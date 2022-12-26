@@ -24,6 +24,20 @@ public class HomeController {
 		System.out.println(test.test());
 		return "home";
 	}
+
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
+	}
 	
+	@RequestMapping("/code")
+	public String code() {
+		return "code";
+	}
+	
+	@RequestMapping("/statistics")
+	public String statistics() {
+		return "statistics";
+	}
 }
 
