@@ -3,8 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>sitemesh test</title>
 </head>
 <body>
 	<div>header</div>

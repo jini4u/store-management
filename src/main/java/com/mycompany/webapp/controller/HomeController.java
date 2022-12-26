@@ -24,6 +24,16 @@ public class HomeController {
 		System.out.println(test.test());
 		return "home";
 	}
+	@RequestMapping(value="/centerList")
+	public String loadCenter() {
+		System.out.println("센터조회");
+		return "centerList";
+	}
 	
+	@RequestMapping(value="/centerPhoto")
+	public String managePhotoCenter() {
+		System.out.println("사진관리");
+		return "centerPhoto";
+	}
 }
 

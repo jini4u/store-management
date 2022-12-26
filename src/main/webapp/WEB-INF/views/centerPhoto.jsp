@@ -2,13 +2,11 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
 <body>
-	<div>
-		<div>
-			<div>
-				<div>left</div>
-			</div>
-		</div>
-	</div>
+	<h1>사진관리</h1>
 </body>
 </html>

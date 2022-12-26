@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>sitemesh test</title>
+<title>sitemesh content</title>
 </head>
 <body>
 	<div>content</div>
