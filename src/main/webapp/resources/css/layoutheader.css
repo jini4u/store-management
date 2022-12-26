@@ -1,0 +1,98 @@
+@charset "EUC-KR";
+
+body {
+	margin: 0px;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul, li {
+	list-style: none;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.logoImage {
+	height: 84px;
+	/* 	margin-left: 100px; */
+}
+
+.menu {
+	display: flex;
+}
+
+.menuMain {
+	vertical-align: top;
+	width: 167px;
+	text-align: center;
+	position: relative;
+	height: 80px;
+	line-height: 80px;
+	font-size: 20px;
+}
+
+.menuMiddle {
+	display: none;
+	position: absolute;
+	width: 250px;
+	text-align: left;
+	border: 1px solid #EDEDED;
+    padding: 10px 20px;
+}
+
+.menuMiddle>li {
+	height: 40px;
+	line-height: 40px;
+}
+.menuMiddle > li > a{
+	display: block;
+    padding: 9px 0;
+    padding-left: 10px;
+    font-size: 18px;
+    line-height: 18px;
+    color: #333;
+}
+
+.menu>li:hover .menuMiddle {
+	display: block;
+}
+.menuMiddle > li > a:hover {
+	background: #FF8787;
+	color: #ffffff;
+	display: block;
+}
+
+.myapage {
+	margin-left: 30px;
+}
+
+.myapage>img {
+	height: 34px;
+}
+.menuMain > a{
+	display: block;
+}
+.menuMain > a > span{
+	position: relative;
+    font-weight: 900;
+    color: #333
+}
+.menuMain > a span:after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: -9px;
+	width: 0;
+	height: 7px;
+	background: #FF8787;
+	transition: width .4s;
+}
+.menuMain > a:hover span:after {
+	width: 100%;
+}
