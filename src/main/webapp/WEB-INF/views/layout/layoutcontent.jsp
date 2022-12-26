@@ -3,10 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css"
+	href="resources/css/layoutcontent.css">
 <meta charset="UTF-8">
 <title>sitemesh content</title>
 </head>
 <body>
-	<div>content</div>
+	<div class="contentBox"></div>
 </body>
 </html>

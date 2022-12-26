@@ -4,13 +4,13 @@
 	<!-- sample -->
 	<decorator name="layoutheader" page="layout/layoutheader.jsp"/>
 	<decorator name="layoutleft" page="layout/layoutleft.jsp"/>
-	<decorator name="default" page="layout/layout.jsp"/>
+	<!-- <decorator name="default" page="layout/layout.jsp"/> -->
 	<decorator name="index" page="layout/layout.jsp">
 		<pattern>/</pattern>
 	</decorator>
 	
 	<!-- decorators를 적용시키지 않을 url 패턴 -->
 	<excludes>
-		<!-- pattern>/excludes</pattern -->
+		<!-- <pattern>/excludes</pattern> -->
 	</excludes>
 </decorators>

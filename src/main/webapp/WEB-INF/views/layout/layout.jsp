@@ -6,15 +6,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css"
+	href="resources/css/layout.css">
 <meta charset="UTF-8">
 <title>sitemesh main</title>
 </head>
 <body>
 	<div>
+<<<<<<< HEAD
 		<div>
+=======
+		<div class="header">
+>>>>>>> refs/remotes/origin/master
 			<page:applyDecorator name="layoutheader" />
 		</div>
+<<<<<<< HEAD
 		<div>
+=======
+		<div class="bodyBox">
+>>>>>>> refs/remotes/origin/master
 			<decorator:body />
 		</div>
 		<div>foot</div>
