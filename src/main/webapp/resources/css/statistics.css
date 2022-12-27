@@ -19,7 +19,7 @@ button:hover {
 	background-color: #E26868;
 }
 
-.menubtn.clicked {
+button.menubtn.clicked {
 	background-color: #E26868;
 }
 
@@ -56,6 +56,7 @@ button:hover {
 #graphdiv p {
 	display: contents;
 }
+
 #graphdiv #centername {
 	color: #E26868;
 }
@@ -79,6 +80,10 @@ button:hover {
 
 #listtable tr:hover{
 	background-color: #EEEEEE;
+}
+
+#listtable td.selected{
+	color: #FF8787;
 }
 
 #listtable td{

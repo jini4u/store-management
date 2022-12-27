@@ -13,25 +13,25 @@
 </div>
 <table id="listtable" border="1">
 <tr>
-	<td>중앙센터</td>
+	<td class="listitem">중앙센터</td>
 </tr>
 <tr>
-	<td>서울역센터</td>
+	<td class="listitem">서울역센터</td>
 </tr>
 <tr>
-	<td>대화역센터</td>
+	<td class="listitem">대화역센터</td>
 </tr>
 <tr>
-	<td style="color: red;">신촌센터</td>
+	<td class="listitem">신촌센터</td>
 </tr>
 <tr>
-	<td>연신내센터</td>
+	<td class="listitem">연신내센터</td>
 </tr>
 <tr>
-	<td>홍대센터</td>
+	<td class="listitem">홍대센터</td>
 </tr>
 <tr>
-	<td>구로디지털단지역센터</td>
+	<td class="listitem">구로디지털단지역센터</td>
 </tr>
 </table>
 </div>
