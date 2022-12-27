@@ -2,8 +2,9 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="resources/css/layoutleft.css">
 <body>
-	<div>
+	<div id="main-frame">
 		<div>
 			<div>
 				<div>left</div>

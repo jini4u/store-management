@@ -6,8 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css"
-	href="resources/css/layout.css">
+<link rel="stylesheet" type="text/css" href="resources/css/layout.css">
 <meta charset="UTF-8">
 <title>sitemesh main</title>
 </head>
@@ -16,8 +15,13 @@
 		<div class="header">
 			<page:applyDecorator name="layoutheader" />
 		</div>
-		<div class="bodyBox">
-			<decorator:body />
+		<div>
+			<div>
+				<page:applyDecorator name="layoutleft" />
+			</div>
+			<div>
+				<decorator:body />
+			</div>
 		</div>
 		<div>foot</div>
 	</div>

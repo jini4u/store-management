@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+#main-frame{
+width: 214px;
+    height: 866px;
+    border: 1px solid;
+    display: inline-block;
+    float: left;
+}
