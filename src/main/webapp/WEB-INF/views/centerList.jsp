@@ -16,9 +16,7 @@
 					<th>센터명</th>
 					<th>전화번호</th>
 					<th>주소</th>
-					<th>오시는 길</th>
 					<th>오픈 일</th>
-					<th>폐점 일</th>
 					<th>운영 여부</th>
 				</tr>
 			</thead>
@@ -28,9 +26,7 @@
 					<td>강남역점</td>
 					<td>02-xxx-xxxx</td>
 					<td>서울시 강남구</td>
-					<td>9호선 신논현 6번출구 대원빌라(라인프렌즈 건물)7층</td>
 					<td>2022.03.15</td>
-					<td></td>
 					<td>Y</td>
 				</tr>
 				<tr>
@@ -40,22 +36,8 @@
 					<td>/</td>
 					<td>/</td>
 					<td>/</td>
-					<td>/</td>
-					<td>/</td>
 				</tr>
 				<tr>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-				</tr>
-				<tr>
-					<td>/</td>
-					<td>/</td>
 					<td>/</td>
 					<td>/</td>
 					<td>/</td>
@@ -70,22 +52,8 @@
 					<td>/</td>
 					<td>/</td>
 					<td>/</td>
-					<td>/</td>
-					<td>/</td>
 				</tr>
 				<tr>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-				</tr>
-				<tr>
-					<td>/</td>
-					<td>/</td>
 					<td>/</td>
 					<td>/</td>
 					<td>/</td>
@@ -100,22 +68,8 @@
 					<td>/</td>
 					<td>/</td>
 					<td>/</td>
-					<td>/</td>
-					<td>/</td>
 				</tr>
 				<tr>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-				</tr>
-				<tr>
-					<td>/</td>
-					<td>/</td>
 					<td>/</td>
 					<td>/</td>
 					<td>/</td>
@@ -130,22 +84,8 @@
 					<td>/</td>
 					<td>/</td>
 					<td>/</td>
-					<td>/</td>
-					<td>/</td>
 				</tr>
 				<tr>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-					<td>/</td>
-				</tr>
-				<tr>
-					<td>/</td>
-					<td>/</td>
 					<td>/</td>
 					<td>/</td>
 					<td>/</td>
@@ -160,12 +100,16 @@
 					<td>/</td>
 					<td>/</td>
 					<td>/</td>
-					<td>/</td>
-					<td>/</td>
 				</tr>
 				<tr>
 					<td>/</td>
 					<td>/</td>
+					<td>/</td>
+					<td>/</td>
+					<td>/</td>
+					<td>/</td>
+				</tr>
+				<tr>
 					<td>/</td>
 					<td>/</td>
 					<td>/</td>
@@ -175,9 +119,15 @@
 				</tr>
 				</tbody>
 			</table>
+			<img src="resources/images/paging.jpg" class="paging-png">
 		</div>
 	</div>
 	<div id="center-contentframe-right">
+		<div class="button-frame">
+			<button class="button">등록</button>
+			<button class="button">수정</button>
+			<button class="button">삭제</button>
+		</div>
 		<div id="center-content-detail">
 			<table id="table">
 				<tr>
@@ -219,8 +169,9 @@
 			</div>
 		</div>
 		<div id="mini-photo-frame">
-			<img src="resources/images/(대구경남)경상대센터2.jpg" class="photo-preview">
-			<img src="resources/images/(대구경남)경상대센터3.jpg" class="photo-preview">
+			<input type="radio" name="slid" id="slide" >
+			<input type="radio" name="slid" id="slide" >
+			<input type="radio" name="slid" id="slide" >
 		</div>
 	</div>
 </div>

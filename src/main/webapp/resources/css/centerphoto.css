@@ -1,0 +1,65 @@
+@charset "UTF-8";
+.table {
+	border-collapse: collapse;
+	border: 0;
+}
+
+body {
+	background-color: #ededed;
+}
+
+tr, th, td {
+	border: 1px solid #aaa;
+	background-clip: padding-box;
+	scroll-snap-align: start;
+}
+
+tbody tr:last-child th, tbody tr:last-child td {
+	border-bottom: 0;
+}
+
+thead {
+	z-index: 1000;
+	position: relative;
+}
+
+th, td {
+	padding: 0.6rem;
+	min-width: 6rem;
+	text-align: center;
+	margin: 0;
+}
+
+thead th {
+	/* 	 sticky 박스는 scroll 박스에 고정합니다. 즉, scroll 박스가 offset 기준입니다. */
+	position: sticky;
+	top: 0;
+	border-top: 0;
+	/*   배경을(배경색이나 이미지)어디까지 색칠할지 정하는 속성 */
+	background-clip: padding-box;
+}
+
+thead th {
+	left: 0;
+	z-index: 1001;
+	border-left: 0;
+}
+
+tbody th {
+	background-clip: padding-box;
+	border-left: 0;
+}
+
+tbody {
+	z-index: 10;
+	position: relative;
+}
+
+tbody th {
+	position: sticky;
+	left: 0;
+}
+
+thead th, tbody th {
+	background-color: #f8f8f8;
+}

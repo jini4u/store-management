@@ -44,7 +44,7 @@ thead th {
 	background-clip: padding-box;
 }
 
-thead th . {
+thead th {
 	left: 0;
 	z-index: 1001;
 	border-left: 0;
@@ -73,29 +73,27 @@ thead th, tbody th {
 	background-color: #fff;
 	height: 75px;
 	display: flex;
+	margin: auto;
 	align-items: center;
 }
 
 #total {
-	display: flex;
+	min-height: 500px;
+	overflow: hidden;
+	position: relative;
 	background-color: #fff;
-	height: 750px;
+	display: flex;
 }
 
 #center-contentframe-left {
-	display: inline-block;
-	float: left;
-	width: 1000px;
-	height: 720px;
-	margin-left: 40px;
+	width: 55%;
+	    margin-left: 3%;
 }
 
 #center-contentframe-right {
-	display: inline;
-	width: 700px;
-	height: 720px;
-	margin-left: 40px;
-	padding: 0px 20px;
+	height: 100%;
+	top: 0;
+	right: 0;
 }
 
 #center-content-detail {
@@ -149,10 +147,25 @@ thead th, tbody th {
 #center-content-detail {
 	padding-top: 53.7px;
 }
-#center-content{
+
+#center-content {
 	height: 660px;
-	width: 100%; overflow: auto;
+	width: 100%;
+	overflow: auto;
 }
+
 .arrow {
 	width: 24px;
+}
+
+#no-side {
+	clear: both;
+}
+
+.button-frame {
+	float: right;
+	padding-right: 3%;
+}
+.paging-png{
+	margin-left: 10%;
 }
