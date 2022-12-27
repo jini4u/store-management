@@ -15,84 +15,43 @@ ul, li {
 .header {
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	background: #fff;
+	justify-content: space-between;
+	height: 75px;
 }
 
 .logoImage {
-	height: 84px;
-	/* 	margin-left: 100px; */
+	height: 75px;
+	width: 228px;
 }
 
-.menu {
+.header>a {
+	margin-left: 27px;
+}
+
+.sidebox {
 	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 20px;
+	margin-right: 30px;
 }
 
-.menuMain {
-	vertical-align: top;
-	width: 167px;
-	text-align: center;
+.sidebox>li {
+	height: 100%;
+}
+
+.bar {
+	top: -1px;
+	padding: 0;
+	font-size: 16px;
 	position: relative;
-	height: 80px;
-	line-height: 80px;
-	font-size: 20px;
+	margin: 0 9px 0 9px;
+	color: #bbb;
 }
 
-.menuMiddle {
-	display: none;
-	position: absolute;
-	width: 250px;
-	text-align: left;
-	border: 1px solid #EDEDED;
-    padding: 10px 20px;
+.mypage>img {
+	height: 20px;
+	margin-right: 4px;
 }
-
-.menuMiddle>li {
-	height: 40px;
-	line-height: 40px;
-}
-.menuMiddle > li > a{
-	display: block;
-    padding: 9px 0;
-    padding-left: 10px;
-    font-size: 18px;
-    line-height: 18px;
-    color: #333;
-}
-
-.menu>li:hover .menuMiddle {
-	display: block;
-}
-.menuMiddle > li > a:hover {
-	background: #FF8787;
-	color: #ffffff;
-	display: block;
-}
-
-.myapage {
-	margin-left: 30px;
-}
-
-.myapage>img {
-	height: 34px;
-}
-.menuMain > a{
-	display: block;
-}
-.menuMain > a > span{
-	position: relative;
-    font-weight: 900;
-    color: #333
-}
-.menuMain > a span:after {
-	content: "";
-	position: absolute;
-	left: 0;
-	bottom: -9px;
-	width: 0;
-	height: 7px;
-	background: #FF8787;
-	transition: width .4s;
-}
-.menuMain > a:hover span:after {
-	width: 100%;
 }
