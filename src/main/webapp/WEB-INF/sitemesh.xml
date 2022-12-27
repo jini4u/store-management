@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemesh>
 <property name="decorators-file" value="/WEB-INF/decorators.xml"/>
-<!-- 	<excludes file="${decorators-file}"/> -->
+<excludes file="${decorators-file}"/>	<!-- decorators.xml에서 excludes적용하려면 있어야함 -->
 	
 	<page-parsers>
 		<parser content-type="text/html" class="com.opensymphony.module.sitemesh.parser.HTMLPageParser"/>

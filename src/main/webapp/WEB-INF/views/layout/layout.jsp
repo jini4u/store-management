@@ -12,18 +12,14 @@
 </head>
 <body>
 	<div>
-		<div class="header">
-			<page:applyDecorator name="layoutheader" />
-		</div>
-		<div>
-			<div>
-				<page:applyDecorator name="layoutleft" />
-			</div>
-			<div>
+		<page:applyDecorator name="layoutheader" />
+
+		<div class="totalbox">
+			<page:applyDecorator name="layoutleft" />
+			<div class="contentbox">
 				<decorator:body />
 			</div>
 		</div>
-		<div>foot</div>
 	</div>
 </body>
 </html>
