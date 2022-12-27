@@ -13,18 +13,10 @@
 </head>
 <body>
 	<div>
-<<<<<<< HEAD
-		<div>
-=======
 		<div class="header">
->>>>>>> refs/remotes/origin/master
 			<page:applyDecorator name="layoutheader" />
 		</div>
-<<<<<<< HEAD
-		<div>
-=======
 		<div class="bodyBox">
->>>>>>> refs/remotes/origin/master
 			<decorator:body />
 		</div>
 		<div>foot</div>

@@ -5,13 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
-=======
 <link rel="stylesheet" type="text/css"
 	href="resources/css/layoutheader.css">
 <meta charset="UTF-8">
 <title>sitemesh test</title>
->>>>>>> refs/remotes/origin/master
 </head>
 <body>
 	<div class="header">
