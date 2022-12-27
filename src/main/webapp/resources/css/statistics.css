@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+div{
+	margin: auto;	
+	width: 1001.69px;
+}
+
+button {
+	background-color: #FF8787;
+	border: none;
+	width: 100px;
+	color: white;
+	border-radius: 10px 10px 0px 0px;
+	margin-right: 1px;
+	font-size: 1em;
+}
+
+button:hover {
+	background-color: #E26868;
+}
+
+button.menubtn.clicked {
+	background-color: #E26868;
+}
+
+#buttonsdiv{
+	display: flex;
+	height: 45px;
+	margin-left: 0;
+}
+
+#searchlistdiv{
+	width: 300px;
+	padding-left: 80px;
+}
+
+#searchdiv > img {
+	height: 30px;
+	padding: 3px;
+	background-color: #FF8787;
+}
+
+#searchdiv {
+	display: flex;
+	width: 206px;
+}
+
+#graphdiv {
+	text-align: center;
+}
+
+#graphdiv > img {
+	width: 500px;
+}
+
+#graphdiv p {
+	display: contents;
+}
+
+#graphdiv #centername {
+	color: #E26868;
+}
+
+#statisticcontentdiv {
+	display: flex;
+	border: 1px solid;
+	height: 600px;
+}
+
+#listtable{
+	width: 206px;
+	margin-left: 3px;
+	margin-top: 30px;
+}
+
+#listtable tr {
+	border: none;
+	height: 30px;
+}
+
+#listtable tr:hover{
+	background-color: #EEEEEE;
+}
+
+#listtable td.selected{
+	color: #FF8787;
+}
+
+#listtable td{
+	border-width: 0px 0px 2px 0px;
+	padding: 6px;
+}
