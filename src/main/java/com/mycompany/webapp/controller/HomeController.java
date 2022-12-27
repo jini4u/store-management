@@ -24,25 +24,24 @@ public class HomeController {
 		System.out.println(test.test());
 		return "home";
 	}
-<<<<<<< HEAD
+
 	@RequestMapping(value="/centerList")
 	public String loadCenter() {
 		System.out.println("센터조회");
 		return "centerList";
-=======
+	}
 
 	@RequestMapping("/login")
 	public String login() {
 		return "login";
->>>>>>> refs/remotes/origin/master
 	}
 	
-<<<<<<< HEAD
 	@RequestMapping(value="/centerPhoto")
 	public String managePhotoCenter() {
 		System.out.println("사진관리");
 		return "centerPhoto";
-=======
+	}
+	
 	@RequestMapping("/code")
 	public String code() {
 		return "code";
@@ -51,7 +50,6 @@ public class HomeController {
 	@RequestMapping("/statistics")
 	public String statistics() {
 		return "statistics";
->>>>>>> refs/remotes/origin/master
 	}
 }
 
