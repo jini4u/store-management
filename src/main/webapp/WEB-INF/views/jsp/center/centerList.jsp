@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="resources/css/centerList.css">
+<link rel="stylesheet" href="resources/css/center/centerList.css">
 <h1 class="title">센터 관리</h1>
 <div id="total">
 	<div id="center-contentframe-left">
@@ -119,7 +119,7 @@
 				</tr>
 				</tbody>
 			</table>
-			<img src="resources/images/paging.jpg" class="paging-png">
+			<img src="resources/images/center/paging.jpg" class="paging-png">
 		</div>
 	</div>
 	<div id="center-contentframe-right">
@@ -163,9 +163,9 @@
 			<div id="main-photo-frame">
 				<p>외관</p>
 				<div id="main-photo-position">
-				<img src="resources/images/left-arrow.png" class="arrow"> 
-				<img src="resources/images/(대구경남)경상대센터1.jpg" id="photo-outside">
-				<img src="resources/images/right-arrow.png" class="arrow">
+				<img src="resources/images/center/left-arrow.png" class="arrow"> 
+				<img src="resources/images/center/(대구경남)경상대센터1.jpg" id="photo-outside">
+				<img src="resources/images/center/right-arrow.png" class="arrow">
 			</div>
 		</div>
 		<div id="mini-photo-frame">
