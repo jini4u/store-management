@@ -19,12 +19,12 @@ public class TestController {
 	@RequestMapping("/board")
 	public String getAllPosts(Model model) {
 		model.addAttribute("allPosts", testService.getAllPosts());
-		return "board";
+		return "jsp/test/board";
 	}
 	
 	@RequestMapping(value="/board/create", method=RequestMethod.GET)
 	public String createPost() {
-		return "create";
+		return "jsp/test/create";
 	}
 	
 	@RequestMapping(value="/board/create", method=RequestMethod.POST)
@@ -36,7 +36,7 @@ public class TestController {
 	@RequestMapping(value="/board/update", method=RequestMethod.GET)
 	public String updatePost(@RequestParam int postno, Model model) {
 		model.addAttribute("post", testService.getPost(postno));
-		return "update";
+		return "jsp/test/update";
 	}
 	
 	@RequestMapping(value="/board/update", method=RequestMethod.POST)
