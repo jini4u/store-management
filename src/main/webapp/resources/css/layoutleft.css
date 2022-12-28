@@ -8,7 +8,6 @@
 
 body {
 	font-family: 'Montserrat', sans-serif;
-	background: #EDEDED;
 }
 
 ul {
@@ -19,10 +18,11 @@ a {
 	text-decoration: none;
 }
 .leftbox{
-	width: 250px;
-	height: 100%;
+	width: 224px;
+	height: 640px;
 	background: #fff;
 	position: fixed;
+	border-right: 1px solid #ccc;
 }
 h2 {
 	text-align: center;
@@ -64,6 +64,13 @@ h2 {
 		left: 16px;
 	}
 }
+.dropdownlink > a{
+	color: #000000;
+}
+.dropdownlink:hover, .dropdownlink > a:hover {
+	color: #E26868;
+}
+
 .fa-chevron-down {
     right: 12px;
     left: auto;

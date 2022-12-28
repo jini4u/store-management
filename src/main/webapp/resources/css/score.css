@@ -1,52 +1,119 @@
 @charset "UTF-8";
 
-.scorebutton {
-	all: unset;
-	background-color:steelblue;
-	color:white;
-	padding:5px 20px;
-  cursor:pointer;
-}
-
-.modal{ 
 
 
- position:fixed;
-   top:0%;
-   left:0%;
-   width:100%; 
-   height:100%;
-   display:flex;
-   justify-content: center;
-   align-items: center;
-   
-}
-
-.modal_overlay{
-background-color:rgba (0,0,0,0. 6);
-  width:100%; 
-  height:100%;
-  position: absolute;
-}
-.modal_content{
-background-color:white;
-padding:50px 100px;
-text-align:center;
-position:relative;
-top:0px;
-border-radius:10px;
-width:30%;
-box-shadow: 0 10px 20px rgba(0,0,0,0.16), 0 6px 6px rgba(0,0,0,0.23);
-
-}
-.modalh1{
-margin: 0;
-
-}
-
-.hidden{
-	display: none;	 
+.score_page{
+	
 	
 }
 
+.year_and_quarter{
+    display: inline-block;
+    float: right;
+}
 
+.scorebutton {
+	all: unset;
+	background-color: steelblue;
+	color: white;
+	padding: 5px 20px;
+	cursor: pointer;
+}
+
+
+
+/*점수 리스트 테이블*/
+.scoretable {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+ .score_th{
+    border-bottom: 1px solid #444444;
+    border-left: 1px solid #444444;
+    padding: 10px;
+  }
+  .score_td{
+    border-bottom: 1px solid #444444;
+    border-left: 1px solid #444444;
+    padding: 10px;
+  
+  }
+ . th:first-child {
+    border-left: none;
+  }
+  .td:first-child {
+   border-left: none;
+  }
+
+
+
+
+/* 지점 버튼 */
+#btn1 {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	margin-right: -4px;
+}
+
+#btn2 {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	margin-left: -3px;
+}
+
+#btn_group button {
+	border: 1px solid #FF8787;
+	background-color: rgba(0, 0, 0, 0);
+	color: FF8787;
+	padding: 5px;
+}
+
+#btn_group button:hover {
+  background-color: #FF8787;
+    color: #e1eef6;
+}
+
+
+
+
+
+
+/*모달*/
+.modal {
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal_overlay {
+	background-color: rgba(0, 0, 0, 0. 6);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+.modal_content {
+	background-color: white;
+	padding: 50px 100px;
+	text-align: center;
+	position: relative;
+	top: 0px;
+	border-radius: 10px;
+	width: 30%;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.16), 0 6px 6px
+		rgba(0, 0, 0, 0.23);
+}
+
+.modalh1 {
+	margin: 0;
+}
+
+.hidden {
+	display: none;
+}
