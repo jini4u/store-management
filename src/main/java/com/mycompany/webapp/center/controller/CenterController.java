@@ -8,7 +8,6 @@ public class CenterController {
 
 	@RequestMapping(value="/centerPhoto")
 	public String managePhotoCenter() {
-		System.out.println("사진관리");
 		return "jsp/center/centerPhoto";
 	}
 	
