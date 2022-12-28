@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link href="resources/css/centerphoto.css" rel="stylesheet">
+<link href="resources/css/center/centerphoto.css" rel="stylesheet">
 <div id="center-photo-total">
 	<div id="photo-left-frame">
 		<div id="center-search">
@@ -89,22 +89,7 @@
 						<td>/</td>
 						<td>/</td>
 					</tr>
-					<tr>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-					</tr>
-					<tr>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-					</tr>
+
 				</tbody>
 			</table>
 		</div>
@@ -117,9 +102,9 @@
 		</div>
 		<div id="photo-frame">
 			<div id="photo-main-size">
-				<img src="resources/images/left-arrow.png" class="arrow"> <img
-					src="resources/images/(대구경남)경상대센터1.jpg" id="photo-img"> <img
-					src="resources/images/right-arrow.png" class="arrow">
+				<img src="resources/images/center/left-arrow.png" class="arrow"> <img
+					src="resources/images/center/(대구경남)경상대센터1.jpg" id="photo-img"> <img
+					src="resources/images/center/right-arrow.png" class="arrow">
 			</div>
 			<div id="photo-mini-size">
 				<input type="radio" name="slid"> <input type="radio"
@@ -128,4 +113,4 @@
 		</div>
 	</div>
 </div>
-<script src="resources/js/centerPhoto.js"></script>
+<script src="resources/js/center/centerPhoto.js"></script>

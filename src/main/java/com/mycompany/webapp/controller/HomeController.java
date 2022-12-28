@@ -39,7 +39,7 @@ public class HomeController {
 	@RequestMapping(value="/centerList")
 	public String loadCenter() {
 		System.out.println("센터조회");
-		return "centerList";
+		return "jsp/center/centerList";
 	}
 
 	@RequestMapping("/login")
@@ -50,7 +50,7 @@ public class HomeController {
 	@RequestMapping(value="/centerPhoto")
 	public String managePhotoCenter() {
 		System.out.println("사진관리");
-		return "centerPhoto";
+		return "jsp/center/centerPhoto";
 	}
 	
 	@RequestMapping(value="/code")
@@ -64,4 +64,3 @@ public class HomeController {
 
 	}
 }
-
