@@ -6,7 +6,6 @@
 <link rel="stylesheet" type="text/css"
 	href="resources/css/layoutheader.css">
 
-<div class="header">
 	<a href="/"> <img class="logoImage" src="resources/images/logo.png">
 	</a>
 
@@ -21,6 +20,4 @@
 				<a>로그아웃</a>
 			</li>
 		</ul>
-
-</div>
 

@@ -1,17 +1,39 @@
 @charset "EUC-KR";
-
 .totalbox {
+	overflow: hidden;
+}
+
+.header {
 	display: flex;
-	height: 640px;
+	align-items: center;
+	background: #fff;
+	justify-content: space-between;
+	height: 75px;
+	position: sticky;
+	top: 0px;
+	border-bottom: 1px solid #ccc;
+}
+
+.header>a {
+	margin-left: 17px;
+}
+
+.middlebox {
+	display: flex;
+	height: calc(100vh - 75px);
+}
+
+.leftbox {
+	min-height: 400px;
+	width: 220px;
+	border-right: 1px solid #ccc;
+	background: #fff;
+	flex-shrink: 0;
 }
 
 .contentbox {
-	display: flex;
-	width: 1294.2px;
+	min-width: 0;
+	flex-grow: 1;
 	flex-direction: column;
-	margin-left : 224px;
-	height: 640px;
-	max-height: 640px;
-	display: inline-block;
-	background-color: #fff;
+	overflow: auto;
 }

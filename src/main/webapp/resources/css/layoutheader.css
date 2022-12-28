@@ -12,7 +12,7 @@ ul, li {
 	list-style: none;
 }
 
-.header {
+/* .header {
 	display: flex;
 	align-items: center;
 	background: #fff;
@@ -21,16 +21,16 @@ ul, li {
 	position:sticky;
     top:0px;
     border-bottom: 1px solid #ccc;
-}
+} */
 
 .logoImage {
 	height: 75px;
 	width: 228px;
 }
 
-.header>a {
+/* .header>a {
 	margin-left: 17px;
-}
+} */
 
 .sidebox {
 	display: flex;

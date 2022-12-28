@@ -37,7 +37,6 @@
 		var accordion = new Accordion($('.accordion-menu'), false);
 	})
 </script>
-	<div class="leftbox">
 		<ul class="accordion-menu">
 			<li>
 				<div class="dropdownlink">
@@ -75,4 +74,3 @@
 				</div>
 			</li>
 		</ul>
-	</div>

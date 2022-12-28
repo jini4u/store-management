@@ -17,13 +17,13 @@ ul {
 a {
 	text-decoration: none;
 }
-.leftbox{
+/* .leftbox{
 	width: 224px;
 	height: 640px;
 	background: #fff;
 	position: fixed;
 	border-right: 1px solid #ccc;
-}
+} */
 h2 {
 	text-align: center;
 	margin: 20px auto;
