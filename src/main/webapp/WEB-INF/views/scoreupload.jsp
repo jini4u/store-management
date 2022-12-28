@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <link rel="stylesheet" type="text/css" href="resources/css/score.css" />
 
 <h1>센터점수 일괄 업로드</h1>
 <input type="text" size="5" placeholder="점수 수정">
