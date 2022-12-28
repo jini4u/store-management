@@ -25,6 +25,17 @@ public class HomeController {
 		return "home";
 	}
 
+	@RequestMapping("/score")
+	public String centerscoreinquiry() {
+//		System.out.println();
+		return "centerscoreinquiry";
+	}
+	@RequestMapping("/scoreupload")
+	public String scoreupload() {
+		return "scoreupload";
+	}
+
+
 	@RequestMapping(value="/centerList")
 	public String loadCenter() {
 		System.out.println("센터조회");
@@ -50,6 +61,7 @@ public class HomeController {
 	@RequestMapping(value="/statistics")
 	public String statistics() {
 		return "statistics";
+
 	}
 }
 
