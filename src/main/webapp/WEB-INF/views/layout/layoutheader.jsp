@@ -7,7 +7,7 @@
 	href="resources/css/layoutheader.css">
 
 <div class="header">
-	<a> <img class="logoImage" src="resources/images/logo.png">
+	<a href="/"> <img class="logoImage" src="resources/images/logo.png">
 	</a>
 
 		<ul class="sidebox">

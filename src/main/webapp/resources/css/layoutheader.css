@@ -18,6 +18,9 @@ ul, li {
 	background: #fff;
 	justify-content: space-between;
 	height: 75px;
+	position:sticky;
+    top:0px;
+    border-bottom: 1px solid #ccc;
 }
 
 .logoImage {
@@ -26,7 +29,7 @@ ul, li {
 }
 
 .header>a {
-	margin-left: 27px;
+	margin-left: 17px;
 }
 
 .sidebox {
