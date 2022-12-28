@@ -2,16 +2,16 @@
 
 .totalbox {
 	display: flex;
+	height: 640px;
 }
 
 .contentbox {
 	display: flex;
-	width: 1410px;
+	width: 1294.2px;
 	flex-direction: column;
-	margin-top: 15px;
-	margin-left : 265px;
-	height: auto;
-	min-height: 100%;
+	margin-left : 224px;
+	height: 640px;
+	max-height: 640px;
 	display: inline-block;
 	background-color: #fff;
 }
