@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.test.dao.ITestRepository">
+<select id="test" resultType="int">
+		SELECT COUNT(*) FROM testtable
+</select>
 <select id="getAllPosts" resultType="com.mycompany.webapp.test.vo.TestVO">
 	SELECT
 		postno,
@@ -10,4 +13,27 @@
 		posttime
 	FROM testboard
 </select>
+<select id="getPost" parameterType="int" resultType="com.mycompany.webapp.test.vo.TestVO">
+	SELECT
+		postno,
+		title,
+		content,
+		author,
+		posttime
+	FROM testboard
+	WHERE postno=#{postno}
+</select>
+<insert id="createPost" parameterType="com.mycompany.webapp.test.vo.TestVO">
+	INSERT INTO testboard
+		VALUES (postno_seq.NEXTVAL, #{title}, #{content}, #{author}, SYSDATE)
+</insert>
+<update id="updatePost" parameterType="com.mycompany.webapp.test.vo.TestVO">
+	UPDATE testboard
+		SET title=#{title}, content=#{content}, author=#{author}
+		WHERE postno=#{postno}
+</update>
+<delete id="deletePost" parameterType="int">
+	DELETE FROM testboard
+		WHERE postno=#{postno}
+</delete>
 </mapper>

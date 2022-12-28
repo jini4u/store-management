@@ -18,5 +18,24 @@ public class TestService implements ITestService {
 	public List<TestVO> getAllPosts() {
 		return testRepository.getAllPosts();
 	}
+	
+	@Override
+	public TestVO getPost(int postno) {
+		return testRepository.getPost(postno);
+	}
 
+	@Override
+	public void createPost(TestVO post) {
+		testRepository.createPost(post);
+	}
+	
+	@Override
+	public void updatePost(TestVO post) {
+		testRepository.updatePost(post);
+	}
+	
+	@Override
+	public void deletePost(int postno) {
+		testRepository.deletePost(postno);	
+	}
 }
