@@ -24,6 +24,14 @@ public class HomeController {
 		System.out.println(test.test());
 		return "home";
 	}
-	
+	@RequestMapping("/score")
+	public String centerscoreinquiry() {
+//		System.out.println();
+		return "centerscoreinquiry";
+	}
+	@RequestMapping("/scoreupload")
+	public String scoreupload() {
+		return "scoreupload";
+	}
 }
 
