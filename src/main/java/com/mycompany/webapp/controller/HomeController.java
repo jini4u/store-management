@@ -24,6 +24,7 @@ public class HomeController {
 		System.out.println(test.test());
 		return "home";
 	}
+
 	@RequestMapping("/score")
 	public String centerscoreinquiry() {
 //		System.out.println();
@@ -32,6 +33,35 @@ public class HomeController {
 	@RequestMapping("/scoreupload")
 	public String scoreupload() {
 		return "scoreupload";
+	}
+
+
+	@RequestMapping(value="/centerList")
+	public String loadCenter() {
+		System.out.println("센터조회");
+		return "centerList";
+	}
+
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
+	}
+	
+	@RequestMapping(value="/centerPhoto")
+	public String managePhotoCenter() {
+		System.out.println("사진관리");
+		return "centerPhoto";
+	}
+	
+	@RequestMapping(value="/code")
+	public String code() {
+		return "code";
+	}
+	
+	@RequestMapping(value="/statistics")
+	public String statistics() {
+		return "statistics";
+
 	}
 }
 

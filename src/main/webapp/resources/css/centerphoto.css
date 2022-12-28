@@ -1,0 +1,118 @@
+@charset "UTF-8";
+
+.table {
+	table-layout: fixed;
+	border-collapse: collapse;
+	border: 0;
+}
+
+body {
+	background-color: #ededed;
+}
+
+tr, th, td {
+	border: 1px solid #aaa;
+	background-clip: padding-box;
+	scroll-snap-align: start;
+}
+
+tbody tr:last-child th, tbody tr:last-child td {
+	border-bottom: 0;
+}
+
+thead {
+	z-index: 1000;
+	position: relative;
+}
+
+th, td {
+	padding: 0.6rem;
+	min-width: 6rem;
+	text-align: center;
+	margin: 0;
+}
+
+thead th {
+	/* 	 sticky 박스는 scroll 박스에 고정합니다. 즉, scroll 박스가 offset 기준입니다. */
+	position: sticky;
+	top: 0;
+	border-top: 0;
+	/*   배경을(배경색이나 이미지)어디까지 색칠할지 정하는 속성 */
+	background-clip: padding-box;
+	left: 0;
+	z-index: 1001;
+	border-left: 0;
+	background-clip: padding-box;
+}
+
+tbody th {
+	position: sticky;
+	left: 0;
+}
+
+thead th, tbody th {
+	color: #000;
+	background-color: #EDEDED;
+}
+
+#center-photo-total {
+	display: flex;
+	position: relative;
+}
+
+#photo-left-frame {
+	width: 53%;
+	margin-left: 3%;
+	margin-top: 3%;
+}
+
+#photo-img {
+	    width: 500px;
+	height: 450px;
+}
+
+.arrow {
+	width: 24px;
+	margin: 2%;
+}
+
+#center-photo-first {
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+thead {
+	display: block;
+	color: #fff;
+}
+
+tbody {
+	display: block;
+	overflow: overlay;
+	height: 190px;
+}
+
+#photo-main-size {
+	display: flex;
+	align-items: center;
+}
+
+.search {
+	width: 699px;
+}
+
+#photo-mini-size {
+	display: flex;
+	justify-content: center;
+	margin: 5%;
+}
+
+#button-frame {
+	display: flex;
+	margin-bottom: 2%;
+	justify-content: flex-end;
+	margin-right: 4%;
+}
+#photo-right-frame{
+	margin-top: auto;
+}

@@ -1,0 +1,57 @@
+@charset "EUC-KR";
+
+body {
+	margin: 0px;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul, li {
+	list-style: none;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	background: #fff;
+	justify-content: space-between;
+	height: 75px;
+}
+
+.logoImage {
+	height: 75px;
+	width: 228px;
+}
+
+.header>a {
+	margin-left: 27px;
+}
+
+.sidebox {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 20px;
+	margin-right: 30px;
+}
+
+.sidebox>li {
+	height: 100%;
+}
+
+.bar {
+	top: -1px;
+	padding: 0;
+	font-size: 16px;
+	position: relative;
+	margin: 0 9px 0 9px;
+	color: #bbb;
+}
+
+.mypage>img {
+	height: 20px;
+	margin-right: 4px;
+}
+}

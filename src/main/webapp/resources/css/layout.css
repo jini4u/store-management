@@ -1,0 +1,17 @@
+@charset "EUC-KR";
+
+.totalbox {
+	display: flex;
+}
+
+.contentbox {
+	display: flex;
+	width: 1410px;
+	flex-direction: column;
+	margin-top: 15px;
+	margin-left : 265px;
+	height: auto;
+	min-height: 100%;
+	display: inline-block;
+	background-color: #fff;
+}

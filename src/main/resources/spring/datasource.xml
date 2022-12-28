@@ -17,7 +17,8 @@
 		<property name="maxIdle" value="2"/>
 	</bean>
 	
+	
 	<!-- 
 	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/spring" expected-type="javax.sql.DataSource"/>
 	-->
-</beans>
+</beans> 
