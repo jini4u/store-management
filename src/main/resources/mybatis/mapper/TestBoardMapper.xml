@@ -10,4 +10,27 @@
 		posttime
 	FROM testboard
 </select>
+<select id="getPost" parameterType="int" resultType="com.mycompany.webapp.test.vo.TestVO">
+	SELECT
+		postno,
+		title,
+		content,
+		author,
+		posttime
+	FROM testboard
+	WHERE postno=#{postno}
+</select>
+<insert id="createPost" parameterType="com.mycompany.webapp.test.vo.TestVO">
+	INSERT INTO testboard
+		VALUES (postno_seq.NEXTVAL, #{title}, #{content}, #{author}, SYSDATE)
+</insert>
+<update id="updatePost" parameterType="com.mycompany.webapp.test.vo.TestVO">
+	UPDATE testboard
+		SET title=#{title}, content=#{content}, author=#{author}
+		WHERE postno=#{postno}
+</update>
+<delete id="deletePost" parameterType="int">
+	DELETE FROM testboard
+		WHERE postno=#{postno}
+</delete>
 </mapper>

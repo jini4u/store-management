@@ -14,8 +14,12 @@ public class TestVO {
 	}
 
 	//getter,setter
-	public int getPostNo() {
+	public int getPostno() {
 		return postno;
+	}
+	
+	public void setPostno(int postno) {
+		this.postno = postno;
 	}
 
 	public String getTitle() {
@@ -53,7 +57,7 @@ public class TestVO {
 	//toString
 	@Override
 	public String toString() {
-		return "TestVO [postNo=" + postno + ", title=" + title + ", content=" + content + ", author=" + author
+		return "TestVO [postno=" + postno + ", title=" + title + ", content=" + content + ", author=" + author
 				+ ", posttime=" + posttime + "]";
 	}
 }
