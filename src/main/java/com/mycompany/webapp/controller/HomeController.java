@@ -42,12 +42,12 @@ public class HomeController {
 		return "centerPhoto";
 	}
 	
-	@RequestMapping("/code")
+	@RequestMapping(value="/code")
 	public String code() {
 		return "code";
 	}
 	
-	@RequestMapping("/statistics")
+	@RequestMapping(value="/statistics")
 	public String statistics() {
 		return "statistics";
 	}

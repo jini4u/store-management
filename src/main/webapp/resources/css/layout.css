@@ -6,10 +6,12 @@
 
 .contentbox {
 	display: flex;
-	width: 100%;
+	width: 1410px;
 	flex-direction: column;
-	margin-top: 40px;
+	margin-top: 15px;
+	margin-left : 265px;
 	height: auto;
 	min-height: 100%;
 	display: inline-block;
+	background-color: #fff;
 }
