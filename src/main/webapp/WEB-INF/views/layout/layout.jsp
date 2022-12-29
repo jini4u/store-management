@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <title>sitemesh main</title>
 </head>
-<body class="totalbox">
+<body class="totalbox"> 
 	<div>
 		<div class="header">
 		<page:applyDecorator name="layoutheader" />
