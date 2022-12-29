@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <link rel="stylesheet" type="text/css"
-	href="resources/css/layoutheader.css">
+	href="resources/css/layout/layoutheader.css">
 
 	<a href="/"> <img class="logoImage" src="resources/images/logo.png">
 	</a>
