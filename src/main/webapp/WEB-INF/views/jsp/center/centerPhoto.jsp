@@ -51,6 +51,7 @@
 					</tr>
 				</tbody>
 			</table>
+			<img src="resources/images/center/paging.jpg" class="pagging">
 		</div>
 		<div id="center-photo-second">
 			<table class="table search" name="search-centerList">
@@ -89,16 +90,15 @@
 						<td>/</td>
 						<td>/</td>
 					</tr>
-
 				</tbody>
 			</table>
 		</div>
 	</div>
 	<div id="photo-right-frame">
 		<div id="button-frame">
-			<button>등록</button>
-			<button>수정</button>
-			<button>삭제</button>
+			<button id="insert-center-modal">등록</button>
+			<button id="update-center-modal">수정</button>
+			<button id="delete-center-modal">삭제</button>
 		</div>
 		<div id="photo-frame">
 			<div id="photo-main-size">
@@ -113,4 +113,15 @@
 		</div>
 	</div>
 </div>
+<div class="modal">
+<div class="modal hidden">
+<!-- 	모달 배경 -->
+	<div class="modal_overlay"></div>
+	<div class="modal_content">
+	<h1>modal content</h1>
+	<button id="closeBtn">✖</button>
+	</div>
+	</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="resources/js/center/centerPhoto.js"></script>
