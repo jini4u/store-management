@@ -1,8 +1,8 @@
-package com.mycompany.webapp.test.vo;
+package com.mycompany.webapp.notice.vo;
 
 import java.sql.Date;
 
-public class TestVO {
+public class PostVO {
 	private int postno;
 	private String title;
 	private String content;
@@ -10,7 +10,7 @@ public class TestVO {
 	private Date posttime;
 	
 	//생성자 
-	public TestVO() {
+	public PostVO() {
 	}
 
 	//getter,setter
@@ -57,7 +57,7 @@ public class TestVO {
 	//toString
 	@Override
 	public String toString() {
-		return "TestVO [postno=" + postno + ", title=" + title + ", content=" + content + ", author=" + author
+		return "PostVO [postno=" + postno + ", title=" + title + ", content=" + content + ", author=" + author
 				+ ", posttime=" + posttime + "]";
 	}
 }

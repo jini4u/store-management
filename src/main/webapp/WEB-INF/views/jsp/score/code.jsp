@@ -2,8 +2,10 @@
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="resources/css/code.css"/>
 
-<div id="wrapcodediv">
-	<img id="logo" src="resources/images/selection.png"><h1 id="codetitle">코드관리</h1>
+<div class="titleBox">
+	<img src="resources/images/selection.png">
+	<h2>코드관리</h2>
+</div>
 	<div id="twocodedivs">
 		<div class="codediv">
 			<form>
@@ -31,7 +33,7 @@
 				</div>
 			</form>
 			<hr>
-			<table border="1">
+			<table class="codetable">
 			<tr>
 				<th>번호</th>
 				<th>그룹코드</th>
@@ -93,7 +95,7 @@
 				</div>
 			</form>
 			<hr>
-			<table border="1">
+			<table class="codetable">
 			<tr>
 				<th>번호</th>
 				<th>그룹코드</th>
@@ -125,6 +127,5 @@
 				<td>Y</td>
 			</tr>
 			</table>
-		</div>
 	</div>
 </div>

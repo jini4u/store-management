@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="resources/css/layout/layoutleft.css">
+<link rel="stylesheet" href="/resources/css/layout/layoutleft.css">
 <body>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="https://kit.fontawesome.com/0b3bdf6c61.js" crossorigin="anonymous"></script>
@@ -31,7 +31,7 @@
 				</div>
 				<ul class="submenuItems">
 					<li><a href="#">센터 점수 조회</a></li>
-					<li><a href="code">항목 코드 관리</a></li>
+					<li><a href="<c:url value='/code'/>">항목 코드 관리</a></li>
 					<li><a href="#">센터 점수 일괄 등록</a></li>
 				</ul>
 			</li>
