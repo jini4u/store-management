@@ -10,6 +10,12 @@ import com.mycompany.webapp.test.dao.ITestRepository;
 
 import lombok.extern.log4j.Log4j2;
 
+
+
+/**
+ * @author KOSA
+ * @ClassName : {fileNmae} 
+ */
 @Controller
 @Log4j2
 public class HomeController {
@@ -35,7 +41,9 @@ public class HomeController {
 		return "scoreupload";
 	}
 
-
+/**
+ * 
+ * */
 	@RequestMapping(value="/centerList")
 	public String loadCenter() {
 		System.out.println("센터조회");
