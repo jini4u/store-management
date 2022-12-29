@@ -17,23 +17,9 @@ ul {
 a {
 	text-decoration: none;
 }
-/* .leftbox{
-	width: 224px;
-	height: 640px;
-	background: #fff;
-	position: fixed;
-	border-right: 1px solid #ccc;
-} */
-h2 {
-	text-align: center;
-	margin: 20px auto;
-	color: #fff;
-}
-
 .accordion-menu {
 	width: 100%;
 	max-width: 350px;
-/* 	margin: 60px auto 20px; */
 	background: #fff;
 	border-radius: 4px;
 }
@@ -44,10 +30,6 @@ h2 {
 .accordion-menu li.open .dropdownlink .fa-chevron-down {
 	transform : rotate(180deg);
 }
-/* .accordion-menu li:last-child .dropdownlink {
-	border-bottom: 0;
-} */
-
 .dropdownlink {
 	cursor: pointer;
 	display: block;
