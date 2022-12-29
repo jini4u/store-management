@@ -120,8 +120,9 @@
 		<p>사진 등록</p>
 		<button id="centermodal-close-btn">❎</button>
 		</div>
-		<h2>모달 창</h2>
-		<p>모달 창입니다</p>
+		<div id="center-search-bar">
+			<input type=
+		</div>
 		<button type="button" id="modal-close-btn">닫기</button>
 	</div>
 	</div>
