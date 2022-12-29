@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="resources/css/layout/layout.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/layout/layout.css">
 <meta charset="UTF-8">
 <title>sitemesh main</title>
 </head>

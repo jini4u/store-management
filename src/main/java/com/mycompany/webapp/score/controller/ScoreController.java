@@ -15,4 +15,9 @@ public class ScoreController {
 	public String centerscoreinquiry() {
 		return "jsp/score/centerscoreinquiry";
 	}
+	
+	@RequestMapping(value="/code")
+	public String code() {
+		return "jsp/score/code";
+	}
 }

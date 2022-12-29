@@ -2,39 +2,18 @@ const mainTable = document.querySelector(".click");
 mainTable.onclick = disappearTable;
 function disappearTable() {
     const searchTable = document.querySelector(".search");
-    if(searchTable.style.display !== "none") {
-        alert("pass");
-        searchTable.style.display = "none"
-    }else {
-        searchTable.style.display ="block";
-    }
+    const searchImg = document.querySelector("#photo-right-frame");
+    searchTable.style.display = "block";
+    searchImg.style.display = "block";	
 };
-
-
-$(function(){ 
-
-     $("#open").click(function(){
-       $(".modal").fadeIn();
-     });
-     
-     $(".modal_content").click(function(){
-       $(".modal").fadeOut();
-     });
-     
-   });
-
-
-
-const openButton = document.querySelector("#insert-center-modal");
-const modal = document.querySelector(".modal");
-const overlay = modal.querySelector(".modal_overlay");
-const closeBtn = modal.querySelector("#closeBtn");
-const openModal = () => {
-	modal.classList.remove("hidden");
-}
-const closeModal = () => {
-	modal.classList.add("hidden");
-}
-//overlay.addEventListener("click", closeModal);
-//closeBtn.addEventListner("click", closeModal);
-openButton.addEventListener("click", openModal);
+const modalAppear = document.querySelector("#modal");
+const openModal = document.querySelector("#insert-center-modal");
+openModal.onclick = modalOpen;
+function modalOpen() {
+    modalAppear.style.display ="block";
+};
+const closeModal = document.querySelector("#modal-close-btn");
+closeModal.onclick = modalClose;
+function modalClose() {
+    modalAppear.style.display = "none";
+};
