@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="resources/css/code.css"/>
 
 <div id="wrapcodediv">
-	<h1>코드관리</h1>
+	<img id="logo" src="resources/images/selection.png"><h1 id="codetitle">코드관리</h1>
 	<div id="twocodedivs">
 		<div class="codediv">
 			<form>
