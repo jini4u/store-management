@@ -121,7 +121,6 @@
 		<button id="centermodal-close-btn">❎</button>
 		</div>
 		<div id="center-search-bar">
-			<input type=
 		</div>
 		<button type="button" id="modal-close-btn">닫기</button>
 	</div>
