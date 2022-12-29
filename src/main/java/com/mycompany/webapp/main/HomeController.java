@@ -1,4 +1,4 @@
-package com.mycompany.webapp.controller;
+package com.mycompany.webapp.main;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,12 +10,6 @@ import com.mycompany.webapp.test.dao.ITestRepository;
 
 import lombok.extern.log4j.Log4j2;
 
-
-
-/**
- * @author KOSA
- * @ClassName : {fileNmae} 
- */
 @Controller
 @Log4j2
 public class HomeController {
@@ -25,16 +19,12 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String home() {
-		//logger.info("실행");
-//		log.info("실행");
 		System.out.println(test.test());
 		return "home";
 	}
-
+	
 	@RequestMapping("/login")
 	public String login() {
 		return "login";
 	}
-	
-
 }

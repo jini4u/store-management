@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="resources/css/layoutleft.css">
 <body>
 <link rel="stylesheet" type="text/css" href="resources/css/layoutleft.css">
@@ -38,15 +37,14 @@
 		var accordion = new Accordion($('.accordion-menu'), false);
 	})
 </script>
-	<div class="leftbox">
 		<ul class="accordion-menu">
 			<li>
 				<div class="dropdownlink">
 					센터 <i class="fa fa-chevron-down" aria-hidden="true"></i>
 				</div>
 				<ul class="submenuItems">
-					<li><a href="#">센터 조회</a></li>
-					<li><a href="#">센터 사진 관리</a></li>
+					<li><a href="<c:url value='/centerList'/>">센터 조회</a></li>
+					<li><a href="<c:url value='/centerPhoto'/>">센터 사진 관리</a></li>
 					<li><a href="#">센터 정보 일괄 등록</a></li>
 				</ul>
 			</li>
@@ -72,8 +70,7 @@
 			</li>
 			<li>
 				<div class="dropdownlink">
-					통계 
+					<a href="<c:url value='/statistics'/>">통계 </a>
 				</div>
 			</li>
 		</ul>
-	</div>
