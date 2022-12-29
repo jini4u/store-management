@@ -3,7 +3,6 @@
 #wrapcodediv {
 	margin: auto;
 	width: -webkit-fill-available;
-	background-color: #EDEDED;
 	padding: 60px 0px;
 }
 
@@ -19,7 +18,6 @@
 
 .codediv{
 	padding: 80px 35px;
-	background: white;
 }
 
 table {

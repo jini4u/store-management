@@ -1,4 +1,5 @@
 @charset "EUC-KR";
+
 .totalbox {
 	overflow: hidden;
 }
@@ -20,7 +21,7 @@
 
 .middlebox {
 	display: flex;
-	height: calc(100vh - 75px);
+	height: 841px;
 }
 
 .leftbox {
@@ -32,7 +33,7 @@
 }
 
 .contentbox {
-	min-width: 0;
+	width: 1486.33px;
 	flex-grow: 1;
 	flex-direction: column;
 	overflow: auto;

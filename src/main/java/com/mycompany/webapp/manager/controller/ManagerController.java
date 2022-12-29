@@ -10,4 +10,9 @@ public class ManagerController {
 	public String code() {
 		return "jsp/manager/code";
 	}
+	
+	@RequestMapping(value="/managerlookup")
+	public String managePhotoCenter() {
+		return "jsp/manager/managerlookup";
+	}
 }
