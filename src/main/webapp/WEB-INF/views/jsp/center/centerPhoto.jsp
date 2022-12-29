@@ -102,9 +102,9 @@
 		</div>
 		<div id="photo-frame">
 			<div id="photo-main-size">
-				<img src="resources/images/center/left-arrow.png" class="arrow"> <img
-					src="resources/images/center/(대구경남)경상대센터1.jpg" id="photo-img"> <img
-					src="resources/images/center/right-arrow.png" class="arrow">
+				<img src="resources/images/center/left-arrow.png" class="arrow">
+				<img src="resources/images/center/(대구경남)경상대센터1.jpg" id="photo-img">
+				<img src="resources/images/center/right-arrow.png" class="arrow">
 			</div>
 			<div id="photo-mini-size">
 				<input type="radio" name="slid"> <input type="radio"
@@ -113,15 +113,19 @@
 		</div>
 	</div>
 </div>
-<div class="modal">
-<div class="modal hidden">
-<!-- 	모달 배경 -->
-	<div class="modal_overlay"></div>
-	<div class="modal_content">
-	<h1>modal content</h1>
-	<button id="closeBtn">✖</button>
+<div id="modal">
+	<div class="modal-content">
+	<div id="center-modal-total">
+		<div id="center-modal-mainbar">
+		<p>사진 등록</p>
+		<button id="centermodal-close-btn">❎</button>
+		</div>
+		<h2>모달 창</h2>
+		<p>모달 창입니다</p>
+		<button type="button" id="modal-close-btn">닫기</button>
 	</div>
 	</div>
+	<div class="modal-layer"></div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="resources/js/center/centerPhoto.js"></script>
