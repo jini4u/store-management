@@ -12,7 +12,12 @@ public class ManagerController {
 	}
 	
 	@RequestMapping(value="/managerlookup")
-	public String managePhotoCenter() {
+	public String managerLookup() {
 		return "jsp/manager/managerlookup";
+	}
+	
+	@RequestMapping(value="/managermapping")
+	public String managerMapping() {
+		return "jsp/manager/managermapping";
 	}
 }

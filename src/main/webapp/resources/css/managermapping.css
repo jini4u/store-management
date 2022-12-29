@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+.buttonBox {
+	padding-top: 20px;
+	height: 38px;
+}
+
+.buttonBox>div {
+	float: right;
+}
+
+.mappingButton, .releaseButton {
+	border-radius: 9px;
+	display: inline-block;
+	cursor: pointer;
+	font-family: Arial;
+	font-size: 18px;
+	padding: 6px 25px;
+	text-decoration: none;
+	font-weight: 550;
+}
+
+.mappingButton:active, .releaseButton:active {
+	position: relative;
+	top: 1px;
+}
+
+.mappingButton {
+	background-color: #FF8787;
+	border: 1px solid #FF8787;
+	color: #fff;
+}
+
+.mappingButton:hover {
+	background-color: #E26868;
+	color: #fff;
+	border: 1px solid #E26868;
+}
+
+.releaseButton {
+	background-color: #ededed;
+	border: 1px solid #ededed;
+	color: #000000;
+}
+
+.releaseButton:hover {
+	background-color: #bebebe;
+	color: #000000;
+	border: 1px solid #bebebe;
+}
+
+.search-box {
+	top: 50%;
+	left: 50%;
+	height: 40px;
+	background-color: #fff;
+	border: 2px solid #E26868;
+	border-radius: 7px;
+	width: 282px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-left: 10px;
+}
+
+.search-btn {
+	text-decoration: none;
+	float: right;
+	width: 40px;
+	height: 40px;
+	background-color: #E26868;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+}
+
+.search-txt {
+	display: flex;
+	width: 200px;
+	padding-left: 15px;
+	border: none;
+	background: none;
+	outline: none;
+	font-size: 1rem;
+	line-height: 30px;
+	height: 40px;
+}
+
+.graphbox {
+	border-top: 1px solid #ccc;
+	margin-top: 20px;
+	display: flex;
+	height: 77%;
+}
+
+.managerbox {
+	height: 100%;
+	width: 35%;
+	padding: 14px;
+	border: 1px solid #ccc
+}
+
+.centerbox {
+	height: 100%;
+	width: 65%;
+	padding: 14px;
+	border: 1px solid #ccc
+}
