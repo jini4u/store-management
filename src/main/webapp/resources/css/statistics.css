@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+#statitems {
+	margin-left: 30px;
+	margin-top: 30px;
+}
+
 button {
 	background-color: #FF8787;
 	border: none;
@@ -22,6 +27,7 @@ button.menubtn.clicked {
 	display: flex;
 	height: 45px;
 	margin-left: 0;
+	margin-top: 30px;
 }
 
 #searchlistdiv{
@@ -60,6 +66,8 @@ button.menubtn.clicked {
 	display: flex;
 	border: 1px solid;
 	height: 600px;
+	padding-top: 50px;
+	width: 1000px;
 }
 
 #listtable{

@@ -16,7 +16,7 @@
 }
 
 .header>a {
-	margin-left: 17px;
+	margin-left: 12px;
 }
 
 .middlebox {
@@ -37,4 +37,19 @@
 	flex-grow: 1;
 	flex-direction: column;
 	overflow: auto;
+	margin: 20px 20px 0px 20px;
+}
+.titleBox {
+	display: flex;
+	align-items: center;
+	    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.titleBox > img {
+	height: 50px;
+	    margin-right: 15px;
+}
+.titleBox > h2{
+	font-size: 32px;
 }
