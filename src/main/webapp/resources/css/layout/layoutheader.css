@@ -11,26 +11,10 @@ a {
 ul, li {
 	list-style: none;
 }
-
-/* .header {
-	display: flex;
-	align-items: center;
-	background: #fff;
-	justify-content: space-between;
-	height: 75px;
-	position:sticky;
-    top:0px;
-    border-bottom: 1px solid #ccc;
-} */
-
 .logoImage {
 	height: 75px;
 	width: 228px;
 }
-
-/* .header>a {
-	margin-left: 17px;
-} */
 
 .sidebox {
 	display: flex;
@@ -56,5 +40,4 @@ ul, li {
 .mypage>img {
 	height: 20px;
 	margin-right: 4px;
-}
 }

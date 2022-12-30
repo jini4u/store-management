@@ -91,19 +91,46 @@
 	border-top: 1px solid #ccc;
 	margin-top: 20px;
 	display: flex;
-	height: 77%;
+	height: 73%;
+}
+
+.managerbox, .centerbox {
+	height: 100%;
+	padding: 14px;
+	border: 1px solid #ccc;
+}
+
+.managerbox>p, 
+.centerbox>p {
+	font-size: 20px;
+	font-weight: 550;
+	margin: 0px 0px 6px 10px;
 }
 
 .managerbox {
-	height: 100%;
 	width: 35%;
-	padding: 14px;
-	border: 1px solid #ccc
 }
 
 .centerbox {
-	height: 100%;
 	width: 65%;
-	padding: 14px;
-	border: 1px solid #ccc
 }
+
+.managertable {
+	font-size: 17px;
+	width: 100%;
+	border-top: 1.5px solid #CCC;
+    border-bottom: 1.5px solid #ccc;
+	border-collapse: collapse;
+}
+
+.managertable th, td {
+	/* border-bottom: 1px solid #CCC; */
+	padding: 10px;
+}
+
+.managertable thead {
+	background: #EDEDED;
+}
+.managertable tbody tr{
+	border-top: 1.5px solid #CCC;
+} 
