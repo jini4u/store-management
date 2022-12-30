@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+#noticediv{
+	margin-top: 30px;
+}
+
+#fullnoticetable{
+	border: 1px solid;
+}
+
+#fullnoticetable tr{
+	border-bottom: 1px solid;
+}
+
+#fullnoticetable tr th{
+	background: #EDEDED;
+}
