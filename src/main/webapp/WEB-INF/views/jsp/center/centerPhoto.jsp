@@ -96,9 +96,9 @@
 	</div>
 	<div id="photo-right-frame">
 		<div id="button-frame">
-			<button id="insert-center-modal">등록</button>
-			<button id="update-center-modal">수정</button>
-			<button id="delete-center-modal">삭제</button>
+			<button id="insert-center-modal" class="insert centerButton">등록</button>
+			<button id="update-center-modal" class="update centerButton">수정</button>
+			<button id="delete-center-modal" class="delete centerButton">삭제</button>
 		</div>
 		<div id="photo-frame">
 			<div id="photo-main-size">
@@ -113,19 +113,9 @@
 		</div>
 	</div>
 </div>
-<div id="modal">
-	<div class="modal-content">
-	<div id="center-modal-total">
-		<div id="center-modal-mainbar">
-		<p>사진 등록</p>
-		<button id="centermodal-close-btn">❎</button>
-		</div>
-		<div id="center-search-bar">
-		</div>
-		<button type="button" id="modal-close-btn">닫기</button>
-	</div>
-	</div>
-	<div class="modal-layer"></div>
-</div>
+<%@ include file="../center/modalinsert.jsp"%>
+<%@ include file="../center/modalupdate.jsp"%>
+<%@ include file="../center/modaldelete.jsp"%>
+
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="resources/js/center/centerPhoto.js"></script>

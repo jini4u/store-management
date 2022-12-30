@@ -15,4 +15,5 @@ public class CenterController {
 	public String loadCenter() {
 		return "jsp/center/centerList";
 	}
+	
 }
