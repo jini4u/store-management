@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
-div{
-	margin: auto;	
-	width: 1001.69px;
+#statitems {
+	margin-left: 30px;
+	margin-top: 30px;
 }
 
 button {
@@ -27,6 +27,7 @@ button.menubtn.clicked {
 	display: flex;
 	height: 45px;
 	margin-left: 0;
+	margin-top: 30px;
 }
 
 #searchlistdiv{
@@ -65,6 +66,8 @@ button.menubtn.clicked {
 	display: flex;
 	border: 1px solid;
 	height: 600px;
+	padding-top: 50px;
+	width: 1000px;
 }
 
 #listtable{

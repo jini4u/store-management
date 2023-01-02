@@ -51,6 +51,7 @@
 					</tr>
 				</tbody>
 			</table>
+			<img src="resources/images/center/paging.jpg" class="pagging">
 		</div>
 		<div id="center-photo-second">
 			<table class="table search" name="search-centerList">
@@ -89,22 +90,21 @@
 						<td>/</td>
 						<td>/</td>
 					</tr>
-
 				</tbody>
 			</table>
 		</div>
 	</div>
 	<div id="photo-right-frame">
 		<div id="button-frame">
-			<button>등록</button>
-			<button>수정</button>
-			<button>삭제</button>
+			<button id="insert-center-modal" class="insert centerButton">등록</button>
+			<button id="update-center-modal" class="update centerButton">수정</button>
+			<button id="delete-center-modal" class="delete centerButton">삭제</button>
 		</div>
 		<div id="photo-frame">
 			<div id="photo-main-size">
-				<img src="resources/images/center/left-arrow.png" class="arrow"> <img
-					src="resources/images/center/(대구경남)경상대센터1.jpg" id="photo-img"> <img
-					src="resources/images/center/right-arrow.png" class="arrow">
+				<img src="resources/images/center/left-arrow.png" class="arrow">
+				<img src="resources/images/center/(대구경남)경상대센터1.jpg" id="photo-img">
+				<img src="resources/images/center/right-arrow.png" class="arrow">
 			</div>
 			<div id="photo-mini-size">
 				<input type="radio" name="slid"> <input type="radio"
@@ -113,4 +113,9 @@
 		</div>
 	</div>
 </div>
+<%@ include file="../center/modalinsert.jsp"%>
+<%@ include file="../center/modalupdate.jsp"%>
+<%@ include file="../center/modaldelete.jsp"%>
+
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="resources/js/center/centerPhoto.js"></script>

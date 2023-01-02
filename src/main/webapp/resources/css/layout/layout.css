@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.totalbox {
+	overflow: hidden;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	background: #fff;
+	justify-content: space-between;
+	height: 75px;
+	position: sticky;
+	top: 0px;
+	border-bottom: 1px solid #ccc;
+}
+
+.header>a {
+	margin-left: 12px;
+}
+
+.middlebox {
+	display: flex;
+	height: 841px;
+}
+
+.leftbox {
+	min-height: 400px;
+	width: 220px;
+	border-right: 1px solid #ccc;
+	background: #fff;
+	flex-shrink: 0;
+}
+
+.contentbox {
+	width: 1486.33px;
+	flex-grow: 1;
+	flex-direction: column;
+	overflow: auto;
+	margin: 20px 20px 0px 20px;
+}
+.titleBox {
+	display: flex;
+	align-items: center;
+	    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.titleBox > img {
+	height: 40px;
+	margin: 0px 15px
+}
+.titleBox > h2{
+	font-size: 32px;
+}

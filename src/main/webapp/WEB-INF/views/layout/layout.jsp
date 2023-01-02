@@ -6,16 +6,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="resources/css/layout.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/layout/layout.css">
 <meta charset="UTF-8">
 <title>sitemesh main</title>
 </head>
-<body>
+<body class="totalbox"> 
 	<div>
+		<div class="header">
 		<page:applyDecorator name="layoutheader" />
+		</div>
 
-		<div class="totalbox">
+		<div class="middlebox">
+			<div class="leftbox">
 			<page:applyDecorator name="layoutleft" />
+			</div>
 			<div class="contentbox">
 				<decorator:body />
 			</div>

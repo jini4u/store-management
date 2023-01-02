@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Sample Page</title>
-</head>
-<body>
-<div>
-<table border="1">
+<link rel="stylesheet" href="/resources/css/notice/notice.css"/>
+<div class="titleBox">
+	<img src="/resources/images/notification-bell.png">
+	<h2>공지사항</h2>
+</div>
+<div id="noticediv">
+<table id="fullnoticetable">
 	<tr>
 		<th>글번호</th>
 		<th>제목</th>
@@ -28,6 +26,4 @@
 </c:forEach>
 </table>
 </div>
-<a href="board/create">글쓰기</a>
-</body>
-</html>
+<a href="board/create"><button>글쓰기</button></a>

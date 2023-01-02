@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<div class="titleBox">
+	<img src="/resources/images/notification-bell.png">
+	<h2>공지사항</h2>
+</div>
 <form action="update" method="post">
 	글번호 ${post.postno} <input name="postno" type="number" value="${post.postno}" hidden="true">
 	제목 <input name="title" type="text" value="${post.title}">
@@ -15,5 +12,3 @@
 	<input type="submit" value="수정">
 </form>
 <a href="delete?postno=${post.postno}">삭제</a>
-</body>
-</html>

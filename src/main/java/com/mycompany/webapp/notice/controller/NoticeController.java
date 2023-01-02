@@ -1,4 +1,4 @@
-package com.mycompany.webapp.test.controller;
+package com.mycompany.webapp.notice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,47 +7,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.mycompany.webapp.test.service.ITestService;
-import com.mycompany.webapp.test.vo.TestVO;
+import com.mycompany.webapp.notice.service.INoticeService;
+import com.mycompany.webapp.notice.vo.PostVO;
 
 @Controller
-public class TestController {
+public class NoticeController {
 	
 	@Autowired
-	ITestService testService;
+	INoticeService noticeService;
 	
 	@RequestMapping("/board")
 	public String getAllPosts(Model model) {
-		model.addAttribute("allPosts", testService.getAllPosts());
-		return "jsp/test/board";
+		model.addAttribute("allPosts", noticeService.getAllPosts());
+		return "jsp/notice/board";
 	}
 	
 	@RequestMapping(value="/board/create", method=RequestMethod.GET)
 	public String createPost() {
-		return "jsp/test/create";
+		return "jsp/notice/create";
 	}
 	
 	@RequestMapping(value="/board/create", method=RequestMethod.POST)
-	public String createPost(TestVO post, Model model) {
-		testService.createPost(post);
+	public String createPost(PostVO post, Model model) {
+		noticeService.createPost(post);
 		return "redirect: /board";
 	}
 	
 	@RequestMapping(value="/board/update", method=RequestMethod.GET)
 	public String updatePost(@RequestParam int postno, Model model) {
-		model.addAttribute("post", testService.getPost(postno));
-		return "jsp/test/update";
+		model.addAttribute("post", noticeService.getPost(postno));
+		return "jsp/notice/update";
 	}
 	
 	@RequestMapping(value="/board/update", method=RequestMethod.POST)
-	public String updatePost(TestVO post, Model model) {
-		testService.updatePost(post);
+	public String updatePost(PostVO post, Model model) {
+		noticeService.updatePost(post);
 		return "redirect: /board";
 	}
 	
 	@RequestMapping("/board/delete")
 	public String deletePost(@RequestParam int postno, Model model) {
-		testService.deletePost(postno);
+		noticeService.deletePost(postno);
 		return "redirect: /board";
 	}
 }

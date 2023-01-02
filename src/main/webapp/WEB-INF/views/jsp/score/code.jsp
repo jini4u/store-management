@@ -1,37 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="resources/css/code.css"/>
+<link rel="stylesheet" href="resources/css/score/code.css"/>
 
-<div id="wrapcodediv">
-	<h1>코드관리</h1>
+<div class="titleBox">
+	<img src="resources/images/selection.png">
+	<h2>코드관리</h2>
+</div>
 	<div id="twocodedivs">
 		<div class="codediv">
 			<form>
-				<div class="codedetailtopdiv">
+				<div id="groupinputs" class="codedetailtopdiv">
 					<div class="codenodiv">
-						그룹코드 <input type="text" id="groupCode">
+						그룹코드 <input type="text" id="groupCode" value="">
 					</div>
 					<div class="codenamediv">
-						그룹코드명 <input type="text" id="groupContent">
+						그룹코드명 <input type="text" id="groupContent" value="">
 					</div>
 				</div>
-				<div class="codedetailbottomdiv">
-					<div class="occupieddiv">사용여부 
+					<div id="groupselectdiv" class="occupieddiv">사용여부 
 						<select name="occupied">
 							<option value="all">전체
 							<option value="y">사용중
 							<option value="n">사용안함
 						</select>
 					</div>
+			<hr>
 					<div class="buttonsdiv">
 						<button>추가</button>
 						<button>삭제</button>
 						<button>저장</button>
 					</div>
-				</div>
 			</form>
-			<hr>
-			<table border="1">
+			<table id="grouptable" class="codetable">
 			<tr>
 				<th>번호</th>
 				<th>그룹코드</th>
@@ -39,28 +39,28 @@
 				<th>사용여부</th>
 			</tr>
 			<tr>
-				<td>1</td>
-				<td>HI</td>
-				<td>위생관리</td>
-				<td>Y</td>
+				<td class="groupcode-HI">1</td>
+				<td class="groupcode-HI">HI</td>
+				<td class="groupcode-HI">위생관리</td>
+				<td class="groupcode-HI">Y</td>
 			</tr>
 			<tr>
-				<td>2</td>
-				<td>DT</td>
-				<td>업무</td>
-				<td>Y</td>
+				<td class="groupcode-DT">2</td>
+				<td class="groupcode-DT">DT</td>
+				<td class="groupcode-DT">업무</td>
+				<td class="groupcode-DT">Y</td>
 			</tr>
 			<tr>
-				<td>3</td>
-				<td>BM</td>
-				<td>혈액관리</td>
-				<td>Y</td>
+				<td class="groupcode-BM">3</td>
+				<td class="groupcode-BM">BM</td>
+				<td class="groupcode-BM">혈액관리</td>
+				<td class="groupcode-BM">Y</td>
 			</tr>
 			<tr>
-				<td>4</td>
-				<td>FM</td>
-				<td>재무관리</td>
-				<td>Y</td>
+				<td class="groupcode-FM">4</td>
+				<td class="groupcode-FM">FM</td>
+				<td class="groupcode-FM">재무관리</td>
+				<td class="groupcode-FM">Y</td>
 			</tr>
 			</table>
 		</div>
@@ -77,7 +77,6 @@
 						상세코드명 <input type="text" id="detailContent">
 					</div>
 				</div>
-				<div class="codedetailbottomdiv">
 					<div class="occupieddiv">사용여부 
 						<select name="occupied">
 							<option value="all">전체
@@ -85,19 +84,18 @@
 							<option value="n">사용안함
 						</select>
 					</div>
+			<hr>
 					<div class="buttonsdiv">
 						<button>추가</button>
 						<button>삭제</button>
 						<button>저장</button>
 					</div>
-				</div>
 			</form>
-			<hr>
-			<table border="1">
+			<table id="detailtable" class="codetable">
 			<tr>
 				<th>번호</th>
-				<th>그룹코드</th>
-				<th>그룹코드명</th>
+				<th>상세코드</th>
+				<th>상세코드명</th>
 				<th>사용여부</th>
 			</tr>
 			<tr>
@@ -125,6 +123,7 @@
 				<td>Y</td>
 			</tr>
 			</table>
-		</div>
 	</div>
 </div>
+
+<script src="resources/js/score/code.js"></script>
