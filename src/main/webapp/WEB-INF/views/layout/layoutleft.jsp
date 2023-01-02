@@ -30,9 +30,9 @@
 					점포점수 <i class="fa fa-chevron-down" aria-hidden="true"></i>
 				</div>
 				<ul class="submenuItems">
-					<li><a href="#">센터 점수 조회</a></li>
+					<li><a href="<c:url value='/score'/>">센터 점수 조회</a></li>
 					<li><a href="<c:url value='/code'/>">항목 코드 관리</a></li>
-					<li><a href="#">센터 점수 일괄 등록</a></li>
+					<li><a href="<c:url value='/scoreupload'/>">센터 점수 일괄 등록</a></li>
 				</ul>
 			</li>
 			<li>

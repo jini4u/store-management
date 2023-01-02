@@ -1,13 +1,10 @@
 @charset "UTF-8";
-
-
-
-.score_page{
-	
+.year_and_quarter{
+	 display: inline-block;
+	 float: right;
 	
 }
-
-.year_and_quarter{
+.year_and_quarter > form{
     display: inline-block;
     float: right;
 }
@@ -21,6 +18,12 @@
 }
 
 
+
+/*수정 점수등록 버튼*/
+#btnclick {
+	float: right;
+	
+}
 
 /*점수 리스트 테이블*/
 .scoretable {

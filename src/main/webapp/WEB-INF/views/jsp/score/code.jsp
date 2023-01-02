@@ -1,69 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="resources/css/code.css"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="resources/css/score/code.css"/>
 
 <div class="titleBox">
 	<img src="resources/images/selection.png">
 	<h2>코드관리</h2>
 </div>
+
 	<div id="twocodedivs">
 		<div class="codediv">
 			<form>
-				<div class="codedetailtopdiv">
+				<div id="groupinputs" class="codedetailtopdiv">
 					<div class="codenodiv">
-						그룹코드 <input type="text" id="groupCode">
+						그룹코드 <input type="text" id="groupCode" value="">
 					</div>
 					<div class="codenamediv">
-						그룹코드명 <input type="text" id="groupContent">
+						그룹코드명 <input type="text" id="groupContent" value="">
 					</div>
 				</div>
-				<div class="codedetailbottomdiv">
-					<div class="occupieddiv">사용여부 
-						<select name="occupied">
+					<div id="groupselectdiv" class="occupieddiv">사용여부 
+						<select name="groupoccupied">
 							<option value="all">전체
 							<option value="y">사용중
 							<option value="n">사용안함
 						</select>
 					</div>
+			<hr>
 					<div class="buttonsdiv">
 						<button>추가</button>
 						<button>삭제</button>
 						<button>저장</button>
 					</div>
-				</div>
 			</form>
-			<hr>
-			<table class="codetable">
+			<table id="grouptable" class="codetable">
 			<tr>
 				<th>번호</th>
 				<th>그룹코드</th>
 				<th>그룹코드명</th>
 				<th>사용여부</th>
 			</tr>
-			<tr>
-				<td>1</td>
-				<td>HI</td>
-				<td>위생관리</td>
-				<td>Y</td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>DT</td>
-				<td>업무</td>
-				<td>Y</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>BM</td>
-				<td>혈액관리</td>
-				<td>Y</td>
-			</tr>
-			<tr>
-				<td>4</td>
-				<td>FM</td>
-				<td>재무관리</td>
-				<td>Y</td>
-			</tr>
+			<c:forEach items="${allGroupCodes}" var="groupCodeMap" varStatus="status">
+				<tr>
+					<td>${status.count}</td>
+				<c:forEach items="${groupCodeMap}" var="groupCode">
+					<td>${groupCode.value}</td>
+				</c:forEach>
+				</tr>
+			</c:forEach>
+			
 			</table>
 		</div>
 		
@@ -73,59 +58,39 @@
 			<form>
 				<div class="codedetailtopdiv">
 					<div class="codenodiv">
-						상세코드 <input type="text" id="detailCode">
+						상세코드 <input type="text" id="detailCode" value="">
 					</div>
 					<div class="codenamediv">
-						상세코드명 <input type="text" id="detailContent">
+						상세코드명 <input type="text" id="detailContent" value="">
 					</div>
 				</div>
-				<div class="codedetailbottomdiv">
 					<div class="occupieddiv">사용여부 
-						<select name="occupied">
+						<select name="detailoccupied">
 							<option value="all">전체
 							<option value="y">사용중
 							<option value="n">사용안함
 						</select>
 					</div>
+			<hr>
 					<div class="buttonsdiv">
 						<button>추가</button>
 						<button>삭제</button>
 						<button>저장</button>
 					</div>
-				</div>
 			</form>
-			<hr>
-			<table class="codetable">
+			<table id="detailtable" class="codetable">
+			<thead>
 			<tr>
 				<th>번호</th>
-				<th>그룹코드</th>
-				<th>그룹코드명</th>
+				<th>상세코드</th>
+				<th id="detailcontentth">상세코드명</th>
 				<th>사용여부</th>
 			</tr>
-			<tr>
-				<td>1</td>
-				<td>01</td>
-				<td>센터 내부 위생관리</td>
-				<td>Y</td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>02</td>
-				<td>의료폐기용품 관리</td>
-				<td>Y</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>03</td>
-				<td>의료기구 관리</td>
-				<td>Y</td>
-			</tr>
-			<tr>
-				<td>4</td>
-				<td>04</td>
-				<td>개인위생 관리</td>
-				<td>Y</td>
-			</tr>
+			</thead>
+			<tbody>
+			</tbody>
 			</table>
 	</div>
 </div>
+
+<script src="resources/js/score/code.js"></script>

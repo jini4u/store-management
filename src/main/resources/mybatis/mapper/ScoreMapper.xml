@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mycompany.webapp.score.dao.IScoreRepository">
+<select id="getAllGroupCodes" resultType="map">
+SELECT check_group_code
+		, check_group_content
+		, check_group_occupied
+	FROM check_group
+</select>
+<select id="getDetailCodes" parameterType="String" resultType="map">
+SELECT LPAD(check_detail_code,2,0) AS check_detail_code
+		, check_detail_content
+		, check_detail_occupied
+	FROM check_detail
+	WHERE check_group_code=#{groupCode}
+</select>
+</mapper>

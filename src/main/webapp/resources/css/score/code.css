@@ -18,9 +18,7 @@
 }
 
 .codediv{
-	margin-top: 40px;
 	padding: 80px 35px;
-	border: 1px solid #E26868;
 }
 
 .codetable {
@@ -28,10 +26,19 @@
 	margin-top: 20px;
 	text-align: center;
 	border: none;
+	border-collapse: collapse;
+}
+.codetable tr{
+	height: 40px;
+	border-bottom: 1px solid #D8D9CF;
 }
 
-.codetable td {
-	border: none;
+.codetable th {
+	background: #EDEDED;
+}
+
+#detailcontentth {
+	width: 277px;
 }
 
 form div {
@@ -42,14 +49,10 @@ form div {
 	margin-bottom: 10px;
 }
 
-.codedetailbottomdiv {
-	display: flex;
-}
-
 .buttonsdiv {
 	display: flex;
     justify-content: flex-end;
-    margin: 10px 0px;
+    margin: 15px 0px;
 }
 
 .occupieddiv {
@@ -75,14 +78,14 @@ button {
 	color: white;
 	background: #FF8787;
 	border: none;
-	border-radius: 10px;
 	width: 55px;
+	height: 30px;
+}
+
+button:hover {
+	background: #E26868;
 }
 
 .verticalhr {
 	margin: -6px;
-}
-
-.codediv hr {
-	margin-bottom: 25px;
 }

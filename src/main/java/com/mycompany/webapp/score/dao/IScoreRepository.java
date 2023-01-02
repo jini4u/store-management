@@ -1,5 +1,9 @@
 package com.mycompany.webapp.score.dao;
 
-public interface IScoreRepository {
+import java.util.List;
+import java.util.Map;
 
+public interface IScoreRepository {
+	List<Map<String, String>> getAllGroupCodes();
+	List<Map<String, Object>> getDetailCodes(String groupCode);
 }

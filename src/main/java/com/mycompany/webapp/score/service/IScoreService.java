@@ -1,5 +1,9 @@
 package com.mycompany.webapp.score.service;
 
-public interface IScoreService {
+import java.util.List;
+import java.util.Map;
 
+public interface IScoreService {
+	List<Map<String, String>> getAllGroupCodes();
+	List<Map<String, Object>> getDetailCodes(String groupCode);
 }
