@@ -37,6 +37,10 @@
 	background: #EDEDED;
 }
 
+#detailcontentth {
+	width: 277px;
+}
+
 form div {
 	display: flex;
 }
