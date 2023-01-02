@@ -28,7 +28,7 @@ public class CenterController {
 	@RequestMapping(value="/insertCenter")
 		public String insertCenter() {
 			return "jsp/center/centerinsert";
-	}
+	} 
 	
 	
 }
