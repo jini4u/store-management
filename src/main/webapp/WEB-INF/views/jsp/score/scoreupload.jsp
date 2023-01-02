@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<link rel="stylesheet" href="resources/css/score/score.css" />
 <h1>센터점수 일괄 업로드</h1>
 <input type="text" size="5" placeholder="점수 수정">
 <input type='button' value='파일선택'/>
