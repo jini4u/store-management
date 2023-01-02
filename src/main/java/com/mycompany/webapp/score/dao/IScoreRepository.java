@@ -6,4 +6,6 @@ import java.util.Map;
 public interface IScoreRepository {
 	List<Map<String, String>> getAllGroupCodes();
 	List<Map<String, Object>> getDetailCodes(String groupCode);
+	
+	int updateDetailCode(Map<String, String> detailCodeMap);
 }

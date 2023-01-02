@@ -23,4 +23,9 @@ public class ScoreService implements IScoreService {
 	public List<Map<String, Object>> getDetailCodes(String groupCode) {
 		return scoreRepository.getDetailCodes(groupCode);
 	}
+	
+	@Override
+	public int updateDetailCode(Map<String, String> detailCodeMap) {
+		return scoreRepository.updateDetailCode(detailCodeMap);
+	}
 }

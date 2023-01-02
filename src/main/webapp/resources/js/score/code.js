@@ -12,9 +12,15 @@ var detailcodeinput = document.getElementById("detailCode");
 var detailcontentinput = document.getElementById("detailContent");
 //상세코드 select 선택자
 var detailselect = document.querySelector('select[name="detailoccupied"]');
+//그룹코드 form 선택자
+var groupForm = document.getElementById("groupform");
 
-//th 부분 제외하고 tr에 클릭이벤트 달아주는 함수
+var detailForm = document.getElementById("detailform");
+var saveDetailBtn = document.getElementById("saveDetail");
+
+//각 요소에 이벤트 달아주는 함수
 function addEvent(){
+	//그룹코드 테이블 클릭 이벤트 등록
 	//선택한 td(event.target)의 부모(.parentElement)에서 attribute 얻어와 컨트롤 해보는게 더 이벤트가 간단
 	for(var i=1;i<groupcodetr.length;i++){
 		groupcodetr[i].addEventListener("click", function(event){
@@ -36,7 +42,7 @@ function addEvent(){
 			//상세 테이블에 있던 내용 지우기
 			detailtable.tBodies[0].innerHTML = '';
 			//ajax 요청해서 상세코드 내용 채우기
-			makeRequest(groupTextArr[1]);
+			makeRequest(getDetailCodes, 'GET', '/getDetailCodes/'+groupTextArr[1]);
 		});
 	}
 	
@@ -55,42 +61,60 @@ function addEvent(){
 			}
 		}
 	});
+	
+	saveDetailBtn.addEventListener("click", function(event){
+		var formData = new FormData(detailForm);
+		formData.append('groupcode', groupcodeinput.value);
+		makeRequest(afterSendForm, 'POST', '/updateDetailCode', formData);
+	})
 }
 
-//ajax 통신하는 함수
-function makeRequest(groupCode){
+/**
+ * ajax 통신함수
+ * @param {Function} callback 함수
+ * @param {String} method
+ * @param {String} url
+ */
+function makeRequest(getFunc, method, url, sendItem){
 	//HTTP request 기능 제공하는 Object 생성
 	httpRequest = new XMLHttpRequest();
 	if(!httpRequest){
 		alert('XMLHTTP 인스턴스 만들기 실패');
 		return false;
 	}
-	//요청에 대한 상태가 변화할 때(응답 받은 후에) getDetailCodes 함수를 부른다
-	httpRequest.onreadystatechange = getDetailCodes;
+	//요청에 대한 상태가 변화할 때(응답 받은 후에) 지정 함수를 부른다
+	httpRequest.onreadystatechange = function(){
+		//DONE: 이상 없음, 응답 받았음
+		if(httpRequest.readyState === XMLHttpRequest.DONE){
+			//200: OK, 이상없음
+			if(httpRequest.status === 200){
+				getFunc();
+			} else {
+				//처리하는 과정에서 문제 발생. 404, 500 등
+				alert('request에 문제 발생'+httpRequest.status);
+			}
+		}
+	}
 	//.open, .send로 요청하기
 	//.open(request method, URL, [true | false]) : 세번째 파라미터는 비동기성. 기본값은 true
-	httpRequest.open('GET', '/getDetailCodes/'+groupCode);
-	httpRequest.send();
+	httpRequest.open(method, url);
+	httpRequest.send(sendItem); 
 }
 
 function getDetailCodes(){
-	//DONE: 이상 없음, 응답 받았음
-	if(httpRequest.readyState === XMLHttpRequest.DONE){
-		//200: OK, 이상없음
-		if(httpRequest.status === 200){
-			//httpRequest.responseText: 서버의 응답을 텍스트 문자열로 반환
-			var detailJSON = JSON.parse(httpRequest.responseText);
-			//반환된 상세코드 수만큼 반복
-			for(var i=0;i<detailJSON.length;i++){
-				//상세코드 tbody안에 번호, 상세코드, 상세코드명, 사용여부 추가하기
-				detailtable.tBodies[0].innerHTML += "<tr><td>"+(i+1)+"</td><td>"+detailJSON[i].CHECK_DETAIL_CODE+"</td><td>"+detailJSON[i].CHECK_DETAIL_CONTENT+"</td><td>"+detailJSON[i].CHECK_DETAIL_OCCUPIED+"</td></tr>";
-			}
-		} else {
-			//처리하는 과정에서 문제 발생. 404, 500 등
-			alert('request에 문제 발생');
-		}
+	//httpRequest.responseText: 서버의 응답을 텍스트 문자열로 반환
+	var detailJSON = JSON.parse(httpRequest.responseText);
+	//반환된 상세코드 수만큼 반복
+	for(var i=0;i<detailJSON.length;i++){
+		//상세코드 tbody안에 번호, 상세코드, 상세코드명, 사용여부 추가하기
+		detailtable.tBodies[0].innerHTML += "<tr><td>"+(i+1)+"</td><td>"+detailJSON[i].CHECK_DETAIL_CODE+"</td><td>"+detailJSON[i].CHECK_DETAIL_CONTENT+"</td><td>"+detailJSON[i].CHECK_DETAIL_OCCUPIED+"</td></tr>";			
 	}
 }
+
+function afterSendForm(){
+	console.log(httpRequest.responseText);
+}
+
 //클릭이벤트 달아주기
 addEvent();
 
