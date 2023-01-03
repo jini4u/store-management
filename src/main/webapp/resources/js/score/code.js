@@ -52,9 +52,7 @@ function addEvent(){
 				groupSelect[i].selected = true;
 			}
 		}
-		
-		//상세 테이블에 있던 내용 지우기
-		detailTable.tBodies[0].innerHTML = '';
+	
 		//ajax 요청해서 상세코드 내용 채우기
 		makeRequest(getDetailCodes, 'GET', '/getDetailCodes/'+groupTextArr[1]);
 	});

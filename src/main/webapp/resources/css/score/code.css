@@ -28,9 +28,17 @@
 	border: none;
 	border-collapse: collapse;
 }
-.codetable tr{
+.codetable tr {
 	height: 40px;
 	border-bottom: 1px solid #D8D9CF;
+}
+
+.codetable tr:hover {
+	background: #EDEDED;
+}
+
+.codetable tr:active {
+	background: #D8D9CF;
 }
 
 .codetable th {
