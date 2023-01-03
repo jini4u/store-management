@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,7 @@ import com.mycompany.webapp.center.vo.CenterVO;
  * **/
 @Controller
 public class CenterController {
+	private static Logger logger = LoggerFactory.getLogger(CenterController.class);
 	@Autowired
 	ICenterService centerService;
 
@@ -36,19 +39,23 @@ public class CenterController {
 	}
 	//url은 value에 적혀있는 값으로 동작하고, centerlist.jsp 페이지를 로딩해준다?
 	@GetMapping(value="/centerInsert")
-	public String insertCenter(HttpServletRequest request) {
-		request.setAttribute("centerCode", centerService.insertCenterCode()+1);
+	public String insertCenter(Model model) {
 		return "jsp/center/centerlist";
 	}
 	
+	
+	//물어보기
 	@PostMapping(value="/centerInsert")
 	public String insertCenter(CenterVO centerVO) {
+		centerVO.setCenterCode(centerService.insertCenterCode()+1);
+		System.out.println(centerVO);
 		centerService.insertCenter(centerVO);
-		return "jsp/center/centerlist";
+		return "redirect:/centerList";
 	}
 	
 	@GetMapping(value="/centerList")
 	public String centerList(Model model) {
+		model.addAttribute("centerCode", centerService.insertCenterCode()+1);
 		model.addAttribute("centerList" ,centerService.centerList());
 		return "jsp/center/centerlist";
 	}

@@ -14,16 +14,14 @@
 		, center_tel
 		, center_address
 		, center_guide
-		, center_opening_date
-		, center_closing_date)
+		, center_opening_date)
 	VALUES (
 		  #{centerCode}
 		, #{centerName}
 		, #{centerTel}
 		, #{centerAddress}
 		, #{centerGuide}
-		, #{centerOpeningDate}
-		, '2022-12-31')
+		, #{centerOpeningDate})
 </insert>
 
 <select id="centerList" resultType="com.mycompany.webapp.center.vo.CenterVO">

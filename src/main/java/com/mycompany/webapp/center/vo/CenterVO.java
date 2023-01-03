@@ -15,9 +15,7 @@ public class CenterVO {
 	private String centerGuide;
 	//jsp에서 input type을 date로 받아와도 string으로 넘어오기 때문에 형변환을 
 	//해줘야 한다
-	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date centerOpeningDate;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date centerClosingDate;
 	private List<FileInfoVO> file;
 	
