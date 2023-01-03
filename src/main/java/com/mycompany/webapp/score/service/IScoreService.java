@@ -11,5 +11,5 @@ public interface IScoreService {
 	List<ScoreVO> getScoreList();
 	void insertScore(ScoreVO score);
 	void deleteScore(ScoreVO score);
-	void updateScore(ScoreVO score);
+	int saveScore(ScoreVO score);
 }

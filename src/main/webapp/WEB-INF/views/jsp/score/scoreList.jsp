@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="resources/css/score/score.css" />
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
@@ -84,14 +85,18 @@ $(function(){
 	<th class="score_th">항목</th>
 	<th class="score_th">상세항목</th>
 	<th class="score_th">점수</th>
+	
+<c:forEach items="${scoreList}" var="scoreCode">
 	<tr>
-		<td>2022</td>
-		<td>분기</td>
-		<td>위생</td>
-		<td>매장위생관리</td>
-		<td><input type="text" size="5" placeholder="점수 수정">
+		<td>${scoreCode.checkYear}</td>
+		<td>${scoreCode.checkSeason}</td>
+		<td>${scoreCode.checkGroupCode}</td>
+		<td>${scoreCode.checkDetailCode}</td>
+		<td><input type="text" calss="placeholderstlye" size="5" placeholder="${scoreCode.checkScore}"></td>
+	
+	
 	</tr>
-
+</c:forEach>
 </table>
 
 
@@ -101,7 +106,9 @@ $(function(){
 <!--  수정 점수등록 버튼 -->
 <div id ="btnclick">
 <div id="btn_group">
-<button class="open" id="btn1">수정</button>
+<form action="/saveScore" name="saveScore" method="post">
+<button id="btn1">수정</button>
+</form>
 <button class="open" id="btn2">점수등록</button>
 </div>
 </div>
@@ -111,16 +118,6 @@ $(function(){
 
 <!-- 수정 모달창 -->
 
-<div class="modal hidden">
-	<div class="modal_overlay"></div>
-	<div class="modal_content">
-		<h1 class="modalh1">여기는 모달창 입니다.</h1>
-<div id="btn_group">
-		<button >등록</button>
-		<button>취소</button>
-		</div>
-		</div>
-	</div>
 
 
 

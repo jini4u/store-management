@@ -14,4 +14,36 @@ SELECT LPAD(check_detail_code,2,0) AS check_detail_code
 	FROM check_detail
 	WHERE check_group_code=#{groupCode}
 </select>
+
+
+
+
+<!-- 조회 -->
+<select id="getScoreList"  resultType="com.mycompany.webapp.score.vo.ScoreVO">
+<![CDATA[
+	SELECT 
+		CENTER_CODE					 AS "centerCode",
+		USER_CODE 					 AS "userCode",
+		CHECK_YEAR 					 AS "checkYear",
+		CHECK_SEASON				 AS "checkSeason",
+		CHECK_GROUP_CODE			 AS "checkGroupCode",
+		CHECK_DETAIL_CODE			 As "checkDetailCode",
+		CHECK_SCORE					 AS "checkScore"
+	
+	from inspection
+]]>
+
+</select>
+
+<!-- 점수 수정 -->
+
+<update id="saveScore" parameterType="com.mycompany.webapp.score.vo.ScoreVO">
+<![CDATA[
+
+	update inspection
+	set CHECK_SCORE=#{checkScore}
+
+]]>
+
+</update> 
 </mapper>

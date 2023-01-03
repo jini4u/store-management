@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import com.mycompany.webapp.score.service.IScoreService;
+import com.mycompany.webapp.score.service.ScoreService;
+import com.mycompany.webapp.score.vo.ScoreVO;
 
 @Controller
 public class ScoreController {
@@ -26,12 +28,26 @@ public class ScoreController {
 	@RequestMapping("/scoreupload")
 	public String scoreupload() {
 		return "jsp/score/scoreupload";
+		
 	}
 	
 	@RequestMapping("/score")
-	public String centerscoreinquiry() {
-		return "jsp/score/scoreList";
+	public String centerscoreinquiry(Model model) {
+		model.addAttribute("scoreList",scoreService.getScoreList());
+				return "jsp/score/scoreList";
 	}
+
+	@RequestMapping(value="/saveScore",method = RequestMethod.POST)
+	public String saveScore(ScoreVO score){
+		scoreService.saveScore(score);
+		 return "redirect: /score";
+	}
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value="/code")
 	public String code(Model model) {
