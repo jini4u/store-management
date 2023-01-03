@@ -1,4 +1,5 @@
 package com.mycompany.webapp.score.controller;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -56,7 +57,13 @@ public class ScoreController {
 	
 	@RequestMapping(value="/updateDetailCode", method=RequestMethod.POST)
 	public @ResponseBody int updateDetailCode(MultipartHttpServletRequest request) {
-		System.out.println(request.getParameter("groupcode"));
-		return 1;
+		Map<String, String> detailCodeMap = new HashMap<String, String>();
+		
+		detailCodeMap.put("detailCode", request.getParameter("detailCode"));
+		detailCodeMap.put("detailContent", request.getParameter("detailContent"));
+		detailCodeMap.put("detailOccupied", request.getParameter("detailOccupied").toUpperCase());
+		detailCodeMap.put("groupCode", request.getParameter("groupCode"));
+		
+		return scoreService.updateDetailCode(detailCodeMap);
 	}
 }
