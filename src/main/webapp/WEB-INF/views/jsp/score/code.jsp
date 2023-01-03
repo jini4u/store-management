@@ -28,27 +28,21 @@
 					</div>
 			<hr>
 					<div class="buttonsdiv">
-						<button>추가</button>
-						<button>삭제</button>
-						<button type="submit">저장</button>
+						<button type="button" id="insertgroup">추가</button>
+						<button type="button" id="savegroup">저장</button>
 					</div>
 			</form>
 			<table id="grouptable" class="codetable">
+			<thead>
 			<tr>
 				<th>번호</th>
 				<th>그룹코드</th>
 				<th>그룹코드명</th>
 				<th>사용여부</th>
-			</tr>
-			<c:forEach items="${allGroupCodes}" var="groupCodeMap" varStatus="status">
-				<tr>
-					<td>${status.count}</td>
-				<c:forEach items="${groupCodeMap}" var="groupCode">
-					<td>${groupCode.value}</td>
-				</c:forEach>
-				</tr>
-			</c:forEach>
-			
+			</tr>	
+			</thead>
+			<tbody>
+			</tbody>	
 			</table>
 		</div>
 		
@@ -73,8 +67,7 @@
 					</div>
 			<hr>
 					<div class="buttonsdiv">
-						<button>추가</button>
-						<button>삭제</button>
+						<button type="button" id="insertdetail">추가</button>
 						<button type="button" id="savedetail">저장</button>
 					</div>
 			</form>
