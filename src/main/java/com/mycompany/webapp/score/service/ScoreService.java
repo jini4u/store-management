@@ -24,11 +24,12 @@ public class ScoreService implements IScoreService {
 	public List<Map<String, Object>> getDetailCodes(String groupCode) {
 		return scoreRepository.getDetailCodes(groupCode);
 	}
-	
-	
-	
-	
-	
+
+	@Override
+	public int updateDetailCode(Map<String, String> detailCodeMap) {
+		return scoreRepository.updateDetailCode(detailCodeMap);
+	}
+
 	//아래는 구현해야함
 	@Override
 	public List<ScoreVO> getScoreList() {
@@ -48,4 +49,6 @@ public class ScoreService implements IScoreService {
 	public int saveScore(ScoreVO score) {
 		return scoreRepository.saveScore(score);
 	}
+	
+	
 }

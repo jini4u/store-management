@@ -39,17 +39,49 @@
 	overflow: auto;
 	margin: 20px 20px 0px 20px;
 }
+
 .titleBox {
 	display: flex;
 	align-items: center;
-	    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 10px;
 }
 
-.titleBox > img {
+.titleBox>img {
 	height: 40px;
 	margin: 0px 15px
 }
-.titleBox > h2{
+
+.titleBox>h2 {
 	font-size: 32px;
 }
+
+.verticalTable,
+.rowTable 
+{
+	font-size: 17px;
+	width: 100%;
+	border-top: 1.5px solid #CCC;
+	border-bottom: 1.5px solid #ccc;
+	border-collapse: collapse;
+}
+
+.verticalTable th, td,
+.rowTable th, td 
+{
+	padding: 10px;
+}
+
+.verticalTable thead,
+.rowTable th 
+{
+	background: #EDEDED;
+}
+
+.verticalTable tbody tr,
+.rowTable tr
+ {
+	border-top: 1.5px solid #CCC;
+	text-align: center;
+}
+
