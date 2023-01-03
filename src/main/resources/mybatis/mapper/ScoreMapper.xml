@@ -1,23 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.score.dao.IScoreRepository">
+<!-- 
+	전체 그룹 코드, 코드명, 사용여부 조회
+	임유진
+ -->
 <select id="getAllGroupCodes" resultType="map">
-SELECT check_group_code
-		, check_group_content
-		, check_group_occupied
+	SELECT check_group_code
+			, check_group_content
+			, check_group_occupied
 	FROM check_group
 </select>
+
+<!-- 
+	그룹 코드에 해당하는 전체 상세 코드, 코드명, 사용여부 조회
+	임유진
+ -->
 <select id="getDetailCodes" parameterType="String" resultType="map">
-SELECT LPAD(check_detail_code,2,0) AS check_detail_code
-		, check_detail_content
-		, check_detail_occupied
+	SELECT LPAD(check_detail_code,2,0) AS check_detail_code
+			, check_detail_content
+			, check_detail_occupied
 	FROM check_detail
 	WHERE check_group_code = #{groupCode}
 </select>
+
+<!-- 조회 -->
+<select id="getScoreList"  resultType="com.mycompany.webapp.score.vo.ScoreVO">
+<![CDATA[
+	SELECT 
+		CENTER_CODE					 AS "centerCode",
+		USER_CODE 					 AS "userCode",
+		CHECK_YEAR 					 AS "checkYear",
+		CHECK_SEASON				 AS "checkSeason",
+		CHECK_GROUP_CODE			 AS "checkGroupCode",
+		CHECK_DETAIL_CODE			 As "checkDetailCode",
+		CHECK_SCORE					 AS "checkScore"
+	
+	from inspection
+]]>
+
+</select>
+
+<!-- 점수 수정 -->
+
+<update id="saveScore" parameterType="com.mycompany.webapp.score.vo.ScoreVO">
+<![CDATA[
+
+	update inspection
+	set CHECK_SCORE=#{checkScore}
+
+]]>
+
+</update> 
+
+<!-- 
+	상세코드 수정.
+	 코드는 수정 불가(PK), 코드명, 사용여부 수정 가능
+	 그룹별 사용여부 수정할 수 있음
+	 임유진 
+-->
 <update id="updateDetailCode" parameterType="map">
-UPDATE check_detail 
-	SET check_detail_content = #{detailContent},
-		check_detail_occupied = #{detailOccupied}
-	WHERE check_group_code = #{groupCode} AND check_detail_code = #{detailCode}
+	UPDATE check_detail 
+	SET check_detail_content = NVL(#{detailContent, jdbcType=VARCHAR}, check_detail_content)
+		, check_detail_occupied = #{detailOccupied}
+	WHERE check_group_code = #{groupCode} <if test="detailCode != null">AND check_detail_code = #{detailCode}</if>
 </update>
+
+<!-- 
+	그룹코드 수정.
+	코드는 수정 불가(PK), 코드명, 사용여부 수정 가능
+	임유진
+ -->
+<update id="updateGroupCode" parameterType="map">
+ 	UPDATE check_group
+ 	SET check_group_content = #{groupContent}
+ 		, check_group_occupied = #{groupOccupied}
+ 	WHERE check_group_code = #{groupCode}
+</update>
+
+<!-- 
+	상세코드 추가
+	임유진
+ -->
+ <insert id="insertDetailCode" parameterType="map">
+ 	INSERT INTO check_detail (check_group_code, check_detail_code, check_detail_content, check_detail_occupied)
+ 	VALUES (#{groupCode}, #{detailCode}, #{detailContent}, #{detailOccupied})
+ </insert>
+ 
+ <!-- 
+ 	그룹코드 추가
+ 	임유진
+ -->
+ <insert id="insertGroupCode" parameterType="map">
+ 	INSERT INTO check_group (check_group_code, check_group_content, check_group_occupied)
+ 	VALUES (#{groupCode}, #{groupContent}, #{groupOccupied})
+ </insert>
 </mapper>
