@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mybatis.mapper.CenterMapper">
+<mapper namespace="com.mycompany.webapp.center.dao.ICenterRepository">
 
+<select id="insertCenterCode" resultType="int">
+	SELECT NVL(MAX(center_code), 0000000) as centerCode
+	FROM CENTER
+</select>
+
+<insert id="insertCenter" parameterType="com.mycompany.webapp.center.vo.CenterVO">
+	INSERT INTO CENTER(
+		  center_code
+		, center_name
+		, center_tel
+		, center_address
+		, center_guide
+		, center_opening_date
+		, center_closing_date)
+	VALUES (
+		  #{centerCode}
+		, #{centerName}
+		, #{centerTel}
+		, #{centerAddress}
+		, #{centerGuide}
+		, #{centerOpeningDate}
+		, '2022-12-31')
+</insert>
+
+<select id="centerList" resultType="com.mycompany.webapp.center.vo.CenterVO">
+	select 
+		center_code as centerCode
+		, center_name as centerName
+		, center_tel as centerTel
+		, center_address as centerAddress
+		, center_guide as centerGuide
+		, center_opening_date as centerOpeningDate
+		, center_closing_date as centerClosingDate
+	FROM CENTER
+</select>
 
 </mapper>
