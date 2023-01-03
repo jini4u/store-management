@@ -49,7 +49,7 @@
 						<option>Y</option>
 						<option>N</option>
 				</select></td>
-			</tr>
+			</tr> 
 			<tr>
 				<th>주소</th>
 				<td><input type="text" name="centerAddress" id="centerAddress"></td>
