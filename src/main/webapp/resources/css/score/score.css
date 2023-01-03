@@ -52,7 +52,10 @@
 
 
 
-/* 지점 버튼 */
+/* 
+작성자 :정윤선
+스타일 :지점 버튼
+ */
 
 #btn_group{
 	display: flex;
@@ -80,13 +83,14 @@ background: #E26868;
 /*모달*/
 .modal {
 	position: fixed;
-	top: 0%;
-	left: 0%;
+	top: 0;
+	left: 0;
 	width: 100%;
 	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
 }
 
 .modal_overlay {
@@ -125,6 +129,7 @@ background: #E26868;
 
 
 /*scoreupload*/
+
 .uploadbutton{
 	display: flex;
     justify-content: flex-end;
@@ -163,3 +168,29 @@ table.scoretable td {
 }
 
 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

@@ -21,12 +21,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.mycompany.webapp.score.service.IScoreService;
+import com.mycompany.webapp.score.service.ScoreService;
+import com.mycompany.webapp.score.vo.ScoreVO;
+
 /**
  * @ClassName : ScoreController
  * @Description : 점수, 코드 관리 기능 구현 Controller
@@ -36,6 +39,7 @@ import com.mycompany.webapp.score.service.IScoreService;
  * @	1/3			임유진		updateDetailCode, updateGroupCode 작성
  * @author 임유진, 정윤선
  * **/
+
 @Controller
 public class ScoreController {
 
@@ -45,11 +49,19 @@ public class ScoreController {
 	@RequestMapping("/scoreupload")
 	public String scoreupload() {
 		return "jsp/score/scoreupload";
+		
 	}
 	
 	@RequestMapping("/score")
-	public String centerscoreinquiry() {
-		return "jsp/score/scoreList";
+	public String centerscoreinquiry(Model model) {
+		model.addAttribute("scoreList",scoreService.getScoreList());
+				return "jsp/score/scoreList";
+	}
+
+	@RequestMapping(value="/saveScore",method = RequestMethod.POST)
+	public String saveScore(ScoreVO score){
+		scoreService.saveScore(score);
+		 return "redirect: /score";
 	}
 	
 	/*
