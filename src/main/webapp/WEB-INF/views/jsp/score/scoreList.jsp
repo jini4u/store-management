@@ -34,16 +34,16 @@ $(function(){
 
 
 <!-- 점검년도 리스트 -->
+<div class="titleBox">
+	<img src="resources/images/checklist.png">
+	<h2>점포 점수 조회</h2>
+</div>
 
-<table>
-	<tr class="scoreimage">
-		<td><img src="resources/images/user.png"></td>
-		<td>정윤선 담당자</td>
-</table>
+
 <div id="score_page">
 <div id="btn_group">
-        <button class="btn1">지점1</button>
-        <button class="btn2">지점2</button>
+        <button>지점1</button>
+        <button>지점2</button>
     </div>
 
 <div class="year_and_quarter">
@@ -102,7 +102,7 @@ $(function(){
 <div id ="btnclick">
 <div id="btn_group">
 <button class="open" id="btn1">수정</button>
-<button id="btn2">점수등록</button>
+<button class="open" id="btn2">점수등록</button>
 </div>
 </div>
 
@@ -115,9 +115,10 @@ $(function(){
 	<div class="modal_overlay"></div>
 	<div class="modal_content">
 		<h1 class="modalh1">여기는 모달창 입니다.</h1>
-		
+<div id="btn_group">
 		<button >등록</button>
 		<button>취소</button>
+		</div>
 		</div>
 	</div>
 
@@ -134,7 +135,6 @@ $(function(){
   const openButton=document.getElementById(".open");
   const modal = document.querySelector(".modal");
   const overlay = modal.querySelector(".modal_overlay");
-  const closeBtn = modal.querySelector(".modalbutton");
   const openModal = () => {
 	  modal.classList.remove("hidden"); 
   }
@@ -143,8 +143,7 @@ $(function(){
   }
   
   overlay.addEventListener("click", closeModal);
-  closeBtn.addEventListener("click", closeModal);
-  openButton.addEventListener("click",openModal);
+ 
   </script>
 
 

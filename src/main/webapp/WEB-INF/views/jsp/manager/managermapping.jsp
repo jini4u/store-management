@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" type="text/css"
-	href="resources/css/managermapping.css">
+	href="resources/css/manager/managermapping.css">
 <div class="titleBox">
 	<img src="resources/images/manager.png">
 	<h2>담당자 맵핑</h2>
@@ -24,7 +24,7 @@
 <div class="graphbox">
 	<div class="managerbox">
 		<p>담당자
-		<table class="managertable">
+		<table class="verticalTable">
 			<thead>
 				<tr>
 					<th>담당자 코드</th>
@@ -52,7 +52,7 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="centerbox">
+	<div class="verticalTable">
 		<p>센터
 	</div>
 </div>

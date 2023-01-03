@@ -12,6 +12,12 @@ SELECT LPAD(check_detail_code,2,0) AS check_detail_code
 		, check_detail_content
 		, check_detail_occupied
 	FROM check_detail
-	WHERE check_group_code=#{groupCode}
+	WHERE check_group_code = #{groupCode}
 </select>
+<update id="updateDetailCode" parameterType="map">
+UPDATE check_detail 
+	SET check_detail_content = #{detailContent},
+		check_detail_occupied = #{detailOccupied}
+	WHERE check_group_code = #{groupCode} AND check_detail_code = #{detailCode}
+</update>
 </mapper>

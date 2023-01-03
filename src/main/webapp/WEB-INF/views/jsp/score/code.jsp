@@ -10,17 +10,17 @@
 
 	<div id="twocodedivs">
 		<div class="codediv">
-			<form>
+			<form id="groupform">
 				<div id="groupinputs" class="codedetailtopdiv">
 					<div class="codenodiv">
-						그룹코드 <input type="text" id="groupCode" value="">
+						그룹코드 <input type="text" name="groupCode" id="groupcode" value="" readonly>
 					</div>
 					<div class="codenamediv">
-						그룹코드명 <input type="text" id="groupContent" value="">
+						그룹코드명 <input type="text" name="groupContent" id="groupcontent" value="">
 					</div>
 				</div>
 					<div id="groupselectdiv" class="occupieddiv">사용여부 
-						<select name="groupoccupied">
+						<select name="groupOccupied">
 							<option value="all">전체
 							<option value="y">사용중
 							<option value="n">사용안함
@@ -30,7 +30,7 @@
 					<div class="buttonsdiv">
 						<button>추가</button>
 						<button>삭제</button>
-						<button>저장</button>
+						<button type="submit">저장</button>
 					</div>
 			</form>
 			<table id="grouptable" class="codetable">
@@ -55,17 +55,17 @@
 		<hr class="verticalhr">
 		
 		<div class="codediv">
-			<form>
+			<form id="detailform">
 				<div class="codedetailtopdiv">
 					<div class="codenodiv">
-						상세코드 <input type="text" id="detailCode" value="">
+						상세코드 <input type="text" name="detailCode" id="detailcode" value="" readonly>
 					</div>
 					<div class="codenamediv">
-						상세코드명 <input type="text" id="detailContent" value="">
+						상세코드명 <input type="text" name="detailContent" id="detailcontent" value="">
 					</div>
 				</div>
 					<div class="occupieddiv">사용여부 
-						<select name="detailoccupied">
+						<select name="detailOccupied">
 							<option value="all">전체
 							<option value="y">사용중
 							<option value="n">사용안함
@@ -75,7 +75,7 @@
 					<div class="buttonsdiv">
 						<button>추가</button>
 						<button>삭제</button>
-						<button>저장</button>
+						<button type="button" id="savedetail">저장</button>
 					</div>
 			</form>
 			<table id="detailtable" class="codetable">
