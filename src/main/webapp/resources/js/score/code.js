@@ -29,13 +29,18 @@ var detailForm = document.getElementById("detailform");
 var saveGroupBtn = document.getElementById("savegroup");
 //상세코드 저장 버튼 선택자
 var saveDetailBtn = document.getElementById("savedetail");
+//그룹코드 추가 버튼 선택자
+var insertGroupBtn = document.getElementById("insertgroup");
+//상세코드 추가 버튼 선택자
+var insertDetailBtn = document.getElementById("insertdetail");
+
 
 //각 요소에 이벤트 달아주는 함수
 function addEvent(){	
 	//그룹코드 테이블 클릭 이벤트 등록
 	groupTable.addEventListener("click", function(event){
 		//event.target: 클릭된 td, .parentElement: 선택된 td의 부모 객체 (=tr), .innerText: 텍스트 내용, .split("\t"): \t 기준으로 split 
-		var groupTextArr = event.target.parentElement.innerText.split("\t");
+		let groupTextArr = event.target.parentElement.innerText.split("\t");
 		
 		//그룹코드, 그룹코드명에 내용 넣어주기
 		groupCodeInput.value = groupTextArr[1];
@@ -57,7 +62,7 @@ function addEvent(){
 	//상세코드 테이블 클릭 이벤트 등록
 	detailTable.addEventListener("click", function(event){
 		//event.target: 클릭된 td, .parentElement: 선택된 td의 부모 객체 (=tr), .innerText: 텍스트 내용, .split("\t"): \t 기준으로 split 
-		var detailTextArr = event.target.parentElement.innerText.split("\t");
+		let detailTextArr = event.target.parentElement.innerText.split("\t");
 		//상세코드, 상세코드명에 내용 넣어주기
 		detailCodeInput.value = detailTextArr[1];
 		detailContentInput.value = detailTextArr[2];
@@ -73,19 +78,54 @@ function addEvent(){
 	//그룹코드 저장버튼 클릭 이벤트 등록
 	saveGroupBtn.addEventListener("click", function(){
 		//그룹코드 form 데이터 가져오기
-		var groupFormData = new FormData(groupForm);
-		//POST 방식, /updateGroupCode로 groupFormData를 전송하는 요청
-		makeRequest(afterSendForm, 'POST', '/updateGroupCode', groupFormData);
+		let groupFormData = new FormData(groupForm);
+		if(!groupCodeInput.hasAttribute("readonly")){
+			makeRequest(afterSendForm, 'POST', '/insertGroupCode', groupFormData);
+			groupCodeInput.setAttribute("readonly", true);
+			//상세코드 칸들 비우기
+			detailCodeInput.value = '';
+			detailContentInput.value = '';
+			detailSelect[1].selected = false;
+			detailSelect[2].selected = false;
+		} else {
+			//POST 방식, /updateGroupCode로 groupFormData를 전송하는 요청
+			makeRequest(afterSendForm, 'POST', '/updateGroupCode', groupFormData);			
+		}
 	});
 	
 	//상세코드 저장버튼 클릭 이벤트 등록
 	saveDetailBtn.addEventListener("click", function(){
 		//상세코드 form 데이터 가져오기
-		var detailFormData = new FormData(detailForm);
+		let detailFormData = new FormData(detailForm);
 		//해당 그룹코드 from 데이터에 추가
 		detailFormData.append('groupCode', groupCodeInput.value);
-		//POST 방식, /updateDetailCode로 detailFormData를 전송하는 요청
-		makeRequest(afterSendForm, 'POST', '/updateDetailCode', detailFormData);
+		if(!detailCodeInput.hasAttribute("readonly")){
+			makeRequest(afterSendForm, 'POST', '/insertDetailCode', detailFormData);
+			detailCodeInput.setAttribute("readonly", true);
+		} else {
+			//POST 방식, /updateDetailCode로 detailFormData를 전송하는 요청
+			makeRequest(afterSendForm, 'POST', '/updateDetailCode', detailFormData);			
+		}
+	});
+	
+	//상세코드 추가버튼 클릭 이벤트 등록
+	insertDetailBtn.addEventListener("click", function(){
+		//정보 입력될 칸들 비우기
+		detailCodeInput.value = '';
+		detailContentInput.value = '';
+		detailSelect[1].selected = false;
+		detailSelect[2].selected = false;
+		//상세코드부분 입력할 수 있도록
+		detailCodeInput.removeAttribute("readonly");
+	});
+	
+	insertGroupBtn.addEventListener("click", function(){
+		groupCodeInput.value = '';
+		groupContentInput.value = '';
+		groupSelect[1].selected = false;
+		groupSelect[2].selected = false;
+		
+		groupCodeInput.removeAttribute("readonly");
 	});
 	
 } //addEvent() 끝
@@ -131,7 +171,7 @@ function makeRequest(getFunc, method, url, sendItem){
 function getGroupCodes(){
 	groupTable.tBodies[0].innerHTML = '';
 	//httpRequest.responseText: 서버의 응답을 텍스트 문자열로 반환
-	var groupJSON = JSON.parse(httpRequest.responseText);
+	let groupJSON = JSON.parse(httpRequest.responseText);
 	//반환된 그룹코드 수만큼 반복
 	for(var i=0;i<groupJSON.length;i++){
 		//그룹코드 tbody안에 번호, 상세코드, 상세코드명, 사용여부 추가하기
@@ -144,11 +184,10 @@ function getGroupCodes(){
  * 그룹에 해당하는 상세코드를 요청
  */
 function getDetailCodes(){
-	console.log("hihi");
 	//상세 테이블에 있던 내용 지우기
 	detailTable.tBodies[0].innerHTML = '';
 	//httpRequest.responseText: 서버의 응답을 텍스트 문자열로 반환
-	var detailJSON = JSON.parse(httpRequest.responseText);
+	let detailJSON = JSON.parse(httpRequest.responseText);
 	//반환된 상세코드 수만큼 반복
 	for(var i=0;i<detailJSON.length;i++){
 		//상세코드 tbody안에 번호, 상세코드, 상세코드명, 사용여부 추가하기
@@ -164,16 +203,10 @@ function afterSendForm(){
 	//순서대로 실행위해  Promise
 	new Promise(function(){
 		//응답을 문자열로 변환
-		var sendFormResponse = JSON.parse(httpRequest.responseText);
-		//수정인 경우
-		if(sendFormResponse[0]=='updateDetail' || sendFormResponse[0]=='updateGroup'){
-			//수정된 칼럼의 수가 1인 경우 (정상 수정)
-			if(sendFormResponse[1] == '1'){
-				//그룹코드 수정이면
-				if(sendFormResponse[0] == 'updateGroup'){
-					makeRequest(getGroupCodes, 'GET', '/getGroupCodes');
-				}
-			}
+		let sendFormResponse = JSON.parse(httpRequest.responseText);
+		//수정된 칼럼의 수가 1인 경우 (정상 수정)
+		if(sendFormResponse[0]=='group' && sendFormResponse[1]=='1'){
+			makeRequest(getGroupCodes, 'GET', '/getGroupCodes');
 		}
 	}).then( //앞부분 완료 후 동작
 		makeRequest(getDetailCodes, 'GET', '/getDetailCodes/'+groupCodeInput.value)
@@ -206,7 +239,7 @@ function getFromServerData(){
 	// custom ajax helper 만들기
 	$ajax = function(options){
 		if(options.url == null){
-			return console.warn('url은 필수값입니다');
+			return .warn('url은 필수값입니다');
 		}
 		// success 도 필수 체
 		_options = {

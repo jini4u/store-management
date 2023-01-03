@@ -13,6 +13,8 @@ public interface IScoreRepository {
 	
 	int updateDetailCode(Map<String, String> detailCodeMap);
 	int updateGroupCode(Map<String, String> groupCodeMap);
+	int insertDetailCode(Map<String, String> detailCodeMap);
+	int insertGroupCode(Map<String, String> groupCodeMap);
 	
 	//윤선
 	List<ScoreVO> getScoreList();

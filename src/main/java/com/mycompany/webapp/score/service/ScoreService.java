@@ -48,6 +48,18 @@ public class ScoreService implements IScoreService {
 		return scoreRepository.updateGroupCode(groupCodeMap);
 	}
 	
+	//상세코드 추가
+	@Override
+	public int insertDetailCode(Map<String, String> detailCodeMap) {
+		return scoreRepository.insertDetailCode(detailCodeMap);
+	}
+	
+	//그룹코드 추가
+	@Override
+	public int insertGroupCode(Map<String, String> groupCodeMap) {
+		return scoreRepository.insertGroupCode(groupCodeMap);
+	}
+	
 	//윤선
 
 	//아래는 구현해야함

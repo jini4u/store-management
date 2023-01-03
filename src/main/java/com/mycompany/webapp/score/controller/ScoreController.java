@@ -100,7 +100,7 @@ public class ScoreController {
 	 * @return 수정된 행 갯수
 	 * */
 	@RequestMapping(value="/updateDetailCode", method=RequestMethod.POST)
-	public @ResponseBody List<String> updateDetailCode(MultipartHttpServletRequest request) {
+	public @ResponseBody int updateDetailCode(MultipartHttpServletRequest request) {
 		//쿼리문 실행에 필요한 정보들을 담을 map 생성
 		Map<String, String> detailCodeMap = new HashMap<String, String>();
 		//요청하면서 넘어온 정보들 담아주기
@@ -108,20 +108,14 @@ public class ScoreController {
 		detailCodeMap.put("detailContent", request.getParameter("detailContent"));
 		detailCodeMap.put("detailOccupied", request.getParameter("detailOccupied").toUpperCase());
 		detailCodeMap.put("groupCode", request.getParameter("groupCode"));
-		//쿼리문 결과를 담을 list 생성
-		List<String> result = new ArrayList<>();
-		//종류를 알리는 문자 추가
-		result.add("updateDetail");
-		//쿼리 결과 string으로 변환해 추가
-		result.add(Integer.toString(scoreService.updateDetailCode(detailCodeMap)));
 
-		return result;
+		return scoreService.updateDetailCode(detailCodeMap);
 	}
 	
 	/*
 	 * 임유진
 	 * 그룹코드명, 사용여부를 수정한다.
-	 * @return 수정된 행 갯수
+	 * @return group, 수정된 행 갯수
 	 * */	
 	@RequestMapping(value="/updateGroupCode", method=RequestMethod.POST)
 	public @ResponseBody List<String> updateGroupCode(MultipartHttpServletRequest request) {
@@ -132,8 +126,46 @@ public class ScoreController {
 		groupCodeMap.put("groupOccupied", request.getParameter("groupOccupied").toUpperCase());
 		
 		List<String> result = new ArrayList<>();
-		result.add("updateGroup");
+		result.add("group");
 		result.add(Integer.toString(scoreService.updateGroupCode(groupCodeMap)));
+		return result;
+	}
+	
+	/*
+	 * 임유진
+	 * 상세코드 추가
+	 * @return 입력된 행 갯수
+	 * */	
+	@RequestMapping(value="/insertDetailCode", method=RequestMethod.POST)
+	public @ResponseBody int insertDetailCode(MultipartHttpServletRequest request) {
+		//쿼리문 실행에 필요한 정보들을 담을 map 생성
+		Map<String, String> detailCodeMap = new HashMap<String, String>();
+		//요청하면서 넘어온 정보들 담아주기
+		detailCodeMap.put("detailCode", request.getParameter("detailCode"));
+		detailCodeMap.put("detailContent", request.getParameter("detailContent"));
+		detailCodeMap.put("detailOccupied", request.getParameter("detailOccupied").toUpperCase());
+		detailCodeMap.put("groupCode", request.getParameter("groupCode"));	
+
+		return scoreService.insertDetailCode(detailCodeMap);
+	}
+	
+	/*
+	 * 임유진
+	 * 그룹코드 추가
+	 * @return group, 입력된 행 갯수
+	 * */
+	@RequestMapping(value="/insertGroupCode", method=RequestMethod.POST)
+	public @ResponseBody List<String> insertGroupCode(MultipartHttpServletRequest request) {
+		Map<String, String> groupCodeMap = new HashMap<>();
+		
+		groupCodeMap.put("groupCode", request.getParameter("groupCode"));
+		groupCodeMap.put("groupContent", request.getParameter("groupContent"));
+		groupCodeMap.put("groupOccupied", request.getParameter("groupOccupied").toUpperCase());
+		
+		List<String> result = new ArrayList<>();
+		result.add("group");
+		result.add(Integer.toString(scoreService.insertGroupCode(groupCodeMap)));
+
 		return result;
 	}
 }

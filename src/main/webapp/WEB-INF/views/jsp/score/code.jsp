@@ -28,8 +28,7 @@
 					</div>
 			<hr>
 					<div class="buttonsdiv">
-						<button>추가</button>
-						<button>삭제</button>
+						<button type="button" id="insertgroup">추가</button>
 						<button type="button" id="savegroup">저장</button>
 					</div>
 			</form>
@@ -68,8 +67,7 @@
 					</div>
 			<hr>
 					<div class="buttonsdiv">
-						<button>추가</button>
-						<button>삭제</button>
+						<button type="button" id="insertdetail">추가</button>
 						<button type="button" id="savedetail">저장</button>
 					</div>
 			</form>

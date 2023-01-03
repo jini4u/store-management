@@ -11,6 +11,7 @@
 			, check_group_occupied
 	FROM check_group
 </select>
+
 <!-- 
 	그룹 코드에 해당하는 전체 상세 코드, 코드명, 사용여부 조회
 	임유진
@@ -76,4 +77,22 @@
  		, check_group_occupied = #{groupOccupied}
  	WHERE check_group_code = #{groupCode}
 </update>
+
+<!-- 
+	상세코드 추가
+	임유진
+ -->
+ <insert id="insertDetailCode" parameterType="map">
+ 	INSERT INTO check_detail (check_group_code, check_detail_code, check_detail_content, check_detail_occupied)
+ 	VALUES (#{groupCode}, #{detailCode}, #{detailContent}, #{detailOccupied})
+ </insert>
+ 
+ <!-- 
+ 	그룹코드 추가
+ 	임유진
+ -->
+ <insert id="insertGroupCode" parameterType="map">
+ 	INSERT INTO check_group (check_group_code, check_group_content, check_group_occupied)
+ 	VALUES (#{groupCode}, #{groupContent}, #{groupOccupied})
+ </insert>
 </mapper>
