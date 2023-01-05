@@ -15,8 +15,8 @@ public interface IScoreService {
 	int insertGroupCode(Map<String, String> groupCodeMap);
 	
 	//윤선
-	List<ScoreVO> getScoreList();
-	void insertScore(ScoreVO score);
-	void deleteScore(ScoreVO score);
+	List<ScoreVO> getScoreList(int centerCode);
+	int insertScore(ScoreVO score);
+	int deleteScore(ScoreVO score);
 	int saveScore(ScoreVO score);
 }

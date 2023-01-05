@@ -18,6 +18,7 @@
 	</div>
 
 	<div class="year_and_quarter">
+	
 		<form>
 			<select name="year">
 				<option value="none">점검년도</option>
@@ -36,14 +37,12 @@
 				<option value="2">2 분기</option>
 				<option value="1">1 분기</option>
 			</select>
+		
 		</form>
+
 	</div>
+	
 </div>
-
-
-
-
-
 
 
 
@@ -62,8 +61,8 @@
 		<tr>
 			<td class="score_td">${scoreCode.checkYear}</td>
 			<td class="score_td">${scoreCode.checkSeason}</td>
-			<td class="score_td">${scoreCode.checkGroupCode}</td>
-			<td class="score_td">${scoreCode.checkDetailCode}</td>
+			<td class="score_td">${scoreCode.checkGroupContent}</td>
+			<td class="score_td">${scoreCode.checkDetailContent}</td>
 			<td class="score_td"><input type="text" class="placeholderstlye"
 				size="5" placeholder="${scoreCode.checkScore}"></td>
 
@@ -93,33 +92,46 @@
 <div class="modal">
 	<div class="modal_overlay"></div>
 	<div class="modal_content">
-		
-			<h1 class="modalh1">점수 입력</h1>
 
-			<!-- 모달창 안 테이블 -->
+		<h1 class="modalh1">점수 입력</h1>
+
+		<!-- 모달창 안 테이블 -->
+		<form method="post" action="insertScore">
+			<div>
+				년도: ${insertTargetYear}, 분기: ${insertTargetSeason}
+			</div>
+			
+			<input type="hidden" name="centerCode" value="${centerCode}"/>
+			<input type="hidden" name="userCode" value="${userCode}"/>
+			<input type="hidden" name="checkYear" value="${insertTargetYear}"/>
+			<input type="hidden" name="checkSeason" value="${insertTargetSeason}"/>
+			
 			<table class="scoretable" border="1">
 				<tr>
-					<th class="score_th">점검년도</th>
-					<th class="score_th">분기</th>
+	
 					<th class="score_th">항목</th>
 					<th class="score_th">상세항목</th>
 					<th class="score_th">점수</th>
 				</tr>
-				<tr>
-					<td>2023</td>
-					<td>1</td>
-					<td>HI</td>
-					<td>센터 내부 위생관리</td>
-					<td><input type="text" size="13" placeholder="점수를 입력하세요"></td>
-				</tr>
+				<c:forEach items="${scoreList}" var="scoreCode">
+					<tr>
+						<td>${scoreCode.checkGroupContent}</td>
+						<td>${scoreCode.checkDetailContent}</td>
+						<td>
+							<input type="hidden" name="arrayCheckGroupCode" value="${scoreCode.checkGroupCode}">
+							<input type="hidden" name="arrayCheckDetailCode" value="${scoreCode.checkDetailCode}">
+							<input type="text" size="13" name="arrayScore" value="0">
+						</td>
+					</tr>
+				</c:forEach>
 			</table>
-
-
+	
+	
 			<button type="submit" class="close-btn">입력</button>
-			<button>취소</button>
-
-		</div>
+			<button class="close-btn">취소</button>
+		</form>
 	</div>
+</div>
 
 
 <!-- 모달 자바 스크립트 -->
@@ -149,8 +161,9 @@ $(function() {
 	}
 	
 	openButton.addEventListener("click", openModal);
+
 	//모달창 닫기//
-    const closeBtn = modal.querySelector(".close-btn");
+    const closeBtn = modal.querySelectorAll(".close-btn");
     $(closeBtn).click(function(){
     	$(".modal").fadeOut();
 
