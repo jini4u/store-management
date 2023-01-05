@@ -59,6 +59,12 @@ public class CenterController {
 		return "jsp/center/centerlist";
 	}
 
-	
-	
+	/**
+	 * @author 임유진
+	 * @return List<맵핑가능센터>
+	 * */
+	@RequestMapping("/availCenter")
+	public @ResponseBody List<CenterVO> getAvailableCenterList(){
+		return centerService.getAvailableCenterList();
+	}
 }

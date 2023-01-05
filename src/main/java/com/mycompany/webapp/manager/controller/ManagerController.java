@@ -95,4 +95,14 @@ public class ManagerController {
 		int centerCode = Integer.parseInt(map.get("centerCode"));
 		return managerService.cancelMapping(userCode, centerCode);
 	}
+	
+	//맵핑 요청
+	@RequestMapping(value="/mapping", method=RequestMethod.POST)
+	public @ResponseBody int mapping(@RequestBody String req) throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, String> map = mapper.readValue(req, Map.class);
+		int userCode = Integer.parseInt(map.get("userCode"));
+		int centerCode = Integer.parseInt(map.get("centerCode"));
+		return managerService.mapping(userCode, centerCode);
+	}
 }

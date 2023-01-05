@@ -57,17 +57,24 @@
 	</div>
 </div>
 
-<div class="hiddenmodal">
+<div class="hiddenmodal hide">
 	<div class="modal_overlay"></div>
 	<div class="modal_content">
-
+		<h3>맵핑 가능 센터 목록</h3>
 		<!-- 모달창 안 테이블 -->
-			<table class="scoretable" border="1">
-
+			<table class="verticalTable" id="availtable">
+				<thead>
+					<th>센터코드</th>
+					<th>센터명</th>
+					<th>주소</th>
+				</thead>
+				<tbody>
+				
+				</tbody>
 			</table>
 	
 	
-			<button type="submit" class="close-btn">입력</button>
+			<button type="button" class="close-btn" id="mappingbutton">저장</button>
 			<button class="close-btn">취소</button>
 		</form>
 	</div>

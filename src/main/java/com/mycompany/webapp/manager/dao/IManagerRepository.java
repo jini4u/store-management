@@ -47,5 +47,6 @@ public interface IManagerRepository {
 	List<CenterVO> getCenterByManager(int userCode);
 	//userCode,centerCode로 맵핑해제
 	int cancelMapping(@Param("userCode") int userCode, @Param("centerCode") int centerCode);
-
+	//맵핑
+	int mapping(@Param("userCode") int userCode, @Param("centerCode") int centerCode);
 }
