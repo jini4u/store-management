@@ -44,8 +44,14 @@
 						<td>${managerVO.userHireDate}</td>
 						<td>${managerVO.userResignDate}</td>
 							<td><select>
-						<c:forEach var="centerVO" items="${centerName}">
-								<option>${centerVO.centerName}
+						<c:set var="userCode" value="${managerVO.userCode}"/>
+						<c:forEach var="center" items="${centerMap}">
+						<c:if test="${center.key eq userCode}">
+							<c:forEach var="centerName" items="${center.value}">
+							<option>${centerName}</option>
+							</c:forEach>
+						</c:if>
+								
 						</c:forEach>
 								</select>
 							</td>
