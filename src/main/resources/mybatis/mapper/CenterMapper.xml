@@ -14,14 +14,16 @@
 		, center_tel
 		, center_address
 		, center_guide
-		, center_opening_date)
+		, center_opening_date
+		, center_closing_date)
 	VALUES (
 		  #{centerCode}
 		, #{centerName}
 		, #{centerTel}
 		, #{centerAddress}
 		, #{centerGuide}
-		, #{centerOpeningDate})
+		, #{centerOpeningDate,jdbcType=DATE}
+		, #{centerClosingDate,jdbcType=DATE})
 </insert>
 
 <select id="centerList" resultType="com.mycompany.webapp.center.vo.CenterVO">

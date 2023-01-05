@@ -3,7 +3,6 @@ package com.mycompany.webapp.center.vo;
 import java.sql.Date;
 import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mycompany.webapp.common.vo.FileInfoVO;
 
@@ -13,8 +12,6 @@ public class CenterVO {
 	private String centerTel;
 	private String centerAddress;
 	private String centerGuide;
-	//jsp에서 input type을 date로 받아와도 string으로 넘어오기 때문에 형변환을 
-	//해줘야 한다
 	private Date centerOpeningDate;
 	private Date centerClosingDate;
 	private List<FileInfoVO> file;
@@ -62,10 +59,10 @@ public class CenterVO {
 	public void setCenterOpeningDate(Date centerClosingDate) {
 		this.centerOpeningDate = centerClosingDate;
 	}
-	public Date getCenterClosiongDate() {
+	public Date getCenterClosingDate() {
 		return centerClosingDate;
 	}
-	public void setCenterClosiongDate(Date centerClosingDate) {
+	public void setCenterClosingDate(Date centerClosingDate) {
 		this.centerClosingDate = centerClosingDate;
 	}
 	@Override

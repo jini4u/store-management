@@ -20,14 +20,16 @@
 				<td>${centerList.centerCode}</td>
 				<td>${centerList.centerName}</td>
 				<td>${centerList.centerTel}</td>
-				<td>${centerList.centerGuide}</td>
+				<td>${centerList.centerAddress}</td>
 				<td>${centerList.centerOpeningDate}</td>
-				<c:if test="${centerList.centerOpeningDate != null}">
+				<c:if test="${centerList.centerOpeningDate!=null}">
 					<td>Y</td>
 				</c:if>
-				<c:if test="${centerList.centerOpeningDate == null}">
+				<c:if test="${centerList.centerClosingDate!=null}"> 
 					<td>N</td>
 				</c:if>
+				<td style="display:none">${centerList.centerGuide}</td>
+				<td style="display:none">${centerList.centerClosingDate}</td>
 			</tr>
 		</c:forEach>
 	</tbody>
@@ -60,11 +62,10 @@
 				<th>오픈 일</th>
 				<td><input type="date" name="centerOpeningDate" id="centerOpeningDate"></td>
 				<th>폐점 일</th>
-				<td><input type="date" name="centerClosingDate" id="centerClosingDate"
-					disabled="disabled"></td>
+				<td><input type="date" name="centerClosingDate" id="centerClosingDate"></td>
 			</tr>
 	</table>
 	<input type="submit" value="등록">
 </form>
-
+<script src="resources/js/center/centerList.js"></script>
 
