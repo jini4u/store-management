@@ -1,6 +1,6 @@
 package com.mycompany.webapp.center.vo;
 
-import java.sql.Date;
+
 import java.util.List;
 
 
@@ -12,8 +12,10 @@ public class CenterVO {
 	private String centerTel;
 	private String centerAddress;
 	private String centerGuide;
-	private Date centerOpeningDate;
-	private Date centerClosingDate;
+	
+	private String centerOpeningDate;
+	private String centerClosingDate;
+	
 	private List<FileInfoVO> file;
 	
 	
@@ -53,16 +55,16 @@ public class CenterVO {
 	public void setCenterGuide(String centerGuide) {
 		this.centerGuide = centerGuide;
 	}
-	public Date getCenterOpeningDate() {
+	public String getCenterOpeningDate() {
 		return centerOpeningDate;
 	}
-	public void setCenterOpeningDate(Date centerClosingDate) {
-		this.centerOpeningDate = centerClosingDate;
+	public void setCenterOpeningDate(String centerOpeningDate) {
+		this.centerOpeningDate = centerOpeningDate;
 	}
-	public Date getCenterClosingDate() {
+	public String getCenterClosingDate() {
 		return centerClosingDate;
 	}
-	public void setCenterClosingDate(Date centerClosingDate) {
+	public void setCenterClosingDate(String centerClosingDate) {
 		this.centerClosingDate = centerClosingDate;
 	}
 	@Override

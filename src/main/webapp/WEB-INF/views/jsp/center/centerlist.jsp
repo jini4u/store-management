@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" href="resources/css/center/centerList.css">
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <h1 class="title">센터 관리</h1>
 <table class="verticalTable" id="center-left">
 	<thead>
@@ -16,12 +18,13 @@
 	</thead>
 	<tbody>
 		<c:forEach var="centerList" items="${centerList}">
-			<tr>
+			<tr class="centerListTr">
 				<td>${centerList.centerCode}</td>
 				<td>${centerList.centerName}</td>
 				<td>${centerList.centerTel}</td>
 				<td>${centerList.centerAddress}</td>
-				<td>${centerList.centerOpeningDate}</td>
+				<td>${fn:substring(centerList.centerOpeningDate,0,10)}</td>
+									
 				<c:if test="${centerList.centerOpeningDate!=null}">
 					<td>Y</td>
 				</c:if>
@@ -29,7 +32,7 @@
 					<td>N</td>
 				</c:if>
 				<td style="display:none">${centerList.centerGuide}</td>
-				<td style="display:none">${centerList.centerClosingDate}</td>
+				<td style="display:none">${fn:substring(centerList.centerClosingDate,0,10)}</td>
 			</tr>
 		</c:forEach>
 	</tbody>
@@ -38,8 +41,7 @@
 	<table class="rowTable" id="center-right">
 			<tr>
 				<th>센터 코드</th>
-				<td><input type="text" name="centerCode" value="${centerCode}" id="centerCode"
-					disabled="disabled"></td>
+				<td><input type="text" name="centerCode" value="${centerCode}" id="centerCode" readonly="readonly"></td>
 				<th>센터명</th>
 				<td><input type="text" name="centerName" id="centerName"></td>
 			</tr>
@@ -65,7 +67,8 @@
 				<td><input type="date" name="centerClosingDate" id="centerClosingDate"></td>
 			</tr>
 	</table>
-	<input type="submit" value="등록">
 </form>
-<script src="resources/js/center/centerList.js"></script>
+	<input type="button" id="centerInsertBtn" value="등록">
+	<input type="button" id="centerSavedBtn" value="저장">
 
+<script src="resources/js/center/centerList.js"></script>
