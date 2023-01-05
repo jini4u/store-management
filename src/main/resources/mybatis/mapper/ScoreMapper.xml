@@ -24,24 +24,41 @@
 	WHERE check_group_code = #{groupCode}
 </select>
 
-<!-- 조회 -->
+<!-- 
+점수조회
+정윤선
+ -->
 <select id="getScoreList"  resultType="com.mycompany.webapp.score.vo.ScoreVO">
 <![CDATA[
-	SELECT 
-		CENTER_CODE					 AS "centerCode",
-		USER_CODE 					 AS "userCode",
-		CHECK_YEAR 					 AS "checkYear",
-		CHECK_SEASON				 AS "checkSeason",
-		CHECK_GROUP_CODE			 AS "checkGroupCode",
-		CHECK_DETAIL_CODE			 As "checkDetailCode",
-		CHECK_SCORE					 AS "checkScore"
-	
-	from inspection
+select 
+ 	   I.center_code as centerCode,
+       I.user_code as userCode,
+       I.check_detail_code as checkDetailCode,
+       I.check_year as "checkYear",
+       I.check_season as "checkSeason",
+       D.check_group_code as "checkGroupCode",
+       G.check_group_content as "checkGroupContent" ,
+       D.check_detail_content as "checkDetailContent",
+       I.check_score as "checkScore"
+       
+from check_detail D  left outer join Inspection I
+        on D.check_group_code = I.check_group_code
+        and D.check_detail_code=I.check_detail_code
+        
+        left outer join check_group G
+        on I.check_group_code = G.check_group_code
+where I.center_code=#{centerCode}
+
 ]]>
 
 </select>
 
-<!-- 점수 수정 -->
+<!-- 
+
+점수 수정
+정윤선
+
+ -->
 
 <update id="saveScore" parameterType="com.mycompany.webapp.score.vo.ScoreVO">
 <![CDATA[
@@ -52,6 +69,40 @@
 ]]>
 
 </update> 
+<!-- 
+
+점수등록
+정윤선
+
+ -->
+ 
+ <insert id="insertScore" parameterType="com.mycompany.webapp.score.vo.ScoreVO">
+ <![CDATA[
+insert into inspection
+ (center_code,
+ user_code,
+ check_year,
+ check_season,
+ check_group_code,
+ check_detail_code,
+ check_score)
+ values(
+ #{centerCode},
+ #{userCode},
+ #{checkYear},
+ #{checkSeason},
+ #{checkGroupCode},
+ #{checkDetailCode},
+ #{checkScore})
+ 
+ 
+ ]]>
+ 
+ </insert> 
+ 
+ 
+ 
+ 
 
 <!-- 
 	상세코드 수정.

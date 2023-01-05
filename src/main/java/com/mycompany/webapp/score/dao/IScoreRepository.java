@@ -5,12 +5,9 @@ import java.util.List;
 
 import com.mycompany.webapp.score.vo.ScoreVO;
 import java.util.Map;
+import org.apache.ibatis.annotations.Mapper;
 
-/**
- * 점수 관리
- * ScoreMapper.xml과 매핑되어있음
- * 
- * */
+
 public interface IScoreRepository {
 	//유진
 	List<Map<String, String>> getAllGroupCodes();
@@ -22,12 +19,12 @@ public interface IScoreRepository {
 	int insertGroupCode(Map<String, String> groupCodeMap);
 	
 	//윤선
-	List<ScoreVO> getScoreList();
+	List<ScoreVO> getScoreList(int centerCode);
 	
 	/*점수 등록*/
-	void insertScore(ScoreVO score);
+	int insertScore(ScoreVO score);
 	/*점수 삭제*/
-	void deleteScore(ScoreVO score);
+	int deleteScore(ScoreVO score);
 	/*점수 수정,저장*/
 	int saveScore(ScoreVO score);
 }

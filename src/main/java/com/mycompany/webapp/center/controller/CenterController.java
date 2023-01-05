@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.center.service.CenterService;
 import com.mycompany.webapp.center.service.ICenterService;
@@ -42,15 +43,15 @@ public class CenterController {
 	public String insertCenter(Model model) {
 		return "jsp/center/centerlist";
 	}
-	
-	
 	//물어보기
+	@ResponseBody
 	@PostMapping(value="/centerInsert")
-	public String insertCenter(CenterVO centerVO) {
+	public List<CenterVO>  insertCenter(CenterVO centerVO) {
 		centerVO.setCenterCode(centerService.insertCenterCode()+1);
 		System.out.println(centerVO);
 		centerService.insertCenter(centerVO);
-		return "redirect:/centerList";
+		List<CenterVO> list = centerService.centerList();
+		return list;
 	}
 	
 	@GetMapping(value="/centerList")
@@ -59,8 +60,7 @@ public class CenterController {
 		model.addAttribute("centerList" ,centerService.centerList());
 		return "jsp/center/centerlist";
 	}
-	
-	
+
 	
 	
 }

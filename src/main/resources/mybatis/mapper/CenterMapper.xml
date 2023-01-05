@@ -28,13 +28,13 @@
 
 <select id="centerList" resultType="com.mycompany.webapp.center.vo.CenterVO">
 	select 
-		center_code as centerCode
-		, center_name as centerName
-		, center_tel as centerTel
-		, center_address as centerAddress
-		, center_guide as centerGuide
-		, center_opening_date as centerOpeningDate
-		, center_closing_date as centerClosingDate
+		center_code as "centerCode"
+		, center_name as "centerName"
+		, center_tel as "centerTel"
+		, center_address as "centerAddress"
+		, center_guide as "centerGuide"
+		, center_opening_date as "centerOpeningDate"
+		, center_closing_date as "centerClosingDate"
 	FROM CENTER
 </select>
 

@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 import org.apache.tomcat.util.json.JSONParser;
+import org.aspectj.apache.bcel.generic.ReturnaddressType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -26,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.fasterxml.jackson.core.JsonParser;
+import com.mycompany.webapp.center.controller.CenterController;
 import com.mycompany.webapp.score.service.IScoreService;
 import com.mycompany.webapp.score.service.ScoreService;
 import com.mycompany.webapp.score.vo.ScoreVO;
@@ -42,9 +46,14 @@ import com.mycompany.webapp.score.vo.ScoreVO;
 
 @Controller
 public class ScoreController {
+	private static Logger logger = LoggerFactory.getLogger(ScoreController.class);
 
 	@Autowired
 	IScoreService scoreService;
+/*
+ * 정윤선
+ * 엑셀파일 일괄 업로드
+ * */
 	
 	@RequestMapping("/scoreupload")
 	public String scoreupload() {
@@ -52,21 +61,70 @@ public class ScoreController {
 		
 	}
 	
+	/*
+	 *정윤선
+	 * DB에 존재하는 값중에 점검년도,분기,항목,상세항목,점수 전체의 정보를 조회
+	 * */
+	
 	@RequestMapping("/score")
-	public String centerscoreinquiry(Model model) {
-		model.addAttribute("scoreList",scoreService.getScoreList());
-				return "jsp/score/scoreList";
-	}
+	public String centerscoreinquiry(int centerCode, Model model) {
+		List<ScoreVO> scoreList = scoreService.getScoreList(centerCode);
+		model.addAttribute("scoreList",scoreService.getScoreList(centerCode));
+		
+		model.addAttribute("centerCode", centerCode);
+		model.addAttribute("userCode", scoreList.get(0).getUserCode());
+//		model.addAttribute("userCode", scoreList.get(0).getUserCode());
 
+		int checkYear = scoreList.get(0).getCheckYear();
+		int checkSeason = scoreList.get(0).getCheckSeason();
+		int insertTargetYear = checkYear;
+		int insertTargetSeason = checkSeason;
+		if(checkSeason == 4) {
+			insertTargetYear++;
+			insertTargetSeason = 1;
+		} else {
+			insertTargetSeason++;
+		}
+		model.addAttribute("insertTargetYear", insertTargetYear);
+		model.addAttribute("insertTargetSeason", insertTargetSeason);
+		
+		return "jsp/score/scoreList";
+	}
+	/*
+	 * 정윤선
+	 * 점수 수정
+	 * */
 	@RequestMapping(value="/saveScore",method = RequestMethod.POST)
 	public String saveScore(ScoreVO score){
 		scoreService.saveScore(score);
 		 return "redirect: /score";
 	}
+	/*
+	 * 정윤선
+	 * 점수 등록
+	 * (모달창에서)
+	 * */	
+	
+	@RequestMapping(value="/insertScore",method = RequestMethod.POST)
+	public String insertsocre(ScoreVO scoreVO) {
+		logger.info(scoreVO.toString());
+		
+		scoreService.insertScore(scoreVO);
+		
+		return "redirect:/score?centerCode=1";
+	}
+	
+	
+	
+	
+
+	
+	
+	
 	
 	/*
 	 * 임유진
-	 * DB에 존재하는 그룹코드 전체의 정보를 조뢰,
+	 * DB에 존재하는 그룹코드 전체의 정보를 조회,
 	 * 코드 관리 화면으로 이동
 	 * */
 	@RequestMapping(value="/code")

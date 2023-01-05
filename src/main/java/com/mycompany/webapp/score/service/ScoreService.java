@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mycompany.webapp.score.dao.IScoreRepository;
 import com.mycompany.webapp.score.vo.ScoreVO;
@@ -62,23 +63,40 @@ public class ScoreService implements IScoreService {
 	
 	//윤선
 
-	//아래는 구현해야함
+	//전체 점수 조회
 	@Override
-	public List<ScoreVO> getScoreList() {
-		return scoreRepository.getScoreList();
+	public List<ScoreVO> getScoreList(int centerCode) {
+		return scoreRepository.getScoreList(centerCode);
 	}
 
-	@Override
-	public void insertScore(ScoreVO score) {
-		scoreRepository.saveScore(score);
-	}
-
-	@Override
-	public void deleteScore(ScoreVO score) {
-	}
 
 	@Override
 	public int saveScore(ScoreVO score) {
 		return scoreRepository.saveScore(score);
+	}
+
+	@Override
+	public int deleteScore(ScoreVO score) {
+		
+		return 0;
+	}
+
+
+
+	@Override
+	@Transactional
+	public int insertScore(ScoreVO scoreVO) {
+		for(int i=0; i<scoreVO.getArrayScore().length; i++) {
+			ScoreVO vo = new ScoreVO();
+			vo.setCenterCode(scoreVO.getCenterCode());
+			vo.setUserCode(scoreVO.getUserCode());
+			vo.setCheckYear(scoreVO.getCheckYear());
+			vo.setCheckSeason(scoreVO.getCheckSeason());
+			vo.setCheckGroupCode(scoreVO.getArrayCheckGroupCode()[i]);
+			vo.setCheckDetailCode(scoreVO.getArrayCheckDetailCode()[i]);
+			vo.setCheckScore(scoreVO.getArrayScore()[i]);
+			scoreRepository.insertScore(vo);
+		}
+		return scoreVO.getArrayScore().length;
 	}
 }
