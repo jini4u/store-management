@@ -54,6 +54,7 @@ $("#centerInsertBtn").click(function (){
 			  $("#center-left").append(str);
 			  alert("성공")
 		  },
+
 	      error: function() {
 	          alert("에러 발생");
 	      }
