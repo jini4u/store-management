@@ -24,7 +24,6 @@
 				<td>${centerList.centerTel}</td>
 				<td>${centerList.centerAddress}</td>
 				<td>${fn:substring(centerList.centerOpeningDate,0,10)}</td>
-									
 				<c:if test="${centerList.centerOpeningDate!=null}">
 					<td>Y</td>
 				</c:if>
