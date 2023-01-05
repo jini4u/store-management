@@ -71,7 +71,19 @@ FROM mapping M
     ON M.center_code = C.center_code
 WHERE M.user_code = #{userCode}
 </select>
+<!-- 
+	맵핑 해제
+	임유진
+ -->
 <delete id="cancelMapping" parameterType="int">
 DELETE FROM mapping WHERE center_code = #{centerCode} AND user_code = #{userCode}
 </delete>
+<!-- 
+	맵핑
+	임유진
+ -->
+ <insert id="mapping" parameterType="int">
+ INSERT INTO mapping (center_code, user_code, mapping_date)
+ VALUES (#{centerCode}, #{userCode}, SYSDATE)
+ </insert>
 </mapper>

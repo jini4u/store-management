@@ -19,4 +19,5 @@ public interface IManagerService {
 	//유진
 	List<CenterVO> getCenterByManager(int userCode);
 	int cancelMapping(int userCode, int centerCode);
+	int mapping(int userCode, int centerCode);
 }

@@ -60,4 +60,16 @@ public class ManagerService implements IManagerService {
 	public int cancelMapping(int userCode, int centerCode) {
 		return managerRepository.cancelMapping(userCode, centerCode);
 	}
+	
+	/**
+	 * @author 임유진
+	 * 담당자, 센터 맵핑
+	 * @param 담당자 userCode
+	 * @param 선택된 centerCode
+	 * @return 삽입된 행 수
+	 * */
+	@Override
+	public int mapping(int userCode, int centerCode) {
+		return managerRepository.mapping(userCode, centerCode);
+	}
 }

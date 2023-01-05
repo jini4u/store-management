@@ -36,12 +36,27 @@ releaseBtn.addEventListener("click", function(){
 //맵핑 버튼, 모달 선택자
 var mappingBtn = document.querySelector(".mappingButton");
 var modal = document.querySelector(".hiddenmodal");
+var availTable = document.getElementById("availtable");
 
 mappingBtn.addEventListener("click", function(){
+	modal.classList.remove("hide");
 	modal.classList.remove("fadeout")
 	modal.classList.add("fadein");
+	
+	makeRequest(getAvailCenters,'GET','/availCenter');
 });
 
+availTable.addEventListener("click", function(e){
+	let availTrList = e.target.parentElement.parentElement.children;
+	for(var i=0;i<availTrList.length;i++){
+		if(availTrList[i].classList.contains("selectedtr")){
+			availTrList[i].classList.remove("selectedtr");
+		}
+		e.target.parentElement.classList.add("selectedtr");
+	}
+})
+
+//닫기버튼 선택자
 var closeBtn = document.querySelectorAll(".close-btn");
 
 closeBtn[0].addEventListener("click", function(){
@@ -52,6 +67,24 @@ closeBtn[0].addEventListener("click", function(){
 closeBtn[1].addEventListener("click", function(){
 	modal.classList.remove("fadein");
 	modal.classList.add("fadeout");
+});
+
+var mappingBtn = document.getElementById("mappingbutton");
+
+mappingBtn.addEventListener("click", function(){
+	let selectedTrList = document.querySelectorAll(".selectedtr");
+	if(selectedTrList.length == 2){
+		let userCode = selectedTrList[0].innerText.split("\t")[0];
+		let centerCode = selectedTrList[1].innerText.split("\t")[0];
+		let reqList = {"userCode":userCode, "centerCode":centerCode};
+		makeRequest(function(){},'POST','/mapping',JSON.stringify(reqList));
+	}
+	
+	selectedTrList[0].classList.remove("selectedtr");
+	selectedTrList[1].classList.remove("selectedtr");
+	let centerTbody = centerTable.tBodies[0];
+	centerTbody.innerHTML = '';
+	modal.classList.add("hide");
 });
 
 /**
@@ -93,5 +126,14 @@ function getCenterList(){
 	let res = JSON.parse(httpRequest.responseText);
 	for(var i=0;i<res.length;i++){
 		centerTbody.innerHTML += "<tr><td><input type='checkbox' name='center' value='"+res[i].centerCode+"'></td><td>"+res[i].centerCode+"</td><td>"+res[i].centerName+"</td><td>"+res[i].centerAddress+"</td></tr>";
+	}
+}
+
+function getAvailCenters(){
+	let availBody = availTable.tBodies[0];
+	availBody.innerHTML = '';
+	let res = JSON.parse(httpRequest.responseText);
+	for(var i=0;i<res.length;i++){
+		availBody.innerHTML += "<tr><td>"+res[i].centerCode+"</td><td>"+res[i].centerName+"</td><td>"+res[i].centerAddress+"</td></tr>";
 	}
 }

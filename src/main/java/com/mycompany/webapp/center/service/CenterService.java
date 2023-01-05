@@ -28,8 +28,14 @@ public class CenterService implements ICenterService{
 		return centerRepository.centerList();
 	}
 	
-	
-
+	/**
+	 * @author 임유진
+	 * @return List<맵핑 가능 센터>
+	 * */
+	@Override
+	public List<CenterVO> getAvailableCenterList() {
+		return centerRepository.getAvailableCenterList();
+	}
 
 
 	
