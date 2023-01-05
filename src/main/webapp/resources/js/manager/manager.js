@@ -36,7 +36,8 @@ window.onload = function(){
 
 		addEvent();
 		*/
-	
+	//담당자 조회 리스트
+	var mgrTable = document.querySelector("#managerTable");
 	//담당자 등록 버튼 선택자
 	var insertBtn = document.getElementById("insertmgr");
 	//담당자 등록 선택자	
@@ -101,6 +102,19 @@ window.onload = function(){
 	
 	})
 	
+	//날짜 YYYY-MM-DD 형태로 변환
+	function dateFormat(date) {
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let hour = date.getHours();
+
+        month = month >= 10 ? month : '0' + month;
+        day = day >= 10 ? day : '0' + day;
+        hour = hour >= 10 ? hour : '0' + hour;
+
+        return date.getFullYear() + '-' + month + '-' + day + ' ';
+}
+	
 	//등록 버튼 클릭 시 
 	$("#insertmgr").click(function (){
 		let url ="/managerInsert";
@@ -112,10 +126,9 @@ window.onload = function(){
 		let useremail=$("#userEmail").val();
 		let userteamCode=$("#userTeamCode").val();
 		let userhireDate=$("#userHireDate").val();
+		//담당자 전체 리스트 행의 수
 		let mgrTr =$('#managerTable >tbody tr').length;
-		
-	
-
+		//휴대전화번호 뒤에 4자리 자르기
 		let pwCut= usertel.substr(9, 12);
 		
 		//등록 버튼 클릭 시 리셋
@@ -148,6 +161,23 @@ window.onload = function(){
 					userHireDate : userhireDate
 				},
 				 success: function(result) {
+					  // 전체 테이블 지우기
+					  mgrTable.tBodies[0].innerHTML = '';
+					  
+					//등록 성공 시 담당자 전체 목록 리스트 마지막 열에 추가 됨
+					  let results = result;
+					  let str = "<tr>";
+					  $.each(results, function(i) {
+						  let birth = new Date(results[i].userBirth);
+						  let hiredate = new Date(results[i].userHireDate);
+
+						  str += "<td>" + results[i].userCode + "</td><td>" + 
+						  results[i].userName + "</td><td>" + dateFormat(birth) + "</td><td>" +
+						  results[i].userTel + "</td><td>" + results[i].userEmail +"</td><td>" +
+						  results[i].userTeamCode + "</td><td>"+ dateFormat(hiredate) + "</td>";
+						  str += "</tr>";
+					  });
+					  $("#managerTable").append(str);
 					  alert("성공")
 			        
 			      },

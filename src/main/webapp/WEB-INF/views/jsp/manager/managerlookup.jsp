@@ -43,7 +43,12 @@
 						<td>${managerVO.userTeamCode}</td>
 						<td>${managerVO.userHireDate}</td>
 						<td>${managerVO.userResignDate}</td>
-						<td>${managerVO.centerName}</td>
+							<td><select>
+						<c:forEach var="centerVO" items="${centerName}">
+								<option>${centerVO.centerName}
+						</c:forEach>
+								</select>
+							</td>
 					</tr>
 				</c:forEach>
 			</tbody>

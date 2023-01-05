@@ -1,6 +1,8 @@
 package com.mycompany.webapp.manager.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,36 +37,54 @@ import com.mycompany.webapp.manager.vo.ManagerVO;
 public class ManagerController {
 	static final Logger logger=LoggerFactory.getLogger(ManagerController.class);
 
-	//은별
+	
 	@Autowired 
 	IManagerService managerService;
-
-	//담당자 목록 조회
+	/* author 은별
+	   담당자 목록 조회*/
 	@RequestMapping(value="/managerList")
-	public String selectManagerList(Model model, ManagerVO mgr) {
+	public String selectManagerList(Model model) {
 		List<ManagerVO> managerList = managerService.selectManagerList();
+		Map<Integer, List<String>> centerMap = new HashMap<>();
+		for(int i=0;i<managerList.size();i++) {
+			ManagerVO manager = managerList.get(i);
+			List<String> centerNamesByManager = new ArrayList<>();
+			int userCode = manager.getUserCode();
+			List<CenterVO> centers = managerService.getCenterByManager(userCode);
+			List<String> centerNames = new ArrayList<>();
+			for(CenterVO center:centers) {
+				centerNames.add(center.getCenterName());
+			}
+			centerMap.put(userCode, centerNames);
+		}
+				//managerService.getCenterByManager(mgr.getUserCode());
 		logger.info("managerList : " + managerList);
 		model.addAttribute("managerList", managerList);
 		int usercode = managerList.get(0).getUserCode();
 		model.addAttribute("userCode",usercode+1);
+		model.addAttribute("centerMap",centerMap);
+		logger.info("centerMaps : " + centerMap);
 		return "jsp/manager/managerlookup";
 	}
-
-	//담당자 상세 조회
+	
+	/* author 은별
+	   담당자 상세 조회*/
 	@RequestMapping(value="/managerDetail")
 	public String selectManagerDetail(Model model, @PathVariable int userCode) {
 		ManagerVO mgrDetails = managerService.selectManagerDetail(userCode);
 		model.addAttribute("managerVO",mgrDetails);
 		return "jsp/manager/managerdetail";
 	}
-
-	//담당자 등록 GET
+	
+	/* author 은별
+	  담당자 등록 GET*/
 	@GetMapping(value="/managerInsert")
 	public String insertManager(Model model) {
 		return "jsp/manager/managerlookup";
 	}
-
-	//담당자 등록 POST
+	
+	/* author 은별
+	  담당자 등록 POST*/
 	@ResponseBody
 	@PostMapping(value="/managerInsert")
 	public List<ManagerVO> insertManager(ManagerVO mgr) {
