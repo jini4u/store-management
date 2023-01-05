@@ -6,7 +6,7 @@ import com.mycompany.webapp.common.vo.FileInfoVO;
 import com.mycompany.webapp.manager.vo.ManagerVO;
 
 public interface IManagerRepository {
-	//autor 고은별
+	//author 고은별
 	
 	//담당자 등록 
 	int insertManager(ManagerVO mgr);

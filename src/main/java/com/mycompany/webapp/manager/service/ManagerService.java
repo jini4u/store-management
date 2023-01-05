@@ -14,21 +14,22 @@ public class ManagerService implements IManagerService {
 	@Autowired
 	IManagerRepository managerRepository;
 	
-	/* autor 고은별
+	/* author 고은별
 	 * 담당자 등록 */
 	@Override
-	public int insertManager(ManagerVO userCode) {
-		return managerRepository.insertManager(userCode);
+	public int insertManager(ManagerVO mgr) {
+		mgr.setUserCode(managerRepository.selectMaxManagerNo()+1);
+		return managerRepository.insertManager(mgr);
 	}
 	
-	/* autor 고은별
+	/* author 고은별
 	 * 담당자 목록 조회 */
 	@Override
-	public List<ManagerVO> selectManagerList() {
+	public List<ManagerVO> selectManagerList(ManagerVO mgr) {
 		return managerRepository.selectManagerList();
 	}
 	
-	/* autor 고은별
+	/* author 고은별
 	 * 담당자 정보 상세조회 */
 	@Override
 	public ManagerVO selectManagerDetail(int userCode) {

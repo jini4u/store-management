@@ -42,14 +42,7 @@ $("#centerInsertBtn").click(function (){
 		},
 		  success: function(result) {
 			  alert("성공")
-	          for(var i=0; i<result.length; i++){
-	        	  $("#centerListTr").append("" +
-	        	  		"<td>centercode</td>" +
-	        	  		"<td>centerName</td>"+
-	        	  		"<td>centertel</td>" +
-	        	  		"<td>centeraddress</td>" +
-	        	  		"<td>centeropeingDate</td>")
-	          }
+	        
 	      },
 	      error: function() {
 	          alert("에러 발생");
