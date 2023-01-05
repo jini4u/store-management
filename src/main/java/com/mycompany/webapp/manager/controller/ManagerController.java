@@ -73,7 +73,8 @@ public class ManagerController {
 
 	//담당자 매핑
 	@RequestMapping(value="/managerMapping")
-	public String managerMapping() {
+	public String managerMapping(Model model) {
+		model.addAttribute("managerList", managerService.selectManagerList());
 		return "jsp/manager/managermapping";
 	}
 
@@ -93,4 +94,3 @@ public class ManagerController {
 		return managerService.cancelMapping(userCode, centerCode);
 	}
 }
-

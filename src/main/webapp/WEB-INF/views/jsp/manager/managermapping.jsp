@@ -57,4 +57,19 @@
 	</div>
 </div>
 
+<div class="hiddenmodal">
+	<div class="modal_overlay"></div>
+	<div class="modal_content">
+
+		<!-- 모달창 안 테이블 -->
+			<table class="scoretable" border="1">
+
+			</table>
+	
+	
+			<button type="submit" class="close-btn">입력</button>
+			<button class="close-btn">취소</button>
+		</form>
+	</div>
+</div>
 <script src="resources/js/manager/mapping.js"></script>

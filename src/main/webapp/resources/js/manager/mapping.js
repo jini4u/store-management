@@ -33,7 +33,12 @@ releaseBtn.addEventListener("click", function(){
 	}, 'POST', '/cancelMapping', JSON.stringify(reqList));
 })
 
-
+//맵핑 버튼, 모달 선택자
+var mappingBtn = document.querySelector(".mappingButton");
+var modal = document.querySelector(".hiddenmodal");
+mappingBtn.addEventListener("click", function(){
+	modal
+})
 
 /**
  * ajax 통신함수
