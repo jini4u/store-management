@@ -24,12 +24,19 @@
 				<td>${centerList.centerTel}</td>
 				<td>${centerList.centerAddress}</td>
 				<td>${fn:substring(centerList.centerOpeningDate,0,10)}</td>
-				<c:if test="${centerList.centerOpeningDate!=null}">
-					<td>Y</td>
-				</c:if>
-				<c:if test="${centerList.centerClosingDate!=null}"> 
-					<td>N</td>
-				</c:if>
+
+				<c:choose>
+					<c:when test="${centerList.centerOpeningDate!=null}">
+						<td>Y</td>
+					</c:when>
+					<c:when test="${centerList.centerOpeningDate==null}">
+						<td>N</td>
+					</c:when>
+					<c:when test="${centerList.centerClosingDate!=null}">
+						<td>N</td>
+					</c:when>
+				</c:choose>					
+
 				<td style="display:none">${centerList.centerGuide}</td>
 				<td style="display:none">${fn:substring(centerList.centerClosingDate,0,10)}</td>
 			</tr>
@@ -48,10 +55,13 @@
 				<th>전화번호</th>
 				<td><input type="text" name="centerTel" id="centerTel"></td>
 				<th>운영여부</th>
-				<td><select>
-						<option>Y</option>
-						<option>N</option>
-				</select></td>
+				<td>
+					<c:choose>
+						<c:when test="">
+						<input type="text" id="centerCondition">
+						</c:when>	
+					</c:choose>
+				</td>
 			</tr> 
 			<tr>
 				<th>주소</th>

@@ -41,16 +41,19 @@ $("#centerInsertBtn").click(function (){
 			centerClosingDate : centerclosingDate,
 		},
 		  success: function(result) {
+			  let results = result;
+			  let str = "<tr>";
+			  $.each(results, function(i) {
+				  
+				  str += "<td>" + results[i].centerCode + "</td><td>" + 
+				  results[i].centerName + "</td><td>" + results[i].centerTel + "</td><td>" +
+				  results[i].centerAddress + "</td><td>" + results[i].centerGuide +"</td><td>";
+//				  results[i].centerOpeningDate + "</td><td>" + results[i].centerClosingDate + "<td></td>";
+				  str += "</tr>";
+			  });
+			  $("#center-left").append(str);
 			  alert("성공")
-	          for(var i=0; i<result.length; i++){
-	        	  $("#centerListTr").append("" +
-	        	  		"<td>centercode</td>" +
-	        	  		"<td>centerName</td>"+
-	        	  		"<td>centertel</td>" +
-	        	  		"<td>centeraddress</td>" +
-	        	  		"<td>centeropeingDate</td>")
-	          }
-	      },
+		  },
 	      error: function() {
 	          alert("에러 발생");
 	      }
