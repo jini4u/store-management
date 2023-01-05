@@ -11,7 +11,7 @@ public interface IManagerService {
 	int insertManager(ManagerVO mgr);
 	
 	//담당자 목록 조회
-	List<ManagerVO> selectManagerList(ManagerVO mgr);
+	List<ManagerVO> selectManagerList();
 	
 	//담당자 정보 상세조회
 	ManagerVO selectManagerDetail(int userCode);

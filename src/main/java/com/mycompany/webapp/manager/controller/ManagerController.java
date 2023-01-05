@@ -42,7 +42,7 @@ public class ManagerController {
 	//담당자 목록 조회
 	@RequestMapping(value="/managerList")
 	public String selectManagerList(Model model, ManagerVO mgr) {
-		List<ManagerVO> managerList = managerService.selectManagerList(mgr);
+		List<ManagerVO> managerList = managerService.selectManagerList();
 		logger.info("managerList : " + managerList);
 		model.addAttribute("managerList", managerList);
 		int usercode = managerList.get(0).getUserCode();
@@ -69,7 +69,7 @@ public class ManagerController {
 	@PostMapping(value="/managerInsert")
 	public List<ManagerVO> insertManager(ManagerVO mgr) {
 		managerService.insertManager(mgr);
-		List<ManagerVO> mgrlist = managerService.selectManagerList(mgr);
+		List<ManagerVO> mgrlist = managerService.selectManagerList();
 		return mgrlist;
 	}
 

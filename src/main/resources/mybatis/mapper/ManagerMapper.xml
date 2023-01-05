@@ -6,7 +6,7 @@
 
 <!-- author 고은별 
 	담당자 목록 조회-->
-<select id="selectManagerList" parameterType="map" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
+<select id="selectManagerList" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
 <![CDATA[	select U.user_code as "userCode",
 		   U.user_name as "userName",
 		   U.user_birth as "userBirth",

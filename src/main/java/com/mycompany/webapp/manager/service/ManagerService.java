@@ -26,7 +26,7 @@ public class ManagerService implements IManagerService {
 	/* author 고은별
 	 * 담당자 목록 조회 */
 	@Override
-	public List<ManagerVO> selectManagerList(ManagerVO mgr) {
+	public List<ManagerVO> selectManagerList() {
 		return managerRepository.selectManagerList();
 	}
 	
