@@ -36,9 +36,23 @@ releaseBtn.addEventListener("click", function(){
 //맵핑 버튼, 모달 선택자
 var mappingBtn = document.querySelector(".mappingButton");
 var modal = document.querySelector(".hiddenmodal");
+
 mappingBtn.addEventListener("click", function(){
-	modal
-})
+	modal.classList.remove("fadeout")
+	modal.classList.add("fadein");
+});
+
+var closeBtn = document.querySelectorAll(".close-btn");
+
+closeBtn[0].addEventListener("click", function(){
+	modal.classList.remove("fadein");
+	modal.classList.add("fadeout");
+});
+
+closeBtn[1].addEventListener("click", function(){
+	modal.classList.remove("fadein");
+	modal.classList.add("fadeout");
+});
 
 /**
  * ajax 통신함수
