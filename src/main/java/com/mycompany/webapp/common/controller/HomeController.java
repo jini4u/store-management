@@ -11,15 +11,14 @@ import com.mycompany.webapp.notice.dao.INoticeRepository;
 import lombok.extern.log4j.Log4j2;
 
 @Controller
-@Log4j2
 public class HomeController {
-	//private static final Logger logger = LoggerFactory.getLogger(Ch01Controller.class);
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
 	@Autowired
 	INoticeRepository test;
 	
 	@RequestMapping("/")
 	public String home() {
-		System.out.println(test.test());
 		return "home";
 	}
 	

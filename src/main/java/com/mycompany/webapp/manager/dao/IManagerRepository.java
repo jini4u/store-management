@@ -1,7 +1,11 @@
 package com.mycompany.webapp.manager.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.mycompany.webapp.center.vo.CenterVO;
 import com.mycompany.webapp.common.vo.FileInfoVO;
 import com.mycompany.webapp.manager.vo.ManagerVO;
 
@@ -38,4 +42,11 @@ public interface IManagerRepository {
 	//키워드 별 담당자 검색
 	List<ManagerVO> searchManagerListByKeyword(String keyword);
 	
+	//유진
+	//userCode로 담당 센터 조회
+	List<CenterVO> getCenterByManager(int userCode);
+	//userCode,centerCode로 맵핑해제
+	int cancelMapping(@Param("userCode") int userCode, @Param("centerCode") int centerCode);
+	
+	List<ManagerVO> getAllManagers();
 }

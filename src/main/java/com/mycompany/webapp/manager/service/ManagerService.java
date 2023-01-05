@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mycompany.webapp.center.vo.CenterVO;
 import com.mycompany.webapp.manager.dao.IManagerRepository;
 import com.mycompany.webapp.manager.vo.ManagerVO;
 
@@ -36,4 +37,27 @@ public class ManagerService implements IManagerService {
 		return managerRepository.selectManagerDetail(userCode);
 	}
 
+	
+	/**
+	 * @author 임유진
+	 * 담당자의 userCode로 담당하는 센터들의 센터코드,센터명,주소 조회
+	 * @param 담당자 userCode
+	 * @return List<담당CenterVO>
+	 * */
+	@Override
+	public List<CenterVO> getCenterByManager(int userCode) {
+		return managerRepository.getCenterByManager(userCode);
+	}
+	
+	/**
+	 * @author 임유진
+	 * 담당자, 센터 맵핑 해제
+	 * @param 담당자 userCode
+	 * @param 선택된 centerCode
+	 * @return 삭제된 행 수
+	 * */
+	@Override
+	public int cancelMapping(int userCode, int centerCode) {
+		return managerRepository.cancelMapping(userCode, centerCode);
+	}
 }

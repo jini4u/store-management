@@ -133,3 +133,16 @@
 .managertable tbody tr{
 	border-top: 1.5px solid #CCC;
 } 
+
+#managertable tbody tr:hover{
+	background: #EDEDED;
+}
+
+
+#address {
+	width: 446px;
+}
+
+.selectedtr {
+	background: #D8D9CF;
+}

@@ -9,8 +9,7 @@
 </div>
 <div class="buttonBox">
 	<div>
-		<a href="#" class="mappingButton">맵핑</a> <a href="#"
-			class="releaseButton">해제</a>
+		<button type="button" class="mappingButton">맵핑</button> <button type="button" class="releaseButton">해제</button>
 	</div>
 </div>
 
@@ -24,7 +23,7 @@
 <div class="graphbox">
 	<div class="managerbox">
 		<p>담당자
-		<table class="verticalTable">
+		<table class="verticalTable" id="managertable">
 			<thead>
 				<tr>
 					<th>담당자 코드</th>
@@ -32,28 +31,30 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>ㅋㅋㅋ</td>
-					<td>ㅋㅋㅋ</td>
-				</tr>
-				<tr>
-					<td>ㅋㅋㅋ</td>
-					<td>ㅋㅋㅋ</td>
-				</tr>
-				<tr>
-					<td>ㅋㅋㅋ</td>
-					<td>ㅋㅋㅋ</td>
-				</tr>
-				<tr>
-					<td>ㅋㅋㅋ</td>
-					<td>ㅋㅋㅋ</td>
-				</tr>
-				
+				<c:forEach items="${managerList}" var="manager">
+					<tr>
+						<td>${manager.userCode}</td>
+						<td>${manager.userName}</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
-	<div class="verticalTable">
+	<div class="centerbox">
 		<p>센터
+		<table class="verticalTable" id="centertable">
+			<thead>
+				<tr>
+					<th></th>
+					<th>센터코드</th>
+					<th>센터명</th>
+					<th id="address">주소</th>
+				</tr>			
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
 	</div>
 </div>
 
+<script src="resources/js/manager/mapping.js"></script>
