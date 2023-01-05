@@ -11,7 +11,7 @@
 
 <div class="graphbox">
 	<div class="managerbox">
-		<table class="verticalTable">
+		<table class="verticalTable" id="managerTable">
 			<thead>
 				<tr>
 					<th>담당자 코드</th>
@@ -27,7 +27,14 @@
 			</thead>
 			<tbody>
 				<c:forEach var="managerVO" items="${managerList}">
-					<tr onClick="location.href='${pageContext.request.contextPath}/managerList/${managerVO.userCode}'">
+				<!-- 	<tr onclick="
+						fetch('managerdetail.jsp').then(function(response){
+							ressponse.text().then(function(text)){
+								document.querySelector('table').innerHTML = text;
+							}
+						});
+					"> -->
+					<tr>
 						<td>${managerVO.userCode}</td>
 						<td>${managerVO.userName}</td>
 						<td>${managerVO.userBirth}</td>
@@ -44,31 +51,38 @@
 
 <div style="height: 30px;"></div>
 
-		<table class="rowTable">
+<form action='/managerlist' method="post">
+<button type="button" id="insertmgr">등록</button>
+<button type="button" id="savemgr">저장</button>
+<table class="rowTable" id="mgrdetailtable">
 			<tr>
 				<th scope="row">담당자코드</th>
-				<td>${managerVO.userCode}</td>
+				<td>
+					<input type="text" name="userCode" id="userCode" value="${userCode}" readonly>
+				</td>
 				<th scope="row">담당자명</th>
-				<td>${managerVO.userName}</td>
+				<td><input type="text" name="userName" id="userName" value="${userName}" readonly></td>
 			</tr>
 			<tr>
 				<th scope="row">생년월일</th>
-				<td>${managerVO.userBirth}</td>
+				<td><input type="text" name="userBirth" id="userBirth" value="${useruserBirth}" readonly></td>
 				<th scope="row">휴대전화번호</th>
-				<td>${managerVO.userTel}</td>
+				<td><input type="text" name="userTel" id="userTel"></td>
 			</tr>
 			<tr>
 				<th scope="row">Email</th>
-				<td>${managerVO.userEmail}</td>
+				<td><input type="text" name="userEmail" id="userEmail"></td>
 				<th scope="row">팀코드</th>
-				<td>${managerVO.userTeamCode}</td>
+				<td><input type="text" name="userTeamCode" id="userTeamCode"></td>
 			</tr>
 			<tr>
 				<th scope="row">입사일자</th>
-				<td>${managerVO.userHireDate}</td>
+				<td><input type="date" name="userHireDate" id="userHireDate" readonly></td>
 				<th scope="row">퇴사일자</th>
-				<td>${managerVO.userResignDate}</td>
+				<td><input type="date" name="userResignDate" id="userResignDate"></td>
 			</tr>
-		</table>
+		</table> 
+		</form>
 	</div>
 </div>
+<script src="resources/js/manager/manager.js"></script>
