@@ -31,13 +31,13 @@
 <select id="getScoreList"  resultType="com.mycompany.webapp.score.vo.ScoreVO">
 <![CDATA[
 select 
- 	   I.center_code as centerCode,
-       I.user_code as userCode,
-       I.check_detail_code as checkDetailCode,
+ 	   I.center_code as "centerCode",
+       I.user_code as "userCode",
+       I.check_detail_code as "checkDetailCode",
        I.check_year as "checkYear",
        I.check_season as "checkSeason",
        D.check_group_code as "checkGroupCode",
-       G.check_group_content as "checkGroupContent" ,
+       G.check_group_content as "checkGroupContent",
        D.check_detail_content as "checkDetailContent",
        I.check_score as "checkScore"
        
@@ -48,11 +48,33 @@ from check_detail D  left outer join Inspection I
         left outer join check_group G
         on I.check_group_code = G.check_group_code
 where I.center_code=#{centerCode}
+order by I.check_year,I.check_season desc
 
 ]]>
 
 </select>
+<!-- 
+ 점수 항목 조회
+(모달)
+정윤선
+ -->
+ <select id="usingCodeList"  resultType="com.mycompany.webapp.score.vo.ScoreVO">
+ <![CDATA[
+ 
+select
+G.check_group_content as "checkGroupContent",
+D.check_detail_content as "checkDetailContent",
+D.check_group_code as"checkGroupCode",
+D.check_detail_code as "checkDetailCode"
 
+FROM check_group G
+	full outer JOIN check_detail D 
+	ON G.check_group_code = D.check_group_code
+WHERE D.check_detail_occupied = 'Y'
+
+
+]]>
+</select>
 <!-- 
 
 점수 수정
@@ -78,22 +100,24 @@ where I.center_code=#{centerCode}
  
  <insert id="insertScore" parameterType="com.mycompany.webapp.score.vo.ScoreVO">
  <![CDATA[
-insert into inspection
- (center_code,
- user_code,
- check_year,
- check_season,
- check_group_code,
- check_detail_code,
- check_score)
+INSERT INTO INSPECTION(
+	center_code,
+ 	user_code,
+ 	check_year,
+ 	check_season, 
+ 	check_group_code, 
+ 	check_detail_code,
+ 	check_score
+ 	)
  values(
- #{centerCode},
- #{userCode},
- #{checkYear},
- #{checkSeason},
- #{checkGroupCode},
- #{checkDetailCode},
- #{checkScore})
+ 	#{centerCode},
+ 	#{userCode}, 
+ 	#{checkYear}, 
+ 	#{checkSeason}, 
+ 	#{checkGroupCode}, 
+ 	#{checkDetailCode}, 
+ 	#{checkScore}
+ 	)
  
  
  ]]>
