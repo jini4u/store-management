@@ -91,13 +91,23 @@ public class ManagerController {
 		return "jsp/manager/managermapping";
 	}
 
-	//담당하는 센터 정보 조회
+	/**
+	 * @author 임유진
+	 * 담당자에 따라 담당하는 센터 조회
+	 * @param 담당자 userCode
+	 * @return List<담당 중인 CenterVO>
+	 * */
 	@RequestMapping(value="/getCenters/{userCode}")
 	public @ResponseBody List<CenterVO> getCenterByManager(@PathVariable int userCode){
 		return managerService.getCenterByManager(userCode);
 	}
 
-	//맵핑 해제
+	/**
+	 * @author 임유진
+	 * 담당자와 센터 간 맵핑 해제
+	 * @param String {userCode:담당자코드, centerCode:센터코드} 형태
+	 * @return int 해제된 맵핑 관계 수
+	 * */
 	@RequestMapping(value="/cancelMapping", method=RequestMethod.POST)
 	public @ResponseBody int cancelMapping(@RequestBody String req) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
@@ -107,7 +117,12 @@ public class ManagerController {
 		return managerService.cancelMapping(userCode, centerCode);
 	}
 	
-	//맵핑 요청
+	/**
+	 * @author 임유진
+	 * 담당자와 센터 간 맵핑 요청
+	 * @param String {userCode:담당자코드, centerCode:센터코드} 형태
+	 * @return int 반영된 맵핑 수
+	 * */
 	@RequestMapping(value="/mapping", method=RequestMethod.POST)
 	public @ResponseBody int mapping(@RequestBody String req) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
