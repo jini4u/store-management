@@ -17,10 +17,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.center.service.ICenterService;
 import com.mycompany.webapp.center.vo.CenterVO;
+import com.mycompany.webapp.common.vo.Pager;
 
 /**
  * @ClassName : centerController.java
@@ -39,8 +41,10 @@ public class CenterController {
 	ICenterService centerService;
 
 	@RequestMapping(value="/centerPhoto")
-	public String manageCenterPhoto(Model model) {
-		List<CenterVO> centerList = centerService.centerList();
+	public String manageCenterPhoto(@RequestParam(defaultValue="1") int pageNo, Model model) {
+		int totalRows = centerService.countAllCenters();
+		Pager pager = new Pager(10, 10, totalRows, pageNo);
+		List<CenterVO> centerList = centerService.centerList(pager);
 		model.addAttribute("centerList", centerList);
 
 		return "jsp/center/centerphoto";
@@ -53,13 +57,16 @@ public class CenterController {
 	//물어보기
 	@ResponseBody
 	@PostMapping(value="/centerInsert")
-	public List<CenterVO>  insertCenter(CenterVO centerVO) {
+	public List<CenterVO>  insertCenter(@RequestParam(defaultValue="1") int pageNo, CenterVO centerVO) {
 		centerVO.setCenterCode(centerService.insertCenterCode()+1);
 		centerService.insertCenter(centerVO);
-		List<CenterVO> list = centerService.centerList();
+		int totalRows = centerService.countAllCenters();
+		Pager pager = new Pager(10, 10, totalRows, pageNo);
+		List<CenterVO> list = centerService.centerList(pager);
 		return list;
 	}
 
+	/* 여기 수정해주세용~~
 	@GetMapping(value="/centerList")
 	public String centerList(Model model) throws Exception {
 
@@ -105,7 +112,7 @@ public class CenterController {
 		}
 		model.addAttribute("centerConList", conList);
 		return "jsp/center/centerlist";
-	}
+	}*/
 
 	/**
 	 * @author 임유진
@@ -114,10 +121,13 @@ public class CenterController {
 	 * */
 	@RequestMapping("/availCenter")
 	public @ResponseBody List<CenterVO> getAvailableCenterList(){
-		List<CenterVO> allCenterList = centerService.centerList();
+		int totalRows = centerService.countAllCenters();
+		Pager pager = new Pager(totalRows, 10, totalRows, 1);
+		List<CenterVO> allCenterList = centerService.centerList(pager);
 		List<CenterVO> result = new ArrayList<>();
 		for(CenterVO center:allCenterList) {
-			if(center.getUserName().equals("") || center.getUserName() == null) {
+			logger.info(center.toString());
+			if(center.getUserCode() == 0) {
 				result.add(center);
 			}
 		}

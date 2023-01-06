@@ -26,7 +26,7 @@
 		, #{centerClosingDate,jdbcType=DATE})
 </insert>
 
-<select id="centerList" resultType="com.mycompany.webapp.center.vo.CenterVO">
+<select id="centerList" parameterType="com.mycompany.webapp.common.vo.Pager" resultType="com.mycompany.webapp.center.vo.CenterVO">
 	<!-- select 
 		C.center_code as "centerCode"
 		, C.center_name as "centerName"
@@ -40,7 +40,12 @@
 	FROM center C LEFT OUTER JOIN mapping M ON C.center_code = M.center_code
                   LEFT OUTER JOIN userinfo U ON M.user_code = U.user_code
 	-->
-	    select 
+<![CDATA[
+SELECT rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGuide", "centerOpeningDate", "centerClosingDate", "centerCondition", "userCode", "userName"
+        FROM(
+        SELECT ROWNUM as rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGuide", "centerOpeningDate", "centerClosingDate", "centerCondition", "userCode", "userName"
+        FROM(
+        SELECT
 		C.center_code as "centerCode"
 		, C.center_name as "centerName"
 		, C.center_tel as "centerTel"
@@ -53,8 +58,16 @@
         , U.user_name as "userName"
 	FROM center C LEFT OUTER JOIN mapping M ON C.center_code = M.center_code
                   LEFT OUTER JOIN userinfo U ON M.user_code = U.user_code
+    ORDER BY "centerCode"
+    )
+    WHERE rownum <= #{endRowNo}
+    )
+    WHERE rnum >= #{startRowNo}
+]]>
 </select>
-
+<select id="countAllCenters" resultType="int">
+SELECT COUNT(*) FROM center
+</select>
 
 <!-- 
 	맵핑가능 센터 목록 
