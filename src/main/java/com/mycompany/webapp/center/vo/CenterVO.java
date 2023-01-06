@@ -1,6 +1,9 @@
 package com.mycompany.webapp.center.vo;
 
-import java.sql.Date;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -12,8 +15,15 @@ public class CenterVO {
 	private String centerTel;
 	private String centerAddress;
 	private String centerGuide;
-	private Date centerOpeningDate;
-	private Date centerClosingDate;
+	
+	private String centerOpeningDate;
+	private String centerClosingDate;
+	private String centerCondition;
+	
+	//담당자 코드
+	private int userCode;
+	//담당자 이름
+	private String userName;
 	private List<FileInfoVO> file;
 	
 	
@@ -53,23 +63,51 @@ public class CenterVO {
 	public void setCenterGuide(String centerGuide) {
 		this.centerGuide = centerGuide;
 	}
-	public Date getCenterOpeningDate() {
+	public String getCenterOpeningDate() {
 		return centerOpeningDate;
 	}
-	public void setCenterOpeningDate(Date centerClosingDate) {
-		this.centerOpeningDate = centerClosingDate;
+	public void setCenterOpeningDate(String centerOpeningDate) {
+		this.centerOpeningDate = centerOpeningDate;
 	}
-	public Date getCenterClosingDate() {
+	public String getCenterClosingDate() {
 		return centerClosingDate;
 	}
-	public void setCenterClosingDate(Date centerClosingDate) {
+	public void setCenterClosingDate(String centerClosingDate) {
 		this.centerClosingDate = centerClosingDate;
+	}
+	public int getUserCode() {
+		return userCode;
+	}
+	public void setUserCode(int userCode) {
+		this.userCode = userCode;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
+	public String getCenterCondition() {
+		return centerCondition;
+	}
+	public void setCenterCondition(String centerCondition) throws Exception {
+		if(centerCondition.equals("notyet")) {
+			centerCondition = "오픈예정";
+		} else if(centerCondition.equals("closed")) {
+			centerCondition = "폐점";
+		} else if(Integer.parseInt(centerCondition) <= 0) {
+			centerCondition = "영업중";
+		} else {
+			centerCondition = "오픈예정";
+		}
+		this.centerCondition = centerCondition;
 	}
 	@Override
 	public String toString() {
 		return "CenterVO [centerCode=" + centerCode + ", centerName=" + centerName + ", centerTel=" + centerTel
 				+ ", centerAddress=" + centerAddress + ", centerGuide=" + centerGuide + ", centerOpeningDate="
-				+ centerOpeningDate + ", centerClosingDate=" + centerClosingDate + "]";
-	}
-	
+				+ centerOpeningDate + ", centerClosingDate=" + centerClosingDate + ", centerCondition="
+				+ centerCondition + ", userCode=" + userCode + ", userName=" + userName + ", file=" + file + "]";
+	}	
 }

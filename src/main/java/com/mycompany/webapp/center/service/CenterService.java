@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.center.dao.ICenterRepository;
 import com.mycompany.webapp.center.vo.CenterVO;
+import com.mycompany.webapp.common.vo.Pager;
 
 @Service
 public class CenterService implements ICenterService{
@@ -24,13 +25,12 @@ public class CenterService implements ICenterService{
 	}
 
 	@Override
-	public List<CenterVO> centerList() {
-		return centerRepository.centerList();
+	public List<CenterVO> centerList(Pager pager) {
+		return centerRepository.centerList(pager);
 	}
-	
-	
-
-
-
-	
+		
+	@Override
+	public int countAllCenters() {
+		return centerRepository.countAllCenters();
+	}
 }

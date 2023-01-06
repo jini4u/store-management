@@ -2,37 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.manager.dao.IManagerRepository">
 
-<!-- author 고은별
-	  담당자 등록 -->
-<insert id="insertManager" parameterType="com.mycompany.webapp.manager.vo.ManagerVO">
-	insert into userInfo (user_code, user_password, user_name, user_birth, user_tel, user_email,
-						 user_team_code, user_hire_date)
-	values (#{userCode}, #{userPassword}, #{userName}, #{userBirth}, #{userTel}, #{userEmail}, #{userTeamCode}, 
-			#{userHireDate})
-</insert> 
 
-<!-- author 고은별
-	  담당자 목록 조회-->
-<select id="selectManagerList" parameterType="map" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
-	select U.user_code as "userCode",
+
+<!-- author 고은별 
+	담당자 목록 조회-->
+<select id="selectManagerList" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
+<![CDATA[	select U.user_code as "userCode",
 		   U.user_name as "userName",
 		   U.user_birth as "userBirth",
 		   U.user_tel as "userTel",
 		   U.user_email as "userEmail",
 		   U.user_team_code as "userTeamCode",
 		   U.user_hire_date as "userHireDate",
-		   U.user_resign_date as "userResignDate",
-		   C.center_name as "centerName"
-	from mapping M left outer join userInfo U 
-						on M.user_code = U.user_code
-				   left outer join center C
-				   		on M.center_code = C.center_code 
+		   U.user_resign_date as "userResignDate"
+	from  userinfo U
+	where U.user_code < 20000
 	order by U.user_code desc
+]]>
 </select>
 
-<!-- author 고은별
-	  담당자 상세 조회-->
-	<select id="selectManagerDetail" parameterType="int" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
+<!--  담당자 상세 조회-->
+<!-- 	<select id="selectManagerDetail" parameterType="int" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
 	select user_code as "userCode",
 		   user_name as "userName",
 		   user_birth as "userBirth",
@@ -44,8 +34,23 @@
 	from userInfo
 	where user_code=#{userCode}
 	</select>
+ -->
+<!-- author 고은별 
+	 담당자 등록-->
+<insert id="insertManager" parameterType="com.mycompany.webapp.manager.vo.ManagerVO">
+insert into userInfo(user_code, user_password, user_name, user_birth, user_tel, user_email,user_team_code, user_hire_Date)
+values	(#{userCode}, #{userPassword}, #{userName}, #{userBirth}, #{userTel}, #{userEmail}, #{userTeamCode}, #{userHireDate})
+</insert>  
+
+<!--author 고은별  
+	담당자 최대 코드 -->
+<select id="selectMaxManagerNo" parameterType="int" resultType="int">
+	select NVL(max(user_code),0) as "userCode"
+	from userInfo
+</select>  
 
 <!--담당자 정보 수정  -->
+<!-- update -->
 
 <!--담당자 전체 인원 수  -->
 
@@ -53,4 +58,32 @@
 
 <!-- 키워드 별 담당자 검색 -->
 
+<!-- 
+	userCode로 담당 센터 조회
+	임유진
+ -->
+<select id="getCenterByManager" parameterType="int" resultType="com.mycompany.webapp.center.vo.CenterVO">
+SELECT C.center_code AS "centerCode"
+		, C.center_name AS "centerName"
+		, C.center_address AS "centerAddress"
+FROM mapping M
+	JOIN center C
+    ON M.center_code = C.center_code
+WHERE M.user_code = #{userCode}
+</select>
+<!-- 
+	맵핑 해제
+	임유진
+ -->
+<delete id="cancelMapping" parameterType="int">
+DELETE FROM mapping WHERE center_code = #{centerCode} AND user_code = #{userCode}
+</delete>
+<!-- 
+	맵핑
+	임유진
+ -->
+ <insert id="mapping" parameterType="int">
+ INSERT INTO mapping (center_code, user_code, mapping_date)
+ VALUES (#{centerCode}, #{userCode}, SYSDATE)
+ </insert>
 </mapper>
