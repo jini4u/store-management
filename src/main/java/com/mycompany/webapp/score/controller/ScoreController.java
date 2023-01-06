@@ -76,7 +76,6 @@ public class ScoreController {
       model.addAttribute("userCode", scoreList.get(0).getUserCode());
       model.addAttribute("userCode", scoreList.get(0).getUserCode());
 
-<<<<<<< HEAD
       int checkYear = scoreList.get(0).getCheckYear();
       int checkSeason = scoreList.get(0).getCheckSeason();
       int insertTargetYear = checkYear;
@@ -96,6 +95,7 @@ public class ScoreController {
      
       return "jsp/score/scoreList";
    }
+   
    /*
     * 정윤선
     * 점수 수정
@@ -105,50 +105,6 @@ public class ScoreController {
       scoreService.saveScore(score);
        return "redirect: /score";
    }
-   
-=======
-		int checkYear = scoreList.get(0).getCheckYear();
-		int checkSeason = scoreList.get(0).getCheckSeason();
-		int insertTargetYear = checkYear;
-		int insertTargetSeason = checkSeason;
-		if(checkSeason == 4) {
-			insertTargetYear++;
-			insertTargetSeason = 1;
-		} else {
-			insertTargetSeason++;
-		}
-		model.addAttribute("insertTargetYear", insertTargetYear);
-		model.addAttribute("insertTargetSeason", insertTargetSeason);
-		return "jsp/score/scoreList";
-	}
-	/*
-	 * 정윤선
-	 * 점수 수정
-	 * */
-	@RequestMapping(value="/saveScore",method = RequestMethod.POST)
-	public String saveScore(ScoreVO score){
-		scoreService.saveScore(score);
-		 return "redirect: /score";
-	}
-	/*
-	 * 정윤선
-	 * 점수 등록
-	 * (모달창에서)
-	 * */	
-	
-	@RequestMapping(value="/insertScore",method = RequestMethod.POST)
-	public String insertsocre(ScoreVO scoreVO) {
-		logger.info(scoreVO.toString());
-		
-		scoreService.insertScore(scoreVO);
-		
-		return "redirect:/score?centerCode=1";
-	}
-	
-	
-	
-	
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 
    /*
     * 정윤선
@@ -164,14 +120,6 @@ public class ScoreController {
       
       return "redirect:/score?centerCode=1";
    }
-   
-   
-   
-   
-
-   
-   
-   
    
    /*
     * 임유진
