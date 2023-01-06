@@ -16,7 +16,10 @@ public interface IScoreService {
 	
 	//윤선
 	List<ScoreVO> getScoreList(int centerCode);
+	
+	
 	int insertScore(ScoreVO score);
+	List<ScoreVO> usingCodeList();
 	int deleteScore(ScoreVO score);
 	int saveScore(ScoreVO score);
 }
