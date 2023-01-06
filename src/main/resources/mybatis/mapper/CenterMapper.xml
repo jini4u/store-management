@@ -38,4 +38,16 @@
 	FROM CENTER
 </select>
 
+
+<!-- 
+	맵핑가능 센터 목록 
+	임유진
+ -->
+ <select id="getAvailableCenterList" resultType="com.mycompany.webapp.center.vo.CenterVO">
+ SELECT C.center_code AS "centerCode"
+ 		, C.center_name AS "centerName"
+ 		, C.center_address AS "centerAddress"
+ FROM center C LEFT OUTER JOIN mapping M ON C.center_code = M.center_code
+ WHERE M.user_code IS NULL
+ </select>
 </mapper>

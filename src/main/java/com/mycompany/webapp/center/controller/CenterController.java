@@ -1,5 +1,6 @@
 package com.mycompany.webapp.center.controller;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -8,7 +9,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +18,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mycompany.webapp.center.service.CenterService;
 import com.mycompany.webapp.center.service.ICenterService;
 import com.mycompany.webapp.center.vo.CenterVO;
 
@@ -106,5 +104,14 @@ public class CenterController {
 		}
 		model.addAttribute("centerConList", conList);
 		return "jsp/center/centerlist";
+	}
+
+	/**
+	 * @author 임유진
+	 * @return List<맵핑가능센터>
+	 * */
+	@RequestMapping("/availCenter")
+	public @ResponseBody List<CenterVO> getAvailableCenterList(){
+		return centerService.getAvailableCenterList();
 	}
 }
