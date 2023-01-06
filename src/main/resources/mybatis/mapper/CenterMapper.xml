@@ -27,7 +27,7 @@
 </insert>
 
 <select id="centerList" resultType="com.mycompany.webapp.center.vo.CenterVO">
-	select 
+	<!-- select 
 		C.center_code as "centerCode"
 		, C.center_name as "centerName"
 		, C.center_tel as "centerTel"
@@ -39,7 +39,20 @@
         , U.user_name as "userName"
 	FROM center C LEFT OUTER JOIN mapping M ON C.center_code = M.center_code
                   LEFT OUTER JOIN userinfo U ON M.user_code = U.user_code
-
+	-->
+	    select 
+		C.center_code as "centerCode"
+		, C.center_name as "centerName"
+		, C.center_tel as "centerTel"
+		, C.center_address as "centerAddress"
+		, C.center_guide as "centerGuide"
+		, C.center_opening_date as "centerOpeningDate"
+		, C.center_closing_date as "centerClosingDate"
+        , NVL2(TO_CHAR(C.center_closing_date),'closed',NVL2(TO_CHAR(C.center_opening_date),TO_CHAR(FLOOR(C.center_opening_Date - SYSDATE)),'notyet')) AS "centerCondition"
+        , U.user_code as "userCode"
+        , U.user_name as "userName"
+	FROM center C LEFT OUTER JOIN mapping M ON C.center_code = M.center_code
+                  LEFT OUTER JOIN userinfo U ON M.user_code = U.user_code
 </select>
 
 

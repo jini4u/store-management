@@ -25,7 +25,7 @@
 							<td>${center.centerName}</td>
 							<td>${center.userName}</td>
 							<td>${center.centerTel}</td>
-							<td></td>
+							<td>${center.centerCondition}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

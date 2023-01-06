@@ -1,6 +1,9 @@
 package com.mycompany.webapp.center.vo;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -88,7 +91,16 @@ public class CenterVO {
 	public String getCenterCondition() {
 		return centerCondition;
 	}
-	public void setCenterCondition(String centerCondition) {
+	public void setCenterCondition(String centerCondition) throws Exception {
+		if(centerCondition.equals("notyet")) {
+			centerCondition = "오픈예정";
+		} else if(centerCondition.equals("closed")) {
+			centerCondition = "폐점";
+		} else if(Integer.parseInt(centerCondition) <= 0) {
+			centerCondition = "영업중";
+		} else {
+			centerCondition = "오픈예정";
+		}
 		this.centerCondition = centerCondition;
 	}
 	@Override
