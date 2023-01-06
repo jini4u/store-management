@@ -10,11 +10,11 @@
 			<div id="centermodal-insertphoto-info">
 				<table id="centermodal-insert">
 					<tr>
-					<th>사진명</th>
-					<td>(강원)강릉센터1.jpg</td>
+					<th>센터명</th>
+					<td id="targetCenterName"></td>
 					<th>외관/내부</th>
 					<td>
-						<select>
+						<select name="fileDetail">
 							<option>외관</option>
 							<option>내부</option>
 						</select>
@@ -23,24 +23,20 @@
 				</table>
 			</div>
 			<div id="center-search-bar">
-				<input type="file">
+				<input type="file" name="centerImage" multiple>
 			</div>
 			<div id="centermodal-photo-list">
 				<table id="centermodal-originalphoto-info">
+				<thead>
 					<tr>
 						<th>사진 번호</th>
 						<th>원본 사진명</th>
 					</tr>
-					<tr>
-						<td>/</td>
-						<td>/</td>
-					</tr>
-					<tr>
-						<td>/</td>
-						<td>/</td>
-					</tr>
+				</thead>
+				<tbody>
+				</tbody>
 				</table>
-				<button id="centermodal-photo-insert">등록</button>
+				<button type="button" id="centermodal-photo-insert" class="savebtn">등록</button>
 			</div>
 		</div>
 	</div>

@@ -46,7 +46,7 @@ public class CenterController {
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		List<CenterVO> centerList = centerService.centerList(pager);
 		model.addAttribute("centerList", centerList);
-
+		model.addAttribute("pager", pager);
 		return "jsp/center/centerphoto";
 	}
 	//url은 value에 적혀있는 값으로 동작하고, centerlist.jsp 페이지를 로딩해준다?
