@@ -50,7 +50,11 @@ values	(#{userCode}, #{userPassword}, #{userName}, #{userBirth}, #{userTel}, #{u
 </select>  
 
 <!--담당자 정보 수정  -->
-<!-- update -->
+<update id="updateManagerInfo" parameterType="com.mycompany.webapp.manager.vo.ManagerVO">
+	update userInfo
+	set user_tel=#{userTel}, user_email=#{userEmail}, user_team_code=#{userTeamCode}, user_resign_date=#{userResignDate}
+	where user_code= #{userCode}
+</update>
 
 <!--담당자 전체 인원 수  -->
 
