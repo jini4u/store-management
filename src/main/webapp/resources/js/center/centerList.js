@@ -69,7 +69,9 @@ centerClosingDate.value = this.cells[7].textContent;
 }
 
 //ceterInsert 해주는 자스
-$("#centerInsertBtn").click(function (){
+$("#centerSavedBtn").click(function (){
+	
+	
 	let url = "/centerInsert";
 	let centername = $("#centerName").val();
 	let centertel = $("#centerTel").val();
@@ -79,7 +81,8 @@ $("#centerInsertBtn").click(function (){
 	let centerclosingDate = $("#centerClosingDate").val();
 	let centercondition = $("#centerCondition").val();	
 	
-	
+	if ($("#centerTel").css("disabled")=="") {
+		
 	$.ajax({
 		type:"POST",
 		url :url,	
@@ -113,4 +116,23 @@ $("#centerInsertBtn").click(function (){
 	          alert("에러 발생");
 	      }
 	});
+	}else{
+		
+	}
 });
+
+$("#centerInsertBtn").click(function () {
+	
+	$(".removeDisabled").attr('disabled', false);
+	
+	$("#centerName").val('');
+	$("#centerTel").val('');
+	$("#centerCondition").val('');
+	$("#centerAddress").val('');
+	$("#centerGuide").val('');
+	$("#centerOpeningDate").val('');
+	$("#centerClosingDate").val('');
+
+});
+
+

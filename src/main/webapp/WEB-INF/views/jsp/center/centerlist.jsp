@@ -35,34 +35,34 @@
 		</c:forEach>
 	</tbody>
 </table>
-<form action="/centerInsert" method="post">
+<form action="/centerInsert" method="post" id="centerForm">
 	<table class="rowTable" id="center-right">
 			<tr>
 				<th>센터 코드</th>
-				<td><input type="text" name="centerCode" value="${centerCode}" id="centerCode" readonly="readonly"></td>
+				<td><input type="text" name="centerCode" value="${centerCode}" id="centerCode" class="removeDisabled" disabled="disabled" readonly="readonly"></td>
 				<th>센터명</th>
-				<td><input type="text" name="centerName" id="centerName"></td>
+				<td><input type="text" name="centerName" id="centerName" class="removeDisabled" disabled="disabled"></td>
 			</tr>
 			<tr>
 				<th>전화번호</th>
-				<td><input type="text" name="centerTel" id="centerTel"></td>
+				<td><input type="text" name="centerTel" id="centerTel" class="removeDisabled" disabled="disabled"></td>
 				<th>운영여부</th>
 				<td>
-						<input type="text" id="centerCondition">
+						<input type="text" id="centerCondition" class="removeDisabled" disabled="disabled">
 				</td>
 			</tr> 
 			<tr>
 				<th>주소</th>
-				<td><input type="text" name="centerAddress" id="centerAddress"></td>
+				<td><input type="text" name="centerAddress" id="centerAddress" class="removeDisabled" disabled="disabled"></td>
 				<th>오시는 길</th>
-				<td><input type="text" name="centerGuide" id="centerGuide"></td>
+				<td><input type="text" name="centerGuide" id="centerGuide" class="removeDisabled" disabled="disabled"></td>
 			</tr>
 			<tr>
 				<th>오픈 일</th>
-				<td><input type="date" name="centerOpeningDate" id="centerOpeningDate"></td>
+				<td><input type="date" name="centerOpeningDate" id="centerOpeningDate" class="removeDisabled" disabled="disabled"></td>
 				<th>폐점 일</th>
 				<td>
-				<input type="date" name="centerClosingDate" id="centerClosingDate" readonly="readonly">
+				<input type="date" name="centerClosingDate" id="centerClosingDate" class="removeDisabled" disabled="disabled" readonly="readonly">
 				</td>
 			</tr>
 	</table>
