@@ -107,5 +107,9 @@ public class ScoreVO {
  * 수정일 		 	수정자	수정내용
  * ======		=====	=========
  * 2023.01.02	정윤선	최초 생성
+ * 2023.01.04	정윤선	private String[] arrayCheckGroupCode;
+						private int[] arrayCheckDetailCode;
+						private int[] arrayScore;
+ * 
  * */
 }

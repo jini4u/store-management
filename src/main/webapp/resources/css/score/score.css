@@ -1,12 +1,12 @@
 @charset "UTF-8";
 .year_and_quarter{
-	 display: inline-block;
-	 float: right;
-	
-}
-.year_and_quarter > form{
     display: inline-block;
     float: right;
+   
+}
+.year_and_quarter > form{
+display: inline-block;
+    size:5px;
 }
 
 .scorebutton {
