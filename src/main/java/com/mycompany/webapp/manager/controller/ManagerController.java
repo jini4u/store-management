@@ -70,7 +70,7 @@ public class ManagerController {
 	/* author 은별
 	  담당자 등록 GET*/
 	@GetMapping(value="/managerInsert")
-	public String insertManager(Model model) {
+	public String insertManager() {
 		return "jsp/manager/managerlookup";
 	}
 	
@@ -84,6 +84,25 @@ public class ManagerController {
 		return mgrlist;
 	}
 
+	/* author 은별
+	  담당자 수정 GET*/
+	@GetMapping(value="/managerUpdate")
+	public  String managerUpdate() {
+		return "jsp/manager/managerlookup";
+	}
+	
+	/* author 은별
+	  담당자 수정 POST*/
+	@ResponseBody
+	@PostMapping(value="/managerUpdate")
+	public  List<ManagerVO> managerUpdate(ManagerVO mgr) {
+		managerService.managerUpdate(mgr);
+		List<ManagerVO> mgrlist = managerService.selectManagerList();
+		logger.info(mgrlist.toString());
+		return mgrlist;
+	}
+	
+	
 	//담당자 매핑
 	@RequestMapping(value="/managerMapping")
 	public String managerMapping(Model model) {

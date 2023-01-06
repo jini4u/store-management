@@ -36,6 +36,14 @@ public class ManagerService implements IManagerService {
 	public ManagerVO selectManagerDetail(int userCode) {
 		return managerRepository.selectManagerDetail(userCode);
 	}
+	
+	/* author 고은별
+	 * 담당자 정보 수정 */
+	@Override
+	public int managerUpdate(ManagerVO mgr) {
+		return managerRepository.updateManagerInfo(mgr);
+	}
+	
 
 	
 	/**
@@ -72,4 +80,6 @@ public class ManagerService implements IManagerService {
 	public int mapping(int userCode, int centerCode) {
 		return managerRepository.mapping(userCode, centerCode);
 	}
+
+	
 }
