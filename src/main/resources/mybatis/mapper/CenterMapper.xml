@@ -33,8 +33,8 @@
 		, center_tel as "centerTel"
 		, center_address as "centerAddress"
 		, center_guide as "centerGuide"
-		, center_opening_date as "centerOpeningDate"
-		, center_closing_date as "centerClosingDate"
+		, NVL(TO_CHAR(center_opening_date, 'YYYY-MM-DD'), '0000-00-00') as "centerOpeningDate"
+		, NVL(TO_CHAR(center_closing_date, 'YYYY-MM-DD'), '0000-00-00') as "centerClosingDate"
 	FROM CENTER
 </select>
 

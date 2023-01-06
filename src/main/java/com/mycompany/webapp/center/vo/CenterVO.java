@@ -15,6 +15,7 @@ public class CenterVO {
 	
 	private String centerOpeningDate;
 	private String centerClosingDate;
+	private String centerCondition;
 	
 	private List<FileInfoVO> file;
 	
@@ -67,11 +68,18 @@ public class CenterVO {
 	public void setCenterClosingDate(String centerClosingDate) {
 		this.centerClosingDate = centerClosingDate;
 	}
+	
+	public String getCenterCondition() {
+		return centerCondition;
+	}
+	public void setCenterCondition(String centerCondition) {
+		this.centerCondition = centerCondition;
+	}
 	@Override
 	public String toString() {
 		return "CenterVO [centerCode=" + centerCode + ", centerName=" + centerName + ", centerTel=" + centerTel
 				+ ", centerAddress=" + centerAddress + ", centerGuide=" + centerGuide + ", centerOpeningDate="
-				+ centerOpeningDate + ", centerClosingDate=" + centerClosingDate + "]";
+				+ centerOpeningDate + ", centerClosingDate=" + centerClosingDate + ", centerCondition="
+				+ centerCondition + ", file=" + file + "]";
 	}
-	
 }

@@ -17,27 +17,20 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach var="centerList" items="${centerList}">
+	<!--varStatus는 forEach문에서의 인덱스 -->
+		<c:forEach var="centerList" items="${centerList}" varStatus="status">
 			<tr class="centerListTr">
 				<td>${centerList.centerCode}</td>
 				<td>${centerList.centerName}</td>
 				<td>${centerList.centerTel}</td>
 				<td>${centerList.centerAddress}</td>
 				<td>${fn:substring(centerList.centerOpeningDate,0,10)}</td>
-				<c:choose>
-					<c:when test="${centerList.centerOpeningDate!=null}">
-						<td>Y</td>
-					</c:when>
-					<c:when test="${centerList.centerOpeningDate==null}">
-						<td>N</td>
-					</c:when>
-					<c:when test="${centerList.centerClosingDate!=null}">
-						<td>N</td>
-					</c:when>
-				</c:choose>					
-
+				
+				<td>${centerConList[status.index]}</td>				
+				
 				<td style="display:none">${centerList.centerGuide}</td>
 				<td style="display:none">${fn:substring(centerList.centerClosingDate,0,10)}</td>
+				
 			</tr>
 		</c:forEach>
 	</tbody>
@@ -55,11 +48,7 @@
 				<td><input type="text" name="centerTel" id="centerTel"></td>
 				<th>운영여부</th>
 				<td>
-					<c:choose>
-						<c:when test="">
 						<input type="text" id="centerCondition">
-						</c:when>	
-					</c:choose>
 				</td>
 			</tr> 
 			<tr>
@@ -72,7 +61,9 @@
 				<th>오픈 일</th>
 				<td><input type="date" name="centerOpeningDate" id="centerOpeningDate"></td>
 				<th>폐점 일</th>
-				<td><input type="date" name="centerClosingDate" id="centerClosingDate"></td>
+				<td>
+				<input type="date" name="centerClosingDate" id="centerClosingDate" readonly="readonly">
+				</td>
 			</tr>
 	</table>
 </form>
