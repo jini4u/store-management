@@ -3,11 +3,12 @@
 .table {
 	table-layout: fixed;
 	border-collapse: collapse;
-	border: 0;
+	/*border: 0;*/
+	width: 699px;
 }
 
 tr, th, td {
-	border: 1px solid #aaa;
+	/*border: 1px solid #aaa;*/
 	background-clip: padding-box;
 	scroll-snap-align: start;
 }
@@ -69,12 +70,12 @@ thead th, tbody th {
 }
 
 thead {
-	display: block;
+	/*display: block;*/
 	color: #fff;
 }
 
 tbody {
-	display: block;
+	/*display: block;*/
 	height: 190px;
 }
 

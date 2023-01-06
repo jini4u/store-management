@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <link href="resources/css/center/centerphoto.css" rel="stylesheet">
 <div id="center-photo-total">
 	<div id="photo-left-frame">
@@ -8,7 +10,7 @@
 			<button>검색</button>
 		</div>
 		<div id="center-photo-first">
-			<table class="table click">
+			<table class="table click verticalTable">
 				<thead>
 					<tr>
 						<th>센터명</th>
@@ -18,43 +20,20 @@
 					</tr>
 				</thead>
 				<tbody>
-
-					<tr>
-						<td>강남센터</td>
-						<td>순남희</td>
-						<td>02-123-4567</td>
-						<td>Y</td>
-					</tr>
-					<tr>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-						<td>Y</td>
-					</tr>
-					<tr>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-						<td>Y</td>
-					</tr>
-					<tr>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-						<td>Y</td>
-					</tr>
-					<tr>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-						<td>Y</td>
-					</tr>
+					<c:forEach items="${centerList}" var="center">
+						<tr>
+							<td>${center.centerName}</td>
+							<td>${center.userName}</td>
+							<td>${center.centerTel}</td>
+							<td></td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 			<img src="resources/images/center/paging.jpg" class="pagging">
 		</div>
 		<div id="center-photo-second">
-			<table class="table search" name="search-centerList">
+			<table class="table search verticalTable" name="search-centerList">
 				<thead>
 					<tr>
 						<th>사진 이름</th>

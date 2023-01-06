@@ -28,21 +28,24 @@
 
 <select id="centerList" resultType="com.mycompany.webapp.center.vo.CenterVO">
 	select 
-		center_code as "centerCode"
-		, center_name as "centerName"
-		, center_tel as "centerTel"
-		, center_address as "centerAddress"
-		, center_guide as "centerGuide"
-		, center_opening_date as "centerOpeningDate"
-		, center_closing_date as "centerClosingDate"
-	FROM CENTER
+		C.center_code as "centerCode"
+		, C.center_name as "centerName"
+		, C.center_tel as "centerTel"
+		, C.center_address as "centerAddress"
+		, C.center_guide as "centerGuide"
+		, C.center_opening_date as "centerOpeningDate"
+		, C.center_closing_date as "centerClosingDate"
+        , U.user_code as "userCode"
+        , U.user_name as "userName"
+	FROM center C LEFT OUTER JOIN mapping M ON C.center_code = M.center_code
+                  LEFT OUTER JOIN userinfo U ON M.user_code = U.user_code
 </select>
 
 
 <!-- 
 	맵핑가능 센터 목록 
 	임유진
- -->
+
  <select id="getAvailableCenterList" resultType="com.mycompany.webapp.center.vo.CenterVO">
  SELECT C.center_code AS "centerCode"
  		, C.center_name AS "centerName"
@@ -50,4 +53,5 @@
  FROM center C LEFT OUTER JOIN mapping M ON C.center_code = M.center_code
  WHERE M.user_code IS NULL
  </select>
+  -->
 </mapper>

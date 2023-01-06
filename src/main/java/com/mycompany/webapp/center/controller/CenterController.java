@@ -1,5 +1,6 @@
 package com.mycompany.webapp.center.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,8 +34,11 @@ public class CenterController {
 	ICenterService centerService;
 
 	@RequestMapping(value="/centerPhoto")
-	public String managePhotoCenter() {
-		return "jsp/center/centerPhoto";
+	public String manageCenterPhoto(Model model) {
+		List<CenterVO> centerList = centerService.centerList();
+		model.addAttribute("centerList", centerList);
+
+		return "jsp/center/centerphoto";
 	}
 	//url은 value에 적혀있는 값으로 동작하고, centerlist.jsp 페이지를 로딩해준다?
 	@GetMapping(value="/centerInsert")
@@ -61,10 +65,18 @@ public class CenterController {
 
 	/**
 	 * @author 임유진
+	 * 담당자가 지정되어있지 않은 센터 조회
 	 * @return List<맵핑가능센터>
 	 * */
 	@RequestMapping("/availCenter")
 	public @ResponseBody List<CenterVO> getAvailableCenterList(){
-		return centerService.getAvailableCenterList();
+		List<CenterVO> allCenterList = centerService.centerList();
+		List<CenterVO> result = new ArrayList<>();
+		for(CenterVO center:allCenterList) {
+			if(center.getUserName().equals("") || center.getUserName() == null) {
+				result.add(center);
+			}
+		}
+		return result;
 	}
 }

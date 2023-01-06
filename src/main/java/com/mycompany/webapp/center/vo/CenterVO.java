@@ -16,6 +16,10 @@ public class CenterVO {
 	private String centerOpeningDate;
 	private String centerClosingDate;
 	
+	//담당자 코드
+	private int userCode;
+	//담당자 이름
+	private String userName;
 	private List<FileInfoVO> file;
 	
 	
@@ -67,11 +71,23 @@ public class CenterVO {
 	public void setCenterClosingDate(String centerClosingDate) {
 		this.centerClosingDate = centerClosingDate;
 	}
+	public int getUserCode() {
+		return userCode;
+	}
+	public void setUserCode(int userCode) {
+		this.userCode = userCode;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	@Override
 	public String toString() {
 		return "CenterVO [centerCode=" + centerCode + ", centerName=" + centerName + ", centerTel=" + centerTel
 				+ ", centerAddress=" + centerAddress + ", centerGuide=" + centerGuide + ", centerOpeningDate="
-				+ centerOpeningDate + ", centerClosingDate=" + centerClosingDate + "]";
-	}
-	
+				+ centerOpeningDate + ", centerClosingDate=" + centerClosingDate + ", userCode=" + userCode
+				+ ", userName=" + userName + "]";
+	}	
 }
