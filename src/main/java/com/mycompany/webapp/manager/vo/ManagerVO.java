@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mycompany.webapp.center.vo.CenterVO;
 import com.mycompany.webapp.common.vo.FileInfoVO;
 
 public class ManagerVO {
@@ -19,7 +20,7 @@ public class ManagerVO {
 	private Date userHireDate;
 	private Date userResignDate;
 	
-	private String centerName;
+	private List<CenterVO> centerList;
 
 	public int getUserCode() {
 		return userCode;
@@ -93,12 +94,12 @@ public class ManagerVO {
 		this.userResignDate = userResignDate;
 	}
 
-	public String getCenterName() {
-		return centerName;
+	public List<CenterVO> getCenterList() {
+		return centerList;
 	}
 
-	public void setCenterName(String centerName) {
-		this.centerName = centerName;
+	public void setCenterList(List<CenterVO> centerList) {
+		this.centerList = centerList;
 	}
 
 	@Override
@@ -106,7 +107,7 @@ public class ManagerVO {
 		return "ManagerVO [userCode=" + userCode + ", userPassword=" + userPassword + ", userName=" + userName
 				+ ", userBirth=" + userBirth + ", userTel=" + userTel + ", userEmail=" + userEmail + ", userTeamCode="
 				+ userTeamCode + ", userHireDate=" + userHireDate + ", userResignDate=" + userResignDate
-				+ ", centerName=" + centerName + "]";
+				+ ", centerList=" + centerList + "]";
 	}
 	
 

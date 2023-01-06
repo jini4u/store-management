@@ -45,25 +45,16 @@ public class ManagerController {
 	@RequestMapping(value="/managerList")
 	public String selectManagerList(Model model) {
 		List<ManagerVO> managerList = managerService.selectManagerList();
-		Map<Integer, List<String>> centerMap = new HashMap<>();
 		for(int i=0;i<managerList.size();i++) {
 			ManagerVO manager = managerList.get(i);
-			List<String> centerNamesByManager = new ArrayList<>();
 			int userCode = manager.getUserCode();
-			List<CenterVO> centers = managerService.getCenterByManager(userCode);
-			List<String> centerNames = new ArrayList<>();
-			for(CenterVO center:centers) {
-				centerNames.add(center.getCenterName());
-			}
-			centerMap.put(userCode, centerNames);
+			List<CenterVO> centerList = managerService.getCenterByManager(userCode);
+			manager.setCenterList(centerList);
 		}
-				//managerService.getCenterByManager(mgr.getUserCode());
 		logger.info("managerList : " + managerList);
 		model.addAttribute("managerList", managerList);
 		int usercode = managerList.get(0).getUserCode();
 		model.addAttribute("userCode",usercode+1);
-		model.addAttribute("centerMap",centerMap);
-		logger.info("centerMaps : " + centerMap);
 		return "jsp/manager/managerlookup";
 	}
 	
