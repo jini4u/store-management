@@ -15,6 +15,7 @@ public class CenterVO {
 	
 	private String centerOpeningDate;
 	private String centerClosingDate;
+	private String centerCondition;
 	
 	//담당자 코드
 	private int userCode;
@@ -83,11 +84,18 @@ public class CenterVO {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	
+	public String getCenterCondition() {
+		return centerCondition;
+	}
+	public void setCenterCondition(String centerCondition) {
+		this.centerCondition = centerCondition;
+	}
 	@Override
 	public String toString() {
 		return "CenterVO [centerCode=" + centerCode + ", centerName=" + centerName + ", centerTel=" + centerTel
 				+ ", centerAddress=" + centerAddress + ", centerGuide=" + centerGuide + ", centerOpeningDate="
-				+ centerOpeningDate + ", centerClosingDate=" + centerClosingDate + ", userCode=" + userCode
-				+ ", userName=" + userName + "]";
+				+ centerOpeningDate + ", centerClosingDate=" + centerClosingDate + ", centerCondition="
+				+ centerCondition + ", userCode=" + userCode + ", userName=" + userName + ", file=" + file + "]";
 	}	
 }

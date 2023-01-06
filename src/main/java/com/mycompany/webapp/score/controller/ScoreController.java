@@ -87,7 +87,6 @@ public class ScoreController {
 		}
 		model.addAttribute("insertTargetYear", insertTargetYear);
 		model.addAttribute("insertTargetSeason", insertTargetSeason);
-		
 		return "jsp/score/scoreList";
 	}
 	/*
