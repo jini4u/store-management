@@ -8,6 +8,7 @@
 				<button id="centermodal-close-btn">✖</button>
 			</div>
 			<div id="centermodal-insertphoto-info">
+				<form id="photoinsertform">
 				<table id="centermodal-insert">
 					<tr>
 					<th>센터명</th>
@@ -15,12 +16,13 @@
 					<th>외관/내부</th>
 					<td>
 						<select name="fileDetail">
-							<option>외관</option>
-							<option>내부</option>
+							<option value="outside">외관</option>
+							<option value="inside">내부</option>
 						</select>
 					</td>
 					</tr>
 				</table>
+				<input name='centerCode' class='centercode' value='' readonly/>
 			</div>
 			<div id="center-search-bar">
 				<input type="file" name="centerImage" multiple>
@@ -36,6 +38,7 @@
 				<tbody>
 				</tbody>
 				</table>
+				</form>
 				<button type="button" id="centermodal-photo-insert" class="savebtn">등록</button>
 			</div>
 		</div>

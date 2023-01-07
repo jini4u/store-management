@@ -17,8 +17,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.mycompany.webapp.center.service.ICenterService;
 import com.mycompany.webapp.center.vo.CenterVO;
@@ -126,11 +129,21 @@ public class CenterController {
 		List<CenterVO> allCenterList = centerService.centerList(pager);
 		List<CenterVO> result = new ArrayList<>();
 		for(CenterVO center:allCenterList) {
-			logger.info(center.toString());
 			if(center.getUserCode() == 0) {
 				result.add(center);
 			}
 		}
 		return result;
+	}
+	
+	@RequestMapping(value="/addCenterImage", method=RequestMethod.POST)
+	public @ResponseBody int addCenterImage(MultipartHttpServletRequest request) {
+		String fileDetail = request.getParameter("fileDetail");
+		int centerCode = Integer.parseInt(request.getParameter("centerCode"));
+		List<MultipartFile> files = request.getFiles("centerImage");
+		logger.info("fileDetail: "+fileDetail);
+		logger.info("centerCode: "+centerCode);
+		logger.info("files: "+files.size());
+		return 1;
 	}
 }

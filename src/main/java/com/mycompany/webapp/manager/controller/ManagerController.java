@@ -112,8 +112,8 @@ public class ManagerController {
 
 	/**
 	 * @author 임유진
-	 * 담당자에 따라 담당하는 센터 조회
-	 * @param 담당자 userCode
+	 * @describe 담당자에 따라 담당하는 센터 조회
+	 * @param {Integer} userCode 담당자 userCode
 	 * @return List<담당 중인 CenterVO>
 	 * */
 	@RequestMapping(value="/getCenters/{userCode}")
