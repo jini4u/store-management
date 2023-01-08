@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <link href="resources/css/center/centerphoto.css" rel="stylesheet">
 <div id="center-photo-total">
@@ -106,7 +107,10 @@
 		<div id="photo-frame">
 			<div id="photo-main-size">
 				<img src="resources/images/center/left-arrow.png" class="arrow">
-				<img src="resources/images/center/(대구경남)경상대센터1.jpg" id="photo-img">
+				<div id="centerImagesDiv">
+				<!-- 센터별 사진들 들어가야함. value에서 /image/사진이름. /image는 resources.xml에서 맵핑해둠 -->
+				<img src="<spring:url value='/image/centerCode_6+originalName_IMG_0352.jpeg'/>" class="photo-img">
+				</div>
 				<img src="resources/images/center/right-arrow.png" class="arrow">
 			</div>
 			<div id="photo-mini-size">

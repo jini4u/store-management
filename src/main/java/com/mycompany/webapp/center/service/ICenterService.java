@@ -21,4 +21,7 @@ public interface ICenterService {
 	
 	//센터 사진 등록
 	int addCenterImage(FileInfoVO file);
+	
+	//센터 사진 이름 조회
+	List<String> getCenterImageNames(int centerCode);
 }

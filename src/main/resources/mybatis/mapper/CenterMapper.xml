@@ -79,4 +79,13 @@ VALUES (
 	, SYSDATE )
 ]]>
 </insert>
+
+<select id="getCenterImageNames" parameterType="int" resultType="String">
+<![CDATA[
+SELECT file_saved_name as "fileSavedName"
+FROM fileinfo
+WHERE center_code = #{centerCode}
+ORDER BY file_detail
+]]>
+</select>
 </mapper>

@@ -40,4 +40,9 @@ public class CenterService implements ICenterService{
 	public int addCenterImage(FileInfoVO file) {
 		return centerRepository.addCenterImage(file);
 	}
+	
+	@Override
+	public List<String> getCenterImageNames(int centerCode) {
+		return centerRepository.getCenterImageNames(centerCode);
+	}
 }

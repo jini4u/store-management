@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -162,7 +163,12 @@ public class CenterController {
 			file.transferTo(new File(filePath+fileSavedName));
 			result += centerService.addCenterImage(newFile);
 		}
-		
 		return result;
+	}
+	
+	@RequestMapping("/getCenterImages/{centerCode}")
+	public @ResponseBody List<String> getCenterImages(@PathVariable int centerCode) {
+		//센터코드에 맞춰서 파일이름만 리턴해주면 됨
+		return centerService.getCenterImageNames(centerCode);
 	}
 }
