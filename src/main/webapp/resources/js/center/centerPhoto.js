@@ -25,8 +25,21 @@ function appearTable(e) {
 	let centerCode = document.querySelector("input[name='centerCode']");
 	centerCode.setAttribute("value", centerNameArr[4].innerText); 
 	insertModalCenterName.innerText = centerNameArr[0].innerText;
+	
+	makeRequest(getCenterImages,'GET','/getCenterImages/'+centerNameArr[4].innerText);
 };
 
+var imgDiv = document.getElementById("centerImagesDiv");
+
+function getCenterImages(){
+	//리턴받은 사진이름들로 이미지 만들어주기
+	let result = JSON.parse(httpRequest.responseText);
+	//imgDiv.innerHTML = ''
+	for(var i=0;i<result.length;i++){
+		// element 를 만들어서 넣기
+		imgDiv.innerText = "&lt;img src='localhost:8080/"+result[i]+"' class='photo-img'/&gt;";
+	}
+}
 
 //세 버튼을 선택할수있도록 -> 리스트로 반환됨 -> foreach?로 반복하면서 click Event 달아주기
 //-> click 했을때 12~14라인 작동하도록 (그럼 아마도 12~14라인을 함수로 묶어놔야겠찌?)
@@ -77,5 +90,7 @@ insertImgBtn.addEventListener("click",function(){
 });
 
 function addCenterImage(){
-	console.log("good");
+	let response = JSON.parse(httpRequest.responseText);
+	console.log(response+"개 저장됨");
+	modalOpen.style.display ="none";
 }

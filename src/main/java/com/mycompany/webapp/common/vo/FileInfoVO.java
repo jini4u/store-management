@@ -12,6 +12,8 @@ public class FileInfoVO {
 	private Date filePostDate;
 	private Date fileModifyDate;
 	
+	private int centerCode;
+	
 	public int getFileNo() {
 		return fileNo;
 	}
@@ -60,12 +62,17 @@ public class FileInfoVO {
 	public void setFileModifyDate(Date fileModifyDate) {
 		this.fileModifyDate = fileModifyDate;
 	}
+	public int getCenterCode() {
+		return centerCode;
+	}
+	public void setCenterCode(int centerCode) {
+		this.centerCode = centerCode;
+	}
+	
 	@Override
 	public String toString() {
 		return "FileInfoVO [fileNo=" + fileNo + ", fileSavedName=" + fileSavedName + ", originalName=" + originalName
 				+ ", fileType=" + fileType + ", fileDetail=" + fileDetail + ", filePath=" + filePath + ", filePostDate="
-				+ filePostDate + ", fileModifyDate=" + fileModifyDate + "]";
+				+ filePostDate + ", fileModifyDate=" + fileModifyDate + ", centerCode=" + centerCode + "]";
 	}
-	
-
 }

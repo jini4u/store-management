@@ -40,7 +40,7 @@ SELECT rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGu
 		, C.center_guide as "centerGuide"
 		, C.center_opening_date as "centerOpeningDate"
 		, C.center_closing_date as "centerClosingDate"
-        , NVL2(TO_CHAR(C.center_closing_date),'closed',NVL2(TO_CHAR(C.center_opening_date),TO_CHAR(FLOOR(C.center_opening_Date - SYSDATE)),'notyet')) AS "centerCondition"
+        , NVL2(TO_CHAR(C.center_closing_date),'c'||TO_CHAR(SYSDATE-C.center_closing_date),NVL2(TO_CHAR(C.center_opening_date),'o'||TO_CHAR(FLOOR(C.center_opening_Date - SYSDATE)),'notyet')) AS "centerCondition"
         , U.user_code as "userCode"
         , U.user_name as "userName"
 	FROM center C LEFT OUTER JOIN mapping M ON C.center_code = M.center_code
@@ -57,4 +57,35 @@ SELECT rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGu
 SELECT COUNT(*) FROM center
 </select>
 
+<insert id="addCenterImage" parameterType="com.mycompany.webapp.common.vo.FileInfoVO">
+<![CDATA[
+INSERT INTO fileinfo (
+	file_no
+	, center_code
+	, file_saved_name
+	, file_original_name
+	, file_type
+	, file_detail
+	, file_path
+	, file_post_date )
+VALUES (
+	(SELECT NVL(MAX(file_no)+1, 1) FROM fileinfo)
+	, #{centerCode}
+	, #{fileSavedName}
+	, #{originalName}
+	, #{fileType}
+	, #{fileDetail}
+	, #{filePath}
+	, SYSDATE )
+]]>
+</insert>
+
+<select id="getCenterImageNames" parameterType="int" resultType="String">
+<![CDATA[
+SELECT file_saved_name as "fileSavedName"
+FROM fileinfo
+WHERE center_code = #{centerCode}
+ORDER BY file_detail
+]]>
+</select>
 </mapper>

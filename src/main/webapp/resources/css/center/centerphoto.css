@@ -54,7 +54,7 @@ thead th, tbody th {
 	margin-top: 3%;
 }
 
-#photo-img {
+.photo-img {
 	width: 500px;
 	height: 450px;
 }
