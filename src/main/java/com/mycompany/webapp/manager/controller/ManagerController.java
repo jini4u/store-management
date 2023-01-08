@@ -1,14 +1,8 @@
 package com.mycompany.webapp.manager.controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.tomcat.util.json.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.bind.annotation.RequestBody;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.webapp.center.vo.CenterVO;
+import com.mycompany.webapp.common.vo.Pager;
 import com.mycompany.webapp.manager.service.IManagerService;
 import com.mycompany.webapp.manager.vo.ManagerVO;
 
@@ -40,26 +30,31 @@ public class ManagerController {
 	
 	@Autowired 
 	IManagerService managerService;
-	/* author 은별
-	   담당자 목록 조회*/
+	/* author ��蹂�
+	   �떞�떦�옄 紐⑸줉 議고쉶*/
 	@RequestMapping(value="/managerList")
-	public String selectManagerList(Model model) {
-		List<ManagerVO> managerList = managerService.selectManagerList();
+	public String selectManagerList(@RequestParam(defaultValue="1") int pageNo,Model model) {
+		int totalRows = managerService.countAllMgr();
+		Pager pager = new Pager(10, 10, totalRows, pageNo);
+		List<ManagerVO> managerList = managerService.selectManagerList(pager);
 		for(int i=0;i<managerList.size();i++) {
 			ManagerVO manager = managerList.get(i);
 			int userCode = manager.getUserCode();
 			List<CenterVO> centerList = managerService.getCenterByManager(userCode);
 			manager.setCenterList(centerList);
 		}
-		logger.info("managerList : " + managerList);
 		model.addAttribute("managerList", managerList);
+		model.addAttribute("pager", pager);
 		int usercode = managerList.get(0).getUserCode();
 		model.addAttribute("userCode",usercode+1);
+		logger.info("managerList : " + managerList);
+		
+
 		return "jsp/manager/managerlookup";
 	}
 	
-	/* author 은별
-	   담당자 상세 조회*/
+	/* author ��蹂�
+	   �떞�떦�옄 �긽�꽭 議고쉶*/
 	@RequestMapping(value="/managerDetail")
 	public String selectManagerDetail(Model model, @PathVariable int userCode) {
 		ManagerVO mgrDetails = managerService.selectManagerDetail(userCode);
@@ -67,54 +62,60 @@ public class ManagerController {
 		return "jsp/manager/managerdetail";
 	}
 	
-	/* author 은별
-	  담당자 등록 GET*/
+	/* author ��蹂�
+	  �떞�떦�옄 �벑濡� GET*/
 	@GetMapping(value="/managerInsert")
 	public String insertManager() {
 		return "jsp/manager/managerlookup";
 	}
 	
-	/* author 은별
-	  담당자 등록 POST*/
+	/* author ��蹂�
+	  �떞�떦�옄 �벑濡� POST*/
 	@ResponseBody
 	@PostMapping(value="/managerInsert")
-	public List<ManagerVO> insertManager(ManagerVO mgr) {
+	public List<ManagerVO> insertManager(@RequestParam(defaultValue="1") int pageNo, ManagerVO mgr) {
 		managerService.insertManager(mgr);
-		List<ManagerVO> mgrlist = managerService.selectManagerList();
-		return mgrlist;
+		int totalRows = managerService.countAllMgr();
+		Pager pager = new Pager(10, 10, totalRows, pageNo);
+		List<ManagerVO> managerList = managerService.selectManagerList(pager);
+		return managerList;
 	}
 
-	/* author 은별
-	  담당자 수정 GET*/
+	/* author ��蹂�
+	  �떞�떦�옄 �닔�젙 GET*/
 	@GetMapping(value="/managerUpdate")
 	public  String managerUpdate() {
 		return "jsp/manager/managerlookup";
 	}
 	
-	/* author 은별
-	  담당자 수정 POST*/
+	/* author ��蹂�
+	  �떞�떦�옄 �닔�젙 POST*/
 	@ResponseBody
 	@PostMapping(value="/managerUpdate")
-	public  List<ManagerVO> managerUpdate(ManagerVO mgr) {
+	public  List<ManagerVO> managerUpdate(@RequestParam(defaultValue="1") int pageNo, ManagerVO mgr) {
 		managerService.managerUpdate(mgr);
-		List<ManagerVO> mgrlist = managerService.selectManagerList();
-		logger.info(mgrlist.toString());
-		return mgrlist;
+		int totalRows = managerService.countAllMgr();
+		Pager pager = new Pager(10, 10, totalRows, pageNo);
+		List<ManagerVO> managerList = managerService.selectManagerList(pager);
+		logger.info(managerList.toString());
+		return managerList;
 	}
 	
 	
-	//담당자 매핑
+	//�떞�떦�옄 留ㅽ븨
 	@RequestMapping(value="/managerMapping")
-	public String managerMapping(Model model) {
-		model.addAttribute("managerList", managerService.selectManagerList());
+	public String managerMapping(@RequestParam(defaultValue="1") int pageNo, Model model) {
+		int totalRows = managerService.countAllMgr();
+		Pager pager = new Pager(10, 10, totalRows, pageNo);
+		model.addAttribute("managerList", managerService.selectManagerList(pager));
 		return "jsp/manager/managermapping";
 	}
 
 	/**
-	 * @author 임유진
-	 * @describe 담당자에 따라 담당하는 센터 조회
-	 * @param {Integer} userCode 담당자 userCode
-	 * @return List<담당 중인 CenterVO>
+	 * @author �엫�쑀吏�
+	 * @describe �떞�떦�옄�뿉 �뵲�씪 �떞�떦�븯�뒗 �꽱�꽣 議고쉶
+	 * @param {Integer} userCode �떞�떦�옄 userCode
+	 * @return List<�떞�떦 以묒씤 CenterVO>
 	 * */
 	@RequestMapping(value="/getCenters/{userCode}")
 	public @ResponseBody List<CenterVO> getCenterByManager(@PathVariable int userCode){
@@ -122,10 +123,10 @@ public class ManagerController {
 	}
 
 	/**
-	 * @author 임유진
-	 * 담당자와 센터 간 맵핑 해제
-	 * @param String {userCode:담당자코드, centerCode:센터코드} 형태
-	 * @return int 해제된 맵핑 관계 수
+	 * @author �엫�쑀吏�
+	 * �떞�떦�옄�� �꽱�꽣 媛� 留듯븨 �빐�젣
+	 * @param String {userCode:�떞�떦�옄肄붾뱶, centerCode:�꽱�꽣肄붾뱶} �삎�깭
+	 * @return int �빐�젣�맂 留듯븨 愿�怨� �닔
 	 * */
 	@RequestMapping(value="/cancelMapping", method=RequestMethod.POST)
 	public @ResponseBody int cancelMapping(@RequestBody String req) throws Exception {
@@ -137,10 +138,10 @@ public class ManagerController {
 	}
 	
 	/**
-	 * @author 임유진
-	 * 담당자와 센터 간 맵핑 요청
-	 * @param String {userCode:담당자코드, centerCode:센터코드} 형태
-	 * @return int 반영된 맵핑 수
+	 * @author �엫�쑀吏�
+	 * �떞�떦�옄�� �꽱�꽣 媛� 留듯븨 �슂泥�
+	 * @param String {userCode:�떞�떦�옄肄붾뱶, centerCode:�꽱�꽣肄붾뱶} �삎�깭
+	 * @return int 諛섏쁺�맂 留듯븨 �닔
 	 * */
 	@RequestMapping(value="/mapping", method=RequestMethod.POST)
 	public @ResponseBody int mapping(@RequestBody String req) throws Exception {

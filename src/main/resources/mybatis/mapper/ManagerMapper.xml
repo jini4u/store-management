@@ -7,34 +7,27 @@
 <!-- author 고은별 
 	담당자 목록 조회-->
 <select id="selectManagerList" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
-<![CDATA[	select U.user_code as "userCode",
-		   U.user_name as "userName",
-		   U.user_birth as "userBirth",
-		   U.user_tel as "userTel",
-		   U.user_email as "userEmail",
-		   U.user_team_code as "userTeamCode",
-		   U.user_hire_date as "userHireDate",
-		   U.user_resign_date as "userResignDate"
-	from  userinfo U
-	where U.user_code < 20000
-	order by U.user_code desc
+<![CDATA[	
+	select * from(
+			select  rownum as rnum, 
+		   			U.user_code as "userCode",
+		  			U.user_name as "userName",
+		   			U.user_birth as "userBirth",
+		   			U.user_tel as "userTel",
+		   			U.user_email as "userEmail",
+		   			U.user_team_code as "userTeamCode",
+		  			U.user_hire_date as "userHireDate",
+		   			U.user_resign_date as "userResignDate"
+			from  userinfo U
+			where U.user_code < 20000 
+			and rownum <= #{endRowNo}
+			order by U.user_code desc
+			)
+			WHERE rnum >= #{startRowNo}
+			
 ]]>
 </select>
 
-<!--  담당자 상세 조회-->
-<!-- 	<select id="selectManagerDetail" parameterType="int" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
-	select user_code as "userCode",
-		   user_name as "userName",
-		   user_birth as "userBirth",
-		   user_tel as "userTel",
-		   user_email as "userEmail",
-		   user_team_code as "userTeamCode",
-		   user_hire_date as "userHireDate",
-		   user_resign_date as "userResignDate"
-	from userInfo
-	where user_code=#{userCode}
-	</select>
- -->
 <!-- author 고은별 
 	 담당자 등록-->
 <insert id="insertManager" parameterType="com.mycompany.webapp.manager.vo.ManagerVO">
@@ -54,9 +47,31 @@ values	(#{userCode}, #{userPassword}, #{userName}, #{userBirth}, #{userTel}, #{u
 	update userInfo
 	set user_tel=#{userTel}, user_email=#{userEmail}, user_team_code=#{userTeamCode}, user_resign_date=#{userResignDate}
 	where user_code= #{userCode}
+	
+<!-- 	update userInfo
+	<set>
+		<if test="userResignDate !=null">
+			user_tel=#{userTel}, user_email=#{userEmail}, user_team_code=#{userTeamCode}, user_resign_date=#{userResignDate,jdbcType=DATE}
+		</if>
+		<if test="userResignDate =null">
+			user_tel=#{userTel}, user_email=#{userEmail}, user_team_code=#{userTeamCode}
+		</if>
+	</set> 
+	where user_code= #{userCode}     -->
+	
+<!-- update userInfo
+	set user_tel=#{userTel}, user_email=#{userEmail}, user_team_code=#{userTeamCode}, user_resign_date= #{userResignDate,jdbcType=DATE}
+	where user_code= #{userCode}  -->
+
 </update>
 
-<!--담당자 전체 인원 수  -->
+ <!--담당자 전체 인원 수
+ 	 은별
+  -->
+<select id="countAllMgr" resultType="int">
+SELECT COUNT(*) FROM userInfo
+</select>
+
 
 <!--키워드 별 담당자 인원 수  -->
 
@@ -90,4 +105,6 @@ DELETE FROM mapping WHERE center_code = #{centerCode} AND user_code = #{userCode
  INSERT INTO mapping (center_code, user_code, mapping_date)
  VALUES (#{centerCode}, #{userCode}, SYSDATE)
  </insert>
+ 
+
 </mapper>
