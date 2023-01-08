@@ -40,7 +40,7 @@ SELECT rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGu
 		, C.center_guide as "centerGuide"
 		, C.center_opening_date as "centerOpeningDate"
 		, C.center_closing_date as "centerClosingDate"
-        , NVL2(TO_CHAR(C.center_closing_date),'closed',NVL2(TO_CHAR(C.center_opening_date),TO_CHAR(FLOOR(C.center_opening_Date - SYSDATE)),'notyet')) AS "centerCondition"
+        , NVL2(TO_CHAR(C.center_closing_date),'c'||TO_CHAR(SYSDATE-C.center_closing_date),NVL2(TO_CHAR(C.center_opening_date),'o'||TO_CHAR(FLOOR(C.center_opening_Date - SYSDATE)),'notyet')) AS "centerCondition"
         , U.user_code as "userCode"
         , U.user_name as "userName"
 	FROM center C LEFT OUTER JOIN mapping M ON C.center_code = M.center_code
