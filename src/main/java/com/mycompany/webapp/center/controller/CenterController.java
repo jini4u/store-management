@@ -1,5 +1,7 @@
 package com.mycompany.webapp.center.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +27,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.mycompany.webapp.center.service.ICenterService;
 import com.mycompany.webapp.center.vo.CenterVO;
+import com.mycompany.webapp.common.vo.FileInfoVO;
 import com.mycompany.webapp.common.vo.Pager;
 
 /**
@@ -137,13 +140,29 @@ public class CenterController {
 	}
 	
 	@RequestMapping(value="/addCenterImage", method=RequestMethod.POST)
-	public @ResponseBody int addCenterImage(MultipartHttpServletRequest request) {
+	public @ResponseBody int addCenterImage(MultipartHttpServletRequest request) throws IOException {
 		String fileDetail = request.getParameter("fileDetail");
 		int centerCode = Integer.parseInt(request.getParameter("centerCode"));
 		List<MultipartFile> files = request.getFiles("centerImage");
-		logger.info("fileDetail: "+fileDetail);
-		logger.info("centerCode: "+centerCode);
-		logger.info("files: "+files.size());
-		return 1;
+		
+		int result = 0;
+		
+		for(MultipartFile file: files) {
+			FileInfoVO newFile = new FileInfoVO();
+			newFile.setFileDetail(fileDetail);
+			newFile.setCenterCode(centerCode);
+			newFile.setOriginalName(file.getOriginalFilename());
+			String fileSavedName = "centerCode_"+centerCode+"+originalName_"+file.getOriginalFilename();
+			//Path는 나중엔 서버상의 Path로 바꾸기
+			String filePath = "/Users/parkdoyoung/Downloads/ujinTest/";
+			newFile.setFileSavedName(fileSavedName);
+			newFile.setFileType(file.getContentType());
+			newFile.setFilePath(filePath);
+			logger.info(newFile.toString());
+			file.transferTo(new File(filePath+fileSavedName));
+			result += centerService.addCenterImage(newFile);
+		}
+		
+		return result;
 	}
 }

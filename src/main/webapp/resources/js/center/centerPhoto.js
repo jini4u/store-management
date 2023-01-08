@@ -73,9 +73,11 @@ var insertImgBtn = document.getElementById("centermodal-photo-insert");
 var insertForm = document.getElementById("photoinsertform");
 insertImgBtn.addEventListener("click",function(){
 	let insertFormData = new FormData(insertForm);
+	console.log(insertFormData.get("centerImage"));
 	makeRequest(addCenterImage, 'POST', '/addCenterImage', insertFormData);
 });
 
 function addCenterImage(){
-	console.log("good");
+	let response = JSON.parse(httpRequest.responseText);
+	console.log(response);
 }

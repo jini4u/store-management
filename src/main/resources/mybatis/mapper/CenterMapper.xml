@@ -57,4 +57,26 @@ SELECT rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGu
 SELECT COUNT(*) FROM center
 </select>
 
+<insert id="addCenterImage" parameterType="com.mycompany.webapp.common.vo.FileInfoVO">
+<![CDATA[
+INSERT INTO fileinfo (
+	file_no
+	, center_code
+	, file_saved_name
+	, file_original_name
+	, file_type
+	, file_detail
+	, file_path
+	, file_post_date )
+VALUES (
+	(SELECT NVL(MAX(file_no)+1, 1) FROM fileinfo)
+	, #{centerCode}
+	, #{fileSavedName}
+	, #{originalName}
+	, #{fileType}
+	, #{fileDetail}
+	, #{filePath}
+	, SYSDATE )
+]]>
+</insert>
 </mapper>
