@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.center.vo.CenterVO;
+import com.mycompany.webapp.common.vo.Pager;
 import com.mycompany.webapp.manager.dao.IManagerRepository;
 import com.mycompany.webapp.manager.vo.ManagerVO;
 
@@ -15,30 +16,30 @@ public class ManagerService implements IManagerService {
 	@Autowired
 	IManagerRepository managerRepository;
 	
-	/* author 고은별
-	 * 담당자 등록 */
+	/* author 怨좎�蹂�
+	 * �떞�떦�옄 �벑濡� */
 	@Override
 	public int insertManager(ManagerVO mgr) {
 		mgr.setUserCode(managerRepository.selectMaxManagerNo()+1);
 		return managerRepository.insertManager(mgr);
 	}
 	
-	/* author 고은별
-	 * 담당자 목록 조회 */
+	/* author 怨좎�蹂�
+	 * �떞�떦�옄 紐⑸줉 議고쉶 */
 	@Override
-	public List<ManagerVO> selectManagerList() {
-		return managerRepository.selectManagerList();
+	public List<ManagerVO> selectManagerList(Pager pager) {
+		return managerRepository.selectManagerList(pager);
 	}
 	
-	/* author 고은별
-	 * 담당자 정보 상세조회 */
+	/* author 怨좎�蹂�
+	 * �떞�떦�옄 �젙蹂� �긽�꽭議고쉶 */
 	@Override
 	public ManagerVO selectManagerDetail(int userCode) {
 		return managerRepository.selectManagerDetail(userCode);
 	}
 	
-	/* author 고은별
-	 * 담당자 정보 수정 */
+	/* author 怨좎�蹂�
+	 * �떞�떦�옄 �젙蹂� �닔�젙 */
 	@Override
 	public int managerUpdate(ManagerVO mgr) {
 		return managerRepository.updateManagerInfo(mgr);
@@ -47,10 +48,10 @@ public class ManagerService implements IManagerService {
 
 	
 	/**
-	 * @author 임유진
-	 * 담당자의 userCode로 담당하는 센터들의 센터코드,센터명,주소 조회
-	 * @param 담당자 userCode
-	 * @return List<담당CenterVO>
+	 * @author �엫�쑀吏�
+	 * �떞�떦�옄�쓽 userCode濡� �떞�떦�븯�뒗 �꽱�꽣�뱾�쓽 �꽱�꽣肄붾뱶,�꽱�꽣紐�,二쇱냼 議고쉶
+	 * @param �떞�떦�옄 userCode
+	 * @return List<�떞�떦CenterVO>
 	 * */
 	@Override
 	public List<CenterVO> getCenterByManager(int userCode) {
@@ -58,11 +59,11 @@ public class ManagerService implements IManagerService {
 	}
 	
 	/**
-	 * @author 임유진
-	 * 담당자, 센터 맵핑 해제
-	 * @param 담당자 userCode
-	 * @param 선택된 centerCode
-	 * @return 삭제된 행 수
+	 * @author �엫�쑀吏�
+	 * �떞�떦�옄, �꽱�꽣 留듯븨 �빐�젣
+	 * @param �떞�떦�옄 userCode
+	 * @param �꽑�깮�맂 centerCode
+	 * @return �궘�젣�맂 �뻾 �닔
 	 * */
 	@Override
 	public int cancelMapping(int userCode, int centerCode) {
@@ -70,16 +71,40 @@ public class ManagerService implements IManagerService {
 	}
 	
 	/**
-	 * @author 임유진
-	 * 담당자, 센터 맵핑
-	 * @param 담당자 userCode
-	 * @param 선택된 centerCode
-	 * @return 삽입된 행 수
+	 * @author �엫�쑀吏�
+	 * �떞�떦�옄, �꽱�꽣 留듯븨
+	 * @param �떞�떦�옄 userCode
+	 * @param �꽑�깮�맂 centerCode
+	 * @return �궫�엯�맂 �뻾 �닔
 	 * */
 	@Override
 	public int mapping(int userCode, int centerCode) {
 		return managerRepository.mapping(userCode, centerCode);
 	}
+
+/*	@Override
+	public List<ManagerVO> managerList(Pager pager) {
+		return managerRepository.managerList(pager);
+	}*/
+
+	@Override
+	public int countAllMgr() {
+		return managerRepository.countAllMgr();
+	}
+
+	@Override
+	public int selectManagerNumByKeyword(String keyword) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<ManagerVO> searchManagerListByKeyword(String keyword, int page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 
 	
 }

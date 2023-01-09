@@ -95,6 +95,7 @@ public class ScoreController {
      
       return "jsp/score/scoreList";
    }
+   
    /*
     * 정윤선
     * 점수 수정
@@ -104,7 +105,6 @@ public class ScoreController {
       scoreService.saveScore(score);
        return "redirect: /score";
    }
-  
 
    /*
     * 정윤선
@@ -121,15 +121,7 @@ public class ScoreController {
       return "redirect:/score?centerCode=1";
    }
    
-   
-   
-   
-
-   
-   
-   
-   
-   /*
+   /**
     * 임유진
     * DB에 존재하는 그룹코드 전체의 정보를 조회,
     * 코드 관리 화면으로 이동
@@ -139,7 +131,7 @@ public class ScoreController {
       return "jsp/score/code";
    }
    
-   /*
+   /**
     * 임유진
     * 전체 그룹코드들을 조회한다
     * @return List<Map<그룹코드번호, 코드명, 사용여부>>
@@ -149,7 +141,7 @@ public class ScoreController {
       return scoreService.getAllGroupCodes();
    }
    
-   /*
+   /**
     * 임유진
     * 해당 그룹코드의 상세코드들을 조회한다
     * @return List<Map<상세코드번호, 코드명, 사용여부>>
@@ -159,7 +151,7 @@ public class ScoreController {
       return scoreService.getDetailCodes(groupCode);
    }
    
-   /*
+   /**
     * 임유진
     * 상세코드명, 사용여부를 수정한다.
     * @return 수정된 행 갯수
@@ -177,7 +169,7 @@ public class ScoreController {
       return scoreService.updateDetailCode(detailCodeMap);
    }
    
-   /*
+   /**
     * 임유진
     * 그룹코드명, 사용여부를 수정한다.
     * @return group, 수정된 행 갯수
@@ -196,7 +188,7 @@ public class ScoreController {
       return result;
    }
    
-   /*
+   /**
     * 임유진
     * 상세코드 추가
     * @return 입력된 행 갯수
@@ -214,7 +206,7 @@ public class ScoreController {
       return scoreService.insertDetailCode(detailCodeMap);
    }
    
-   /*
+   /**
     * 임유진
     * 그룹코드 추가
     * @return group, 입력된 행 갯수

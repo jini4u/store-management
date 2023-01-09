@@ -3,6 +3,7 @@ package com.mycompany.webapp.center.dao;
 import java.util.List;
 
 import com.mycompany.webapp.center.vo.CenterVO;
+import com.mycompany.webapp.common.vo.FileInfoVO;
 import com.mycompany.webapp.common.vo.Pager;
 
 public interface ICenterRepository {
@@ -17,4 +18,6 @@ public interface ICenterRepository {
 
 	//유진
 	int countAllCenters();
+	int addCenterImage(FileInfoVO file);
+	List<String> getCenterImageNames(int centerCode);
 }
