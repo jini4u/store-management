@@ -76,12 +76,18 @@ public class FileInfoVO {
 	public void setUploadUserCode(int uploadUserCode) {
 		this.uploadUserCode = uploadUserCode;
 	}
+	public String getUploadUserName() {
+		return uploadUserName;
+	}
+	public void setUploadUserName(String uploadUserName) {
+		this.uploadUserName = uploadUserName;
+	}
 	
 	@Override
 	public String toString() {
 		return "FileInfoVO [fileNo=" + fileNo + ", fileSavedName=" + fileSavedName + ", originalName=" + originalName
 				+ ", fileType=" + fileType + ", fileDetail=" + fileDetail + ", filePath=" + filePath + ", filePostDate="
 				+ filePostDate + ", fileModifyDate=" + fileModifyDate + ", centerCode=" + centerCode
-				+ ", uploadUserCode=" + uploadUserCode + "]";
+				+ ", uploadUserCode=" + uploadUserCode + ", uploadUserName=" + uploadUserName + "]";
 	}
 }

@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div id="modal" class="insertModal">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div class="modal insertModal">
 	<div class="modal-content">
 		<div id="center-modal-total">
-			<div id="center-modal-mainbar">
+			<div class="center-modal-mainbar">
 				<p>사진 등록</p>
-				<button id="centermodal-close-btn">✖</button>
+				<button class="centermodal-close-btn">✖</button>
 			</div>
 			<div id="centermodal-insertphoto-info">
 				<form id="photoinsertform">
@@ -38,7 +39,9 @@
 				<tbody>
 				</tbody>
 				</table>
-				<input type="text" name='uploadUserCode' id="uploadUserCode" value="${titleUserCode}"/>
+				<!-- 일단 고정해둠.. 로그인한 사용자걸로 바꾸기 -->
+				<c:set var="titleUserCode" value="10001"/>
+				<input type="text" name='uploadUserCode' id="uploadUserCode" value="<c:out value='${titleUserCode}'/>" />
 				</form>
 				<button type="button" id="centermodal-photo-insert" class="savebtn">등록</button>
 			</div>

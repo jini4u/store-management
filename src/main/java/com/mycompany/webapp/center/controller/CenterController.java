@@ -142,7 +142,7 @@ public class CenterController {
 	
 	@RequestMapping("/getCenterImages/{centerCode}")
 	public @ResponseBody List<FileInfoVO> getCenterImages(@PathVariable int centerCode) {
-		//센터코드에 맞춰서 파일이름만 리턴해주면 됨
+		//센터코드에 맞춰서 파일 리턴해주면 됨
 		return centerService.getCenterImageNames(centerCode);
 	}
 }
