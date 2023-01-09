@@ -24,33 +24,41 @@
 	WHERE check_group_code = #{groupCode}
 </select>
 
+
+
+
+
 <!-- 
-점수조회
+점수조회,해당년도/해당분기 조회
 정윤선
  -->
 <select id="getScoreList"  resultType="com.mycompany.webapp.score.vo.ScoreVO">
-<![CDATA[
-select 
- 	   I.center_code as "centerCode",
-       I.user_code as "userCode",
-       I.check_detail_code as "checkDetailCode",
-       I.check_year as "checkYear",
-       I.check_season as "checkSeason",
-       D.check_group_code as "checkGroupCode",
-       G.check_group_content as "checkGroupContent",
-       D.check_detail_content as "checkDetailContent",
-       I.check_score as "checkScore"
-       
-from check_detail D  left outer join Inspection I
-        on D.check_group_code = I.check_group_code
-        and D.check_detail_code=I.check_detail_code
-        
-        left outer join check_group G
-        on I.check_group_code = G.check_group_code
-where I.center_code=#{centerCode}
-order by I.check_year,I.check_season desc
+	SELECT 
+	 	   I.center_code as "centerCode",
+	       I.user_code as "userCode",
+	       I.check_detail_code as "checkDetailCode",
+	       I.check_year as "checkYear",
+	       I.check_season as "checkSeason",
+	       D.check_group_code as "checkGroupCode",
+	       G.check_group_content as "checkGroupContent",
+	       D.check_detail_content as "checkDetailContent",
+	       I.check_score as "checkScore"
+	FROM check_detail D  
+		LEFT OUTER JOIN Inspection I
+	        ON D.check_group_code = I.check_group_code
+	        AND D.check_detail_code=I.check_detail_code
+	    LEFT OUTER JOIN check_group G
+	        ON I.check_group_code = G.check_group_code
+	WHERE 
+		I.center_code = #{centerCode}
+		<if test="checkYear != null and checkYear != ''">
+			AND I.check_year = #{checkYear}
+		</if>
+		<if test="checkSeason != null and checkSeason != ''">
+		  	AND I.check_Season = #{checkSeason}
+		</if>
+	ORDER BY I.check_year, I.check_season DESC
 
-]]>
 
 </select>
 <!-- 
@@ -83,13 +91,17 @@ WHERE D.check_detail_occupied = 'Y'
  -->
 
 <update id="saveScore" parameterType="com.mycompany.webapp.score.vo.ScoreVO">
-<![CDATA[
+	UPDATE inspection
+	SET	CHECK_SCORE=#{checkScore}
+	WHERE center_code=#{centerCode}
 
-	update inspection
-	set CHECK_SCORE=#{checkScore}
-
-]]>
-
+<!--  수정값이 없어서 발생하는 문제같음
+	  최근 년도만 수정가능하게 해야함 
+	
+	
+	서비스에서 mapper를 실행하는 함수에서 
+	
+ -->
 </update> 
 <!-- 
 
@@ -109,7 +121,7 @@ INSERT INTO INSPECTION(
  	check_detail_code,
  	check_score
  	)
- values(
+VALUES(
  	#{centerCode},
  	#{userCode}, 
  	#{checkYear}, 
@@ -123,9 +135,7 @@ INSERT INTO INSPECTION(
  ]]>
  
  </insert> 
- 
- 
- 
+
  
 
 <!-- 
