@@ -19,7 +19,7 @@
 
 	<div class="year_and_quarter">
 	
-		<form>
+		<form action="/score" name="score" method="get">
 			<select name="year">
 				<option value="none">점검년도</option>
 				<option value="2022">2022</option>
@@ -29,7 +29,7 @@
 			</select>
 		</form>
 
-		<form>
+		<form action="/score" name="score" method="get">
 			<select name="quarter_of_ a_year">
 				<option value="none">분기</option>
 				<option value="4">4 분기</option>
@@ -39,7 +39,7 @@
 			</select>
 		
 		</form>
-	<button>찾기</button>
+	<button id= "searchscore">찾기</button>
 	</div>
 	
 </div>
@@ -138,7 +138,7 @@
         
    
    
-         <button type="submit" class="close-btn">입력</button>
+        <button type="submit" class="close-btn">입력</button>
         <button type="button" class="close-btn">취소</button>
       </form>
    </div>
@@ -173,6 +173,8 @@ $(function() {
    
    openButton.addEventListener("click", openModal);
 
+   
+   
    //모달창 닫기//
     const closeBtn = modal.querySelectorAll(".close-btn");
     $(closeBtn).click(function(){

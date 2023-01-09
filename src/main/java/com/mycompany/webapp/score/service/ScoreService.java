@@ -66,8 +66,8 @@ public class ScoreService implements IScoreService {
 
    //전체 점수 조회
    @Override
-   public List<ScoreVO> getScoreList(int centerCode) {
-      return scoreRepository.getScoreList(centerCode);
+   public List<ScoreVO> getScoreList(ScoreVO scoreVO) {
+      return scoreRepository.getScoreList(scoreVO);
    }
 
 
@@ -102,11 +102,11 @@ public class ScoreService implements IScoreService {
    }
    
    //모달창 점수 항목 출력 리스트
-@Override
-public List<ScoreVO> usingCodeList() {
+   	@Override
+	public List<ScoreVO> usingCodeList() {
 	
 	return scoreRepository.usingCodeList();
-}
+   	}
    
 }
    
