@@ -66,7 +66,7 @@ public class ScoreService implements IScoreService {
 
    //전체 점수 조회
    @Override
-   public List<ScoreVO> getScoreList(ScoreVO scoreVO) {
+   public List<ScoreVO> getScoreList(ScoreVO scoreVO) {	
       return scoreRepository.getScoreList(scoreVO);
    }
 

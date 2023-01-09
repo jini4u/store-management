@@ -32,7 +32,7 @@
 점수조회,해당년도/해당분기 조회
 정윤선
  -->
-<select id="getScoreList"  resultType="com.mycompany.webapp.score.vo.ScoreVO">
+<select id="getScoreList" parameterType="com.mycompany.webapp.score.vo.ScoreVO" resultType="com.mycompany.webapp.score.vo.ScoreVO">
 	SELECT 
 	 	   I.center_code as "centerCode",
 	       I.user_code as "userCode",

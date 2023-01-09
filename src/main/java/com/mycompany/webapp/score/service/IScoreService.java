@@ -23,4 +23,5 @@ public interface IScoreService {
 	List<ScoreVO> usingCodeList();
 	int deleteScore(ScoreVO score);
 	int saveScore(ScoreVO score);
+
 }
