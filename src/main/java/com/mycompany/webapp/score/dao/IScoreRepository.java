@@ -6,6 +6,9 @@ import java.util.List;
 import com.mycompany.webapp.score.vo.ScoreVO;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
+
+
 /**
  * 점수 관리
  * ScoreMapper.xml과 매핑되어있음
