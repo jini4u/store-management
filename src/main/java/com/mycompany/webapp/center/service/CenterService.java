@@ -35,6 +35,23 @@ public class CenterService implements ICenterService{
 	public int countAllCenters() {
 		return centerRepository.countAllCenters();
 	}
+
+	@Override
+	public List<CenterVO> centerList() {
+		// TODO Auto-generated method stub
+		return centerRepository.centerList();
+	}
+
+	@Override
+	public List<CenterVO> centerUpdate(CenterVO centerVO) {
+		return centerRepository.centerUpdate(centerVO);
+	}
+
+	//센터운영상태
+	@Override
+	public String centerCondition(CenterVO centerVO) {
+		return centerRepository.centerCondition(centerVO);
+	}
 	
 	@Override
 	public int addCenterImage(FileInfoVO file) {
@@ -44,5 +61,6 @@ public class CenterService implements ICenterService{
 	@Override
 	public List<FileInfoVO> getCenterImageNames(int centerCode) {
 		return centerRepository.getCenterImageNames(centerCode);
+
 	}
 }

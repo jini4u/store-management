@@ -38,11 +38,11 @@ import com.mycompany.webapp.score.vo.ScoreVO;
  * @ClassName : ScoreController
  * @Description : 점수, 코드 관리 기능 구현 Controller
  * @Modification 
- * @    수정일            	수정자                 	  	수정내용
+ * @    수정일               수정자                         수정내용
  * @ ===========  =========  =====================
- * @	1/3			임유진		updateDetailCode, updateGroupCode 작성
- * @				정윤선		saveScoreCode,
- * @	1/4			정윤선		insertCode작성, scoreList수정
+ * @   1/3         임유진      updateDetailCode, updateGroupCode 작성
+ * @            정윤선      saveScoreCode,
+ * @   1/4         정윤선      insertCode작성, scoreList수정
  * @author 임유진, 정윤선
  * **/
 @Controller
@@ -66,13 +66,13 @@ public class ScoreController {
     *정윤선
     * DB에 존재하는 값중에 점검년도,분기,항목,상세항목,점수 전체의 정보를 조회
     * */
-   
-   @RequestMapping("/score")
-   public String centerscoreinquiry(int centerCode, Model model) {
-      List<ScoreVO> scoreList = scoreService.getScoreList(centerCode);
-      model.addAttribute("scoreList",scoreService.getScoreList(centerCode));
+ 
+   @RequestMapping(value="/score", method = RequestMethod.GET)
+   public String centerscoreinquiry(ScoreVO scoreVO, Model model) {
+      List<ScoreVO> scoreList = scoreService.getScoreList(scoreVO);
+      model.addAttribute("scoreList",scoreService.getScoreList(scoreVO));
       
-      model.addAttribute("centerCode", centerCode);
+      model.addAttribute("centerCode", scoreVO);
       model.addAttribute("userCode", scoreList.get(0).getUserCode());
       model.addAttribute("userCode", scoreList.get(0).getUserCode());
 

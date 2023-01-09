@@ -14,14 +14,25 @@ public interface ICenterService {
 	public int insertCenter(CenterVO centerVO);
 	//센터조회
 	public List<CenterVO> centerList(Pager pager);
+	
+	//테스트용
+	public List<CenterVO>centerList();
 
 	//유진
 	//전체 센터 수 조회
 	int countAllCenters();
 	
+
+	//센터운영여부
+	public String centerCondition(CenterVO centerVO);
+	
+	//센터수정
+	public List<CenterVO> centerUpdate(CenterVO centerVO);
+
 	//센터 사진 등록
 	int addCenterImage(FileInfoVO file);
-	
+
 	//센터 사진 조회
 	List<FileInfoVO> getCenterImageNames(int centerCode);
+
 }
