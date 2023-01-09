@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.tomcat.util.json.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -184,5 +187,12 @@ public class CenterController {
 		}
 		
 		return centerService.updateImage(file);
+	}
+	
+	@RequestMapping(value="/deleteImage", method=RequestMethod.POST)
+	public @ResponseBody int deleteImage(String request) {
+
+		return 1;
+//		return centerService.deleteImage(fileNoList);
 	}
 }

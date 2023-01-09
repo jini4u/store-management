@@ -15,6 +15,10 @@ setTrEvent();
 
 //수정 모달 선택자
 var updateModal = document.querySelector(".updateModal");
+//삭제 모달 선택자
+var deleteModal = document.querySelector(".deleteModal");
+//삭제 모달 테이블 바디 선택자
+var deleteModalBody = document.getElementById("image-delete-table").tBodies[0];
 
 //센터 목록 테이블 클릭시 실행되는 함수
 function appearTable(e) {
@@ -175,10 +179,13 @@ function getCenterImages(){
 	
 	//사진 정보 기록 테이블 초기화
 	imgHistoryTable.tBodies[0].innerHTML = '';
+	//삭제 모달 테이블 초기화
+	deleteModalBody.innerHTML = '';
 	//응답 받은 사진 수만큼 반복
 	for(var i=0;i<result.length;i++){
 		//파일 이름, 등록자, 등록일, 수정일 넣어주기
 		imgHistoryTable.tBodies[0].innerHTML += '<tr><td>'+result[i].originalName+'</td><td>'+result[i].uploadUserName+"</td><td>"+result[i].filePostDate+"</td><td>"+result[i].fileModifyDate+"</td></tr>";
+		deleteModalBody.innerHTML += '<tr><td><input type="checkbox" name="deleteCheck" value="'+result[i].fileNo+'"></td><td>'+result[i].originalName+'</td></tr>';
 	}
 	
 	
@@ -252,15 +259,36 @@ function addCenterImage(){
 //수정 모달 내부 수정 버튼
 var updateBtn = document.getElementById("updatebutton");
 
+//수정 버튼 클릭 이벤트
 updateBtn.addEventListener("click", function(){
 	var imgUpdateForm = document.getElementById("imageUpdateForm");
 	var imgUpdateFormData = new FormData(imgUpdateForm);
 	imgUpdateFormData.append("centerCode", centerNameArr[4].innerText);
 	makeRequest(afterUpdateImg, 'POST', '/updateImage', imgUpdateFormData);
-	
 });
 
+//수정 요청 후 실행되는 함수
 function afterUpdateImg(){
 	updateModal.style.display ="none";
 	makeRequest(getCenterImages,'GET','/getCenterImages/'+centerNameArr[4].innerText);
+}
+
+//삭제 모달 내부 삭제 버튼 선택자
+var deleteBtn = document.getElementById("deletebutton");
+
+deleteBtn.addEventListener("click", function(){
+	let checkbox = document.getElementsByName("deleteCheck");
+	let checked = [];
+	for(var i=0;i<checkbox.length;i++){
+		if(checkbox[i].checked){
+			checked.push(checkbox[i].value);
+		}
+	}
+	
+	console.log(JSON.stringify(checked));
+	makeRequest(afterDeleteImg, 'POST', '/deleteImage', JSON.stringify(checked));
+});
+
+function afterDeleteImg(){
+	deleteModal.style.display = "none";
 }

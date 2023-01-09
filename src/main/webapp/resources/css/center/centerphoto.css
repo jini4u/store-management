@@ -200,3 +200,7 @@ tbody {
 #uploadUserCode,.hidden-file-no {
 	display: none;
 }
+
+#deletecheck {
+	width: 20px;
+}

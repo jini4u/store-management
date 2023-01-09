@@ -132,4 +132,9 @@ SET file_original_name = #{originalName}
 WHERE file_no = #{fileNo}
 ]]>
 </update>
+
+<delete id="deleteImage" parameterType="int">
+DELETE FROM fileinfo
+WHERE file_no = #{fileNo}
+</delete>
 </mapper>

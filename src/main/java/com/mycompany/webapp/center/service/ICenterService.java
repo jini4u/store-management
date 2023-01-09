@@ -36,4 +36,6 @@ public interface ICenterService {
 
 	//센터 사진 정보 수정(originalName, fileDetail)
 	int updateImage(FileInfoVO file);
+	
+	int deleteImage(List<Integer> fileNoList);
 }
