@@ -54,7 +54,7 @@ thead th, tbody th {
 	margin-top: 3%;
 }
 
-#photo-img {
+.photo-img {
 	width: 500px;
 	height: 450px;
 }
@@ -76,7 +76,15 @@ thead {
 
 tbody {
 	/*display: block;*/
-	height: 190px;
+	/*height: 190px;*/
+}
+
+#centertable tr:hover {
+	background: #EDEDED;
+}
+
+.selectedtr {
+	background: #D8D9CF;
 }
 
 #photo-main-size {
@@ -128,14 +136,16 @@ tbody {
 	margin: 0;
 }
 
-#modal button {
+.savebtn {
 	display: inline-block;
+	margin: 10px;
 }
 
 #modal p {
 	display: inline-block;
 	float: left;
 	color: #fff;
+	padding: 6px;
 }
 
 .modal-content {
@@ -157,4 +167,34 @@ tbody {
 
 #center-modal-mainbar {
 	background-color: #E26868;
+	display: flex;
+    justify-content: space-between;
+    height: 35px;
+}
+
+#centermodal-insert {
+	margin: 10px;
+}
+
+#center-search-bar {
+	margin: 30px;
+	text-align: center;
+}
+
+#centermodal-photo-list {
+	margin: 10px;
+}
+
+#centermodal-originalphoto-info {
+	width: 100%;
+}
+
+#centermodal-close-btn {
+	margin: 0;
+	height: 100%;
+	width: 35px;
+}
+
+.centercode {
+	display: none;
 }

@@ -10,6 +10,8 @@
 <meta charset="UTF-8">
 <title>sitemesh main</title>
 </head>
+<!-- 공통함수 부분 -->
+<script src="resources/js/common.js"></script>
 <body class="totalbox"> 
 	<div>
 		<div class="header">

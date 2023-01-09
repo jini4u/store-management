@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.center.dao.ICenterRepository;
 import com.mycompany.webapp.center.vo.CenterVO;
+import com.mycompany.webapp.common.vo.FileInfoVO;
 import com.mycompany.webapp.common.vo.Pager;
 
 @Service
@@ -29,6 +30,7 @@ public class CenterService implements ICenterService{
 		return centerRepository.centerList(pager);
 	}
 		
+	//유진
 	@Override
 	public int countAllCenters() {
 		return centerRepository.countAllCenters();
@@ -49,5 +51,16 @@ public class CenterService implements ICenterService{
 	@Override
 	public String centerCondition(CenterVO centerVO) {
 		return centerRepository.centerCondition(centerVO);
+	}
+	
+	@Override
+	public int addCenterImage(FileInfoVO file) {
+		return centerRepository.addCenterImage(file);
+	}
+	
+	@Override
+	public List<String> getCenterImageNames(int centerCode) {
+		return centerRepository.getCenterImageNames(centerCode);
+
 	}
 }

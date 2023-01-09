@@ -8,6 +8,11 @@ import java.util.Map;
 
 
 
+/**
+ * 점수 관리
+ * ScoreMapper.xml과 매핑되어있음
+ * 
+ * */
 public interface IScoreRepository {
 	//유진
 	List<Map<String, String>> getAllGroupCodes();

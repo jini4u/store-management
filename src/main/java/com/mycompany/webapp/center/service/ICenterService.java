@@ -3,6 +3,7 @@ package com.mycompany.webapp.center.service;
 import java.util.List;
 
 import com.mycompany.webapp.center.vo.CenterVO;
+import com.mycompany.webapp.common.vo.FileInfoVO;
 import com.mycompany.webapp.common.vo.Pager;
 
 public interface ICenterService {
@@ -17,11 +18,21 @@ public interface ICenterService {
 	//테스트용
 	public List<CenterVO>centerList();
 
+	//유진
+	//전체 센터 수 조회
 	int countAllCenters();
 	
+
 	//센터운영여부
 	public String centerCondition(CenterVO centerVO);
 	
 	//센터수정
 	public List<CenterVO> centerUpdate(CenterVO centerVO);
+
+	//센터 사진 등록
+	int addCenterImage(FileInfoVO file);
+	
+	//센터 사진 이름 조회
+	List<String> getCenterImageNames(int centerCode);
+
 }

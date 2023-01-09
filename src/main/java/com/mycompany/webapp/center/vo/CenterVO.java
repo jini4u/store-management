@@ -90,12 +90,20 @@ public class CenterVO {
 	public void setCenterCondition(String centerCondition) throws Exception {
 		if(centerCondition.equals("notyet")) {
 			centerCondition = "오픈예정";
+		} else if(centerCondition.substring(0, 1).equals("o")){		
+			if(Integer.parseInt(centerCondition.substring(1)) > 0) {
+				centerCondition = "오픈예정";
+			} else {
+				centerCondition = "영업중";
+			}
 		} else if(centerCondition.equals("closed")) {
-			centerCondition = "폐점";
-		} else if(Integer.parseInt(centerCondition) <= 0) {
-			centerCondition = "영업중";
-		} else {
-			centerCondition = "오픈예정";
+				centerCondition = "폐점";
+		} else if(centerCondition.substring(0, 1).equals("c")) {
+			if(Integer.parseInt(centerCondition.substring(1)) > 0) {
+				centerCondition = "폐점";
+			} else {
+				centerCondition = "영업중";
+			}
 		}
 		this.centerCondition = centerCondition;
 	}

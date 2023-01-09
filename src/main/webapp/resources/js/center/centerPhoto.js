@@ -1,12 +1,45 @@
-const mainTable = document.querySelector(".click");
-mainTable.onclick = disappearTable;
-function disappearTable() {
+var centerBody = document.getElementById("centertable").tBodies[0];
+var centerNameArr;
+
+function setTrEvent(){
+	for(var i=0;i<centerBody.children.length-1;i++){
+		centerBody.children[i].addEventListener("click", appearTable);	
+	}
+}
+
+setTrEvent();
+
+function appearTable(e) {
+	for(var i=0;i<centerBody.children.length-1;i++){
+		if(centerBody.children[i].classList.contains("selectedtr")){
+			centerBody.children[i].classList.remove("selectedtr");
+		}
+	}
+	e.target.parentElement.classList.add("selectedtr");
 	const searchTable = document.querySelector(".search");
 	const searchImg = document.querySelector("#photo-right-frame");
 	searchTable.style.display = "block";
 	searchImg.style.display = "block";	
+	let insertModalCenterName = document.getElementById("targetCenterName");
+	centerNameArr = document.querySelector(".selectedtr").children;
+	let centerCode = document.querySelector("input[name='centerCode']");
+	centerCode.setAttribute("value", centerNameArr[4].innerText); 
+	insertModalCenterName.innerText = centerNameArr[0].innerText;
+	
+	makeRequest(getCenterImages,'GET','/getCenterImages/'+centerNameArr[4].innerText);
 };
 
+var imgDiv = document.getElementById("centerImagesDiv");
+
+function getCenterImages(){
+	//리턴받은 사진이름들로 이미지 만들어주기
+	let result = JSON.parse(httpRequest.responseText);
+	//imgDiv.innerHTML = ''
+	for(var i=0;i<result.length;i++){
+		// element 를 만들어서 넣기
+		imgDiv.innerText = "&lt;img src='localhost:8080/"+result[i]+"' class='photo-img'/&gt;";
+	}
+}
 
 //세 버튼을 선택할수있도록 -> 리스트로 반환됨 -> foreach?로 반복하면서 click Event 달아주기
 //-> click 했을때 12~14라인 작동하도록 (그럼 아마도 12~14라인을 함수로 묶어놔야겠찌?)
@@ -34,3 +67,30 @@ buttonClick.forEach(function (element) {
 });
 
 
+var fileSelect = document.querySelector("input[name='centerImage']");
+
+var insertImgTable = document.getElementById("centermodal-originalphoto-info");
+var insertImgTbody = insertImgTable.tBodies[0];
+
+fileSelect.addEventListener("change", handleFiles);
+
+function handleFiles(){
+	fileList = this.files;
+	insertImgTbody.innerHTML = '';
+	for(var i=0;i<fileList.length;i++){
+		insertImgTbody.innerHTML += "<tr><td>"+(i+1)+"</td><td>"+fileList[i].name+"</td></tr>";
+	}
+}
+
+var insertImgBtn = document.getElementById("centermodal-photo-insert");
+var insertForm = document.getElementById("photoinsertform");
+insertImgBtn.addEventListener("click",function(){
+	let insertFormData = new FormData(insertForm);
+	makeRequest(addCenterImage, 'POST', '/addCenterImage', insertFormData);
+});
+
+function addCenterImage(){
+	let response = JSON.parse(httpRequest.responseText);
+	console.log(response+"개 저장됨");
+	modalOpen.style.display ="none";
+}
