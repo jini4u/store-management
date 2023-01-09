@@ -13,6 +13,15 @@ public interface ICenterService {
 	public int insertCenter(CenterVO centerVO);
 	//센터조회
 	public List<CenterVO> centerList(Pager pager);
+	
+	//테스트용
+	public List<CenterVO>centerList();
 
 	int countAllCenters();
+	
+	//센터운영여부
+	public String centerCondition(CenterVO centerVO);
+	
+	//센터수정
+	public List<CenterVO> centerUpdate(CenterVO centerVO);
 }

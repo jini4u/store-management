@@ -16,20 +16,25 @@
 			<th>운영 여부</th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody id="centerList">
 	<!--varStatus는 forEach문에서의 인덱스 -->
+<!-- 	왼쪽박스 리스트 -->
 		<c:forEach var="centerList" items="${centerList}" varStatus="status">
-			<tr class="centerListTr">
+			<tr class="centerListTr" onclick="CallcenterList()">
 				<td>${centerList.centerCode}</td>
 				<td>${centerList.centerName}</td>
 				<td>${centerList.centerTel}</td>
 				<td>${centerList.centerAddress}</td>
 				<td>${fn:substring(centerList.centerOpeningDate,0,10)}</td>
+				<td>${centerList.centerCondition}</td>
 				
-				<td>${centerConList[status.index]}</td>				
+				<td style=display:none>${centerList.centerGuide}</td>
+				<td style=display:none>${fn:substring(centerList.centerClosingDate,0,10)}</td>
 				
-				<td style="display:none">${centerList.centerGuide}</td>
-				<td style="display:none">${fn:substring(centerList.centerClosingDate,0,10)}</td>
+					
+				
+<%-- 				<td style="display:none">${centerList.centerGuide}</td> --%>
+<%-- 				<td style="display:none">${fn:substring(centerList.centerClosingDate,0,10)}</td> --%>
 				
 			</tr>
 		</c:forEach>
@@ -48,7 +53,7 @@
 				<td><input type="text" name="centerTel" id="centerTel" class="removeDisabled" disabled="disabled"></td>
 				<th>운영여부</th>
 				<td>
-						<input type="text" id="centerCondition" class="removeDisabled" disabled="disabled">
+						<input type="text" id="centerCondition" class="removeDisabled" disabled="disabled" readonly="readonly">
 				</td>
 			</tr> 
 			<tr>

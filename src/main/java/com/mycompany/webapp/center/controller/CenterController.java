@@ -1,11 +1,6 @@
 package com.mycompany.webapp.center.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 
@@ -60,59 +55,35 @@ public class CenterController {
 	public List<CenterVO>  insertCenter(@RequestParam(defaultValue="1") int pageNo, CenterVO centerVO) {
 		centerVO.setCenterCode(centerService.insertCenterCode()+1);
 		centerService.insertCenter(centerVO);
-		int totalRows = centerService.countAllCenters();
-		Pager pager = new Pager(10, 10, totalRows, pageNo);
-		List<CenterVO> list = centerService.centerList(pager);
+//		int totalRows = centerService.countAllCenters();
+//		Pager pager = new Pager(10, 10, totalRows, pageNo);
+//		List<CenterVO> list = centerService.centerList(pager);
+		List<CenterVO> list = centerService.centerList();
 		return list;
 	}
 
-	/* 여기 수정해주세용~~
 	@GetMapping(value="/centerList")
-	public String centerList(Model model) throws Exception {
-
-		//calendar 객체를 생성하여 현재 날짜와 시간정보를 가져옵니다
-		Calendar calendar = Calendar.getInstance();
-		//원하는 date형식을 지정
-		SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD");
-//		Date nowToday = Calendar.getInstance().getTime();
-		//가져온 정보를 format 후 string 으로 저장
-		String now = format.format(calendar.getTime()).replaceAll("-", "");
-		int nowToday = Integer.parseInt(now);
-		
-		model.addAttribute("centerCode", centerService.insertCenterCode()+1);
-		model.addAttribute("centerList" ,centerService.centerList());
-		List<CenterVO> centerList = centerService.centerList();
-		String con = "";
-		//현재 날짜 구하기
-		//센터 상태 정보 , 센터리스트 만큼 돌려야 함
-		List<String>conList = new ArrayList<String>();
-
-		for(int i=0; i<centerList.size(); i++) {
-			String open = centerList.get(i).getCenterOpeningDate().replaceAll("-","");
-			String close = centerList.get(i).getCenterClosingDate().replaceAll("-","");
-//			Date openDate = format.parse(open);
-//			Date closeDate = format.parse(close);
-			
-			
-			int openInteger = Integer.parseInt(open);
-			int closeInteger = Integer.parseInt(close);
-			
-//			int openCenter = openInteger.compareTo(nowToday); //오픈예정 1
-//			int expectedCenter = closeInteger.compareTo(nowToday); // 오픈중 -1
-//			int closeCenter = close.compareTo(nowToday); //폐점 1
-			
-			if (openInteger > nowToday) {
-				con = "N";
-			}if (openInteger <= nowToday) {
-				con = "Y";
-			}if ( closeInteger > 00000000 && closeInteger < nowToday && openInteger < nowToday) {
-				con = "N";
-			}
-			conList.add(con);
-		}
-		model.addAttribute("centerConList", conList);
+	public String centerList(Model model, CenterVO centerVO){
+		model.addAttribute("newCenterCode", centerService.insertCenterCode()+1);
+		model.addAttribute("centerList", centerService.centerList());
 		return "jsp/center/centerlist";
-	}*/
+	}
+	
+	@ResponseBody
+	@PostMapping(value ="/centerUpdate")
+	public List<CenterVO> centerUpdate(CenterVO centerVO) throws Exception{
+		centerService.centerUpdate(centerVO);
+		List<CenterVO> centerList = centerService.centerList();
+		return centerList;
+	}
+
+	@ResponseBody
+	@PostMapping(value ="/centerCondition")
+	public String centerCondition(CenterVO centerVO) {
+		String centerCondition = centerService.centerCondition(centerVO);
+		System.out.println(centerCondition);
+		return centerCondition;
+	}
 
 	/**
 	 * @author 임유진

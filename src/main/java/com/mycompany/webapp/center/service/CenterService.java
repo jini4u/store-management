@@ -33,4 +33,21 @@ public class CenterService implements ICenterService{
 	public int countAllCenters() {
 		return centerRepository.countAllCenters();
 	}
+
+	@Override
+	public List<CenterVO> centerList() {
+		// TODO Auto-generated method stub
+		return centerRepository.centerList();
+	}
+
+	@Override
+	public List<CenterVO> centerUpdate(CenterVO centerVO) {
+		return centerRepository.centerUpdate(centerVO);
+	}
+
+	//센터운영상태
+	@Override
+	public String centerCondition(CenterVO centerVO) {
+		return centerRepository.centerCondition(centerVO);
+	}
 }
