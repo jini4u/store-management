@@ -18,7 +18,6 @@ public interface ICenterService {
 	//유진
 	//전체 센터 수 조회
 	int countAllCenters();
-	
 	//센터운영여부
 	public String centerCondition(CenterVO centerVO);
 	
@@ -27,10 +26,15 @@ public interface ICenterService {
 
 	//센터 사진 등록
 	int addCenterImage(FileInfoVO file);
-	
-	//센터 사진 이름 조회
-	List<String> getCenterImageNames(int centerCode);
 
 	//센터 검색
 	public List<CenterVO> findCenter(Pager pager, CenterVO centerVO);
+
+	//센터 사진 조회
+	List<FileInfoVO> getCenterImageNames(int centerCode);
+
+	//센터 사진 정보 수정(originalName, fileDetail)
+	int updateImage(FileInfoVO file);
+	
+	int deleteImage(List<Integer> fileNoList);
 }

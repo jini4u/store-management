@@ -58,42 +58,16 @@
 			</table>
 		</div>
 		<div id="center-photo-second">
-			<table class="table search verticalTable" name="search-centerList">
+			<table class="table search verticalTable" id="imageHistory">
 				<thead>
 					<tr>
 						<th>사진 이름</th>
-						<th>센터명</th>
 						<th>사진 등록자</th>
 						<th>등록일</th>
 						<th>수정일</th>
-						<th>경로</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>(서울남부)강남센터1.jpg</td>
-						<td>강남센터</td>
-						<td>심수혜</td>
-						<td>2000.10.15</td>
-						<td>2000.10.18</td>
-						<td>C:\KCC정보통신</td>
-					</tr>
-					<tr>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-					</tr>
-					<tr>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-						<td>/</td>
-					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -109,7 +83,7 @@
 				<img src="resources/images/center/left-arrow.png" class="arrow">
 				<div id="centerImagesDiv">
 				<!-- 센터별 사진들 들어가야함. value에서 /image/사진이름. /image는 resources.xml에서 맵핑해둠 -->
-				<img src="<spring:url value='/image/centerCode_6+originalName_IMG_0352.jpeg'/>" class="photo-img">
+				<img src="" class="photo-img">
 				</div>
 				<img src="resources/images/center/right-arrow.png" class="arrow">
 			</div>

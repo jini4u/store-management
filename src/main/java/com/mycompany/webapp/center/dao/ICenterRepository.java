@@ -24,11 +24,14 @@ public interface ICenterRepository {
 	//센터운영상태
 	public String centerCondition(CenterVO centerVO);
 	
+	//센터 검색
+	public List<CenterVO> findCenter(@Param("pager")Pager pager, @Param("centerVO")CenterVO centerVO);
+	
 	//유진
 	int countAllCenters();
 	int addCenterImage(FileInfoVO file);
-	List<String> getCenterImageNames(int centerCode);
 	
-	//센터 검색
-	public List<CenterVO> findCenter(@Param("pager")Pager pager, @Param("centerVO")CenterVO centerVO);
+	List<FileInfoVO> getCenterImageNames(int centerCode);
+	int updateImage(FileInfoVO file);
+	int deleteImage(int fileNo);
 }
