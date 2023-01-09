@@ -8,7 +8,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -190,9 +193,11 @@ public class CenterController {
 	}
 	
 	@RequestMapping(value="/deleteImage", method=RequestMethod.POST)
-	public @ResponseBody int deleteImage(String request) {
-
-		return 1;
-//		return centerService.deleteImage(fileNoList);
+	public @ResponseBody int deleteImage(@RequestBody String request) {
+		List<Integer> fileNoList = new ArrayList<Integer>();
+		for(String fileNo:request.split(",")) {
+			fileNoList.add(Integer.parseInt(fileNo));
+		}
+		return centerService.deleteImage(fileNoList);
 	}
 }
