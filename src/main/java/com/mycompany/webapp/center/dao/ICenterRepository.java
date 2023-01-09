@@ -28,5 +28,5 @@ public interface ICenterRepository {
 	//유진
 	int countAllCenters();
 	int addCenterImage(FileInfoVO file);
-	List<String> getCenterImageNames(int centerCode);
+	List<FileInfoVO> getCenterImageNames(int centerCode);
 }

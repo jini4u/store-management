@@ -59,7 +59,7 @@ public class CenterService implements ICenterService{
 	}
 	
 	@Override
-	public List<String> getCenterImageNames(int centerCode) {
+	public List<FileInfoVO> getCenterImageNames(int centerCode) {
 		return centerRepository.getCenterImageNames(centerCode);
 
 	}

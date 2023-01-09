@@ -4,7 +4,7 @@
 	table-layout: fixed;
 	border-collapse: collapse;
 	/*border: 0;*/
-	width: 699px;
+	width: 600px;
 }
 
 tr, th, td {
@@ -93,7 +93,6 @@ tbody {
 }
 
 .search {
-	width: 699px;
 	display: none;
 }
 
@@ -196,5 +195,9 @@ tbody {
 }
 
 .centercode {
+	display: none;
+}
+
+#uploadUserCode {
 	display: none;
 }
