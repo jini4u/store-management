@@ -9,25 +9,21 @@ import com.mycompany.webapp.common.vo.Pager;
 public interface ICenterService {
 	
 	//센터코드+1
-	public int insertCenterCode();
+	public int getLastCenterCode();
 	//센터등록
 	public int insertCenter(CenterVO centerVO);
 	//센터조회
 	public List<CenterVO> centerList(Pager pager);
-	
-	//테스트용
-	public List<CenterVO>centerList();
 
 	//유진
 	//전체 센터 수 조회
 	int countAllCenters();
 	
-
 	//센터운영여부
 	public String centerCondition(CenterVO centerVO);
 	
 	//센터수정
-	public List<CenterVO> centerUpdate(CenterVO centerVO);
+	public int centerUpdate(CenterVO centerVO);
 
 	//센터 사진 등록
 	int addCenterImage(FileInfoVO file);
@@ -35,4 +31,6 @@ public interface ICenterService {
 	//센터 사진 이름 조회
 	List<String> getCenterImageNames(int centerCode);
 
+	//센터 검색
+	public List<CenterVO> findCenter(Pager pager, CenterVO centerVO);
 }

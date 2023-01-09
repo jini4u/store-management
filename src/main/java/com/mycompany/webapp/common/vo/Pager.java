@@ -10,7 +10,7 @@ public class Pager {
 	private int startPageNo;	//그룹의 시작 페이지 번호
 	private int endPageNo;		//그룹의 끝 페이지 번호
 	private int pageNo;			//현재 페이지 번호
-	private int pagesPerGroup;	//그룹당 페이지 수
+	private int pagesPerGroup;	//그룹당 페이지 수 -> 처음 1,2,3,4,5 다음 = pagePerGroup : 1
 	private int groupNo;		//현재 그룹 번호
 	private int rowsPerPage;	//페이지당 행 수 
 	private int startRowNo;		//페이지의 시작 행 번호(1, ..., n)
@@ -29,6 +29,7 @@ public class Pager {
 		
 		totalGroupNo = totalPageNo / pagesPerGroup;
 		if(totalPageNo % pagesPerGroup != 0) totalGroupNo++;
+		
 		
 		groupNo = (pageNo - 1) / pagesPerGroup + 1;
 		

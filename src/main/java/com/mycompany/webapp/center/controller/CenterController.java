@@ -52,45 +52,54 @@ public class CenterController {
 		model.addAttribute("pager", pager);
 		return "jsp/center/centerphoto";
 	}
-	//url은 value에 적혀있는 값으로 동작하고, centerlist.jsp 페이지를 로딩해준다?
+	/*//url은 value에 적혀있는 값으로 동작하고, centerlist.jsp 페이지를 로딩해준다?
 	@GetMapping(value="/centerInsert")
 	public String insertCenter(Model model) {
 		return "jsp/center/centerlist";
-	}
+	}*/
 	//물어보기
 	@ResponseBody
 	@PostMapping(value="/centerInsert")
-	public List<CenterVO>  insertCenter(@RequestParam(defaultValue="1") int pageNo, CenterVO centerVO) {
-		centerVO.setCenterCode(centerService.insertCenterCode()+1);
+	public List<CenterVO> insertCenter(@RequestParam(defaultValue="1") int pageNo, CenterVO centerVO) {
+		centerVO.setCenterCode(centerService.getLastCenterCode());
 		centerService.insertCenter(centerVO);
-//		int totalRows = centerService.countAllCenters();
-//		Pager pager = new Pager(10, 10, totalRows, pageNo);
-//		List<CenterVO> list = centerService.centerList(pager);
-		List<CenterVO> list = centerService.centerList();
+		int totalRows = centerService.countAllCenters();
+		Pager pager = new Pager(10, 10, totalRows, pageNo);
+		List<CenterVO> list = centerService.centerList(pager);
 		return list;
 	}
 
 	@GetMapping(value="/centerList")
-	public String centerList(Model model, CenterVO centerVO){
-		model.addAttribute("newCenterCode", centerService.insertCenterCode()+1);
-		model.addAttribute("centerList", centerService.centerList());
+	public String centerList(@RequestParam(defaultValue="1")int pageNo, Model model, CenterVO centerVO){
+		int totalRows = centerService.countAllCenters();
+		Pager pager = new Pager(10, 10, totalRows, pageNo);
+		model.addAttribute("newCenterCode", centerService.getLastCenterCode()+1);
+		model.addAttribute("centerList", centerService.centerList(pager));
+		model.addAttribute("pager", pager);
 		return "jsp/center/centerlist";
 	}
 	
 	@ResponseBody
 	@PostMapping(value ="/centerUpdate")
-	public List<CenterVO> centerUpdate(CenterVO centerVO) throws Exception{
+	public List<CenterVO> centerUpdate(@RequestParam(defaultValue="1")int pageNo, Model model, CenterVO centerVO){
+		int totalRows = centerService.countAllCenters();
+		Pager pager = new Pager(10, 10, totalRows, pageNo);
+		model.addAttribute("centerList", centerService.centerList(pager));
 		centerService.centerUpdate(centerVO);
-		List<CenterVO> centerList = centerService.centerList();
+		List<CenterVO> centerList = centerService.centerList(pager);
+		System.out.println(centerList);
 		return centerList;
 	}
-
 	@ResponseBody
-	@PostMapping(value ="/centerCondition")
-	public String centerCondition(CenterVO centerVO) {
-		String centerCondition = centerService.centerCondition(centerVO);
-		System.out.println(centerCondition);
-		return centerCondition;
+	@PostMapping(value ="/findCenter")
+	public List<CenterVO> findCenter(@RequestParam(defaultValue="1")int pageNo, CenterVO centerVO, Model model) {
+		int totalRows = centerService.countAllCenters();
+		Pager pager = new Pager(10, 10, totalRows, pageNo);
+		model.addAttribute("pager", pager);
+		centerVO.setCenterName(centerVO.getCenterName());
+		System.out.println(centerVO.getCenterName());
+		List<CenterVO> centerList = centerService.findCenter(pager,centerVO);
+		return centerList;
 	}
 
 	/**

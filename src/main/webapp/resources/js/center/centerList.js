@@ -11,64 +11,41 @@ let getToday = function() {
 	return new Date(year+"-"+month+"-"+day);
 }
 
-//$("#centerOpeningDate").change(function() {
-//let centerOpeningDate = new Date(document.querySelector("#centerOpeningDate").value);
-//let centerClosingDate = document.querySelector("#centerClosingDate");
-//centerClosingDate.value = '';
-//if (centerOpeningDate !== '') {
-//centerClosingDate.readOnly = false;
-//} else {
-//centerClosingDate.readOnly = true;
-//}
-//if (centerOpeningDate < getToday()) {
-//centerCondition.value = "o";
-//}
-//if (centerOpeningDate > getToday())  {
-//centerCondition.value = "notyet";
-//}
-//$("#centerClosingDate").change(function() {
-//let centerCondition = document.querySelector("#centerCondition");
-//let centerClosingDate = new Date(document.querySelector("#centerClosingDate").value);
-//if ((centerOpeningDate !=='') && (centerClosingDate !== '')) {
-//if (centerOpeningDate <= centerClosingDate && centerClosingDate <= getToday() ) {
-//centerCondition.value = "c";
-//}else if (centerOpeningDate < centerClosingDate && (centerClosingDate > getToday())) {
-//centerCondition.value = "notyet";
-//}
-//}
-//if (centerOpeningDate.value > centerClosingDate.value) {
-//centerClosingDate.value = '';
-//centerCondition.value='';
-//}
-//});
-
-//});
-
 $("#centerOpeningDate").change(function() {
-	centerClosingDate.readOnly = false;
-	$("#centerClosingDate").change(function() {
-		let centercode = $("centerCode").val();
-
-		$.ajax({
-			url : "/centerCondition",
-			type : "post",
-			data : {
-				centerCode : centercode,
-			},
-			//계산결과 받아옴
-			success : function(results){
-				let centerCondition = $("#centerCondition").val(results);
-
-				alert(centerCondition);
-				alert("성공");
-			},
-			error : function(error) {
-				alert(error)
-			}
-		});
-
-	});
+let centerOpeningDate = new Date(document.querySelector("#centerOpeningDate").value);
+let centerClosingDate = document.querySelector("#centerClosingDate");
+centerClosingDate.value = '';
+if (centerOpeningDate !== '') {
+centerClosingDate.readOnly = false;
+} else {
+centerClosingDate.readOnly = true;
+}
+if (centerOpeningDate > getToday()) {
+centerCondition.value = "notyet";
+}
+if (centerOpeningDate < getToday()) {
+	centerCondition.value = "o"+"1";
+}
+$("#centerClosingDate").change(function() {
+let centerCondition = document.querySelector("#centerCondition");
+let centerClosingDate = new Date(document.querySelector("#centerClosingDate").value);
+if (centerOpeningDate > getToday() && centerClosingDate > getToday())  {
+	centerCondition.value = "o"+"1";
+}
+if ((centerOpeningDate !=='') && (centerClosingDate !== '')) {
+if (centerOpeningDate <= centerClosingDate && centerClosingDate <= getToday() ) {
+centerCondition.value = "closed";
+}else if (centerOpeningDate < getToday()  && centerOpeningDate < centerClosingDate && centerClosingDate > getToday()) {
+centerCondition.value = "o"+"-1";
+}
+}
+if (centerOpeningDate.value > centerClosingDate.value) {
+centerClosingDate.value = '';
+centerCondition.value='';
+}
 });
+});
+
 
 
 
@@ -87,6 +64,7 @@ function CallcenterList() {
 			let centeraddress = document.querySelector("#centerAddress");
 			let centeropeningdate = document.querySelector("#centerOpeningDate");
 			let centercondition = document.querySelector("#centerCondition");
+	
 			let centerclosingdate = document.querySelector("#centerClosingDate");
 			let centerguide = document.querySelector("#centerGuide");
 
@@ -97,6 +75,16 @@ function CallcenterList() {
 			centeraddress.value = this.cells[3].innerHTML;
 			centeropeningdate.value = this.cells[4].innerText;
 			centercondition.value = this.cells[5].innerText;
+			if (this.cells[5].innerText == '폐점') {
+				centercondition.value = 'closed';
+				alert("돌아?1")
+			}else if(this.cells[5].innerText == '오픈예정') {
+				centercondition.value = 'notyet';
+				alert("돌아?2")
+			}else if(this.cells[5].innerText == '영업중') {
+				centercondition.value = 'o'+'-1';
+				alert("돌아?3")
+			}
 			centerguide.value = this.cells[6].textContent;
 			centerclosingdate.value =this.cells[7].textContext;
 			if (this.cells[7]) {
@@ -121,7 +109,8 @@ $("#centerSavedBtn").click(function (){
 	let centerclosingDate = $("#centerClosingDate").val();
 
 
-	if (centercode == $("#center-left tr").length) {
+	if (!$("#centerName").attr("readonly")) {
+		
 		let centercondition = $("#centerCondition").val();	
 		let insertURL = "/centerInsert";
 
@@ -142,7 +131,6 @@ $("#centerSavedBtn").click(function (){
 			success: function(results) {
 
 				$("#centerList").empty();
-
 
 				let str = "<tr>";
 				$.each(results, function(i) {
@@ -177,20 +165,11 @@ $("#centerSavedBtn").click(function (){
 
 	}else{
 		let updateURL = "/centerUpdate";
-
-
 		let centercondition = document.querySelector("#centerCondition").value;
+		console.log("centerCondition"+centercondition);
 
-//		if (centercondition.value == "영업중") {
-//		centercondition = "0";
-//		console.log(centercondition);
-//		}else if (centercondition.value == "오픈예정") {
-//		centercondition = "notyet";
-//		}else if (centercondition.value == "폐점") {
-//		centercondition = "closed";
-//		}
 		$.ajax({
-			type : "post",
+			type : "POST",
 			url : updateURL,
 			data : {
 				centerCode : centercode,
@@ -199,36 +178,34 @@ $("#centerSavedBtn").click(function (){
 				centerAddress : centeraddress,
 				centerOpeningDate  : centeropeningDate,
 				centerCondition  : centercondition,
-				cemterGuide : centerguide,
+				centerGuide : centerguide,
 				centerClosingDate : centerclosingDate
 			},
 			success : function(results) {
-				alert(results);
 				$("#centerList").empty();
-
-
+				
 				let str = "<tr>";
-				$.each(results, function(i) {
-
+				$.each(results, function(i){
 					if (results[i].centerOpeningDate == null) {
 						results[i].centerOpeningDate ='-';
-					} else {
-						results[i].centerOpeningDate = results[i].centerOpeningDate.substring(0, 10);
+					}else {
+						results[i].centerOpeningDate = results[i].centerOpeningDate.substring(0,10);
 					}
-
+					
 					str += "<td>" + results[i].centerCode + "</td><td>" + 
 					results[i].centerName + "</td><td>" + results[i].centerTel + "</td><td>" +
 					results[i].centerAddress + "</td><td>" + results[i].centerOpeningDate +"</td><td>"
-					+ results[i].centerCondition + "</td><td style='display:none'>" + results[i].centerGuide + "</td><td style='display:none'>"
-					+ results[i].centerClosingDate + "</td>";
-
+					+ results[i].centerCondition + "</td><td style='display:none'>" + results[i].centerGuide + 
+					"</td><td style='display:none'>" + results[i].centerClosingDate + "</td>";
+					
 					str += "</tr>";
 				});
 				$("#center-left").append(str);
-				alert("성공")
+				alert("성공");
 				$("#centerForm input").val('');
 				CallcenterList();
 				$(".removeDisabled").attr("disabled", true);
+				
 			},
 			error: function( request, status, error ){
 				alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
@@ -242,10 +219,15 @@ $("#centerSavedBtn").click(function (){
 $("#centerInsertBtn").click(function () {
 
 	$(".removeDisabled").attr('disabled', false);
-
-	//테이블 행 개수 구하는 법
-	let centerTrCount = $("#center-left tr").length;
-	$("#centerCode").val(centerTrCount);
+	$("#centerName").attr("readonly", false);
+	
+	let centerCode = document.querySelector("#centerCode");
+	let hiddenCenterCode = document.querySelector("#hiddenCenterCode");
+	console.log(centerCode.value);
+	console.log(hiddenCenterCode.value);
+	if (centerCode !== hiddenCenterCode) {
+		centerCode.value ="";
+	}
 
 	//폐점일 비활성화
 	if ($("#centerOpeningDate").val('')) {
@@ -260,7 +242,24 @@ $("#centerInsertBtn").click(function () {
 	$("#centerGuide").val('');
 	$("#centerOpeningDate").val('');
 	$("#centerClosingDate").val('');
+});
 
+$("#findCenterList").click(function (){
+	let centername = $("#findCenterName").val();
+	console.log(centername);
+	$.ajax({
+		url : "/findCenter",
+		type : "POST",
+		data : {
+			centerName : centername
+		},
+		success : function(results){
+			alert(results)
+		},
+		error: function( request, status, error ){
+			alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
+		}
+	});
 });
 
 
