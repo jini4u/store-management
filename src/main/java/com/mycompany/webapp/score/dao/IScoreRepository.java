@@ -6,14 +6,25 @@ import java.util.List;
 import com.mycompany.webapp.score.vo.ScoreVO;
 import java.util.Map;
 
+<<<<<<< HEAD
+=======
+import org.apache.ibatis.annotations.Mapper;
+>>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 /**
  * 점수 관리
  * ScoreMapper.xml과 매핑되어있음
  * 
  * */
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 public interface IScoreRepository {
 	//유진
 	List<Map<String, String>> getAllGroupCodes();

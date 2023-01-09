@@ -1,5 +1,7 @@
 package com.mycompany.webapp.center.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,13 +17,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.mycompany.webapp.center.service.ICenterService;
 import com.mycompany.webapp.center.vo.CenterVO;
+import com.mycompany.webapp.common.vo.FileInfoVO;
 import com.mycompany.webapp.common.vo.Pager;
 
 /**
@@ -46,7 +53,7 @@ public class CenterController {
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		List<CenterVO> centerList = centerService.centerList(pager);
 		model.addAttribute("centerList", centerList);
-
+		model.addAttribute("pager", pager);
 		return "jsp/center/centerphoto";
 	}
 	//url은 value에 적혀있는 값으로 동작하고, centerlist.jsp 페이지를 로딩해준다?
@@ -126,11 +133,42 @@ public class CenterController {
 		List<CenterVO> allCenterList = centerService.centerList(pager);
 		List<CenterVO> result = new ArrayList<>();
 		for(CenterVO center:allCenterList) {
-			logger.info(center.toString());
 			if(center.getUserCode() == 0) {
 				result.add(center);
 			}
 		}
 		return result;
+	}
+	
+	@RequestMapping(value="/addCenterImage", method=RequestMethod.POST)
+	public @ResponseBody int addCenterImage(MultipartHttpServletRequest request) throws IOException {
+		String fileDetail = request.getParameter("fileDetail");
+		int centerCode = Integer.parseInt(request.getParameter("centerCode"));
+		List<MultipartFile> files = request.getFiles("centerImage");
+		
+		int result = 0;
+		
+		for(MultipartFile file: files) {
+			FileInfoVO newFile = new FileInfoVO();
+			newFile.setFileDetail(fileDetail);
+			newFile.setCenterCode(centerCode);
+			newFile.setOriginalName(file.getOriginalFilename());
+			String fileSavedName = "centerCode_"+centerCode+"+originalName_"+file.getOriginalFilename();
+			//Path는 나중엔 서버상의 Path로 바꾸기
+			String filePath = "/Users/parkdoyoung/Downloads/ujinTest/";
+			newFile.setFileSavedName(fileSavedName);
+			newFile.setFileType(file.getContentType());
+			newFile.setFilePath(filePath);
+			logger.info(newFile.toString());
+			file.transferTo(new File(filePath+fileSavedName));
+			result += centerService.addCenterImage(newFile);
+		}
+		return result;
+	}
+	
+	@RequestMapping("/getCenterImages/{centerCode}")
+	public @ResponseBody List<String> getCenterImages(@PathVariable int centerCode) {
+		//센터코드에 맞춰서 파일이름만 리턴해주면 됨
+		return centerService.getCenterImageNames(centerCode);
 	}
 }

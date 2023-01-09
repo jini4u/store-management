@@ -9,6 +9,13 @@
 	<h2>담당자 조회</h2>
 </div>
 
+<!-- 검색 -->
+<div class="search-box">
+	<input type="text" class="search-txt" name="" placeholder="담당자 검색">
+	<a class="search-btn" href="#"> <i class="fas fa-search"></i>
+	</a>
+</div>
+
 <div class="graphbox">
 	<div class="managerbox">
 		<table class="verticalTable" id="managerTable">
@@ -35,7 +42,7 @@
 						});
 					"> -->
 					<tr>
-						<td>${managerVO.userCode}</td>
+						<td id=existenceUserCode>${managerVO.userCode}</td>
 						<td>${managerVO.userName}</td>
 						<td>${managerVO.userBirth}</td>
 						<td>${managerVO.userTel}</td>
@@ -50,6 +57,35 @@
 						</select></td>
 					</tr>
 				</c:forEach>
+
+				<tr>
+					<td id="pager" colspan="9">
+						<div>
+							<a class="innerPager" href="managerList?pageNo=1">처음</a>
+							<c:if test="${pager.groupNo>1}">
+								<a class="innerPager"
+									href="managerList?pageNo=${pager.startPageNo-1}">이전</a>
+							</c:if>
+
+							<c:forEach var="i" begin="${pager.startPageNo}"
+								end="${pager.endPageNo}">
+								<c:if test="${pager.pageNo != i}">
+									<a class="innerPager" href="managerList?pageNo=${i}">${i}</a>
+								</c:if>
+								<c:if test="${pager.pageNo == i}">
+									<a class="innerPager" href="managerList?pageNo=${i}">${i}</a>
+								</c:if>
+							</c:forEach>
+
+							<c:if test="${pager.groupNo<pager.totalGroupNo}">
+								<a class="innerPager"
+									href="managerList?pageNo=${pager.endPageNo+1}">다음</a>
+							</c:if>
+							<a class="innerPager"
+								href="managerList?pageNo=${pager.totalPageNo}">맨끝</a>
+						</div>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 
@@ -61,8 +97,9 @@
 			<table class="rowTable" id="mgrdetailtable">
 				<tr>
 					<th scope="row">담당자코드</th>
-					<td><input type="text" name="userCode" id="userCode" value="${userCode}" readonly>
-					<input type="hidden" name="userPassword" id="userPassword"></td>
+					<td><input type="text" name="userCode" id="userCode"
+						value="${userCode}" readonly> <input type="hidden"
+						name="userPassword" id="userPassword"></td>
 					<th scope="row">담당자명</th>
 					<td><input type="text" name="userName" id="userName"></td>
 				</tr>
@@ -82,7 +119,8 @@
 					<th scope="row">입사일자</th>
 					<td><input type="date" name="userHireDate" id="userHireDate"></td>
 					<th scope="row">퇴사일자</th>
-					<td><input type="date" name="userResignDate" id="userResignDate" readonly></td>
+					<td><input type="date" name="userResignDate"
+						id="userResignDate" readonly></td>
 				</tr>
 			</table>
 		</form>
