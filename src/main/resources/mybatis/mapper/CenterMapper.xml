@@ -67,7 +67,9 @@ INSERT INTO fileinfo (
 	, file_type
 	, file_detail
 	, file_path
-	, file_post_date )
+	, file_post_date 
+	, file_upload_user_code
+	)
 VALUES (
 	(SELECT NVL(MAX(file_no)+1, 1) FROM fileinfo)
 	, #{centerCode}
@@ -76,14 +78,20 @@ VALUES (
 	, #{fileType}
 	, #{fileDetail}
 	, #{filePath}
-	, SYSDATE )
+	, SYSDATE 
+	, #{uploadUserCode}
+	)
 ]]>
 </insert>
 
-<select id="getCenterImageNames" parameterType="int" resultType="String">
+<select id="getCenterImageNames" parameterType="int" resultType="com.mycompany.webapp.common.vo.FileInfoVO">
 <![CDATA[
-SELECT file_saved_name as "fileSavedName"
-FROM fileinfo
+SELECT file_original_name AS "originalName"
+		, file_saved_name AS "fileSavedName"
+		, user_name AS "uploadUserName"
+		, TO_CHAR(file_post_date, 'YYYY-MM-DD') AS "filePostDate"
+		, NVL(TO_CHAR(file_modify_date, 'YYYY-MM-DD'), 'null') AS "fileModifyDate"
+FROM fileinfo F LEFT OUTER JOIN userinfo U ON F.file_upload_user_code = U.user_code
 WHERE center_code = #{centerCode}
 ORDER BY file_detail
 ]]>

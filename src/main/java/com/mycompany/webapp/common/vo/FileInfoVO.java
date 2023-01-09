@@ -9,10 +9,12 @@ public class FileInfoVO {
 	private String fileType;
 	private String fileDetail;
 	private String filePath;
-	private Date filePostDate;
-	private Date fileModifyDate;
+	private String filePostDate;
+	private String fileModifyDate;
 	
 	private int centerCode;
+	private int uploadUserCode;
+	private String uploadUserName;
 	
 	public int getFileNo() {
 		return fileNo;
@@ -50,16 +52,16 @@ public class FileInfoVO {
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
-	public Date getFilePostDate() {
+	public String getFilePostDate() {
 		return filePostDate;
 	}
-	public void setFilePostDate(Date filePostDate) {
+	public void setFilePostDate(String filePostDate) {
 		this.filePostDate = filePostDate;
 	}
-	public Date getFileModifyDate() {
+	public String getFileModifyDate() {
 		return fileModifyDate;
 	}
-	public void setFileModifyDate(Date fileModifyDate) {
+	public void setFileModifyDate(String fileModifyDate) {
 		this.fileModifyDate = fileModifyDate;
 	}
 	public int getCenterCode() {
@@ -68,11 +70,18 @@ public class FileInfoVO {
 	public void setCenterCode(int centerCode) {
 		this.centerCode = centerCode;
 	}
+	public int getUploadUserCode() {
+		return uploadUserCode;
+	}
+	public void setUploadUserCode(int uploadUserCode) {
+		this.uploadUserCode = uploadUserCode;
+	}
 	
 	@Override
 	public String toString() {
 		return "FileInfoVO [fileNo=" + fileNo + ", fileSavedName=" + fileSavedName + ", originalName=" + originalName
 				+ ", fileType=" + fileType + ", fileDetail=" + fileDetail + ", filePath=" + filePath + ", filePostDate="
-				+ filePostDate + ", fileModifyDate=" + fileModifyDate + ", centerCode=" + centerCode + "]";
+				+ filePostDate + ", fileModifyDate=" + fileModifyDate + ", centerCode=" + centerCode
+				+ ", uploadUserCode=" + uploadUserCode + "]";
 	}
 }

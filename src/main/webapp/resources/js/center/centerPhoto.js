@@ -30,14 +30,24 @@ function appearTable(e) {
 };
 
 var imgDiv = document.getElementById("centerImagesDiv");
+var imgHistoryTable = document.getElementById("imageHistory");
 
 function getCenterImages(){
-	//리턴받은 사진이름들로 이미지 만들어주기
+	//리턴받은 정보로 이미지 만들어주기
 	let result = JSON.parse(httpRequest.responseText);
-	//imgDiv.innerHTML = ''
+	
+	imgDiv.innerHTML = ''
 	for(var i=0;i<result.length;i++){
 		// element 를 만들어서 넣기
-		imgDiv.innerText = "&lt;img src='localhost:8080/"+result[i]+"' class='photo-img'/&gt;";
+		var img = document.createElement('img');
+		img.setAttribute('src', '/image/'+result[i].fileSavedName);
+		img.setAttribute('class','photo-img');
+		imgDiv.appendChild(img);
+	}
+	
+	imgHistoryTable.tBodies[0].innerHTML = '';
+	for(var i=0;i<result.length;i++){
+		imgHistoryTable.tBodies[0].innerHTML += '<tr><td>'+result[i].originalName+'</td><td>'+result[i].uploadUserName+"</td><td>"+result[i].filePostDate+"</td><td>"+result[i].fileModifyDate+"</td></tr>";
 	}
 }
 
@@ -93,4 +103,5 @@ function addCenterImage(){
 	let response = JSON.parse(httpRequest.responseText);
 	console.log(response+"개 저장됨");
 	modalOpen.style.display ="none";
+	makeRequest(getCenterImages,'GET','/getCenterImages/'+centerNameArr[4].innerText);
 }

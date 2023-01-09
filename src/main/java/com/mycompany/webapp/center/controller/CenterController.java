@@ -144,6 +144,7 @@ public class CenterController {
 	public @ResponseBody int addCenterImage(MultipartHttpServletRequest request) throws IOException {
 		String fileDetail = request.getParameter("fileDetail");
 		int centerCode = Integer.parseInt(request.getParameter("centerCode"));
+		int uploadUserCode = Integer.parseInt(request.getParameter("uploadUserCode"));
 		List<MultipartFile> files = request.getFiles("centerImage");
 		
 		int result = 0;
@@ -152,10 +153,11 @@ public class CenterController {
 			FileInfoVO newFile = new FileInfoVO();
 			newFile.setFileDetail(fileDetail);
 			newFile.setCenterCode(centerCode);
+			newFile.setUploadUserCode(uploadUserCode);
 			newFile.setOriginalName(file.getOriginalFilename());
 			String fileSavedName = "centerCode_"+centerCode+"+originalName_"+file.getOriginalFilename();
 			//Path는 나중엔 서버상의 Path로 바꾸기
-			String filePath = "/Users/parkdoyoung/Downloads/ujinTest/";
+			String filePath = "C:/dev/uploadfiles/";
 			newFile.setFileSavedName(fileSavedName);
 			newFile.setFileType(file.getContentType());
 			newFile.setFilePath(filePath);
@@ -167,7 +169,7 @@ public class CenterController {
 	}
 	
 	@RequestMapping("/getCenterImages/{centerCode}")
-	public @ResponseBody List<String> getCenterImages(@PathVariable int centerCode) {
+	public @ResponseBody List<FileInfoVO> getCenterImages(@PathVariable int centerCode) {
 		//센터코드에 맞춰서 파일이름만 리턴해주면 됨
 		return centerService.getCenterImageNames(centerCode);
 	}

@@ -38,6 +38,7 @@
 				<tbody>
 				</tbody>
 				</table>
+				<input type="text" name='uploadUserCode' id="uploadUserCode" value="${titleUserCode}"/>
 				</form>
 				<button type="button" id="centermodal-photo-insert" class="savebtn">등록</button>
 			</div>
