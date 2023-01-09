@@ -29,8 +29,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.mycompany.webapp.score.service.IScoreService;
 import com.mycompany.webapp.score.vo.ScoreVO;
 
-import jdk.internal.org.jline.utils.Log;
-
 /**
  * @ClassName : ScoreController
  * @Description : 점수, 코드 관리 기능 구현 Controller
