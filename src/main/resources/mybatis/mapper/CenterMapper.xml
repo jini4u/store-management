@@ -42,17 +42,17 @@ SELECT rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGu
         FROM(
         SELECT ROWNUM as rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGuide", "centerOpeningDate", "centerClosingDate", "centerCondition", "userCode", "userName"
         FROM(
-        SELECT
-      C.center_code as "centerCode"
-      , C.center_name as "centerName"
-      , C.center_tel as "centerTel"
-      , C.center_address as "centerAddress"
-      , C.center_guide as "centerGuide"
-      , C.center_opening_date as "centerOpeningDate"
-      , C.center_closing_date as "centerClosingDate"
-        , NVL2(TO_CHAR(C.center_closing_date),'c'||TO_CHAR(SYSDATE-C.center_closing_date),NVL2(TO_CHAR(C.center_opening_date),'o'||TO_CHAR(FLOOR(C.center_opening_Date - SYSDATE)),'notyet')) AS "centerCondition"
-        , U.user_code as "userCode"
-        , U.user_name as "userName"
+	        SELECT
+		      C.center_code as "centerCode"
+		      , C.center_name as "centerName"
+		      , C.center_tel as "centerTel"
+		      , C.center_address as "centerAddress"
+		      , C.center_guide as "centerGuide"
+		      , C.center_opening_date as "centerOpeningDate"
+		      , C.center_closing_date as "centerClosingDate"
+	      	  , NVL2(TO_CHAR(C.center_closing_date),'c'||TO_CHAR(FLOOR(SYSDATE-C.center_closing_date)),NVL2(TO_CHAR(C.center_opening_date),'o'||TO_CHAR(FLOOR(C.center_opening_Date - SYSDATE)),'notyet')) AS "centerCondition"
+	     	  , U.user_code as "userCode"
+	     	  , U.user_name as "userName"
    FROM center C LEFT OUTER JOIN mapping M ON C.center_code = M.center_code
                   LEFT OUTER JOIN userinfo U ON M.user_code = U.user_code
     ORDER BY "centerCode"
@@ -107,21 +107,34 @@ VALUES (
       WHERE center_code = #{centerCode}
 </update>
 
-   <!-- 맵핑가능 센터 목록 임유진 <select id="getAvailableCenterList" resultType="com.mycompany.webapp.center.vo.CenterVO"> 
-      SELECT C.center_code AS "centerCode" , C.center_name AS "centerName" , C.center_address 
-      AS "centerAddress" FROM center C LEFT OUTER JOIN mapping M ON C.center_code 
-      = M.center_code WHERE M.user_code IS NULL </select> -->
-
 <select id="getCenterImageNames" parameterType="int" resultType="com.mycompany.webapp.common.vo.FileInfoVO">
 <![CDATA[
-SELECT file_original_name AS "originalName"
+SELECT file_no AS "fileNo"
+		, file_original_name AS "originalName"
 		, file_saved_name AS "fileSavedName"
 		, user_name AS "uploadUserName"
 		, TO_CHAR(file_post_date, 'YYYY-MM-DD') AS "filePostDate"
-		, NVL(TO_CHAR(file_modify_date, 'YYYY-MM-DD'), 'null') AS "fileModifyDate"
+		, NVL(TO_CHAR(file_modify_date, 'YYYY-MM-DD'), ' ') AS "fileModifyDate"
+		, file_detail AS "fileDetail"
 FROM fileinfo F LEFT OUTER JOIN userinfo U ON F.file_upload_user_code = U.user_code
 WHERE center_code = #{centerCode}
 ORDER BY file_detail
 ]]>
 </select>
+
+<update id="updateImage" parameterType="com.mycompany.webapp.common.vo.FileInfoVO">
+<![CDATA[
+UPDATE fileinfo 
+SET file_original_name = #{originalName}
+	, file_detail = #{fileDetail}
+	, file_saved_name = #{fileSavedName}
+	, file_modify_date = SYSDATE
+WHERE file_no = #{fileNo}
+]]>
+</update>
+
+<delete id="deleteImage" parameterType="int">
+DELETE FROM fileinfo
+WHERE file_no = #{fileNo}
+</delete>
 </mapper>

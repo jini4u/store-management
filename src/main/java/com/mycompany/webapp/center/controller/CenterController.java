@@ -2,11 +2,17 @@ package com.mycompany.webapp.center.controller;
 
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.tomcat.util.json.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,7 +139,6 @@ public class CenterController {
 			newFile.setFileSavedName(fileSavedName);
 			newFile.setFileType(file.getContentType());
 			newFile.setFilePath(filePath);
-			logger.info(newFile.toString());
 			file.transferTo(new File(filePath+fileSavedName));
 			result += centerService.addCenterImage(newFile);
 		}
@@ -142,7 +147,52 @@ public class CenterController {
 	
 	@RequestMapping("/getCenterImages/{centerCode}")
 	public @ResponseBody List<FileInfoVO> getCenterImages(@PathVariable int centerCode) {
-		//센터코드에 맞춰서 파일이름만 리턴해주면 됨
+		//센터코드에 맞춰서 파일 리턴해주면 됨
 		return centerService.getCenterImageNames(centerCode);
+	}
+	
+	@RequestMapping(value="/updateImage", method=RequestMethod.POST)
+	public @ResponseBody int updateImage(MultipartHttpServletRequest request) throws Exception {
+		FileInfoVO file = new FileInfoVO();
+		
+		file.setFileNo(Integer.parseInt(request.getParameter("fileNo")));
+		file.setOriginalName(request.getParameter("newOriginalName"));
+		file.setFileDetail(request.getParameter("fileDetail"));
+		int centerCode = Integer.parseInt(request.getParameter("centerCode"));
+		String oldOriginalName = (String)request.getParameter("oldOriginalName");
+		String oldSavedName = "centerCode_"+centerCode+"+originalName_"+oldOriginalName;
+		File oldFile = new File("C:/dev/uploadfiles/"+oldSavedName);
+		String newSavedName = "centerCode_"+centerCode+"+originalName_"+file.getOriginalName();
+		
+		file.setFileSavedName(newSavedName);
+		File newFile = new File("C:/dev/uploadfiles/"+newSavedName);
+
+		byte[] buf = new byte[1024];
+		FileInputStream is = null;
+		FileOutputStream os = null;
+		
+		if(!oldFile.renameTo(newFile)) {
+			buf = new byte[1024];
+			is = new FileInputStream(oldFile);
+			os = new FileOutputStream(newFile);
+			
+			int read = 0;
+			while((read=is.read(buf,0,buf.length)) != -1) {
+				os.write(buf, 0, read);
+			}
+			
+			is.close();
+			os.close();
+			oldFile.delete();
+		}
+		
+		return centerService.updateImage(file);
+	}
+	
+	@RequestMapping(value="/deleteImage", method=RequestMethod.POST)
+	public @ResponseBody int deleteImage(String request) {
+
+		return 1;
+//		return centerService.deleteImage(fileNoList);
 	}
 }

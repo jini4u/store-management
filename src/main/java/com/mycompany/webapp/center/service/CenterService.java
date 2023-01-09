@@ -61,6 +61,19 @@ public class CenterService implements ICenterService{
 	@Override
 	public List<FileInfoVO> getCenterImageNames(int centerCode) {
 		return centerRepository.getCenterImageNames(centerCode);
-
+	}
+	
+	@Override
+	public int updateImage(FileInfoVO file) {
+		return centerRepository.updateImage(file);
+	}
+	
+	@Override
+	public int deleteImage(List<Integer> fileNoList) {
+		int result = 0;
+		for(int fileNo:fileNoList) {
+			result += centerRepository.deleteImage(fileNo);
+		}
+		return result;
 	}
 }
