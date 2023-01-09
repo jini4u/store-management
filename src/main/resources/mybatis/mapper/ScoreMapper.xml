@@ -33,31 +33,31 @@
 정윤선
  -->
 <select id="getScoreList" parameterType="com.mycompany.webapp.score.vo.ScoreVO" resultType="com.mycompany.webapp.score.vo.ScoreVO">
-	SELECT 
-	 	   I.center_code as "centerCode",
-	       I.user_code as "userCode",
-	       I.check_detail_code as "checkDetailCode",
-	       I.check_year as "checkYear",
-	       I.check_season as "checkSeason",
-	       D.check_group_code as "checkGroupCode",
-	       G.check_group_content as "checkGroupContent",
-	       D.check_detail_content as "checkDetailContent",
-	       I.check_score as "checkScore"
-	FROM check_detail D  
+	SELECT
+		I.center_code as "centerCode",
+		I.user_code as "userCode",
+		I.check_detail_code as "checkDetailCode",
+		I.check_year as "checkYear",
+		I.check_season as "checkSeason",
+		D.check_group_code as "checkGroupCode",
+		G.check_group_content as "checkGroupContent",
+		D.check_detail_content as "checkDetailContent",
+		I.check_score as "checkScore"
+	FROM check_detail D
 		LEFT OUTER JOIN Inspection I
-	        ON D.check_group_code = I.check_group_code
-	        AND D.check_detail_code=I.check_detail_code
-	    LEFT OUTER JOIN check_group G
-	        ON I.check_group_code = G.check_group_code
-	WHERE 
+			ON D.check_group_code = I.check_group_code
+			AND D.check_detail_code = I.check_detail_code
+		LEFT OUTER JOIN check_group G
+			ON I.check_group_code = G.check_group_code
+	WHERE
 		I.center_code = #{centerCode}
-		<if test="checkYear != null and checkYear != ''">
-			AND I.check_year = #{checkYear}
+		<if test="checkYear != 0">
+		AND I.check_year = #{checkYear}
 		</if>
-		<if test="checkSeason != null and checkSeason != ''">
-		  	AND I.check_Season = #{checkSeason}
+		<if test="checkSeason != 0">
+		AND I.check_season = #{checkSeason}
 		</if>
-	ORDER BY I.check_year, I.check_season DESC
+	ORDER BY I.check_year, I.check_season DESC NULLS LAST
 
 
 </select>

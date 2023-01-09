@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="resources/css/score/score.css" />
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
@@ -20,17 +20,16 @@
 	<div class="year_and_quarter">
 
 		<form action="/score" name="score" method="get">
-			<input type="hidden" name="centerCode" value="1">
+	        <input type="hidden" name="centerCode" value="1">
 			<select name="checkYear">
-				<option >점검년도</option>
+				<option value="0">점검년도</option>
+				<option value="2023">2023</option>
 				<option value="2022">2022</option>
 				<option value="2021">2021</option>
 				<option value="2020">2020</option>
-				<option value="2019">2019</option>
 			</select> 
-			
 			<select name="checkSeason">
-				<option >분기</option>
+				<option value="0">분기</option>
 				<option value="4">4 분기</option>
 				<option value="3">3 분기</option>
 				<option value="2">2 분기</option>
@@ -53,7 +52,11 @@
 		<th>상세항목</th>
 		<th>점수</th>
 	</tr>
-
+	<c:if test="${empty scoreList}">
+		데이터가 없습니다.
+	</c:if>
+	<c:if test="${not empty scoreList}">
+	
 	<c:forEach items="${scoreList}" var="scoreCode">
 		<tr>
 
@@ -63,7 +66,7 @@
 			<td class="score_td">${scoreCode.checkDetailContent}</td>
 			<td class="score_td"><input type="text" class="placeholderstlye" size="5" placeholder="${scoreCode.checkScore}"></td>
 		</tr>
-	</c:forEach>
+	</c:forEach></c:if>
 </table>
 
 
@@ -91,14 +94,13 @@
 		<h1 class="modalh1">점수 입력</h1>
 
 		<!-- 모달창 안 테이블 -->
-		<form method="post" action="insertScore">
-			<div>년도: ${insertTargetYear}, 분기: ${insertTargetSeason}</div>
+		<form method="post" action="/insertScore">
+			<div>년도: ${year}, 분기: ${season}</div>
 
-			<input type="text" name="centerCode" value="${centerCode}" /> 
-			<input type="text" name="userCode" value="${userCode}" />
-			<input type="text" name="checkYear" value="${insertTargetYear}" /> 
-			<input type="text" name="checkSeason" value="${insertTargetSeason}" />
-
+			<input type="hidden" name="centerCode" value="${centerCode}" /> 
+			<input type="hidden" name="userCode" value="${userCode}" /> 
+			<input type="hidden" name="checkYear" value="${year}" />
+			<input type="hidden" name="checkSeason" value="${season}" />
 			<table class="scoretable" border="1">
 				<tr>
 
@@ -117,11 +119,9 @@
 						<td>${usingCodeList.checkGroupContent}</td>
 						<td>${usingCodeList.checkDetailContent}</td>
 
-						<td>
-						<input type="hidden" name="arrayCheckGroupCode" value="${usingCodeList.checkGroupCode}"> 
-						<input type="hidden" name="arrayCheckDetailCode" value="${usingCodeList.checkDetailCode}"> 
-						<input type="text" size="13" name="arrayScore" value="0">
-						</td>
+						<td><input type="hidden" name="arrayCheckGroupCode"	value="${usingCodeList.checkGroupCode}"> 
+							<input type="hidden" name="arrayCheckDetailCode" value="${usingCodeList.checkDetailCode}"> 
+							<input type="text" size="13" name="arrayScore" value="0"></td>
 					</tr>
 
 

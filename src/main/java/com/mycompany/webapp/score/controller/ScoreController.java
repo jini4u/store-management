@@ -1,38 +1,35 @@
 package com.mycompany.webapp.score.controller;
+import java.io.Console;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpSession;
 
-import org.apache.tomcat.util.json.JSONParser;
-import org.aspectj.apache.bcel.generic.ReturnaddressType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PathVariable;
-
-import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.mycompany.webapp.center.controller.CenterController;
 import com.mycompany.webapp.score.service.IScoreService;
-import com.mycompany.webapp.score.service.ScoreService;
 import com.mycompany.webapp.score.vo.ScoreVO;
+
+import jdk.internal.org.jline.utils.Log;
 
 /**
  * @ClassName : ScoreController
@@ -43,7 +40,7 @@ import com.mycompany.webapp.score.vo.ScoreVO;
  * @   1/3         임유진      updateDetailCode, updateGroupCode 작성
  * @               정윤선      saveScoreCode,
  * @   1/4         정윤선      insertCode작성, scoreList수정
- * @  1/9		     정윤선	   
+ * @  1/9		     정윤선	   /score수정
  * @author 임유진, 정윤선
  * **/
 @Controller
@@ -69,39 +66,52 @@ public class ScoreController {
 	 * */
 
 	@RequestMapping(value="/score", method = RequestMethod.GET)
-	public String centerscoreinquiry(ScoreVO scoreVO, Model model) {
+	public String centerscoreinquiry(ScoreVO scoreVO, Model model,HttpSession session) {
 
 		List<ScoreVO> scoreList = scoreService.getScoreList(scoreVO);
 		model.addAttribute("scoreList",scoreList);
-		System.out.println(scoreList);
+		
+		//userCode는 session불러와서 담아놓을것 !일단세션에 없으니까 그냥 임의로 지정해서 넣어주기
+		//**고쳐야 함 **//
+		session.setAttribute("userCode", 1);
 
-		model.addAttribute("centerCode", scoreList.get(0).getCenterCode());
-		System.out.println("centerCode"+scoreVO.getCenterCode());
-		model.addAttribute("userCode", scoreList.get(0).getUserCode());
+		//기본날짜 설정
+		Calendar now = Calendar.getInstance();
+		int yy = now.get(Calendar.YEAR);
+		int mm = now.get(Calendar.MONTH) +1;
 
-		int checkYear = scoreList.get(0).getCheckYear();
-		int checkSeason = scoreList.get(0).getCheckSeason();
-		int insertTargetYear = checkYear;
-		int insertTargetSeason = checkSeason;
-		if(checkSeason == 4) {
-			insertTargetYear++;
-			insertTargetSeason = 1;
-		} else {
-			insertTargetSeason++;
+		int season=0;
+		int year=0;
+
+		//분기 설정
+		if( (mm-3)>0 &&(mm-3)<=3) {
+			season = 1;
+		}else if((mm-3) > 3 && (mm-3) <= 6) {
+			season = 2;
+		}else if((mm-3) > 6 && (mm-3) <= 9){	
+			season = 3;
+		}else if((mm-3) <= 12){	
+			season = 4;
+		}else{
+			season = 0;
 		}
-		model.addAttribute("insertTargetYear", insertTargetYear);
-		model.addAttribute("insertTargetSeason", insertTargetSeason);
+
+		if((mm-3)<=0) {
+			year = yy-1;
+		}else {
+			year = yy;
+		}
 
 
+		model.addAttribute("year", yy);
+		model.addAttribute("season", mm);
 		//모달창 점수 항목 출력 리스트
 		model.addAttribute("usingCodeList", scoreService.usingCodeList());
-		//      logger.info(scoreService.usingCodeList().toString());
-
 
 		return "jsp/score/scoreList";
-
-
 	}
+
+
 
 	/*
 	 * 정윤선
@@ -121,9 +131,9 @@ public class ScoreController {
 
 	@RequestMapping(value="/insertScore",method = RequestMethod.POST)
 	public String insertsocre(ScoreVO scoreVO) {
-		logger.info(scoreVO.toString());
-
+		System.out.println("점수등록" + scoreService.insertScore(scoreVO));
 		scoreService.insertScore(scoreVO);
+		System.out.println("점수등록" + scoreService.insertScore(scoreVO));
 
 		return "redirect:/score?centerCode=1";
 	}
