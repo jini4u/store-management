@@ -29,4 +29,5 @@ public interface ICenterRepository {
 	int countAllCenters();
 	int addCenterImage(FileInfoVO file);
 	List<FileInfoVO> getCenterImageNames(int centerCode);
+	int updateImage(FileInfoVO file);
 }

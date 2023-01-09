@@ -121,4 +121,15 @@ WHERE center_code = #{centerCode}
 ORDER BY file_detail
 ]]>
 </select>
+
+<update id="updateImage" parameterType="com.mycompany.webapp.common.vo.FileInfoVO">
+<![CDATA[
+UPDATE fileinfo 
+SET file_original_name = #{originalName}
+	, file_detail = #{fileDetail}
+	, file_saved_name = #{fileSavedName}
+	, file_modify_date = SYSDATE
+WHERE file_no = #{fileNo}
+]]>
+</update>
 </mapper>

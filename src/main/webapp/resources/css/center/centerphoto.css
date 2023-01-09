@@ -197,6 +197,6 @@ tbody {
 	display: none;
 }
 
-#uploadUserCode,#hidden-file-no {
+#uploadUserCode,.hidden-file-no {
 	display: none;
 }

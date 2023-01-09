@@ -13,6 +13,9 @@ function setTrEvent(){
 
 setTrEvent();
 
+//수정 모달 선택자
+var updateModal = document.querySelector(".updateModal");
+
 //센터 목록 테이블 클릭시 실행되는 함수
 function appearTable(e) {
 	//테이블의 행 수-1만큼 반복
@@ -97,7 +100,7 @@ function getCenterImages(){
 			//input에 속성 추가. type='text'
 			nameInput.setAttribute('type', 'text');
 			//name='originalName'
-			nameInput.setAttribute('name', 'originalName');
+			nameInput.setAttribute('name', 'newOriginalName');
 			//value='클릭한 이미지의 data-img-name 속성 값'
 			nameInput.setAttribute('value', e.target.getAttribute('data-img-name'));
 			//nameTd에 nameInput 넣기
@@ -134,9 +137,29 @@ function getCenterImages(){
 			imgDetailTr.append(detailTd);
 			//수정 모달 사진 정보 table에 사진정보tr 추가
 			imgDetailTable.tBodies[0].append(imgDetailTr);
-						
-			//수정 모달 선택자
-			var updateModal = document.querySelector(".updateModal");
+			
+			//수정 전 사진 이름을 담을 <td></td> 생성
+			var oldNameTd = document.createElement('td');
+			//<input> 생성
+			var oldNameInput = document.createElement('input');
+			//input에 속성 추가. type='text'
+			oldNameInput.setAttribute('type', 'text');
+			//name='originalName'
+			oldNameInput.setAttribute('name', 'oldOriginalName');
+			//value='클릭한 이미지의 data-img-name 속성 값'
+			oldNameInput.setAttribute('value', e.target.getAttribute('data-img-name'));
+			oldNameInput.setAttribute('class','hidden-file-no');
+			//테이블에 nameInput 넣기
+			imgDetailTable.tBodies[0].append(oldNameInput);
+			
+			//파일번호를 담을 <input> 생성
+			var fileNoInput = document.createElement('input');
+			fileNoInput.setAttribute('name', 'fileNo');
+			fileNoInput.setAttribute('value', e.target.getAttribute('data-img-fileNo'));
+			fileNoInput.setAttribute('class','hidden-file-no');
+			
+			imgDetailTable.tBodies[0].append(fileNoInput);
+			
 			//클릭시 화면에 보이도록
 			updateModal.style.display = "block";
 			//닫기 버튼들에 모달 보이지않게하는 이벤트 등록
@@ -228,3 +251,16 @@ function addCenterImage(){
 
 //수정 모달 내부 수정 버튼
 var updateBtn = document.getElementById("updatebutton");
+
+updateBtn.addEventListener("click", function(){
+	var imgUpdateForm = document.getElementById("imageUpdateForm");
+	var imgUpdateFormData = new FormData(imgUpdateForm);
+	imgUpdateFormData.append("centerCode", centerNameArr[4].innerText);
+	makeRequest(afterUpdateImg, 'POST', '/updateImage', imgUpdateFormData);
+	
+});
+
+function afterUpdateImg(){
+	updateModal.style.display ="none";
+	makeRequest(getCenterImages,'GET','/getCenterImages/'+centerNameArr[4].innerText);
+}
