@@ -1,16 +1,9 @@
 package com.mycompany.webapp.score.controller;
-import java.io.Console;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -29,7 +22,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.mycompany.webapp.score.service.IScoreService;
 import com.mycompany.webapp.score.vo.ScoreVO;
 
-import jdk.internal.org.jline.utils.Log;
 
 /**
  * @ClassName : ScoreController
@@ -120,7 +112,7 @@ public class ScoreController {
 	@RequestMapping(value="/saveScore",method = RequestMethod.POST)
 	public String saveScore(ScoreVO score){
 		scoreService.saveScore(score);
-		return "redirect: /score";
+		return "redirect:/scoreList";
 	}
 
 	/*
@@ -131,11 +123,12 @@ public class ScoreController {
 
 	@RequestMapping(value="/insertScore",method = RequestMethod.POST)
 	public String insertsocre(ScoreVO scoreVO) {
-		System.out.println("점수등록" + scoreService.insertScore(scoreVO));
+		
+//		System.out.println("점수등록" + scoreService.insertScore(scoreVO));
 		scoreService.insertScore(scoreVO);
-		System.out.println("점수등록" + scoreService.insertScore(scoreVO));
+//		System.out.println("점수등록" + scoreService.insertScore(scoreVO));
 
-		return "redirect:/score?centerCode=1";
+		return "redirect:/score";
 	}
 
 	/**
