@@ -24,10 +24,6 @@
 	WHERE check_group_code = #{groupCode}
 </select>
 
-
-
-
-
 <!-- 
 점수조회,해당년도/해당분기 조회
 정윤선
@@ -58,8 +54,6 @@
 		AND I.check_season = #{checkSeason}
 		</if>
 	ORDER BY I.check_year, I.check_season DESC NULLS LAST
-
-
 </select>
 <!-- 
  점수 항목 조회
@@ -140,20 +134,11 @@ VALUES(
  	#{checkGroupCode}, 
  	#{checkDetailCode}, 
  	#{checkScore}
- 	)
- 
- 
+ 	) 
  ]]>
  
  </insert> 
 
- 
- 
- 
- 
- 
- 
- 
 
 <!-- 
 	상세코드 수정.
