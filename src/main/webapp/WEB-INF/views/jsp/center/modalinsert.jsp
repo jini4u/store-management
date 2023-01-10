@@ -43,7 +43,7 @@
 				<c:set var="titleUserCode" value="10001"/>
 				<input type="text" name='uploadUserCode' id="uploadUserCode" value="<c:out value='${titleUserCode}'/>" />
 				</form>
-				<button type="button" id="centermodal-photo-insert" class="savebtn">등록</button>
+				<button type="button" id="centermodal-photo-insert" class="savebtn pinkButton">등록</button>
 			</div>
 		</div>
 	</div>

@@ -204,3 +204,10 @@ tbody {
 #deletecheck {
 	width: 20px;
 }
+
+#button-frame button {
+	margin-left: 7px;
+	border: none;
+	width: 55px;
+	height: 30px;
+}
