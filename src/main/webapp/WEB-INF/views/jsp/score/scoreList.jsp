@@ -94,7 +94,7 @@
 		<h1 class="modalh1">점수 입력</h1>
 
 		<!-- 모달창 안 테이블 -->
-		<form method="post" action="/insertScore">
+		<form method="post" action="insertScore">
 			<div>년도: ${year}, 분기: ${season}</div>
 
 			<input type="hidden" name="centerCode" value="${centerCode}" /> 
@@ -143,7 +143,6 @@
 
 <script type="text/javascript">
 	$(function() {
-
 		$(".open").click(function() {
 			$(".modal").fadeIn();
 		});

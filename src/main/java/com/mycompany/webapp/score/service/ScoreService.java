@@ -78,11 +78,6 @@ public class ScoreService implements IScoreService {
 		return scoreRepository.saveScore(score);
 	}
 
-	@Override
-	public int deleteScore(ScoreVO score) {
-
-		return 0;
-	}
 
 	@Override
 	@Transactional
@@ -108,6 +103,12 @@ public class ScoreService implements IScoreService {
 	public List<ScoreVO> usingCodeList() {
 
 		return scoreRepository.usingCodeList();
+	}
+
+	@Override
+	public int deleteScore(ScoreVO score) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
