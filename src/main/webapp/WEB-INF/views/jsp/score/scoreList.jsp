@@ -79,7 +79,7 @@
 		<form action="/saveScore" name="saveScore" method="post">
 			<button id="btn1">수정</button>
 		</form>
-		<button class="open">점수등록</button>
+		<button type="submit" class="open" >점수등록</button>
 	</div>
 </div>
 
@@ -112,7 +112,7 @@
 				</tr>
 
 
-				<c:forEach items="${usingCodeList}" var="usingCodeList">
+				<c:forEach items="${usingCodeList}" var = "usingCodeList">
 
 					<tr>
 
@@ -167,8 +167,8 @@
 		openButton.addEventListener("click", openModal);
 
 		//모달창 닫기//
-		const closeBtn = modal.querySelectorAll(".close-btn");
-		$(closeBtn).click(function() {
+		const = modal.querySelectorAll(".close-btn");
+		$(".close-btn").click(function() {
 			$(".modal").fadeOut();
 
 		})

@@ -106,13 +106,6 @@ AND
 AND check_year = #{checkYear}
 AND check_season = #{checkSeason};
 
-<!--  수정값이 없어서 발생하는 문제같음
-	  최근 년도만 수정가능하게 해야함 
-	
-	
-	서비스에서 mapper를 실행하는 함수에서 
-	
- -->
 </update> 
 <!-- 
 
