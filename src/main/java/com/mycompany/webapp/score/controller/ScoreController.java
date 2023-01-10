@@ -59,14 +59,17 @@ public class ScoreController {
 
 	@RequestMapping(value="/score", method = RequestMethod.GET)
 	public String centerscoreinquiry(ScoreVO scoreVO, Model model,HttpSession session) {
-
+		//로그인에 처리할 내용-------------------------------------
+		session.setAttribute("centerCode", 1);
+		session.setAttribute("userCode", 10006);
+		//------------------------------------------------
+		
+		//scoreVO.setCenterCode((Integer)session.getAttribute("centerCode"));
+		scoreVO.setCenterCode(1);
+		
 		List<ScoreVO> scoreList = scoreService.getScoreList(scoreVO);
 		model.addAttribute("scoreList",scoreList);
 		
-		//userCode는 session불러와서 담아놓을것 !일단세션에 없으니까 그냥 임의로 지정해서 넣어주기
-		//**고쳐야 함 **//
-		session.setAttribute("userCode", 1);
-
 		//기본날짜 설정
 		Calendar now = Calendar.getInstance();
 		int yy = now.get(Calendar.YEAR);
@@ -109,10 +112,10 @@ public class ScoreController {
 	 * 정윤선
 	 * 점수 수정
 	 * */
-	@RequestMapping(value="/saveScore",method = RequestMethod.POST)
+	@RequestMapping(value="/saveScore", method=RequestMethod.POST)
 	public String saveScore(ScoreVO score){
 		scoreService.saveScore(score);
-		return "redirect:/scoreList";
+		return "redirect:/score";
 	}
 
 	/*
@@ -121,7 +124,7 @@ public class ScoreController {
 	 * (모달창에서)
 	 * */   
 
-	@RequestMapping(value="/insertScore",method = RequestMethod.POST)
+	@RequestMapping(value="/insertScore", method=RequestMethod.POST)
 	public String insertsocre(ScoreVO scoreVO) {
 		
 		scoreService.insertScore(scoreVO);

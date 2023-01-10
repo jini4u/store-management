@@ -24,10 +24,6 @@
 	WHERE check_group_code = #{groupCode}
 </select>
 
-
-
-
-
 <!-- 
 점수조회,해당년도/해당분기 조회
 정윤선
@@ -58,8 +54,6 @@
 		AND I.check_season = #{checkSeason}
 		</if>
 	ORDER BY I.check_year, I.check_season DESC NULLS LAST
-
-
 </select>
 <!-- 
  점수 항목 조회
@@ -67,20 +61,21 @@
 정윤선
  -->
  <select id="usingCodeList"  resultType="com.mycompany.webapp.score.vo.ScoreVO">
-UPDATE 
-    inspection 
-SET
-    check_score = #{checkScore}
-WHERE
-    center_code =#{centerCode}
-AND
-    user_code = #{userCode}
-AND
-    check_group_code = #{checkGroupCode}
-AND 
-    check_detail_code = #{checkDetailCode}
-AND check_year = #{checkYear}
-AND check_season = #{checkSeason}
+ <![CDATA[
+ 
+select
+G.check_group_content as "checkGroupContent",
+D.check_detail_content as "checkDetailContent",
+D.check_group_code as"checkGroupCode",
+D.check_detail_code as "checkDetailCode"
+
+FROM check_group G
+	full outer JOIN check_detail D 
+	ON G.check_group_code = D.check_group_code
+WHERE D.check_detail_occupied = 'Y'
+
+
+]]>
 </select>
 <!-- 
 
@@ -90,10 +85,21 @@ AND check_season = #{checkSeason}
  -->
 
 <update id="saveScore" parameterType="com.mycompany.webapp.score.vo.ScoreVO">
-	UPDATE inspection
-	SET	CHECK_SCORE=#{checkScore}
-	WHERE center_code=#{centerCode} 
-		AND user_code=#{userCode}
+UPDATE
+    inspection 
+SET
+    check_score = #{checkScore}
+WHERE 
+    center_code =#{centerCode}
+AND
+    user_code = #{userCode}
+AND
+    check_group_code = #{checkGroupCode}
+AND 
+    check_detail_code = #{checkDetailCode}
+AND check_year = #{checkYear}
+AND check_season = #{checkSeason};
+
 <!--  수정값이 없어서 발생하는 문제같음
 	  최근 년도만 수정가능하게 해야함 
 	

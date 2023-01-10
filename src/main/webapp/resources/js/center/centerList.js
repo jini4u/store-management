@@ -1,3 +1,4 @@
+
 //centerCondition 바꿔주는 자스
 
 let getToday = function() {
@@ -58,6 +59,7 @@ function CallcenterList() {
 		var row = leftTableTr[i];
 
 		row.onclick = function () {
+			$("#centerName").attr("readonly", true);
 			let centercode = document.querySelector("#centerCode");
 			let centername = document.querySelector("#centerName");
 			let centertel = document.querySelector("#centerTel");
@@ -77,13 +79,10 @@ function CallcenterList() {
 			centercondition.value = this.cells[5].innerText;
 			if (this.cells[5].innerText == '폐점') {
 				centercondition.value = 'closed';
-				alert("돌아?1")
 			}else if(this.cells[5].innerText == '오픈예정') {
 				centercondition.value = 'notyet';
-				alert("돌아?2")
 			}else if(this.cells[5].innerText == '영업중') {
 				centercondition.value = 'o'+'-1';
-				alert("돌아?3")
 			}
 			centerguide.value = this.cells[6].textContent;
 			centerclosingdate.value =this.cells[7].textContext;
@@ -99,7 +98,6 @@ function CallcenterList() {
 //ceterInsert 해주는 자스
 $("#centerSavedBtn").click(function (){
 
-
 	let centercode = $("#centerCode").val();
 	let centername = $("#centerName").val();
 	let centertel = $("#centerTel").val();
@@ -108,13 +106,10 @@ $("#centerSavedBtn").click(function (){
 	let centeropeningDate = $("#centerOpeningDate").val();
 	let centerclosingDate = $("#centerClosingDate").val();
 
-
 	if (!$("#centerName").attr("readonly")) {
 		
 		let centercondition = $("#centerCondition").val();	
 		let insertURL = "/centerInsert";
-
-//		if ($("#centerTel").css("disabled")=="") {
 
 		$.ajax({
 			type:"POST",
@@ -161,8 +156,6 @@ $("#centerSavedBtn").click(function (){
 			}
 
 		});
-
-
 	}else{
 		let updateURL = "/centerUpdate";
 		let centercondition = document.querySelector("#centerCondition").value;
@@ -217,24 +210,18 @@ $("#centerSavedBtn").click(function (){
 
 //등록버튼
 $("#centerInsertBtn").click(function () {
-
+	
+	const newCenterCode = $("#newCenterCode").val();
+	
 	$(".removeDisabled").attr('disabled', false);
 	$("#centerName").attr("readonly", false);
-	
-	let centerCode = document.querySelector("#centerCode");
-	let hiddenCenterCode = document.querySelector("#hiddenCenterCode");
-	console.log(centerCode.value);
-	console.log(hiddenCenterCode.value);
-	if (centerCode !== hiddenCenterCode) {
-		centerCode.value ="";
-	}
 
 	//폐점일 비활성화
 	if ($("#centerOpeningDate").val('')) {
 		$("#centerClosingDate").attr("readonly",true);
 	}
 
-
+	$("#centerCode").val(newCenterCode);
 	$("#centerName").val('');
 	$("#centerTel").val('');
 	$("#centerCondition").val('');
@@ -244,17 +231,43 @@ $("#centerInsertBtn").click(function () {
 	$("#centerClosingDate").val('');
 });
 
+
 $("#findCenterList").click(function (){
+	let centerCode = $("#centerCode").val();
 	let centername = $("#findCenterName").val();
+	let centerGuide = $("#centerGuide").val();
+	let centerOpeningDate = $("#centerOpeningDate").val();
+	let centerCondition = $("#ceneterCondition").val();
+	let centerClosingDate = $("centerClosingDate").val();
 	console.log(centername);
-	$.ajax({
+	$.ajax({ 
 		url : "/findCenter",
 		type : "POST",
 		data : {
 			centerName : centername
 		},
 		success : function(results){
-			alert(results)
+			$("#centerList").empty();
+			let str = "<tr>";
+			$.each(results, function(i){
+				if(results[i].centerOpeningDate == null) {
+					results[i].centerOpeningDate = '-';
+				}else {
+					results[i].centerOpeningDate = results[i].centerOpeningDate.substring(0,10);
+				}
+				str += "<td>" + results[i].centerCode + "</td><td>" + results[i].centerName 
+				+"<td></td>" + results[i].centerOpeningDate + "<td></td>"
+				+ results[i].centerCondintion + "</td><td style='display:none'>"
+				+ results[i].centerGuide + "</td><td style='display:none'>" 
+				+ results[i].centerClosingDate +"</td>";
+				
+				str += "</tr>";
+			});
+			$("#center-left").append(str);
+			alert("성공");
+			$("#centerForm input").val('');
+			CallcenterList();
+			$(".removeDisabled").attr("disabled", true);
 		},
 		error: function( request, status, error ){
 			alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);

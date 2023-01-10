@@ -48,7 +48,6 @@ public abstract class POIClass {
 						
 						handlingData(cell);
 					} //cell 조회 while문 끝
-					
 				}
 			} //row 조회 while문 끝
 			file.close();
