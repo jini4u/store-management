@@ -91,9 +91,20 @@ WHERE D.check_detail_occupied = 'Y'
  -->
 
 <update id="saveScore" parameterType="com.mycompany.webapp.score.vo.ScoreVO">
-	UPDATE inspection
-	SET	CHECK_SCORE=#{checkScore}
-	WHERE center_code=#{centerCode}
+UPDATE
+    inspection 
+SET
+    check_score = #{checkScore}
+WHERE 
+    center_code =#{centerCode}
+AND
+    user_code = #{userCode}
+AND
+    check_group_code = #{checkGroupCode}
+AND 
+    check_detail_code = #{checkDetailCode}
+AND check_year = #{checkYear}
+AND check_season = #{checkSeason};
 
 <!--  수정값이 없어서 발생하는 문제같음
 	  최근 년도만 수정가능하게 해야함 
@@ -136,6 +147,12 @@ VALUES(
  
  </insert> 
 
+ 
+ 
+ 
+ 
+ 
+ 
  
 
 <!-- 

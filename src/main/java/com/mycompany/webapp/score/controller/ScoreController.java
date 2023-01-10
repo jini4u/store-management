@@ -1,16 +1,9 @@
 package com.mycompany.webapp.score.controller;
-import java.io.Console;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -28,6 +21,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.mycompany.webapp.score.service.IScoreService;
 import com.mycompany.webapp.score.vo.ScoreVO;
+
 
 /**
  * @ClassName : ScoreController
@@ -65,14 +59,17 @@ public class ScoreController {
 
 	@RequestMapping(value="/score", method = RequestMethod.GET)
 	public String centerscoreinquiry(ScoreVO scoreVO, Model model,HttpSession session) {
-
+		//로그인에 처리할 내용-------------------------------------
+		session.setAttribute("centerCode", 1);
+		session.setAttribute("userCode", 10006);
+		//------------------------------------------------
+		
+		//scoreVO.setCenterCode((Integer)session.getAttribute("centerCode"));
+		scoreVO.setCenterCode(1);
+		
 		List<ScoreVO> scoreList = scoreService.getScoreList(scoreVO);
 		model.addAttribute("scoreList",scoreList);
 		
-		//userCode는 session불러와서 담아놓을것 !일단세션에 없으니까 그냥 임의로 지정해서 넣어주기
-		//**고쳐야 함 **//
-		session.setAttribute("userCode", 1);
-
 		//기본날짜 설정
 		Calendar now = Calendar.getInstance();
 		int yy = now.get(Calendar.YEAR);
@@ -115,10 +112,10 @@ public class ScoreController {
 	 * 정윤선
 	 * 점수 수정
 	 * */
-	@RequestMapping(value="/saveScore",method = RequestMethod.POST)
+	@RequestMapping(value="/saveScore", method=RequestMethod.POST)
 	public String saveScore(ScoreVO score){
 		scoreService.saveScore(score);
-		return "redirect: /score";
+		return "redirect:/score";
 	}
 
 	/*
@@ -127,13 +124,12 @@ public class ScoreController {
 	 * (모달창에서)
 	 * */   
 
-	@RequestMapping(value="/insertScore",method = RequestMethod.POST)
+	@RequestMapping(value="/insertScore", method=RequestMethod.POST)
 	public String insertsocre(ScoreVO scoreVO) {
-		System.out.println("점수등록" + scoreService.insertScore(scoreVO));
+		
 		scoreService.insertScore(scoreVO);
-		System.out.println("점수등록" + scoreService.insertScore(scoreVO));
 
-		return "redirect:/score?centerCode=1";
+		return "redirect:/score";
 	}
 
 	/**
