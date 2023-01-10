@@ -9,7 +9,7 @@
 </div>
 <div class="buttonBox">
 	<div>
-		<button type="button" class="mappingButton">맵핑</button> <button type="button" class="releaseButton">해제</button>
+		<button type="button" class="pinkButton">맵핑</button> <button type="button" class="greyButton">해제</button>
 	</div>
 </div>
 

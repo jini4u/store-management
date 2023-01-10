@@ -1,8 +1,9 @@
 package com.mycompany.webapp.manager.vo;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.webapp.center.vo.CenterVO;
@@ -13,14 +14,23 @@ public class ManagerVO {
 	private int userCode;
 	private String userPassword;
 	private String userName;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date userBirth;
+	
 	private String userTel;
 	private String userEmail;
 	private int userTeamCode;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date userHireDate;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date userResignDate;
 	
 	private List<CenterVO> centerList;
+	
+	private String keyword;
 
 	public int getUserCode() {
 		return userCode;
@@ -102,16 +112,21 @@ public class ManagerVO {
 		this.centerList = centerList;
 	}
 
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
 	@Override
 	public String toString() {
 		return "ManagerVO [userCode=" + userCode + ", userPassword=" + userPassword + ", userName=" + userName
 				+ ", userBirth=" + userBirth + ", userTel=" + userTel + ", userEmail=" + userEmail + ", userTeamCode="
 				+ userTeamCode + ", userHireDate=" + userHireDate + ", userResignDate=" + userResignDate
-				+ ", centerList=" + centerList + "]";
+				+ ", centerList=" + centerList + ", keyword=" + keyword + "]";
 	}
-	
 
-	
-	
 	
 }

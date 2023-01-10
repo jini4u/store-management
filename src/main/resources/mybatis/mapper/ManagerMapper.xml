@@ -9,21 +9,24 @@
 <select id="selectManagerList" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
 <![CDATA[	
 	select * from(
-			select  rownum as rnum, 
-		   			U.user_code as "userCode",
-		  			U.user_name as "userName",
-		   			U.user_birth as "userBirth",
-		   			U.user_tel as "userTel",
-		   			U.user_email as "userEmail",
-		   			U.user_team_code as "userTeamCode",
-		  			U.user_hire_date as "userHireDate",
-		   			U.user_resign_date as "userResignDate"
-			from  userinfo U
-			where U.user_code < 20000 
-			and rownum <= #{endRowNo}
-			order by U.user_code desc
-			)
-			WHERE rnum >= #{startRowNo}
+		select rownum as rnum, userCode, userName, userBirth, userTel, userEmail, userTeamCode, userHireDate, userResignDate 
+		from (
+			select
+	   			user_code as userCode,
+	  			user_name as userName,
+	   			user_birth as userBirth,
+	   			user_tel as userTel,
+	   			user_email as userEmail,
+	   			user_team_code as userTeamCode,
+	  			user_hire_date as userHireDate,
+	   			user_resign_date as userResignDate
+			from  userinfo
+			where user_code < 20000 
+			order by user_code desc
+		)
+		where rownum <= #{endRowNo}
+	)
+	WHERE rnum >= #{startRowNo}
 			
 ]]>
 </select>
@@ -45,24 +48,8 @@ values	(#{userCode}, #{userPassword}, #{userName}, #{userBirth}, #{userTel}, #{u
 <!--담당자 정보 수정  -->
 <update id="updateManagerInfo" parameterType="com.mycompany.webapp.manager.vo.ManagerVO">
 	update userInfo
-	set user_tel=#{userTel}, user_email=#{userEmail}, user_team_code=#{userTeamCode}, user_resign_date=#{userResignDate}
+	set user_tel=#{userTel}, user_email=#{userEmail}, user_team_code=#{userTeamCode}, user_resign_date=#{userResignDate,jdbcType=DATE} 
 	where user_code= #{userCode}
-	
-<!-- 	update userInfo
-	<set>
-		<if test="userResignDate !=null">
-			user_tel=#{userTel}, user_email=#{userEmail}, user_team_code=#{userTeamCode}, user_resign_date=#{userResignDate,jdbcType=DATE}
-		</if>
-		<if test="userResignDate =null">
-			user_tel=#{userTel}, user_email=#{userEmail}, user_team_code=#{userTeamCode}
-		</if>
-	</set> 
-	where user_code= #{userCode}     -->
-	
-<!-- update userInfo
-	set user_tel=#{userTel}, user_email=#{userEmail}, user_team_code=#{userTeamCode}, user_resign_date= #{userResignDate,jdbcType=DATE}
-	where user_code= #{userCode}  -->
-
 </update>
 
  <!--담당자 전체 인원 수
@@ -72,23 +59,50 @@ values	(#{userCode}, #{userPassword}, #{userName}, #{userBirth}, #{userTel}, #{u
 SELECT COUNT(*) FROM userInfo
 </select>
 
-
-<!--키워드 별 담당자 인원 수  -->
-
 <!-- 키워드 별 담당자 검색 -->
+<!-- select * from(
+		select rownum as rnum, userCode, userName, userBirth, userTel, userEmail, userTeamCode, userHireDate, userResignDate 
+		from (
+			select
+	   			user_code as userCode,
+	  			user_name as userName,
+	   			user_birth as userBirth,
+	   			user_tel as userTel,
+	   			user_email as userEmail,
+	   			user_team_code as userTeamCode,
+	  			user_hire_date as userHireDate,
+	   			user_resign_date as userResignDate
+			from  userinfo
+			where user_code < 20000 
+			order by user_code desc
+		)
+		where rownum <= #{endRowNo}
+	)
+	WHERE rnum >= #{startRowNo} -->
+
 
 <!-- 
 	userCode로 담당 센터 조회
 	임유진
  -->
 <select id="getCenterByManager" parameterType="int" resultType="com.mycompany.webapp.center.vo.CenterVO">
-SELECT C.center_code AS "centerCode"
+<!-- SELECT C.center_code AS "centerCode"
 		, C.center_name AS "centerName"
 		, C.center_address AS "centerAddress"
 FROM mapping M
 	JOIN center C
     ON M.center_code = C.center_code
-WHERE M.user_code = #{userCode}
+WHERE M.user_code = #{userCode} -->
+
+SELECT center_code AS centerCode,
+       center_name AS centerName,
+       center_address AS centerAddress
+FROM center 
+WHERE center_code in (
+    select center_code
+    from mapping
+    where user_code = #{userCode}
+)
 </select>
 <!-- 
 	맵핑 해제

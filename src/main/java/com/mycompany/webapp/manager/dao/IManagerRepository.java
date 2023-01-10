@@ -37,11 +37,8 @@ public interface IManagerRepository {
 	//�떞�떦�옄 �쟾泥� �씤�썝 �닔
 	int countAllMgr();
 	
-	//키워드별 담당자 수
-	int selectManagerNumByKeyword(String keyword);
-	
 	//키워드별 담당자 검색
-	List<ManagerVO> searchManagerListByKeyword(String keyword);
+	List<ManagerVO> managerSearch(String keyword);
 	
 	//�쑀吏�
 	//userCode濡� �떞�떦 �꽱�꽣 議고쉶

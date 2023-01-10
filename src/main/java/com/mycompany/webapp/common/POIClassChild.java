@@ -11,6 +11,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mycompany.webapp.common.poi.POIClass;
+
 public class POIClassChild extends POIClass {
 	@Override
 	public void handlingData(Cell cell) {

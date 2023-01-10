@@ -24,11 +24,24 @@ public class ManagerService implements IManagerService {
 		return managerRepository.insertManager(mgr);
 	}
 	
+	@Override
+	public int getLastUserCode() {
+		return managerRepository.selectMaxManagerNo();
+	}
+	
 	/* author 怨좎�蹂�
 	 * �떞�떦�옄 紐⑸줉 議고쉶 */
 	@Override
 	public List<ManagerVO> selectManagerList(Pager pager) {
-		return managerRepository.selectManagerList(pager);
+		List<ManagerVO> managerList = managerRepository.selectManagerList(pager);
+		for(int i=0;i<managerList.size();i++) {
+			ManagerVO manager = managerList.get(i);
+			int userCode = manager.getUserCode();
+			List<CenterVO> centerList = getCenterByManager(userCode);
+			manager.setCenterList(centerList);
+		}
+		
+		return managerList;
 	}
 	
 	/* author 怨좎�蹂�
@@ -93,17 +106,14 @@ public class ManagerService implements IManagerService {
 	}
 
 	@Override
-	public int selectManagerNumByKeyword(String keyword) {
-		// TODO Auto-generated method stub
-		return 0;
+	public List<ManagerVO> managerSearch(String keyword) {
+		return managerRepository.managerSearch(keyword);
 	}
 
-	@Override
-	public List<ManagerVO> searchManagerListByKeyword(String keyword, int page) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+
+
+
+
 	
 
 	
