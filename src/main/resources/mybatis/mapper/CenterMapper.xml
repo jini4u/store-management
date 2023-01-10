@@ -2,29 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.center.dao.ICenterRepository">
 
-<select id="insertCenterCode" resultType="int">
-	SELECT NVL(MAX(center_code), 0000000) as centerCode
-	FROM CENTER
+<select id="getLastCenterCode" resultType="int">
+   SELECT NVL(MAX(center_code), 0000000) as centerCode
+   FROM CENTER
 </select>
 
 <insert id="insertCenter" parameterType="com.mycompany.webapp.center.vo.CenterVO">
-	INSERT INTO CENTER(
-		  center_code
-		, center_name
-		, center_tel
-		, center_address
-		, center_guide
-		, center_opening_date
-		, center_closing_date)
-	VALUES (
-		  #{centerCode}
-		, #{centerName}
-		, #{centerTel}
-		, #{centerAddress}
-		, #{centerGuide}
-		, #{centerOpeningDate,jdbcType=DATE}
-		, #{centerClosingDate,jdbcType=DATE})
+   INSERT INTO CENTER(
+        center_code
+      , center_name
+      , center_tel
+      , center_address
+      , center_guide
+      , center_opening_date
+      , center_closing_date)
+   VALUES (
+        #{centerCode}
+      , #{centerName}
+      , #{centerTel}
+      , #{centerAddress}
+      , #{centerGuide}
+      , #{centerOpeningDate,jdbcType=DATE}
+      , #{centerClosingDate,jdbcType=DATE})
 </insert>
+
+<select id="centerCondition" resultType="String"
+      parameterType="com.mycompany.webapp.center.vo.CenterVO">
+      select
+     NVL2(TO_CHAR(C.center_closing_date),'c'||TO_CHAR(FLOOR(SYSDATE-C.center_closing_date)),NVL2(TO_CHAR(C.center_opening_date),'o'||TO_CHAR(FLOOR(C.center_opening_Date - SYSDATE)),'notyet')) AS "centerCondition"
+      from center
+      where
+      center_code = #{centerCode}
+</select>
+
+
 
 <select id="centerList" parameterType="com.mycompany.webapp.common.vo.Pager" resultType="com.mycompany.webapp.center.vo.CenterVO">
 <![CDATA[
@@ -32,18 +43,18 @@ SELECT rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGu
         FROM(
         SELECT ROWNUM as rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGuide", "centerOpeningDate", "centerClosingDate", "centerCondition", "userCode", "userName"
         FROM(
-        SELECT
-		C.center_code as "centerCode"
-		, C.center_name as "centerName"
-		, C.center_tel as "centerTel"
-		, C.center_address as "centerAddress"
-		, C.center_guide as "centerGuide"
-		, C.center_opening_date as "centerOpeningDate"
-		, C.center_closing_date as "centerClosingDate"
-        , NVL2(TO_CHAR(C.center_closing_date),'c'||TO_CHAR(SYSDATE-C.center_closing_date),NVL2(TO_CHAR(C.center_opening_date),'o'||TO_CHAR(FLOOR(C.center_opening_Date - SYSDATE)),'notyet')) AS "centerCondition"
-        , U.user_code as "userCode"
-        , U.user_name as "userName"
-	FROM center C LEFT OUTER JOIN mapping M ON C.center_code = M.center_code
+	        SELECT
+		      C.center_code as "centerCode"
+		      , C.center_name as "centerName"
+		      , C.center_tel as "centerTel"
+		      , C.center_address as "centerAddress"
+		      , C.center_guide as "centerGuide"
+		      , C.center_opening_date as "centerOpeningDate"
+		      , C.center_closing_date as "centerClosingDate"
+	      	  , NVL2(TO_CHAR(C.center_closing_date),'c'||TO_CHAR(FLOOR(SYSDATE-C.center_closing_date)),NVL2(TO_CHAR(C.center_opening_date),'o'||TO_CHAR(FLOOR(C.center_opening_Date - SYSDATE)),'notyet')) AS "centerCondition"
+	     	  , U.user_code as "userCode"
+	     	  , U.user_name as "userName"
+   FROM center C LEFT OUTER JOIN mapping M ON C.center_code = M.center_code
                   LEFT OUTER JOIN userinfo U ON M.user_code = U.user_code
     ORDER BY "centerCode"
     )
@@ -52,6 +63,35 @@ SELECT rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGu
     WHERE rnum >= #{startRowNo}
 ]]>
 </select>
+
+<select id="findCenter" parameterType="map" resultType="com.mycompany.webapp.center.vo.CenterVO">
+<![CDATA[
+SELECT rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGuide", "centerOpeningDate", "centerClosingDate", "centerCondition", "userCode", "userName"
+        FROM(
+        SELECT ROWNUM as rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGuide", "centerOpeningDate", "centerClosingDate", "centerCondition", "userCode", "userName"
+        FROM(
+           SELECT
+            C.center_code as "centerCode"
+            , C.center_name as "centerName"
+            , C.center_tel as "centerTel"
+            , C.center_address as "centerAddress"
+            , C.center_guide as "centerGuide"
+            , C.center_opening_date as "centerOpeningDate"
+            , C.center_closing_date as "centerClosingDate"
+              , NVL2(TO_CHAR(C.center_closing_date),'c'||TO_CHAR(FLOOR(SYSDATE-C.center_closing_date)),NVL2(TO_CHAR(C.center_opening_date),'o'||TO_CHAR(FLOOR(C.center_opening_Date - SYSDATE)),'notyet')) AS "centerCondition"
+             , U.user_code as "userCode"
+             , U.user_name as "userName"
+   FROM center C LEFT OUTER JOIN mapping M ON C.center_code = M.center_code
+                  LEFT OUTER JOIN userinfo U ON M.user_code = U.user_code
+    WHERE C.center_name like('%' ||#{centerVO.centerName}||'%')
+    ORDER BY "centerCode"
+    )
+    WHERE rownum <= #{pager.endRowNo}
+    )
+    WHERE rnum >= #{pager.startRowNo}
+]]>
+</select>
+
 
 <select id="countAllCenters" resultType="int">
 SELECT COUNT(*) FROM center
@@ -67,7 +107,9 @@ INSERT INTO fileinfo (
 	, file_type
 	, file_detail
 	, file_path
-	, file_post_date )
+	, file_post_date 
+	, file_upload_user_code
+	)
 VALUES (
 	(SELECT NVL(MAX(file_no)+1, 1) FROM fileinfo)
 	, #{centerCode}
@@ -76,16 +118,53 @@ VALUES (
 	, #{fileType}
 	, #{fileDetail}
 	, #{filePath}
-	, SYSDATE )
+	, SYSDATE 
+	, #{uploadUserCode}
+	)
 ]]>
 </insert>
 
-<select id="getCenterImageNames" parameterType="int" resultType="String">
+<update id="centerUpdate"
+      parameterType="com.mycompany.webapp.center.vo.CenterVO">
+      UPDATE CENTER
+      SET
+      	center_name = #{centerName},
+      	center_tel = #{centerTel},
+      	center_address = #{centerAddress},
+      	center_guide = #{centerGuide},
+      	center_opening_date = #{centerOpeningDate,jdbcType=DATE},
+      	center_closing_date = #{centerClosingDate,jdbcType=DATE}
+      WHERE center_code = #{centerCode}
+</update>
+
+<select id="getCenterImageNames" parameterType="int" resultType="com.mycompany.webapp.common.vo.FileInfoVO">
 <![CDATA[
-SELECT file_saved_name as "fileSavedName"
-FROM fileinfo
+SELECT file_no AS "fileNo"
+		, file_original_name AS "originalName"
+		, file_saved_name AS "fileSavedName"
+		, user_name AS "uploadUserName"
+		, TO_CHAR(file_post_date, 'YYYY-MM-DD') AS "filePostDate"
+		, NVL(TO_CHAR(file_modify_date, 'YYYY-MM-DD'), ' ') AS "fileModifyDate"
+		, file_detail AS "fileDetail"
+FROM fileinfo F LEFT OUTER JOIN userinfo U ON F.file_upload_user_code = U.user_code
 WHERE center_code = #{centerCode}
 ORDER BY file_detail
 ]]>
 </select>
+
+<update id="updateImage" parameterType="com.mycompany.webapp.common.vo.FileInfoVO">
+<![CDATA[
+UPDATE fileinfo 
+SET file_original_name = #{originalName}
+	, file_detail = #{fileDetail}
+	, file_saved_name = #{fileSavedName}
+	, file_modify_date = SYSDATE
+WHERE file_no = #{fileNo}
+]]>
+</update>
+
+<delete id="deleteImage" parameterType="int">
+DELETE FROM fileinfo
+WHERE file_no = #{fileNo}
+</delete>
 </mapper>

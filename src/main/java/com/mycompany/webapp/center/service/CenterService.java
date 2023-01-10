@@ -16,8 +16,8 @@ public class CenterService implements ICenterService{
 	@Autowired
 	ICenterRepository centerRepository;
 	
-	public int insertCenterCode() {
-		return centerRepository.insertCenterCode();
+	public int getLastCenterCode() {
+		return centerRepository.getLastCenterCode()+1;
 	}
 
 	@Override
@@ -35,6 +35,16 @@ public class CenterService implements ICenterService{
 	public int countAllCenters() {
 		return centerRepository.countAllCenters();
 	}
+	@Override
+	public int centerUpdate(CenterVO centerVO) {
+		return centerRepository.centerUpdate(centerVO);
+	}
+
+	//센터운영상태
+	@Override
+	public String centerCondition(CenterVO centerVO) {
+		return centerRepository.centerCondition(centerVO);
+	}
 	
 	@Override
 	public int addCenterImage(FileInfoVO file) {
@@ -42,7 +52,28 @@ public class CenterService implements ICenterService{
 	}
 	
 	@Override
-	public List<String> getCenterImageNames(int centerCode) {
+	public List<FileInfoVO> getCenterImageNames(int centerCode) {
 		return centerRepository.getCenterImageNames(centerCode);
 	}
+	
+	@Override
+	public int updateImage(FileInfoVO file) {
+		return centerRepository.updateImage(file);
+	}
+	
+	@Override
+	public int deleteImage(List<Integer> fileNoList) {
+		int result = 0;
+		for(int fileNo:fileNoList) {
+			result += centerRepository.deleteImage(fileNo);
+		}
+		return result;
+	}
+
+	@Override
+	public List<CenterVO> findCenter(Pager pager, CenterVO centerVO) {
+		return centerRepository.findCenter(pager ,centerVO);
+	}
+
+
 }

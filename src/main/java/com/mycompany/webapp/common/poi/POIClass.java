@@ -27,7 +27,9 @@ public abstract class POIClass {
 			//경로, 이름 이용 파일에 대한 입력스트림 생성
 			FileInputStream file = new FileInputStream(new File(filePath, fileName));
 			//엑셀파일로 Workbook 인스턴스 생성
+
 			XSSFWorkbook workbook = new XSSFWorkbook(file);
+
 			//0번 인덱스(첫번째)시트를 가져온다
 			XSSFSheet sheet = workbook.getSheetAt(0);
 			//모든 row 조회를 위한 반복자 획득

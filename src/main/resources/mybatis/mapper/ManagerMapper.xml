@@ -60,7 +60,7 @@ SELECT COUNT(*) FROM userInfo
 </select>
 
 <!-- 키워드 별 담당자 검색 -->
-select * from(
+<!-- select * from(
 		select rownum as rnum, userCode, userName, userBirth, userTel, userEmail, userTeamCode, userHireDate, userResignDate 
 		from (
 			select
@@ -78,7 +78,7 @@ select * from(
 		)
 		where rownum <= #{endRowNo}
 	)
-	WHERE rnum >= #{startRowNo}
+	WHERE rnum >= #{startRowNo} -->
 
 
 <!-- 

@@ -1,16 +1,20 @@
 package com.mycompany.webapp.center.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.tomcat.util.json.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,16 +61,17 @@ public class CenterController {
 		model.addAttribute("pager", pager);
 		return "jsp/center/centerphoto";
 	}
-	//url은 value에 적혀있는 값으로 동작하고, centerlist.jsp 페이지를 로딩해준다?
+	/*//url은 value에 적혀있는 값으로 동작하고, centerlist.jsp 페이지를 로딩해준다?
 	@GetMapping(value="/centerInsert")
 	public String insertCenter(Model model) {
 		return "jsp/center/centerlist";
-	}
+	}*/
 	//물어보기
 	@ResponseBody
 	@PostMapping(value="/centerInsert")
-	public List<CenterVO>  insertCenter(@RequestParam(defaultValue="1") int pageNo, CenterVO centerVO) {
-		centerVO.setCenterCode(centerService.insertCenterCode()+1);
+	public List<CenterVO> insertCenter(@RequestParam(defaultValue="1") int pageNo, CenterVO centerVO) {
+		centerVO.setCenterCode(centerService.getLastCenterCode());
+		System.out.println("센터인서트"+centerVO);
 		centerService.insertCenter(centerVO);
 		int totalRows = centerService.countAllCenters();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
@@ -73,53 +79,43 @@ public class CenterController {
 		return list;
 	}
 
-	/* 여기 수정해주세용~~
 	@GetMapping(value="/centerList")
-	public String centerList(Model model) throws Exception {
-
-		//calendar 객체를 생성하여 현재 날짜와 시간정보를 가져옵니다
-		Calendar calendar = Calendar.getInstance();
-		//원하는 date형식을 지정
-		SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD");
-//		Date nowToday = Calendar.getInstance().getTime();
-		//가져온 정보를 format 후 string 으로 저장
-		String now = format.format(calendar.getTime()).replaceAll("-", "");
-		int nowToday = Integer.parseInt(now);
-		
-		model.addAttribute("centerCode", centerService.insertCenterCode()+1);
-		model.addAttribute("centerList" ,centerService.centerList());
-		List<CenterVO> centerList = centerService.centerList();
-		String con = "";
-		//현재 날짜 구하기
-		//센터 상태 정보 , 센터리스트 만큼 돌려야 함
-		List<String>conList = new ArrayList<String>();
-
-		for(int i=0; i<centerList.size(); i++) {
-			String open = centerList.get(i).getCenterOpeningDate().replaceAll("-","");
-			String close = centerList.get(i).getCenterClosingDate().replaceAll("-","");
-//			Date openDate = format.parse(open);
-//			Date closeDate = format.parse(close);
-			
-			
-			int openInteger = Integer.parseInt(open);
-			int closeInteger = Integer.parseInt(close);
-			
-//			int openCenter = openInteger.compareTo(nowToday); //오픈예정 1
-//			int expectedCenter = closeInteger.compareTo(nowToday); // 오픈중 -1
-//			int closeCenter = close.compareTo(nowToday); //폐점 1
-			
-			if (openInteger > nowToday) {
-				con = "N";
-			}if (openInteger <= nowToday) {
-				con = "Y";
-			}if ( closeInteger > 00000000 && closeInteger < nowToday && openInteger < nowToday) {
-				con = "N";
-			}
-			conList.add(con);
-		}
-		model.addAttribute("centerConList", conList);
+	public String centerList(@RequestParam(defaultValue="1")int pageNo, Model model, CenterVO centerVO){
+		int totalRows = centerService.countAllCenters();
+		Pager pager = new Pager(10, 10, totalRows, pageNo);
+		model.addAttribute("newCenterCode", centerService.getLastCenterCode());
+		model.addAttribute("centerList", centerService.centerList(pager));
+		model.addAttribute("pager", pager);
 		return "jsp/center/centerlist";
-	}*/
+	}
+	
+	@ResponseBody
+	@PostMapping(value ="/centerUpdate")
+	public List<CenterVO> centerUpdate(@RequestParam(defaultValue="1")int pageNo, Model model, CenterVO centerVO){
+		int totalRows = centerService.countAllCenters();
+		Pager pager = new Pager(10, 10, totalRows, pageNo);
+		model.addAttribute("centerList", centerService.centerList(pager));
+		centerService.centerUpdate(centerVO);
+		List<CenterVO> centerList = centerService.centerList(pager);
+		System.out.println(centerList);
+		return centerList;
+	}
+	@ResponseBody
+	@PostMapping(value ="/findCenter")
+	public List<CenterVO> findCenter(@RequestParam(defaultValue="1")int pageNo, CenterVO centerVO, Model model) {
+		int totalRows = centerService.countAllCenters();
+		Pager pager = new Pager(10, 10, totalRows, pageNo);
+		model.addAttribute("pager", pager);
+		centerVO.setCenterName(centerVO.getCenterName());
+		System.out.println(centerVO.getCenterName());
+		List<CenterVO> centerList = centerService.findCenter(pager,centerVO);
+		return centerList;
+	}
+	
+	@GetMapping(value="/excelUpload")
+	public String excelUplaod() {
+		return "jsp/center/excelupload";
+	}
 
 	/**
 	 * @author 임유진
@@ -144,6 +140,7 @@ public class CenterController {
 	public @ResponseBody int addCenterImage(MultipartHttpServletRequest request) throws IOException {
 		String fileDetail = request.getParameter("fileDetail");
 		int centerCode = Integer.parseInt(request.getParameter("centerCode"));
+		int uploadUserCode = Integer.parseInt(request.getParameter("uploadUserCode"));
 		List<MultipartFile> files = request.getFiles("centerImage");
 		
 		int result = 0;
@@ -152,14 +149,14 @@ public class CenterController {
 			FileInfoVO newFile = new FileInfoVO();
 			newFile.setFileDetail(fileDetail);
 			newFile.setCenterCode(centerCode);
+			newFile.setUploadUserCode(uploadUserCode);
 			newFile.setOriginalName(file.getOriginalFilename());
 			String fileSavedName = "centerCode_"+centerCode+"+originalName_"+file.getOriginalFilename();
 			//Path는 나중엔 서버상의 Path로 바꾸기
-			String filePath = "/Users/parkdoyoung/Downloads/ujinTest/";
+			String filePath = "C:/dev/uploadfiles/";
 			newFile.setFileSavedName(fileSavedName);
 			newFile.setFileType(file.getContentType());
 			newFile.setFilePath(filePath);
-			logger.info(newFile.toString());
 			file.transferTo(new File(filePath+fileSavedName));
 			result += centerService.addCenterImage(newFile);
 		}
@@ -167,8 +164,55 @@ public class CenterController {
 	}
 	
 	@RequestMapping("/getCenterImages/{centerCode}")
-	public @ResponseBody List<String> getCenterImages(@PathVariable int centerCode) {
-		//센터코드에 맞춰서 파일이름만 리턴해주면 됨
+	public @ResponseBody List<FileInfoVO> getCenterImages(@PathVariable int centerCode) {
+		//센터코드에 맞춰서 파일 리턴해주면 됨
 		return centerService.getCenterImageNames(centerCode);
+	}
+	
+	@RequestMapping(value="/updateImage", method=RequestMethod.POST)
+	public @ResponseBody int updateImage(MultipartHttpServletRequest request) throws Exception {
+		FileInfoVO file = new FileInfoVO();
+		
+		file.setFileNo(Integer.parseInt(request.getParameter("fileNo")));
+		file.setOriginalName(request.getParameter("newOriginalName"));
+		file.setFileDetail(request.getParameter("fileDetail"));
+		int centerCode = Integer.parseInt(request.getParameter("centerCode"));
+		String oldOriginalName = (String)request.getParameter("oldOriginalName");
+		String oldSavedName = "centerCode_"+centerCode+"+originalName_"+oldOriginalName;
+		File oldFile = new File("C:/dev/uploadfiles/"+oldSavedName);
+		String newSavedName = "centerCode_"+centerCode+"+originalName_"+file.getOriginalName();
+		
+		file.setFileSavedName(newSavedName);
+		File newFile = new File("C:/dev/uploadfiles/"+newSavedName);
+
+		byte[] buf = new byte[1024];
+		FileInputStream is = null;
+		FileOutputStream os = null;
+		
+		if(!oldFile.renameTo(newFile)) {
+			buf = new byte[1024];
+			is = new FileInputStream(oldFile);
+			os = new FileOutputStream(newFile);
+			
+			int read = 0;
+			while((read=is.read(buf,0,buf.length)) != -1) {
+				os.write(buf, 0, read);
+			}
+			
+			is.close();
+			os.close();
+			oldFile.delete();
+		}
+		
+		return centerService.updateImage(file);
+	}
+	
+	@RequestMapping(value="/deleteImage", method=RequestMethod.POST)
+	public @ResponseBody int deleteImage(@RequestBody String request) {
+		List<Integer> fileNoList = new ArrayList<Integer>();
+		for(String fileNo:request.split(",")) {
+			fileNoList.add(Integer.parseInt(fileNo));
+		}
+		return centerService.deleteImage(fileNoList);
 	}
 }
