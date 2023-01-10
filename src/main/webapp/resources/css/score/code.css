@@ -97,3 +97,8 @@ button:hover {
 .verticalhr {
 	margin: -6px;
 }
+
+.pinkButton {
+	padding: 0px;
+	font-size: 0.95em;
+}

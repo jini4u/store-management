@@ -6,9 +6,11 @@
 <link href="resources/css/center/centerphoto.css" rel="stylesheet">
 <div id="center-photo-total">
 	<div id="photo-left-frame">
-		<div id="center-search">
-			<input type="text" placeholder="센터명" />
-			<button>검색</button>
+		<div class="search-box">
+			<input type="text" class="search-txt" name="" placeholder="검색">
+			<a class="search-btn" href="#"> <i class="fas fa-search"
+				aria-hidden="true"></i>
+			</a>
 		</div>
 		<div id="center-photo-first">
 			<table id="centertable" class="table click verticalTable">
@@ -74,9 +76,9 @@
 	</div>
 	<div id="photo-right-frame">
 		<div id="button-frame">
-			<button id="insert-center-modal" class="insert centerButton">등록</button>
-			<button id="update-center-modal" class="update centerButton">수정</button>
-			<button id="delete-center-modal" class="delete centerButton">삭제</button>
+			<button id="insert-center-modal" class="insert centerButton greyButton">등록</button>
+			<button id="update-center-modal" class="update centerButton greyButton">수정</button>
+			<button id="delete-center-modal" class="delete centerButton greyButton">삭제</button>
 		</div>
 		<div id="photo-frame">
 			<div id="photo-main-size">
