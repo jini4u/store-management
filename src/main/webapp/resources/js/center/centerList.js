@@ -240,7 +240,7 @@ $("#findCenterList").click(function (){
 	let centerCondition = $("#ceneterCondition").val();
 	let centerClosingDate = $("centerClosingDate").val();
 	console.log(centername);
-	$.ajax({
+	$.ajax({ 
 		url : "/findCenter",
 		type : "POST",
 		data : {
