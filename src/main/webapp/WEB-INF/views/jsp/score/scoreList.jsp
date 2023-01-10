@@ -35,7 +35,7 @@
 				<option value="2">2 분기</option>
 				<option value="1">1 분기</option>
 			</select>
-			<button type="submit">찾기</button>
+			<button type="submit" >찾기</button>
 		</form>
 	</div>
 
