@@ -17,7 +17,7 @@ public class CenterService implements ICenterService{
 	ICenterRepository centerRepository;
 	
 	public int getLastCenterCode() {
-		return centerRepository.getLastCenterCode();
+		return centerRepository.getLastCenterCode()+1;
 	}
 
 	@Override
