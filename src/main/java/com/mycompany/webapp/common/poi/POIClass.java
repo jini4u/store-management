@@ -1,4 +1,4 @@
-package com.mycompany.webapp.common;
+package com.mycompany.webapp.common.poi;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,10 +12,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
 public abstract class POIClass {
-	public void readWorkBook(MultipartFile mf) throws Exception {
-		XSSFWorkbook workbook = new XSSFWorkbook(mf.getInputStream());
-		
-	}
+//	public void readWorkBook(MultipartFile mf) throws Exception {
+//		XSSFWorkbook workbook = new XSSFWorkbook(mf.getInputStream());
+//		
+//	}
 	
 	/**
 	 * @ .xlsx 파일을 읽어오는 메소드
@@ -33,17 +33,23 @@ public abstract class POIClass {
 			//모든 row 조회를 위한 반복자 획득
 			Iterator<Row> rowIter = sheet.iterator();
 			//모든행 조회
+			int rowCnt = 0;
 			while(rowIter.hasNext()) {
+				rowCnt++;
 				//한줄씩 얻어오기
 				Row row = rowIter.next();
-				//모든 cell 조회를 위한 반복자 획득
-				Iterator<Cell> cellIter = row.iterator();
-				//모든 cell 조회
-				while(cellIter.hasNext()) {
-					//한칸씩 얻어오기
-					Cell cell = cellIter.next();
-					handlingData(cell);
-				} //cell 조회 while문 끝
+				if(rowCnt > 4) {
+					//모든 cell 조회를 위한 반복자 획득
+					Iterator<Cell> cellIter = row.iterator();
+					//모든 cell 조회
+					while(cellIter.hasNext()) {
+						//한칸씩 얻어오기
+						Cell cell = cellIter.next();
+						
+						handlingData(cell);
+					} //cell 조회 while문 끝
+					
+				}
 			} //row 조회 while문 끝
 			file.close();
 		} catch (IOException e) {

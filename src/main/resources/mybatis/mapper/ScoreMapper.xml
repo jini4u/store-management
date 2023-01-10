@@ -94,8 +94,6 @@ AND check_season = #{checkSeason}
 	SET	CHECK_SCORE=#{checkScore}
 	WHERE center_code=#{centerCode} 
 		AND user_code=#{userCode}
-		
-
 <!--  수정값이 없어서 발생하는 문제같음
 	  최근 년도만 수정가능하게 해야함 
 	
@@ -130,20 +128,11 @@ VALUES(
  	#{checkGroupCode}, 
  	#{checkDetailCode}, 
  	#{checkScore}
- 	)
- 
- 
+ 	) 
  ]]>
  
  </insert> 
 
- 
- 
- 
- 
- 
- 
- 
 
 <!-- 
 	상세코드 수정.

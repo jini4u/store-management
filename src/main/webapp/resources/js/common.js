@@ -28,6 +28,6 @@ function makeRequest(callback, method, url, sendItem){
 	}
 	//.open, .send로 요청하기
 	//.open(request method, URL, [true | false]) : 세번째 파라미터는 비동기성. 기본값은 true
-	httpRequest.open(method, url);
+	httpRequest.open(method, url, false);
 	httpRequest.send(sendItem); 
 }
