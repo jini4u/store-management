@@ -39,7 +39,7 @@
 	overflow: auto;
 	margin: 20px 20px 0px 20px;
 }
-
+/* 제목 디자인 */
 .titleBox {
 	display: flex;
 	align-items: center;
@@ -55,7 +55,7 @@
 .titleBox>h2 {
 	font-size: 32px;
 }
-
+/* 표 디자인 */
 .verticalTable,
 .rowTable 
 {
@@ -84,7 +84,7 @@
 	border-top: 1.5px solid #CCC;
 	text-align: center;
 }
-
+/* 검색 */
 .search-box {
 	top: 50%;
 	left: 50%;
@@ -122,4 +122,43 @@
 	line-height: 30px;
 	height: 40px;
 }
+/*버튼 */
+.pinkButton, .releaseButton {
+	border-radius: 9px;
+	display: inline-block;
+	cursor: pointer;
+	font-family: Arial;
+	font-size: 18px;
+	padding: 6px 25px;
+	text-decoration: none;
+	font-weight: 550;
+}
 
+.pinkButton:active, .greyButton:active {
+	position: relative;
+	top: 1px;
+}
+
+.pinkButton {
+	background-color: #FF8787;
+	border: 1px solid #FF8787;
+	color: #fff;
+}
+
+.pinkButton:hover {
+	background-color: #E26868;
+	color: #fff;
+	border: 1px solid #E26868;
+}
+
+.greyButton {
+	background-color: #ededed;
+	border: 1px solid #ededed;
+	color: #000000;
+}
+
+.greyButton:hover {
+	background-color: #bebebe;
+	color: #000000;
+	border: 1px solid #bebebe;
+}

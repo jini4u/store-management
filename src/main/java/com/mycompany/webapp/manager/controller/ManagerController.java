@@ -27,50 +27,44 @@ import com.mycompany.webapp.manager.vo.ManagerVO;
 public class ManagerController {
 	static final Logger logger=LoggerFactory.getLogger(ManagerController.class);
 
-	
+
 	@Autowired 
 	IManagerService managerService;
-	/* author ��蹂�
-	   �떞�떦�옄 紐⑸줉 議고쉶*/
+	/* author 은별
+	    담당자 목록조회*/
 	@RequestMapping(value="/managerList")
 	public String selectManagerList(@RequestParam(defaultValue="1") int pageNo,Model model) {
 		int totalRows = managerService.countAllMgr();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		List<ManagerVO> managerList = managerService.selectManagerList(pager);
-		for(int i=0;i<managerList.size();i++) {
-			ManagerVO manager = managerList.get(i);
-			int userCode = manager.getUserCode();
-			List<CenterVO> centerList = managerService.getCenterByManager(userCode);
-			manager.setCenterList(centerList);
-		}
 		model.addAttribute("managerList", managerList);
 		model.addAttribute("pager", pager);
-		int usercode = managerList.get(0).getUserCode();
-		model.addAttribute("userCode",usercode+1);
-		logger.info("managerList : " + managerList);
-		
 
+		logger.info("managerList : " + managerList);
+
+		int lastUserCode = managerService.getLastUserCode();
+		model.addAttribute("newUserCode", lastUserCode+1);
 		return "jsp/manager/managerlookup";
 	}
-	
-	/* author ��蹂�
-	   �떞�떦�옄 �긽�꽭 議고쉶*/
+
+	/* author 은별
+	  담당자 상세조회/
 	@RequestMapping(value="/managerDetail")
 	public String selectManagerDetail(Model model, @PathVariable int userCode) {
 		ManagerVO mgrDetails = managerService.selectManagerDetail(userCode);
 		model.addAttribute("managerVO",mgrDetails);
 		return "jsp/manager/managerdetail";
 	}
-	
-	/* author ��蹂�
-	  �떞�떦�옄 �벑濡� GET*/
+
+	/* author 은별
+	  담당자 등록 GET*/
 	@GetMapping(value="/managerInsert")
 	public String insertManager() {
 		return "jsp/manager/managerlookup";
 	}
-	
-	/* author ��蹂�
-	  �떞�떦�옄 �벑濡� POST*/
+
+	/* author 은별
+	  담당자 등록 POST*/
 	@ResponseBody
 	@PostMapping(value="/managerInsert")
 	public List<ManagerVO> insertManager(@RequestParam(defaultValue="1") int pageNo, ManagerVO mgr) {
@@ -81,18 +75,19 @@ public class ManagerController {
 		return managerList;
 	}
 
-	/* author ��蹂�
-	  �떞�떦�옄 �닔�젙 GET*/
+	/* author 은별
+	  담담자 수정 GET*/
 	@GetMapping(value="/managerUpdate")
 	public  String managerUpdate() {
 		return "jsp/manager/managerlookup";
 	}
-	
-	/* author ��蹂�
-	  �떞�떦�옄 �닔�젙 POST*/
+
+	/* author 은별
+	  담담자 수정 POST*/
 	@ResponseBody
 	@PostMapping(value="/managerUpdate")
 	public  List<ManagerVO> managerUpdate(@RequestParam(defaultValue="1") int pageNo, ManagerVO mgr) {
+		logger.info(mgr.toString());
 		managerService.managerUpdate(mgr);
 		int totalRows = managerService.countAllMgr();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
@@ -101,8 +96,19 @@ public class ManagerController {
 		return managerList;
 	}
 	
-	
-	//�떞�떦�옄 留ㅽ븨
+	/* author 은별
+	  담담자 검색 */
+	@GetMapping(value="/managerSearch")
+	@ResponseBody
+	private String managerSearch(@RequestParam(defaultValue="1") String keyword, Model model){
+		List<ManagerVO> mgrSearchList = managerService.managerSearch(keyword);
+		model.addAttribute("mgrSearchList",mgrSearchList);
+		model.addAttribute("keyword",keyword);
+		return "jsp/manager/managerlookup";
+	}
+
+
+	//담당자 매핑
 	@RequestMapping(value="/managerMapping")
 	public String managerMapping(@RequestParam(defaultValue="1") int pageNo, Model model) {
 		int totalRows = managerService.countAllMgr();
@@ -112,10 +118,10 @@ public class ManagerController {
 	}
 
 	/**
-	 * @author �엫�쑀吏�
-	 * @describe �떞�떦�옄�뿉 �뵲�씪 �떞�떦�븯�뒗 �꽱�꽣 議고쉶
-	 * @param {Integer} userCode �떞�떦�옄 userCode
-	 * @return List<�떞�떦 以묒씤 CenterVO>
+	 * @author 임유진
+	 * @describe 담당자에 따라 담당하는 센터 조회
+	 * @param {Integer} userCode 담당자 userCode
+	 * @return List<담당 중인 CenterVO>
 	 * */
 	@RequestMapping(value="/getCenters/{userCode}")
 	public @ResponseBody List<CenterVO> getCenterByManager(@PathVariable int userCode){
@@ -123,10 +129,10 @@ public class ManagerController {
 	}
 
 	/**
-	 * @author �엫�쑀吏�
-	 * �떞�떦�옄�� �꽱�꽣 媛� 留듯븨 �빐�젣
-	 * @param String {userCode:�떞�떦�옄肄붾뱶, centerCode:�꽱�꽣肄붾뱶} �삎�깭
-	 * @return int �빐�젣�맂 留듯븨 愿�怨� �닔
+	 * @author 임유진
+	 * 담당자와 센터 간 맵핑 해제
+	 * @param String {userCode:담당자코드, centerCode:센터코드} 형태
+	 * @return int 해제된 맵핑 관계 수
 	 * */
 	@RequestMapping(value="/cancelMapping", method=RequestMethod.POST)
 	public @ResponseBody int cancelMapping(@RequestBody String req) throws Exception {
@@ -136,12 +142,12 @@ public class ManagerController {
 		int centerCode = Integer.parseInt(map.get("centerCode"));
 		return managerService.cancelMapping(userCode, centerCode);
 	}
-	
+
 	/**
-	 * @author �엫�쑀吏�
-	 * �떞�떦�옄�� �꽱�꽣 媛� 留듯븨 �슂泥�
-	 * @param String {userCode:�떞�떦�옄肄붾뱶, centerCode:�꽱�꽣肄붾뱶} �삎�깭
-	 * @return int 諛섏쁺�맂 留듯븨 �닔
+	 * @author 임유진
+	 * 담당자와 센터 간 맵핑 요청
+	 * @param String {userCode:담당자코드, centerCode:센터코드} 형태
+	 * @return int 반영된 맵핑 수
 	 * */
 	@RequestMapping(value="/mapping", method=RequestMethod.POST)
 	public @ResponseBody int mapping(@RequestBody String req) throws Exception {

@@ -7,23 +7,24 @@ import com.mycompany.webapp.common.vo.Pager;
 import com.mycompany.webapp.manager.vo.ManagerVO;
 
 public interface IManagerService {
-	/* author 怨좎�蹂�
-	 * �떞�떦�옄 �벑濡� */
+	/* author 은별
+	 * 담당자 등록 */
 	int insertManager(ManagerVO mgr);
 	
-	/* author 怨좎�蹂�
-	 * �떞�떦�옄 紐⑸줉 議고쉶 */
+	/* author 은별
+	 * 담당자 등록 */
 	List<ManagerVO> selectManagerList(Pager pager);
 	
-	/* author 怨좎�蹂�
-	 * �떞�떦�옄 �젙蹂� �긽�꽭議고쉶 */
+	/* author 은별
+	 * 담당자 등록 */
 	ManagerVO selectManagerDetail(int userCode);
 	
-	/* author 怨좎�蹂�
-	 * �떞�떦�옄 �젙蹂� �닔�젙*/
+	/* author 은별
+	 * 담당자 등록 */
 	int managerUpdate(ManagerVO mgr);
 	
-	//�쑀吏�
+	/* author 유진
+	 * 담당자 매핑 */
 	List<CenterVO> getCenterByManager(int userCode);
 	int cancelMapping(int userCode, int centerCode);
 	int mapping(int userCode, int centerCode);
@@ -31,13 +32,11 @@ public interface IManagerService {
 	int countAllMgr();
 	
 	/* author 은별
-		검색 
-	 * */
-	//키워드별 담당자 수
-	int selectManagerNumByKeyword(String keyword);
-		
+	 * 담당자 검색 */
 	//키워드별 담당자 검색
-	List<ManagerVO> searchManagerListByKeyword(String keyword, int page);
+	List<ManagerVO> managerSearch(String keyword);
+
+	int getLastUserCode();
 		
 	 
 }

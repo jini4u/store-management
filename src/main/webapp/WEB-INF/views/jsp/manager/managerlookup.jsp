@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet" type="text/css"
 	href="resources/css/manager/managerlookup.css">
 
@@ -29,7 +30,6 @@
 					<th>팀코드</th>
 					<th>입사일자</th>
 					<th>퇴사일자</th>
-					<th>센터명</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -41,24 +41,24 @@
 							}
 						});
 					"> -->
-					<tr>
+					<tr id="mgrListTr">
 						<td id=existenceUserCode>${managerVO.userCode}</td>
 						<td>${managerVO.userName}</td>
-						<td>${managerVO.userBirth}</td>
+						<td><fmt:formatDate value="${managerVO.userBirth}" pattern="yyyy-MM-dd"/></td>
 						<td>${managerVO.userTel}</td>
 						<td>${managerVO.userEmail}</td>
 						<td>${managerVO.userTeamCode}</td>
-						<td>${managerVO.userHireDate}</td>
-						<td>${managerVO.userResignDate}</td>
-						<td><select>
+						<td><fmt:formatDate value="${managerVO.userHireDate}" pattern="yyyy-MM-dd"/></td>
+						<td><fmt:formatDate value="${managerVO.userResignDate}" pattern="yyyy-MM-dd"/></td>
+<%-- 						<td><select>
 								<c:forEach var="center" items="${managerVO.centerList}">
 									<option>${center.centerName}</option>
 								</c:forEach>
-						</select></td>
+						</select></td> --%>
 					</tr>
 				</c:forEach>
 
-				<tr>
+				<%-- <tr>
 					<td id="pager" colspan="9">
 						<div>
 							<a class="innerPager" href="managerList?pageNo=1">처음</a>
@@ -85,9 +85,34 @@
 								href="managerList?pageNo=${pager.totalPageNo}">맨끝</a>
 						</div>
 					</td>
-				</tr>
+				</tr> --%>
 			</tbody>
 		</table>
+		
+		<div>
+							<a class="innerPager" href="managerList?pageNo=1">처음</a>
+							<c:if test="${pager.groupNo>1}">
+								<a class="innerPager"
+									href="managerList?pageNo=${pager.startPageNo-1}">이전</a>
+							</c:if>
+
+							<c:forEach var="i" begin="${pager.startPageNo}"
+								end="${pager.endPageNo}">
+								<c:if test="${pager.pageNo != i}">
+									<a class="innerPager" href="managerList?pageNo=${i}">${i}</a>
+								</c:if>
+								<c:if test="${pager.pageNo == i}">
+									<a class="innerPager" href="managerList?pageNo=${i}">${i}</a>
+								</c:if>
+							</c:forEach>
+
+							<c:if test="${pager.groupNo<pager.totalGroupNo}">
+								<a class="innerPager"
+									href="managerList?pageNo=${pager.endPageNo+1}">다음</a>
+							</c:if>
+							<a class="innerPager"
+								href="managerList?pageNo=${pager.totalPageNo}">맨끝</a>
+						</div>
 
 		<div style="height: 30px;"></div>
 
@@ -98,8 +123,11 @@
 				<tr>
 					<th scope="row">담당자코드</th>
 					<td><input type="text" name="userCode" id="userCode"
-						value="${userCode}" readonly> <input type="hidden"
-						name="userPassword" id="userPassword"></td>
+						value="${newUserCode}" readonly> 
+						<input type="hidden" value="${newUserCode}" id="newUserCode">
+						<input type="hidden"
+						name="userPassword" id="userPassword">
+					</td>
 					<th scope="row">담당자명</th>
 					<td><input type="text" name="userName" id="userName"></td>
 				</tr>
@@ -121,6 +149,14 @@
 					<th scope="row">퇴사일자</th>
 					<td><input type="date" name="userResignDate"
 						id="userResignDate" readonly></td>
+				</tr>
+				<tr>
+					<th>담당 센터명</th>
+					<td colspan="3">
+						<c:forEach var="center" items="${managerVO.centerList}">
+							${center.centerName}
+						</c:forEach>
+					</td>
 				</tr>
 			</table>
 		</form>

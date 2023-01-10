@@ -1,4 +1,4 @@
-package com.mycompany.webapp.common;
+package com.mycompany.webapp.common.poi;
 
 import java.io.File;
 import java.io.FileInputStream;
