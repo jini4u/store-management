@@ -16,8 +16,8 @@ public class CenterService implements ICenterService{
 	@Autowired
 	ICenterRepository centerRepository;
 	
-	public int insertCenterCode() {
-		return centerRepository.insertCenterCode();
+	public int getLastCenterCode() {
+		return centerRepository.getLastCenterCode();
 	}
 
 	@Override
@@ -35,15 +35,8 @@ public class CenterService implements ICenterService{
 	public int countAllCenters() {
 		return centerRepository.countAllCenters();
 	}
-
 	@Override
-	public List<CenterVO> centerList() {
-		// TODO Auto-generated method stub
-		return centerRepository.centerList();
-	}
-
-	@Override
-	public List<CenterVO> centerUpdate(CenterVO centerVO) {
+	public int centerUpdate(CenterVO centerVO) {
 		return centerRepository.centerUpdate(centerVO);
 	}
 
@@ -76,4 +69,11 @@ public class CenterService implements ICenterService{
 		}
 		return result;
 	}
+
+	@Override
+	public List<CenterVO> findCenter(Pager pager, CenterVO centerVO) {
+		return centerRepository.findCenter(pager ,centerVO);
+	}
+
+
 }

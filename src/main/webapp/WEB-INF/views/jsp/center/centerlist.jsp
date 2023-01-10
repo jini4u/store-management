@@ -5,6 +5,8 @@
 <link rel="stylesheet" href="resources/css/center/centerList.css">
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <h1 class="title">센터 관리</h1>
+<input type="text" name="centerCode" id="findCenterName">
+<button type="submit" id="findCenterList">찾기</button>
 <table class="verticalTable" id="center-left">
 	<thead>
 		<tr>
@@ -30,23 +32,42 @@
 				
 				<td style=display:none>${centerList.centerGuide}</td>
 				<td style=display:none>${fn:substring(centerList.centerClosingDate,0,10)}</td>
-				
-					
-				
-<%-- 				<td style="display:none">${centerList.centerGuide}</td> --%>
-<%-- 				<td style="display:none">${fn:substring(centerList.centerClosingDate,0,10)}</td> --%>
-				
 			</tr>
 		</c:forEach>
+			<tr>
+				<td id="pager" colspan="4">
+					<div>
+						<a class="innerPager" href="centerList?pageNo=1">처음</a>
+						<c:if test="${pager.groupNo>1}">
+							<a class="innerPager" href="centerList?pageNo=${pager.startPageNo-1}">이전</a>
+						</c:if>
+						
+						<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+							<c:if test="${pager.pageNo != i}">
+								<a class="innerPager" href="centerList?pageNo=${i}">${i}</a>
+							</c:if>
+							<c:if test="${pager.pageNo == i}">
+								<a class="innerPager" href="centerList?pageNo=${i}">${i}</a>
+							</c:if>
+						</c:forEach>
+						
+						<c:if test="${pager.groupNo<pager.totalGroupNo}">
+							<a class="innerPager" href="centerList?pageNo=${pager.endPageNo+1}">다음</a>
+						</c:if>
+						<a class="innerPager" href="centerList?pageNo=${pager.totalPageNo}">맨끝</a>
+					</div>
+				</td>
+			</tr>
 	</tbody>
 </table>
-<form action="/centerInsert" method="post" id="centerForm">
+<form id="centerForm">
 	<table class="rowTable" id="center-right">
 			<tr>
 				<th>센터 코드</th>
-				<td><input type="text" name="centerCode" value="${centerCode}" id="centerCode" class="removeDisabled" disabled="disabled" readonly="readonly"></td>
+				<td><input type="text" name="centerCode" value="${newCenterCode}" id="centerCode" class="removeDisabled" disabled="disabled" readonly="readonly">
+				<div id="hiddenCenterCode" value="${newCenterCode}" style="display:none;"></div></td>
 				<th>센터명</th>
-				<td><input type="text" name="centerName" id="centerName" class="removeDisabled" disabled="disabled"></td>
+				<td><input type="text" name="centerName" id="centerName" class="removeDisabled" disabled="disabled" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<th>전화번호</th>

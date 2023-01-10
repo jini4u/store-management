@@ -284,11 +284,10 @@ deleteBtn.addEventListener("click", function(){
 			checked.push(checkbox[i].value);
 		}
 	}
-	
-	console.log(JSON.stringify(checked));
-	makeRequest(afterDeleteImg, 'POST', '/deleteImage', JSON.stringify(checked));
+	makeRequest(afterDeleteImg, 'POST', '/deleteImage', checked);
 });
 
 function afterDeleteImg(){
 	deleteModal.style.display = "none";
+	makeRequest(getCenterImages,'GET','/getCenterImages/'+centerNameArr[4].innerText);
 }
