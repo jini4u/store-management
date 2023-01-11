@@ -20,6 +20,6 @@
 			</table>
 				</form>
 		</div>
-		<button type="button" class="button" id="updatebutton">수정</button>
+		<button type="button" class="button pinkButton" id="updatebutton">수정</button>
 	</div>
 </div>

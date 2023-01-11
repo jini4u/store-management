@@ -28,8 +28,8 @@
 					</div>
 			<hr>
 					<div class="buttonsdiv">
-						<button type="button" id="insertgroup">추가</button>
-						<button type="button" id="savegroup">저장</button>
+						<button type="button" id="insertgroup" class="pinkButton">추가</button>
+						<button type="button" id="savegroup" class="pinkButton">저장</button>
 					</div>
 			</form>
 			<table id="grouptable" class="codetable">
@@ -67,8 +67,8 @@
 					</div>
 			<hr>
 					<div class="buttonsdiv">
-						<button type="button" id="insertdetail">추가</button>
-						<button type="button" id="savedetail">저장</button>
+						<button type="button" id="insertdetail" class="pinkButton">추가</button>
+						<button type="button" id="savedetail" class="pinkButton">저장</button>
 					</div>
 			</form>
 			<table id="detailtable" class="codetable">
