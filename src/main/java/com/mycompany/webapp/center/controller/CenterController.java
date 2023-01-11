@@ -18,6 +18,7 @@ import org.apache.tomcat.util.json.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,6 +52,9 @@ public class CenterController {
 	private static Logger logger = LoggerFactory.getLogger(CenterController.class);
 	@Autowired
 	ICenterService centerService;
+	
+	@Value("${file.path}")
+	private String filePath;
 
 	@RequestMapping(value="/centerPhoto")
 	public String manageCenterPhoto(@RequestParam(defaultValue="1") int pageNo, Model model) {
@@ -152,8 +156,6 @@ public class CenterController {
 			newFile.setUploadUserCode(uploadUserCode);
 			newFile.setOriginalName(file.getOriginalFilename());
 			String fileSavedName = "centerCode_"+centerCode+"+originalName_"+file.getOriginalFilename();
-			//Path는 나중엔 서버상의 Path로 바꾸기
-			String filePath = "C:/dev/uploadfiles/";
 			newFile.setFileSavedName(fileSavedName);
 			newFile.setFileType(file.getContentType());
 			newFile.setFilePath(filePath);
@@ -179,11 +181,11 @@ public class CenterController {
 		int centerCode = Integer.parseInt(request.getParameter("centerCode"));
 		String oldOriginalName = (String)request.getParameter("oldOriginalName");
 		String oldSavedName = "centerCode_"+centerCode+"+originalName_"+oldOriginalName;
-		File oldFile = new File("C:/dev/uploadfiles/"+oldSavedName);
+		File oldFile = new File(filePath+oldSavedName);
 		String newSavedName = "centerCode_"+centerCode+"+originalName_"+file.getOriginalName();
 		
 		file.setFileSavedName(newSavedName);
-		File newFile = new File("C:/dev/uploadfiles/"+newSavedName);
+		File newFile = new File(filePath+newSavedName);
 
 		byte[] buf = new byte[1024];
 		FileInputStream is = null;
