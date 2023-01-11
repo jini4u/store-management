@@ -18,6 +18,7 @@ import org.apache.tomcat.util.json.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,6 +52,9 @@ public class CenterController {
 	private static Logger logger = LoggerFactory.getLogger(CenterController.class);
 	@Autowired
 	ICenterService centerService;
+	
+	@Value("${file.path}")
+	private String filePath;
 
 	/**
 	 * 
@@ -148,39 +152,38 @@ public class CenterController {
 		return result;
 	}
 	
+	/**
+	 * @author 임유진
+	 * 센터 이미지 등록
+	 * @return int 등록된 사진 수
+	 * */
 	@RequestMapping(value="/addCenterImage", method=RequestMethod.POST)
-	public @ResponseBody int addCenterImage(MultipartHttpServletRequest request) throws IOException {
+	public @ResponseBody int addCenterImage(MultipartHttpServletRequest request) {
 		String fileDetail = request.getParameter("fileDetail");
 		int centerCode = Integer.parseInt(request.getParameter("centerCode"));
 		int uploadUserCode = Integer.parseInt(request.getParameter("uploadUserCode"));
 		List<MultipartFile> files = request.getFiles("centerImage");
 		
-		int result = 0;
-		
-		for(MultipartFile file: files) {
-			FileInfoVO newFile = new FileInfoVO();
-			newFile.setFileDetail(fileDetail);
-			newFile.setCenterCode(centerCode);
-			newFile.setUploadUserCode(uploadUserCode);
-			newFile.setOriginalName(file.getOriginalFilename());
-			String fileSavedName = "centerCode_"+centerCode+"+originalName_"+file.getOriginalFilename();
-			//Path는 나중엔 서버상의 Path로 바꾸기
-			String filePath = "C:/dev/uploadfiles/";
-			newFile.setFileSavedName(fileSavedName);
-			newFile.setFileType(file.getContentType());
-			newFile.setFilePath(filePath);
-			file.transferTo(new File(filePath+fileSavedName));
-			result += centerService.addCenterImage(newFile);
-		}
-		return result;
+		return centerService.addCenterImage(fileDetail, centerCode, uploadUserCode, files);
 	}
 	
+	/**
+	 * @author 임유진
+	 * 센터 이미지 조회
+	 * @param int 센터 코드
+	 * @return List<해당 코드의 사진>
+	 * */
 	@RequestMapping("/getCenterImages/{centerCode}")
 	public @ResponseBody List<FileInfoVO> getCenterImages(@PathVariable int centerCode) {
-		//센터코드에 맞춰서 파일 리턴해주면 됨
+		//센터코드에 맞춰서 파일리스트 리턴해주면 됨
 		return centerService.getCenterImageNames(centerCode);
 	}
 	
+	/**
+	 * @author 임유진
+	 * 센터 이미지 정보 수정
+	 * @return 정보 수정된 파일 수 (0 또는 1)
+	 * */
 	@RequestMapping(value="/updateImage", method=RequestMethod.POST)
 	public @ResponseBody int updateImage(MultipartHttpServletRequest request) throws Exception {
 		FileInfoVO file = new FileInfoVO();
@@ -190,35 +193,15 @@ public class CenterController {
 		file.setFileDetail(request.getParameter("fileDetail"));
 		int centerCode = Integer.parseInt(request.getParameter("centerCode"));
 		String oldOriginalName = (String)request.getParameter("oldOriginalName");
-		String oldSavedName = "centerCode_"+centerCode+"+originalName_"+oldOriginalName;
-		File oldFile = new File("C:/dev/uploadfiles/"+oldSavedName);
-		String newSavedName = "centerCode_"+centerCode+"+originalName_"+file.getOriginalName();
 		
-		file.setFileSavedName(newSavedName);
-		File newFile = new File("C:/dev/uploadfiles/"+newSavedName);
-
-		byte[] buf = new byte[1024];
-		FileInputStream is = null;
-		FileOutputStream os = null;
-		
-		if(!oldFile.renameTo(newFile)) {
-			buf = new byte[1024];
-			is = new FileInputStream(oldFile);
-			os = new FileOutputStream(newFile);
-			
-			int read = 0;
-			while((read=is.read(buf,0,buf.length)) != -1) {
-				os.write(buf, 0, read);
-			}
-			
-			is.close();
-			os.close();
-			oldFile.delete();
-		}
-		
-		return centerService.updateImage(file);
+		return centerService.updateImage(file, centerCode, oldOriginalName);
 	}
 	
+	/**
+	 * @author 임유진
+	 * 센터 이미지 삭제
+	 * @return 삭제된 파일 수
+	 * */
 	@RequestMapping(value="/deleteImage", method=RequestMethod.POST)
 	public @ResponseBody int deleteImage(@RequestBody String request) {
 		List<Integer> fileNoList = new ArrayList<Integer>();

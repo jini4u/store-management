@@ -27,7 +27,7 @@
 			</li>
 			<li>
 				<div class="dropdownlink">
-					점포점수 <i class="fa fa-chevron-down" aria-hidden="true"></i>
+					점수 <i class="fa fa-chevron-down" aria-hidden="true"></i>
 				</div>
 				<ul class="submenuItems">
 					<li><a href="<c:url value='/score'/>">센터 점수 조회</a></li>
