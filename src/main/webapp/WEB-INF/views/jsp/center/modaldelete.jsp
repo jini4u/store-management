@@ -18,6 +18,6 @@
 					</tbody>
 			</table>
 		</div>
-		<button type="button" class="button" id="deletebutton">삭제</button>
+		<button type="button" class="button pinkButton" id="deletebutton">삭제</button>
 	</div>
 </div>

@@ -8,9 +8,6 @@ a {
 	text-decoration: none;
 }
 
-ul, li {
-	list-style: none;
-}
 .logoImage {
 	height: 75px;
 	width: 228px;
@@ -22,10 +19,12 @@ ul, li {
 	justify-content: center;
 	height: 20px;
 	margin-right: 30px;
+	list-style: none;
 }
 
 .sidebox>li {
 	height: 100%;
+	list-style: none;
 }
 
 .bar {

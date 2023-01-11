@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-.totalbox {
-	overflow: hidden;
-}
-
 .header {
 	display: flex;
 	align-items: center;
@@ -13,6 +9,7 @@
 	position: sticky;
 	top: 0px;
 	border-bottom: 1px solid #ccc;
+	z-index: 22;
 }
 
 .header>a {
@@ -25,19 +22,21 @@
 }
 
 .leftbox {
-	min-height: 400px;
+	max-height: 1000px;
 	width: 220px;
 	border-right: 1px solid #ccc;
 	background: #fff;
 	flex-shrink: 0;
+	z-index: 0;
+	height: 960px;
 }
 
 .contentbox {
 	width: 1486.33px;
 	flex-grow: 1;
 	flex-direction: column;
-	overflow: auto;
-	margin: 20px 20px 0px 20px;
+	padding: 20px;
+	max-width: 1486.33px;
 }
 /* 제목 디자인 */
 .titleBox {
@@ -95,8 +94,8 @@
 	width: 282px;
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
-	margin-left: 10px;
+	align-items: center;	
+    margin: 20px 0 20px 5px;
 }
 
 .search-btn {

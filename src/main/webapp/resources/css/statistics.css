@@ -35,23 +35,14 @@ button.menubtn.clicked {
 	padding-left: 80px;
 }
 
-#searchdiv > img {
-	height: 30px;
-	padding: 3px;
-	background-color: #FF8787;
-}
-
-#searchdiv {
-	display: flex;
-	width: 206px;
-}
-
 #graphdiv {
 	text-align: center;
+	margin: 25px 0px;
 }
 
-#graphdiv > img {
-	width: 500px;
+#graphdiv img {
+	margin-top: 100px;
+	width: 600px;
 }
 
 #graphdiv p {
@@ -66,30 +57,64 @@ button.menubtn.clicked {
 	display: flex;
 	border: 1px solid;
 	height: 600px;
+	width: 99%;
 	padding-top: 50px;
-	width: 1000px;
+	justify-content: space-between;
 }
 
-#listtable{
+.table{
 	width: 206px;
 	margin-left: 3px;
 	margin-top: 30px;
 }
 
-#listtable tr {
+.table tr {
 	border: none;
 	height: 30px;
+	width: 206px;
 }
 
-#listtable tr:hover{
+.table tr:hover{
 	background-color: #EEEEEE;
 }
 
-#listtable td.selected{
+.table td.selected{
 	color: #FF8787;
 }
 
-#listtable td{
+.table td{
 	border-width: 0px 0px 2px 0px;
 	padding: 6px;
+	width: 206px;
+}
+
+#rightdiv{
+	display: flex;
+	margin-right: 100px;
+}
+
+#infodiv {
+	margin-left: 180px;	
+    display: inline-grid;
+}
+
+#infodiv div {
+	box-shadow: 5px 5px 5px #FF8787;
+	text-align: center;
+	margin-bottom: 30px;
+	
+}
+#infodiv p {
+	height: 45px;
+    padding: 0px 7px;
+    margin: 25px 0px;
+}
+
+.title-p{
+	font-size: 23px;
+}
+
+.colored-p{
+	font-size: 30px; 
+	color: #E26868;
 }
