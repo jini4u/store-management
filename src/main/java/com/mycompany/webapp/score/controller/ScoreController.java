@@ -69,6 +69,22 @@ public class ScoreController {
 		List<ScoreVO> scoreList = scoreService.getScoreList(scoreVO);
 		model.addAttribute("scoreList",scoreList);
 		
+		//비어있는 ScoreVO 생성
+		ScoreVO emptyVO = new ScoreVO();
+		//getScoreList 하기위해서 centerCode는 무조건 필요하므로 1로 set
+		emptyVO.setCenterCode(1);
+		//빈 VO를 이용해서 getScoreList : emptyVO에 센터코드만 있고 년도, 시즌 없으니까 쿼리문에서 WHERE절에 if조건으로 안걸려서 전체 점수 정보가 다 담겨있음
+		//List<ScoreVO> getScoreList(ScoreVO scoreVO) : 리턴값의 자료형이 List<ScoreVO>임. 
+		List<ScoreVO> allScoreList = scoreService.getScoreList(emptyVO);
+		//전체 리스트 크기가 0보다 크면 (점수 테이블에 값이 있으면)
+		if(allScoreList.size() > 0) {
+			//제일 최근 정보가 0번이므로 0번의 정보를 담아줌
+			int maxYear = allScoreList.get(0).getCheckYear();			
+			int maxSeason = allScoreList.get(0).getCheckSeason();
+			//뷰페이지로 가져갈수있게 담아주기
+			model.addAttribute("maxYear", maxYear);
+			model.addAttribute("maxSeason", maxSeason);
+		}
 		//기본날짜 설정
 		Calendar now = Calendar.getInstance();
 		int yy = now.get(Calendar.YEAR);
