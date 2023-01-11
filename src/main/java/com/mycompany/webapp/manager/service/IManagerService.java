@@ -36,7 +36,6 @@ public interface IManagerService {
 	//키워드별 담당자 검색
 	List<ManagerVO> managerSearch(Pager pager, ManagerVO mgr);
 
-	int getLastUserCode();
 		
 	 
 }

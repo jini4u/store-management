@@ -92,8 +92,7 @@
 					
 					<th scope="row">담당자명</th>
 					<td>
-						<input type="hidden" name="userCode" id="userCode"
-						value="${userCode}">  
+						<input type="hidden" name="userCode" id="userCode">
 						<input type="hidden" name="userPassword" id="userPassword">
 						<input type="text" name="userName" id="userName" disabled>
 					</td>

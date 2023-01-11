@@ -41,9 +41,6 @@ public class ManagerController {
 		model.addAttribute("pager", pager);
 
 		logger.info("managerList : " + managerList);
-
-		int lastUserCode = managerService.getLastUserCode();
-		model.addAttribute("newUserCode", lastUserCode+1);
 		return "jsp/manager/managerlookup";
 	}
 

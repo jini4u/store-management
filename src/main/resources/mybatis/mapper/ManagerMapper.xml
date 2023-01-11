@@ -34,8 +34,12 @@
 <!-- author 고은별 
 	 담당자 등록-->
 <insert id="insertManager" parameterType="com.mycompany.webapp.manager.vo.ManagerVO">
+<![CDATA[	
 insert into userInfo(user_code, user_password, user_name, user_birth, user_tel, user_email,user_team_code, user_hire_Date)
-values	(#{userCode}, #{userPassword}, #{userName}, #{userBirth}, #{userTel}, #{userEmail}, #{userTeamCode}, #{userHireDate})
+values	(
+			(SELECT NVL(MAX(user_code)+1, 10001) FROM userinfo), 
+			#{userPassword}, #{userName}, #{userBirth}, #{userTel}, #{userEmail}, #{userTeamCode}, #{userHireDate})
+]]>
 </insert>  
 
 <!--author 고은별  

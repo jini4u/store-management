@@ -20,13 +20,7 @@ public class ManagerService implements IManagerService {
 	 * �떞�떦�옄 �벑濡� */
 	@Override
 	public int insertManager(ManagerVO mgr) {
-		mgr.setUserCode(managerRepository.selectMaxManagerNo()+1);
 		return managerRepository.insertManager(mgr);
-	}
-	
-	@Override
-	public int getLastUserCode() {
-		return managerRepository.selectMaxManagerNo();
 	}
 	
 	/* author 怨좎�蹂�

@@ -68,7 +68,8 @@ window.onload = function(){
 
 	//등록 버튼 클릭 시 리셋
 	$("#insertmgr").click(function (){
-		const newUserCode = $("#newUserCode").val();
+		let userCode = $("#userCode").val();
+		$("#userCode").val(userCode);
 		$("#userName").val('');
 		$("#userBirth").val('');
 		$("#userTel").val('');
@@ -83,6 +84,7 @@ window.onload = function(){
 		$("#userTel").removeAttr("disabled");
 		$("#userHireDate").removeAttr("disabled");
 		$("#userTeamCode").removeAttr("disabled");
+		$("#userResignDate").attr("disabled");
 	});
 
 	//저장 버튼 클릭 
@@ -98,13 +100,8 @@ window.onload = function(){
 		let userTeamCode=$("#userTeamCode").val();
 		let userHireDate=$("#userHireDate").val();
 		let userResignDate = $("#userResignDate").val();
-		//담당자 전체 리스트 행의 수
-		let mgrTr =$('#managerTable >tbody tr').length;
 		//휴대전화번호 뒤에 4자리 자르기
 		let pwCut= userTel.substr(9, 12);
-
-		console.log("userHireDate: " + userHireDate);
-		console.log("userResignDate: " + userResignDate);
 
 		//등록
 		if(!$("#userName").attr("disabled")){

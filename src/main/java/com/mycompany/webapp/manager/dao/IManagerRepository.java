@@ -11,9 +11,9 @@ import com.mycompany.webapp.common.vo.Pager;
 import com.mycompany.webapp.manager.vo.ManagerVO;
 
 public interface IManagerRepository {
-	//author 怨좎�蹂�
+	//author 은별
 	
-	//�떞�떦�옄 �벑濡� 
+	//담당자 등록
 	int insertManager(ManagerVO mgr);
 
 	//�떞�떦�옄 肄붾뱶 理쒕� 踰덊샇 
