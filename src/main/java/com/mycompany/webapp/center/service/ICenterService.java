@@ -2,6 +2,8 @@ package com.mycompany.webapp.center.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.mycompany.webapp.center.vo.CenterVO;
 import com.mycompany.webapp.common.vo.FileInfoVO;
 import com.mycompany.webapp.common.vo.Pager;
@@ -25,7 +27,7 @@ public interface ICenterService {
 	public int centerUpdate(CenterVO centerVO);
 
 	//센터 사진 등록
-	int addCenterImage(FileInfoVO file);
+	int addCenterImage(String fileDetail, int centerCode, int uploadUserCode, List<MultipartFile> files);
 
 	//센터 검색
 	public List<CenterVO> findCenter(Pager pager, CenterVO centerVO);
@@ -34,7 +36,7 @@ public interface ICenterService {
 	List<FileInfoVO> getCenterImageNames(int centerCode);
 
 	//센터 사진 정보 수정(originalName, fileDetail)
-	int updateImage(FileInfoVO file);
+	int updateImage(FileInfoVO file, int centerCode, String oldOriginalName);
 	
 	int deleteImage(List<Integer> fileNoList);
 }

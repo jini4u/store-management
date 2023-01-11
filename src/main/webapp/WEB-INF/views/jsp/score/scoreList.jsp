@@ -167,7 +167,6 @@
 		openButton.addEventListener("click", openModal);
 
 		//모달창 닫기//
-		const = modal.querySelectorAll(".close-btn");
 		$(".close-btn").click(function() {
 			$(".modal").fadeOut();
 
