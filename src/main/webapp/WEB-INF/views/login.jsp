@@ -1,36 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
-<link rel="stylesheet" href="resources/css/login.css"/>
-<div id="logindiv">
-<h1>로그인</h1>
-<form action="#" method="post">
+<link rel="stylesheet" href="resources/css/login/login.css" />
+<div class="loginpage">
+	<div class="logindiv">
+		<h1 class="loginh1">로그인</h1>
 
-	<table>
-	<tr id="bordertr">
-		<td>
-		<img src="resources/images/person-icon.png">
-		</td>
-		<td>
-		<input class="rightinput" id="userId" placeholder="아이디">
-		</td>
-	</tr>
-	<tr id="blanktr">
-	</tr>
-	<tr id="bordertr">
-		<td>
-		<img src="resources/images/key-icon.png">
-		</td>
-		<td>
-		<input class="rightinput" id="userPassword" placeholder="비밀번호">
-		</td>
-	</tr>
-	<tr>
-	<td class="righttd" colspan="2"><a href="#">로그인 정보 찾기</a></td>
-	</tr>
-	<tr>
-	<td colspan="2"><input type="submit" id="loginbtn" value="로그인"></td>
-	</tr>
-	</table>
-</form>
+
+
+		<div class="login_blank"></div>
+		<div class="login_pw_form">
+
+			<div class="image_placeholder">
+				<img src="resources/images/person-icon.png"> <input
+					class="login_pw" placeholder="아이디">
+			</div>
+
+			<div class="blank"></div>
+
+			<div class="image_placeholder">
+				<img src="resources/images/key-icon.png"> <input
+					class="login_pw" placeholder="비밀번호">
+			</div>
+		</div>
+		<div class="blank"></div>
+
+		<div class="login_search">
+			<a href="#">로그인 정보 찾기</a>
+		</div>
+
+
+		<div class="blank"></div>
+		<a href="/"><input type="button" class="pinkButton" value="로그인"></a>
+	</div>
 </div>

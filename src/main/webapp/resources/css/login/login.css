@@ -1,63 +1,92 @@
 @charset "UTF-8";
 
-a {
-	color: red;
-}
-
 body {
 	background-color: #EDEDED;
 }
 
-#logindiv {
+.loginpage {
 	background-color: white;
 	width: fit-content;
 	margin: auto;
-	padding: 100px;
+	padding: 110px;
 	border-radius: 3%;
-	margin-top: 181px;
+	margin-top: 180;
+	padding: 276px 118px;
+}
+
+.login_blank {
+	margisn-top: 60px;
+}
+
+.loginh1 {
+	text-align: center;
+	margin-top: -210px;
+	font-size: 50px;
+}
+
+a {
+	text-decoration: none;
 }
 
 img {
-	background-color: #E26868;
-	width: 50px;
+	background-color: #FF8787;
+	width: 48px;
 	padding: 5px;
-	
+	background-color: #FF8787;
+	border: 1px solid #FF8787;
+	color: #fff;
+	float: revert;
+	border-radius: 9px;
 }
 
-.rightinput{
-	padding-left: 10px;
+.image_placeholder {
+	display: flex;
+	height: 53px;
 }
 
-table {
-	border-collapse: collapse;
+.login_pw_form {
+	padding: 39px 5px;
 }
 
-#bordertr {
-	border: solid 1px grey;
+.blank {
+	margin-top: 10px;
 }
 
-td {
-	padding: 0;
-	height: 50px;
+.login_pw {
+	margin-left: 10px;
+	radius: 10px;
+	border-radius: 10px;
+	border: 1;
+	border: 1px solid grey;
 }
 
-td > * {
-	height: 50px;
-	border: none;
-	vertical-align: middle;
-	box-sizing: border-box;
+.login_search {
+	text-align: right;
 }
 
-#loginbtn {
+/*버튼 */
+.pinkButton {
+	border-radius: 9px;
+	display: inline-block;
+	cursor: pointer;
+	font-family: Arial;
+	font-size: 18px;
+	padding: 14px 94px;
+	text-decoration: none;
+	font-weight: 550;
+	background-color: #FF8787;
+	border: 1px solid #FF8787;
+	color: #fff;
+	float: right;
+}
+
+.pinkButton:active {
+	position: relative;
+	top: 1px;
+}
+
+.pinkButton:hover {
 	background-color: #E26868;
-	border: #E26868;
-	width: 100%;
-}
-
-.righttd {
-	text-align-last: right;
-}
-
-#blanktr {
-	height: 10px;
+	color: #fff;
+	border: 1px solid #E26868;
 }
