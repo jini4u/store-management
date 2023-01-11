@@ -284,7 +284,7 @@ deleteBtn.addEventListener("click", function(){
 			checked.push(checkbox[i].value);
 		}
 	}
-	makeRequest(afterDeleteImg, 'POST', '/deleteImage', checked);
+	makeRequest(afterDeleteImg, 'POST', '/deleteImage/'+centerNameArr[4].innerText, checked);
 });
 
 function afterDeleteImg(){

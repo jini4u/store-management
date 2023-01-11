@@ -22,12 +22,12 @@
 				<ul class="submenuItems">
 					<li><a href="/managerList">담당자 조회</a></li>
 					<li><a href="/managerMapping">담당자 맵핑</a></li>
-					<li><a href="#">담당자 정보 일괄 등록</a></li>
+					<li><a href="/managerupload">담당자 정보 일괄 등록</a></li>
 				</ul>
 			</li>
 			<li>
 				<div class="dropdownlink">
-					점포점수 <i class="fa fa-chevron-down" aria-hidden="true"></i>
+					점수 <i class="fa fa-chevron-down" aria-hidden="true"></i>
 				</div>
 				<ul class="submenuItems">
 					<li><a href="<c:url value='/score'/>">센터 점수 조회</a></li>
