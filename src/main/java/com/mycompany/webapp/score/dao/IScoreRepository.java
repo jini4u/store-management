@@ -34,6 +34,6 @@ public interface IScoreRepository {
 	/*점수 삭제*/
 	int deleteScore(ScoreVO score);
 	/*점수 수정,저장*/
-	int saveScore(ScoreVO score);
+	int updateScore(ScoreVO score);
 }
 

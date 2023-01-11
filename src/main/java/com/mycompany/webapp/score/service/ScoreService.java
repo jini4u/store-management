@@ -74,8 +74,8 @@ public class ScoreService implements IScoreService {
 
 
 	@Override
-	public int saveScore(ScoreVO score) {
-		return scoreRepository.saveScore(score);
+	public int updateScore(ScoreVO score) {
+		return scoreRepository.updateScore(score);
 	}
 
 

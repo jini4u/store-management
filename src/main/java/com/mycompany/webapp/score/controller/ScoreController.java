@@ -85,6 +85,7 @@ public class ScoreController {
 			model.addAttribute("maxYear", maxYear);
 			model.addAttribute("maxSeason", maxSeason);
 		}
+		
 		//기본날짜 설정
 		Calendar now = Calendar.getInstance();
 		int yy = now.get(Calendar.YEAR);
@@ -127,9 +128,10 @@ public class ScoreController {
 	 * 정윤선
 	 * 점수 수정
 	 * */
-	@RequestMapping(value="/saveScore", method=RequestMethod.POST)
-	public String saveScore(ScoreVO score){
-		scoreService.saveScore(score);
+	@RequestMapping(value="/updateScore", method=RequestMethod.POST)
+	public String updateScore(ScoreVO score,Model model){
+		
+		scoreService.updateScore(score);
 		return "redirect:/score";
 	}
 

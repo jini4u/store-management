@@ -10,228 +10,224 @@
 	font-family: NanumSquareRound;
 }
 
-.totalbox {
-	overflow: hidden;
-}
-
 .header {
-	display: flex;
-	align-items: center;
-	background: #fff;
-	justify-content: space-between;
-	height: 75px;
-	position: sticky;
-	top: 0px;
-	border-bottom: 1px solid #ccc;
-	z-index: 22;
+   display: flex;
+   align-items: center;
+   background: #fff;
+   justify-content: space-between;
+   height: 75px;
+   position: sticky;
+   top: 0px;
+   border-bottom: 1px solid #ccc;
+   z-index: 22;
 }
 
 .header>a {
-	margin-left: 12px;
+   margin-left: 12px;
 }
 
 .middlebox {
-	display: flex;
-	height: 841px;
+   display: flex;
+   height: 880px;
 }
 
 .leftbox {
-	max-height: 1000px;
-	width: 220px;
-	border-right: 1px solid #ccc;
-	background: #fff;
-	flex-shrink: 0;
-	z-index: 0;
-	height: 960px;
+   max-height: 1000px;
+   width: 220px;
+   border-right: 1px solid #ccc;
+   background: #fff;
+   flex-shrink: 0;
+   z-index: 0;
+   height: 960px;
 }
 
 .contentbox {
-	width: 1486.33px;
-	flex-grow: 1;
-	flex-direction: column;
-	padding: 20px;
-	max-width: 1486.33px;
+   width: 1486.33px;
+   flex-grow: 1;
+   flex-direction: column;
+   padding: 20px;
+   max-width: 1486.33px;
 }
 /* 제목 디자인 */
 .titleBox {
-	display: flex;
-	align-items: center;
-	border-bottom: 1px solid #ccc;
-	padding-bottom: 10px;
+   display: flex;
+   align-items: center;
+   border-bottom: 1px solid #ccc;
+   padding-bottom: 10px;
 }
 
 .titleBox>img {
-	height: 40px;
-	margin: 0px 15px
+   height: 40px;
+   margin: 0px 15px
 }
 
 .titleBox>h2 {
-	font-size: 32px;
+   font-size: 32px;
 }
 /* 표 디자인 */
 .verticalTable, .rowTable {
-	font-size: 17px;
-	width: 100%;
-	border-top: 1.5px solid #CCC;
-	border-bottom: 1.5px solid #ccc;
-	border-collapse: collapse;
+   font-size: 17px;
+   width: 100%;
+   border-top: 1.5px solid #CCC;
+   border-bottom: 1.5px solid #ccc;
+   border-collapse: collapse;
 }
 
 .verticalTable th, td, .rowTable th, td {
-	padding: 10px;
+   padding: 10px;
 }
 
 .verticalTable thead, .rowTable th {
-	background: #EDEDED;
+   background: #EDEDED;
 }
 
 .verticalTable tbody tr, .rowTable tr {
-	border-top: 1.5px solid #CCC;
-	text-align: center;
+   border-top: 1.5px solid #CCC;
+   text-align: center;
 }
 /* 검색 */
 .search-box {
-	top: 50%;
-	left: 50%;
-	height: 40px;
-	background-color: #fff;
-	border: 2px solid #E26868;
-	border-radius: 7px;
-	width: 282px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;	
+   top: 50%;
+   left: 50%;
+   height: 40px;
+   background-color: #fff;
+   border: 2px solid #E26868;
+   border-radius: 7px;
+   width: 282px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;   
     margin: 20px 0 20px 5px;
 }
 
 .search-btn {
-	text-decoration: none;
-	float: right;
-	width: 40px;
-	height: 40px;
-	background-color: #E26868;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: #fff;
+   text-decoration: none;
+   float: right;
+   width: 40px;
+   height: 40px;
+   background-color: #E26868;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: #fff;
 }
 
 .search-txt {
-	display: flex;
-	width: 200px;
-	padding-left: 15px;
-	border: none;
-	background: none;
-	outline: none;
-	font-size: 1rem;
-	line-height: 30px;
-	height: 40px;
+   display: flex;
+   width: 200px;
+   padding-left: 15px;
+   border: none;
+   background: none;
+   outline: none;
+   font-size: 1rem;
+   line-height: 30px;
+   height: 40px;
 }
 /*버튼 */
 .pinkButton, .greyButton {
-	border-radius: 9px;
-	display: inline-block;
-	cursor: pointer;
-	font-family: Arial;
-	font-size: 18px;
-	padding: 6px 25px;
-	text-decoration: none;
-	font-weight: 550;
+   border-radius: 9px;
+   display: inline-block;
+   cursor: pointer;
+   font-family: Arial;
+   font-size: 18px;
+   padding: 6px 25px;
+   text-decoration: none;
+   font-weight: 550;
 }
 
 .pinkButton:active, .greyButton:active {
-	position: relative;
-	top: 1px;
+   position: relative;
+   top: 1px;
 }
 
 .pinkButton {
-	background-color: #FF8787;
-	border: 1px solid #FF8787;
-	color: #fff;
+   background-color: #FF8787;
+   border: 1px solid #FF8787;
+   color: #fff;
 }
 
 .pinkButton:hover {
-	background-color: #E26868;
-	color: #fff;
-	border: 1px solid #E26868;
+   background-color: #E26868;
+   color: #fff;
+   border: 1px solid #E26868;
 }
 
 .greyButton {
-	background-color: #ededed;
-	border: 1px solid #ededed;
-	color: #000000;
+   background-color: #ededed;
+   border: 1px solid #ededed;
+   color: #000000;
 }
 
 .greyButton:hover {
-	background-color: #bebebe;
-	color: #000000;
-	border: 1px solid #bebebe;
+   background-color: #bebebe;
+   color: #000000;
+   border: 1px solid #bebebe;
 }
 
 /* 페이지네이션*/
 .center-pagging {
-	text-align: center;
+   text-align: center;
 }
 
 .pagination {
-	list-style: none;
-	display: inline-block;
-	padding: 0;
-	margin-top: 20px;
+   list-style: none;
+   display: inline-block;
+   padding: 0;
+   margin-top: 20px;
 }
 
 .pagination li {
-	display: inline;
-	text-align: center;
+   display: inline;
+   text-align: center;
 }
 
 .pagination a {
-	float: left;
-	display: block;
-	font-size: 14px;
-	text-decoration: none;
-	padding: 5px 12px;
-	color: #96a0ad;
-	line-height: 1.5;
+   float: left;
+   display: block;
+   font-size: 14px;
+   text-decoration: none;
+   padding: 5px 12px;
+   color: #96a0ad;
+   line-height: 1.5;
 }
 
 .first {
-	margin-right: 15px;
+   margin-right: 15px;
 }
 
 .first:hover, .last:hover, .left:hover, .right:hover {
-	color: #E26868;
+   color: #E26868;
 }
 
 .pagination a.active {
-	cursor: default;
-	color: #fff;
+   cursor: default;
+   color: #fff;
 }
 
 .pagination a:active {
-	outline: none;
+   outline: none;
 }
 
 .modal .num {
-	margin-left: 3px;
-	padding: 0;
-	width: 30px;
-	height: 30px;
-	line-height: 30px;
-	-moz-border-radius: 100%;
-	-wekit-border-radius: 100%;
-	border-radius: 100%;
+   margin-left: 3px;
+   padding: 0;
+   width: 30px;
+   height: 30px;
+   line-height: 30px;
+   -moz-border-radius: 100%;
+   -wekit-border-radius: 100%;
+   border-radius: 100%;
 }
 
 .modal .num.active, .modal .num:active {
-	background-color: #E26868;
-	cursor: pointer;
+   background-color: #E26868;
+   cursor: pointer;
 }
 
 .arrow .left {
-	width: 0;
-	height: 0;
-	border-top: 10px solid transparent;
-	border-bottom: 10px solid transparent;
-	border-right: 10px solid blue;
+   width: 0;
+   height: 0;
+   border-top: 10px solid transparent;
+   border-bottom: 10px solid transparent;
+   border-right: 10px solid blue;
 }

@@ -4,7 +4,7 @@
 
 <div class="titleBox">
 	<img src="resources/images/업로드.png">
-	<h2>직원  일괄 등록</h2>
+	<h2>담당자 일괄 등록</h2>
 </div>
 <div class='uploadbutton'>
 <input type="text" size="20" placeholder="파일을 선택하세요">

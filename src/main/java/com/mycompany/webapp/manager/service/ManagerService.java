@@ -105,10 +105,12 @@ public class ManagerService implements IManagerService {
 		return managerRepository.countAllMgr();
 	}
 
-	@Override
-	public List<ManagerVO> managerSearch(String keyword) {
-		return managerRepository.managerSearch(keyword);
-	}
+@Override
+public List<ManagerVO> managerSearch(Pager pager, ManagerVO mgr) {
+	return managerRepository.managerSearch(pager, mgr);
+}
+
+
 
 
 

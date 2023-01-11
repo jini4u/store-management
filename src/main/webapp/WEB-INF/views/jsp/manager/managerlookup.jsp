@@ -12,9 +12,8 @@
 
 <!-- 검색 -->
 <div class="search-box">
-	<input type="text" class="search-txt" name="" placeholder="담당자 검색">
-	<a class="search-btn" href="#"> <i class="fas fa-search"></i>
-	</a>
+		<input type="text" class="search-txt" id="searchTxt" name="userName" placeholder="담당자 검색">
+		<a class="search-btn" href="#" id="searchBtn"> <i class="fas fa-search"></i></a>
 </div>
 
 <div class="graphbox">
@@ -32,17 +31,10 @@
 					<th>퇴사일자</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="mgrList">
 				<c:forEach var="managerVO" items="${managerList}">
-					<!-- 	<tr onclick="
-						fetch('managerdetail.jsp').then(function(response){
-							ressponse.text().then(function(text)){
-								document.querySelector('table').innerHTML = text;
-							}
-						});
-					"> -->
-					<tr id="mgrListTr">
-						<td id=existenceUserCode>${managerVO.userCode}</td>
+					<tr>
+						<td>${managerVO.userCode}</td>
 						<td>${managerVO.userName}</td>
 						<td><fmt:formatDate value="${managerVO.userBirth}"
 								pattern="yyyy-MM-dd" /></td>
@@ -97,39 +89,41 @@
 			</div>
 			<table class="rowTable" id="mgrdetailtable">
 				<tr>
-					<th scope="row">담당자코드</th>
-					<td><input type="text" name="userCode" id="userCode"
-						value="${newUserCode}" readonly> <input type="hidden"
-						value="${newUserCode}" id="newUserCode"> <input
-						type="hidden" name="userPassword" id="userPassword"></td>
+					
 					<th scope="row">담당자명</th>
-					<td><input type="text" name="userName" id="userName"></td>
-				</tr>
-				<tr>
+					<td>
+						<input type="hidden" name="userCode" id="userCode"
+						value="${userCode}">  
+						<input type="hidden" name="userPassword" id="userPassword">
+						<input type="text" name="userName" id="userName" disabled>
+					</td>
 					<th scope="row">생년월일</th>
-					<td><input type="date" name="userBirth" id="userBirth"></td>
-					<th scope="row">휴대전화번호</th>
-					<td><input type="text" name="userTel" id="userTel"></td>
+					<td><input type="date" name="userBirth" id="userBirth" disabled></td>
 				</tr>
 				<tr>
 					<th scope="row">Email</th>
-					<td><input type="text" name="userEmail" id="userEmail"></td>
-					<th scope="row">팀코드</th>
-					<td><input type="text" name="userTeamCode" id="userTeamCode"></td>
+					<td><input type="text" name="userEmail" id="userEmail" disabled> </td>
+					<th scope="row">휴대전화번호</th>
+					<td><input type="text" name="userTel" id="userTel" disabled></td>
 				</tr>
 				<tr>
 					<th scope="row">입사일자</th>
-					<td><input type="date" name="userHireDate" id="userHireDate"></td>
+					<td><input type="date" name="userHireDate" id="userHireDate" disabled></td>
+					<th scope="row">팀코드</th>
+					<td><input type="text" name="userTeamCode" id="userTeamCode" disabled></td>
+				</tr>			
+
+				
+				<tr>
 					<th scope="row">퇴사일자</th>
 					<td><input type="date" name="userResignDate"
-						id="userResignDate" readonly></td>
-				</tr>
-				<tr>
+						id="userResignDate" disabled></td>
 					<th>담당 센터명</th>
-					<td colspan="3"><c:forEach var="center"
+					<td><c:forEach var="center"
 							items="${managerVO.centerList}">
 							${center.centerName}
-						</c:forEach></td>
+						</c:forEach>
+					</td>
 				</tr>
 			</table>
 		</form>
