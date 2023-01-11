@@ -190,12 +190,12 @@ public class CenterController {
 	 * 센터 이미지 삭제
 	 * @return 삭제된 파일 수
 	 * */
-	@RequestMapping(value="/deleteImage", method=RequestMethod.POST)
-	public @ResponseBody int deleteImage(@RequestBody String request) {
+	@RequestMapping(value="/deleteImage/{centerCode}", method=RequestMethod.POST)
+	public @ResponseBody int deleteImage(@RequestBody String request, @PathVariable int centerCode) {
 		List<Integer> fileNoList = new ArrayList<Integer>();
 		for(String fileNo:request.split(",")) {
 			fileNoList.add(Integer.parseInt(fileNo));
 		}
-		return centerService.deleteImage(fileNoList);
+		return centerService.deleteImage(fileNoList, centerCode);
 	}
 }

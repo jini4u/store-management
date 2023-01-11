@@ -152,9 +152,16 @@ public class CenterService implements ICenterService{
 	 * @return 삭제된 파일 수
 	 * */
 	@Override
-	public int deleteImage(List<Integer> fileNoList) {
+	public int deleteImage(List<Integer> fileNoList, int centerCode) {
 		int result = 0;
+		List<FileInfoVO> centerFileList = centerRepository.getCenterImageNames(centerCode);
 		for(int fileNo:fileNoList) {
+			for(FileInfoVO centerFile:centerFileList) {
+				if(centerFile.getFileNo() == fileNo) {
+					File centerImage = new File(filePath+centerFile.getFileSavedName());
+					centerImage.delete();
+				}
+			}
 			result += centerRepository.deleteImage(fileNo);
 		}
 		return result;
