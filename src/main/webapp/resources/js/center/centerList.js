@@ -12,39 +12,49 @@ let getToday = function() {
 	return new Date(year+"-"+month+"-"+day);
 }
 
+//담당자 리스트 마우스 오버시 색 변화
+function changeColor(){
+	$('#center-left tr').mouseover(function(){
+		$(this).addClass('changeColor');
+	}).mouseout(function() {
+		$(this).removeClass('changeColor');
+	});
+}
+changeColor();
+
 $("#centerOpeningDate").change(function() {
-let centerOpeningDate = new Date(document.querySelector("#centerOpeningDate").value);
-let centerClosingDate = document.querySelector("#centerClosingDate");
-centerClosingDate.value = '';
-if (centerOpeningDate !== '') {
-centerClosingDate.readOnly = false;
-} else {
-centerClosingDate.readOnly = true;
-}
-if (centerOpeningDate > getToday()) {
-centerCondition.value = "notyet";
-}
-if (centerOpeningDate < getToday()) {
-	centerCondition.value = "o"+"1";
-}
-$("#centerClosingDate").change(function() {
-let centerCondition = document.querySelector("#centerCondition");
-let centerClosingDate = new Date(document.querySelector("#centerClosingDate").value);
-if (centerOpeningDate > getToday() && centerClosingDate > getToday())  {
-	centerCondition.value = "o"+"1";
-}
-if ((centerOpeningDate !=='') && (centerClosingDate !== '')) {
-if (centerOpeningDate <= centerClosingDate && centerClosingDate <= getToday() ) {
-centerCondition.value = "closed";
-}else if (centerOpeningDate < getToday()  && centerOpeningDate < centerClosingDate && centerClosingDate > getToday()) {
-centerCondition.value = "o"+"-1";
-}
-}
-if (centerOpeningDate.value > centerClosingDate.value) {
-centerClosingDate.value = '';
-centerCondition.value='';
-}
-});
+	let centerOpeningDate = new Date(document.querySelector("#centerOpeningDate").value);
+	let centerClosingDate = document.querySelector("#centerClosingDate");
+	let centerCondition = document.querySelector("#centerCondition");
+	centerClosingDate.value = '';
+	if (centerOpeningDate !== '') {
+		centerClosingDate.readOnly = false;
+	} else {
+		centerClosingDate.readOnly = true;
+	}
+	if (centerOpeningDate > getToday()) {
+		centerCondition.value = "notyet";
+	}
+	if (centerOpeningDate < getToday()) {
+		centerCondition.value = "o"+"1";
+	}
+	$("#centerClosingDate").change(function() {
+		let centerClosingDate = new Date(document.querySelector("#centerClosingDate").value);
+		if (centerOpeningDate > getToday() && centerClosingDate > getToday())  {
+			centerCondition.value = "o"+"1";
+		}
+		if ((centerOpeningDate !=='') && (centerClosingDate !== '')) {
+			if (centerOpeningDate <= centerClosingDate && centerClosingDate <= getToday() ) {
+				centerCondition.value = "closed";
+			}else if (centerOpeningDate < getToday()  && centerOpeningDate < centerClosingDate && centerClosingDate > getToday()) {
+				centerCondition.value = "o"+"-1";
+			}
+		}
+		if (centerOpeningDate.value > centerClosingDate.value) {
+			centerClosingDate.value = '';
+			centerCondition.value='';
+		}
+	});
 });
 
 
@@ -59,6 +69,7 @@ function CallcenterList() {
 		var row = leftTableTr[i];
 
 		row.onclick = function () {
+			$(".removeDisabled").attr("disabled", false);
 			$("#centerName").attr("readonly", true);
 			let centercode = document.querySelector("#centerCode");
 			let centername = document.querySelector("#centerName");
@@ -66,7 +77,7 @@ function CallcenterList() {
 			let centeraddress = document.querySelector("#centerAddress");
 			let centeropeningdate = document.querySelector("#centerOpeningDate");
 			let centercondition = document.querySelector("#centerCondition");
-	
+
 			let centerclosingdate = document.querySelector("#centerClosingDate");
 			let centerguide = document.querySelector("#centerGuide");
 
@@ -103,12 +114,17 @@ $("#centerSavedBtn").click(function (){
 	let centertel = $("#centerTel").val();
 	let centeraddress = $("#centerAddress").val();
 	let centerguide = $("#centerGuide").val();
-	let centeropeningDate = $("#centerOpeningDate").val();
 	let centerclosingDate = $("#centerClosingDate").val();
+	let centercondition = $("#centerCondition").val();	
+
+	let centeropeningDate = $("#centerOpeningDate").val();
+	if (centeropeningDate  == '') {
+		centercondition = "notyet";
+		console.log(centercondition);
+	}
 
 	if (!$("#centerName").attr("readonly")) {
-		
-		let centercondition = $("#centerCondition").val();	
+
 		let insertURL = "/centerInsert";
 
 		$.ajax({
@@ -147,6 +163,7 @@ $("#centerSavedBtn").click(function (){
 				$("#center-left").append(str);
 				$("#centerForm input").val('');
 				CallcenterList();
+				changeColor()
 				$(".removeDisabled").attr("disabled", true);
 			},
 
@@ -175,7 +192,7 @@ $("#centerSavedBtn").click(function (){
 			},
 			success : function(results) {
 				$("#centerList").empty();
-				
+
 				let str = "<tr>";
 				$.each(results, function(i){
 					if (results[i].centerOpeningDate == null) {
@@ -183,20 +200,21 @@ $("#centerSavedBtn").click(function (){
 					}else {
 						results[i].centerOpeningDate = results[i].centerOpeningDate.substring(0,10);
 					}
-					
+
 					str += "<td>" + results[i].centerCode + "</td><td>" + 
 					results[i].centerName + "</td><td>" + results[i].centerTel + "</td><td>" +
 					results[i].centerAddress + "</td><td>" + results[i].centerOpeningDate +"</td><td>"
 					+ results[i].centerCondition + "</td><td style='display:none'>" + results[i].centerGuide + 
 					"</td><td style='display:none'>" + results[i].centerClosingDate + "</td>";
-					
+
 					str += "</tr>";
 				});
 				$("#center-left").append(str);
 				$("#centerForm input").val('');
 				CallcenterList();
+				changeColor()
 				$(".removeDisabled").attr("disabled", true);
-				
+
 			},
 			error: function( request, status, error ){
 				alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
@@ -208,9 +226,9 @@ $("#centerSavedBtn").click(function (){
 
 //등록버튼
 $("#centerInsertBtn").click(function () {
-	
-	const newCenterCode = $("#newCenterCode").val();
-	
+
+//	const newCenterCode = $("#newCenterCode").val();
+
 	$(".removeDisabled").attr('disabled', false);
 	$("#centerName").attr("readonly", false);
 
@@ -219,7 +237,7 @@ $("#centerInsertBtn").click(function () {
 		$("#centerClosingDate").attr("readonly",true);
 	}
 
-	$("#centerCode").val(newCenterCode);
+//	$("#centerCode").val(newCenterCode);
 	$("#centerName").val('');
 	$("#centerTel").val('');
 	$("#centerCondition").val('');
@@ -236,8 +254,7 @@ $("#findCenterList").click(function (){
 	let centerGuide = $("#centerGuide").val();
 	let centerOpeningDate = $("#centerOpeningDate").val();
 	let centerCondition = $("#ceneterCondition").val();
-	let centerClosingDate = $("centerClosingDate").val();
-	console.log(centername);
+	let centerClosingDate = $("#centerClosingDate").val();
 	$.ajax({ 
 		url : "/findCenter",
 		type : "POST",
@@ -253,12 +270,13 @@ $("#findCenterList").click(function (){
 				}else {
 					results[i].centerOpeningDate = results[i].centerOpeningDate.substring(0,10);
 				}
+				console.log(results[i].centerCondition);
 				str += "<td>" + results[i].centerCode + "</td><td>" + results[i].centerName 
-				+"<td></td>" + results[i].centerOpeningDate + "<td></td>"
-				+ results[i].centerCondintion + "</td><td style='display:none'>"
-				+ results[i].centerGuide + "</td><td style='display:none'>" 
-				+ results[i].centerClosingDate +"</td>";
-				
+				+"</td><td>" + results[i].centerTel + "</td><td>" + results[i].centerGuide 
+				+ "</td><td>" + results[i].centerOpeningDate + "</td><td>" + results[i].centerCondition 
+				+ "</td><td style='display:none'>" + results[i].centerGuide 
+				+ "</td><td style='display:none'>" + results[i].centerClosingDate +"</td>";
+
 				str += "</tr>";
 			});
 			$("#center-left").append(str);

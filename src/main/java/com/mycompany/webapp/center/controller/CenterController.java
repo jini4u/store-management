@@ -61,12 +61,7 @@ public class CenterController {
 		model.addAttribute("pager", pager);
 		return "jsp/center/centerphoto";
 	}
-	/*//url은 value에 적혀있는 값으로 동작하고, centerlist.jsp 페이지를 로딩해준다?
-	@GetMapping(value="/centerInsert")
-	public String insertCenter(Model model) {
-		return "jsp/center/centerlist";
-	}*/
-	//물어보기
+
 	@ResponseBody
 	@PostMapping(value="/centerInsert")
 	public List<CenterVO> insertCenter(@RequestParam(defaultValue="1") int pageNo, CenterVO centerVO) {
@@ -106,9 +101,10 @@ public class CenterController {
 		int totalRows = centerService.countAllCenters();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		model.addAttribute("pager", pager);
-		centerVO.setCenterName(centerVO.getCenterName());
+//		centerVO.setCenterName(centerVO.getCenterName());
 		System.out.println(centerVO.getCenterName());
 		List<CenterVO> centerList = centerService.findCenter(pager,centerVO);
+		logger.info(centerList+"");
 		return centerList;
 	}
 	

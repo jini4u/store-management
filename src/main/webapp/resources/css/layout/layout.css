@@ -10,10 +10,6 @@
 	font-family: NanumSquareRound;
 }
 
-.totalbox {
-	overflow: hidden;
-}
-
 .header {
 	display: flex;
 	align-items: center;
@@ -32,7 +28,7 @@
 
 .middlebox {
 	display: flex;
-	height: 841px;
+	height: 880px;
 }
 
 .leftbox {

@@ -11,10 +11,10 @@
 </div>
 <div class="center-search-button">
 	<div class="search-box center">
-		<input type="text" name="centerCode" id="findCenterName"
-			class="search-txt search-button"> <a class="search-btn"
-			id="findCenterList" href="#"> <i class="fas fa-search"></i>
-		</a>
+		<input type="text" name="centerCode" id="findCenterName" class="search-txt search-button"> 
+			<a class="search-btn" id="findCenterList" href="#"> 
+				<i class="fas fa-search"></i>
+			</a>
 	</div>
 
 </div>
@@ -73,19 +73,13 @@
 		</ul>
 	</div>
 </div>
-<form id="centerForm">
 	<div class="center-button-group">
 		<input type="button" class="pinkButton" id="centerInsertBtn" value="등록"> 
 		<input type="button" class="greyButton" id="centerSavedBtn" value="저장">
 	</div>
+<form id="centerForm">
 	<table class="rowTable" id="center-right">
-		<tr>
-			<th>센터 코드</th>
-			<td><input type="text" name="centerCode"
-				value="${newCenterCode}" id="centerCode" class="removeDisabled"
-				disabled="disabled" readonly="readonly"> <input
-				type="hidden" value="${newCenterCode}" id="newCenterCode"></td>
-		</tr>
+			<input type="hidden" name="centerCode" value="${newCenterCode}" id="centerCode" class="removeDisabled"> 
 		<tr>
 			<th>센터명</th>
 			<td><input type="text" name="centerName" id="centerName"
@@ -129,7 +123,7 @@
 	<div id="centerphoto-main-size">
 		<img src="resources/images/center/left-arrow.png" class="center-arrow">
 		<div id="centerImagesDiv">
-			<!-- 센터별 사진들 들어가야함. value에서 /image/사진이름. /image는 resources.xml에서 맵핑해둠 -->
+			<!-- 센터별 사진들 들어가야함. src에서 /image/사진이름. /image는 resources.xml에서 맵핑해둠 -->
 			<img src="resources/images/center/(대구경남)경상대센터1.jpg"
 				class="centerphoto-img">
 		</div>
