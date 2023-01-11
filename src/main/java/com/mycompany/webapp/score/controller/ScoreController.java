@@ -63,8 +63,7 @@ public class ScoreController {
 		session.setAttribute("centerCode", 1);
 		session.setAttribute("userCode", 10006);
 		//------------------------------------------------
-		
-		//scoreVO.setCenterCode((Integer)session.getAttribute("centerCode"));
+
 		scoreVO.setCenterCode(1);
 		
 		List<ScoreVO> scoreList = scoreService.getScoreList(scoreVO);

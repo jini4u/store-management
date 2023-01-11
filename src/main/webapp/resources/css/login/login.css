@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+body {
+	background-color: #EDEDED;
+}
+
+.loginpage {
+	background-color: white;
+	width: fit-content;
+	margin: auto;
+	padding: 110px;
+	border-radius: 3%;
+	margin-top: 180;
+	padding: 276px 118px;
+}
+
+.login_blank {
+	margisn-top: 60px;
+}
+
+.loginh1 {
+	text-align: center;
+	margin-top: -210px;
+	font-size: 50px;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	background-color: #FF8787;
+	width: 48px;
+	padding: 5px;
+	background-color: #FF8787;
+	border: 1px solid #FF8787;
+	color: #fff;
+	float: revert;
+	border-radius: 9px;
+}
+
+.image_placeholder {
+	display: flex;
+	height: 53px;
+}
+
+.login_pw_form {
+	padding: 39px 5px;
+}
+
+.blank {
+	margin-top: 10px;
+}
+
+.login_pw {
+	margin-left: 10px;
+	radius: 10px;
+	border-radius: 10px;
+	border: 1;
+	border: 1px solid grey;
+}
+
+.login_search {
+	text-align: right;
+}
+
+/*버튼 */
+.pinkButton {
+	border-radius: 9px;
+	display: inline-block;
+	cursor: pointer;
+	font-family: Arial;
+	font-size: 18px;
+	padding: 14px 94px;
+	text-decoration: none;
+	font-weight: 550;
+	background-color: #FF8787;
+	border: 1px solid #FF8787;
+	color: #fff;
+	float: right;
+}
+
+.pinkButton:active {
+	position: relative;
+	top: 1px;
+}
+
+.pinkButton:hover {
+	background-color: #E26868;
+	color: #fff;
+	border: 1px solid #E26868;
+}

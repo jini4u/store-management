@@ -13,8 +13,8 @@
 
 <div id="score_page">
 	<div id="btn_group">
-		<button>지점1</button>
-		<button>지점2</button>
+		<button class="pinkButton">지점1</button>
+		<button class="greyButton">지점2</button>
 	</div>
 
 	<div class="year_and_quarter">
@@ -35,7 +35,7 @@
 				<option value="2">2 분기</option>
 				<option value="1">1 분기</option>
 			</select>
-			<button type="submit">찾기</button>
+			<button type="submit" class="pinkButton" >찾기</button>
 		</form>
 	</div>
 
@@ -77,9 +77,9 @@
 <div id="btnclick">
 	<div id="btn_group">
 		<form action="/saveScore" name="saveScore" method="post">
-			<button id="btn1">수정</button>
+			<button id="btn1" class="pinkButton">수정</button>
 		</form>
-		<button class="open">점수등록</button>
+		<button type="submit" class="open greyButton" >점수등록</button>
 	</div>
 </div>
 
@@ -112,7 +112,7 @@
 				</tr>
 
 
-				<c:forEach items="${usingCodeList}" var="usingCodeList">
+				<c:forEach items="${usingCodeList}" var = "usingCodeList">
 
 					<tr>
 
@@ -132,8 +132,8 @@
 
 
 
-			<button type="submit" class="close-btn">입력</button>
-			<button type="button" class="close-btn">취소</button>
+			<button type="submit" class="close-btn pinkButton">입력</button>
+			<button type="button" class="close-btn greyButton">취소</button>
 		</form>
 	</div>
 </div>
@@ -167,8 +167,8 @@
 		openButton.addEventListener("click", openModal);
 
 		//모달창 닫기//
-		const closeBtn = modal.querySelectorAll(".close-btn");
-		$(closeBtn).click(function() {
+		const = modal.querySelectorAll(".close-btn");
+		$(".close-btn").click(function() {
 			$(".modal").fadeOut();
 
 		})
