@@ -145,7 +145,6 @@ $("#centerSavedBtn").click(function (){
 					str += "</tr>";
 				});
 				$("#center-left").append(str);
-				alert("성공")
 				$("#centerForm input").val('');
 				CallcenterList();
 				$(".removeDisabled").attr("disabled", true);
@@ -194,7 +193,6 @@ $("#centerSavedBtn").click(function (){
 					str += "</tr>";
 				});
 				$("#center-left").append(str);
-				alert("성공");
 				$("#centerForm input").val('');
 				CallcenterList();
 				$(".removeDisabled").attr("disabled", true);
@@ -264,7 +262,6 @@ $("#findCenterList").click(function (){
 				str += "</tr>";
 			});
 			$("#center-left").append(str);
-			alert("성공");
 			$("#centerForm input").val('');
 			CallcenterList();
 			$(".removeDisabled").attr("disabled", true);

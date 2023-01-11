@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-style: normal;
+}
+
+*{
+	font-family: NanumSquareRound;
+}
+
 .totalbox {
 	overflow: hidden;
 }
@@ -56,9 +66,7 @@
 	font-size: 32px;
 }
 /* 표 디자인 */
-.verticalTable,
-.rowTable 
-{
+.verticalTable, .rowTable {
 	font-size: 17px;
 	width: 100%;
 	border-top: 1.5px solid #CCC;
@@ -66,21 +74,15 @@
 	border-collapse: collapse;
 }
 
-.verticalTable th, td,
-.rowTable th, td 
-{
+.verticalTable th, td, .rowTable th, td {
 	padding: 10px;
 }
 
-.verticalTable thead,
-.rowTable th 
-{
+.verticalTable thead, .rowTable th {
 	background: #EDEDED;
 }
 
-.verticalTable tbody tr,
-.rowTable tr
- {
+.verticalTable tbody tr, .rowTable tr {
 	border-top: 1.5px solid #CCC;
 	text-align: center;
 }
@@ -123,7 +125,7 @@
 	height: 40px;
 }
 /*버튼 */
-.pinkButton, .releaseButton {
+.pinkButton, .greyButton {
 	border-radius: 9px;
 	display: inline-block;
 	cursor: pointer;
@@ -161,4 +163,72 @@
 	background-color: #bebebe;
 	color: #000000;
 	border: 1px solid #bebebe;
+}
+
+/* 페이지네이션*/
+.center-pagging {
+	text-align: center;
+}
+
+.pagination {
+	list-style: none;
+	display: inline-block;
+	padding: 0;
+	margin-top: 20px;
+}
+
+.pagination li {
+	display: inline;
+	text-align: center;
+}
+
+.pagination a {
+	float: left;
+	display: block;
+	font-size: 14px;
+	text-decoration: none;
+	padding: 5px 12px;
+	color: #96a0ad;
+	line-height: 1.5;
+}
+
+.first {
+	margin-right: 15px;
+}
+
+.first:hover, .last:hover, .left:hover, .right:hover {
+	color: #E26868;
+}
+
+.pagination a.active {
+	cursor: default;
+	color: #fff;
+}
+
+.pagination a:active {
+	outline: none;
+}
+
+.modal .num {
+	margin-left: 3px;
+	padding: 0;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	-moz-border-radius: 100%;
+	-wekit-border-radius: 100%;
+	border-radius: 100%;
+}
+
+.modal .num.active, .modal .num:active {
+	background-color: #E26868;
+	cursor: pointer;
+}
+
+.arrow .left {
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-right: 10px solid blue;
 }

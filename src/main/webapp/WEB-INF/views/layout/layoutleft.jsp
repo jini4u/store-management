@@ -12,7 +12,7 @@
 				<ul class="submenuItems">
 					<li><a href="<c:url value='/centerList'/>">센터 조회</a></li>
 					<li><a href="<c:url value='/centerPhoto'/>">센터 사진 관리</a></li>
-					<li><a href="#">센터 정보 일괄 등록</a></li>
+					<li><a href="/centerExcelUpload">센터 정보 일괄 등록</a></li>
 				</ul>
 			</li>
 			<li>

@@ -112,7 +112,7 @@ public class CenterController {
 		return centerList;
 	}
 	
-	@GetMapping(value="/excelUpload")
+	@GetMapping(value="/centerExcelUpload")
 	public String excelUplaod() {
 		return "jsp/center/excelupload";
 	}
