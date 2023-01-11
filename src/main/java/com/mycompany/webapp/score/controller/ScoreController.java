@@ -85,6 +85,7 @@ public class ScoreController {
 			model.addAttribute("maxYear", maxYear);
 			model.addAttribute("maxSeason", maxSeason);
 		}
+		
 		//기본날짜 설정
 		Calendar now = Calendar.getInstance();
 		int yy = now.get(Calendar.YEAR);

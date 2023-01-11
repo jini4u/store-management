@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="resources/css/score/score.css" />
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
+
 <!-- 점검년도 리스트 -->
 <div class="titleBox">
 	<img src="resources/images/checklist.png">
@@ -87,7 +88,7 @@
 
 
 <!-- 입력 모달창 -->
-
+<c:if test="${maxYear ne year and maxseason ne season}">
 <div class="modal">
 	<div class="modal_overlay"></div>
 	<div class="modal_content">
@@ -131,6 +132,7 @@
 
 
 				</c:forEach>
+				
 			</table>
 
 
@@ -141,9 +143,9 @@
 		</form>
 
 	</div>
+	
 </div>
-
-
+</c:if>
 
 <!-- 모달 자바 스크립트 -->
 
