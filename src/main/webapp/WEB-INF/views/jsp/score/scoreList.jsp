@@ -76,8 +76,8 @@
 <!--  수정 점수등록 버튼 -->
 <div id="btnclick">
 	<div id="btn_group">
-		<form action="/saveScore" name="saveScore" method="post">
-			<button id="btn1" class="pinkButton">수정</button>
+		<form action="/updateScore" name="updateScore" method="post">
+			<button type="submit" id="btn1" class="pinkButton">수정</button>
 		</form>
 		<button type="submit" class="open greyButton" >점수등록</button>
 	</div>
@@ -87,13 +87,18 @@
 
 
 <!-- 입력 모달창 -->
+
 <div class="modal">
 	<div class="modal_overlay"></div>
 	<div class="modal_content">
 
-		<h1 class="modalh1">점수 입력</h1>
+		
 
 		<!-- 모달창 안 테이블 -->
+		
+		
+		
+		<h1 class="modalh1">점수 입력</h1>
 		<form method="post" action="insertScore">
 			<div>년도: ${year}, 분기: ${season}</div>
 
@@ -111,7 +116,7 @@
 
 				</tr>
 
-
+					
 				<c:forEach items="${usingCodeList}" var = "usingCodeList">
 
 					<tr>
@@ -126,7 +131,6 @@
 
 
 				</c:forEach>
-
 			</table>
 
 
@@ -135,8 +139,10 @@
 			<button type="submit" class="close-btn pinkButton">입력</button>
 			<button type="button" class="close-btn greyButton">취소</button>
 		</form>
+
 	</div>
 </div>
+
 
 
 <!-- 모달 자바 스크립트 -->
@@ -167,7 +173,6 @@
 		openButton.addEventListener("click", openModal);
 
 		//모달창 닫기//
-		const = modal.querySelectorAll(".close-btn");
 		$(".close-btn").click(function() {
 			$(".modal").fadeOut();
 

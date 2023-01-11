@@ -72,8 +72,11 @@ public class CenterService implements ICenterService{
 
 	@Override
 	public List<CenterVO> findCenter(Pager pager, CenterVO centerVO) {
-		return centerRepository.findCenter(pager ,centerVO);
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	
 
 
 }
