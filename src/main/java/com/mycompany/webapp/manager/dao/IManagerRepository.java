@@ -38,7 +38,7 @@ public interface IManagerRepository {
 	int countAllMgr();
 	
 	//키워드별 담당자 검색
-	List<ManagerVO> managerSearch(String keyword);
+	List<ManagerVO> managerSearch(@Param("pager")Pager pager, @Param("mgr")ManagerVO mgr);
 	
 	//�쑀吏�
 	//userCode濡� �떞�떦 �꽱�꽣 議고쉶
