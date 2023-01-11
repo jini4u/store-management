@@ -84,7 +84,7 @@
 			<div id="photo-main-size">
 				<img src="resources/images/center/left-arrow.png" class="arrow">
 				<div id="centerImagesDiv">
-				<!-- 센터별 사진들 들어가야함. value에서 /image/사진이름. /image는 resources.xml에서 맵핑해둠 -->
+				<!-- 센터별 사진들 들어가야함. src에서 /image/사진이름. /image는 resources.xml에서 맵핑해둠 -->
 				<img src="" class="photo-img">
 				</div>
 				<img src="resources/images/center/right-arrow.png" class="arrow">
