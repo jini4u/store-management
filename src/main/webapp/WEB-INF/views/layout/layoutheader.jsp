@@ -14,7 +14,6 @@
 				<a class="mypage"> <img src="/resources/images/user.png">
 				</a>
 			</li>
-			<c:set var="titleUserCode" value="10006"/>
 			<c:set var="titleUserName" value="고은별"/>
 			<li><c:out value="${titleUserName}"/> 담당자<!-- 로그인하는 사람마다 달라짐 --></li>
 			<li class="bar">|</li>

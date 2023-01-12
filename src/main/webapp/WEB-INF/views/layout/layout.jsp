@@ -8,10 +8,10 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/resources/css/layout/layout.css">
 <meta charset="UTF-8">
-<title>sitemesh main</title>
+<title>헌혈의 집 관리 시스템</title>
 </head>
 <!-- 공통함수 부분 -->
-<script src="resources/js/common.js"></script>
+<script src="/resources/js/common.js"></script>
 <body class="totalbox"> 
 	<div>
 		<div class="header">
