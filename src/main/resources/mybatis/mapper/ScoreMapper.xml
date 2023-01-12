@@ -53,7 +53,7 @@
 		<if test="checkSeason != 0">
 		AND I.check_season = #{checkSeason}
 		</if>
-	ORDER BY I.check_year, I.check_season DESC NULLS LAST
+	ORDER BY I.check_year DESC, I.check_season DESC NULLS LAST
 </select>
 <!-- 
  점수 항목 조회
@@ -84,7 +84,7 @@ WHERE D.check_detail_occupied = 'Y'
 
  -->
 
-<update id="saveScore" parameterType="com.mycompany.webapp.score.vo.ScoreVO">
+<update id="updateScore" parameterType="com.mycompany.webapp.score.vo.ScoreVO">
 UPDATE
     inspection 
 SET

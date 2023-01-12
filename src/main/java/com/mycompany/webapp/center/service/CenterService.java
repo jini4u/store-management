@@ -3,7 +3,6 @@ package com.mycompany.webapp.center.service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,9 +151,16 @@ public class CenterService implements ICenterService{
 	 * @return 삭제된 파일 수
 	 * */
 	@Override
-	public int deleteImage(List<Integer> fileNoList) {
+	public int deleteImage(List<Integer> fileNoList, int centerCode) {
 		int result = 0;
+		List<FileInfoVO> centerFileList = centerRepository.getCenterImageNames(centerCode);
 		for(int fileNo:fileNoList) {
+			for(FileInfoVO centerFile:centerFileList) {
+				if(centerFile.getFileNo() == fileNo) {
+					File centerImage = new File(filePath+centerFile.getFileSavedName());
+					centerImage.delete();
+				}
+			}
 			result += centerRepository.deleteImage(fileNo);
 		}
 		return result;
@@ -162,8 +168,11 @@ public class CenterService implements ICenterService{
 
 	@Override
 	public List<CenterVO> findCenter(Pager pager, CenterVO centerVO) {
-		return centerRepository.findCenter(pager ,centerVO);
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	
 
 
 }

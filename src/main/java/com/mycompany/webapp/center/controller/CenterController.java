@@ -56,6 +56,12 @@ public class CenterController {
 	@Value("${file.path}")
 	private String filePath;
 
+	/**
+	 * 
+	 * @param 점포 사진을 조회한다.
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="/centerPhoto")
 	public String manageCenterPhoto(@RequestParam(defaultValue="1") int pageNo, Model model) {
 		int totalRows = centerService.countAllCenters();
@@ -77,6 +83,12 @@ public class CenterController {
 		return list;
 	}
 
+	/**
+	 * 
+	 * @param 점포 리스트를 조회한다.
+	 * @param model
+	 * @return
+	 */
 	@GetMapping(value="/centerList")
 	public String centerList(@RequestParam(defaultValue="1")int pageNo, Model model, CenterVO centerVO){
 		int totalRows = centerService.countAllCenters();
@@ -185,12 +197,12 @@ public class CenterController {
 	 * 센터 이미지 삭제
 	 * @return 삭제된 파일 수
 	 * */
-	@RequestMapping(value="/deleteImage", method=RequestMethod.POST)
-	public @ResponseBody int deleteImage(@RequestBody String request) {
+	@RequestMapping(value="/deleteImage/{centerCode}", method=RequestMethod.POST)
+	public @ResponseBody int deleteImage(@RequestBody String request, @PathVariable int centerCode) {
 		List<Integer> fileNoList = new ArrayList<Integer>();
 		for(String fileNo:request.split(",")) {
 			fileNoList.add(Integer.parseInt(fileNo));
 		}
-		return centerService.deleteImage(fileNoList);
+		return centerService.deleteImage(fileNoList, centerCode);
 	}
 }
