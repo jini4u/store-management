@@ -24,10 +24,6 @@ public class CenterService implements ICenterService{
 	@Value("${file.path}")
 	private String filePath;
 	
-//	public int getLastCenterCode() {
-//		return centerRepository.getLastCenterCode()+1;
-//	}
-
 	@Override
 	public int insertCenter(CenterVO centerVO) {
 		return centerRepository.insertCenter(centerVO);
@@ -168,8 +164,12 @@ public class CenterService implements ICenterService{
 
 	@Override
 	public List<CenterVO> findCenter(Pager pager, CenterVO centerVO) {
-		// TODO Auto-generated method stub
-		return null;
+		return centerRepository.findCenter(pager, centerVO);
+	}
+
+	@Override
+	public int filterCountAllCenters(String centerName) {
+		return centerRepository.filterCountAllCenters(centerName);
 	}
 
 	

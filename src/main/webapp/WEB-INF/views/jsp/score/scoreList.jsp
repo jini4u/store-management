@@ -39,30 +39,31 @@
 </div>
 
 <!-- 점수리스트 테이블 -->
-<table class="scoretable" border="1">
-	<tr>
-		<th>점검년도</th>
-		<th>분기</th>
-		<th>항목</th>
-		<th>상세항목</th>
-		<th>점수</th>
-	</tr>
-	<c:if test="${empty scoreList}">
-		데이터가 없습니다.
-	</c:if>
-	<c:if test="${not empty scoreList}">
-		<c:forEach items="${scoreList}" var="scoreCode">
-			<tr>
-				<td class="score_td">${scoreCode.checkYear}</td>
-				<td class="score_td">${scoreCode.checkSeason}</td>
-				<td class="score_td">${scoreCode.checkGroupContent}</td>
-				<td class="score_td">${scoreCode.checkDetailContent}</td>
-				<td class="score_td"><input type="text" class="placeholderstlye" size="5" placeholder="${scoreCode.checkScore}"></td>
-			</tr>
-		</c:forEach>
-	</c:if>
-</table>
-
+<form>
+	<table class="scoretable" border="1">
+		<tr>
+			<th>점검년도</th>
+			<th>분기</th>
+			<th>항목</th>
+			<th>상세항목</th>
+			<th>점수</th>
+		</tr>
+		<c:if test="${empty scoreList}">
+			데이터가 없습니다.
+		</c:if>
+		<c:if test="${not empty scoreList}">
+			<c:forEach items="${scoreList}" var="scoreCode">
+				<tr>
+					<td class="score_td">${scoreCode.checkYear}</td>
+					<td class="score_td">${scoreCode.checkSeason}</td>
+					<td class="score_td">${scoreCode.checkGroupContent}</td>
+					<td class="score_td">${scoreCode.checkDetailContent}</td>
+					<td class="score_td"><input type="text" class="placeholderstlye" size="5" placeholder="${scoreCode.checkScore}"></td>
+				</tr>
+			</c:forEach>
+		</c:if>
+	</table>
+</form>
 <!--  수정 점수등록 버튼 -->
 <div id="btnclick">
 	<div id="btn_group">

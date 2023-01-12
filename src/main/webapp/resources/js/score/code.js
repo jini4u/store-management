@@ -55,7 +55,7 @@ function addEvent(){
 		}
 	
 		//ajax 요청해서 상세코드 내용 채우기
-		makeRequest(getDetailCodes, 'GET', '/getDetailCodes/'+groupTextArr[1]);
+		makeRequest(getDetailCodes, 'GET', '/score/getDetailCodes/'+groupTextArr[1]);
 	});
 	
 	//상세코드 테이블 클릭 이벤트 등록
@@ -79,7 +79,7 @@ function addEvent(){
 		//그룹코드 form 데이터 가져오기
 		let groupFormData = new FormData(groupForm);
 		if(!groupCodeInput.hasAttribute("readonly")){
-			makeRequest(afterSendForm, 'POST', '/insertGroupCode', groupFormData);
+			makeRequest(afterSendForm, 'POST', '/score/insertGroupCode', groupFormData);
 			groupCodeInput.setAttribute("readonly", true);
 			//상세코드 칸들 비우기
 			detailCodeInput.value = '';
@@ -88,7 +88,7 @@ function addEvent(){
 			detailSelect[2].selected = false;
 		} else {
 			//POST 방식, /updateGroupCode로 groupFormData를 전송하는 요청
-			makeRequest(afterSendForm, 'POST', '/updateGroupCode', groupFormData);			
+			makeRequest(afterSendForm, 'POST', '/score/updateGroupCode', groupFormData);			
 		}
 	});
 	
@@ -99,11 +99,11 @@ function addEvent(){
 		//해당 그룹코드 from 데이터에 추가
 		detailFormData.append('groupCode', groupCodeInput.value);
 		if(!detailCodeInput.hasAttribute("readonly")){
-			makeRequest(afterSendForm, 'POST', '/insertDetailCode', detailFormData);
+			makeRequest(afterSendForm, 'POST', '/score/insertDetailCode', detailFormData);
 			detailCodeInput.setAttribute("readonly", true);
 		} else {
 			//POST 방식, /updateDetailCode로 detailFormData를 전송하는 요청
-			makeRequest(afterSendForm, 'POST', '/updateDetailCode', detailFormData);			
+			makeRequest(afterSendForm, 'POST', '/score/updateDetailCode', detailFormData);			
 		}
 	});
 	
@@ -171,14 +171,14 @@ function afterSendForm(){
 		let sendFormResponse = JSON.parse(httpRequest.responseText);
 		//수정된 칼럼의 수가 1인 경우 (정상 수정)
 		if(sendFormResponse[0]=='group' && sendFormResponse[1]=='1'){
-			makeRequest(getGroupCodes, 'GET', '/getGroupCodes');
+			makeRequest(getGroupCodes, 'GET', '/score/getGroupCodes');
 		}
 	}).then( //앞부분 완료 후 동작
-		makeRequest(getDetailCodes, 'GET', '/getDetailCodes/'+groupCodeInput.value)
+		makeRequest(getDetailCodes, 'GET', '/score/getDetailCodes/'+groupCodeInput.value)
 	);
 }
 
-makeRequest(getGroupCodes, 'GET', '/getGroupCodes');		
+makeRequest(getGroupCodes, 'GET', '/score/getGroupCodes');		
 addEvent();
 
 /*****************비동기통신 참고***************************
