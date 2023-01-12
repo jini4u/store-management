@@ -11,7 +11,7 @@ import com.mycompany.webapp.common.vo.Pager;
 public interface ICenterRepository {
 	//소정
 	//센터코드 +1
-	public int getLastCenterCode();
+//	public int getLastCenterCode();
 	//센터 등록
 	public int insertCenter(CenterVO centerVO);
 	
