@@ -76,70 +76,11 @@
 </div>
 
 <!-- 입력 모달창 -->
-<<<<<<< HEAD
 <c:if test="${(maxYear eq year and maxSeason eq season) == false}">
 	<div class="modal">
 		<div class="modal_overlay"></div>
 		<div class="modal_content">
-=======
 
-<c:if test="${(maxYear eq year and maxSeason eq season)==false}">
-<div class="modal">
-	<div class="modal_overlay"></div>
-	<div class="modal_content">
-
-		
-
-		<!-- 모달창 안 테이블 -->
-		
-		
-		
-		<h1 class="modalh1">점수 입력</h1>
-		<form method="post" action="insertScore">
-			<div>년도: ${year}, 분기: ${season}</div>
-
-			<input type="hidden" name="centerCode" value="${centerCode}" /> 
-			<input type="hidden" name="userCode" value="${userCode}" /> 
-			<input type="hidden" name="checkYear" value="${year}" />
-			<input type="hidden" name="checkSeason" value="${season}" />
-			<table class="scoretable" border="1">
-				<tr>
-
-					<th class="score_th">항목</th>
-					<th class="score_th">상세항목</th>
-					<th class="score_th">점수</th>
-
-
-				</tr>
-
-					
-				<c:forEach items="${usingCodeList}" var = "usingCodeList">
-
-					<tr>
-
-						<td>${usingCodeList.checkGroupContent}</td>
-						<td>${usingCodeList.checkDetailContent}</td>
-
-						<td><input type="hidden" name="arrayCheckGroupCode"	value="${usingCodeList.checkGroupCode}"> 
-							<input type="hidden" name="arrayCheckDetailCode" value="${usingCodeList.checkDetailCode}"> 
-							<input type="text" size="13" name="arrayScore" value="0"></td>
-					</tr>
-
-
-				</c:forEach>
-				
-			</table>
-
-
-
-
-			<button type="submit" class="close-btn pinkButton">입력</button>
-			<button type="button" class="close-btn greyButton">취소</button>
-		</form>
-
-	</div>
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
-	
 			<!-- 모달창 안 테이블 -->
 			<h1 class="modalh1">점수 입력</h1>
 			<form method="post" action="insertScore">
@@ -179,7 +120,6 @@
 
 
 <!-- 모달 자바 스크립트 -->
-<<<<<<< HEAD
 <script type="text/javascript">
 	$(function() {
 		$(".open").click(function() {
@@ -212,7 +152,4 @@
 		})
 	});
 </script>
-=======
-
 <script src="resources/js/score/scoreList.js"></script>
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
