@@ -9,9 +9,7 @@ import com.mycompany.webapp.common.vo.FileInfoVO;
 import com.mycompany.webapp.common.vo.Pager;
 
 public interface ICenterRepository {
-	//소정
-	//센터코드 +1
-//	public int getLastCenterCode();
+
 	//센터 등록
 	public int insertCenter(CenterVO centerVO);
 	
@@ -34,4 +32,7 @@ public interface ICenterRepository {
 	List<FileInfoVO> getCenterImageNames(int centerCode);
 	int updateImage(FileInfoVO file);
 	int deleteImage(int fileNo);
+	
+	//센터 검색된 수 받아오는 것
+	int filterCountAllCenters(String centerName);
 }

@@ -113,10 +113,9 @@ public class CenterController {
 	@ResponseBody
 	@PostMapping(value ="/findCenter")
 	public List<CenterVO> findCenter(@RequestParam(defaultValue="1")int pageNo, CenterVO centerVO, Model model) {
-		int totalRows = centerService.countAllCenters();
+		int totalRows = centerService.filterCountAllCenters(centerVO.getCenterName());
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		model.addAttribute("pager", pager);
-//		centerVO.setCenterName(centerVO.getCenterName());
 		System.out.println(centerVO.getCenterName());
 		List<CenterVO> centerList = centerService.findCenter(pager,centerVO);
 		logger.info(centerList+"");

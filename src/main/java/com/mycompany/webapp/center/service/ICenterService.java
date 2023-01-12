@@ -10,8 +10,6 @@ import com.mycompany.webapp.common.vo.Pager;
 
 public interface ICenterService {
 	
-	//센터코드+1
-//	public int getLastCenterCode();
 	//센터등록
 	public int insertCenter(CenterVO centerVO);
 	//센터조회
@@ -39,4 +37,7 @@ public interface ICenterService {
 	int updateImage(FileInfoVO file, int centerCode, String oldOriginalName);
 	
 	int deleteImage(List<Integer> fileNoList, int centerCode);
+	
+	//센터 검색된 수
+	int filterCountAllCenters(String centerName);
 }
