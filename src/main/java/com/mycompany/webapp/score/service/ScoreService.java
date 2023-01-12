@@ -76,6 +76,8 @@ public class ScoreService implements IScoreService {
 	@Override
 	public int updateScore(ScoreVO score) {
 		return scoreRepository.updateScore(score);
+		
+
 	}
 
 
@@ -89,9 +91,7 @@ public class ScoreService implements IScoreService {
 			vo.setCheckYear(scoreVO.getCheckYear());
 			vo.setCheckSeason(scoreVO.getCheckSeason());
 			vo.setCheckGroupCode(scoreVO.getArrayCheckGroupCode()[i]);
-			//         System.out.println("점수 코드 : " + scoreVO.getArrayCheckGroupCode()[i]);
 			vo.setCheckDetailCode(scoreVO.getArrayCheckDetailCode()[i]);
-			//         System.out.println("점수 상세 코드 :" + scoreVO.getArrayCheckDetailCode()[i]);
 			vo.setCheckScore(scoreVO.getArrayScore()[i]);
 			scoreRepository.insertScore(vo);
 		}
@@ -103,12 +103,6 @@ public class ScoreService implements IScoreService {
 	public List<ScoreVO> usingCodeList() {
 
 		return scoreRepository.usingCodeList();
-	}
-
-	@Override
-	public int deleteScore(ScoreVO score) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

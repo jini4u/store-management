@@ -140,7 +140,7 @@ public class ScoreController {
 	public String updateScore(ScoreVO score ){
 		
 		scoreService.updateScore(score);
-		return "redirect:/scorelist";
+		return "redirect:/score/scoreList";
 	}
 
 	/*
@@ -153,7 +153,7 @@ public class ScoreController {
 	public String insertsocre(ScoreVO scoreVO) {
 		scoreService.insertScore(scoreVO);
 
-		return "redirect:/scorelist";
+		return "redirect:/score/scorelist";
 	}
 
 	/**

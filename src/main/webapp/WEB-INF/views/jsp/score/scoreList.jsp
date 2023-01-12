@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="resources/css/score/score.css" />
+<link rel="stylesheet" href="/resources/css/score/score.css" />
 
 <!-- 점검년도 리스트 -->
 <div class="titleBox">
-	<img src="resources/images/checklist.png">
+	<img src="${pageContext.request.contextPath}/resources/images/checklist.png">
 	<h2>점포 점수 조회</h2>
 </div>
 
@@ -17,7 +17,7 @@
 
 	<div class="year_and_quarter">
 
-		<form action="/score/scorelist" name="score" method="get">
+		<form action="${pageContext.request.contextPath}/score/scorelist" name="score" method="get">
 	        <input type="hidden" name="centerCode" value="1">
 			<select name="checkYear">
 				<option value="0">점검년도</option>
@@ -119,4 +119,4 @@
 
 <!-- 모달 자바 스크립트 -->
 
-<script src="resources/js/score/scoreList.js"></script>
+<script src="/resources/js/score/scoreList.js"></script>
