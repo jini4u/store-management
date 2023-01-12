@@ -17,7 +17,7 @@
 
 	<div class="year_and_quarter">
 
-		<form action="/score" name="score" method="get">
+		<form action="/score/scorelist" name="score" method="get">
 	        <input type="hidden" name="centerCode" value="1">
 			<select name="checkYear">
 				<option value="0">점검년도</option>
@@ -66,7 +66,7 @@
 <!--  수정 점수등록 버튼 -->
 <div id="btnclick">
 	<div id="btn_group">
-		<form action="/updateScore" name="updateScore" method="post">
+		<form action="/score/updateScore" name="updateScore" method="post">
 			<button type="submit" id="btn1" class="pinkButton">수정</button>
 		</form>
 		<button type="submit" class="open greyButton" >점수등록</button>
@@ -118,36 +118,5 @@
 
 
 <!-- 모달 자바 스크립트 -->
-<script type="text/javascript">
-	$(function() {
-		$(".open").click(function() {
-			$(".modal").fadeIn();
-		});
 
-		window.onclick = function(e) {
-			if (e.target == modal) {
-				modal.style.visibility = "hidden";
-				modal.style.opacity = 0;
-			}
-		}
-
-		const openButton = document.querySelector(".open");
-		const modal = document.querySelector(".modal");
-		const overlay = modal.querySelector(".modal_overlay");
-		const openModal = function() {
-			console.log("hi");
-		}
-		const closeModal = function() {
-			modal.classList.add();
-		}
-
-		openButton.addEventListener("click", openModal);
-
-		//모달창 닫기//
-		$(".close-btn").click(function() {
-			$(".modal").fadeOut();
-
-		})
-	});
-</script>
 <script src="resources/js/score/scoreList.js"></script>

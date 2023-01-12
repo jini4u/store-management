@@ -58,7 +58,7 @@ public class ScoreController {
 	 * DB에 존재하는 값중에 점검년도,분기,항목,상세항목,점수 전체의 정보를 조회
 	 * */
 
-	@RequestMapping(value="/score", method = RequestMethod.GET)
+	@RequestMapping(value="/scorelist", method = RequestMethod.GET)
 	public String centerscoreinquiry(ScoreVO scoreVO, Model model,HttpSession session) {
 		
 		
@@ -140,7 +140,7 @@ public class ScoreController {
 	public String updateScore(ScoreVO score ){
 		
 		scoreService.updateScore(score);
-		return "redirect:/score";
+		return "redirect:/scorelist";
 	}
 
 	/*
@@ -153,7 +153,7 @@ public class ScoreController {
 	public String insertsocre(ScoreVO scoreVO) {
 		scoreService.insertScore(scoreVO);
 
-		return "redirect:/score";
+		return "redirect:/scorelist";
 	}
 
 	/**
