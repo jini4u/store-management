@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.center.dao.ICenterRepository">
 
-<select id="getLastCenterCode" resultType="int">
-   SELECT NVL(MAX(center_code), 0000000) as centerCode
-   FROM CENTER
-</select>
+<!-- <select id="getLastCenterCode" resultType="int"> -->
+<!--    SELECT NVL(MAX(center_code)+1, 0000000) as centerCode -->
+<!--    FROM CENTER -->
+<!-- </select> -->
 
 <insert id="insertCenter" parameterType="com.mycompany.webapp.center.vo.CenterVO">
    INSERT INTO CENTER(
@@ -17,7 +17,7 @@
       , center_opening_date
       , center_closing_date)
    VALUES (
-        #{centerCode}
+        (SELECT NVL(MAX(center_code)+1, 1)FROM center)
       , #{centerName}
       , #{centerTel}
       , #{centerAddress}

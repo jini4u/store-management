@@ -31,3 +31,23 @@ function makeRequest(callback, method, url, sendItem){
 	httpRequest.open(method, url, false);
 	httpRequest.send(sendItem); 
 }
+/**
+ * ajax jquery 통신함수
+ * @param {Function} callback 함수
+ * @param {String} method
+ * @param {String} 요청 url
+ * @param {Object} 서버로 전송할 object
+ *  */
+function ajaxCmm(type, url, param, callback) {
+	$.ajax({
+		type : type,
+		url : url,
+		data : param,
+		success : function (data, status, xr) {
+			return callback(data);
+		},
+		error : function (xhr, status, error) {
+			return callback(data);
+		}
+	});
+}

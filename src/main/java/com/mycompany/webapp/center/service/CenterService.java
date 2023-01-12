@@ -25,9 +25,9 @@ public class CenterService implements ICenterService{
 	@Value("${file.path}")
 	private String filePath;
 	
-	public int getLastCenterCode() {
-		return centerRepository.getLastCenterCode()+1;
-	}
+//	public int getLastCenterCode() {
+//		return centerRepository.getLastCenterCode()+1;
+//	}
 
 	@Override
 	public int insertCenter(CenterVO centerVO) {

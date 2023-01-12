@@ -69,8 +69,7 @@ public class CenterController {
 	@ResponseBody
 	@PostMapping(value="/centerInsert")
 	public List<CenterVO> insertCenter(@RequestParam(defaultValue="1") int pageNo, CenterVO centerVO) {
-		centerVO.setCenterCode(centerService.getLastCenterCode());
-		System.out.println("센터인서트"+centerVO);
+//		centerVO.setCenterCode(centerService.getLastCenterCode());
 		centerService.insertCenter(centerVO);
 		int totalRows = centerService.countAllCenters();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
@@ -82,9 +81,9 @@ public class CenterController {
 	public String centerList(@RequestParam(defaultValue="1")int pageNo, Model model, CenterVO centerVO){
 		int totalRows = centerService.countAllCenters();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
-		model.addAttribute("newCenterCode", centerService.getLastCenterCode());
+//		model.addAttribute("newCenterCode", centerService.getLastCenterCode());
 		model.addAttribute("centerList", centerService.centerList(pager));
-		model.addAttribute("pager", pager);
+		model.addAttribute("pager", pager);	
 		return "jsp/center/centerlist";
 	}
 	
