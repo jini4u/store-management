@@ -23,6 +23,7 @@ import com.mycompany.webapp.common.vo.Pager;
 import com.mycompany.webapp.manager.service.IManagerService;
 import com.mycompany.webapp.manager.vo.ManagerVO;
 
+@RequestMapping("/manager")
 @Controller
 public class ManagerController {
 	static final Logger logger=LoggerFactory.getLogger(ManagerController.class);

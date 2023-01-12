@@ -35,6 +35,7 @@ import com.mycompany.webapp.score.vo.ScoreVO;
  * @  1/9		     정윤선	   /score수정
  * @author 임유진, 정윤선
  * **/
+@RequestMapping("/score")
 @Controller
 public class ScoreController {
 	private static Logger logger = LoggerFactory.getLogger(ScoreController.class);
