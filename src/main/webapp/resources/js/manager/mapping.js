@@ -12,7 +12,7 @@ var allTr = document.querySelectorAll("#managertable tr");
 managerTable.addEventListener("click",function(e){
 	let targetTr = e.target.parentElement;
 	let clickedManagerCode = targetTr.innerText.split("\t")[0];
-	makeRequest(getCenterList, 'GET', '/getCenters/'+clickedManagerCode);
+	makeRequest(getCenterList, 'GET', '/manager/getCenters/'+clickedManagerCode);
 	for(var i=0;i<allTr.length;i++){
 		if(allTr[i].classList.contains("selectedtr")){
 			allTr[i].classList.remove("selectedtr");
@@ -29,8 +29,8 @@ releaseBtn.addEventListener("click", function(){
 	let centerCode = document.querySelector("input[name='center']:checked").value;
 	let reqList = {"userCode":userCode, "centerCode":centerCode};
 	makeRequest(function(){	
-		makeRequest(getCenterList, 'GET', '/getCenters/'+userCode);
-	}, 'POST', '/cancelMapping', JSON.stringify(reqList));
+		makeRequest(getCenterList, 'GET', '/manager/getCenters/'+userCode);
+	}, 'POST', '/manager/cancelMapping', JSON.stringify(reqList));
 })
 
 //맵핑 버튼, 모달 선택자
@@ -43,7 +43,7 @@ mappingBtn.addEventListener("click", function(){
 	modal.classList.remove("fadeout")
 	modal.classList.add("fadein");
 	
-	makeRequest(getAvailCenters,'GET','/availCenter');
+	makeRequest(getAvailCenters,'GET','/center/availCenter');
 });
 
 availTable.addEventListener("click", function(e){
@@ -77,13 +77,13 @@ mappingBtn.addEventListener("click", function(){
 		var userCode = selectedTrList[0].innerText.split("\t")[0];
 		let centerCode = selectedTrList[1].innerText.split("\t")[0];
 		let reqList = {"userCode":userCode, "centerCode":centerCode};
-		makeRequest(function(){},'POST','/mapping',JSON.stringify(reqList));
+		makeRequest(function(){},'POST','/manager/mapping',JSON.stringify(reqList));
 	}
 	//selectedTrList[0].classList.remove("selectedtr");
 	//selectedTrList[1].classList.remove("selectedtr");
 	let centerTbody = centerTable.tBodies[0];
 	centerTbody.innerHTML = '';
-	makeRequest(getCenterList, 'GET', '/getCenters/'+userCode);
+	makeRequest(getCenterList, 'GET', '/manager/getCenters/'+userCode);
 	modal.classList.add("hide");
 });
 

@@ -16,6 +16,10 @@ public class FileInfoVO {
 	private int uploadUserCode;
 	private String uploadUserName;
 	
+	//엑셀 정보 업로드를 위한 필드
+	private int insertHistory;
+	private int updateHistory;
+	
 	public int getFileNo() {
 		return fileNo;
 	}

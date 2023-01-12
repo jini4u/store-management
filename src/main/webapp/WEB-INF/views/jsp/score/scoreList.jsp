@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="resources/css/score/score.css" />
+<link rel="stylesheet" href="/resources/css/score/score.css" />
 
 <!-- 점검년도 리스트 -->
 <div class="titleBox">
-	<img src="resources/images/checklist.png">
+	<img src="${pageContext.request.contextPath}/resources/images/checklist.png">
 	<h2>점포 점수 조회</h2>
 </div>
 
@@ -17,7 +17,7 @@
 
 	<div class="year_and_quarter">
 
-		<form action="/score/scorelist" name="score" method="get">
+		<form action="${pageContext.request.contextPath}/score/scorelist" name="score" method="get">
 	        <input type="hidden" name="centerCode" value="1">
 			<select name="checkYear">
 				<option value="0">점검년도</option>
@@ -39,30 +39,31 @@
 </div>
 
 <!-- 점수리스트 테이블 -->
-<table class="scoretable" border="1">
-	<tr>
-		<th>점검년도</th>
-		<th>분기</th>
-		<th>항목</th>
-		<th>상세항목</th>
-		<th>점수</th>
-	</tr>
-	<c:if test="${empty scoreList}">
-		데이터가 없습니다.
-	</c:if>
-	<c:if test="${not empty scoreList}">
-		<c:forEach items="${scoreList}" var="scoreCode">
-			<tr>
-				<td class="score_td">${scoreCode.checkYear}</td>
-				<td class="score_td">${scoreCode.checkSeason}</td>
-				<td class="score_td">${scoreCode.checkGroupContent}</td>
-				<td class="score_td">${scoreCode.checkDetailContent}</td>
-				<td class="score_td"><input type="text" class="placeholderstlye" size="5" placeholder="${scoreCode.checkScore}"></td>
-			</tr>
-		</c:forEach>
-	</c:if>
-</table>
-
+<form>
+	<table class="scoretable" border="1">
+		<tr>
+			<th>점검년도</th>
+			<th>분기</th>
+			<th>항목</th>
+			<th>상세항목</th>
+			<th>점수</th>
+		</tr>
+		<c:if test="${empty scoreList}">
+			데이터가 없습니다.
+		</c:if>
+		<c:if test="${not empty scoreList}">
+			<c:forEach items="${scoreList}" var="scoreCode">
+				<tr>
+					<td class="score_td">${scoreCode.checkYear}</td>
+					<td class="score_td">${scoreCode.checkSeason}</td>
+					<td class="score_td">${scoreCode.checkGroupContent}</td>
+					<td class="score_td">${scoreCode.checkDetailContent}</td>
+					<td class="score_td"><input type="text" class="placeholderstlye" size="5" placeholder="${scoreCode.checkScore}"></td>
+				</tr>
+			</c:forEach>
+		</c:if>
+	</table>
+</form>
 <!--  수정 점수등록 버튼 -->
 <div id="btnclick">
 	<div id="btn_group">
@@ -119,4 +120,4 @@
 
 <!-- 모달 자바 스크립트 -->
 
-<script src="resources/js/score/scoreList.js"></script>
+<script src="/resources/js/score/scoreList.js"></script>

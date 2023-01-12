@@ -270,7 +270,7 @@ updateBtn.addEventListener("click", function(){
 //수정 요청 후 실행되는 함수
 function afterUpdateImg(){
 	updateModal.style.display ="none";
-	makeRequest(getCenterImages,'GET','/getCenterImages/'+centerNameArr[4].innerText);
+	makeRequest(getCenterImages,'GET','/center/getCenterImages/'+centerNameArr[4].innerText);
 }
 
 //삭제 모달 내부 삭제 버튼 선택자
@@ -284,10 +284,10 @@ deleteBtn.addEventListener("click", function(){
 			checked.push(checkbox[i].value);
 		}
 	}
-	makeRequest(afterDeleteImg, 'POST', '/deleteImage/'+centerNameArr[4].innerText, checked);
+	makeRequest(afterDeleteImg, 'POST', '/center/deleteImage/'+centerNameArr[4].innerText, checked);
 });
 
 function afterDeleteImg(){
 	deleteModal.style.display = "none";
-	makeRequest(getCenterImages,'GET','/getCenterImages/'+centerNameArr[4].innerText);
+	makeRequest(getCenterImages,'GET','/center/getCenterImages/'+centerNameArr[4].innerText);
 }
