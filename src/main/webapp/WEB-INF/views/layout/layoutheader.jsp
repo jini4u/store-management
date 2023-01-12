@@ -4,14 +4,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <link rel="stylesheet" type="text/css"
-	href="/resources/css/layout/layoutheader.css">
+	href="${pageContext.request.contextPath}/resources/css/layout/layoutheader.css">
 
-	<a href="/"> <img class="logoImage" src="/resources/images/logo.png">
+	<a href="/"> <img class="logoImage" src="${pageContext.request.contextPath}/resources/images/logo.png">
 	</a>
 
 		<ul class="sidebox">
 			<li>
-				<a class="mypage"> <img src="/resources/images/user.png">
+				<a class="mypage"> <img src="${pageContext.request.contextPath}/resources/images/user.png">
 				</a>
 			</li>
 			<c:set var="titleUserName" value="고은별"/>
