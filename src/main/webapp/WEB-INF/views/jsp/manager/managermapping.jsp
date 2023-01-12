@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css"
 	href="resources/css/manager/managermapping.css">
 <div class="titleBox">
-	<img src="resources/images/manager.png">
+	<img src="${pageContext.request.contextPath}/resources/images/manager.png">
 	<h2>담당자 맵핑</h2>
 </div>
 <div class="buttonBox">

@@ -90,7 +90,7 @@ mappingBtn.addEventListener("click", function(){
 function getCenterList(){
 	let centerTbody = centerTable.tBodies[0];
 	centerTbody.innerHTML = '';
-	let res = JSON.parse(httpRequest.responseText);
+	let res = JSON.parse(httpRequest.responseText); //응답으로 받은 문자열 형식을 json 형식으로 변환 
 	for(var i=0;i<res.length;i++){
 		centerTbody.innerHTML += "<tr><td><input type='checkbox' name='center' value='"+res[i].centerCode+"'></td><td>"+res[i].centerCode+"</td><td>"+res[i].centerName+"</td><td>"+res[i].centerAddress+"</td></tr>";
 	}

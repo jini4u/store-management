@@ -46,11 +46,17 @@ public class ManagerController {
 	}
 
 	/* author 은별
-	  담당자 상세조회/
-	@RequestMapping(value="/managerDetail")
+	  담당자 상세조회*/
+	/*@RequestMapping(value="/managerDetail")
 	public String selectManagerDetail(Model model, @PathVariable int userCode) {
 		ManagerVO mgrDetails = managerService.selectManagerDetail(userCode);
 		model.addAttribute("managerVO",mgrDetails);
+		return "jsp/manager/managerdetail";
+	}*/
+	@RequestMapping(value="/managerDetail")
+	public String selectManagerDetail(Model model, @PathVariable int userCode) {
+		List<CenterVO> centerName = managerService.getCenterByManager(userCode);
+		model.addAttribute("centerName",centerName);
 		return "jsp/manager/managerdetail";
 	}
 

@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet" type="text/css"
-	href="resources/css/manager/managerlookup.css">
+	href="/resources/css/manager/managerlookup.css">
 
 <div class="titleBox">
-	<img src="resources/images/manager.png">
+	<img src="${pageContext.request.contextPath}/resources/images/manager.png"> 
 	<h2>담당자 조회</h2>
 </div>
 
@@ -118,14 +118,11 @@
 					<td><input type="date" name="userResignDate"
 						id="userResignDate" disabled></td>
 					<th>담당 센터명</th>
-					<td><c:forEach var="center"
-							items="${managerVO.centerList}">
-							${center.centerName}
-						</c:forEach>
-					</td>
+					<td id="centerName">
+					</td> 
 				</tr>
 			</table>
 		</form>
 	</div>
 </div>
-<script src="resources/js/manager/manager.js"></script>
+<script src="/resources/js/manager/manager.js"></script>

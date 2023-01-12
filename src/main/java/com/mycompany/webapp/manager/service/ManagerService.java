@@ -28,12 +28,12 @@ public class ManagerService implements IManagerService {
 	@Override
 	public List<ManagerVO> selectManagerList(Pager pager) {
 		List<ManagerVO> managerList = managerRepository.selectManagerList(pager);
-		for(int i=0;i<managerList.size();i++) {
+	/*	for(int i=0;i<managerList.size();i++) {
 			ManagerVO manager = managerList.get(i);
 			int userCode = manager.getUserCode();
 			List<CenterVO> centerList = getCenterByManager(userCode);
 			manager.setCenterList(centerList);
-		}
+		}*/
 		return managerList;
 	}
 	

@@ -1,3 +1,4 @@
+//브라우저 로드 완료 상태를 나타냅니다 
 window.onload = function(){
 	handleClickTr();
 
@@ -21,7 +22,7 @@ window.onload = function(){
 			if(this.cells[7]) {
 				userResignDate = this.cells[7].innerHTML;
 			}
-
+			let centerName=$("#centerName").val();
 
 			$("#userCode").val(userCode);
 			$("#userName").val(userName);
@@ -31,6 +32,7 @@ window.onload = function(){
 			$("#userTeamCode").val(userTeamCode);            
 			$("#userHireDate").val(userHireDate);
 			$("#userResignDate").val(userResignDate);
+			$("#centerName").val(centerName);
 
 			$("#userName").attr("disabled");
 			$("#userBirth").attr("disabled");
@@ -38,6 +40,19 @@ window.onload = function(){
 			$("#userTel").removeAttr("disabled");
 			$("#userTeamCode").removeAttr("disabled");
 			$("#userResignDate").removeAttr("disabled");
+
+
+			$.ajax({
+				type: 'POST',
+				url:'/manager/getCenters/'+userCode,
+				success: function(result) {
+					console.log(result);
+					$.each(result, function(index, value){
+						console.log(index + " :: " + value.centerName);
+						$("#centerName").html(value.centerName);	
+					});
+				}
+			});
 
 		})
 	}
@@ -89,8 +104,8 @@ window.onload = function(){
 
 	//저장 버튼 클릭 
 	$("#savemgr").click(function (){
-		let updateUrl = "/managerUpdate";
-		let insertUrl ="/managerInsert";
+		let updateUrl = "/manager/managerUpdate";
+		let insertUrl ="/manager/managerInsert";
 		let userCode=$("#userCode").val();
 		let userPassWord=$("#userPassword").val();
 		let userName=$("#userName").val();
@@ -120,13 +135,11 @@ window.onload = function(){
 				},
 				success: function(result) {
 
-					// 전체 테이블 지우기
-					$("#mgrListTr").html("");
-
 					//등록 성공 시 담당자 전체 목록 리스트 마지막 열에 추가 됨
 					let results = result;
 
 					let str = "";
+					//결과룰 반복한다
 					$.each(results, function(i) {
 						let birth = new Date(results[i].userBirth);
 						let hiredate = new Date(results[i].userHireDate);
@@ -193,10 +206,10 @@ window.onload = function(){
 						let resigndate = new Date(results[i].userResignDate);
 
 						str +="<tr>"
-						str += "<td>" + results[i].userCode + "</td><td>" + 
-						results[i].userName + "</td><td>" + dateFormat(birth) + "</td><td>" +
-						results[i].userTel + "</td><td>" + results[i].userEmail +"</td><td>" +
-						results[i].userTeamCode + "</td><td>"+ dateFormat(hiredate) + "</td><td>" + dateFormat(resigndate)+ "</td>";
+							str += "<td>" + results[i].userCode + "</td><td>" + 
+							results[i].userName + "</td><td>" + dateFormat(birth) + "</td><td>" +
+							results[i].userTel + "</td><td>" + results[i].userEmail +"</td><td>" +
+							results[i].userTeamCode + "</td><td>"+ dateFormat(hiredate) + "</td><td>" + dateFormat(resigndate)+ "</td>";
 						str += "</tr>";
 					});
 					$("#mgrList").html(str);
@@ -229,14 +242,11 @@ window.onload = function(){
 		let userResignDate = $("#userResignDate").val();
 		$.ajax({
 			type:"POST",
-			url: "/managerSearch",
+			url: "manager/managerSearch",
 			data: {
 				userName : userName
 			},
 			success: function(result) {
-
-				// 전체 테이블 지우기
-				$("#mgrListTr").html("");
 
 				//등록 성공 시 담당자 전체 목록 리스트 마지막 열에 추가 됨
 				let results = result;
@@ -253,8 +263,9 @@ window.onload = function(){
 					results[i].userTeamCode + "</td><td>"+ dateFormat(hiredate) + "</td>";
 					str += "</tr>";
 				});
+				//테이블 비우고 불러온다
 				$("#mgrList").html(str);
-				
+
 				handleClickTr();
 				changeColor();
 			},
