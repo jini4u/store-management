@@ -49,7 +49,7 @@
 		</tbody>
 	</table>
 	<div class="center-pagging">
-		<ul class="pagination modal">
+		<ul class="pagination modal"> 
 			<li><a class="innerPager first" href="centerList?pageNo=1">처음</a></li>
 			<li><c:if test="${pager.groupNo>1}">
 					<a class="innerPager arrow left"
