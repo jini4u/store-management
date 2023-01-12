@@ -34,14 +34,18 @@
 <!-- author 고은별 
 	 담당자 등록-->
 <insert id="insertManager" parameterType="com.mycompany.webapp.manager.vo.ManagerVO">
+<![CDATA[	
 insert into userInfo(user_code, user_password, user_name, user_birth, user_tel, user_email,user_team_code, user_hire_Date)
-values	(#{userCode}, #{userPassword}, #{userName}, #{userBirth}, #{userTel}, #{userEmail}, #{userTeamCode}, #{userHireDate})
+values	(
+			(SELECT NVL(MAX(user_code)+1, 10001) FROM userinfo), 
+			#{userPassword}, #{userName}, #{userBirth}, #{userTel}, #{userEmail}, #{userTeamCode}, #{userHireDate})
+]]>
 </insert>  
 
 <!--author 고은별  
 	담당자 최대 코드 -->
 <select id="selectMaxManagerNo" parameterType="int" resultType="int">
-	select NVL(max(user_code),0) as "userCode"
+	select NVL(max(user_code),10001) as "userCode"
 	from userInfo
 </select>  
 
@@ -60,7 +64,9 @@ SELECT COUNT(*) FROM userInfo
 </select>
 
 <!-- 키워드 별 담당자 검색 -->
-<!-- select * from(
+<select id="managerSearch" parameterType="map" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
+<![CDATA[
+select * from(
 		select rownum as rnum, userCode, userName, userBirth, userTel, userEmail, userTeamCode, userHireDate, userResignDate 
 		from (
 			select
@@ -74,12 +80,14 @@ SELECT COUNT(*) FROM userInfo
 	   			user_resign_date as userResignDate
 			from  userinfo
 			where user_code < 20000 
+			and user_name like ('%' ||#{mgr.userName}||'%')
 			order by user_code desc
 		)
-		where rownum <= #{endRowNo}
+		where rownum <= #{pager.endRowNo}
 	)
-	WHERE rnum >= #{startRowNo} -->
-
+	WHERE rnum >= #{pager.startRowNo} 
+]]>
+</select>
 
 <!-- 
 	userCode로 담당 센터 조회

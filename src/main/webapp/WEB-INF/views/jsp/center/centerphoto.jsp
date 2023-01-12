@@ -7,10 +7,10 @@
 <div id="center-photo-total">
 	<div id="photo-left-frame">
 		<div class="search-box">
-			<input type="text" class="search-txt" name="" placeholder="검색">
-			<a class="search-btn" href="#"> <i class="fas fa-search"
+			<input type="text" id="searchCenter" class="search-txt" name="" placeholder="검색">
+			<button class="search-btn"> <i class="fas fa-search"
 				aria-hidden="true"></i>
-			</a>
+			</button>
 		</div>
 		<div id="center-photo-first">
 			<table id="centertable" class="table click verticalTable">

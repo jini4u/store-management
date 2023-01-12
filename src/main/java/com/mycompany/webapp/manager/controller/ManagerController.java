@@ -41,9 +41,6 @@ public class ManagerController {
 		model.addAttribute("pager", pager);
 
 		logger.info("managerList : " + managerList);
-
-		int lastUserCode = managerService.getLastUserCode();
-		model.addAttribute("newUserCode", lastUserCode+1);
 		return "jsp/manager/managerlookup";
 	}
 
@@ -98,15 +95,15 @@ public class ManagerController {
 	
 	/* author 은별
 	  담담자 검색 */
-	@GetMapping(value="/managerSearch")
 	@ResponseBody
-	private String managerSearch(@RequestParam(defaultValue="1") String keyword, Model model){
-		List<ManagerVO> mgrSearchList = managerService.managerSearch(keyword);
-		model.addAttribute("mgrSearchList",mgrSearchList);
-		model.addAttribute("keyword",keyword);
-		return "jsp/manager/managerlookup";
+	@PostMapping(value="/managerSearch")
+	private List<ManagerVO> managerSearch(@RequestParam(defaultValue="1")int pageNo, ManagerVO mgr, Model model){
+		int totalRows = managerService.countAllMgr();
+		Pager pager = new Pager(10, 10, totalRows, pageNo);
+		model.addAttribute("pager", pager);
+		List<ManagerVO> mgrSearchList = managerService.managerSearch(pager, mgr);
+		return mgrSearchList;
 	}
-
 
 	//담당자 매핑
 	@RequestMapping(value="/managerMapping")

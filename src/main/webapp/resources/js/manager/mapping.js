@@ -74,16 +74,16 @@ var mappingBtn = document.getElementById("mappingbutton");
 mappingBtn.addEventListener("click", function(){
 	let selectedTrList = document.querySelectorAll(".selectedtr");
 	if(selectedTrList.length == 2){
-		let userCode = selectedTrList[0].innerText.split("\t")[0];
+		var userCode = selectedTrList[0].innerText.split("\t")[0];
 		let centerCode = selectedTrList[1].innerText.split("\t")[0];
 		let reqList = {"userCode":userCode, "centerCode":centerCode};
 		makeRequest(function(){},'POST','/mapping',JSON.stringify(reqList));
 	}
-	
-	selectedTrList[0].classList.remove("selectedtr");
-	selectedTrList[1].classList.remove("selectedtr");
+	//selectedTrList[0].classList.remove("selectedtr");
+	//selectedTrList[1].classList.remove("selectedtr");
 	let centerTbody = centerTable.tBodies[0];
 	centerTbody.innerHTML = '';
+	makeRequest(getCenterList, 'GET', '/getCenters/'+userCode);
 	modal.classList.add("hide");
 });
 

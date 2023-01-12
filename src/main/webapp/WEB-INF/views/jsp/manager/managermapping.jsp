@@ -69,7 +69,6 @@
 					<th>주소</th>
 				</thead>
 				<tbody>
-				
 				</tbody>
 			</table>
 	
