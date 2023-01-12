@@ -17,7 +17,7 @@ window.onload = function(){
 			var userEmail = this.cells[4].innerHTML;
 			var userTeamCode = this.cells[5].innerHTML;
 			var userHireDate = this.cells[6].innerHTML;
-			var userResignDate = '';
+			var userResignDate = '';                                      
 			if(this.cells[7]) {
 				userResignDate = this.cells[7].innerHTML;
 			}

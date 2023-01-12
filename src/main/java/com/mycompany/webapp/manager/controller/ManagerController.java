@@ -69,7 +69,9 @@ public class ManagerController {
 		int totalRows = managerService.countAllMgr();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		List<ManagerVO> managerList = managerService.selectManagerList(pager);
+		//비동기 처리를 하기 위해 결과값을 보내준다
 		return managerList;
+		
 	}
 
 	/* author 은별
@@ -102,6 +104,7 @@ public class ManagerController {
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		model.addAttribute("pager", pager);
 		List<ManagerVO> mgrSearchList = managerService.managerSearch(pager, mgr);
+		logger.info(pager.toString());
 		return mgrSearchList;
 	}
 
