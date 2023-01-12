@@ -47,6 +47,7 @@ import com.mycompany.webapp.common.vo.Pager;
  * @
  * @author 이소정
  * **/
+@RequestMapping("/center")
 @Controller
 public class CenterController {
 	private static Logger logger = LoggerFactory.getLogger(CenterController.class);

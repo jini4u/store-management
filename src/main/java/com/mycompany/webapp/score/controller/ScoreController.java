@@ -35,6 +35,7 @@ import com.mycompany.webapp.score.vo.ScoreVO;
  * @  1/9		     정윤선	   /score수정
  * @author 임유진, 정윤선
  * **/
+@RequestMapping("/score")
 @Controller
 public class ScoreController {
 	private static Logger logger = LoggerFactory.getLogger(ScoreController.class);
@@ -57,16 +58,19 @@ public class ScoreController {
 	 * DB에 존재하는 값중에 점검년도,분기,항목,상세항목,점수 전체의 정보를 조회
 	 * */
 
-	@RequestMapping(value="/score", method = RequestMethod.GET)
+	@RequestMapping(value="/scorelist", method = RequestMethod.GET)
 	public String centerscoreinquiry(ScoreVO scoreVO, Model model,HttpSession session) {
+		
+		
 		//로그인에 처리할 내용-------------------------------------
 		session.setAttribute("centerCode", 1);
 		session.setAttribute("userCode", 10006);
 		//------------------------------------------------
 
 		scoreVO.setCenterCode(1);
-		
+		//scoreVo를 getScoreList로 담아 socreList로 만듬
 		List<ScoreVO> scoreList = scoreService.getScoreList(scoreVO);
+		//scoreList를 view페이지로 보내주기 위해서 model에 담음
 		model.addAttribute("scoreList",scoreList);
 		
 		//비어있는 ScoreVO 생성
@@ -78,6 +82,7 @@ public class ScoreController {
 		List<ScoreVO> allScoreList = scoreService.getScoreList(emptyVO);
 		//전체 리스트 크기가 0보다 크면 (점수 테이블에 값이 있으면)
 		if(allScoreList.size() > 0) {
+			
 			//제일 최근 정보가 0번이므로 0번의 정보를 담아줌
 			int maxYear = allScoreList.get(0).getCheckYear();			
 			int maxSeason = allScoreList.get(0).getCheckSeason();
@@ -95,6 +100,7 @@ public class ScoreController {
 		int year=0;
 
 		//분기 설정
+		//1.만약 mm(월) 0보다크거나 3보다 작거나같으면 season 은1분기....
 		if( (mm-3)>0 &&(mm-3)<=3) {
 			season = 1;
 		}else if((mm-3) > 3 && (mm-3) <= 6) {
@@ -106,7 +112,9 @@ public class ScoreController {
 		}else{
 			season = 0;
 		}
-
+		
+		//2번째 i문 mm(월)이 0보다 작거나 같으면 yy(년)에 -1 
+		//그게 아니라면 현재 년도가 나오면 됨
 		if((mm-3)<=0) {
 			year = yy-1;
 		}else {
@@ -114,8 +122,8 @@ public class ScoreController {
 		}
 
 
-		model.addAttribute("year", yy);
-		model.addAttribute("season", mm);
+		model.addAttribute("year",year);
+		model.addAttribute("season",season);
 		//모달창 점수 항목 출력 리스트
 		model.addAttribute("usingCodeList", scoreService.usingCodeList());
 
@@ -129,10 +137,10 @@ public class ScoreController {
 	 * 점수 수정
 	 * */
 	@RequestMapping(value="/updateScore", method=RequestMethod.POST)
-	public String updateScore(ScoreVO score,Model model){
+	public String updateScore(ScoreVO score ){
 		
 		scoreService.updateScore(score);
-		return "redirect:/score";
+		return "redirect:/scorelist";
 	}
 
 	/*
@@ -143,10 +151,9 @@ public class ScoreController {
 
 	@RequestMapping(value="/insertScore", method=RequestMethod.POST)
 	public String insertsocre(ScoreVO scoreVO) {
-		
 		scoreService.insertScore(scoreVO);
 
-		return "redirect:/score";
+		return "redirect:/scorelist";
 	}
 
 	/**

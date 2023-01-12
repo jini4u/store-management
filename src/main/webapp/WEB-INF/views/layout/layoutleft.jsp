@@ -10,9 +10,9 @@
 					센터 <i class="fa fa-chevron-down" aria-hidden="true"></i>
 				</div>
 				<ul class="submenuItems">
-					<li><a href="<c:url value='/centerList'/>">센터 조회</a></li>
-					<li><a href="<c:url value='/centerPhoto'/>">센터 사진 관리</a></li>
-					<li><a href="/centerExcelUpload">센터 정보 일괄 등록</a></li>
+					<li><a href="<c:url value='/center/centerList'/>">센터 조회</a></li>
+					<li><a href="<c:url value='/center/centerPhoto'/>">센터 사진 관리</a></li>
+					<li><a href="/center/centerExcelUpload">센터 정보 일괄 등록</a></li>
 				</ul>
 			</li>
 			<li>
@@ -20,9 +20,9 @@
 					담당자 <i class="fa fa-chevron-down" aria-hidden="true"></i>
 				</div>
 				<ul class="submenuItems">
-					<li><a href="/managerList">담당자 조회</a></li>
-					<li><a href="/managerMapping">담당자 맵핑</a></li>
-					<li><a href="/managerupload">담당자 정보 일괄 등록</a></li>
+					<li><a href="/manager/managerList">담당자 조회</a></li>
+					<li><a href="/manager/managerMapping">담당자 맵핑</a></li>
+					<li><a href="/manager/managerupload">담당자 정보 일괄 등록</a></li>
 				</ul>
 			</li>
 			<li>
@@ -30,10 +30,10 @@
 					점수 <i class="fa fa-chevron-down" aria-hidden="true"></i>
 				</div>
 				<ul class="submenuItems">
-					<li><a href="<c:url value='/score'/>">센터 점수 조회</a></li>
+					<li><a href="<c:url value='/score/scorelist'/>">센터 점수 조회</a></li>
 					<!-- centercode 로그인 기능 만든 후 변경해줘야함 -->
-					<li><a href="<c:url value='/code'/>">항목 코드 관리</a></li>
-					<li><a href="<c:url value='/scoreupload'/>">센터 점수 일괄 등록</a></li>
+					<li><a href="<c:url value='/score/code'/>">항목 코드 관리</a></li>
+					<li><a href="<c:url value='/score/scoreupload'/>">센터 점수 일괄 등록</a></li>
 				</ul>
 			</li>
 			<li>
@@ -42,4 +42,4 @@
 				</div>
 			</li>
 		</ul>
-<script src="resources/js/layoutleft.js"></script>
+<script src="/resources/js/layoutleft.js"></script>

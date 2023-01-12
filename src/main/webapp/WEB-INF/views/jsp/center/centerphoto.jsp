@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<link href="resources/css/center/centerphoto.css" rel="stylesheet">
+<link href="/resources/css/center/centerphoto.css" rel="stylesheet">
 <div id="center-photo-total">
 	<div id="photo-left-frame">
 		<div class="search-box">
@@ -82,12 +82,12 @@
 		</div>
 		<div id="photo-frame">
 			<div id="photo-main-size">
-				<img src="resources/images/center/left-arrow.png" class="arrow">
+				<img src="/resources/images/center/left-arrow.png" class="arrow">
 				<div id="centerImagesDiv">
 				<!-- 센터별 사진들 들어가야함. src에서 /image/사진이름. /image는 resources.xml에서 맵핑해둠 -->
 				<img src="" class="photo-img">
 				</div>
-				<img src="resources/images/center/right-arrow.png" class="arrow">
+				<img src="/resources/images/center/right-arrow.png" class="arrow">
 			</div>
 			<div id="photo-mini-size">
 				<input type="radio" name="slid"> <input type="radio"
@@ -101,4 +101,4 @@
 <%@ include file="../center/modaldelete.jsp"%>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script src="resources/js/center/centerPhoto.js"></script>
+<script src="/resources/js/center/centerPhoto.js"></script>
