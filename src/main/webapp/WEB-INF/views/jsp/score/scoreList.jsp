@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <link rel="stylesheet" href="resources/css/score/score.css" />
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
 
 <!-- 점검년도 리스트 -->
