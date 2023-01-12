@@ -3,6 +3,7 @@ package com.mycompany.webapp.score.controller;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.mycompany.webapp.score.service.IScoreService;
@@ -47,12 +49,18 @@ public class ScoreController {
 	 * 엑셀파일 일괄 업로드
 	 * */
 
-	@RequestMapping("/scoreupload")
+	@RequestMapping(value="/scoreupload", method=RequestMethod.GET)
 	public String scoreupload() {
 		return "jsp/score/scoreupload";
-
 	}
-
+	
+	@RequestMapping(value="/scorefileupload", method=RequestMethod.POST)
+	public List<String> scoreFileUpload(MultipartHttpServletRequest request){
+		MultipartFile file = request.getFile("scoreExcelFile");
+		List<String> resultList = new ArrayList<String>();
+		resultList.add(file.getName());
+		return resultList;
+	}
 	/*
 	 *정윤선
 	 * DB에 존재하는 값중에 점검년도,분기,항목,상세항목,점수 전체의 정보를 조회

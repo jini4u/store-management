@@ -38,7 +38,8 @@ public abstract class POIClass {
 				rowCnt++;
 				//한줄씩 얻어오기
 				Row row = rowIter.next();
-				if(rowCnt > 4) {
+				//몇번째줄부터 읽을지
+				if(rowCnt > 3) {
 					//모든 cell 조회를 위한 반복자 획득
 					Iterator<Cell> cellIter = row.iterator();
 					//모든 cell 조회

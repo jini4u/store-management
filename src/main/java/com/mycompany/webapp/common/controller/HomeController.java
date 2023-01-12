@@ -3,6 +3,7 @@ package com.mycompany.webapp.common.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +21,9 @@ public class HomeController {
 	@Autowired
 	INoticeRepository test;
 	
+	@Value("${file.path}")
+	private String filePath;
+	
 	@RequestMapping("/")
 	public String home() {
 		return "home";
@@ -33,7 +37,6 @@ public class HomeController {
 	//poi 테스트 중
 	@RequestMapping("/poi")
 	public @ResponseBody void poiTest() {
-		String filePath = "C:\\Users\\KOSA\\Documents\\숙제용";
 		String fileName = "template_점수.xlsx";
 		
 		POIClass poi = new ScorePOI();
