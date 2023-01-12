@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <link rel="stylesheet" href="resources/css/score/score.css" />
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
@@ -88,7 +89,8 @@
 
 
 <!-- 입력 모달창 -->
-<c:if test="${maxYear ne year and maxseason ne season}">
+
+<c:if test="${(maxYear eq year and maxSeason eq season)==false}">
 <div class="modal">
 	<div class="modal_overlay"></div>
 	<div class="modal_content">
@@ -147,37 +149,9 @@
 </div>
 </c:if>
 
+
+
+
 <!-- 모달 자바 스크립트 -->
 
-<script type="text/javascript">
-	$(function() {
-		$(".open").click(function() {
-			$(".modal").fadeIn();
-		});
-
-		window.onclick = function(e) {
-			if (e.target == modal) {
-				modal.style.visibility = "hidden";
-				modal.style.opacity = 0;
-			}
-		}
-
-		const openButton = document.querySelector(".open");
-		const modal = document.querySelector(".modal");
-		const overlay = modal.querySelector(".modal_overlay");
-		const openModal = function() {
-			console.log("hi");
-		}
-		const closeModal = function() {
-			modal.classList.add();
-		}
-
-		openButton.addEventListener("click", openModal);
-
-		//모달창 닫기//
-		$(".close-btn").click(function() {
-			$(".modal").fadeOut();
-
-		})
-	});
-</script>
+<script src="resources/js/score/scoreList.js"></script>

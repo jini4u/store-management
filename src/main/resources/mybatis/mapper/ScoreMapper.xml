@@ -98,7 +98,7 @@ AND
 AND 
     check_detail_code = #{checkDetailCode}
 AND check_year = #{checkYear}
-AND check_season = #{checkSeason};
+AND check_season = #{checkSeason}
 
 </update> 
 <!-- 
