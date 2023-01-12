@@ -6,6 +6,9 @@
         </Console>
     </Appenders>
     <Loggers>
+	    <Logger name="com.mycompany.webapp" level="info" additivity="false">
+	      <AppenderRef ref="Out"/>
+	    </Logger>
         <Logger name="java.sql" level="DEBUG" additivity="false">
             <AppenderRef ref="console" />
         </Logger>
@@ -17,6 +20,8 @@
             <AppenderRef ref="console" />
         </Logger>
         <!-- <Logger name="org.springframework" level="INFO" additivity="false">
+<!--         <Logger name="org.springframework" level="INFO" additivity="false">
+<!--         <Logger name="org.springframework" level="INFO" additivity="false">
             <AppenderRef ref="console" />
         </Logger> -->
         <Logger name="jdbc.resultsettable" level="DEBUG" additivity="false">
