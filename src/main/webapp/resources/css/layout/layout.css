@@ -225,6 +225,7 @@
    border-top: 1.5px solid #CCC;
    border-bottom: 1.5px solid #ccc;
    border-collapse: collapse;
+   text-align: center;
 }
 
 .verticalTable th, td, .rowTable th, td {
@@ -407,4 +408,9 @@
    border-top: 10px solid transparent;
    border-bottom: 10px solid transparent;
    border-right: 10px solid blue;
+}
+.pageModal {
+	display: flex;
+	align-items: center;
+    justify-content: center;
 }

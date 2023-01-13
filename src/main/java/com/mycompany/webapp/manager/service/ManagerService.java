@@ -28,12 +28,6 @@ public class ManagerService implements IManagerService {
 	@Override
 	public List<ManagerVO> selectManagerList(Pager pager) {
 		List<ManagerVO> managerList = managerRepository.selectManagerList(pager);
-	/*	for(int i=0;i<managerList.size();i++) {
-			ManagerVO manager = managerList.get(i);
-			int userCode = manager.getUserCode();
-			List<CenterVO> centerList = getCenterByManager(userCode);
-			manager.setCenterList(centerList);
-		}*/
 		return managerList;
 	}
 	
@@ -87,11 +81,6 @@ public class ManagerService implements IManagerService {
 	public int mapping(int userCode, int centerCode) {
 		return managerRepository.mapping(userCode, centerCode);
 	}
-
-/*	@Override
-	public List<ManagerVO> managerList(Pager pager) {
-		return managerRepository.managerList(pager);
-	}*/
 
 	@Override
 	public int countAllMgr() {
