@@ -7,7 +7,7 @@
     </Appenders>
     <Loggers>
 	    <Logger name="com.mycompany.webapp" level="info" additivity="false">
-	      <AppenderRef ref="Out"/>
+	      <AppenderRef ref="console"/>
 	    </Logger>
         <Logger name="java.sql" level="DEBUG" additivity="false">
             <AppenderRef ref="console" />
@@ -25,7 +25,7 @@
         <Logger name="jdbc.resultsettable" level="DEBUG" additivity="false">
             <AppenderRef ref="console" />
         </Logger>
-        <Root level="warn">
+        <Root level="error">
             <AppenderRef ref="console" />
         </Root>
     </Loggers>

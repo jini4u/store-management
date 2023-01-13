@@ -51,14 +51,7 @@ display: inline-block;
 
 #modal_group{
 	display: flex;
-	justify-content:
 }
-
-
-
-
-
-
 
 /*모달*/
 .modal {
@@ -95,15 +88,6 @@ transform: translate(-50%, -50%);
 .modalh1 {
 	margin: 0;
 }
-
-
-
-
-
-
-
-
-
 
 /*scoreupload*/
 
@@ -144,30 +128,6 @@ table.scoretable td {
     border-bottom: 1px solid #ccc;
 }
 
-
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+#file-select-button {
+	display: none;
+}

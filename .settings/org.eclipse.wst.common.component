@@ -71,7 +71,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
                 
         <property name="java-output-path" value="/springframework6-xml-config-no-root/target/classes"/>
-        <property name="context-root" value="/"/>
+        <property name="context-root" value="springframework-xml-config-no-root"/>
                                                                                                         	
     
     

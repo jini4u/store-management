@@ -1,6 +1,10 @@
 package com.mycompany.webapp.common.poi;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.mycompany.webapp.score.vo.ScoreVO;
 
 /**
  * 점수 엑셀 파일 일괄 업로드를 위한 클래스
@@ -8,6 +12,9 @@ import org.apache.poi.ss.usermodel.Cell;
  * 엑셀파일 열 순서: 센터코드, 점검년도, 점검시즌, 그룹코드, 상세코드, 점수, 담당자 코드
  * */
 public class ScorePOI extends POIClass {
+	private static final Logger logger = LoggerFactory.getLogger(ScorePOI.class);
+	
+	ScoreVO oneScore;
 
 	@Override
 	public void handlingData(Cell cell) {
@@ -16,35 +23,39 @@ public class ScorePOI extends POIClass {
 		case 1:
 			//getNumericCellValue는 기본적으로 double형을 반환해줌
 			//(int)cell.getNumericCellValue() 이런식으로 형변환해서 사용
+			oneScore = new ScoreVO();
 			String centerCode = cell.getStringCellValue();
-			System.out.print(centerCode+" ");
+			oneScore.setCenterCode(Integer.parseInt(centerCode));
 			break;
 		//문자일 경우
 		case 2:
 			//cell.getStringCellValue()
 			int checkYear = (int)cell.getNumericCellValue();
-			System.out.print(checkYear+" ");
+			oneScore.setCheckYear(checkYear);
 			break;
 		case 3:
 			int checkSeason = (int)cell.getNumericCellValue();
-			System.out.print(checkSeason+" ");
+			oneScore.setCheckSeason(checkSeason);
 			break;
 		case 4:
 			String groupCode = cell.getStringCellValue();
-			System.out.print(groupCode+" ");
+			oneScore.setCheckGroupCode(groupCode);
 			break;
 		case 5:
 			String detailCode = cell.getStringCellValue();
-			System.out.print(detailCode+" ");
+			oneScore.setCheckDetailCode(Integer.parseInt(detailCode));
 			break;
 		case 6:
 			int score = (int)cell.getNumericCellValue();
-			System.out.print(score+" ");
+			oneScore.setCheckScore(score);
 			break;
 		case 7:
-			int userCode = (int)cell.getNumericCellValue();
-			System.out.println(userCode);
+			String userCode = cell.getStringCellValue();
+			oneScore.setUserCode(Integer.parseInt(userCode));
+			
 			break;
+		default:
+			break;	
 		}
 	}
 
