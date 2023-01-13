@@ -26,10 +26,9 @@ fileUpload.addEventListener("click", uploadFile);
 //업로드 버튼 클릭시 실행될 함수
 function uploadFile(){
 	let formData = new FormData(fileUploadForm);
-	makeRequest(afterUploadFile, 'POST', '/scorefileupload', formData);
+	makeRequest(afterUploadFile, 'POST', '/score/scorefileupload', formData);
 }
 
 function afterUploadFile(){
-	let res = JSON.parse(httpRequest.responseText);
-	console.log(res);
+	location.replace(location.href);
 }

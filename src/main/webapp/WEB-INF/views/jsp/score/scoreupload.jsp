@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/score/score.css" />
 
 <div class="titleBox">
@@ -23,6 +24,14 @@
 		<th>파일명</th>
 		<th>구분</th>
 	</tr>
+	<c:forEach items="${historyMapList}" var="historyMap">
+	<tr>
+		<td>${historyMap.postDate}</td>
+		<td>${historyMap.userName}</td>
+		<td>${historyMap.originalName}</td>
+		<td>${historyMap.result}</td>
+	</tr>
+	</c:forEach>
 </table>
 
 <script src="${pageContext.request.contextPath}/resources/js/score/scoreupload.js"></script>

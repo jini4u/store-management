@@ -34,5 +34,5 @@ public interface ICenterRepository {
 	int deleteImage(int fileNo);
 	
 	//센터 검색된 수 받아오는 것
-	int filterCountAllCenters(String centerName);
+	int CountAllCenters(String centerName);
 }

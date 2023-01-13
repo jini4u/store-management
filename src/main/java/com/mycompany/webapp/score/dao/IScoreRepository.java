@@ -3,9 +3,10 @@ package com.mycompany.webapp.score.dao;
 
 import java.util.List;
 
+import com.mycompany.webapp.common.vo.FileInfoVO;
 import com.mycompany.webapp.score.vo.ScoreVO;
 import java.util.Map;
-import org.apache.ibatis.annotations.Mapper;
+
 /**
  * 점수 관리
  * ScoreMapper.xml과 매핑되어있음
@@ -21,6 +22,8 @@ public interface IScoreRepository {
 	int insertDetailCode(Map<String, String> detailCodeMap);
 	int insertGroupCode(Map<String, String> groupCodeMap);
 	
+	int isDataExist(ScoreVO scoreVO);
+	List<Map<String, Object>> getScoreUploadHistory();
 	//윤선
 	List<ScoreVO> getScoreList(ScoreVO scoreVO);
 	
@@ -33,5 +36,7 @@ public interface IScoreRepository {
 	List<ScoreVO>usingCodeList();
 	/*점수 수정,저장*/
 	int updateScore(ScoreVO score);
+	/*점수리스트 수 받아오기*/
+	int CountAllList();
 }
 

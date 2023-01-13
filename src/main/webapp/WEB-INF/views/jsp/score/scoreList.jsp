@@ -39,7 +39,7 @@
 </div>
 
 <!-- 점수리스트 테이블 -->
-<form>
+<form action="/score/updateScore" name="updatescore" method="post">
 	<table class="scoretable" border="1">
 		<tr>
 			<th>점검년도</th>
@@ -56,21 +56,54 @@
 				<tr>
 					<td class="score_td">${scoreCode.checkYear}</td>
 					<td class="score_td">${scoreCode.checkSeason}</td>
-					<td class="score_td">${scoreCode.checkGroupContent}</td>
-					<td class="score_td">${scoreCode.checkDetailContent}</td>
-					<td class="score_td"><input type="text" class="placeholderstlye" size="5" placeholder="${scoreCode.checkScore}"></td>
+					<td class="score_td">${scoreCode.checkGroupCode}</td>
+					<td class="score_td">${scoreCode.checkDetailCode}</td>
+					<td class="score_td"><input type="text" name="checkScore" class="placeholderstlye" size="5" placeholder="${scoreCode.checkScore}"></td>
 				</tr>
-			</c:forEach>
+				</c:forEach>
+				<tr>
+				<td id="pager" colspan="10">
+					<div>
+						<a class="innerPager first" href="scorelist?pageNo=1">처음</a>
+						<c:if test="${pager.groupNo>1}">
+							<a class="innerPager arrow left" href="scorelist?pageNo=${pager.startPageNo-1}">이전</a>
+						</c:if>
+						
+						<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+							<c:if test="${pager.pageNo != i}">
+								<a class="innerPager active num" href="scorelist?pageNo=${i}">${i}</a>
+							</c:if>
+							<c:if test="${pager.pageNo == i}">
+								<a class="innerPager num" href="scorelist?pageNo=${i}">${i}</a>
+							</c:if>
+						</c:forEach>
+						
+						<c:if test="${pager.groupNo<pager.totalGroupNo}">
+							<a class="innerPager arrow right" href="scorelist?pageNo=${pager.endPageNo+1}">다음</a>
+						</c:if>
+						<a class="innerPager last" href="scorelist?pageNo=${pager.totalPageNo}">맨끝</a>
+					</div>
+				</td>
+					</tr>
+			
+				<c:forEach items="${scoreList}" var="score">
+					<input type="hidden" name="centerCode" value="${score.centerCode}" />
+					<input type="hidden" name="checkYear" value="${score.checkYear}" />
+					<input type="hidden" name="checkSeason" value="${score.checkSeason}" />
+					<input type="hidden" name="arrayCheckGroupCode" value="${score.checkGroupCode}">
+					<input type="hidden" name="arrayCheckDetailCode" value="${score.checkDetailCode}">
+
+				</c:forEach>
 		</c:if>
 	</table>
-</form>
+
 <!--  수정 점수등록 버튼 -->
-<div id="btnclick">
+ <div id="btnclick">
 	<div id="btn_group">
-		<form action="/score/updateScore" name="updateScore" method="post">
-			<button type="submit" id="btn1" class="pinkButton">수정</button>
-		</form>
-		<button type="submit" class="open greyButton" >점수등록</button>
+<!--		<form action="/score/updateScore" name="updatescore" method="post">-->
+			<button type="submit" class="pinkButton">수정</button>
+</form>
+		<button type="submit" class="open greyButton">점수등록</button>
 	</div>
 </div>
 
