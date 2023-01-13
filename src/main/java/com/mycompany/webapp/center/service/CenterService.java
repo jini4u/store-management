@@ -51,8 +51,8 @@ public class CenterService implements ICenterService{
 	}
 	
 	/**
-	 * @author 임유진
 	 * 센터 이미지 등록
+	 * @author 임유진
 	 * @param String 파일 내부/외부 정보
 	 * @param int 센터코드
 	 * @param int 업로드하는 담당자 번호

@@ -1,5 +1,8 @@
 package com.mycompany.webapp.common.poi;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +20,7 @@ public class ScorePOI extends POIClass {
 	ScoreVO oneScore;
 
 	@Override
-	public void handlingData(Cell cell) {
+	public void handlingData(Cell cell, List<Object> VOList) {
 		int col = cell.getAddress().getColumn();
 		switch(col) {
 		case 1:
@@ -52,7 +55,8 @@ public class ScorePOI extends POIClass {
 		case 7:
 			String userCode = cell.getStringCellValue();
 			oneScore.setUserCode(Integer.parseInt(userCode));
-			
+			//리스트에 완성된 점수VO 넣어주기
+			VOList.add(oneScore);
 			break;
 		default:
 			break;	

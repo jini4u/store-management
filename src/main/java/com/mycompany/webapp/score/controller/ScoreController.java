@@ -15,12 +15,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.mycompany.webapp.common.poi.POIClass;
+import com.mycompany.webapp.common.poi.ScorePOI;
+import com.mycompany.webapp.common.vo.FileInfoVO;
 import com.mycompany.webapp.score.service.IScoreService;
 import com.mycompany.webapp.score.vo.ScoreVO;
 
@@ -50,17 +54,25 @@ public class ScoreController {
 	 * */
 
 	@RequestMapping(value="/scoreupload", method=RequestMethod.GET)
-	public String scoreupload() {
+	public String scoreupload(Model model) {
+		model.addAttribute("historyMapList", scoreService.getScoreUploadHistory());
 		return "jsp/score/scoreupload";
 	}
 	
+	/**
+	 * @author 임유진
+	 * 엑셀 파일 업로드 POST 요청을 처리
+	 * @return {Map<String, Integer>} <insert, 입력된 행 수>,<update, 수정된 행 수> 가 담긴 맵
+	 * */
 	@RequestMapping(value="/scorefileupload", method=RequestMethod.POST)
-	public List<String> scoreFileUpload(MultipartHttpServletRequest request){
+	public String scoreFileUpload(MultipartHttpServletRequest request){
+		//request에서 업로드한 파일 얻기
 		MultipartFile file = request.getFile("scoreExcelFile");
-		List<String> resultList = new ArrayList<String>();
-		resultList.add(file.getName());
-		return resultList;
+		//service에서 인덱스 3까지는 무시하고 처리하도록 넘겨주고 결과 리턴
+		scoreService.uploadFileInfo(file, 3);
+		return "redirect: /score/scoreupload";
 	}
+	
 	/*
 	 *정윤선
 	 * DB에 존재하는 값중에 점검년도,분기,항목,상세항목,점수 전체의 정보를 조회
