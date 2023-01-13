@@ -132,6 +132,9 @@ VALUES(
  
  </insert> 
 
+<select id="CountAllList" resultType="int">
+SELECT COUNT(*) FROM INSPECTION
+</select>
 
 <!-- 
 	상세코드 수정.

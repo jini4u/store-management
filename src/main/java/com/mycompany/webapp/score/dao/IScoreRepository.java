@@ -33,5 +33,7 @@ public interface IScoreRepository {
 	List<ScoreVO>usingCodeList();
 	/*점수 수정,저장*/
 	int updateScore(ScoreVO score);
+	/*점수리스트 수 받아오기*/
+	int CountAllList();
 }
 

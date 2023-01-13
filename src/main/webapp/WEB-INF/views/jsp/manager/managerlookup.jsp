@@ -56,7 +56,7 @@
 		</table>
 
 		<div class="center-pagging">
-			<ul class="pagination modal">
+			<ul class="pagination pageModal">
 				<li><a class="innerPager first" href="managerList?pageNo=1">처음</a></li>
 				<li><c:if test="${pager.groupNo>1}">
 						<a class="innerPager arrow left"
