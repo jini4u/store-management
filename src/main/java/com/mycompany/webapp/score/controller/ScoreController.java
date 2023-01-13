@@ -3,7 +3,6 @@ package com.mycompany.webapp.score.controller;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +23,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.mycompany.webapp.common.vo.Pager;
 import com.mycompany.webapp.score.service.IScoreService;
-import com.mycompany.webapp.score.service.ScoreService;
 import com.mycompany.webapp.score.vo.ScoreVO;
 
 
@@ -151,21 +148,9 @@ public class ScoreController {
 	 * 점수 수정
 	 * */
 	
-	
 
-	//점수를 변경해줌
-//	@RequestMapping(value="/updateScore", method=RequestMethod.POST)
-//	public String updateScore(ScoreVO score,Model model){
-//		scoreService.updateScore(score);
-//		score.setCenterCode(1);
-//		System.out.println("점수 : "+scoreService.updateScore(score));
-//		model.addAttribute("scoreList",scoreService.getScoreList(score));
-//
-//		return "redirect:/score/scorelist";
-//	}
-//	
 	//값을 화면에 보내줌
-	@RequestMapping(value="/updateSave")
+	@RequestMapping(value="/updateScore")
 	public String updateGetScore(ScoreVO score, Model model) {
 		
 		scoreService.updateScore(score);

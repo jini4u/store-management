@@ -5,39 +5,15 @@
  * @Modification 
  *     수정일      	수정자      	  	수정내용
  *  =========== =========  =====================
- * 	
+ * 2023.01.03	정윤선
+ * 2023.01.13	정윤선
  * @author 정윤선
  * **/
-
 window.onload = function(){
+   //모달창
 
-		$(".open").click(function() {
-			$(".modal").fadeIn();
-		});
-
-		window.onclick = function(e) {
-			if (e.target == modal) {
-				modal.style.visibility = "hidden";
-				modal.style.opacity = 0;
-			}
-		}
-
-		const openButton = document.querySelector(".open");
-		const modal = document.querySelector(".modal");
-		const overlay = modal.querySelector(".modal_overlay");
-		const openModal = function() {
-			console.log("hi");
-		}
-		const closeModal = function() {
-			modal.classList.add();
-		}
-
-		openButton.addEventListener("click", openModal);
-
-		//모달창 닫기//
-		$(".close-btn").click(function() {
-			$(".modal").fadeOut();
-
-		})
-	}
-	
+   $("#firstCenter").click(function(){
+	   
+	 alert("점포1입니다.");
+   });
+}

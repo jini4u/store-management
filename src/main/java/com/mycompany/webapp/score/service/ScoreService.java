@@ -77,14 +77,13 @@ public class ScoreService implements IScoreService {
 
 			ScoreVO update = new ScoreVO();
 			update.setCenterCode(score.getCenterCode());
-			update.setUserCode(score.getUserCode());
 			update.setCheckYear(score.getCheckYear());
 			update.setCheckSeason(score.getCheckSeason());
 			//groupcode에서의 값들을 가져오기 위함
 			update.setCheckGroupCode(score.getArrayCheckGroupCode()[i]);
 			update.setCheckDetailCode(score.getArrayCheckDetailCode()[i]);
 			update.setCheckScore(score.getArrayScore()[i]);
-			scoreRepository.updateScore(score);
+			scoreRepository.updateScore(update);
 		}
 		return score.getArrayScore().length;
 	}

@@ -145,7 +145,7 @@ window.onload = function(){
 					let results = result;
 
 					let str = "";
-					//결과룰 반복한다
+					//결과를 반복한다
 					$.each(results, function(i) {
 						let birth = new Date(results[i].userBirth);
 						let hiredate = new Date(results[i].userHireDate);
