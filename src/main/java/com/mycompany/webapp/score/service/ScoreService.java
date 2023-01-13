@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -108,15 +106,28 @@ public class ScoreService implements IScoreService {
 		return scoreRepository.getScoreList(scoreVO);
 	}
 
-
+	//점수 수정
 	@Override
 	public int updateScore(ScoreVO score) {
-		return scoreRepository.updateScore(score);
-		
+		for(int i=0; i<score.getArrayScore().length; i++) {
 
+			ScoreVO update = new ScoreVO();
+			update.setCenterCode(score.getCenterCode());
+			update.setUserCode(score.getUserCode());
+			update.setCheckYear(score.getCheckYear());
+			update.setCheckSeason(score.getCheckSeason());
+			//groupcode에서의 값들을 가져오기 위함
+			update.setCheckGroupCode(score.getArrayCheckGroupCode()[i]);
+			update.setCheckDetailCode(score.getArrayCheckDetailCode()[i]);
+			update.setCheckScore(score.getArrayScore()[i]);
+			scoreRepository.updateScore(score);
+		}
+		return score.getArrayScore().length;
 	}
 
 
+
+	//점수등록
 	@Override
 	@Transactional
 	public int insertScore(ScoreVO scoreVO) {
@@ -204,4 +215,11 @@ public class ScoreService implements IScoreService {
 		
 		return resultMap;
 	}
+	
+	//점수리스트 수 받아오기
+	@Override
+	public int CountAllList() {
+		return scoreRepository.CountAllList();
+	}
+
 }

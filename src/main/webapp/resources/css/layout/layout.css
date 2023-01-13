@@ -164,73 +164,6 @@
 	border: 1px solid #bebebe;
 }
 
-/* 페이지네이션*/
-.center-pagging {
-	text-align: center;
-}
-
-.pagination {
-	list-style: none;
-	display: inline-block;
-	padding: 0;
-	margin-top: 20px;
-}
-
-.pagination li {
-	display: inline;
-	text-align: center;
-}
-
-.pagination a {
-	float: left;
-	display: block;
-	font-size: 14px;
-	text-decoration: none;
-	padding: 5px 12px;
-	color: #96a0ad;
-	line-height: 1.5;
-}
-
-.first {
-	margin-right: 15px;
-}
-
-.first:hover, .last:hover, .left:hover, .right:hover {
-	color: #E26868;
-}
-
-.pagination a.active {
-	cursor: default;
-	color: #fff;
-}
-
-.pagination a:active {
-	outline: none;
-}
-
-.modal .num {
-	margin-left: 3px;
-	padding: 0;
-	width: 30px;
-	height: 30px;
-	line-height: 30px;
-	-moz-border-radius: 100%;
-	-wekit-border-radius: 100%;
-	border-radius: 100%;
-}
-
-.modal .num.active, .modal .num:active {
-	background-color: #E26868;
-	cursor: pointer;
-}
-
-.arrow .left {
-	width: 0;
-	height: 0;
-	border-top: 10px solid transparent;
-	border-bottom: 10px solid transparent;
-	border-right: 10px solid blue;
-}	
 .header {
    display: flex;
    align-items: center;
@@ -360,6 +293,31 @@
    position: relative;
    top: 1px;
 }
+.centerSize{
+	width: 60px;
+    height: 35px;
+    background-color: #FF8787;
+   	border: 1px solid #FF8787;
+  	color: #fff;
+  	border-radius: 9px;
+   display: inline-block;
+   cursor: pointer;
+   font-family: Arial;
+   font-size: 15px;
+   text-decoration: none;
+   font-weight: 550;
+}
+
+.centerSize:active, .greyButton:active {
+   position: relative;
+   top: 1px;
+}
+
+.centerSize:hover {
+   background-color: #E26868;
+   color: #fff;
+   border: 1px solid #E26868;
+}
 
 .pinkButton {
    background-color: #FF8787;
@@ -385,7 +343,7 @@
    border: 1px solid #bebebe;
 }
 
-/* 페이지네이션*/
+/* 페이지네이션 */
 .center-pagging {
    text-align: center;
 }
@@ -395,6 +353,7 @@
    display: inline-block;
    padding: 0;
    margin-top: 20px;
+   font-size: 20px;
 }
 
 .pagination li {
@@ -405,43 +364,40 @@
 .pagination a {
    float: left;
    display: block;
-   font-size: 14px;
    text-decoration: none;
    padding: 5px 12px;
    color: #96a0ad;
    line-height: 1.5;
 }
 
-.first {
-   margin-right: 15px;
-}
-
 .first:hover, .last:hover, .left:hover, .right:hover {
    color: #E26868;
+    text-decoration-line: none;
 }
 
 .pagination a.active {
    cursor: default;
-   color: #fff;
 }
 
 .pagination a:active {
    outline: none;
 }
 
-.modal .num {
+.pageModal .num {
    margin-left: 3px;
    padding: 0;
    width: 30px;
    height: 30px;
    line-height: 30px;
-   -moz-border-radius: 100%;
+}
+.num:hover{
+	-moz-border-radius: 100%;
    -wekit-border-radius: 100%;
    border-radius: 100%;
-}
-
-.modal .num.active, .modal .num:active {
    background-color: #E26868;
+   color: #fff;
+}
+.pageModal .num.active, .pageModal .num:active {
    cursor: pointer;
 }
 

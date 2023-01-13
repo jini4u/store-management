@@ -169,7 +169,7 @@ public class CenterService implements ICenterService{
 
 	@Override
 	public int filterCountAllCenters(String centerName) {
-		return centerRepository.filterCountAllCenters(centerName);
+		return centerRepository.CountAllCenters(centerName);
 	}
 
 	

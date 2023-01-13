@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="/resources/css/score.css" />
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/score/score.css" />
 <div class="titleBox">
-	<img src="/resources/images/업로드.png">
+	<img src="${pageContext.request.contextPath}/resources/images/업로드.png">
+
 	<h2>센터 정보 일괄 등록</h2>
 </div>
 <div class='uploadbutton'>

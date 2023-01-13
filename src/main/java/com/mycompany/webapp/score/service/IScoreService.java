@@ -21,11 +21,13 @@ public interface IScoreService {
 	
 	//윤선
 	List<ScoreVO> getScoreList(ScoreVO scoreVO);
-	
-	
+	//점수등록	
 	int insertScore(ScoreVO score);
-
+	//모달 점수 등록
 	List<ScoreVO> usingCodeList();
+	//점수 수정
 	int updateScore(ScoreVO score);
+	
+	int CountAllList();
 
 }

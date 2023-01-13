@@ -21,7 +21,6 @@ let centerlist = function centerList(results){
 	$("#centerForm input").val('');
 	$("#findCenterName").val('');
 	CallcenterList();
-	$(".removeDisabled").attr("disabled", true);
 }
 let error = function( request, status, error ){
 	alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
@@ -96,7 +95,6 @@ function CallcenterList() {
 		var row = leftTableTr[i];
 
 		row.onclick = function () {
-			$(".removeDisabled").attr("disabled", false);
 			$("#centerName").attr("readonly", true);
 			let centercode = document.querySelector("#centerCode");
 
@@ -153,7 +151,7 @@ $("#centerSavedBtn").click(function (){
 
 	if (!$("#centerName").attr("readonly")) {
 
-		let insertURL = "/centerInsert";
+		let insertURL = "/center/centerInsert";
 
 		$.ajax({
 			type:"POST",
@@ -173,7 +171,7 @@ $("#centerSavedBtn").click(function (){
 
 		});
 	}else{
-		let updateURL = "/centerUpdate";
+		let updateURL = "/center/centerUpdate";
 		let centercondition = document.querySelector("#centerCondition").value;
 		console.log("centerCondition"+centercondition);
 
@@ -200,9 +198,6 @@ $("#centerSavedBtn").click(function (){
 //등록버튼
 $("#centerInsertBtn").click(function () {
 
-//	const newCenterCode = $("#newCenterCode").val();
-
-	$(".removeDisabled").attr('disabled', false);
 	$("#centerName").attr("readonly", false);
 
 	//폐점일 비활성화
@@ -210,7 +205,6 @@ $("#centerInsertBtn").click(function () {
 		$("#centerClosingDate").attr("readonly",true);
 	}
 
-//	$("#centerCode").val(newCenterCode);
 	$("#centerName").val('');
 	$("#centerTel").val('');
 	$("#centerCondition").val('');
@@ -238,7 +232,7 @@ $("#findCenterList").click(function (){
 //	}
 
 	$.ajax({ 
-		url : "/findCenter",
+		url : "/center/findCenter",
 		type : "POST",
 		data : {
 			centerName : centername
@@ -247,4 +241,5 @@ $("#findCenterList").click(function (){
 		error: error
 	});
 });
+
 
