@@ -2,21 +2,34 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<link rel="stylesheet" href="resources/css/center/centerList.css">
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<link rel="stylesheet" href="/resources/css/center/centerList.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
+<!-- jQuery library -->
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <div class="titleBox">
-	<img src="resources/images/blood-bank.png">
+	<img
+		src="${pageContext.request.contextPath}/resources/images/blood-bank.png" />
 	<h2>센터관리</h2>
 </div>
 <div class="center-search-button">
 	<div class="search-box center">
-		<input type="text" name="centerCode" id="findCenterName" class="search-txt search-button"> 
-			<a class="search-btn" id="findCenterList" href="#"> 
-				<i class="fas fa-search"></i>
-			</a>
+		<input type="text" name="centerCode" id="findCenterName"
+			class="search-txt search-button"> <a class="search-btn"
+			id="findCenterList" href="#"> <i class="fas fa-search"></i>
+		</a>
 	</div>
-
 </div>
 <div id="center-form-pagging">
 	<table class="verticalTable" id="center-left">
@@ -49,7 +62,7 @@
 		</tbody>
 	</table>
 	<div class="center-pagging">
-		<ul class="pagination modal"> 
+		<ul class="pagination modal">
 			<li><a class="innerPager first" href="centerList?pageNo=1">처음</a></li>
 			<li><c:if test="${pager.groupNo>1}">
 					<a class="innerPager arrow left"
@@ -73,66 +86,97 @@
 		</ul>
 	</div>
 </div>
-	<div class="center-button-group">
-		<input type="button" class="pinkButton" id="centerInsertBtn" value="등록"> 
-		<input type="button" class="greyButton" id="centerSavedBtn" value="저장">
-	</div>
-<form id="centerForm">
-	<table class="rowTable" id="center-right">
-			<input type="hidden" name="centerCode" value="${newCenterCode}" id="centerCode" class="removeDisabled"> 
-		<tr>
-			<th>센터명</th>
-			<td><input type="text" name="centerName" id="centerName"
-				class="removeDisabled" disabled="disabled" readonly="readonly"></td>
-		</tr>
-		<tr>
-			<th>전화번호</th>
-			<td><input type="text" name="centerTel" id="centerTel"
-				class="removeDisabled" disabled="disabled"></td>
-		</tr>
-		<tr>
-			<th>운영여부</th>
-			<td><input type="text" id="centerCondition"
-				class="removeDisabled" disabled="disabled" readonly="readonly">
-			</td>
-		</tr>
-		<tr>
-			<th>주소</th>
-			<td><input type="text" name="centerAddress" id="centerAddress"
-				class="removeDisabled" disabled="disabled"></td>
-		</tr>
-		<tr>
-			<th>오시는 길</th>
-			<td><input type="text" name="centerGuide" id="centerGuide"
-				class="removeDisabled" disabled="disabled"></td>
-		</tr>
-		<tr>
-			<th>오픈 일</th>
-			<td><input type="date" name="centerOpeningDate"
-				id="centerOpeningDate" class="removeDisabled" disabled="disabled"></td>
-		</tr>
-		<tr>
-			<th>폐점 일</th>
-			<td><input type="date" name="centerClosingDate"
-				id="centerClosingDate" class="removeDisabled" disabled="disabled"
-				readonly="readonly"></td>
-		</tr>
-	</table>
-</form>
-<div id="center-photo-frame">
-	<div id="centerphoto-main-size">
-		<img src="resources/images/center/left-arrow.png" class="center-arrow">
-		<div id="centerImagesDiv">
-			<!-- 센터별 사진들 들어가야함. src에서 /image/사진이름. /image는 resources.xml에서 맵핑해둠 -->
-			<img src="" class="centerphoto-img">
-		</div>
-		<img src="resources/images/center/right-arrow.png"
-			class="center-arrow">
-	</div>
-	<div id="centerphoto-mini-size">
-		<input type="radio" name="slid"> <input type="radio"
-			name="slid"> <input type="radio" name="slid">
-	</div>
+<div class="center-button-group">
+	
 </div>
 
-<script src="resources/js/center/centerList.js"></script>
+
+<button id="centerInsertBtn" class="centerSize" data-toggle="modal"
+	data-target="#myModal">등록</button>
+<!-- Modal -->
+
+<div class="modal fade" id="myModal" role="dialog">
+	<!-- 사용자 지정 부분① : id명 -->
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">센터 등록</h4>
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<!-- 사용자 지정 부분② : 타이틀 -->
+			</div>
+			<div class="modal-body">
+				<form id="centerForm">
+					<!--   disabled="disabled" class="form-control removeDisabled"  <table class="rowTable" id="center-right">  -->
+
+					<div class="input-group input-group-sm mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="inputGroup-sizing-sm">센터명</span>
+						</div>
+						<input type="text" name="centerName" id="centerName"
+							class="form-control" aria-label="Sizing example input"
+							aria-describedby="inputGroup-sizing-sm" readonly="readonly">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="inputGroup-sizing-sm">운영여부</span>
+						</div>
+						<input type="text" id="centerCondition" name="centerCondition"
+							class="form-control" aria-label="Sizing example input"
+							aria-describedby="inputGroup-sizing-sm">
+					</div>
+
+					<div class="input-group input-group-sm mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="inputGroup-sizing-sm">전화번호</span>
+						</div>
+						<input type="text" name="centerTel" id="centerTel"
+							class="form-control" aria-label="Sizing example input"
+							aria-describedby="inputGroup-sizing-sm">
+					</div>
+
+					<div class="input-group input-group-sm mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="inputGroup-sizing-sm">주소</span>
+						</div>
+						<input type="text" name="centerAddress" id="centerAddress"
+							class="form-control" aria-label="Sizing example input"
+							aria-describedby="inputGroup-sizing-sm">
+					</div>
+
+					<div class="input-group input-group-sm mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="inputGroup-sizing-sm">오시는
+								길</span>
+						</div>
+						<input type="text" name="centerGuide" id="centerGuide"
+							class="form-control" aria-label="Sizing example input"
+							aria-describedby="inputGroup-sizing-sm">
+					</div>
+
+					<div class="input-group input-group-sm mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="inputGroup-sizing-sm">오픈
+								일</span>
+						</div>
+						<input type="date" name="centerOpeningDate" id="centerOpeningDate"
+							class="form-control" aria-label="Sizing example input"
+							aria-describedby="inputGroup-sizing-sm">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="inputGroup-sizing-sm">폐점
+								일</span>
+						</div>
+						<input type="date" name="centerClosingDate" id="centerClosingDate"
+							class="form-control" aria-label="Sizing example input"
+							aria-describedby="inputGroup-sizing-sm">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="centerSize" data-dismiss="modal" >Close</button>
+				<input type="button" class="centerSize" id="centerSavedBtn" value="저장">
+			</div>
+		</div>
+	</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/center/centerList.js"></script>
