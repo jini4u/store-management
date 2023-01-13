@@ -33,13 +33,4 @@ public class HomeController {
 	public String login() {
 		return "login";
 	}
-	
-	//poi 테스트 중
-	@RequestMapping("/poi")
-	public @ResponseBody void poiTest() {
-		String fileName = "template_점수.xlsx";
-		
-		POIClass poi = new ScorePOI();
-		poi.readWorkBook(filePath, fileName);
-	}
 }

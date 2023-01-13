@@ -62,7 +62,7 @@
 		</tbody>
 	</table>
 	<div class="center-pagging">
-		<ul class="pagination modal">
+		<ul class="pagination pageModal">
 			<li><a class="innerPager first" href="centerList?pageNo=1">처음</a></li>
 			<li><c:if test="${pager.groupNo>1}">
 					<a class="innerPager arrow left"
@@ -95,85 +95,75 @@
 	data-target="#myModal">등록</button>
 <!-- Modal -->
 
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" data-backdrop="static" id="myModal"
+	role="dialog">
 	<!-- 사용자 지정 부분① : id명 -->
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered" >
 		<!-- Modal content-->
-		<div class="modal-content">
+		<div class="modal-content p-6">
 			<div class="modal-header">
 				<h4 class="modal-title">센터 등록</h4>
 				<button type="button" class="close" data-dismiss="modal">×</button>
 				<!-- 사용자 지정 부분② : 타이틀 -->
 			</div>
 			<div class="modal-body">
-				<form id="centerForm">
 					<!--   disabled="disabled" class="form-control removeDisabled"  <table class="rowTable" id="center-right">  -->
 
-					<div class="input-group input-group-sm mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="inputGroup-sizing-sm">센터명</span>
+				<form id="centerForm">
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="name">센터명</label> <input type="text"
+								name="centerName" id="centerName" class="form-control"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-sm" readonly="readonly">
 						</div>
-						<input type="text" name="centerName" id="centerName"
-							class="form-control" aria-label="Sizing example input"
-							aria-describedby="inputGroup-sizing-sm" readonly="readonly">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="inputGroup-sizing-sm">운영여부</span>
+						<div class="col-md-6 mb-3">
+							<label for="name">운영여부</label> <input type="text"
+								id="centerCondition" name="centerCondition" class="form-control"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-sm">
 						</div>
-						<input type="text" id="centerCondition" name="centerCondition"
-							class="form-control" aria-label="Sizing example input"
+					</div>
+					<div class="mb-3">
+						<label for="email">전화번호</label> <input type="text"
+							name="centerTel" id="centerTel" class="form-control"
+							aria-label="Sizing example input"
+							aria-describedby="inputGroup-sizing-sm">
+					</div>
+					<div class="mb-3">
+						<label for="email">주소</label> <input type="text"
+							name="centerAddress" id="centerAddress" class="form-control"
+							aria-label="Sizing example input"
+							aria-describedby="inputGroup-sizing-sm">
+					</div>
+					<div class="mb-3">
+						<label for="email">오시는 길</label> <input type="text"
+							name="centerGuide" id="centerGuide" class="form-control"
+							aria-label="Sizing example input"
 							aria-describedby="inputGroup-sizing-sm">
 					</div>
 
-					<div class="input-group input-group-sm mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="inputGroup-sizing-sm">전화번호</span>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="name">오픈일</label> <input type="date"
+								name="centerOpeningDate" id="centerOpeningDate"
+								class="form-control" aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-sm">
 						</div>
-						<input type="text" name="centerTel" id="centerTel"
-							class="form-control" aria-label="Sizing example input"
-							aria-describedby="inputGroup-sizing-sm">
+						<div class="col-md-6 mb-3">
+							<label for="name">폐점일</label> <input type="date"
+								name="centerClosingDate" id="centerClosingDate"
+								class="form-control" aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-sm">
+						</div>
 					</div>
-
-					<div class="input-group input-group-sm mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="inputGroup-sizing-sm">주소</span>
-						</div>
-						<input type="text" name="centerAddress" id="centerAddress"
-							class="form-control" aria-label="Sizing example input"
-							aria-describedby="inputGroup-sizing-sm">
-					</div>
-
-					<div class="input-group input-group-sm mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="inputGroup-sizing-sm">오시는
-								길</span>
-						</div>
-						<input type="text" name="centerGuide" id="centerGuide"
-							class="form-control" aria-label="Sizing example input"
-							aria-describedby="inputGroup-sizing-sm">
-					</div>
-
-					<div class="input-group input-group-sm mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="inputGroup-sizing-sm">오픈
-								일</span>
-						</div>
-						<input type="date" name="centerOpeningDate" id="centerOpeningDate"
-							class="form-control" aria-label="Sizing example input"
-							aria-describedby="inputGroup-sizing-sm">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="inputGroup-sizing-sm">폐점
-								일</span>
-						</div>
-						<input type="date" name="centerClosingDate" id="centerClosingDate"
-							class="form-control" aria-label="Sizing example input"
-							aria-describedby="inputGroup-sizing-sm">
-					</div>
-				</form>
+			</form>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="centerSize" data-dismiss="modal" >Close</button>
-				<input type="button" class="centerSize" id="centerSavedBtn" value="저장">
-			</div>
+		<div class="modal-footer">
+			<!-- 				<button type="button" class="centerSize" data-dismiss="modal" >Close</button> -->
+			<input type="button" class="centerSize  btn-lg btn-block" id="centerSavedBtn"
+				value="저장">
+		</div>
 		</div>
 	</div>
 </div>

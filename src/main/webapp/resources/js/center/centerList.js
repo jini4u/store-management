@@ -16,7 +16,6 @@ let centerlist = function centerList(results){
 
 		str += "</tr>";
 	});
-	alert("성공");
 	$("#center-left").append(str);
 	$("#centerForm input").val('');
 	$("#findCenterName").val('');
@@ -234,6 +233,7 @@ $("#findCenterList").click(function (){
 	$.ajax({ 
 		url : "/center/findCenter",
 		type : "POST",
+		async:false,
 		data : {
 			centerName : centername
 		},

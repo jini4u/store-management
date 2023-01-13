@@ -54,6 +54,7 @@
 
 <!-- 점수리스트 테이블 -->
 <form action="/score/updateScore" name="updatescore" method="post">
+<<<<<<< HEAD
    <table class="verticalTable" border="1">
       <tr>
          <th>점검년도</th>
@@ -125,6 +126,73 @@
 
 
 </div>
+=======
+	<table class="scoretable" border="1">
+		<tr>
+			<th>점검년도</th>
+			<th>분기</th>
+			<th>항목</th>
+			<th>상세항목</th>
+			<th>점수</th>
+		</tr>
+		<c:if test="${empty scoreList}">
+			데이터가 없습니다.
+		</c:if>
+		<c:if test="${not empty scoreList}">
+			<c:forEach items="${scoreList}" var="scoreCode">
+				<tr>
+					<td class="score_td">${scoreCode.checkYear}</td>
+					<td class="score_td">${scoreCode.checkSeason}</td>
+					<td class="score_td">${scoreCode.checkGroupCode}</td>
+					<td class="score_td">${scoreCode.checkDetailCode}</td>
+					<td class="score_td"><input type="text" name="checkScore" class="placeholderstlye" size="5" placeholder="${scoreCode.checkScore}"></td>
+				</tr>
+				</c:forEach>
+				<tr>
+				<td id="pager" colspan="10">
+					<div>
+						<a class="innerPager first" href="scorelist?pageNo=1">처음</a>
+						<c:if test="${pager.groupNo>1}">
+							<a class="innerPager arrow left" href="scorelist?pageNo=${pager.startPageNo-1}">이전</a>
+						</c:if>
+						
+						<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+							<c:if test="${pager.pageNo != i}">
+								<a class="innerPager active num" href="scorelist?pageNo=${i}">${i}</a>
+							</c:if>
+							<c:if test="${pager.pageNo == i}">
+								<a class="innerPager num" href="scorelist?pageNo=${i}">${i}</a>
+							</c:if>
+						</c:forEach>
+						
+						<c:if test="${pager.groupNo<pager.totalGroupNo}">
+							<a class="innerPager arrow right" href="scorelist?pageNo=${pager.endPageNo+1}">다음</a>
+						</c:if>
+						<a class="innerPager last" href="scorelist?pageNo=${pager.totalPageNo}">맨끝</a>
+					</div>
+				</td>
+					</tr>
+			
+				<c:forEach items="${scoreList}" var="score">
+					<input type="hidden" name="centerCode" value="${score.centerCode}" />
+					<input type="hidden" name="checkYear" value="${score.checkYear}" />
+					<input type="hidden" name="checkSeason" value="${score.checkSeason}" />
+					<input type="hidden" name="arrayCheckGroupCode" value="${score.checkGroupCode}">
+					<input type="hidden" name="arrayCheckDetailCode" value="${score.checkDetailCode}">
+
+				</c:forEach>
+		</c:if>
+	</table>
+
+<!--  수정 점수등록 버튼 -->
+ <div id="btnclick">
+	<div id="btn_group">
+<!--		<form action="/score/updateScore" name="updatescore" method="post">-->
+			<button type="submit" class="pinkButton">수정</button>
+</form>
+		<button type="submit" class="open greyButton">점수등록</button>
+	</div>
+>>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 </div>
 
 
@@ -149,4 +217,4 @@
    </div>
    
 <!-- 모달 자바 스크립트 -->
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
