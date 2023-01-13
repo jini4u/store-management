@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="resources/css/score/code.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/score/code.css"/>
 
 <div class="titleBox">
-	<img src="resources/images/selection.png">
+	<img src="${pageContext.request.contextPath}/resources/images/selection.png">
 	<h2>코드관리</h2>
 </div>
 
@@ -86,4 +86,4 @@
 	</div>
 </div>
 
-<script src="resources/js/score/code.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/score/code.js"></script>

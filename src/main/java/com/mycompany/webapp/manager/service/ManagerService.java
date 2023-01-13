@@ -16,37 +16,36 @@ public class ManagerService implements IManagerService {
 	@Autowired
 	IManagerRepository managerRepository;
 	
-	/* author 怨좎�蹂�
-	 * �떞�떦�옄 �벑濡� */
+	/* author 은별 
+	 * 담당자 등록  */
 	@Override
 	public int insertManager(ManagerVO mgr) {
 		return managerRepository.insertManager(mgr);
 	}
 	
-	/* author 怨좎�蹂�
-	 * �떞�떦�옄 紐⑸줉 議고쉶 */
+	/* author 은별 
+	 * 담당자 목록 조회  */
 	@Override
 	public List<ManagerVO> selectManagerList(Pager pager) {
 		List<ManagerVO> managerList = managerRepository.selectManagerList(pager);
-		for(int i=0;i<managerList.size();i++) {
+	/*	for(int i=0;i<managerList.size();i++) {
 			ManagerVO manager = managerList.get(i);
 			int userCode = manager.getUserCode();
 			List<CenterVO> centerList = getCenterByManager(userCode);
 			manager.setCenterList(centerList);
-		}
-		
+		}*/
 		return managerList;
 	}
 	
-	/* author 怨좎�蹂�
-	 * �떞�떦�옄 �젙蹂� �긽�꽭議고쉶 */
+	/* author 은별
+	 * 담당자 상세 조회 */
 	@Override
 	public ManagerVO selectManagerDetail(int userCode) {
 		return managerRepository.selectManagerDetail(userCode);
 	}
 	
-	/* author 怨좎�蹂�
-	 * �떞�떦�옄 �젙蹂� �닔�젙 */
+	/* author 은별
+	 * 담당자 수정 */
 	@Override
 	public int managerUpdate(ManagerVO mgr) {
 		return managerRepository.updateManagerInfo(mgr);

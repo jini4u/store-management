@@ -1,6 +1,7 @@
 package com.mycompany.webapp.score.vo;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ScoreVO {
 	private int checkYear;
@@ -18,6 +19,7 @@ public class ScoreVO {
 	private int[] arrayCheckDetailCode;
 	private int[] arrayScore;
 	
+	private List<ScoreVO> scoreVOList;
 	
 	public int getCheckYear() {
 		return checkYear;
@@ -91,6 +93,13 @@ public class ScoreVO {
 	public void setArrayScore(int[] arrayScore) {
 		this.arrayScore = arrayScore;
 	}
+	public List<ScoreVO> getScoreVOList() {
+		return scoreVOList;
+	}
+	public void setScoreVOList(List<ScoreVO> scoreVOList) {
+		this.scoreVOList = scoreVOList;
+	}
+	
 	@Override
 	public String toString() {
 		return "ScoreVO [checkYear=" + checkYear + ", checkSeason=" + checkSeason + ", checkGroupCode=" + checkGroupCode

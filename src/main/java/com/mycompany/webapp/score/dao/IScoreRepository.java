@@ -31,8 +31,6 @@ public interface IScoreRepository {
 	
 	/*모달 점수 리스트 */
 	List<ScoreVO>usingCodeList();
-	/*점수 삭제*/
-	int deleteScore(ScoreVO score);
 	/*점수 수정,저장*/
 	int updateScore(ScoreVO score);
 }
