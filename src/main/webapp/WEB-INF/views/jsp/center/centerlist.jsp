@@ -41,28 +41,24 @@
 				<th>주소</th>
 				<th>오픈 일</th>
 				<th>운영 여부</th>
-				<th>상세 보기</th>
 			</tr>
 		</thead>
 		<tbody id="centerList">
 			<!--varStatus는 forEach문에서의 인덱스 -->
 			<!-- 	왼쪽박스 리스트 -->
-				<tr class="centerListTr" onclick="CallcenterList()">
 			<c:forEach var="centerList" items="${centerList}" varStatus="status">
+				<tr class="centerListTr" onclick="CallcenterList()">
 					<td>${centerList.centerCode}</td>
 					<td>${centerList.centerName}</td>
 					<td>${centerList.centerTel}</td>
 					<td>${centerList.centerAddress}</td>
 					<td>${fn:substring(centerList.centerOpeningDate,0,10)}</td>
 					<td>${centerList.centerCondition}</td>
-					<td></td>
 
 					<td style="display: none">${centerList.centerGuide}</td>
 					<td style="display: none">${fn:substring(centerList.centerClosingDate,0,10)}</td>
-			</c:forEach>
-				
-				<td></td>
 				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 	<div class="center-pagging">
@@ -90,7 +86,9 @@
 		</ul>
 	</div>
 </div>
-<div class="center-button-group"></div>
+<div class="center-button-group">
+	
+</div>
 
 
 <button id="centerInsertBtn" class="centerSize" data-toggle="modal"
