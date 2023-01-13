@@ -47,10 +47,16 @@ window.onload = function(){
 				url:'/manager/getCenters/'+userCode,
 				success: function(result) {
 					console.log(result);
-					$.each(result, function(index, value){
-						console.log(index + " :: " + value.centerName);
-						$("#centerName").html(value.centerName);	
+					var view = '';
+					//.each : 배열과 length 속성을 갖는 배열과 유사 배열 객체들을 index를 기준으로 반복
+					$.each(result,function(index, value){	
+						view += value.centerName;
+						
+						if(index != result.length-1){
+							view += ', ';
+						}	
 					});
+					$("#centerName").html(view);
 				}
 			});
 
@@ -242,7 +248,7 @@ window.onload = function(){
 		let userResignDate = $("#userResignDate").val();
 		$.ajax({
 			type:"POST",
-			url: "manager/managerSearch",
+			url: "/manager/managerSearch",
 			data: {
 				userName : userName
 			},
@@ -276,7 +282,12 @@ window.onload = function(){
 
 		})
 	});
-
+	//모달창
+	$('#testBtn').click(function(e){
+		e.preventDefault();
+		$('#testModal').modal("show");
+	});
+	
 }
 
 

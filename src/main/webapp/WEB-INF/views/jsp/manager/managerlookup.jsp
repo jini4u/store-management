@@ -4,7 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/manager/managerlookup.css">
-
+	<link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/resources/css/bootstrap.css" />
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/bootstrap.js"></script>
+	<script src="/resources/js/manager/manager.js"></script>
+	
 <div class="titleBox">
 	<img src="${pageContext.request.contextPath}/resources/images/manager.png"> 
 	<h2>담당자 조회</h2>
@@ -45,18 +50,13 @@
 								pattern="yyyy-MM-dd" /></td>
 						<td><fmt:formatDate value="${managerVO.userResignDate}"
 								pattern="yyyy-MM-dd" /></td>
-						<%-- 						<td><select>
-								<c:forEach var="center" items="${managerVO.centerList}">
-									<option>${center.centerName}</option>
-								</c:forEach>
-						</select></td> --%>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-
+		<!-- 페이징 처리  -->
 		<div class="center-pagging">
-			<ul class="pagination modal">
+			<ul class="pagination pageModal">
 				<li><a class="innerPager first" href="managerList?pageNo=1">처음</a></li>
 				<li><c:if test="${pager.groupNo>1}">
 						<a class="innerPager arrow left"
@@ -125,4 +125,25 @@
 		</form>
 	</div>
 </div>
-<script src="/resources/js/manager/manager.js"></script>
+<!-- 모달창 -->
+ <button id="testBtn" class="btn">모달 테스트</button>
+	<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">담당자 등록</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">X</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+				
+				</div>
+				<div class="modal-footer">
+					<a class="btn" id="modalY" href="#">예</a>
+					<button class="btn" type="button" data-dismiss="modal">아니요</button>
+				</div>
+			</div>
+		</div>
+	</div>
