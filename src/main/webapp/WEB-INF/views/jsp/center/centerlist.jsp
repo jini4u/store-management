@@ -64,7 +64,7 @@
 				</tr>
 			</c:forEach>
 		</tbody>
-	</table>
+	</table> 
 	<div class="center-pagging">
 		<ul class="pagination pageModal">
 			<li><a class="innerPager first" href="centerList?pageNo=1">처음</a></li>
