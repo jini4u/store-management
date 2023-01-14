@@ -53,3 +53,11 @@
  .modal-dialog{ 
  max-width: 552px;
  }  
+ #centerphoto{
+ display: flex;
+    flex-direction: row;
+ }
+ #centerPhotoSize{
+ 	width: 355px;
+    height: 300px;
+ }
