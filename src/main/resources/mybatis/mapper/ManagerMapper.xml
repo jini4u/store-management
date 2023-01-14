@@ -80,7 +80,7 @@ select * from(
 	   			user_resign_date as userResignDate
 			from  userinfo
 			where user_code < 20000 
-			and user_name like ('%' ||#{mgr.userName}||'%')
+			and user_name like ('%' ||#{keyword}||'%')
 			order by user_code desc
 		)
 		where rownum <= #{pager.endRowNo}

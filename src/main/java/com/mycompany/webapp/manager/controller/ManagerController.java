@@ -112,8 +112,9 @@ public class ManagerController {
 		model.addAttribute("pager", pager);
 		List<ManagerVO> mgrSearchList = managerService.managerSearch(pager, mgr);
 		logger.info(pager.toString());
+		
 		model.addAttribute("mgrSearchList",mgrSearchList);
-		return "jsp/manager/managersearch";
+		return "redirect: /manager/managerList";
 	}
 
 	//담당자 매핑

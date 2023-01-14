@@ -222,12 +222,12 @@
 }
 /* 표 디자인 */
 .verticalTable, .rowTable {
-	font-size: 17px;
-	width: 100%;
-	border-top: 1.5px solid #CCC;
-	border-bottom: 1.5px solid #ccc;
-	border-collapse: collapse;
-	text-align: center;
+   font-size: 17px;
+   width: 100%;
+   border-top: 1.5px solid #CCC;
+   border-bottom: 1.5px solid #ccc;
+   border-collapse: collapse;
+   text-align: center;
 }
 
 .verticalTable th, td, .rowTable th, td {
@@ -417,5 +417,6 @@
 .pageModal {
 	display: flex;
 	align-items: center;
-	justify-content: center;
+    justify-content: center;
 }
+

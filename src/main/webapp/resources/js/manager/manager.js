@@ -235,7 +235,7 @@ window.onload = function(){
 
 	});
 
-	//검색 버튼
+/*	//검색 버튼
 	$("#searchBtn").click(function (){
 		let userCode=$("#userCode").val();
 		let userPassWord=$("#userPassword").val();
@@ -281,7 +281,7 @@ window.onload = function(){
 			}
 
 		})
-	});
+	});*/
 	//모달창
 	$('#testBtn').click(function(e){
 		e.preventDefault();
