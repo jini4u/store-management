@@ -105,14 +105,13 @@ public class ManagerController {
 	/* author 은별
 	  담담자 검색 */
 	@ResponseBody
-	@PostMapping(value="/managerSearch")
+	@PostMapping(value="/managerList")
 	private String managerSearch(@RequestParam(defaultValue="1")int pageNo, ManagerVO mgr, Model model){
 		int totalRows = managerService.countAllMgr();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		model.addAttribute("pager", pager);
 		List<ManagerVO> mgrSearchList = managerService.managerSearch(pager, mgr);
 		logger.info(pager.toString());
-		
 		model.addAttribute("mgrSearchList",mgrSearchList);
 		return "redirect: /manager/managerList";
 	}
