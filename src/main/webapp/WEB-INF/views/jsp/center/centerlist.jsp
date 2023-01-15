@@ -41,6 +41,7 @@
 				<th>주소</th>
 				<th>오픈 일</th>
 				<th>운영 여부</th>
+				<th>상세보기</th>
 			</tr>
 		</thead>
 		<tbody id="centerList">
@@ -57,10 +58,13 @@
 
 					<td style="display: none">${centerList.centerGuide}</td>
 					<td style="display: none">${fn:substring(centerList.centerClosingDate,0,10)}</td>
+					<td><button id="centerDetails" class="centerSize"
+							data-toggle="modal" data-target="#myModal"
+							onclick="CallcenterList()">상세보기</button></td>
 				</tr>
 			</c:forEach>
 		</tbody>
-	</table>
+	</table> 
 	<div class="center-pagging">
 		<ul class="pagination pageModal">
 			<li><a class="innerPager first" href="centerList?pageNo=1">처음</a></li>
@@ -86,19 +90,17 @@
 		</ul>
 	</div>
 </div>
-<div class="center-button-group">
-	
-</div>
+<div class="center-button-group"></div>
 
 
 <button id="centerInsertBtn" class="centerSize" data-toggle="modal"
 	data-target="#myModal">등록</button>
-<!-- Modal -->
+<!--insert Modal -->
 
 <div class="modal fade" data-backdrop="static" id="myModal"
 	role="dialog">
 	<!-- 사용자 지정 부분① : id명 -->
-	<div class="modal-dialog modal-dialog-centered" >
+	<div class="modal-dialog modal-lg modal-dialog-centered">
 		<!-- Modal content-->
 		<div class="modal-content p-6">
 			<div class="modal-header">
@@ -106,12 +108,13 @@
 				<button type="button" class="close" data-dismiss="modal">×</button>
 				<!-- 사용자 지정 부분② : 타이틀 -->
 			</div>
-			<div class="modal-body">
-					<!--   disabled="disabled" class="form-control removeDisabled"  <table class="rowTable" id="center-right">  -->
+			<div class="modal-body" id="centerphoto">
+				<!--   disabled="disabled" class="form-control removeDisabled"  <table class="rowTable" id="center-right">  -->
 
 				<form id="centerForm">
 					<div class="row">
 						<div class="col-md-6 mb-3">
+							<input type="hidden" name="${centerCode}" id="centerCode">
 							<label for="name">센터명</label> <input type="text"
 								name="centerName" id="centerName" class="form-control"
 								aria-label="Sizing example input"
@@ -147,26 +150,39 @@
 						<div class="col-md-6 mb-3">
 							<label for="name">오픈일</label> <input type="date"
 								name="centerOpeningDate" id="centerOpeningDate"
-								class="form-control" aria-label="Sizing example input"
+								class="form-control centerDate"
+								aria-label="Sizing example input"
 								aria-describedby="inputGroup-sizing-sm">
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="name">폐점일</label> <input type="date"
 								name="centerClosingDate" id="centerClosingDate"
-								class="form-control" aria-label="Sizing example input"
+								class="form-control centerDate"
+								aria-label="Sizing example input"
 								aria-describedby="inputGroup-sizing-sm">
 						</div>
 					</div>
-			</form>
+				</form>
+				<div>
+					<div class="col-md-6 mb-3">
+						<label for="name">사진</label> 
+						<div id="centerPhotoList"></div>
+					</div>
+				</div>
 			</div>
-		<div class="modal-footer">
-			<!-- 				<button type="button" class="centerSize" data-dismiss="modal" >Close</button> -->
-			<input type="button" class="centerSize  btn-lg btn-block" id="centerSavedBtn"
-				value="저장">
-		</div>
+			<div class="modal-footer">
+				<!-- 				<button type="button" class="centerSize" data-dismiss="modal" >Close</button> -->
+				<input type="button" class="centerSize  btn-lg btn-block"
+					id="centerSavedBtn" value="저장">
+			</div>
 		</div>
 	</div>
 </div>
+</div>
+
+
+
+
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/center/centerList.js"></script>

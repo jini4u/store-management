@@ -83,15 +83,8 @@ public class CenterController {
 	public String centerList(@RequestParam(defaultValue="1")int pageNo, Model model, CenterVO centerVO){
 		int totalRows = centerService.countAllCenters();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
-//		model.addAttribute("newCenterCode", centerService.getLastCenterCode());
 		model.addAttribute("pager", pager);	
-		
-		if (centerVO.getCenterName() == null) {
-			model.addAttribute("centerList", centerService.centerList(pager));
-			
-		}else {
-			model.addAttribute("centerList", centerService.findCenter(pager, centerVO));
-		}
+		model.addAttribute("centerList", centerService.centerList(pager));
 		
 		return "jsp/center/centerlist";
 	}
