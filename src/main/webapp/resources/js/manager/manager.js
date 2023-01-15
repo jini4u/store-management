@@ -329,7 +329,9 @@ $(".updateModal").click(function(){
 						results[i].userName + "</td><td>" + dateFormat(birth) + "</td><td>" +
 						results[i].userTel + "</td><td>" + results[i].userEmail +"</td><td>" +
 						results[i].userTeamCode + "</td><td>"+ dateFormat(hiredate) + "</td><td>" +
-						dateFormat(resigndate)+ "</td><td>"+results[i].updateModal+"</td>"
+						dateFormat(resigndate)+ "</td>"+
+						 "<td><button class='updateModal' data-toggle='modal' " +
+						 "data-target='#updateModal'>수정</button></td>";
 						str += "</tr>"; 
 					});
 					$("#mgrList").html(str);

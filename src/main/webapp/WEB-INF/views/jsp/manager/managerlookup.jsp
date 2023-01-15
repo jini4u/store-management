@@ -65,8 +65,8 @@
 								pattern="yyyy-MM-dd" /></td>
 						<td><fmt:formatDate value="${managerVO.userResignDate}"
 								pattern="yyyy-MM-dd" /></td>
-						<td><input type="button" class="updateModal" value="수정" 
-								   data-toggle="modal" data-target="#updateModal"/></td>
+						<td><button  class='updateModal' 
+								   data-toggle='modal' data-target='#updateModal'>수정</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
