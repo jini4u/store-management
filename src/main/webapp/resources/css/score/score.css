@@ -2,15 +2,13 @@
 .year_and_quarter{
     display: inline-block;
     float: right;
+
    
 }
 .year_and_quarter > form{
 display: inline-block;
     size:5px;
 }
-
-
-
 
 /*수정 점수등록 버튼*/
 #btnclick {
@@ -39,55 +37,7 @@ display: inline-block;
 
 
 
-/* 
-작성자 :정윤선
-스타일 :지점 버튼
- */
 
-#btn_group{
-	display: flex;
-    justify-content: flex-start;
-}
-
-#modal_group{
-	display: flex;
-}
-
-/*모달*/
-.modal {
-position: fixed;
-top: 50%;
-left: 50%;
-display:none;
--webkit-transform: translate(-50%, -50%);
--moz-transform: translate(-50%, -50%);
--ms-transform: translate(-50%, -50%);
--o-transform: translate(-50%, -50%);
-transform: translate(-50%, -50%);
-}
-
-.modal_overlay {
-	background-color: rgba(0, 0, 0, 0. 6);
-	width: 100%;
-	height: 50%;
-	position: absolute;
-}
-
-.modal_content {
-	background-color: white;
-	padding: 50px 100px;
-	text-align: center;
-	position: relative;
-	top: 0px;
-	border-radius: 10px;
-	width: 80%;
-	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.16), 0 6px 6px
-		rgba(0, 0, 0, 0.23);
-}
-
-.modalh1 {
-	margin: 0;
-}
 
 /*scoreupload*/
 

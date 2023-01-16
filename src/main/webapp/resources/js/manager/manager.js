@@ -156,6 +156,135 @@ $(".updateModal").click(function(){
 		$("#userResignDate").val('');   
 	});
 
+<<<<<<< HEAD
+	//저장 버튼 클릭 
+	$("#savemgr").click(function (){
+		let updateUrl = "/manager/managerUpdate";
+		let insertUrl ="/manager/managerInsert";
+		let userCode=$("#userCode").val();
+		let userPassWord=$("#userPassword").val();
+		let userName=$("#userName").val();
+		let userBirth=$("#userBirth").val();
+		let userTel=$("#userTel").val();
+		let userEmail=$("#userEmail").val();
+		let userTeamCode=$("#userTeamCode").val();
+		let userHireDate=$("#userHireDate").val();
+		let userResignDate = $("#userResignDate").val();
+		//휴대전화번호 뒤에 4자리 자르기
+		let pwCut= userTel.substr(9, 12);
+
+		//등록
+		if(!$("#userName").attr("disabled")){
+			$.ajax({
+				type:"POST",
+				url: insertUrl,
+				data: {
+					userCode : userCode,
+					userPassword : pwCut,
+					userName : userName,
+					userBirth : userBirth,
+					userTel : userTel,
+					userEmail : userEmail,
+					userTeamCode : userTeamCode,
+					userHireDate : userHireDate
+				},
+				success: function(result) {
+
+					//등록 성공 시 담당자 전체 목록 리스트 마지막 열에 추가 됨
+					let results = result;
+
+					let str = "";
+					//결과를 반복한다
+					$.each(results, function(i) {
+						let birth = new Date(results[i].userBirth);
+						let hiredate = new Date(results[i].userHireDate);
+
+						str += "<tr>";
+						str += "<td>" + results[i].userCode + "</td><td>" + 
+						results[i].userName + "</td><td>" + dateFormat(birth) + "</td><td>" +
+						results[i].userTel + "</td><td>" + results[i].userEmail +"</td><td>" +
+						results[i].userTeamCode + "</td><td>"+ dateFormat(hiredate) + "</td>";
+						str += "</tr>";
+					});
+
+					$("#mgrList").html(str);
+
+					$("#userCode").val('');
+					$("#userName").val('');
+					$("#userBirth").val('');
+					$("#userTel").val('');
+					$("#userEmail").val('');
+					$("#userTeamCode").val('');            
+					$("#userHireDate").val('');
+					$("#userResignDate").val('');   
+
+					alert("담당자 등록에 성공하셨습니다.")
+
+					handleClickTr();
+					changeColor();
+				},
+				error: function() {
+					alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
+					/* alert("담당자를 등록하세요.");*/
+				}
+
+			});
+
+		} else { // 수정
+			var data = {
+					userCode : userCode,
+					userPassword : pwCut,
+					userName : userName,
+					userBirth : userBirth,
+					userTel : userTel,
+					userEmail : userEmail,
+					userTeamCode : userTeamCode,
+					userHireDate : userHireDate,
+					userResignDate : userResignDate
+			};
+
+			console.log(data);
+
+			$.ajax({
+				type:"POST",
+				url: updateUrl,
+				data: data,
+				success: function(result) {
+
+
+					//등록 성공 시 담당자 전체 목록 리스트 마지막 열에 추가 됨
+					let results = result;
+					let str = " ";
+					$.each(results, function(i) {
+						let birth = new Date(results[i].userBirth);
+						let hiredate = new Date(results[i].userHireDate);
+						let resigndate = new Date(results[i].userResignDate);
+
+						str +="<tr>"
+							str += "<td>" + results[i].userCode + "</td><td>" + 
+							results[i].userName + "</td><td>" + dateFormat(birth) + "</td><td>" +
+							results[i].userTel + "</td><td>" + results[i].userEmail +"</td><td>" +
+							results[i].userTeamCode + "</td><td>"+ dateFormat(hiredate) + "</td><td>" + dateFormat(resigndate)+ "</td>";
+						str += "</tr>";
+					});
+					$("#mgrList").html(str);
+					alert("수정 성공");
+					handleClickTr();
+					changeColor();
+				},
+
+				error: function( request, status, error ){
+					alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
+
+				}
+
+			});
+
+		}
+
+	});
+=======
+>>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 
 	//검색 버튼
 	/*$("#searchBtn").click(function (){

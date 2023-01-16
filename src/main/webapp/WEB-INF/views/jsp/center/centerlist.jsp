@@ -92,12 +92,17 @@
 </div>
 <div class="center-button-group"></div>
 
-
 <button id="centerInsertBtn" class="centerSize" data-toggle="modal"
+<<<<<<< HEAD
+   data-target="#myModal">등록</button>
+<!-- Modal -->
+=======
 	data-target="#myModal">등록</button>
 <!--insert Modal -->
+>>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 
 <div class="modal fade" data-backdrop="static" id="myModal"
+
 	role="dialog">
 	<!-- 사용자 지정 부분① : id명 -->
 	<div class="modal-dialog modal-lg modal-dialog-centered">
@@ -108,6 +113,69 @@
 				<button type="button" class="close" data-dismiss="modal">×</button>
 				<!-- 사용자 지정 부분② : 타이틀 -->
 			</div>
+<<<<<<< HEAD
+			<div class="modal-body">
+					<!--   disabled="disabled" class="form-control removeDisabled"  <table class="rowTable" id="center-right">  -->
+
+            <form id="centerForm">
+               <div class="row">
+                  <div class="col-md-6 mb-3">
+                     <label for="name">센터명</label> <input type="text"
+                        name="centerName" id="centerName" class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm" readonly="readonly">
+                  </div>
+                  <div class="col-md-6 mb-3">
+                     <label for="name">운영여부</label> <input type="text"
+                        id="centerCondition" name="centerCondition" class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm">
+                  </div>
+               </div>
+               <div class="mb-3">
+                  <label for="email">전화번호</label> <input type="text"
+                     name="centerTel" id="centerTel" class="form-control"
+                     aria-label="Sizing example input"
+                     aria-describedby="inputGroup-sizing-sm">
+               </div>
+               <div class="mb-3">
+                  <label for="email">주소</label> <input type="text"
+                     name="centerAddress" id="centerAddress" class="form-control"
+                     aria-label="Sizing example input"
+                     aria-describedby="inputGroup-sizing-sm">
+               </div>
+               <div class="mb-3">
+                  <label for="email">오시는 길</label> <input type="text"
+                     name="centerGuide" id="centerGuide" class="form-control"
+                     aria-label="Sizing example input"
+                     aria-describedby="inputGroup-sizing-sm">
+               </div>
+
+               <div class="row">
+                  <div class="col-md-6 mb-3">
+                     <label for="name">오픈일</label> <input type="date"
+                        name="centerOpeningDate" id="centerOpeningDate"
+                        class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                  <div class="col-md-6 mb-3">
+                     <label for="name">폐점일</label> <input type="date"
+                        name="centerClosingDate" id="centerClosingDate"
+                        class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm">
+                  </div>
+               </div>
+         </form>
+         </div>
+      <div class="modal-footer">
+         <!--             <button type="button" class="centerSize" data-dismiss="modal" >Close</button> -->
+         <input type="button" class="centerSize  btn-lg btn-block" id="centerSavedBtn"
+            value="저장">
+      </div>
+      </div>
+   </div>
+
+=======
 			<div class="modal-body" id="centerphoto">
 				<!--   disabled="disabled" class="form-control removeDisabled"  <table class="rowTable" id="center-right">  -->
 
@@ -146,6 +214,7 @@
 							aria-describedby="inputGroup-sizing-sm">
 					</div>
 
+>>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="name">오픈일</label> <input type="date"
@@ -177,9 +246,13 @@
 			</div>
 		</div>
 	</div>
+
 </div>
+<<<<<<< HEAD
+=======
 </div>
 
+>>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 
 
 

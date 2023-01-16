@@ -156,21 +156,9 @@ public class ScoreController {
 	 * 점수 수정
 	 * */
 	
-	
 
-	//점수를 변경해줌
-//	@RequestMapping(value="/updateScore", method=RequestMethod.POST)
-//	public String updateScore(ScoreVO score,Model model){
-//		scoreService.updateScore(score);
-//		score.setCenterCode(1);
-//		System.out.println("점수 : "+scoreService.updateScore(score));
-//		model.addAttribute("scoreList",scoreService.getScoreList(score));
-//
-//		return "redirect:/score/scorelist";
-//	}
-//	
 	//값을 화면에 보내줌
-	@RequestMapping(value="/updateSave")
+	@RequestMapping(value="/updateScore")
 	public String updateGetScore(ScoreVO score, Model model) {
 		
 		scoreService.updateScore(score);
