@@ -7,7 +7,7 @@
 }
 .rowTable input{
 	width: 400px;
-	
+}
 .center-arrow {
 	width: 24px;
 	margin: 2%;
@@ -49,3 +49,7 @@
 .changeColor{
    background-color: #EDEDED;
 }
+
+ .modal-dialog{ 
+ max-width: 552px;
+ }  

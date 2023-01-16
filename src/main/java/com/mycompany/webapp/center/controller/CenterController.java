@@ -84,8 +84,15 @@ public class CenterController {
 		int totalRows = centerService.countAllCenters();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 //		model.addAttribute("newCenterCode", centerService.getLastCenterCode());
-		model.addAttribute("centerList", centerService.centerList(pager));
 		model.addAttribute("pager", pager);	
+		
+		if (centerVO.getCenterName() == null) {
+			model.addAttribute("centerList", centerService.centerList(pager));
+			
+		}else {
+			model.addAttribute("centerList", centerService.findCenter(pager, centerVO));
+		}
+		
 		return "jsp/center/centerlist";
 	}
 	
@@ -137,9 +144,9 @@ public class CenterController {
 	}
 	
 	/**
-	 * @author 임유진
 	 * 센터 이미지 등록
-	 * @return int 등록된 사진 수
+	 * @author 임유진
+	 * @return {int} 등록된 사진 수
 	 * */
 	@RequestMapping(value="/addCenterImage", method=RequestMethod.POST)
 	public @ResponseBody int addCenterImage(MultipartHttpServletRequest request) {
@@ -152,8 +159,8 @@ public class CenterController {
 	}
 	
 	/**
-	 * @author 임유진
 	 * 센터 이미지 조회
+	 * @author 임유진
 	 * @param int 센터 코드
 	 * @return List<해당 코드의 사진>
 	 * */
@@ -164,8 +171,8 @@ public class CenterController {
 	}
 	
 	/**
-	 * @author 임유진
 	 * 센터 이미지 정보 수정
+	 * @author 임유진
 	 * @return 정보 수정된 파일 수 (0 또는 1)
 	 * */
 	@RequestMapping(value="/updateImage", method=RequestMethod.POST)
@@ -182,8 +189,8 @@ public class CenterController {
 	}
 	
 	/**
-	 * @author 임유진
 	 * 센터 이미지 삭제
+	 * @author 임유진
 	 * @return 삭제된 파일 수
 	 * */
 	@RequestMapping(value="/deleteImage/{centerCode}", method=RequestMethod.POST)

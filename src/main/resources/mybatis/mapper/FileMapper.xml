@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mycompany.webapp.common.dao.IFileRepository">
+<!-- fileinfo 테이블에 정보 저장 -->
+<insert id="insertFile" parameterType="com.mycompany.webapp.common.vo.FileInfoVO">
+<![CDATA[
+INSERT INTO fileinfo (
+	file_no
+	, file_saved_name
+	, file_original_name
+	, file_type
+	, file_path
+	, file_post_date 
+	, file_upload_user_code
+	)
+VALUES (
+	(SELECT NVL(MAX(file_no)+1, 1) FROM fileinfo)
+	, #{fileSavedName}
+	, #{originalName}
+	, #{fileType}
+	, #{filePath}
+	, SYSDATE 
+	, #{uploadUserCode}
+	)
+]]>
+</insert>
+
+ <!-- 
+ 	history 테이블에 파일업로드 정보 남김
+  -->
+<insert id="insertFileUploadHistory" parameterType="map">
+INSERT INTO history (history_no, file_no, user_code, history_insert, history_update)
+VALUES ((SELECT NVL(MAX(history_no)+1, 1) FROM history)
+		, #{fileNo}
+		, #{userCode}
+		, #{insert}
+		, #{update})
+</insert>
+
+<select id="getFileInfoByOriginalName" parameterType="String" resultType="com.mycompany.webapp.common.vo.FileInfoVO">
+SELECT file_no AS "fileNo"
+		, file_saved_name AS "fileSavedName"
+		, file_type AS "fileType"
+		, file_path AS "filePath"
+		, TO_CHAR(file_post_date, 'YYYY-MM-DD')  AS "filePostDate"
+		, (SELECT user_name 
+			FROM userinfo 
+			WHERE user_code = (SELECT file_upload_user_code
+					FROM fileinfo
+					WHERE file_original_name = #{originalName})
+			)AS "uploadUserName"
+FROM fileinfo
+WHERE file_original_name = #{originalName}
+</select>
+</mapper>

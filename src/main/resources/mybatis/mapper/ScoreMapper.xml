@@ -177,4 +177,30 @@ SELECT COUNT(*) FROM INSPECTION
  	INSERT INTO check_group (check_group_code, check_group_content, check_group_occupied)
  	VALUES (#{groupCode}, #{groupContent}, #{groupOccupied})
  </insert>
+ 
+ <!-- 
+ 	inspection 테이블에 같은 센터,년도,시즌,코드의 데이터가 있는지 조회
+ 	임유진
+  -->
+ <select id="isDataExist" parameterType="com.mycompany.webapp.score.vo.ScoreVO" resultType="int">
+ SELECT COUNT(*) 
+ FROM inspection
+ WHERE center_code = #{centerCode}
+ 	AND check_year = #{checkYear}
+ 	AND check_season = #{checkSeason}
+ 	AND check_group_code = #{checkGroupCode}
+ 	AND check_detail_code = #{checkDetailCode}
+ </select>
+ 
+<select id="getScoreUploadHistory" resultType="map">
+SELECT TO_CHAR(F.file_post_date, 'YYYY-MM-DD') AS "postDate"
+		, U.user_name AS "userName"
+		, F.file_original_name AS "originalName"
+		, H.history_insert AS "insert"
+		, H.history_update AS "update"
+FROM history H
+	JOIN fileinfo F ON H.file_no = F.file_no
+	JOIN userinfo U ON H.user_code = U.user_code
+</select>
+
 </mapper>

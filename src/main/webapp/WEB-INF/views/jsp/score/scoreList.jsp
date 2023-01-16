@@ -4,17 +4,21 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/score/score.css" />
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+   href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
 <!-- jQuery library -->
 <script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+   src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
 
 <!-- Popper JS -->
 <script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+   src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
 <script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+   src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- 점검년도 리스트 -->
 <div class="titleBox">
@@ -53,7 +57,7 @@
 </div>
 
 <!-- 점수리스트 테이블 -->
-<form action="/score/updateScore" name="updatescore" method="post">
+<form action="updateScore" name="updatescore" method="post">
 	<table class="verticalTable" border="1">
 		<tr>
 			<th>점검년도</th>
@@ -121,13 +125,68 @@
 	<div id="btnclick">
 		<div id="btn_group">
 			<button type="submit" class="pinkButton">수정</button>
+			
 </form>
-
+<button id="testBtn" class="pinkButton">점수입력</button>
 
 </div>
 </div>
 
-	
+<!-- 입력 모달창 -->
+
+<c:if test="${(maxYear eq year and maxSeason eq season) == false}"> 
+
+	<div class="modal fade" id="testModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">점수입력</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">X</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<!-- 모달창 안 테이블 -->
+					<form method="post" action="insertScore">
+						<div>년도: ${year}, 분기: ${season}</div>
+
+						<input type="hidden" name="centerCode" value="${centerCode}" /> <input
+							type="hidden" name="userCode" value="${userCode}" /> <input
+							type="hidden" name="checkYear" value="${year}" /> <input
+							type="hidden" name="checkSeason" value="${season}" />
+						<table class="scoretable" border="1">
+							<tr>
+								<th class="score_th">항목</th>
+								<th class="score_th">상세항목</th>
+								<th class="score_th">점수</th>
+							</tr>
+							<c:forEach items="${usingCodeList}" var="usingCodeList">
+								<tr>
+									<td>${usingCodeList.checkGroupContent}</td>
+									<td>${usingCodeList.checkDetailContent}</td>
+									<td><input type="hidden" name="arrayCheckGroupCode" value="${usingCodeList.checkGroupCode}"> 
+									<input type="hidden" name="arrayCheckDetailCode" value="${usingCodeList.checkDetailCode}"> 
+									<input type="text" size="13" name="arrayScore" value="0"></td>
+								</tr>
+							</c:forEach>
+						</table>
+				</div>
+				<div class="modal-footer">
+					
+					<button type="submit" class="close-btn pinkButton">입력</button>
+					<!-- <a class="pinkButton" id="modalY" href="#">입력</a>-->
+					</form>
+					<button class="greyButton"  data-dismiss="modal">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+  </c:if>  
+
+
 <!-- 모달 자바 스크립트 -->
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/resources/js/score/scoreList.js"></script>
