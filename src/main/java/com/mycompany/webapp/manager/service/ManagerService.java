@@ -84,12 +84,18 @@ public class ManagerService implements IManagerService {
 
 	@Override
 	public int countAllMgr() {
+		System.out.println("검색결과수:"+managerRepository.countAllMgr());
 		return managerRepository.countAllMgr();
 	}
 
 @Override
-public List<ManagerVO> managerSearch(Pager pager, ManagerVO mgr) {
-	return managerRepository.managerSearch(pager, mgr);
+public List<ManagerVO> managerSearch(Pager pager, String keyword) {
+	return managerRepository.managerSearch(pager, keyword);
+}
+
+@Override
+public int managerCountByKeyword(String keyword) {
+	return managerRepository.managerCountByKeyword("%"+keyword+"%");
 }
 
 

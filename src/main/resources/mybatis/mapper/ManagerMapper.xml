@@ -5,100 +5,112 @@
 
 
 <!-- author 고은별 
-	담당자 목록 조회-->
+   담당자 목록 조회-->
 <select id="selectManagerList" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
-<![CDATA[	
-	select * from(
-		select rownum as rnum, userCode, userName, userBirth, userTel, userEmail, userTeamCode, userHireDate, userResignDate 
-		from (
-			select
-	   			user_code as userCode,
-	  			user_name as userName,
-	   			user_birth as userBirth,
-	   			user_tel as userTel,
-	   			user_email as userEmail,
-	   			user_team_code as userTeamCode,
-	  			user_hire_date as userHireDate,
-	   			user_resign_date as userResignDate
-			from  userinfo
-			where user_code < 20000 
-			order by user_code desc
-		)
-		where rownum <= #{endRowNo}
-	)
-	WHERE rnum >= #{startRowNo}
-			
+<![CDATA[   
+   select * from(
+      select rownum as rnum, userCode, userName, userBirth, userTel, userEmail, userTeamCode, userHireDate, userResignDate 
+      from (
+         select
+               user_code as userCode,
+              user_name as userName,
+               user_birth as userBirth,
+               user_tel as userTel,
+               user_email as userEmail,
+               user_team_code as userTeamCode,
+              user_hire_date as userHireDate,
+               user_resign_date as userResignDate
+         from  userinfo
+         where user_code < 20000 
+         order by user_code desc
+      )
+      where rownum <= #{endRowNo}
+   )
+   WHERE rnum >= #{startRowNo}
+         
 ]]>
 </select>
 
 <!-- author 고은별 
-	 담당자 등록-->
+    담당자 등록-->
 <insert id="insertManager" parameterType="com.mycompany.webapp.manager.vo.ManagerVO">
-<![CDATA[	
+<![CDATA[   
 insert into userInfo(user_code, user_password, user_name, user_birth, user_tel, user_email,user_team_code, user_hire_Date)
-values	(
-			(SELECT NVL(MAX(user_code)+1, 10001) FROM userinfo), 
-			#{userPassword}, #{userName}, #{userBirth}, #{userTel}, #{userEmail}, #{userTeamCode}, #{userHireDate})
+values   (
+         (SELECT NVL(MAX(user_code)+1, 10001) FROM userinfo), 
+         #{userPassword}, #{userName}, #{userBirth}, #{userTel}, #{userEmail}, #{userTeamCode}, #{userHireDate})
 ]]>
 </insert>  
 
 <!--author 고은별  
-	담당자 최대 코드 -->
+   담당자 최대 코드 -->
 <select id="selectMaxManagerNo" parameterType="int" resultType="int">
-	select NVL(max(user_code),10001) as "userCode"
-	from userInfo
+   select NVL(max(user_code),10001) as "userCode"
+   from userInfo
 </select>  
 
 <!--담당자 정보 수정  -->
 <update id="updateManagerInfo" parameterType="com.mycompany.webapp.manager.vo.ManagerVO">
-	update userInfo
-	set user_tel=#{userTel}, user_email=#{userEmail}, user_team_code=#{userTeamCode}, user_resign_date=#{userResignDate,jdbcType=DATE} 
-	where user_code= #{userCode}
+   update userInfo
+   set user_tel=#{userTel}, user_email=#{userEmail}, user_team_code=#{userTeamCode}, user_resign_date=#{userResignDate,jdbcType=DATE} 
+   where user_code= #{userCode}
 </update>
 
  <!--담당자 전체 인원 수
- 	 은별
+     은별
   -->
 <select id="countAllMgr" resultType="int">
 SELECT COUNT(*) FROM userInfo
+</select>
+
+<!-- 키워드별 담당자 수  -->
+<select id="managerCountByKeyword" parameterType="string" resultType="int">
+<![CDATA[ 
+	select count(*) from userinfo
+	where  user_name like ('%' ||#{keyword}||'%')
+]]>
 </select>
 
 <!-- 키워드 별 담당자 검색 -->
 <select id="managerSearch" parameterType="map" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
 <![CDATA[
 select * from(
-		select rownum as rnum, userCode, userName, userBirth, userTel, userEmail, userTeamCode, userHireDate, userResignDate 
-		from (
-			select
-	   			user_code as userCode,
-	  			user_name as userName,
-	   			user_birth as userBirth,
-	   			user_tel as userTel,
-	   			user_email as userEmail,
-	   			user_team_code as userTeamCode,
-	  			user_hire_date as userHireDate,
-	   			user_resign_date as userResignDate
-			from  userinfo
-			where user_code < 20000 
-			and user_name like ('%' ||#{keyword}||'%')
-			order by user_code desc
-		)
-		where rownum <= #{pager.endRowNo}
-	)
-	WHERE rnum >= #{pager.startRowNo} 
+      select rownum as rnum, userCode, userName, userBirth, userTel, userEmail, userTeamCode, userHireDate, userResignDate 
+      from (
+         select
+               user_code as userCode,
+              user_name as userName,
+               user_birth as userBirth,
+               user_tel as userTel,
+               user_email as userEmail,
+               user_team_code as userTeamCode,
+              user_hire_date as userHireDate,
+               user_resign_date as userResignDate
+         from  userinfo
+         where user_code < 20000 
+         ]]> 
+        <if test="keyword != null or keyword != ''">
+		  and user_name like ('%' ||#{keyword}||'%')
+		</if>
+<![CDATA[
+         order by user_code desc
+      )
+      where rownum <= #{pager.endRowNo}
+   )
+   WHERE rnum >= #{pager.startRowNo} 
 ]]>
 </select>
 
 <!-- 
-	userCode로 담당 센터 조회
-	임유진
+   userCode로 담당 센터 조회
+   임유진
  -->
 <select id="getCenterByManager" parameterType="int" resultType="com.mycompany.webapp.center.vo.CenterVO">
 <!-- SELECT C.center_code AS "centerCode"
-		, C.center_name AS "centerName"
-		, C.center_address AS "centerAddress"
+      , C.center_name AS "centerName"
+      , C.center_address AS "centerAddress"
 FROM mapping M
-	JOIN center C
+   JOIN center C
     ON M.center_code = C.center_code
 WHERE M.user_code = #{userCode} -->
 
@@ -113,15 +125,15 @@ WHERE center_code in (
 )
 </select>
 <!-- 
-	맵핑 해제
-	임유진
+   맵핑 해제
+   임유진
  -->
 <delete id="cancelMapping" parameterType="int">
 DELETE FROM mapping WHERE center_code = #{centerCode} AND user_code = #{userCode}
 </delete>
 <!-- 
-	맵핑
-	임유진
+   맵핑
+   임유진
  -->
  <insert id="mapping" parameterType="int">
  INSERT INTO mapping (center_code, user_code, mapping_date)

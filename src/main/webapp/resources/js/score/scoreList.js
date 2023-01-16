@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 /**
  * @code.js
@@ -17,9 +16,10 @@ window.onload = function(){
       e.preventDefault();
       $('#testModal').modal("show");
    });
-   
+
    $("#firstCenter").click(function(){
 	   
 	 alert("점포1입니다.");
+
    });
 }

@@ -2,14 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<<<<<<< HEAD
-<link rel="stylesheet" type="text/css" href="/resources/css/manager/managerlookup.css">
-	<link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="/resources/css/bootstrap.css" />
-	<script src="/resources/js/bootstrap.min.js"></script>
-	<script src="/resources/js/bootstrap.js"></script>
-	<script src="/resources/js/manager/manager.js"></script>
-=======
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/manager/managerlookup.css">
 <!-- Latest compiled and minified CSS -->
@@ -27,7 +19,6 @@
 <!-- Latest compiled JavaScript -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 	
 <div class="titleBox">
 	 <img src="${pageContext.request.contextPath}/resources/images/manager.png">
@@ -37,9 +28,10 @@
 
 <!-- 검색 -->
 <div class="search-box">
-   <form action="/manager/managerList" method="get">
+   <form action="/manager/managerSearch" method="get">
       <input type="text" class="search-txt" id="searchTxt" name="keyword" placeholder="담당자 검색"> 
-     <a class="search-btn" href="/manager/managersearch" id="searchBtn"> <i class="fas fa-search"></i></a> 
+     <!-- <a class="search-btn" href="/manager/managerSearch" id="searchBtn"> <i class="fas fa-search"></i></a>  -->
+     <input type="submit" value="search">
 
    </form>
 </div>
@@ -47,6 +39,8 @@
 
 <div class="graphbox">
 	<div class="managerbox">
+		<!-- 검색한 키워드가 존재할 때 -->
+		<c:if test="${managerListCheck != 'empty' }">
 		<table class="verticalTable" id="managerTable">
 			<thead>
 				<tr>
@@ -80,10 +74,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
-
-	</div>
-</div>
-
 		<div class="center-pagging">
 			<ul class="pagination">
 				<li><a class="innerPager first" href="managerList?pageNo=1">처음</a></li>
@@ -108,6 +98,72 @@
 					href="managerList?pageNo=${pager.totalPageNo}">맨끝</a></li>
 			</ul>
 		</div>
+		</c:if>
+		<!-- 검색한 키워드가 존재하지 않을 때 -->
+		<c:if test="${managerListCheck == 'empty'}">
+			<table class="verticalTable" id="managerTable">
+				<thead>
+					<tr>
+						<th>담당자 코드</th>
+						<th>담당자명</th>
+						<th>생년월일</th>
+						<th>휴대전화번호</th>
+						<th>Email</th>
+						<th>팀코드</th>
+						<th>입사일자</th>
+						<th>퇴사일자</th>
+					</tr>
+				</thead>
+				<tbody id="mgrList">
+					<tr> <td colspan="9">등록된 담당자가 없습니다.</td></tr>
+					<%-- <c:forEach var="managerVO" items="${managerList}">
+						<tr>
+							<td>${managerVO.userCode}</td>
+							<td>${managerVO.userName}</td>
+							<td><fmt:formatDate value="${managerVO.userBirth}"
+									pattern="yyyy-MM-dd" /></td>
+							<td>${managerVO.userTel}</td>
+							<td>${managerVO.userEmail}</td>
+							<td>${managerVO.userTeamCode}</td>
+							<td><fmt:formatDate value="${managerVO.userHireDate}"
+									pattern="yyyy-MM-dd" /></td>
+							<td><fmt:formatDate value="${managerVO.userResignDate}"
+									pattern="yyyy-MM-dd" /></td>
+							<td><button  class='updateModal' 
+									   data-toggle='modal' data-target='#updateModal'>수정</button></td>
+						</tr>
+					</c:forEach> --%>
+				</tbody>
+			</table>
+			<div class="center-pagging">
+				<ul class="pagination">
+					<li><a class="innerPager first" href="managerList?pageNo=1">처음</a></li>
+					<li><c:if test="${pager.groupNo>1}">
+							<a class="innerPager arrow left"
+								href="managerList?pageNo=${pager.startPageNo-1}">이전</a>
+						</c:if></li>
+					<c:forEach var="i" begin="${pager.startPageNo}"
+						end="${pager.endPageNo}">
+						<li><c:if test="${pager.pageNo != i}">
+								<a class="innerPager active num" href="managerList?pageNo=${i}">${i}</a>
+							</c:if></li>
+						<li><c:if test="${pager.pageNo == i}">
+								<a class="innerPager num" href="managerList?pageNo=${i}">${i}</a>
+							</c:if></li>
+					</c:forEach>
+					<li><c:if test="${pager.groupNo<pager.totalGroupNo}">
+							<a class="innerPager arrow right"
+								href="managerList?pageNo=${pager.endPageNo+1}">다음</a>
+						</c:if></li>
+					<li><a class="innerPager last"
+						href="managerList?pageNo=${pager.totalPageNo}">맨끝</a></li>
+				</ul>
+			</div>
+         </c:if> 
+
+	</div>
+</div>
+
 
 
 <button class="pinkButton" data-toggle="modal" data-target="#insertModal">등록</button>
@@ -267,7 +323,7 @@
 			</form>
 			</div>
 		<div class="modal-footer">
-			<button type="button" class="greyButton" id="updatemgr">수정</button>
+			<button type="button" class="greyButton" id="updatemgr" data-dismiss="modal">수정</button>
 				
 			<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 		</div>

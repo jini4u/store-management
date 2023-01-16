@@ -4,10 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.webapp.center.vo.CenterVO;
-import com.mycompany.webapp.common.vo.FileInfoVO;
 
 public class ManagerVO {
 	//담당자

@@ -146,7 +146,6 @@
                      aria-label="Sizing example input"
                      aria-describedby="inputGroup-sizing-sm">
                </div>
-	
                <div class="row">
                   <div class="col-md-6 mb-3">
                      <label for="name">오픈일</label> <input type="date"
@@ -185,5 +184,4 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script
-   src="${pageContext.request.contextPath}/resources/js/center/centerList.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/center/centerList.js"></script>
