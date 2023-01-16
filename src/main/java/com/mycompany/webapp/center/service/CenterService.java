@@ -163,13 +163,13 @@ public class CenterService implements ICenterService{
 	}
 
 	@Override
-	public List<CenterVO> findCenter(Pager pager, CenterVO centerVO) {
-		return centerRepository.findCenter(pager, centerVO);
+	public List<CenterVO> findCenter(Pager filterPager, String keyword) {
+		return centerRepository.findCenter(filterPager, keyword);
 	}
 
 	@Override
-	public int filterCountAllCenters(String centerName) {
-		return centerRepository.CountAllCenters(centerName);
+	public int filterCountAllCenters(String keyword) {
+		return centerRepository.filterCountAllCenters(keyword);
 	}
 
 	
