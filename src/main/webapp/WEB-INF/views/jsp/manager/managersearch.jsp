@@ -2,12 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script src="/resources/js/manager/manager.js"></script>
 
 <div class="titleBox">
 	<img src="${pageContext.request.contextPath}/resources/images/manager.png"> 
 	<h2>담당자 조회</h2>
 </div>
-
 <table class="verticalTable" id="managerTable">
 	<thead>
 		<tr>
@@ -22,7 +22,7 @@
 		</tr>
 	</thead>
 	<tbody id="mgrList">
-		<c:forEach var="managerVO" items="${managerList}">
+		<c:forEach var="managerVO" items="${mgrSearchList}">
 			<tr>
 				<td>${managerVO.userCode}</td>
 				<td>${managerVO.userName}</td>

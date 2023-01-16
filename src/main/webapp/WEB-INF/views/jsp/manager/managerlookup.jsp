@@ -2,23 +2,48 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<<<<<<< HEAD
 <link rel="stylesheet" type="text/css" href="/resources/css/manager/managerlookup.css">
 	<link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/resources/css/bootstrap.css" />
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/bootstrap.js"></script>
 	<script src="/resources/js/manager/manager.js"></script>
+=======
+<link rel="stylesheet" type="text/css"
+	href="/resources/css/manager/managerlookup.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+>>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 	
 <div class="titleBox">
-	<img src="${pageContext.request.contextPath}/resources/images/manager.png"> 
-	<h2>담당자 조회</h2>
+	 <img src="${pageContext.request.contextPath}/resources/images/manager.png">
+   <h2>담당자 조회</h2>
+
 </div>
 
 <!-- 검색 -->
 <div class="search-box">
-		<input type="text" class="search-txt" id="searchTxt" name="userName" placeholder="담당자 검색">
-		<a class="search-btn" href="#" id="searchBtn"> <i class="fas fa-search"></i></a>
+   <form action="/manager/managerList" method="get">
+      <input type="text" class="search-txt" id="searchTxt" name="keyword" placeholder="담당자 검색"> 
+     <a class="search-btn" href="/manager/managersearch" id="searchBtn"> <i class="fas fa-search"></i></a> 
+
+   </form>
 </div>
+
 
 <div class="graphbox">
 	<div class="managerbox">
@@ -49,13 +74,18 @@
 								pattern="yyyy-MM-dd" /></td>
 						<td><fmt:formatDate value="${managerVO.userResignDate}"
 								pattern="yyyy-MM-dd" /></td>
+						<td><button  class='updateModal' 
+								   data-toggle='modal' data-target='#updateModal'>수정</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<!-- 페이징 처리  -->
+
+	</div>
+</div>
+
 		<div class="center-pagging">
-			<ul class="pagination pageModal">
+			<ul class="pagination">
 				<li><a class="innerPager first" href="managerList?pageNo=1">처음</a></li>
 				<li><c:if test="${pager.groupNo>1}">
 						<a class="innerPager arrow left"
@@ -79,70 +109,171 @@
 			</ul>
 		</div>
 
-		<div style="height: 30px;"></div>
 
-		<form id="insertform">
-			<div>
-				<button type="button" class="pinkButton" id="insertmgr">등록</button>
-				<button type="button" class="greyButton" id="savemgr">저장</button>
-			</div>
-			<table class="rowTable" id="mgrdetailtable">
-				<tr>
-					
-					<th scope="row">담당자명</th>
-					<td>
-						<input type="hidden" name="userCode" id="userCode">
-						<input type="hidden" name="userPassword" id="userPassword">
-						<input type="text" name="userName" id="userName" disabled>
-					</td>
-					<th scope="row">생년월일</th>
-					<td><input type="date" name="userBirth" id="userBirth" disabled></td>
-				</tr>
-				<tr>
-					<th scope="row">Email</th>
-					<td><input type="text" name="userEmail" id="userEmail" disabled> </td>
-					<th scope="row">휴대전화번호</th>
-					<td><input type="text" name="userTel" id="userTel" disabled></td>
-				</tr>
-				<tr>
-					<th scope="row">입사일자</th>
-					<td><input type="date" name="userHireDate" id="userHireDate" disabled></td>
-					<th scope="row">팀코드</th>
-					<td><input type="text" name="userTeamCode" id="userTeamCode" disabled></td>
-				</tr>			
+<button class="pinkButton" data-toggle="modal" data-target="#insertModal">등록</button>
+<!-- <button class="greyButton" data-toggle="modal" data-target="#myModal">수정</button> -->
+<!-- Modal -->
 
-				
-				<tr>
-					<th scope="row">퇴사일자</th>
-					<td><input type="date" name="userResignDate"
-						id="userResignDate" disabled></td>
-					<th>담당 센터명</th>
-					<td id="centerName">
-					</td> 
-				</tr>
-			</table>
-		</form>
-	</div>
-</div>
-<!-- 모달창 -->
- <button id="testBtn" class="btn">모달 테스트</button>
-	<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">담당자 등록</h5>
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">X</span>
-					</button>
-				</div>
-				<div class="modal-body">
-				
-				
-				</div>
-				<div class="modal-footer">
-					<a class="btn" id="modalY" href="#">예</a>
-					<button class="btn" type="button" data-dismiss="modal">아니요</button>
-				</div>
+<div class="modal fade" data-backdrop="static" id="insertModal"
+	role="dialog">
+	<!-- 사용자 지정 부분① : id명 -->
+	<div class="modal-dialog modal-dialog-centered" >
+		<!-- Modal content-->
+		<div class="modal-content p-6">
+			<div class="modal-header">
+				<h4 class="modal-title">담당자 등록</h4>
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<!-- 사용자 지정 부분② : 타이틀 -->
 			</div>
+			<div class="modal-body">
+					<!--   disabled="disabled" class="form-control removeDisabled"  <table class="rowTable" id="center-right">  -->
+			<form id="insertform">
+				<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="name">담당자명</label> 
+							<input type="hidden" name="userCode" id="userCode">
+							<input type="hidden" name="userPassword" id="userPassword">
+							<input type="text" name="userName" id="userName" class="form-control"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-sm">
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="name">생년월일</label> 
+							<input type="date" name="userBirth" id="userBirth" class="form-control"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-sm">
+						</div>
+				</div>
+
+
+				<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="name">Email</label> 
+							<input type="text" name="userEmail" id="userEmail" class="form-control" 
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-sm">
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="name">휴대전화번호</label> 
+							<input type="text" name="userTel" id="userTel" class="form-control" 
+									aria-label="Sizing example input"
+									aria-describedby="inputGroup-sizing-sm">
+						</div>
+				</div>
+				<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="name">입사일자</label>
+							<input type="date" name="userHireDate" id="userHireDate" class="form-control" 
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-sm">
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="name">팀코드</label> 
+							<input type="text" name="userTeamCode" id="userTeamCode" class="form-control" 
+									aria-label="Sizing example input"
+									aria-describedby="inputGroup-sizing-sm">
+						</div>
+				</div>
+			</form>
+			</div>
+		<div class="modal-footer">
+			<button type="button" class="pinkButton" id="resetBtn">초기화</button>
+			<button type="button" class="greyButton" id="savemgr">저장</button>
+	<!-- 		<button type="button" class="greyButton" id="updatemgr">수정</button> -->
+				
+			<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+		</div>
 		</div>
 	</div>
+</div>
+
+
+<!-- 수정 모달창 -->
+
+<div class="modal fade" data-backdrop="static" id="updateModal"
+	role="dialog">
+	<!-- 사용자 지정 부분① : id명 -->
+	<div class="modal-dialog modal-dialog-centered" >
+		<!-- Modal content-->
+		<div class="modal-content p-6">
+			<div class="modal-header">
+				<h4 class="modal-title">담당자 정보 수정</h4>
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<!-- 사용자 지정 부분② : 타이틀 -->
+			</div>
+			<div class="modal-body">
+					<!--   disabled="disabled" class="form-control removeDisabled"  <table class="rowTable" id="center-right">  -->
+			<form id="insertform">
+				<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="name">담당자명</label> 
+							<input type="hidden" name="userCode" id="userCodeInfo">
+							<input type="hidden" name="userPassword" id="userPasswordInfo">
+							<input type="text" name="userName" id="userNameInfo" class="form-control"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-sm" disabled="disabled">
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="name">생년월일</label> 
+							<input type="date" name="userBirth" id="userBirthInfo" class="form-control"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-sm"  disabled="disabled">
+						</div>
+				</div>
+
+
+				<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="name">Email</label> 
+							<input type="text" name="userEmail" id="userEmailInfo" class="form-control" 
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-sm">
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="name">휴대전화번호</label> 
+							<input type="text" name="userTel" id="userTelInfo" class="form-control" 
+									aria-label="Sizing example input"
+									aria-describedby="inputGroup-sizing-sm">
+						</div>
+				</div>
+				<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="name">입사일자</label>
+							<input type="date" name="userHireDate" id="userHireDateInfo" class="form-control" 
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-sm"  disabled="disabled">
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="name">팀코드</label> 
+							<input type="text" name="userTeamCode" id="userTeamCodeInfo" class="form-control" 
+									aria-label="Sizing example input"
+									aria-describedby="inputGroup-sizing-sm" >
+						</div>
+				</div>
+				<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="name">퇴사일자</label>
+							<input  type="date" name="userResignDate" id="userResignDateInfo" class="form-control" 
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-sm">
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="name">담당 센터명</label> 
+							<div id="centerName" class="form-control" 
+									aria-label="Sizing example input"
+									aria-describedby="inputGroup-sizing-sm"></div>
+						</div>
+				</div>
+			</form>
+			</div>
+		<div class="modal-footer">
+			<button type="button" class="greyButton" id="updatemgr">수정</button>
+				
+			<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+		</div>
+		</div>
+	</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/resources/js/manager/manager.js"></script>
