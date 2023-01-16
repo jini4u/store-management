@@ -80,12 +80,26 @@ public class CenterController {
 	 * @return
 	 */
 	@GetMapping(value="/centerList")
-	public String centerList(@RequestParam(defaultValue="1")int pageNo, Model model, CenterVO centerVO){
+	public String centerList(@RequestParam(defaultValue="1")int pageNo,@RequestParam(value="keyword", required=false)String keyword, Model model, CenterVO centerVO){
+		if (keyword == null) {
 		int totalRows = centerService.countAllCenters();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		model.addAttribute("pager", pager);	
-		model.addAttribute("centerList", centerService.centerList(pager));
-		
+		model.addAttribute("centerList", centerService.findCenter(pager, keyword));
+		logger.info( "센터리스트" +centerVO.getCenterName());
+		}else{
+			int filterTotalRows = centerService.filterCountAllCenters(keyword);
+			Pager filterPager = new Pager(10, 10, filterTotalRows, pageNo);
+			List<CenterVO> filterCenterList = centerService.findCenter(filterPager, keyword);
+			if (filterCenterList.size() != 0) {
+				model.addAttribute("centerList", filterCenterList);
+				model.addAttribute("pager", filterPager);
+			}else {
+				model.addAttribute("centerList", filterCenterList);
+				model.addAttribute("pager", new Pager(1, 1, 1, 1));
+				
+			}
+		}
 		return "jsp/center/centerlist";
 	}
 	
@@ -100,7 +114,7 @@ public class CenterController {
 		System.out.println(centerList);
 		return centerList;
 	}
-	@ResponseBody
+/*	@ResponseBody
 	@PostMapping(value ="/findCenter")
 	public List<CenterVO> findCenter(@RequestParam(defaultValue="1")int pageNo, CenterVO centerVO, Model model) {
 		int totalRows = centerService.filterCountAllCenters(centerVO.getCenterName());
@@ -111,6 +125,7 @@ public class CenterController {
 		logger.info(centerList+"");
 		return centerList;
 	}
+	*/
 	
 	@GetMapping(value="/centerExcelUpload")
 	public String excelUplaod() {
