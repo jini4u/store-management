@@ -1,67 +1,4 @@
 window.onload = function(){
-/*	handleClickTr();
-*/
-	//담당자 테이블 행 클릭 시 상세조회
-/*	function handleClickTr() {
-		$(".updateBtn").click(function(event){      
-			console.log(event.target.nodeName);
-
-			if(event.target.nodeName == "A"){
-				return;
-			} 
-
-			var userCode = this.cells[0].innerHTML;
-			var userName = this.cells[1].innerHTML;
-			var userBirth = this.cells[2].innerHTML;
-			var userTel = this.cells[3].innerHTML;
-			var userEmail = this.cells[4].innerHTML;
-			var userTeamCode = this.cells[5].innerHTML;
-			var userHireDate = this.cells[6].innerHTML;
-			var userResignDate = '';
-			if(this.cells[7]) {
-				userResignDate = this.cells[7].innerHTML;
-			}
-
-
-			$("#userCode").val(userCode);
-			$("#userName").val(userName);
-			$("#userBirth").val(userBirth);
-			$("#userTel").val(userTel);
-			$("#userEmail").val(userEmail);
-			$("#userTeamCode").val(userTeamCode);            
-			$("#userHireDate").val(userHireDate);
-			$("#userResignDate").val(userResignDate);
-
-			$("#userName").attr("disabled",true);
-			$("#userBirth").attr("disabled",true);
-			$("#userEmail").attr("disabled",false);
-			$("#userTel").attr("disabled",false);
-			$("#userTeamCode").attr("disabled",false);
-			$("#userHireDate").attr("disabled",true);
-			$("#userResignDate").attr("disabled",false);
-			
-			//담당 센터명 조회
-	        $.ajax({
-	            type: 'POST',
-	            url:'/manager/getCenters/'+userCode,
-	            success: function(result) {
-	               console.log(result);
-	               var view = '';
-	               //.each : 배열과 length 속성을 갖는 배열과 유사 배열 객체들을 index를 기준으로 반복
-	               $.each(result,function(index, value){   
-	                  view += value.centerName;
-	                  
-	                  if(index != result.length-1){
-	                     view += ', ';
-	                  }   
-	               });
-	               $("#centerName").html(view);
-	            }
-	         });
-
-		})
-	}*/
-
 	
 $(".updateModal").click(function(){ 
 	
@@ -84,6 +21,9 @@ $(".updateModal").click(function(){
 	var userTeamCode = td.eq(5).text();
 	var userHireDate = td.eq(6).text();
 	var userResignDate = '';
+    if(td.eq(7)) {
+       userResignDate =  td.eq(7).text();
+    }
 	
 	$("#userCodeInfo").val(userCode);
 	$("#userNameInfo").val(userName);
@@ -156,185 +96,7 @@ $(".updateModal").click(function(){
 		$("#userResignDate").val('');   
 	});
 
-<<<<<<< HEAD
-	//저장 버튼 클릭 
-	$("#savemgr").click(function (){
-		let updateUrl = "/manager/managerUpdate";
-		let insertUrl ="/manager/managerInsert";
-		let userCode=$("#userCode").val();
-		let userPassWord=$("#userPassword").val();
-		let userName=$("#userName").val();
-		let userBirth=$("#userBirth").val();
-		let userTel=$("#userTel").val();
-		let userEmail=$("#userEmail").val();
-		let userTeamCode=$("#userTeamCode").val();
-		let userHireDate=$("#userHireDate").val();
-		let userResignDate = $("#userResignDate").val();
-		//휴대전화번호 뒤에 4자리 자르기
-		let pwCut= userTel.substr(9, 12);
 
-		//등록
-		if(!$("#userName").attr("disabled")){
-			$.ajax({
-				type:"POST",
-				url: insertUrl,
-				data: {
-					userCode : userCode,
-					userPassword : pwCut,
-					userName : userName,
-					userBirth : userBirth,
-					userTel : userTel,
-					userEmail : userEmail,
-					userTeamCode : userTeamCode,
-					userHireDate : userHireDate
-				},
-				success: function(result) {
-
-					//등록 성공 시 담당자 전체 목록 리스트 마지막 열에 추가 됨
-					let results = result;
-
-					let str = "";
-					//결과를 반복한다
-					$.each(results, function(i) {
-						let birth = new Date(results[i].userBirth);
-						let hiredate = new Date(results[i].userHireDate);
-
-						str += "<tr>";
-						str += "<td>" + results[i].userCode + "</td><td>" + 
-						results[i].userName + "</td><td>" + dateFormat(birth) + "</td><td>" +
-						results[i].userTel + "</td><td>" + results[i].userEmail +"</td><td>" +
-						results[i].userTeamCode + "</td><td>"+ dateFormat(hiredate) + "</td>";
-						str += "</tr>";
-					});
-
-					$("#mgrList").html(str);
-
-					$("#userCode").val('');
-					$("#userName").val('');
-					$("#userBirth").val('');
-					$("#userTel").val('');
-					$("#userEmail").val('');
-					$("#userTeamCode").val('');            
-					$("#userHireDate").val('');
-					$("#userResignDate").val('');   
-
-					alert("담당자 등록에 성공하셨습니다.")
-
-					handleClickTr();
-					changeColor();
-				},
-				error: function() {
-					alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
-					/* alert("담당자를 등록하세요.");*/
-				}
-
-			});
-
-		} else { // 수정
-			var data = {
-					userCode : userCode,
-					userPassword : pwCut,
-					userName : userName,
-					userBirth : userBirth,
-					userTel : userTel,
-					userEmail : userEmail,
-					userTeamCode : userTeamCode,
-					userHireDate : userHireDate,
-					userResignDate : userResignDate
-			};
-
-			console.log(data);
-
-			$.ajax({
-				type:"POST",
-				url: updateUrl,
-				data: data,
-				success: function(result) {
-
-
-					//등록 성공 시 담당자 전체 목록 리스트 마지막 열에 추가 됨
-					let results = result;
-					let str = " ";
-					$.each(results, function(i) {
-						let birth = new Date(results[i].userBirth);
-						let hiredate = new Date(results[i].userHireDate);
-						let resigndate = new Date(results[i].userResignDate);
-
-						str +="<tr>"
-							str += "<td>" + results[i].userCode + "</td><td>" + 
-							results[i].userName + "</td><td>" + dateFormat(birth) + "</td><td>" +
-							results[i].userTel + "</td><td>" + results[i].userEmail +"</td><td>" +
-							results[i].userTeamCode + "</td><td>"+ dateFormat(hiredate) + "</td><td>" + dateFormat(resigndate)+ "</td>";
-						str += "</tr>";
-					});
-					$("#mgrList").html(str);
-					alert("수정 성공");
-					handleClickTr();
-					changeColor();
-				},
-
-				error: function( request, status, error ){
-					alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
-
-				}
-
-			});
-
-		}
-
-	});
-=======
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
-
-	//검색 버튼
-	/*$("#searchBtn").click(function (){
-		let userCode=$("#userCode").val();
-		let userPassWord=$("#userPassword").val();
-		let userName=$("#searchTxt").val();
-		let userBirth=$("#userBirth").val();
-		let userTel=$("#userTel").val();
-		let userEmail=$("#userEmail").val();
-		let userTeamCode=$("#userTeamCode").val();
-		let userHireDate=$("#userHireDate").val();
-		let userResignDate = $("#userResignDate").val();
-		$.ajax({
-			type:"POST",
-			url: "/managerSearch",
-			data: {
-				userName : userName
-			},
-			success: function(result) {
-
-				// 전체 테이블 지우기
-				$("#mgrListTr").html("");
-
-				//등록 성공 시 담당자 전체 목록 리스트 마지막 열에 추가 됨
-				let results = result;
-
-				let str = "";
-				$.each(results, function(i) {
-					let birth = new Date(results[i].userBirth);
-					let hiredate = new Date(results[i].userHireDate);
-
-					str += "<tr>";
-					str += "<td>" + results[i].userCode + "</td><td>" + 
-					results[i].userName + "</td><td>" + dateFormat(birth) + "</td><td>" +
-					results[i].userTel + "</td><td>" + results[i].userEmail +"</td><td>" +
-					results[i].userTeamCode + "</td><td>"+ dateFormat(hiredate) + "</td>";
-					str += "</tr>";
-				});
-				$("#mgrList").html(str);
-				
-				handleClickTr();
-				changeColor();
-			},
-			error: function( request, status, error ){
-				alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
-
-			}
-
-		});
-	});*/
 	
 	//담당자 등록
 	$("#savemgr").click(function (){
@@ -382,7 +144,8 @@ $(".updateModal").click(function(){
 					str += "<td>" + results[i].userCode + "</td><td>" + 
 					results[i].userName + "</td><td>" + dateFormat(birth) + "</td><td>" +
 					results[i].userTel + "</td><td>" + results[i].userEmail +"</td><td>" +
-					results[i].userTeamCode + "</td><td>"+ dateFormat(hiredate) + "</td>";
+					results[i].userTeamCode + "</td><td>"+ dateFormat(hiredate) + "</td>"+
+					 "<td><button class='updateModal' data-toggle='modal'data-target='#updateModal'>수정</button></td>";
 					str += "</tr>";
 				});
 
@@ -398,12 +161,14 @@ $(".updateModal").click(function(){
 				$("#userResignDate").val('');   
 
 				alert("담당자 등록에 성공하셨습니다.")
-
+				location.replace("/manager/managerList")
 				changeColor();
+/*				$('#insertModal').hide();
+				$('.modal-backdrop').hide();*/
+				
 			},
 			error: function() {
 				alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
-				/* alert("담당자를 등록하세요.");*/
 			}
 
 		});
@@ -479,14 +244,6 @@ $(".updateModal").click(function(){
 
 	});
 	
-	
-	//검색 버튼
-	$("#searchBtn").click(function (){
-		var url = "${pageContext.request.contextPath}/manager/managerList";
-		url = url + "&keyword=" + $('#keyword').val();
-		location.href = url;
-		console.log(url);
-	});
 }
 
 

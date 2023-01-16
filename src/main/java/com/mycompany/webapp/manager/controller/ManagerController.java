@@ -99,15 +99,29 @@ public class ManagerController {
 	  담담자 검색 */
 	@GetMapping(value="/managerSearch")
 	public String managerSearch(@RequestParam(defaultValue="1")int pageNo, @RequestParam("keyword") String keyword,Model model){
-		  int totalRows = managerService.managerCountByKeyword(keyword);
-	      Pager pager = new Pager(10, 10, totalRows, pageNo);
-	      model.addAttribute("pager", pager);
+		  int keywordTotalRows = managerService.managerCountByKeyword(keyword);
+	      Pager searchPager = new Pager(10, 10, keywordTotalRows, pageNo);
+	      model.addAttribute("pager", searchPager);
 	      
-	      List<ManagerVO> mgrSearchList = managerService.managerSearch(pager, keyword);
-	      logger.info(pager.toString());
-	      model.addAttribute("managerList",mgrSearchList);
+	      List<ManagerVO> mgrSearchList = managerService.managerSearch(searchPager, keyword);
+	      if (mgrSearchList.size() != 0) {
+	            model.addAttribute("managerList", mgrSearchList);
+	            model.addAttribute("pager", searchPager);
+	         }else {
+	            model.addAttribute("managerList", mgrSearchList);
+	            model.addAttribute("pager", new Pager(1, 1, 1, 1));
+	            model.addAttribute("managerListCheck", "empty");
+	         }
+	/*      if(!mgrSearchList.isEmpty()) {
+				model.addAttribute("managerList",mgrSearchList);	// 담당자 존재 경우
+			} else {
+				model.addAttribute("managerListCheck", "empty");	// 담당자 존재하지 않을 경우
+			}*/
+	      
+	      logger.info(searchPager.toString());
 	      model.addAttribute("keyword",keyword);
 	      return "jsp/manager/managerlookup";
+
 	}
 	
 	

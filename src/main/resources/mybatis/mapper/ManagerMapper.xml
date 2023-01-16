@@ -62,6 +62,7 @@ values   (
 <select id="countAllMgr" resultType="int">
 SELECT COUNT(*) FROM userInfo
 </select>
+
 <!-- 키워드별 담당자 수  -->
 <select id="managerCountByKeyword" parameterType="string" resultType="int">
 <![CDATA[ 
@@ -69,6 +70,7 @@ SELECT COUNT(*) FROM userInfo
 	where  user_name like ('%' ||#{keyword}||'%')
 ]]>
 </select>
+
 <!-- 키워드 별 담당자 검색 -->
 <select id="managerSearch" parameterType="map" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
 <![CDATA[
@@ -86,7 +88,11 @@ select * from(
                user_resign_date as userResignDate
          from  userinfo
          where user_code < 20000 
-         and user_name like ('%' ||#{keyword}||'%')
+         ]]> 
+        <if test="keyword != null or keyword != ''">
+		  and user_name like ('%' ||#{keyword}||'%')
+		</if>
+<![CDATA[
          order by user_code desc
       )
       where rownum <= #{pager.endRowNo}
