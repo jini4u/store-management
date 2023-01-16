@@ -131,8 +131,29 @@ VALUES(
  
  </insert> 
 
+<!-- 
+페이징처리
+정윤선
+ -->
 <select id="CountAllList" resultType="int">
 SELECT COUNT(*) FROM INSPECTION
+</select>
+
+<!-- 
+센터이름 가져오기
+정윤선
+ -->
+<select id="getCenterName" parameterType="com.mycompany.webapp.score.vo.ScoreVO" resultType="com.mycompany.webapp.score.vo.ScoreVO">
+select 
+I.center_code as "centerCode",
+C.center_name as "centerName"
+
+from center C
+    LEFT OUTER JOIN Inspection I
+        ON C.center_code = I.center_code  
+WHERE 
+   I.user_code = #{userCode};
+
 </select>
 
 <!-- 

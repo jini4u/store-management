@@ -3,7 +3,6 @@ package com.mycompany.webapp.score.dao;
 
 import java.util.List;
 
-import com.mycompany.webapp.common.vo.FileInfoVO;
 import com.mycompany.webapp.score.vo.ScoreVO;
 import java.util.Map;
 
@@ -38,5 +37,7 @@ public interface IScoreRepository {
 	int updateScore(ScoreVO score);
 	/*점수리스트 수 받아오기*/
 	int CountAllList();
+	/* 수 받아오기*/
+	List<ScoreVO> getCenterName(int centerCode);
 }
 
