@@ -29,30 +29,23 @@ public class ManagerController {
 	static final Logger logger=LoggerFactory.getLogger(ManagerController.class);
 
 
-	@Autowired 
-	IManagerService managerService;
-	/* author 은별
-	    담당자 목록조회*/
-	@RequestMapping(value="/managerList")
-	public String selectManagerList(@RequestParam(defaultValue="1") int pageNo,Model model) {
-		int totalRows = managerService.countAllMgr();
-		Pager pager = new Pager(10, 10, totalRows, pageNo);
-		List<ManagerVO> managerList = managerService.selectManagerList(pager);
-		model.addAttribute("managerList", managerList);
-		model.addAttribute("pager", pager);
+	  @Autowired 
+	   IManagerService managerService;
+	   /* author 은별
+	       담당자 목록조회*/
+	   @RequestMapping(value="/managerList")
+	   public String selectManagerList(@RequestParam(defaultValue="1") int pageNo,Model model) {
+	      int totalRows = managerService.countAllMgr();
+	      Pager pager = new Pager(10, 10, totalRows, pageNo);
+	      List<ManagerVO> managerList = managerService.selectManagerList(pager);
+	      model.addAttribute("managerList", managerList);
+	      model.addAttribute("pager", pager);
 
-		logger.info("managerList : " + managerList);
-		return "jsp/manager/managerlookup";
-	}
+	      logger.info("managerList : " + managerList);
+	      return "jsp/manager/managerlookup";
+	   }
 
-	/* author 은별
-	  담당자 상세조회*/
-	/*@RequestMapping(value="/managerDetail")
-	public String selectManagerDetail(Model model, @PathVariable int userCode) {
-		ManagerVO mgrDetails = managerService.selectManagerDetail(userCode);
-		model.addAttribute("managerVO",mgrDetails);
-		return "jsp/manager/managerdetail";
-	}*/
+
 	@RequestMapping(value="/managerDetail")
 	public String selectManagerDetail(Model model, @PathVariable int userCode) {
 		List<CenterVO> centerName = managerService.getCenterByManager(userCode);
@@ -78,7 +71,7 @@ public class ManagerController {
 		List<ManagerVO> managerList = managerService.selectManagerList(pager);
 		//비동기 처리를 하기 위해 결과값을 보내준다
 		return managerList;
-		
+
 	}
 
 	/* author 은별
@@ -101,21 +94,23 @@ public class ManagerController {
 		logger.info(managerList.toString());
 		return managerList;
 	}
-	
+
 	/* author 은별
 	  담담자 검색 */
-	@ResponseBody
-	@PostMapping(value="/managerList")
-	private String managerSearch(@RequestParam(defaultValue="1")int pageNo, ManagerVO mgr, Model model){
-		int totalRows = managerService.countAllMgr();
-		Pager pager = new Pager(10, 10, totalRows, pageNo);
-		model.addAttribute("pager", pager);
-		List<ManagerVO> mgrSearchList = managerService.managerSearch(pager, mgr);
-		logger.info(pager.toString());
-		model.addAttribute("mgrSearchList",mgrSearchList);
-		return "redirect: /manager/managerList";
+	@GetMapping(value="/managerSearch")
+	public String managerSearch(@RequestParam(defaultValue="1")int pageNo, @RequestParam("keyword") String keyword,Model model){
+		  int totalRows = managerService.managerCountByKeyword(keyword);
+	      Pager pager = new Pager(10, 10, totalRows, pageNo);
+	      model.addAttribute("pager", pager);
+	      
+	      List<ManagerVO> mgrSearchList = managerService.managerSearch(pager, keyword);
+	      logger.info(pager.toString());
+	      model.addAttribute("managerList",mgrSearchList);
+	      model.addAttribute("keyword",keyword);
+	      return "jsp/manager/managerlookup";
 	}
-
+	
+	
 	//담당자 매핑
 	@RequestMapping(value="/managerMapping")
 	public String managerMapping(@RequestParam(defaultValue="1") int pageNo, Model model) {

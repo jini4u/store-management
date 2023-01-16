@@ -28,9 +28,10 @@
 
 <!-- 검색 -->
 <div class="search-box">
-   <form action="/manager/managerList" method="get">
+   <form action="/manager/managerSearch" method="get">
       <input type="text" class="search-txt" id="searchTxt" name="keyword" placeholder="담당자 검색"> 
-     <a class="search-btn" href="/manager/managersearch" id="searchBtn"> <i class="fas fa-search"></i></a> 
+     <!-- <a class="search-btn" href="/manager/managerSearch" id="searchBtn"> <i class="fas fa-search"></i></a>  -->
+     <input type="submit" value="search">
 
    </form>
 </div>

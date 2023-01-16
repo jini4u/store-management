@@ -220,19 +220,22 @@ $(".updateModal").click(function(){
 		//휴대전화번호 뒤에 4자리 자르기
 		let pwCut= userTel.substr(9, 12);
 		
+		let data = {
+			userPassword : pwCut,
+			userName : userName,
+			userBirth : userBirth,
+			userTel : userTel,
+			userEmail : userEmail,
+			userTeamCode : userTeamCode,
+			userHireDate : userHireDate
+		};
+		
+		console.log(data);
+		
 		$.ajax({
 			type:"POST",
 			url: "/manager/managerInsert",
-			data: {
-				userCode : userCode,
-				userPassword : pwCut,
-				userName : userName,
-				userBirth : userBirth,
-				userTel : userTel,
-				userEmail : userEmail,
-				userTeamCode : userTeamCode,
-				userHireDate : userHireDate
-			},
+			data: data,
 			success: function(result) {
 
 				// 전체 테이블 지우기
@@ -330,8 +333,7 @@ $(".updateModal").click(function(){
 						results[i].userTel + "</td><td>" + results[i].userEmail +"</td><td>" +
 						results[i].userTeamCode + "</td><td>"+ dateFormat(hiredate) + "</td><td>" +
 						dateFormat(resigndate)+ "</td>"+
-						 "<td><button class='updateModal' data-toggle='modal' " +
-						 "data-target='#updateModal'>수정</button></td>";
+						 "<td><button class='updateModal' data-toggle='modal'data-target='#updateModal'>수정</button></td>";
 						str += "</tr>"; 
 					});
 					$("#mgrList").html(str);
@@ -348,6 +350,14 @@ $(".updateModal").click(function(){
 
 	});
 	
+	
+	//검색 버튼
+	$("#searchBtn").click(function (){
+		var url = "${pageContext.request.contextPath}/manager/managerList";
+		url = url + "&keyword=" + $('#keyword').val();
+		location.href = url;
+		console.log(url);
+	});
 }
 
 
