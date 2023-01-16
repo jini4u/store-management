@@ -12,7 +12,7 @@ public class FileInfoVO {
 	private String filePostDate;
 	private String fileModifyDate;
 	
-	private int centerCode;
+	private int centerCode; 
 	private int uploadUserCode;
 	private String uploadUserName;
 	
