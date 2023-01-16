@@ -1,6 +1,7 @@
 package com.mycompany.webapp.score.service;
 
 import java.util.List;
+
 import com.mycompany.webapp.score.vo.ScoreVO;
 import java.util.Map;
 
@@ -27,7 +28,9 @@ public interface IScoreService {
 	List<ScoreVO> usingCodeList();
 	//점수 수정
 	int updateScore(ScoreVO score);
-	
+	//페이징처리를 위한 갯수
 	int CountAllList();
+	//센터리스트 가져오기
+	List<ScoreVO> getCenterName(int centerCode);
 
 }
