@@ -95,8 +95,8 @@ public class CenterController {
 				model.addAttribute("centerList", filterCenterList);
 				model.addAttribute("pager", filterPager);
 			}else {
-				model.addAttribute("centerList", filterCenterList);
 				model.addAttribute("pager", new Pager(1, 1, 1, 1));
+				model.addAttribute("centerListN" , "empty");
 				
 			}
 		}

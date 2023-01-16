@@ -21,11 +21,11 @@ let centerlist = function centerList(results){
 		str += "</tr>";
 	});
 	$("#center-left").append(str);
-	$("#centerForm input").val('');
+//	$("#centerForm input").val('');
 	$("#findCenterName").val('');
 	CallcenterList();
-	$('#myModal').hide();
-	$('.modal-backdrop').hide();
+//	$('#myModal').hide();
+//	$('.modal-backdrop').hide();
 }
 let error = function( request, status, error ){
 	alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
@@ -94,6 +94,7 @@ const leftTable = document.querySelector("#center-left");
 var leftTableTr = leftTable.rows;
 
 var imgCenterCode;
+var updateCenterName;
 
 function CallcenterList() {
 	$("#centerName").attr("readonly", true);
@@ -107,12 +108,16 @@ function CallcenterList() {
 	let centerclosingdate = document.querySelector("#centerClosingDate");
 	let centerguide = document.querySelector("#centerGuide");
 
+//	$('#myModal').hide();
+//	$('.modal-backdrop').remove();
+
 	for(var i=1; i<leftTableTr.length; i++) {
 		var row = leftTableTr[i];
 		row.onclick = function () {
 			centercode.value = this.cells[0].textContent;
 			imgCenterCode = this.cells[0].textContent;
 			centername.value = this.cells[1].innerHTML;
+			updateCenterName = this.cells[1].innerHTML;
 			centertel.value = this.cells[2].innerHTML;
 			centeraddress.value = this.cells[3].innerHTML;
 			centeropeningdate.value = this.cells[4].innerText;
@@ -127,45 +132,65 @@ function CallcenterList() {
 			centerguide.value = this.cells[6].textContent;
 			console.log(this.cells[6].textContent);
 			centerclosingdate.value = this.cells[7].textContent;
-			alert(imgCenterCode);
 			if (imgCenterCode != null) {
-				alert("centerCode 받아오나")
 				//디스플레이 논 풀어주고
 				$("#showPhoto").show();
 				//id="centerphoto" 추가
 				$(".modal-body").attr('id', 'centerphoto' );
 				getDetailAjax();
 			}
-			
+
 		}
 	}
 	$("#centerPhotoList").empty();
 }
-	function getDetailAjax() {
-		$.ajax({
-			url : "getCenterImages/" + imgCenterCode,
-			data : {
-				centerCode : imgCenterCode
-			},
-			success : function(results) {
-				let centerPhotoList = $("#centerPhotoList");
-				let strDOM = "";
-				if (results.length == 0) {
-					strDOM +="<div>"
+function getDetailAjax() {
+	$.ajax({
+		url : "getCenterImages/" + imgCenterCode,
+		data : {
+			centerCode : imgCenterCode
+		},
+		success : function(results) {
+			let centerPhotoList = $("#centerPhotoList");
+			let strDOM = "";
+			if (results.length == 0) {
+				strDOM +="<div>"
 					strDOM += "<img src='/resources/images/center/no_image.png'>"
-					strDOM += "</div>";
-				}
-				for(i=0; i<results.length; i++) {
-					let image = results[i];
-					strDOM += "<div>";
-		               strDOM += "<img id='centerPhotoSize' src=/image/"+image.fileSavedName + "/> </c:if>"
-					strDOM += "</div>";
-				}
-				centerPhotoList.append(strDOM);
-			},
-			error : error
-		});
-	}
+						strDOM += "</div>";
+			}
+			for(i=0; i<results.length; i++) {
+				let image = results[i];
+				strDOM += "<div>";
+				strDOM += "<img id='centerPhotoSize' src=/image/"+image.fileSavedName + "/> </c:if>"
+				strDOM += "</div>";
+			}
+			centerPhotoList.append(strDOM);
+
+		},
+		error : error
+	});
+	$('#myModal').hide();
+	$('.modal-backdrop').hide();
+}
+var addr0;
+var addr1;
+var addr2;
+var addr3;
+var addr4;
+var addr5;
+
+var takeTd = $("#centerDetails").click(function (){
+	//현재 row의 정보 가져오기
+	var thisRow = $(this).closest('tr');
+	//주소 input 값 가져오기
+	addr0 = thisRow.find('td:eq(0)');
+	addr1 = thisRow.find('td:eq(1)');
+	addr2 = thisRow.find('td:eq(2)');
+	addr3 = thisRow.find('td:eq(3)');
+	addr4 = thisRow.find('td:eq(4)');
+	addr5 = thisRow.find('td:eq(5)');
+});
+
 
 //ceterInsert 해주는 자스
 $("#centerSavedBtn").click(function (){
@@ -178,14 +203,13 @@ $("#centerSavedBtn").click(function (){
 	let centercondition = $("#centerCondition").val();	
 
 	let centeropeningDate = $("#centerOpeningDate").val();
-	
+
 	if (centeropeningDate  == '') {
 		centercondition = "notyet";
 		console.log(centercondition);
 	}
 
 	if(!$("#centerName").attr("readonly")) {
-		alert("등록");
 
 		let insertURL = "centerInsert";
 
@@ -201,42 +225,76 @@ $("#centerSavedBtn").click(function (){
 				centerClosingDate : centerclosingDate,
 				centerCondition : centercondition
 			},
-			success: centerlist,
+			success: function(results){
+				location.href="centerList"
+			},
 			error: error
 		});
 	}else{
-		let updateURL = "centerUpdate";
-		let centercondition = document.querySelector("#centerCondition").value;
-		console.log("centerCondition"+centercondition);
-		alert("수정");
-		$.ajax({
-			type : "POST",
-			url : updateURL,
-			data : {
-				centerCode : centercode,
-				centerName : centername,
-				centerTel : centertel,
-				centerAddress : centeraddress,
-				centerOpeningDate  : centeropeningDate,
-				centerCondition  : centercondition,
-				centerGuide : centerguide,
-				centerClosingDate : centerclosingDate
-			},
-			success : centerlist,
-			error: error
-		});
-	}
-});
+		  let updateURL = "centerUpdate";
+	      let centercondition = document.querySelector("#centerCondition").value;
+	      let pageNo = $("#now-page").text();
+	      alert(pageNo);
+	      console.log("centerCondition"+centercondition);
+	      $.ajax({
+	         type : "POST",
+	         url : updateURL,
+	         data : {
+	        	pageNo : pageNo,
+	            centerCode : centercode,
+	            centerName : centername,
+	            centerTel : centertel,
+	            centerAddress : centeraddress,
+	            centerOpeningDate  : centeropeningDate,
+	            centerCondition  : centercondition,
+	            centerGuide : centerguide,
+	            centerClosingDate : centerclosingDate
+	         },
+	         success : function centerList(results){
+	        	
+	        		$.each(results, function(i){
+	        			if(results[i].centerOpeningDate == null) {
+	        				results[i].centerOpeningDate = '-';
+	        			}else {
+	        				results[i].centerOpeningDate = results[i].centerOpeningDate.substring(0,10);
+	        			}
+
+	        			if (results[i].centerCode == imgCenterCode) {
+	        				
+	        				console.log(imgCenterCode);
+	        				console.log("res"+results[i].centerCode);
+	        				
+	        				takeTd;
+	        				
+	        				addr0.text(results[i].centerCode);
+	        				addr1.text(results[i].centerName);
+	        				addr2.text(results[i].centerTel);
+	        				addr3.text(results[i].centerAddress);
+	        				addr4.text(results[i].centerOpeningDate);
+	        				addr5.text(results[i].centerCondition);
+						}
+	        		});
+	        		$("#findCenterName").val('');
+	        		CallcenterList();
+	        	},
+	         error: error
+	      });
+	   }
+	});
+
 
 //등록버튼
 $("#centerInsertBtn").click(function () {
-	$("#centerPhotoList").empty();
 	
+
+	
+	$("#centerPhotoList").empty();
+
 	$("#showPhoto").hide();
 	$(".modal-body").removeAttr('id', 'centerphoto' );
 
-	
-	
+
+
 	$("#centerName").attr("readonly", false);
 
 	//폐점일 비활성화

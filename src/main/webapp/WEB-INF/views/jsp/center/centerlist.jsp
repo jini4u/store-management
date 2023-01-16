@@ -32,6 +32,7 @@
       </form>
    </div>
 </div>
+<c:if test="${centerListN != 'empty'}">
 <div id="center-form-pagging">
    <table class="verticalTable" id="center-left">
       <thead>
@@ -66,6 +67,53 @@
          </c:forEach>
       </tbody>
    </table>
+  
+   <div class="center-pagging">
+      <ul class="pagination pageModal">
+         <li><a class="innerPager first" href="centerList?pageNo=1">처음</a></li>
+         <li><c:if test="${pager.groupNo>1}">
+               <a class="innerPager arrow left"
+                  href="centerList?pageNo=${pager.startPageNo-1}">이전</a>
+            </c:if></li>
+         <c:forEach var="i" begin="${pager.startPageNo}"
+            end="${pager.endPageNo}">
+            <li><c:if test="${pager.pageNo != i}">
+                  <a class="innerPager active num" href="centerList?pageNo=${i}">${i}</a>
+               </c:if></li>
+            <li><c:if test="${pager.pageNo == i}">
+                  <a id="now-page" class="innerPager num" href="centerList?pageNo=${i}">${i}</a>
+               </c:if></li>
+         </c:forEach>
+         <li><c:if test="${pager.groupNo<pager.totalGroupNo}">
+               <a class="innerPager arrow right"
+                  href="centerList?pageNo=${pager.endPageNo+1}">다음</a>
+            </c:if></li>
+         <li><a class="innerPager last"
+            href="centerList?pageNo=${pager.totalPageNo}">맨끝</a></li>
+      </ul>
+   </div>
+</div>
+ </c:if>
+ 
+ <c:if test="${centerListN == 'empty'}">
+<div id="center-form-pagging">
+   <table class="verticalTable" id="center-left">
+      <thead>
+         <tr>
+            <th>센터 코드</th>
+            <th>센터명</th>
+            <th>전화번호</th>
+            <th>주소</th>
+            <th>오픈 일</th>
+            <th>운영 여부</th>
+            <th>상세보기</th>
+         </tr>
+      </thead>
+      <tbody id="centerList">
+        	<tr> <td colspan="7">등록된 담당자가 없습니다.</td></tr>
+      </tbody>
+   </table>
+  
    <div class="center-pagging">
       <ul class="pagination pageModal">
          <li><a class="innerPager first" href="centerList?pageNo=1">처음</a></li>
@@ -91,6 +139,11 @@
       </ul>
    </div>
 </div>
+ </c:if>
+ 
+ 
+ 
+ 
 <div class="center-button-group"></div>
 
 
@@ -173,7 +226,7 @@
          <div class="modal-footer">
             <!--             <button type="button" class="centerSize" data-dismiss="modal" >Close</button> -->
             <input type="button" class="centerSize  btn-lg btn-block"
-               id="centerSavedBtn" value="저장">
+               id="centerSavedBtn" data-dismiss="modal" value="저장">
          </div>
       </div>
    </div>
