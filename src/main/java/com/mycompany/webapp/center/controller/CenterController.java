@@ -169,8 +169,8 @@ public class CenterController {
 	/**
 	 * 센터 이미지 조회
 	 * @author 임유진
-	 * @param int 센터 코드
-	 * @return List<해당 코드의 사진>
+	 * @param {int} 센터 코드
+	 * @return {List<해당 코드의 사진>}
 	 * */
 	@RequestMapping("/getCenterImages/{centerCode}")
 	public @ResponseBody List<FileInfoVO> getCenterImages(@PathVariable int centerCode) {
@@ -181,7 +181,7 @@ public class CenterController {
 	/**
 	 * 센터 이미지 정보 수정
 	 * @author 임유진
-	 * @return 정보 수정된 파일 수 (0 또는 1)
+	 * @return {int} 정보 수정된 파일 수 (0 또는 1)
 	 * */
 	@RequestMapping(value="/updateImage", method=RequestMethod.POST)
 	public @ResponseBody int updateImage(MultipartHttpServletRequest request) throws Exception {
@@ -199,7 +199,7 @@ public class CenterController {
 	/**
 	 * 센터 이미지 삭제
 	 * @author 임유진
-	 * @return 삭제된 파일 수
+	 * @return {int} 삭제된 파일 수
 	 * */
 	@RequestMapping(value="/deleteImage/{centerCode}", method=RequestMethod.POST)
 	public @ResponseBody int deleteImage(@RequestBody String request, @PathVariable int centerCode) {
