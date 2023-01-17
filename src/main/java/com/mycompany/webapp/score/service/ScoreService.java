@@ -1,7 +1,6 @@
 package com.mycompany.webapp.score.service;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -219,6 +218,11 @@ public class ScoreService implements IScoreService {
 	@Override
 	public int CountAllList() {
 		return scoreRepository.CountAllList();
+	}
+
+	@Override
+	public List<ScoreVO> getCenterName(int centerCode) {
+		return scoreRepository.getCenterName(centerCode);
 	}
 
 }

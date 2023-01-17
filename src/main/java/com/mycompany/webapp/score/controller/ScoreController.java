@@ -41,7 +41,7 @@ import com.mycompany.webapp.score.vo.ScoreVO;
 @RequestMapping("/score")
 @Controller
 public class ScoreController {
-	private static Logger logger = LoggerFactory.getLogger(ScoreController.class);
+	private static Logger log = LoggerFactory.getLogger(ScoreController.class);
 
 	@Autowired
 	IScoreService scoreService;
@@ -77,6 +77,7 @@ public class ScoreController {
 
 	@RequestMapping(value="/scorelist", method = RequestMethod.GET)
 	public String centerscoreinquiry(@RequestParam(defaultValue="1") int pageNo,ScoreVO scoreVO, Model model,HttpSession session) {
+		
 		int totalRows = scoreService.CountAllList();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 	
@@ -182,7 +183,22 @@ public class ScoreController {
 
 		return "redirect:/score/scorelist";
 	}
+	
+	/*
+	 * 정윤선
+	 * 버튼에 센터(담당자 별 센터)를 설정하기 위해
+	 * */   
+	@RequestMapping(value="/getCenterName/{centerCode}")
+	public @ResponseBody List<ScoreVO> getCenterName(@PathVariable int centerCode,Model model){
+		model.addAttribute("centerNameList",centerCode);
+		return scoreService.getCenterName(centerCode);
+		
+	}
 
+	
+	
+	
+	
 	/**
 	 * 임유진
 	 * DB에 존재하는 그룹코드 전체의 정보를 조회,

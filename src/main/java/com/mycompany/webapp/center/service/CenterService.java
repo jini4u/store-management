@@ -24,11 +24,22 @@ public class CenterService implements ICenterService{
 	@Value("${file.path}")
 	private String filePath;
 	
+	/**
+	 * @author 이소정
+	 * 센터 정보 등록
+	 * @param centerVO
+	 * @return 등록된 센터 수 (0또는 1)
+	 * */
 	@Override
 	public int insertCenter(CenterVO centerVO) {
 		return centerRepository.insertCenter(centerVO);
 	}
-
+	/**
+	 * @author 이소정
+	 * 센터 정보 리스트
+	 * @param pager 페이징 정보
+	 * @return 센터 정보 리스트
+	 * */
 	@Override
 	public List<CenterVO> centerList(Pager pager) {
 		return centerRepository.centerList(pager);
@@ -39,16 +50,18 @@ public class CenterService implements ICenterService{
 	public int countAllCenters() {
 		return centerRepository.countAllCenters();
 	}
+	
+	/**
+	 * @author 이소정
+	 * 센터 정보 수정
+	 * @param CenterVO 센터 정보
+	 * @return 수정된 센터 수 (0또는 1)
+	 * */
 	@Override
 	public int centerUpdate(CenterVO centerVO) {
 		return centerRepository.centerUpdate(centerVO);
 	}
 
-	//센터운영상태
-	@Override
-	public String centerCondition(CenterVO centerVO) {
-		return centerRepository.centerCondition(centerVO);
-	}
 	
 	/**
 	 * 센터 이미지 등록
@@ -161,12 +174,25 @@ public class CenterService implements ICenterService{
 		}
 		return result;
 	}
-
+	
+	/**
+	 * @author 이소정
+	 * 검색된 센터 정보 리스트
+	 * @param Pager 검색된 페이지 수
+	 * *@param String 검색한 센터명
+	 * @return 검색된 센터 정보 리스트
+	 * */
 	@Override
 	public List<CenterVO> findCenter(Pager filterPager, String keyword) {
 		return centerRepository.findCenter(filterPager, keyword);
 	}
-
+	
+	/**
+	 * @author 이소정
+	 * 검색된 센터 정보 수(합칠 수 있는지 확인)
+	 * @param String 검색한 센터명
+	 * @return 검색된 센터 정보 수
+	 * */
 	@Override
 	public int filterCountAllCenters(String keyword) {
 		return centerRepository.filterCountAllCenters(keyword);

@@ -18,8 +18,6 @@ public interface ICenterService {
 	//유진
 	//전체 센터 수 조회
 	int countAllCenters();
-	//센터운영여부
-	public String centerCondition(CenterVO centerVO);
 	
 	//센터수정
 	public int centerUpdate(CenterVO centerVO);
