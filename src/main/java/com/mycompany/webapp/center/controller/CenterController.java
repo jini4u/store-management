@@ -29,12 +29,7 @@ import com.mycompany.webapp.common.vo.Pager;
 /**
  * @ClassName : centerController.java
  * @Description : 센터에 관한 controller
- * @Modification 
- * @
- * @       수정일                  수정자                 수정내용
- * @ ==============   ============   ===========
- * @
- * @author
+ * @author 이소정, 임유진 
  * **/
 @RequestMapping("/center")
 @Controller
@@ -43,6 +38,7 @@ public class CenterController {
 	@Autowired
 	ICenterService centerService;
 	
+	//local.properties에 있는 file.path
 	@Value("${file.path}")
 	private String filePath;
 
@@ -108,6 +104,7 @@ public class CenterController {
 		}
 		return "jsp/center/centerlist";
 	}
+	
 	/**
 	 * 센터 정보 수정
 	 * @author 이소정
@@ -125,7 +122,10 @@ public class CenterController {
 		System.out.println(centerList);
 		return centerList;
 	}
-/*	@ResponseBody
+
+	
+	/*	
+	@ResponseBody
 	@PostMapping(value ="/findCenter")
 	public List<CenterVO> findCenter(@RequestParam(defaultValue="1")int pageNo, CenterVO centerVO, Model model) {
 		int totalRows = centerService.filterCountAllCenters(centerVO.getCenterName());
@@ -138,14 +138,17 @@ public class CenterController {
 	}
 	*/
 	
+	/**
+	 * 센터 정보 일괄 업로드
+	 * */
 	@GetMapping(value="/centerExcelUpload")
 	public String excelUplaod() {
 		return "jsp/center/excelupload";
 	}
 
 	/**
-	 * @author 임유진
 	 * 담당자가 지정되어있지 않은 센터 조회
+	 * @author 임유진
 	 * @return {List<맵핑가능센터>}
 	 * */
 	@RequestMapping("/availCenter")
@@ -181,11 +184,10 @@ public class CenterController {
 	 * 센터 이미지 조회
 	 * @author 임유진
 	 * @param {int} 센터 코드
-	 * @return {List<해당 코드의 사진>}
+	 * @return {List<FileInfoVO>} 해당 코드의 사진들 리스트 
 	 * */
 	@RequestMapping("/getCenterImages/{centerCode}")
 	public @ResponseBody List<FileInfoVO> getCenterImages(@PathVariable int centerCode) {
-		//센터코드에 맞춰서 파일리스트 리턴해주면 됨
 		return centerService.getCenterImageNames(centerCode);
 	}
 	

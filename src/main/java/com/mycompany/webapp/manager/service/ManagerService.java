@@ -12,17 +12,17 @@ import com.mycompany.webapp.manager.vo.ManagerVO;
 
 @Service
 public class ManagerService implements IManagerService {
-	
+
 	@Autowired
 	IManagerRepository managerRepository;
-	
+
 	/* author 은별 
 	 * 담당자 등록  */
 	@Override
 	public int insertManager(ManagerVO mgr) {
 		return managerRepository.insertManager(mgr);
 	}
-	
+
 	/* author 은별 
 	 * 담당자 목록 조회  */
 	@Override
@@ -30,14 +30,14 @@ public class ManagerService implements IManagerService {
 		List<ManagerVO> managerList = managerRepository.selectManagerList(pager);
 		return managerList;
 	}
-	
+
 	/* author 은별
 	 * 담당자 상세 조회 */
 	@Override
 	public ManagerVO selectManagerDetail(int userCode) {
 		return managerRepository.selectManagerDetail(userCode);
 	}
-	
+
 	/* author 은별
 	 * 담당자 수정 */
 	@Override
@@ -45,37 +45,35 @@ public class ManagerService implements IManagerService {
 		return managerRepository.updateManagerInfo(mgr);
 	}
 	
-
-	
 	/**
-	 * @author �엫�쑀吏�
-	 * �떞�떦�옄�쓽 userCode濡� �떞�떦�븯�뒗 �꽱�꽣�뱾�쓽 �꽱�꽣肄붾뱶,�꽱�꽣紐�,二쇱냼 議고쉶
-	 * @param �떞�떦�옄 userCode
-	 * @return List<�떞�떦CenterVO>
+	 * 담당자의 userCode로 담당하는 센터들의 센터코드,센터명,주소 조회
+	 * @author 임유진
+	 * @param {int} 담당자 userCode
+	 * @return {List<CenterVO>} 담당 센터 리스트 
 	 * */
 	@Override
 	public List<CenterVO> getCenterByManager(int userCode) {
 		return managerRepository.getCenterByManager(userCode);
 	}
-	
+
 	/**
-	 * @author �엫�쑀吏�
-	 * �떞�떦�옄, �꽱�꽣 留듯븨 �빐�젣
-	 * @param �떞�떦�옄 userCode
-	 * @param �꽑�깮�맂 centerCode
-	 * @return �궘�젣�맂 �뻾 �닔
+	 * 담당자, 센터 맵핑 해제
+	 * @author 임유진
+	 * @param {int} 담당자 userCode
+	 * @param {int}선택된 centerCode
+	 * @return {int} 삭제된 행 수
 	 * */
 	@Override
 	public int cancelMapping(int userCode, int centerCode) {
 		return managerRepository.cancelMapping(userCode, centerCode);
 	}
-	
+
 	/**
-	 * @author �엫�쑀吏�
-	 * �떞�떦�옄, �꽱�꽣 留듯븨
-	 * @param �떞�떦�옄 userCode
-	 * @param �꽑�깮�맂 centerCode
-	 * @return �궫�엯�맂 �뻾 �닔
+	 * 담당자, 센터 맵핑
+	 * @author 임유진
+	 * @param 담당자 userCode
+	 * @param 선택된 centerCode
+	 * @return 삽입된 행 수
 	 * */
 	@Override
 	public int mapping(int userCode, int centerCode) {
@@ -88,23 +86,14 @@ public class ManagerService implements IManagerService {
 		return managerRepository.countAllMgr();
 	}
 
-@Override
-public List<ManagerVO> managerSearch(Pager pager, String keyword) {
-	return managerRepository.managerSearch(pager, keyword);
-}
+	@Override
+	public List<ManagerVO> managerSearch(Pager pager, String keyword) {
+		return managerRepository.managerSearch(pager, keyword);
+	}
 
-@Override
-public int managerCountByKeyword(String keyword) {
-	return managerRepository.managerCountByKeyword("%"+keyword+"%");
-}
+	@Override
+	public int managerCountByKeyword(String keyword) {
+		return managerRepository.managerCountByKeyword("%"+keyword+"%");
+	}
 
-
-
-
-
-
-
-	
-
-	
 }

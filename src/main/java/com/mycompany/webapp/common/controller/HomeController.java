@@ -3,32 +3,31 @@ package com.mycompany.webapp.common.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.mycompany.webapp.common.poi.POIClass;
-import com.mycompany.webapp.common.poi.ScorePOI;
 import com.mycompany.webapp.notice.dao.INoticeRepository;
 
-import lombok.extern.log4j.Log4j2;
-
+/**
+ * 공통적인 기능을 위한 HomeController
+ * */
 @Controller
 public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
 	@Autowired
 	INoticeRepository test;
-	
-	@Value("${file.path}")
-	private String filePath;
-	
+
+	/**
+	 * 메인 페이지
+	 * */
 	@RequestMapping("/")
 	public String home() {
 		return "home";
 	}
-	
+
+	/**
+	 * 로그인 페이지 
+	 * */
 	@RequestMapping("/login")
 	public String login() {
 		return "login";

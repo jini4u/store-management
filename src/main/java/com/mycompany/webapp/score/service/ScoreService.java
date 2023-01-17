@@ -29,6 +29,11 @@ public class ScoreService implements IScoreService {
 	@Value("${file.path}")
 	String filePath;
 	
+	/**
+	 * 점수 엑셀 파일 업로드 이력 조회 
+	 * @author 임유진
+	 * @return {List<Map<String, String>>} 파일 업로드 이력을 담은 Map의 List
+	 * */
 	@Override
 	public List<Map<String, String>> getScoreUploadHistory() {
 		List<Map<String, Object>> historyList = scoreRepository.getScoreUploadHistory();
@@ -54,7 +59,7 @@ public class ScoreService implements IScoreService {
 	//유진
 	//전체 그룹코드 조회
 	@Override
-	public List<Map<String, String>> getAllGroupCodes() {
+	public List<Map<String, Object>> getAllGroupCodes() {
 		return scoreRepository.getAllGroupCodes();
 	}
 

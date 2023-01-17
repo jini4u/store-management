@@ -47,6 +47,7 @@ public class StatController {
 		Pager managerPager = new Pager(countAllManagers, 1, countAllManagers, 1);
 		model.addAttribute("managerList", managerService.selectManagerList(managerPager));
 		
+		model.addAttribute("codeList", statService.getCodes());
 		return "jsp/statistics";
 	}
 	
@@ -61,8 +62,14 @@ public class StatController {
 		return statService.getCenterAvgScores(centerCode);
 	}
 	
+	/**
+	 * 담당자 코드를 이용한 담당자 평균 점수와 모든 담당자의 점수 조회
+	 * @author 임유진
+	 * @param {int} 담당자 코드
+	 * @return {Map<String, List<ScoreVO>>} 전체 평균과 담당자 평균들을 담은 리스트
+	 * */
 	@RequestMapping("/managerAvgScore/{userCode}")
-	public Map<String, List<ScoreVO>> getManagerAvgScores(@PathVariable int userCode){
-		return null;
+	public @ResponseBody Map<String, List<ScoreVO>> getManagerAvgScores(@PathVariable int userCode){
+		return statService.getManagerAvgScores(userCode);
 	}
 }

@@ -34,6 +34,7 @@ public interface ICenterService {
 	//센터 사진 정보 수정(originalName, fileDetail)
 	int updateImage(FileInfoVO file, int centerCode, String oldOriginalName);
 	
+	//센터 사진 삭제 
 	int deleteImage(List<Integer> fileNoList, int centerCode);
 	
 	//센터 검색된 수
