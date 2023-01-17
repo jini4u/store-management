@@ -23,7 +23,7 @@ public interface ICenterRepository {
 	public String centerCondition(CenterVO centerVO);
 	
 	//센터 검색
-	public List<CenterVO> findCenter(@Param("pager")Pager pager, @Param("centerVO")CenterVO centerVO);
+	public List<CenterVO> findCenter(@Param("filterPager")Pager filterPager, @Param("keyword")String keyword);
 	
 	//유진
 	int countAllCenters();
@@ -34,5 +34,5 @@ public interface ICenterRepository {
 	int deleteImage(int fileNo);
 	
 	//센터 검색된 수 받아오는 것
-	int CountAllCenters(String centerName);
+	int filterCountAllCenters(String keyword);
 }

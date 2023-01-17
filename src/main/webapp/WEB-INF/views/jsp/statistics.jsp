@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="resources/css/statistics.css"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/statistics.css"/>
 <div class="titleBox">
-<img src="resources/images/trend.png">
+<img src="${pageContext.request.contextPath}/resources/images/trend.png">
 <h2>통계보기</h2>
 </div>
 <div id="buttonsdiv">
-	<button class="menubtn center">센터별</button><button class="menubtn manager">담당자별</button><button class="menubtn code">점수항목별</button><button class="menubtn">TOP3</button>
+	<button class="menubtn center clicked">센터별</button><button class="menubtn manager">담당자별</button><button class="menubtn code">점수항목별</button><button class="menubtn">TOP3</button>
 </div>
 <div id="statisticcontentdiv">
 	<div id="searchlistdiv">
@@ -16,41 +17,15 @@
 				aria-hidden="true"></i>
 			</a>
 		</div>
-		<table id="centerlisttable" border="1" class="center table">
-			<tr>
-				<td class="listitem">중앙센터</td>
-			</tr>
-			<tr>
-				<td class="listitem">서울역센터</td>
-			</tr>
-			<tr>
-				<td class="listitem">대화역센터</td>
-			</tr>
-			<tr>
-				<td class="listitem">신촌센터</td>
-			</tr>
-			<tr>
-				<td class="listitem">연신내센터</td>
-			</tr>
-			<tr>
-				<td class="listitem">홍대센터</td>
-			</tr>
-			<tr>
-				<td class="listitem">구로디지털단지역센터</td>
-			</tr>
-			<tr>
-				<td class="listitem">진접센터</td>
-			</tr>
-			<tr>
-				<td class="listitem">당고개센터</td>
-			</tr>
-			<tr>
-				<td class="listitem">마석센터</td>
-			</tr>
-			<tr>
-				<td class="listitem">동래센터</td>
-			</tr>
-		</table>
+		<div id="centertablediv">
+			<table id="centerlisttable" border="1" class="center table">
+				<c:forEach items="${centerList}" var="center">
+					<tr>
+						<td class="listitem" id="center${center.centerCode}">${center.centerName}</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
 		
 		<table id="managerlisttable" border="1" class="manager table">
 			<tr>
@@ -127,10 +102,8 @@
 	<div id="rightdiv">
 
 		<div id="graphdiv">
-			<h2><p id="centername">신촌센터</p> <p id="statisticcontent">평균 점수 추이</p></h2>
-			<img src="resources/images/graph.jpg" id="graphIMG">
-			<img src="resources/images/blueGraph.jpg" id="blueIMG">
-			<img src="resources/images/codeGraph.jpg" id="codeIMG">
+			<h2 id="graphtitle"><p id="centername"></p> <p id="statisticcontent">평균 점수 추이</p></h2>
+			<div id="container"></div>
 		</div>
 		<div id="infodiv">
 			<div>
@@ -149,4 +122,8 @@
 		
 	</div>
 </div>
-<script src="resources/js/statistics.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/statistics.js"></script>

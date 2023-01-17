@@ -34,7 +34,7 @@ import com.mycompany.webapp.common.vo.Pager;
  * @       수정일                  수정자                 수정내용
  * @ ==============   ============   ===========
  * @
- * @author 이소정
+ * @author
  * **/
 @RequestMapping("/center")
 @Controller
@@ -47,11 +47,11 @@ public class CenterController {
 	private String filePath;
 
 	/**
-	 * 
-	 * @param 점포 사진을 조회한다.
-	 * @param model
-	 * @return
-	 */
+	 * 확인해보기,,
+	 * @author 이소정
+	 * @param int 페이지 번호, keyword, model, centerVO
+	 * @return centerlist.jsp
+	 * */
 	@RequestMapping(value="/centerPhoto")
 	public String manageCenterPhoto(@RequestParam(defaultValue="1") int pageNo, Model model) {
 		int totalRows = centerService.countAllCenters();
@@ -61,7 +61,13 @@ public class CenterController {
 		model.addAttribute("pager", pager);
 		return "jsp/center/centerphoto";
 	}
-
+	
+	/**
+	 * 센터 정보 등록
+	 * @author 이소정
+	 * @param int 페이지 번호, centerVO
+	 * @return List<센터 정보 리스트>
+	 * */
 	@ResponseBody
 	@PostMapping(value="/centerInsert")
 	public List<CenterVO> insertCenter(@RequestParam(defaultValue="1") int pageNo, CenterVO centerVO) {
@@ -74,21 +80,40 @@ public class CenterController {
 	}
 
 	/**
-	 * 
-	 * @param 점포 리스트를 조회한다.
-	 * @param model
-	 * @return
-	 */
+	 * 센터 정보 리스트
+	 * @author 이소정
+	 * @param int 페이지 번호, keyword, model, centerVO
+	 * @return centerlist.jsp
+	 * */
 	@GetMapping(value="/centerList")
-	public String centerList(@RequestParam(defaultValue="1")int pageNo, Model model, CenterVO centerVO){
+	public String centerList(@RequestParam(defaultValue="1")int pageNo,@RequestParam(value="keyword", required=false)String keyword, Model model, CenterVO centerVO){
+		if (keyword == null) {
 		int totalRows = centerService.countAllCenters();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		model.addAttribute("pager", pager);	
-		model.addAttribute("centerList", centerService.centerList(pager));
-		
+		model.addAttribute("centerList", centerService.findCenter(pager, keyword));
+		logger.info( "센터리스트" +centerVO.getCenterName());
+		}else{
+			int filterTotalRows = centerService.filterCountAllCenters(keyword);
+			Pager filterPager = new Pager(10, 10, filterTotalRows, pageNo);
+			List<CenterVO> filterCenterList = centerService.findCenter(filterPager, keyword);
+			if (filterCenterList.size() != 0) {
+				model.addAttribute("centerList", filterCenterList);
+				model.addAttribute("pager", filterPager);
+			}else {
+				model.addAttribute("pager", new Pager(1, 1, 1, 1));
+				model.addAttribute("centerListN" , "empty");
+				
+			}
+		}
 		return "jsp/center/centerlist";
 	}
-	
+	/**
+	 * 센터 정보 수정
+	 * @author 이소정
+	 * @param int 페이지 번호, model, centerVO
+	 * @return List<센터리스트>
+	 * */
 	@ResponseBody
 	@PostMapping(value ="/centerUpdate")
 	public List<CenterVO> centerUpdate(@RequestParam(defaultValue="1")int pageNo, Model model, CenterVO centerVO){
@@ -100,7 +125,7 @@ public class CenterController {
 		System.out.println(centerList);
 		return centerList;
 	}
-	@ResponseBody
+/*	@ResponseBody
 	@PostMapping(value ="/findCenter")
 	public List<CenterVO> findCenter(@RequestParam(defaultValue="1")int pageNo, CenterVO centerVO, Model model) {
 		int totalRows = centerService.filterCountAllCenters(centerVO.getCenterName());
@@ -111,6 +136,7 @@ public class CenterController {
 		logger.info(centerList+"");
 		return centerList;
 	}
+	*/
 	
 	@GetMapping(value="/centerExcelUpload")
 	public String excelUplaod() {
