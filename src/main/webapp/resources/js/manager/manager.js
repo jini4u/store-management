@@ -1,28 +1,29 @@
 window.onload = function(){
-   
+
+var mgrListTd;
 $(".updateModal").click(function(){ 
    
    var str = ""
-   var tdArr = new Array();   // 배열 선언
+   var mgrTdArr = new Array();   // 배열 선언
    var updateModal = $(this);
    
    // updateModal.parent() : updateModal의 부모는 <td>이다.
    // updateModal.parent().parent() : <td>의 부모이므로 <tr>이다.
-   var tr = updateModal.parent().parent();
-   var td = tr.children();
+   var mgrListTr = updateModal.parent().parent();
+   mgrListTd = mgrListTr.children();
    
-   console.log("클릭한 Row의 모든 데이터 : "+tr.text());
+   console.log("클릭한 Row의 모든 데이터 : "+mgrListTr.text());
    
-   var userCode = td.eq(0).text();
-   var userName = td.eq(1).text();
-   var userBirth = td.eq(2).text();
-   var userTel = td.eq(3).text();
-   var userEmail = td.eq(4).text();
-   var userTeamCode = td.eq(5).text();
-   var userHireDate = td.eq(6).text();
+   var userCode = mgrListTd.eq(0).text();
+   var userName = mgrListTd.eq(1).text();
+   var userBirth = mgrListTd.eq(2).text();
+   var userTel = mgrListTd.eq(3).text();
+   var userEmail = mgrListTd.eq(4).text();
+   var userTeamCode = mgrListTd.eq(5).text();
+   var userHireDate = mgrListTd.eq(6).text();
    var userResignDate = '';
-    if(td.eq(7)) {
-       userResignDate =  td.eq(7).text();
+    if(mgrListTd.eq(7)) {
+       userResignDate =  mgrListTd.eq(7).text();
     }
    
    $("#userCodeInfo").val(userCode);
@@ -34,7 +35,7 @@ $(".updateModal").click(function(){
    $("#userHireDateInfo").val(userHireDate);
    $("#userResignDateInfo").val(userResignDate);
    
-   console.log("배열에 담긴 값 : "+tdArr);
+   console.log("배열에 담긴 값 : "+mgrTdArr);
    
    //담당 센터명 조회
     $.ajax({
@@ -56,6 +57,64 @@ $(".updateModal").click(function(){
      });
 });
 
+//담당자 수정
+$("#updatemgr").click(function (){
+   let userCode=$("#userCodeInfo").val();
+   let userPassWord=$("#userPasswordInfo").val();
+   let userName=$("#userNameInfo").val();
+   let userBirth=$("#userBirthInfo").val();
+   let userTel=$("#userTelInfo").val();
+   let userEmail=$("#userEmailInfo").val();
+   let userTeamCode=$("#userTeamCodeInfo").val();
+   let userHireDate=$("#userHireDateInfo").val();
+   let userResignDate = $("#userResignDateInfo").val();
+   //휴대전화번호 뒤에 4자리 자르기
+   let pwCut= userTel.substr(9, 12);
+   let pageNo = $("#now-page").text();  
+   
+   var data = {
+ 		   pageNo : pageNo,
+            userCode : userCode,
+            userPassword : pwCut,
+            userName : userName,
+            userBirth : userBirth,
+            userTel : userTel,
+            userEmail : userEmail,
+            userTeamCode : userTeamCode,
+            userHireDate : userHireDate,
+            userResignDate : userResignDate,
+      };
+
+      console.log(data);
+
+      $.ajax({
+         type:"POST",
+         url: "/manager/managerUpdate",
+         data: data,
+         success: function(results) {
+        	 mgrListTd.eq(0).text(results.userCode);
+             mgrListTd.eq(1).text(results.userName);
+             mgrListTd.eq(2).text(dateFormat(new Date(results.userBirth)));
+             mgrListTd.eq(3).text(results.userTel);
+             mgrListTd.eq(4).text(results.userEmail);
+             mgrListTd.eq(5).text(results.userTeamCode);
+             mgrListTd.eq(6).text(dateFormat(new Date(results.userHireDate))); 
+             if(results.userResignDate) {
+                userResignDate =  mgrListTd.eq(7).text(dateFormat(new Date(results.userResignDate)));
+             }
+             
+            alert("수정 성공");
+            changeColor();
+         },
+
+         error: function( request, status, error ){
+            alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
+
+         }
+
+      });
+
+});
 
    
    
@@ -138,142 +197,9 @@ $(".updateModal").click(function(){
       });
    });
    
-
-
-   //담당자 수정
-   $("#updatemgr").click(function (){
-      let userCode=$("#userCodeInfo").val();
-      let userPassWord=$("#userPasswordInfo").val();
-      let userName=$("#userNameInfo").val();
-      let userBirth=$("#userBirthInfo").val();
-      let userTel=$("#userTelInfo").val();
-      let userEmail=$("#userEmailInfo").val();
-      let userTeamCode=$("#userTeamCodeInfo").val();
-      let userHireDate=$("#userHireDateInfo").val();
-      let userResignDate = $("#userResignDateInfo").val();
-      //휴대전화번호 뒤에 4자리 자르기
-      let pwCut= userTel.substr(9, 12);
-      let updateModal = $(".updateModal").val();
-         
-      // 수정
-      var data = {
-               userCode : userCode,
-               userPassword : pwCut,
-               userName : userName,
-               userBirth : userBirth,
-               userTel : userTel,
-               userEmail : userEmail,
-               userTeamCode : userTeamCode,
-               userHireDate : userHireDate,
-               userResignDate : userResignDate,
-               updateModal : updateModal
-         };
-
-         console.log(data);
-
-         $.ajax({
-            type:"POST",
-            url: "/manager/managerUpdate",
-            data: data,
-            success: function(result) {
-
-               let results = result;
-               let str = " ";
-               $.each(results, function(i) {
-                  let birth = new Date(results[i].userBirth);
-                  let hiredate = new Date(results[i].userHireDate);
-                  let resigndate = new Date(results[i].userResignDate);
-
-
-                  str += "<td>" + results[i].userCode + "</td><td>" + 
-                  results[i].userName + "</td><td>" + dateFormat(birth) + "</td><td>" +
-                  results[i].userTel + "</td><td>" + results[i].userEmail +"</td><td>" +
-                  results[i].userTeamCode + "</td><td>"+ dateFormat(hiredate) + "</td><td>" +
-                  dateFormat(resigndate)+ "</td>"+
-                   "<td><button class='updateModal' data-toggle='modal'data-target='#updateModal'>수정</button></td>";
-               });
-               $("#mgrList").html(str);
-               alert("수정 성공");
-               changeColor();
-            },
-
-            error: function( request, status, error ){
-               alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
-
-            }
-
-         });
-
-   });
   
 	
-   //담당자 수정
-   $("#updatemgr").click(function (){
-      let userCode=$("#userCodeInfo").val();
-      let userPassWord=$("#userPasswordInfo").val();
-      let userName=$("#userNameInfo").val();
-      let userBirth=$("#userBirthInfo").val();
-      let userTel=$("#userTelInfo").val();
-      let userEmail=$("#userEmailInfo").val();
-      let userTeamCode=$("#userTeamCodeInfo").val();
-      let userHireDate=$("#userHireDateInfo").val();
-      let userResignDate = $("#userResignDateInfo").val();
-      //휴대전화번호 뒤에 4자리 자르기
-      let pwCut= userTel.substr(9, 12);
-      let updateModal = $(".updateModal").val();
-         
-      // 수정
-      var data = {
-               userCode : userCode,
-               userPassword : pwCut,
-               userName : userName,
-               userBirth : userBirth,
-               userTel : userTel,
-               userEmail : userEmail,
-               userTeamCode : userTeamCode,
-               userHireDate : userHireDate,
-               userResignDate : userResignDate,
-               updateModal : updateModal
-         };
-
-         console.log(data);
-
-         $.ajax({
-            type:"POST",
-            url: "/manager/managerUpdate",
-            data: data,
-            success: function(result) {
-
-
-               //등록 성공 시 담당자 전체 목록 리스트 마지막 열에 추가 됨
-               let results = result;
-               let str = " ";
-               $.each(results, function(i) {
-                  let birth = new Date(results[i].userBirth);
-                  let hiredate = new Date(results[i].userHireDate);
-                  let resigndate = new Date(results[i].userResignDate);
-
-                  str +="<tr>"
-                  str += "<td>" + results[i].userCode + "</td><td>" + 
-                  results[i].userName + "</td><td>" + dateFormat(birth) + "</td><td>" +
-                  results[i].userTel + "</td><td>" + results[i].userEmail +"</td><td>" +
-                  results[i].userTeamCode + "</td><td>"+ dateFormat(hiredate) + "</td><td>" +
-                  dateFormat(resigndate)+ "</td>"+
-                   "<td><button class='updateModal' data-toggle='modal'data-target='#updateModal'>수정</button></td>";
-                  str += "</tr>"; 
-               });
-               $("#mgrList").html(str);
-               alert("수정 성공");
-               changeColor();
-            },
-
-            error: function( request, status, error ){
-               alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
-
-            }
-
-         });
-
-   });
+  
+  
 }
 
