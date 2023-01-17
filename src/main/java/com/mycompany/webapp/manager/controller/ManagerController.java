@@ -40,6 +40,7 @@ public class ManagerController {
 	      List<ManagerVO> managerList = managerService.selectManagerList(pager);
 	      model.addAttribute("managerList", managerList);
 	      model.addAttribute("pager", pager);
+	      model.addAttribute("mgrURL","/manager/managerList");
 
 	      logger.info("managerList : " + managerList);
 	      return "jsp/manager/managerlookup";
@@ -85,14 +86,14 @@ public class ManagerController {
 	  담담자 수정 POST*/
 	@ResponseBody
 	@PostMapping(value="/managerUpdate")
-	public  List<ManagerVO> managerUpdate(@RequestParam(defaultValue="1") int pageNo, ManagerVO mgr) {
+	public  ManagerVO managerUpdate(@RequestParam(defaultValue="1") int pageNo, ManagerVO mgr) {
 		logger.info(mgr.toString());
 		managerService.managerUpdate(mgr);
 		int totalRows = managerService.countAllMgr();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
-		List<ManagerVO> managerList = managerService.selectManagerList(pager);
-		logger.info(managerList.toString());
-		return managerList;
+		/*List<ManagerVO> managerList = managerService.selectManagerList(pager);
+		logger.info(managerList.toString());*/
+		return mgr;
 	}
 
 	/* author 은별
@@ -107,15 +108,11 @@ public class ManagerController {
 	      if (mgrSearchList.size() != 0) {
 	            model.addAttribute("managerList", mgrSearchList);
 	            model.addAttribute("pager", searchPager);
+	            model.addAttribute("mgrURL","/manager/managerSearch");
 	         }else {
 	            model.addAttribute("pager", new Pager(1, 1, 1, 1));
 	            model.addAttribute("managerListCheck", "empty");
 	         }
-	/*      if(!mgrSearchList.isEmpty()) {
-				model.addAttribute("managerList",mgrSearchList);	// 담당자 존재 경우
-			} else {
-				model.addAttribute("managerListCheck", "empty");	// 담당자 존재하지 않을 경우
-			}*/
 	      
 	      logger.info(searchPager.toString());
 	      model.addAttribute("keyword",keyword);
