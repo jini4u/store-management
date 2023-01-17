@@ -179,11 +179,12 @@ var addr3;
 var addr4;
 var addr5;
 
-var takeTd = $("#centerDetails").click(function (){
-	//현재 row의 정보 가져오기
+$("#centerDetails").click(function (){
+	//현재 row의 정보 가져오기 tr->td로 해보기
 	var thisRow = $(this).closest('tr');
 	//주소 input 값 가져오기
 	addr0 = thisRow.find('td:eq(0)');
+	console.log("but"+thisRow.find('td:eq(0)').text());
 	addr1 = thisRow.find('td:eq(1)');
 	addr2 = thisRow.find('td:eq(2)');
 	addr3 = thisRow.find('td:eq(3)');
@@ -263,8 +264,6 @@ $("#centerSavedBtn").click(function (){
 	        				
 	        				console.log(imgCenterCode);
 	        				console.log("res"+results[i].centerCode);
-	        				
-	        				takeTd;
 	        				
 	        				addr0.text(results[i].centerCode);
 	        				addr1.text(results[i].centerName);
