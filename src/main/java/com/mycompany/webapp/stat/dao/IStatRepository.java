@@ -9,4 +9,5 @@ import com.mycompany.webapp.score.vo.ScoreVO;
 @Repository
 public interface IStatRepository {
 	List<ScoreVO> getAvgScoreByCenterCode(int centerCode);
+	List<ScoreVO> getAvgScoreByUserCode(int userCode);
 }

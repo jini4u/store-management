@@ -57,7 +57,12 @@ public class StatController {
 	 *  @return {Map<String, List<ScoreVO>>} 전체 평균과 센터 평균들을 담은 리스트 
 	 * */
 	@RequestMapping("/centerAvgScore/{centerCode}")
-	public @ResponseBody Map<String, List<ScoreVO>> getAvgScores(@PathVariable int centerCode){
-		return statService.getAvgScores(centerCode);
+	public @ResponseBody Map<String, List<ScoreVO>> getCenterAvgScores(@PathVariable int centerCode){
+		return statService.getCenterAvgScores(centerCode);
+	}
+	
+	@RequestMapping("/managerAvgScore/{userCode}")
+	public Map<String, List<ScoreVO>> getManagerAvgScores(@PathVariable int userCode){
+		return null;
 	}
 }
