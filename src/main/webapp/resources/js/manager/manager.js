@@ -128,44 +128,8 @@ $(".updateModal").click(function(){
          url: "/manager/managerInsert",
          data: data,
          success: function(result) {
-
-            // 전체 테이블 지우기
-            $("#mgrListTr").html("");
-
-            //등록 성공 시 담당자 전체 목록 리스트 마지막 열에 추가 됨
-            let results = result;
-
-            let str = "";
-            $.each(results, function(i) {
-               let birth = new Date(results[i].userBirth);
-               let hiredate = new Date(results[i].userHireDate);
-
-               str += "<tr>";
-               str += "<td>" + results[i].userCode + "</td><td>" + 
-               results[i].userName + "</td><td>" + dateFormat(birth) + "</td><td>" +
-               results[i].userTel + "</td><td>" + results[i].userEmail +"</td><td>" +
-               results[i].userTeamCode + "</td><td>"+ dateFormat(hiredate) + "</td>"+
-                "<td><button class='updateModal' data-toggle='modal'data-target='#updateModal'>수정</button></td>";
-               str += "</tr>";
-            });
-
-            $("#mgrList").html(str);
-
-            $("#userCode").val('');
-            $("#userName").val('');
-            $("#userBirth").val('');
-            $("#userTel").val('');
-            $("#userEmail").val('');
-            $("#userTeamCode").val('');            
-            $("#userHireDate").val('');
-            $("#userResignDate").val('');   
-
-            alert("담당자 등록에 성공하셨습니다.")
-            location.replace("/manager/managerList")
-            changeColor();
-/*            $('#insertModal').hide();
-            $('.modal-backdrop').hide();*/
-            
+        	 location.href = "/manager/managerList";  
+          /*  $("#mgrList").html(str);*/
          },
          error: function() {
             alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
@@ -175,6 +139,74 @@ $(".updateModal").click(function(){
    });
    
 
+
+   //담당자 수정
+   $("#updatemgr").click(function (){
+      let userCode=$("#userCodeInfo").val();
+      let userPassWord=$("#userPasswordInfo").val();
+      let userName=$("#userNameInfo").val();
+      let userBirth=$("#userBirthInfo").val();
+      let userTel=$("#userTelInfo").val();
+      let userEmail=$("#userEmailInfo").val();
+      let userTeamCode=$("#userTeamCodeInfo").val();
+      let userHireDate=$("#userHireDateInfo").val();
+      let userResignDate = $("#userResignDateInfo").val();
+      //휴대전화번호 뒤에 4자리 자르기
+      let pwCut= userTel.substr(9, 12);
+      let updateModal = $(".updateModal").val();
+         
+      // 수정
+      var data = {
+               userCode : userCode,
+               userPassword : pwCut,
+               userName : userName,
+               userBirth : userBirth,
+               userTel : userTel,
+               userEmail : userEmail,
+               userTeamCode : userTeamCode,
+               userHireDate : userHireDate,
+               userResignDate : userResignDate,
+               updateModal : updateModal
+         };
+
+         console.log(data);
+
+         $.ajax({
+            type:"POST",
+            url: "/manager/managerUpdate",
+            data: data,
+            success: function(result) {
+
+               let results = result;
+               let str = " ";
+               $.each(results, function(i) {
+                  let birth = new Date(results[i].userBirth);
+                  let hiredate = new Date(results[i].userHireDate);
+                  let resigndate = new Date(results[i].userResignDate);
+
+
+                  str += "<td>" + results[i].userCode + "</td><td>" + 
+                  results[i].userName + "</td><td>" + dateFormat(birth) + "</td><td>" +
+                  results[i].userTel + "</td><td>" + results[i].userEmail +"</td><td>" +
+                  results[i].userTeamCode + "</td><td>"+ dateFormat(hiredate) + "</td><td>" +
+                  dateFormat(resigndate)+ "</td>"+
+                   "<td><button class='updateModal' data-toggle='modal'data-target='#updateModal'>수정</button></td>";
+               });
+               $("#mgrList").html(str);
+               alert("수정 성공");
+               changeColor();
+            },
+
+            error: function( request, status, error ){
+               alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
+
+            }
+
+         });
+
+   });
+  
+	
    //담당자 수정
    $("#updatemgr").click(function (){
       let userCode=$("#userCodeInfo").val();
@@ -243,6 +275,5 @@ $(".updateModal").click(function(){
          });
 
    });
-   
 }
 

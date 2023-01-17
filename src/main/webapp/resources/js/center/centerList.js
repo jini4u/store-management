@@ -94,7 +94,6 @@ const leftTable = document.querySelector("#center-left");
 var leftTableTr = leftTable.rows;
 
 var imgCenterCode;
-var updateCenterName;
 
 function CallcenterList() {
 	$("#centerName").attr("readonly", true);
@@ -108,8 +107,6 @@ function CallcenterList() {
 	let centerclosingdate = document.querySelector("#centerClosingDate");
 	let centerguide = document.querySelector("#centerGuide");
 
-//	$('#myModal').hide();
-//	$('.modal-backdrop').remove();
 
 	for(var i=1; i<leftTableTr.length; i++) {
 		var row = leftTableTr[i];
@@ -117,7 +114,6 @@ function CallcenterList() {
 			centercode.value = this.cells[0].textContent;
 			imgCenterCode = this.cells[0].textContent;
 			centername.value = this.cells[1].innerHTML;
-			updateCenterName = this.cells[1].innerHTML;
 			centertel.value = this.cells[2].innerHTML;
 			centeraddress.value = this.cells[3].innerHTML;
 			centeropeningdate.value = this.cells[4].innerText;
@@ -172,24 +168,22 @@ function getDetailAjax() {
 	$('#myModal').hide();
 	$('.modal-backdrop').hide();
 }
-var addr0;
-var addr1;
-var addr2;
-var addr3;
-var addr4;
-var addr5;
 
-$("#centerDetails").click(function (){
-	//현재 row의 정보 가져오기 tr->td로 해보기
-	var thisRow = $(this).closest('tr');
-	//주소 input 값 가져오기
-	addr0 = thisRow.find('td:eq(0)');
-	console.log("but"+thisRow.find('td:eq(0)').text());
-	addr1 = thisRow.find('td:eq(1)');
-	addr2 = thisRow.find('td:eq(2)');
-	addr3 = thisRow.find('td:eq(3)');
-	addr4 = thisRow.find('td:eq(4)');
-	addr5 = thisRow.find('td:eq(5)');
+
+var str;
+var tdArr;
+var tr;
+var td;
+//테이블 클릭시 td값
+$("#center-left tr").click(function (){
+	str =""
+	tdArr = new Array(); //배열 선언
+	
+	//현재 클릭된 Row(<tr>)
+	tr = $(this);
+	td = tr.children();
+	
+	console.log("클릭한 td데이터 :" + td.text());
 });
 
 
@@ -265,12 +259,14 @@ $("#centerSavedBtn").click(function (){
 	        				console.log(imgCenterCode);
 	        				console.log("res"+results[i].centerCode);
 	        				
-	        				addr0.text(results[i].centerCode);
-	        				addr1.text(results[i].centerName);
-	        				addr2.text(results[i].centerTel);
-	        				addr3.text(results[i].centerAddress);
-	        				addr4.text(results[i].centerOpeningDate);
-	        				addr5.text(results[i].centerCondition);
+	        				td.eq(0).text(results[i].centerCode);
+	        				td.eq(1).text(results[i].centerName);
+	        				td.eq(2).text(results[i].centerTel);
+	        				td.eq(3).text(results[i].centerAddress);
+	        				td.eq(4).text(results[i].centerOpeningDate);
+	        				td.eq(5).text(results[i].centerCondition);
+	        				
+	        				
 						}
 	        		});
 	        		$("#findCenterName").val('');

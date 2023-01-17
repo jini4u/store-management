@@ -108,7 +108,6 @@ public class ManagerController {
 	            model.addAttribute("managerList", mgrSearchList);
 	            model.addAttribute("pager", searchPager);
 	         }else {
-	            model.addAttribute("managerList", mgrSearchList);
 	            model.addAttribute("pager", new Pager(1, 1, 1, 1));
 	            model.addAttribute("managerListCheck", "empty");
 	         }
