@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.stat.dao.IStatRepository">
+
 <select id="getAvgScoreByCenterCode" parameterType="int" resultType="com.mycompany.webapp.score.vo.ScoreVO">
 SELECT check_year AS "checkYear"
 		, check_season AS "checkSeason"
@@ -18,4 +19,37 @@ SELECT check_year AS "checkYear"
 	ORDER BY check_year, check_season
 	</if>
 </select>
+
+<select id="getAvgScoreByUserCode" parameterType="int" resultType="com.mycompany.webapp.score.vo.ScoreVO">
+<if test="userCode != 0">
+SELECT check_year AS "checkYear"
+		, check_season AS "checkSeason"
+		, AVG(checkScore) AS "checkScore"
+		, user_code
+FROM (SELECT check_year
+			, check_season
+			, AVG(check_score) AS checkScore
+			, user_code
+			, center_code
+	FROM inspection
+	WHERE user_code = #{userCode}
+	GROUP BY check_season, check_year, center_code, user_code)
+GROUP BY check_year, check_season, user_code
+ORDER BY check_year, check_season
+</if>
+<if test="userCode == 0">
+SELECT check_year AS "checkYear"
+		, check_season AS "checkSeason"
+		, AVG(checkScore) AS "checkScore"
+FROM (SELECT check_year
+			, check_season
+			, AVG(check_score) AS checkScore
+			, user_code
+	FROM inspection
+	GROUP BY check_year, check_season, user_code)
+GROUP BY check_year, check_season
+ORDER BY check_year, check_season
+</if>
+</select>
+
 </mapper>
