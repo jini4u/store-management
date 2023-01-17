@@ -47,9 +47,9 @@ public class CenterController {
 	private String filePath;
 
 	/**
-	 * 확인해보기,,
-	 * @author 이소정
-	 * @param int 페이지 번호, keyword, model, centerVO
+	 * 센터별 사진을 조회
+	 * @author 임유진
+	 * @param {int} 페이지 번호
 	 * @return centerlist.jsp
 	 * */
 	@RequestMapping(value="/centerPhoto")
@@ -146,7 +146,7 @@ public class CenterController {
 	/**
 	 * @author 임유진
 	 * 담당자가 지정되어있지 않은 센터 조회
-	 * @return List<맵핑가능센터>
+	 * @return {List<맵핑가능센터>}
 	 * */
 	@RequestMapping("/availCenter")
 	public @ResponseBody List<CenterVO> getAvailableCenterList(){

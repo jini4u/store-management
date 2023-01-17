@@ -22,11 +22,16 @@ public class StatService implements IStatService {
 	 *  @return {Map<String, List<ScoreVO>>} 전체 평균과 센터 평균들을 담은 리스트 
 	 * */
 	@Override
-	public Map<String, List<ScoreVO>> getAvgScores(int centerCode) {
+	public Map<String, List<ScoreVO>> getCenterAvgScores(int centerCode) {
 		Map<String, List<ScoreVO>> responseMap = new HashMap<String, List<ScoreVO>>();
 		responseMap.put("entireAvg", statRepository.getAvgScoreByCenterCode(0));
 		responseMap.put("centerAvg", statRepository.getAvgScoreByCenterCode(centerCode));
 		return responseMap;
 	}
 
+	
+	@Override
+	public Map<String, List<ScoreVO>> getManagerAvgScores(int userCode) {
+		return null;
+	}
 }

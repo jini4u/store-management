@@ -8,5 +8,6 @@ import org.springframework.stereotype.Service;
 import com.mycompany.webapp.score.vo.ScoreVO;
 
 public interface IStatService {
-	Map<String, List<ScoreVO>> getAvgScores(int centerCode);
+	Map<String, List<ScoreVO>> getCenterAvgScores(int centerCode);
+	Map<String, List<ScoreVO>> getManagerAvgScores(int userCode);
 }

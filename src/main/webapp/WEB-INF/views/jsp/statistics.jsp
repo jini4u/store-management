@@ -12,12 +12,12 @@
 <div id="statisticcontentdiv">
 	<div id="searchlistdiv">
 		<div class="search-box">
-			<input type="text" class="search-txt" name="" placeholder="검색">
-			<a class="search-btn" href="#"> <i class="fas fa-search"
+			<input type="text" class="search-txt" id="searchinput" placeholder="검색">
+			<a class="search-btn"> <i class="fas fa-search"
 				aria-hidden="true"></i>
 			</a>
 		</div>
-		<div id="centertablediv">
+		<div class="tablediv">
 			<table id="centerlisttable" border="1" class="center table">
 				<c:forEach items="${centerList}" var="center">
 					<tr>
@@ -26,78 +26,52 @@
 				</c:forEach>
 			</table>
 		</div>
-		
-		<table id="managerlisttable" border="1" class="manager table">
-			<tr>
-				<td class="listitem">이소정</td>
-			</tr>
-			<tr>
-				<td class="listitem">고은별</td>
-			</tr>
-			<tr>
-				<td class="listitem">정윤선</td>
-			</tr>
-			<tr>
-				<td class="listitem">임유진</td>
-			</tr>
-			<tr>
-				<td class="listitem">이정림</td>
-			</tr>
-			<tr>
-				<td class="listitem">정가영</td>
-			</tr>
-			<tr>
-				<td class="listitem">김영서</td>
-			</tr>
-			<tr>
-				<td class="listitem">최혜민</td>
-			</tr>
-			<tr>
-				<td class="listitem">한혜원</td>
-			</tr>
-			<tr>
-				<td class="listitem">김나영</td>
-			</tr>
-			<tr>
-				<td class="listitem">이영진</td>
-			</tr>
-		</table>
-		
-		<table id="codelisttable" border="1" class="code table">
-			<tr>
-				<td class="listitem">센터 내부 위생관리</td>
-			</tr>
-			<tr>
-				<td class="listitem">의료폐기용품 관리</td>
-			</tr>
-			<tr>
-				<td class="listitem">의료기구 관리</td>
-			</tr>
-			<tr>
-				<td class="listitem">개인위생 관리</td>
-			</tr>
-			<tr>
-				<td class="listitem">문서보안 관리</td>
-			</tr>
-			<tr>
-				<td class="listitem">채혈 및 간호 업무</td>
-			</tr>
-			<tr>
-				<td class="listitem">프로모션 이행</td>
-			</tr>
-			<tr>
-				<td class="listitem">헌혈유보군 관리</td>
-			</tr>
-			<tr>
-				<td class="listitem">헌혈 혈액 상태 관리</td>
-			</tr>
-			<tr>
-				<td class="listitem">채혈 기구 예산안 적정성</td>
-			</tr>
-			<tr>
-				<td class="listitem">채혈자 기념품 예산안 적정성</td>
-			</tr>
-		</table>
+		<div class="tablediv">
+			<table id="managerlisttable" border="1" class="manager table">
+				<c:forEach items="${managerList}" var="manager">
+					<tr>
+						<td class="listitem" id="manager${manager.userCode}">${manager.userName}</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
+		<div class="tablediv">		
+			<table id="codelisttable" border="1" class="code table">
+				<tr>
+					<td class="listitem">센터 내부 위생관리</td>
+				</tr>
+				<tr>
+					<td class="listitem">의료폐기용품 관리</td>
+				</tr>
+				<tr>
+					<td class="listitem">의료기구 관리</td>
+				</tr>
+				<tr>
+					<td class="listitem">개인위생 관리</td>
+				</tr>
+				<tr>
+					<td class="listitem">문서보안 관리</td>
+				</tr>
+				<tr>
+					<td class="listitem">채혈 및 간호 업무</td>
+				</tr>
+				<tr>
+					<td class="listitem">프로모션 이행</td>
+				</tr>
+				<tr>
+					<td class="listitem">헌혈유보군 관리</td>
+				</tr>
+				<tr>
+					<td class="listitem">헌혈 혈액 상태 관리</td>
+				</tr>
+				<tr>
+					<td class="listitem">채혈 기구 예산안 적정성</td>
+				</tr>
+				<tr>
+					<td class="listitem">채혈자 기념품 예산안 적정성</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 	<div id="rightdiv">
 
