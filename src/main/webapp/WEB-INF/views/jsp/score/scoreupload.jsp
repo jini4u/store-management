@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/score/score.css" />
 
 <div class="titleBox">
-	<img src="${pageContext.request.contextPath}/resources/images/업로드.png">
+	<img src="${pageContext.request.contextPath}/resources/images/upload.png">
 	<h2>점수 일괄 등록</h2>
 </div>
 <div class='uploadbutton'>

@@ -68,14 +68,11 @@ $("#updatemgr").click(function (){
    let userTeamCode=$("#userTeamCodeInfo").val();
    let userHireDate=$("#userHireDateInfo").val();
    let userResignDate = $("#userResignDateInfo").val();
-   //휴대전화번호 뒤에 4자리 자르기
-   let pwCut= userTel.substr(9, 12);
    let pageNo = $("#now-page").text();  
    
    var data = {
- 		   pageNo : pageNo,
+ 		   	pageNo : pageNo,
             userCode : userCode,
-            userPassword : pwCut,
             userName : userName,
             userBirth : userBirth,
             userTel : userTel,
