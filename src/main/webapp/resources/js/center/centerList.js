@@ -26,7 +26,7 @@ let centerlist = function centerList(results){
 }
 let error = function( request, status, error ){
 	alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
-};	
+};
 
 let getToday = function() {
 	let date = new Date();

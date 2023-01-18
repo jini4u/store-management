@@ -36,7 +36,7 @@ public interface IManagerService {
 	//키워드별 담당자 검색
 	List<ManagerVO> managerSearch(Pager pager, String keyword);
 	// 키워드별 담당자 수  
-		int managerCountByKeyword(String keyword);
+	int managerCountByKeyword(String keyword);
 
 		
 	 

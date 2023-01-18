@@ -16,25 +16,18 @@ public interface IManagerRepository {
 	//담당자 등록
 	int insertManager(ManagerVO mgr);
 
-	//�떞�떦�옄 肄붾뱶 理쒕� 踰덊샇 
 	int selectMaxManagerNo();
 	
-	//�뙆�씪肄붾뱶 理쒕� 踰덊샇 
 	int selectMaxManagerFileNo();
 	
-	//�뙆�씪 �씪愿꾩뾽濡쒕뱶
 	int insertManagerFileData(FileInfoVO fileNo);
 	
-	//�떞�떦�옄 紐⑸줉 議고쉶
 	List<ManagerVO> selectManagerList(Pager pager);
 	
-	//�떞�떦�옄 �긽�꽭 議고쉶
 	ManagerVO selectManagerDetail(int userCode);
 	
-	//�떞�떦�옄 �젙蹂� �닔�젙
 	int updateManagerInfo(ManagerVO mgr);
 	
-	//�떞�떦�옄 �쟾泥� �씤�썝 �닔
 	int countAllMgr();
 	
 	//키워드별 담당자 검색
@@ -42,12 +35,10 @@ public interface IManagerRepository {
 	// 키워드별 담당자 수  
 	int managerCountByKeyword(String keyword);
 	
-	//�쑀吏�
-	//userCode濡� �떞�떦 �꽱�꽣 議고쉶
+	//담당하는 센터 리스트 조회 
 	List<CenterVO> getCenterByManager(int userCode);
-	//userCode,centerCode濡� 留듯븨�빐�젣
+	//맵핑 해제 
 	int cancelMapping(@Param("userCode") int userCode, @Param("centerCode") int centerCode);
-	//留듯븨
+	//맵핑 설정 
 	int mapping(@Param("userCode") int userCode, @Param("centerCode") int centerCode);
-
 }

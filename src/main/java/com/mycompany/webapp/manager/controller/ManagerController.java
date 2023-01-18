@@ -23,6 +23,9 @@ import com.mycompany.webapp.common.vo.Pager;
 import com.mycompany.webapp.manager.service.IManagerService;
 import com.mycompany.webapp.manager.vo.ManagerVO;
 
+/**
+ * 담당자 메뉴 관련 기능 
+ * */
 @RequestMapping("/manager")
 @Controller
 public class ManagerController {
@@ -40,6 +43,7 @@ public class ManagerController {
 	      List<ManagerVO> managerList = managerService.selectManagerList(pager);
 	      model.addAttribute("managerList", managerList);
 	      model.addAttribute("pager", pager);
+	      model.addAttribute("mgrURL","/manager/managerList");
 
 	      logger.info("managerList : " + managerList);
 	      return "jsp/manager/managerlookup";
@@ -85,14 +89,14 @@ public class ManagerController {
 	  담담자 수정 POST*/
 	@ResponseBody
 	@PostMapping(value="/managerUpdate")
-	public  List<ManagerVO> managerUpdate(@RequestParam(defaultValue="1") int pageNo, ManagerVO mgr) {
+	public  ManagerVO managerUpdate(@RequestParam(defaultValue="1") int pageNo, ManagerVO mgr) {
 		logger.info(mgr.toString());
 		managerService.managerUpdate(mgr);
 		int totalRows = managerService.countAllMgr();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
-		List<ManagerVO> managerList = managerService.selectManagerList(pager);
-		logger.info(managerList.toString());
-		return managerList;
+		/*List<ManagerVO> managerList = managerService.selectManagerList(pager);
+		logger.info(managerList.toString());*/
+		return mgr;
 	}
 
 	/* author 은별
@@ -107,16 +111,11 @@ public class ManagerController {
 	      if (mgrSearchList.size() != 0) {
 	            model.addAttribute("managerList", mgrSearchList);
 	            model.addAttribute("pager", searchPager);
+	            model.addAttribute("mgrURL","/manager/managerSearch");
 	         }else {
-	            model.addAttribute("managerList", mgrSearchList);
 	            model.addAttribute("pager", new Pager(1, 1, 1, 1));
 	            model.addAttribute("managerListCheck", "empty");
 	         }
-	/*      if(!mgrSearchList.isEmpty()) {
-				model.addAttribute("managerList",mgrSearchList);	// 담당자 존재 경우
-			} else {
-				model.addAttribute("managerListCheck", "empty");	// 담당자 존재하지 않을 경우
-			}*/
 	      
 	      logger.info(searchPager.toString());
 	      model.addAttribute("keyword",keyword);
@@ -124,8 +123,10 @@ public class ManagerController {
 
 	}
 	
-	
-	//담당자 매핑
+	/**
+	 * 담당자 맵핑 페이지로 이동 
+	 * @author 임유진
+	 * */
 	@RequestMapping(value="/managerMapping")
 	public String managerMapping(@RequestParam(defaultValue="1") int pageNo, Model model) {
 		int totalRows = managerService.countAllMgr();
@@ -135,10 +136,10 @@ public class ManagerController {
 	}
 
 	/**
+	 * 담당자에 따라 담당하는 센터 조회
 	 * @author 임유진
-	 * @describe 담당자에 따라 담당하는 센터 조회
-	 * @param {Integer} userCode 담당자 userCode
-	 * @return List<담당 중인 CenterVO>
+	 * @param {Integer} 담당자 userCode
+	 * @return {List<CenterVO>} 담당하고 있는 센터 리스트 
 	 * */
 	@RequestMapping(value="/getCenters/{userCode}")
 	public @ResponseBody List<CenterVO> getCenterByManager(@PathVariable int userCode){
@@ -146,32 +147,40 @@ public class ManagerController {
 	}
 
 	/**
-	 * @author 임유진
 	 * 담당자와 센터 간 맵핑 해제
-	 * @param String {userCode:담당자코드, centerCode:센터코드} 형태
-	 * @return int 해제된 맵핑 관계 수
+	 * @author 임유진
+	 * @param {String} {userCode:담당자코드, centerCode:센터코드} 형태
+	 * @return {int} 해제된 맵핑 관계 수
 	 * */
 	@RequestMapping(value="/cancelMapping", method=RequestMethod.POST)
 	public @ResponseBody int cancelMapping(@RequestBody String req) throws Exception {
+		//JSON 객체를 Map으로 받기위해 Jackson 라이브러리의 ObjectMapper 생성 
 		ObjectMapper mapper = new ObjectMapper();
+		//req를 Map 객체로 역직렬화 
 		Map<String, String> map = mapper.readValue(req, Map.class);
+		
 		int userCode = Integer.parseInt(map.get("userCode"));
 		int centerCode = Integer.parseInt(map.get("centerCode"));
+		
 		return managerService.cancelMapping(userCode, centerCode);
 	}
 
 	/**
-	 * @author 임유진
 	 * 담당자와 센터 간 맵핑 요청
-	 * @param String {userCode:담당자코드, centerCode:센터코드} 형태
-	 * @return int 반영된 맵핑 수
+	 * @author 임유진
+	 * @param {String} {userCode:담당자코드, centerCode:센터코드} 형태
+	 * @return {int} 반영된 맵핑 수
 	 * */
 	@RequestMapping(value="/mapping", method=RequestMethod.POST)
 	public @ResponseBody int mapping(@RequestBody String req) throws Exception {
+		//JSON 객체를 Map으로 받기위해 Jackson 라이브러리의 ObjectMapper 생성
 		ObjectMapper mapper = new ObjectMapper();
+		//req를 Map 객체로 역직렬화 
 		Map<String, String> map = mapper.readValue(req, Map.class);
+		
 		int userCode = Integer.parseInt(map.get("userCode"));
 		int centerCode = Integer.parseInt(map.get("centerCode"));
+		
 		return managerService.mapping(userCode, centerCode);
 	}
 }
