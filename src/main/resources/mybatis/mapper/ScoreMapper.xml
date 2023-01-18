@@ -222,6 +222,7 @@ SELECT TO_CHAR(F.file_post_date, 'YYYY-MM-DD') AS "postDate"
 FROM history H
 	JOIN fileinfo F ON H.file_no = F.file_no
 	JOIN userinfo U ON H.user_code = U.user_code
+WHERE F.FILE_SAVED_NAME LIKE 'score%'
 </select>
 
 </mapper>

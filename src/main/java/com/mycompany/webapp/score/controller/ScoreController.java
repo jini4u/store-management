@@ -29,13 +29,6 @@ import com.mycompany.webapp.score.vo.ScoreVO;
 /**
  * @ClassName : ScoreController
  * @Description : 점수, 코드 관리 기능 구현 Controller
- * @Modification 
- * @    수정일               수정자                         수정내용
- * @ ===========  =========  =====================
- * @   1/3         임유진      updateDetailCode, updateGroupCode 작성
- * @               정윤선      saveScoreCode,
- * @   1/4         정윤선      insertCode작성, scoreList수정
- * @  1/9		     정윤선	   /score수정
  * @author 임유진, 정윤선
  * **/
 @RequestMapping("/score")
@@ -57,8 +50,8 @@ public class ScoreController {
 	}
 	
 	/**
-	 * @author 임유진
 	 * 엑셀 파일 업로드 POST 요청을 처리
+	 * @author 임유진
 	 * @return {Map<String, Integer>} <insert, 입력된 행 수>,<update, 수정된 행 수> 가 담긴 맵
 	 * */
 	@RequestMapping(value="/scorefileupload", method=RequestMethod.POST)
@@ -74,7 +67,6 @@ public class ScoreController {
 	 *정윤선
 	 * DB에 존재하는 값중에 점검년도,분기,항목,상세항목,점수 전체의 정보를 조회
 	 * */
-
 	@RequestMapping(value="/scorelist", method = RequestMethod.GET)
 	public String centerscoreinquiry(@RequestParam(defaultValue="1") int pageNo,ScoreVO scoreVO, Model model,HttpSession session) {
 		
@@ -140,8 +132,7 @@ public class ScoreController {
 		}else {
 			year = yy;
 		}
-
-
+		
 		model.addAttribute("year",year);
 		model.addAttribute("season",season);
 		//모달창 점수 항목 출력 리스트
@@ -155,20 +146,15 @@ public class ScoreController {
 	/*
 	 * 정윤선
 	 * 점수 수정
+	 * 값을 화면에 보내줌
 	 * */
-	
-
-	//값을 화면에 보내줌
 	@RequestMapping(value="/updateScore")
-	public String updateGetScore(ScoreVO score, Model model) {
-		
+	public String updateGetScore(ScoreVO score, Model model) {		
 		scoreService.updateScore(score);
-		//score랑 같은 년도,분기인 점수들의 list. 결국에는 score 이용해서 getScoreList를 하면 되겠죠?
 		List<ScoreVO> getScoreList = scoreService.getScoreList(score); 
 		model.addAttribute("scoreList",getScoreList);
 		
 		return "redirect:/score/scorelist";
-		
 	}
 
 	/*
@@ -176,7 +162,6 @@ public class ScoreController {
 	 * 점수 등록
 	 * (모달창에서)
 	 * */   
-
 	@RequestMapping(value="/insertScore", method=RequestMethod.POST)
 	public String insertsocre(ScoreVO scoreVO) {
 		scoreService.insertScore(scoreVO);
@@ -192,17 +177,11 @@ public class ScoreController {
 	public @ResponseBody List<ScoreVO> getCenterName(@PathVariable int centerCode,Model model){
 		model.addAttribute("centerNameList",centerCode);
 		return scoreService.getCenterName(centerCode);
-		
 	}
 
-	
-	
-	
-	
 	/**
-	 * 임유진
-	 * DB에 존재하는 그룹코드 전체의 정보를 조회,
-	 * 코드 관리 화면으로 이동
+	 * DB에 존재하는 그룹코드 전체의 정보를 조회, 코드 관리 화면으로 이동
+	 * @author 임유진
 	 * */
 	@RequestMapping(value="/code")
 	public String code(Model model) {
@@ -210,19 +189,20 @@ public class ScoreController {
 	}
 
 	/**
-	 * 임유진
 	 * 전체 그룹코드들을 조회한다
-	 * @return List<Map<그룹코드번호, 코드명, 사용여부>>
+	 * @author 임유진
+	 * @return {List<Map<String, Object>>} 그룹코드번호, 코드명, 사용여부를 담은 Map의 List 
 	 * */
 	@RequestMapping("/getGroupCodes")
-	public @ResponseBody List<Map<String, String>> getGroupCodes() {
+	public @ResponseBody List<Map<String, Object>> getGroupCodes() {
 		return scoreService.getAllGroupCodes();
 	}
 
 	/**
-	 * 임유진
 	 * 해당 그룹코드의 상세코드들을 조회한다
-	 * @return List<Map<상세코드번호, 코드명, 사용여부>>
+	 * @author 임유진
+	 * @param {String} 그룹코드명 
+	 * @return {List<Map<String, Object>>} 상세코드번호, 코드명, 사용여부를 담은 Map의 List
 	 * */
 	@RequestMapping("/getDetailCodes/{groupCode}")
 	public @ResponseBody List<Map<String, Object>> getDetailCodes(@PathVariable String groupCode) {
@@ -230,9 +210,9 @@ public class ScoreController {
 	}
 
 	/**
-	 * 임유진
 	 * 상세코드명, 사용여부를 수정한다.
-	 * @return 수정된 행 갯수
+	 * @author 임유진
+	 * @return {int} 수정된 행 갯수
 	 * */
 	@RequestMapping(value="/updateDetailCode", method=RequestMethod.POST)
 	public @ResponseBody int updateDetailCode(MultipartHttpServletRequest request) {
@@ -248,9 +228,9 @@ public class ScoreController {
 	}
 
 	/**
-	 * 임유진
 	 * 그룹코드명, 사용여부를 수정한다.
-	 * @return group, 수정된 행 갯수
+	 * @author 임유진
+	 * @return {List<String>} group, 수정된 행 갯수
 	 * */   
 	@RequestMapping(value="/updateGroupCode", method=RequestMethod.POST)
 	public @ResponseBody List<String> updateGroupCode(MultipartHttpServletRequest request) {
@@ -267,9 +247,9 @@ public class ScoreController {
 	}
 
 	/**
-	 * 임유진
 	 * 상세코드 추가
-	 * @return 입력된 행 갯수
+	 * @author 임유진
+	 * @return {int} 입력된 행 갯수
 	 * */   
 	@RequestMapping(value="/insertDetailCode", method=RequestMethod.POST)
 	public @ResponseBody int insertDetailCode(MultipartHttpServletRequest request) {
@@ -285,9 +265,9 @@ public class ScoreController {
 	}
 
 	/**
-	 * 임유진
 	 * 그룹코드 추가
-	 * @return group, 입력된 행 갯수
+	 * @author 임유진
+	 * @return {List<String>} group, 입력된 행 갯수
 	 * */
 	@RequestMapping(value="/insertGroupCode", method=RequestMethod.POST)
 	public @ResponseBody List<String> insertGroupCode(MultipartHttpServletRequest request) {

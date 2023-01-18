@@ -37,39 +37,13 @@
 		</div>
 		<div class="tablediv">		
 			<table id="codelisttable" border="1" class="code table">
-				<tr>
-					<td class="listitem">센터 내부 위생관리</td>
-				</tr>
-				<tr>
-					<td class="listitem">의료폐기용품 관리</td>
-				</tr>
-				<tr>
-					<td class="listitem">의료기구 관리</td>
-				</tr>
-				<tr>
-					<td class="listitem">개인위생 관리</td>
-				</tr>
-				<tr>
-					<td class="listitem">문서보안 관리</td>
-				</tr>
-				<tr>
-					<td class="listitem">채혈 및 간호 업무</td>
-				</tr>
-				<tr>
-					<td class="listitem">프로모션 이행</td>
-				</tr>
-				<tr>
-					<td class="listitem">헌혈유보군 관리</td>
-				</tr>
-				<tr>
-					<td class="listitem">헌혈 혈액 상태 관리</td>
-				</tr>
-				<tr>
-					<td class="listitem">채혈 기구 예산안 적정성</td>
-				</tr>
-				<tr>
-					<td class="listitem">채혈자 기념품 예산안 적정성</td>
-				</tr>
+				<c:forEach items="${codeList}" var="codeMap">
+					<c:forEach items="${codeMap.detailCodes}" var="detailMap">
+						<tr>
+							<td class="listitem" id="code${codeMap.CHECK_GROUP_CODE}.${detailMap.CHECK_DETAIL_CODE}">${detailMap.CHECK_DETAIL_CONTENT}</td>
+						</tr>
+					</c:forEach>
+				</c:forEach>
 			</table>
 		</div>
 	</div>

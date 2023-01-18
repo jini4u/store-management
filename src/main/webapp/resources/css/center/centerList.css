@@ -50,14 +50,17 @@
    background-color: #EDEDED;
 }
 
- .modal-dialog{ 
- max-width: 552px;
- }  
+/*  .modal-dialog{  */
+/*  max-width: 552px; */
+/*  }   */
  #centerphoto{
  display: flex;
-    flex-direction: row;
+   justify-content: space-between;
  }
  #centerPhotoSize{
- 	width: 355px;
-    height: 300px;
+ 	width: 500px;
+    height: 345px;
  }
+/*  #centerForm{ */
+/*      width: 576px; */
+/*  } */

@@ -11,6 +11,8 @@ var searchBtn = document.querySelector("a[class='search-btn']");
 
 //메뉴 버튼 클릭시 
 function menuClick(event){
+	keyword.value='';
+	
 	for(var i=0;i<menu.length;i++){
 		menu[i].classList.remove("clicked");
 		graphTitle.style.display = 'none';
@@ -67,6 +69,9 @@ function listClick(event){
 	if(clickedMenu == 'center'){
 		centerCode = event.target.id.substr(6);
 		makeRequest(makeCenterGraph, 'GET', '/centerAvgScore/'+centerCode);
+	} else if(clickedMenu == 'manager'){
+		userCode = event.target.id.substr(7);
+		makeRequest(makeManagerGraph, 'GET', '/managerAvgScore/'+userCode);
 	}
 	//차트 그리는 부분
 	Highcharts.chart('container', {
@@ -132,9 +137,39 @@ function makeCenterGraph(){
 		}
 	}
 	
-	entireStr = '전체 센터 평균';
-	itemStr = '선택 센터 평균';
+	entireStr = '전체 센터 점수 평균';
+	itemStr = '선택 센터 점수 평균';
 }
+
+//담당자 통계 그래프 그리기 위한 정보 처리 부분
+function makeManagerGraph(){
+	let response = JSON.parse(httpRequest.responseText);
+	
+	var entireVOArr = response.entireAvg;
+	var managerVOArr = response.managerAvg;
+	categories = [];
+	entireAvgArr = [];
+	itemAvgArr = [];
+	
+	for(var i=0;i<entireVOArr.length;i++){
+		categories.push(entireVOArr[i].checkYear+'/'+entireVOArr[i].checkSeason);
+		entireAvgArr.push(entireVOArr[i].checkScore);
+		for(var j=0;j<managerVOArr.length;j++){
+			var matched = false;
+			if(entireVOArr[i].checkYear==managerVOArr[j].checkYear && entireVOArr[i].checkSeason==managerVOArr[j].checkSeason){
+				itemAvgArr.push(managerVOArr[j].checkScore);
+				matched = true;
+				break;
+			}
+		}
+		if(matched == false){
+			itemAvgArr.push(0);
+		}
+	}
+	entireStr = '전체 담당자 점수 평균';
+	itemStr = '선택 담당자 점수 평균';
+}
+
 
 //메뉴 버튼, 리스트 항목에 이벤트 달아줌 
 function init(){

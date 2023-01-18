@@ -17,7 +17,9 @@ public class FileInfoVO {
 	private String uploadUserName;
 	
 	//엑셀 정보 업로드를 위한 필드
+	//추가된 열 수 
 	private int insertHistory;
+	//수정된 열 수 
 	private int updateHistory;
 	
 	public int getFileNo() {

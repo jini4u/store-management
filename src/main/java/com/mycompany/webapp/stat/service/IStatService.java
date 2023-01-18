@@ -10,4 +10,5 @@ import com.mycompany.webapp.score.vo.ScoreVO;
 public interface IStatService {
 	Map<String, List<ScoreVO>> getCenterAvgScores(int centerCode);
 	Map<String, List<ScoreVO>> getManagerAvgScores(int userCode);
+	List<Map<String, Object>> getCodes();
 }

@@ -23,8 +23,10 @@ import com.mycompany.webapp.score.vo.ScoreVO;
  * @author 임유진
  * */
 public abstract class POIClass {
+	
 	/**
 	 * 엑셀 파일을 읽어줌
+	 * @author 임유진 
 	 * @param {MultipartFile} 업로드한 파일
 	 * @param {int} 몇번째 인덱스의 열까지 제외하고 읽기 시작할지
 	 * @return {List<Object>} 파일의 행 정보를 원하는 VO에 담아 List로 리턴

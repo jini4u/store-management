@@ -15,21 +15,26 @@ public interface IManagerRepository {
 	//담당자 등록
 	int insertManager(ManagerVO mgr);
 
+
 	//담당자 최대번호 조회
 	int selectMaxManagerNo();
 	
+
 	//담당자 최대 파일번호 조회
 	int selectMaxManagerFileNo();
-	
+
 	//담당자 파일 등록
 	int insertManagerFileData(FileInfoVO fileNo);
 	
+
 	//담당자 목록 조회
 	List<ManagerVO> selectManagerList(Pager pager);
 	
+
 	//담당자 수정
 	int updateManagerInfo(ManagerVO mgr);
 	
+
 	//담당자 총 인원 수 
 	int countAllMgr();
 	
@@ -43,12 +48,13 @@ public interface IManagerRepository {
 	// 키워드별 담당자 수  
 	int managerCountByKeyword(String keyword);
 	
+
 	//임유진
 	//userCode濡� �떞�떦 �꽱�꽣 議고쉶
+	//담당하는 센터 리스트 조회 
 	List<CenterVO> getCenterByManager(int userCode);
-	//userCode,centerCode濡� 留듯븨�빐�젣
+	//맵핑 해제 
 	int cancelMapping(@Param("userCode") int userCode, @Param("centerCode") int centerCode);
-	//留듯븨
+	//맵핑 설정 
 	int mapping(@Param("userCode") int userCode, @Param("centerCode") int centerCode);
-
 }
