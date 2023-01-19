@@ -133,14 +133,11 @@ public class ScoreController {
 			year = yy;
 		}
 		
-<<<<<<< HEAD
 		//session에 있는 userCode를 가져오기 위해서 int를 바꿔줌,session은 value로 값을 담기 때문에 
 		int userCode = Integer.parseInt(session.getAttribute("userCode").toString());
 		
 		emptyVO.setUserCode(userCode);
 		
-=======
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 		model.addAttribute("year",year);
 		model.addAttribute("season",season);
 		//모달창 점수 항목 출력 리스트
@@ -168,6 +165,7 @@ public class ScoreController {
 		int ajaxCenterCode = Integer.parseInt(hiddenCenterCode);
 		//변경한 int형의 ajaxCenterCode를 vo에 담음
 		scoreVO.setCenterCode(ajaxCenterCode);
+		
 		//scoreVo를 getScoreList로 담아 socreList로 만듬
 		List<ScoreVO> scoreList = scoreService.getScoreList(scoreVO);
 		//scoreList를 view페이지로 보내주기 위해서 model에 담음
@@ -266,27 +264,13 @@ public class ScoreController {
 	
 	/*
 	 * 정윤선
-<<<<<<< HEAD
 	 * 버튼을 누르면 해당 센터(담당자 별 센터) 점수 리스트 설정
 	 * */  
 	@RequestMapping(value="/getCenters/{userCode}")
 	public @ResponseBody List<ScoreVO> getCenterName(@PathVariable ScoreVO userCode,Model model){
 		return scoreService.getCenterName(userCode);
 		
-=======
-	 * 버튼에 센터(담당자 별 센터)를 설정하기 위해
-	 * */   
-	@RequestMapping(value="/getCenterName/{centerCode}")
-	public @ResponseBody List<ScoreVO> getCenterName(@PathVariable int centerCode,Model model){
-		model.addAttribute("centerNameList",centerCode);
-		return scoreService.getCenterName(centerCode);
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 	}
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 	/**
 	 * DB에 존재하는 그룹코드 전체의 정보를 조회, 코드 관리 화면으로 이동
 	 * @author 임유진
