@@ -13,18 +13,18 @@ public class ManagerVO {
 	private String userPassword;
 	private String userName;
 	
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date userBirth;
+	/*@DateTimeFormat(pattern="yyyy-MM-dd")*/
+	private String userBirth;
 	
 	private String userTel;
 	private String userEmail;
 	private int userTeamCode;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date userHireDate;
+	private String userHireDate;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date userResignDate;
+	private String userResignDate;
 	
 	private List<CenterVO> centerList;
 	
@@ -54,11 +54,11 @@ public class ManagerVO {
 		this.userName = userName;
 	}
 
-	public Date getUserBirth() {
+	public String getUserBirth() {
 		return userBirth;
 	}
 
-	public void setUserBirth(Date userBirth) {
+	public void setUserBirth(String userBirth) {
 		this.userBirth = userBirth;
 	}
 
@@ -86,19 +86,19 @@ public class ManagerVO {
 		this.userTeamCode = userTeamCode;
 	}
 
-	public Date getUserHireDate() {
+	public String getUserHireDate() {
 		return userHireDate;
 	}
 
-	public void setUserHireDate(Date userHireDate) {
+	public void setUserHireDate(String userHireDate) {
 		this.userHireDate = userHireDate;
 	}
 
-	public Date getUserResignDate() {
+	public String getUserResignDate() {
 		return userResignDate;
 	}
 
-	public void setUserResignDate(Date userResignDate) {
+	public void setUserResignDate(String userResignDate) {
 		this.userResignDate = userResignDate;
 	}
 
@@ -126,5 +126,5 @@ public class ManagerVO {
 				+ ", centerList=" + centerList + ", keyword=" + keyword + "]";
 	}
 
-	
+
 }

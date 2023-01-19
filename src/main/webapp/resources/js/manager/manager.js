@@ -91,13 +91,13 @@ $("#updatemgr").click(function (){
          success: function(results) {
         	 mgrListTd.eq(0).text(results.userCode);
              mgrListTd.eq(1).text(results.userName);
-             mgrListTd.eq(2).text(dateFormat(new Date(results.userBirth)));
+             mgrListTd.eq(2).text(results.userBirth);
              mgrListTd.eq(3).text(results.userTel);
              mgrListTd.eq(4).text(results.userEmail);
              mgrListTd.eq(5).text(results.userTeamCode);
-             mgrListTd.eq(6).text(dateFormat(new Date(results.userHireDate))); 
+             mgrListTd.eq(6).text(results.userHireDate); 
              if(results.userResignDate) {
-                userResignDate =  mgrListTd.eq(7).text(dateFormat(new Date(results.userResignDate)));
+                userResignDate =  mgrListTd.eq(7).text(results.userResignDate);
              }
              
             alert("수정 성공");
@@ -130,11 +130,9 @@ $("#updatemgr").click(function (){
    function dateFormat(date) {
       let month = date.getMonth() + 1;
       let day = date.getDate();
-      let hour = date.getHours();
 
       month = month >= 10 ? month : '0' + month;
       day = day >= 10 ? day : '0' + day;
-      hour = hour >= 10 ? hour : '0' + hour;
 
       return date.getFullYear() + '-' + month + '-' + day;
    }

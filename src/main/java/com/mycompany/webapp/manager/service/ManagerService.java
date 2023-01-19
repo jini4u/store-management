@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -17,12 +19,14 @@ import com.mycompany.webapp.common.poi.ManagerPOI;
 import com.mycompany.webapp.common.poi.POIClass;
 import com.mycompany.webapp.common.vo.FileInfoVO;
 import com.mycompany.webapp.common.vo.Pager;
+import com.mycompany.webapp.manager.controller.ManagerController;
 import com.mycompany.webapp.manager.dao.IManagerRepository;
 import com.mycompany.webapp.manager.vo.ManagerVO;
 
 @Service
 public class ManagerService implements IManagerService {
-
+	static final Logger logger=LoggerFactory.getLogger(ManagerController.class);
+	
 	@Autowired
 	IManagerRepository managerRepository;
 
@@ -122,7 +126,7 @@ public class ManagerService implements IManagerService {
 	public Map<String, Integer> mgrUploadFileInfo(MultipartFile file, int startRow) {
 		
 		Map<String, Integer> resultMap = new HashMap<String, Integer>();
-		//왜??
+		//
 		resultMap.put("fileNo", 0);
 		resultMap.put("userCode", 0);
 		resultMap.put("insert", 0);
@@ -138,11 +142,13 @@ public class ManagerService implements IManagerService {
 			int mgrExisData = managerRepository.mgrIsDataExist(mgr);
 			if(mgrExisData == 0) {
 				managerRepository.insertManager(mgr);
+				logger.info("등록@@@@@@@@@@@@ : "+mgr.toString());
 				//replace(K key, V oldValue, V newValue): 저장된 key의 value가 oldValue와 동일할 때만 newValue로 변경해준다
 				//replace로 바꿔서 히스토리에 저장
-				resultMap.replace("insert", resultMap.get("insert"), resultMap.get("update")+1);
+				resultMap.replace("insert", resultMap.get("insert"), resultMap.get("insert")+1);
 			} else {
 				managerRepository.updateManagerInfo(mgr);
+				logger.info("수정%%%%%%%%%%%%%%% : "+mgr.toString());
 				resultMap.replace("update", resultMap.get("update"), resultMap.get("update")+1);
 			}
 		}
@@ -152,15 +158,13 @@ public class ManagerService implements IManagerService {
 		fileVO.setFileSavedName("manager_"+file.getOriginalFilename());
 		fileVO.setOriginalName(file.getOriginalFilename());
 		fileVO.setFileType(file.getContentType());
+		fileVO.setFilePath(filePathName);
 		//로그인 구현 후 수정
-		fileVO.setUploadUserCode(10004);
+		fileVO.setUploadUserCode(10002);
 		
 		fileRepository.insertFile(fileVO);
 		
-		//오리지널 이름으로 정보를 가져와서 정보에 파일 번호를 저장, 방금 등록한 파일 번호 가져옴
-		int fileNo = fileRepository.getFileInfoByOriginalName(fileVO.getOriginalName()).getFileNo();
-		
-		resultMap.replace("fileNo", 0, fileNo);
+		resultMap.replace("fileNo", 0, fileVO.getFileNo());
 		resultMap.replace("userCode", 0, fileVO.getUploadUserCode());
 		
 		//업로드 히스토리 등록
