@@ -152,7 +152,7 @@ public class CenterController {
 	public String excelUplaod(MultipartHttpServletRequest request) {
 		//request에서 업로드한 파일 얻기, getFile안에 있는 건 이름을 정해주는 건가?
 		MultipartFile file = request.getFile("centerExcelFile");
-		centerService.centerUploadFile(file, 3);
+		centerService.centerUploadFile(file, 2);
 		
 		return "redirect:/center/centerExcelUpload";
 	}
@@ -163,9 +163,9 @@ public class CenterController {
 	 * @return {List<맵핑가능센터>}
 	 * */
 	@RequestMapping("/availCenter")
-	public @ResponseBody List<CenterVO> getAvailableCenterList(){
+	public @ResponseBody List<CenterVO> getAvailableCenterList(@RequestParam(defaultValue="1") int pageNo){
 		int totalRows = centerService.countAllCenters();
-		Pager pager = new Pager(totalRows, 10, totalRows, 1);
+		Pager pager = new Pager(9, 5, totalRows, pageNo);
 		List<CenterVO> allCenterList = centerService.centerList(pager);
 		List<CenterVO> result = new ArrayList<>();
 		for(CenterVO center:allCenterList) {

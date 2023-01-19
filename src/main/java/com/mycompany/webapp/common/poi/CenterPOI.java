@@ -12,14 +12,14 @@ import com.mycompany.webapp.center.vo.CenterVO;
 public class CenterPOI extends POIClass{
 	private static final Logger logger = LoggerFactory.getLogger(POIClass.class);
 
-	CenterVO center = new CenterVO();
+	CenterVO center;
 	@Override
 	public void handlingData(Cell cell, List<Object> VOList) {
 		int col = cell.getAddress().getColumn();
 		switch (col) {
 		case 1:
 			//00001이렇게 시작되는 건 String으로 인식된다
-			
+			center = new CenterVO();
 			String centerCode = cell.getStringCellValue();
 			System.out.println("들어오나1?" + centerCode);
 			center.setCenterCode(Integer.parseInt(centerCode));
@@ -45,21 +45,21 @@ public class CenterPOI extends POIClass{
 			}
 			break;
 		case 5:
-			if (cell.getNumericCellValue() == 0) {
+			if ((int)cell.getNumericCellValue() == 0) {
 				System.out.println("들어오나6?" + cell.getNumericCellValue());
 				center.setCenterOpeningDate("");
 			}else {
-				String centerOpeningDate = String.valueOf(cell.getNumericCellValue());
+				String centerOpeningDate = String.valueOf((int)cell.getNumericCellValue());
 				System.out.println("들어오나7?" + centerOpeningDate);
 				center.setCenterOpeningDate(centerOpeningDate);
 			}
 			break;
 		case 6:
-			if (cell.getNumericCellValue() == 0) {
-				System.out.println("들어오나8?" + cell.getNumericCellValue());
+			if ((int)cell.getNumericCellValue() == 0) {
+				System.out.println("들어오나8?" + (int)cell.getNumericCellValue());
 				center.setCenterClosingDate("");
 			}else {
-				String centerClosingDate = String.valueOf(cell.getNumericCellValue());
+				String centerClosingDate = String.valueOf((int)cell.getNumericCellValue());
 				System.out.println("들어오나9?" + centerClosingDate);
 				center.setCenterClosingDate(centerClosingDate);
 			}
@@ -68,6 +68,7 @@ public class CenterPOI extends POIClass{
 			String centerTel = cell.getStringCellValue();
 			System.out.println("들어오나10?" + centerTel);
 			center.setCenterTel(centerTel);
+			VOList.add(center);
 			break;
 		default:
 			break;
