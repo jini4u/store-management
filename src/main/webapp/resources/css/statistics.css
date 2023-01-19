@@ -91,10 +91,10 @@ button.menubtn.clicked {
 	width: 206px;
 }
 
-#centertablediv {
+.tablediv {
 	overflow: scroll;
 	height: 500px;
-	width: 210px;
+	width: 220px;
 }
 
 #rightdiv{

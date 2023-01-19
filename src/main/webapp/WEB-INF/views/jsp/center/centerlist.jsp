@@ -25,7 +25,7 @@
 </div>
 <div class="center-search-button">
    <div class="search-box center">
-   	<form action="centerList">
+      <form action="centerList">
       <input type="text" name="keyword" id="findCenterName" class="search-txt search-button"> 
       <input type="submit" class="search-btn" id="findCenterList"> 
       <i class="fas fa-search"></i>
@@ -50,7 +50,7 @@
          <!--varStatus는 forEach문에서의 인덱스 -->
          <!--    왼쪽박스 리스트 -->
          <c:forEach var="centerList" items="${centerList}" varStatus="status">
-            <tr class="centerListTr" onclick="CallcenterList()">
+            <tr class="centerListTr">
                <td>${centerList.centerCode}</td>
                <td>${centerList.centerName}</td>
                <td>${centerList.centerTel}</td>
@@ -61,8 +61,7 @@
                <td style="display: none">${centerList.centerGuide}</td>
                <td style="display: none">${fn:substring(centerList.centerClosingDate,0,10)}</td>
                <td><button id="centerDetails" class="centerSize"
-                     data-toggle="modal" data-target="#myModal"
-                     onclick="CallcenterList()">상세보기</button></td>
+                     data-toggle="modal" data-target="#myModal">상세보기</button></td>
             </tr>
          </c:forEach>
       </tbody>
@@ -110,32 +109,32 @@
          </tr>
       </thead>
       <tbody id="centerList">
-        	<tr> <td colspan="7">등록된 담당자가 없습니다.</td></tr>
+           <tr> <td colspan="7">등록된 담당자가 없습니다.</td></tr>
       </tbody>
    </table>
   
    <div class="center-pagging">
       <ul class="pagination pageModal">
-         <li><a class="innerPager first" href="centerList?pageNo=1">처음</a></li>
+         <li><a class="innerPager first" href="centerList?pageNo=1&keyword=${keyword}">처음</a></li>
          <li><c:if test="${pager.groupNo>1}">
                <a class="innerPager arrow left"
-                  href="centerList?pageNo=${pager.startPageNo-1}">이전</a>
+                  href="centerList?pageNo=${pager.startPageNo-1}&keyword=${keyword}">이전</a>
             </c:if></li>
          <c:forEach var="i" begin="${pager.startPageNo}"
             end="${pager.endPageNo}">
             <li><c:if test="${pager.pageNo != i}">
-                  <a class="innerPager active num" href="centerList?pageNo=${i}">${i}</a>
+                  <a class="innerPager active num" href="centerList?pageNo=${i}&keyword=${keyword}">${i}</a>
                </c:if></li>
             <li><c:if test="${pager.pageNo == i}">
-                  <a class="innerPager num" href="centerList?pageNo=${i}">${i}</a>
+                  <a id="now-page" class="innerPager num" href="centerList?pageNo=${i}&keyword=${keyword}">${i}</a>
                </c:if></li>
          </c:forEach>
          <li><c:if test="${pager.groupNo<pager.totalGroupNo}">
                <a class="innerPager arrow right"
-                  href="centerList?pageNo=${pager.endPageNo+1}">다음</a>
+                  href="centerList?pageNo=${pager.endPageNo+1}&keyword=${keyword}">다음</a>
             </c:if></li>
          <li><a class="innerPager last"
-            href="centerList?pageNo=${pager.totalPageNo}">맨끝</a></li>
+            href="centerList?pageNo=${pager.totalPageNo}&keyword=${keyword}">맨끝</a></li>
       </ul>
    </div>
 </div>
@@ -146,6 +145,8 @@
  
 <div class="center-button-group"></div>
 
+<%-- 울엉니 공부안하고 뭐해 자꾸 돌아다니지 ㅏㅁㄹ구 
+	얼렁 코	딩	해 --%>
 
 <button id="centerInsertBtn" class="centerSize" data-toggle="modal"
    data-target="#myModal">등록</button>
@@ -154,7 +155,7 @@
 <div class="modal fade" data-backdrop="static" id="myModal"
    role="dialog">
    <!-- 사용자 지정 부분① : id명 -->
-   <div class="modal-dialog modal-lg modal-dialog-centered">
+   <div class="modal-dialog modal-xl modal-dialog-centered" id="centerInsertModal">
       <!-- Modal content-->
       <div class="modal-content p-6">
          <div class="modal-header">
@@ -216,7 +217,7 @@
                   </div>
                </div>
             </form>
-            <div style="display:none" id="showPhoto">
+            <div id="showPhoto">
                <div class="col-md-6 mb-3">
                   <label for="name">사진</label> 
                   <div id="centerPhotoList"></div>

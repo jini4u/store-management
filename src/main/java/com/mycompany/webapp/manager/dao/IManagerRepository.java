@@ -11,43 +11,50 @@ import com.mycompany.webapp.common.vo.Pager;
 import com.mycompany.webapp.manager.vo.ManagerVO;
 
 public interface IManagerRepository {
-	//author 은별
-	
+	//author 고은별
 	//담당자 등록
 	int insertManager(ManagerVO mgr);
 
-	//�떞�떦�옄 肄붾뱶 理쒕� 踰덊샇 
+
+	//담당자 최대번호 조회
 	int selectMaxManagerNo();
 	
-	//�뙆�씪肄붾뱶 理쒕� 踰덊샇 
+
+	//담당자 최대 파일번호 조회
 	int selectMaxManagerFileNo();
-	
-	//�뙆�씪 �씪愿꾩뾽濡쒕뱶
+
+	//담당자 파일 등록
 	int insertManagerFileData(FileInfoVO fileNo);
 	
-	//�떞�떦�옄 紐⑸줉 議고쉶
+
+	//담당자 목록 조회
 	List<ManagerVO> selectManagerList(Pager pager);
 	
-	//�떞�떦�옄 �긽�꽭 議고쉶
-	ManagerVO selectManagerDetail(int userCode);
-	
-	//�떞�떦�옄 �젙蹂� �닔�젙
+
+	//담당자 수정
 	int updateManagerInfo(ManagerVO mgr);
 	
-	//�떞�떦�옄 �쟾泥� �씤�썝 �닔
+
+	//담당자 총 인원 수 
 	int countAllMgr();
+	
+	//같은 데이터가 있는지 조회
+	int mgrIsDataExist(ManagerVO mgr);
+	//담당자 엑셀 업로드 히스토리 
+	List<Map<String, Object>> mgrUploadFileHistory();
 	
 	//키워드별 담당자 검색
 	List<ManagerVO> managerSearch(@Param("pager")Pager pager, @Param("keyword") String keyword);
 	// 키워드별 담당자 수  
 	int managerCountByKeyword(String keyword);
 	
-	//�쑀吏�
-	//userCode濡� �떞�떦 �꽱�꽣 議고쉶
-	List<CenterVO> getCenterByManager(int userCode);
-	//userCode,centerCode濡� 留듯븨�빐�젣
-	int cancelMapping(@Param("userCode") int userCode, @Param("centerCode") int centerCode);
-	//留듯븨
-	int mapping(@Param("userCode") int userCode, @Param("centerCode") int centerCode);
 
+	//임유진
+	//userCode濡� �떞�떦 �꽱�꽣 議고쉶
+	//담당하는 센터 리스트 조회 
+	List<CenterVO> getCenterByManager(int userCode);
+	//맵핑 해제 
+	int cancelMapping(@Param("userCode") int userCode, @Param("centerCode") int centerCode);
+	//맵핑 설정 
+	int mapping(@Param("userCode") int userCode, @Param("centerCode") int centerCode);
 }

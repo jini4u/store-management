@@ -40,7 +40,7 @@
 <div class="graphbox">
 	<div class="managerbox">
 		<!-- 검색한 키워드가 존재할 때 -->
-		<c:if test="${managerListCheck != 'empty' }">
+		
 		<table class="verticalTable" id="managerTable">
 			<thead>
 				<tr>
@@ -52,8 +52,10 @@
 					<th>팀코드</th>
 					<th>입사일자</th>
 					<th>퇴사일자</th>
+					<th>상세보기</th>				
 				</tr>
 			</thead>
+			<c:if test="${managerListCheck != 'empty' }">
 			<tbody id="mgrList">
 				<c:forEach var="managerVO" items="${managerList}">
 					<tr>
@@ -68,108 +70,52 @@
 								pattern="yyyy-MM-dd" /></td>
 						<td><fmt:formatDate value="${managerVO.userResignDate}"
 								pattern="yyyy-MM-dd" /></td>
-						<td><button  class='updateModal' 
+						<td><button  class='updateModal greyButton'
 								   data-toggle='modal' data-target='#updateModal'>수정</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<div class="center-pagging">
+ 		<div class="center-pagging">
 			<ul class="pagination">
-				<li><a class="innerPager first" href="managerList?pageNo=1">처음</a></li>
+				<li><a class="innerPager first" href="${mgrURL}?pageNo=1&keyword=${keyword}">처음</a></li>
 				<li><c:if test="${pager.groupNo>1}">
 						<a class="innerPager arrow left"
-							href="managerList?pageNo=${pager.startPageNo-1}">이전</a>
+							href="${mgrURL}?pageNo=${pager.startPageNo-1}&keyword=${keyword}">이전</a>
 					</c:if></li>
 				<c:forEach var="i" begin="${pager.startPageNo}"
 					end="${pager.endPageNo}">
 					<li><c:if test="${pager.pageNo != i}">
-							<a class="innerPager active num" href="managerList?pageNo=${i}">${i}</a>
+							<a class="innerPager active num" href="${mgrURL}?pageNo=${i}&keyword=${keyword}">${i}</a>
 						</c:if></li>
 					<li><c:if test="${pager.pageNo == i}">
-							<a class="innerPager num" href="managerList?pageNo=${i}">${i}</a>
+							<a id="now-page" class="innerPager num" href="${mgrURL}?pageNo=${i}&keyword=${keyword}">${i}</a>
 						</c:if></li>
 				</c:forEach>
 				<li><c:if test="${pager.groupNo<pager.totalGroupNo}">
 						<a class="innerPager arrow right"
-							href="managerList?pageNo=${pager.endPageNo+1}">다음</a>
+							href="${mgrURL}?pageNo=${pager.endPageNo+1}&keyword=${keyword}">다음</a>
 					</c:if></li>
 				<li><a class="innerPager last"
-					href="managerList?pageNo=${pager.totalPageNo}">맨끝</a></li>
+					href="${mgrURL}?pageNo=${pager.totalPageNo}&keyword=${keyword}">맨끝</a></li>
 			</ul>
-		</div>
+		</div> 
 		</c:if>
+		
 		<!-- 검색한 키워드가 존재하지 않을 때 -->
 		<c:if test="${managerListCheck == 'empty'}">
-			<table class="verticalTable" id="managerTable">
-				<thead>
-					<tr>
-						<th>담당자 코드</th>
-						<th>담당자명</th>
-						<th>생년월일</th>
-						<th>휴대전화번호</th>
-						<th>Email</th>
-						<th>팀코드</th>
-						<th>입사일자</th>
-						<th>퇴사일자</th>
-					</tr>
-				</thead>
-				<tbody id="mgrList">
+			<tbody id="mgrList">
 					<tr> <td colspan="9">등록된 담당자가 없습니다.</td></tr>
-					<%-- <c:forEach var="managerVO" items="${managerList}">
-						<tr>
-							<td>${managerVO.userCode}</td>
-							<td>${managerVO.userName}</td>
-							<td><fmt:formatDate value="${managerVO.userBirth}"
-									pattern="yyyy-MM-dd" /></td>
-							<td>${managerVO.userTel}</td>
-							<td>${managerVO.userEmail}</td>
-							<td>${managerVO.userTeamCode}</td>
-							<td><fmt:formatDate value="${managerVO.userHireDate}"
-									pattern="yyyy-MM-dd" /></td>
-							<td><fmt:formatDate value="${managerVO.userResignDate}"
-									pattern="yyyy-MM-dd" /></td>
-							<td><button  class='updateModal' 
-									   data-toggle='modal' data-target='#updateModal'>수정</button></td>
-						</tr>
-					</c:forEach> --%>
-				</tbody>
+			</tbody>
 			</table>
-			<div class="center-pagging">
-				<ul class="pagination">
-					<li><a class="innerPager first" href="managerList?pageNo=1">처음</a></li>
-					<li><c:if test="${pager.groupNo>1}">
-							<a class="innerPager arrow left"
-								href="managerList?pageNo=${pager.startPageNo-1}">이전</a>
-						</c:if></li>
-					<c:forEach var="i" begin="${pager.startPageNo}"
-						end="${pager.endPageNo}">
-						<li><c:if test="${pager.pageNo != i}">
-								<a class="innerPager active num" href="managerList?pageNo=${i}">${i}</a>
-							</c:if></li>
-						<li><c:if test="${pager.pageNo == i}">
-								<a class="innerPager num" href="managerList?pageNo=${i}">${i}</a>
-							</c:if></li>
-					</c:forEach>
-					<li><c:if test="${pager.groupNo<pager.totalGroupNo}">
-							<a class="innerPager arrow right"
-								href="managerList?pageNo=${pager.endPageNo+1}">다음</a>
-						</c:if></li>
-					<li><a class="innerPager last"
-						href="managerList?pageNo=${pager.totalPageNo}">맨끝</a></li>
-				</ul>
-			</div>
          </c:if> 
-
 	</div>
 </div>
 
 
 
 <button class="pinkButton" data-toggle="modal" data-target="#insertModal">등록</button>
-<!-- <button class="greyButton" data-toggle="modal" data-target="#myModal">수정</button> -->
 <!-- Modal -->
-
 <div class="modal fade" data-backdrop="static" id="insertModal"
 	role="dialog">
 	<!-- 사용자 지정 부분① : id명 -->
@@ -233,11 +179,10 @@
 			</form>
 			</div>
 		<div class="modal-footer">
-			<button type="button" class="pinkButton" id="resetBtn">초기화</button>
-			<button type="button" class="greyButton" id="savemgr">저장</button>
-	<!-- 		<button type="button" class="greyButton" id="updatemgr">수정</button> -->
+			<button type="button" class="greyButton" id="resetBtn">초기화</button>
+			<button type="button" class="pinkButton" id="savemgr" data-dismiss="modal">저장</button>
 				
-			<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			<!-- <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button> -->
 		</div>
 		</div>
 	</div>
@@ -245,7 +190,6 @@
 
 
 <!-- 수정 모달창 -->
-
 <div class="modal fade" data-backdrop="static" id="updateModal"
 	role="dialog">
 	<!-- 사용자 지정 부분① : id명 -->
@@ -323,7 +267,7 @@
 			</form>
 			</div>
 		<div class="modal-footer">
-			<button type="button" class="greyButton" id="updatemgr" data-dismiss="modal">수정</button>
+			<button type="button" class="pinkButton" id="updatemgr" data-dismiss="modal">수정</button>
 				
 			<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 		</div>

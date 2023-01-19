@@ -1,6 +1,7 @@
 package com.mycompany.webapp.center.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,8 +35,13 @@ public interface ICenterService {
 	//센터 사진 정보 수정(originalName, fileDetail)
 	int updateImage(FileInfoVO file, int centerCode, String oldOriginalName);
 	
+	//센터 사진 삭제 
 	int deleteImage(List<Integer> fileNoList, int centerCode);
 	
 	//센터 검색된 수
 	int filterCountAllCenters(String keyword);
+	
+	public Map<String, Integer> centerUploadFile(MultipartFile file, int startRow);
+	
+	List<Map<String, String>>getCenterUploadHistory();
 }

@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface IScoreService {
 	//유진
-	List<Map<String, String>> getAllGroupCodes();
+	List<Map<String, Object>> getAllGroupCodes();
 	List<Map<String, Object>> getDetailCodes(String groupCode);
 	
 	int updateDetailCode(Map<String, String> detailCodeMap);
