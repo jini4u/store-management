@@ -1,5 +1,6 @@
 package com.mycompany.webapp.common.poi;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -8,8 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.mycompany.webapp.manager.vo.ManagerVO;
-import com.mycompany.webapp.score.vo.ScoreVO;
-
 
 /**
  * 담당자 엑셀 파일 일괄 업로드를 위한 클래스
@@ -19,51 +18,56 @@ import com.mycompany.webapp.score.vo.ScoreVO;
 public class ManagerPOI extends POIClass {
 	private static final Logger logger = LoggerFactory.getLogger(ScorePOI.class);
 
-	ManagerVO mgr;
+	ManagerVO mgr = new ManagerVO();
 
 	@Override
 	public void handlingData(Cell cell, List<Object> VOList) {
 		int col = cell.getAddress().getColumn();
-/*		if (cell == null) {
-			continue;
-		} else {*/
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			switch(col) {
-			case 1:
-				//VO를 만들어주지 않으므로 만듦
-				mgr = new ManagerVO();
+			case 1:	
 				int userCode = (int)cell.getNumericCellValue();
 				mgr.setUserCode(userCode);
+				System.out.println("담당자 코드: "+userCode);
 				break;
 			case 2:
-				String userPassword= cell.getStringCellValue();
+				String userPassword= String.valueOf(cell.getNumericCellValue());
 				mgr.setUserPassword(userPassword);
+				System.out.println("담당자 비번: "+userPassword);
 				break;
 			case 3:
 				String userName= cell.getStringCellValue();
 				mgr.setUserName(userName);
+				System.out.println("담당자 이름: "+userName);
 				break;
 			case 4:
 				Date userBirth = cell.getDateCellValue();
 				mgr.setUserBirth(userBirth);
+				System.out.println("담당자 생일: "+userBirth);
 				break;
 			case 5:
 				String userTel = cell.getStringCellValue();
 				mgr.setUserTel(userTel);
+				System.out.println("담당자 전화번호: "+userTel);
 				break;
 			case 6: 
 				String userEmail = cell.getStringCellValue();
 				mgr.setUserEmail(userEmail);
+				System.out.println("담당자 이메일: "+userEmail);
 			case 7: 
 				int userTeamCode = (int)cell.getNumericCellValue();
 				mgr.setUserTeamCode(userTeamCode);
+				System.out.println("담당자 팀코드: "+userTeamCode);
 				break;
 			case 8: 
 				Date userHireDate = cell.getDateCellValue();
 				mgr.setUserHireDate(userHireDate);
+				System.out.println("담당자 입사일: "+userHireDate);
 				break;
 			case 9:
 				Date userResignDate = cell.getDateCellValue();
 				mgr.setUserResignDate(userResignDate);
+				System.out.println("담당자 퇴사일: "+userResignDate);
 				VOList.add(mgr);
 				break;
 			default:
@@ -72,3 +76,4 @@ public class ManagerPOI extends POIClass {
 			}
 		}
 	}  
+

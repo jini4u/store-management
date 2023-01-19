@@ -1,6 +1,7 @@
 package com.mycompany.webapp.center.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -35,4 +36,9 @@ public interface ICenterRepository {
 	
 	//센터 검색된 수 받아오는 것
 	int filterCountAllCenters(String keyword);
+
+	//센터코드 총 갯수
+	int centerDataExist(CenterVO center);
+	
+	List<Map<String, Object>> getCenterUploadHistory();
 }

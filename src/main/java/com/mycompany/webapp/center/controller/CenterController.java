@@ -96,6 +96,7 @@ public class CenterController {
 			if (filterCenterList.size() != 0) {
 				model.addAttribute("centerList", filterCenterList);
 				model.addAttribute("pager", filterPager);
+				model.addAttribute("keyword", keyword);
 			}else {
 				model.addAttribute("pager", new Pager(1, 1, 1, 1));
 				model.addAttribute("centerListN" , "empty");
@@ -113,14 +114,12 @@ public class CenterController {
 	 * */
 	@ResponseBody
 	@PostMapping(value ="/centerUpdate")
-	public List<CenterVO> centerUpdate(@RequestParam(defaultValue="1")int pageNo, Model model, CenterVO centerVO){
+	public CenterVO centerUpdate(@RequestParam(defaultValue="1")int pageNo, Model model, CenterVO centerVO){
 		int totalRows = centerService.countAllCenters();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
-		model.addAttribute("centerList", centerService.centerList(pager));
 		centerService.centerUpdate(centerVO);
-		List<CenterVO> centerList = centerService.centerList(pager);
-		System.out.println(centerList);
-		return centerList;
+
+		return centerVO;
 	}
 
 	
@@ -142,8 +141,20 @@ public class CenterController {
 	 * 센터 정보 일괄 업로드
 	 * */
 	@GetMapping(value="/centerExcelUpload")
-	public String excelUplaod() {
+	public String excelUplaod(Model model) {
+		model.addAttribute("historyMapList", centerService.getCenterUploadHistory());
 		return "jsp/center/excelupload";
+	}
+	
+	//MultipartHttpServletRequest 는 여러개의 파일을 업로드할 때 사용하는데 
+	//우리는 왜 사용? 값을 list로 받아올 수 있기 때문인가?
+	@PostMapping(value="/centerExcelUpload")
+	public String excelUplaod(MultipartHttpServletRequest request) {
+		//request에서 업로드한 파일 얻기, getFile안에 있는 건 이름을 정해주는 건가?
+		MultipartFile file = request.getFile("centerExcelFile");
+		centerService.centerUploadFile(file, 3);
+		
+		return "redirect:/center/centerExcelUpload";
 	}
 
 	/**

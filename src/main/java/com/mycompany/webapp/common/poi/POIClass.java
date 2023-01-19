@@ -33,6 +33,7 @@ public abstract class POIClass {
 	 * */
 	public List<Object> readWorkBook(MultipartFile mf, int startRow) {
 		try {
+			//getInputStream: 파일 컨텐트를 읽음
 			InputStream fileIS = mf.getInputStream();
 			//엑셀파일로 Workbook 인스턴스 생성
 			XSSFWorkbook workbook = new XSSFWorkbook(fileIS);

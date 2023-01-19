@@ -22,7 +22,7 @@
 				<ul class="submenuItems">
 					<li><a href="${pageContext.request.contextPath}/manager/managerList">담당자 조회</a></li>
 					<li><a href="${pageContext.request.contextPath}/manager/managerMapping">담당자 맵핑</a></li>
-					<li><a href="${pageContext.request.contextPath}/manager/managerupload">담당자 정보 일괄 등록</a></li>
+					<li><a href="${pageContext.request.contextPath}/manager/managerFileUploadHistory">담당자 정보 일괄 등록</a></li>
 				</ul>
 			</li>
 			<li>
