@@ -63,7 +63,7 @@
  <select id="usingCodeList"  resultType="com.mycompany.webapp.score.vo.ScoreVO">
  <![CDATA[
  
-select
+SELECT
 G.check_group_content as "checkGroupContent",
 D.check_detail_content as "checkDetailContent",
 D.check_group_code as"checkGroupCode",
@@ -78,10 +78,8 @@ WHERE D.check_detail_occupied = 'Y'
 ]]>
 </select>
 <!-- 
-
 점수 수정
 정윤선
-
  -->
 
 <update id="updateScore" parameterType="com.mycompany.webapp.score.vo.ScoreVO">
@@ -101,10 +99,8 @@ AND check_season = #{checkSeason}
 
 </update> 
 <!-- 
-
 점수등록
 정윤선
-
  -->
  
  <insert id="insertScore" parameterType="com.mycompany.webapp.score.vo.ScoreVO">
@@ -141,21 +137,21 @@ SELECT COUNT(*) FROM INSPECTION
 
 <!-- 
 센터이름 가져오기
-정윤선
- -->
+정윤선 -->
+
 <select id="getCenterName" parameterType="com.mycompany.webapp.score.vo.ScoreVO" resultType="com.mycompany.webapp.score.vo.ScoreVO">
-select 
+
+SELECT DISTINCT
 I.center_code as "centerCode",
 C.center_name as "centerName"
 
-from center C
+FROM center C
     LEFT OUTER JOIN Inspection I
         ON C.center_code = I.center_code  
 WHERE 
-   I.user_code = #{userCode};
+    I.user_code = #{userCode}
 
-</select>
-
+</select> 
 <!-- 
 	상세코드 수정.
 	 코드는 수정 불가(PK), 코드명, 사용여부 수정 가능

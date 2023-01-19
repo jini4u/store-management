@@ -100,8 +100,6 @@ public class ScoreService implements IScoreService {
 	//전체 점수 조회
 	@Override
 	public List<ScoreVO> getScoreList(ScoreVO scoreVO) {	
-
-		
 		return scoreRepository.getScoreList(scoreVO);
 	}
 
@@ -122,8 +120,6 @@ public class ScoreService implements IScoreService {
 		}
 		return score.getArrayScore().length;
 	}
-
-
 
 	//점수등록
 	@Override
@@ -150,6 +146,19 @@ public class ScoreService implements IScoreService {
 		return scoreRepository.usingCodeList();
 	}
 	
+	//점수리스트 수 받아오기
+	@Override
+	public int CountAllList() {
+		return scoreRepository.CountAllList();
+	}
+
+	@Override
+	public List<ScoreVO> getCenterName(ScoreVO userCode) {
+		return scoreRepository.getCenterName(userCode);
+	}
+
+
+
 	/**
 	 * 업로드한 파일을 읽어서 얻은 정보를 DB에 저장, 파일을 저장
 	 * @param {MultipartFile} 업로드한 파일
@@ -214,15 +223,4 @@ public class ScoreService implements IScoreService {
 		return resultMap;
 	}
 	
-	//점수리스트 수 받아오기
-	@Override
-	public int CountAllList() {
-		return scoreRepository.CountAllList();
-	}
-
-	@Override
-	public List<ScoreVO> getCenterName(int centerCode) {
-		return scoreRepository.getCenterName(centerCode);
-	}
-
 }

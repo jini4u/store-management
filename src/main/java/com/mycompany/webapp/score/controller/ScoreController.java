@@ -80,11 +80,11 @@ public class ScoreController {
 		
 		int totalRows = scoreService.CountAllList();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
-	
+
 		
 		//로그인에 처리할 내용-------------------------------------
-		session.setAttribute("centerCode", 1);
-		session.setAttribute("userCode", 10006);
+		session.setAttribute("centerCode",3);
+		session.setAttribute("userCode",10004);
 		//------------------------------------------------
 
 		scoreVO.setCenterCode(1);
@@ -140,17 +140,108 @@ public class ScoreController {
 		}else {
 			year = yy;
 		}
-
-
+		
+		//session에 있는 userCode를 가져오기 위해서 int를 바꿔줌,session은 value로 값을 담기 때문에 
+		int userCode = Integer.parseInt(session.getAttribute("userCode").toString());
+		
+		emptyVO.setUserCode(userCode);
+		
 		model.addAttribute("year",year);
 		model.addAttribute("season",season);
 		//모달창 점수 항목 출력 리스트
 		model.addAttribute("usingCodeList", scoreService.usingCodeList());
-
+		//센터 버튼에 센터 이름 출력
+		model.addAttribute("centerName",scoreService.getCenterName(emptyVO));
+		
 		return "jsp/score/scoreList";
 	}
+	
+//ajax를 위한  .........................................................
+	@RequestMapping(value="/indexListAjax", method = RequestMethod.POST)
+	public String centerscoreinquiry(@RequestParam(defaultValue="1") int pageNo,@RequestParam String hiddenCenterCode,ScoreVO scoreVO, Model model,HttpSession session) {
+//		log.info("aaaaa:"+hiddenCenterCode);
+		int totalRows = scoreService.CountAllList();
+		Pager pager = new Pager(10, 10, totalRows, pageNo);
 
+		
+		//로그인에 처리할 내용-------------------------------------
+		session.setAttribute("centerCode",3);
+		session.setAttribute("userCode",10004);
+		//------------------------------------------------
+		
+		//ajax가 String으로 와야 하니깐 int형으로 사용하기 위해 int형으로 변경 후 ajaxCenterCode에 담음
+		int ajaxCenterCode = Integer.parseInt(hiddenCenterCode);
+		//변경한 int형의 ajaxCenterCode를 vo에 담음
+		scoreVO.setCenterCode(ajaxCenterCode);
+		//scoreVo를 getScoreList로 담아 socreList로 만듬
+		List<ScoreVO> scoreList = scoreService.getScoreList(scoreVO);
+		//scoreList를 view페이지로 보내주기 위해서 model에 담음
+		model.addAttribute("scoreList",scoreList);
+//		log.info("bbbbbbbb:"+scoreList);
+		
+		
+		//비어있는 ScoreVO 생성
+		ScoreVO emptyVO = new ScoreVO();
+		//getScoreList 하기위해서 centerCode는 무조건 필요하므로 1로 set
+		emptyVO.setCenterCode(1);
+		//빈 VO를 이용해서 getScoreList : emptyVO에 센터코드만 있고 년도, 시즌 없으니까 쿼리문에서 WHERE절에 if조건으로 안걸려서 전체 점수 정보가 다 담겨있음
+		//List<ScoreVO> getScoreList(ScoreVO scoreVO) : 리턴값의 자료형이 List<ScoreVO>임. 
+		List<ScoreVO> allScoreList = scoreService.getScoreList(emptyVO);
+		//전체 리스트 크기가 0보다 크면 (점수 테이블에 값이 있으면)
+		if(allScoreList.size() > 0) {
+			
+			//제일 최근 정보가 0번이므로 0번의 정보를 담아줌
+			int maxYear = allScoreList.get(0).getCheckYear();			
+			int maxSeason = allScoreList.get(0).getCheckSeason();
+			//뷰페이지로 가져갈수있게 담아주기
+			model.addAttribute("maxYear", maxYear);
+			model.addAttribute("maxSeason", maxSeason);
+			model.addAttribute("pager",pager);
+		}
 
+		Calendar now = Calendar.getInstance();
+		int yy = now.get(Calendar.YEAR);
+		int mm = now.get(Calendar.MONTH) +1;
+
+		int season=0;
+		int year=0;
+
+		//분기 설정
+		//1.만약 mm(월) 0보다크거나 3보다 작거나같으면 season 은1분기....
+		if( (mm-3)>0 &&(mm-3)<=3) {
+			season = 1;
+		}else if((mm-3) > 3 && (mm-3) <= 6) {
+			season = 2;
+		}else if((mm-3) > 6 && (mm-3) <= 9){	
+			season = 3;
+		}else if((mm-3) <= 12){	
+			season = 4;
+		}else{
+			season = 0;
+		}
+		
+		//2번째 i문 mm(월)이 0보다 작거나 같으면 yy(년)에 -1 
+		//그게 아니라면 현재 년도가 나오면 됨
+		if((mm-3)<=0) {
+			year = yy-1;
+		}else {
+			year = yy;
+		}
+		
+		//session에 있는 userCode를 가져오기 위해서 int를 바꿔줌,session은 value로 값을 담기 때문에 
+		int userCode = Integer.parseInt(session.getAttribute("userCode").toString());
+		
+		emptyVO.setUserCode(userCode);
+		
+		model.addAttribute("year",year);
+		model.addAttribute("season",season);
+		//모달창 점수 항목 출력 리스트
+		model.addAttribute("usingCodeList", scoreService.usingCodeList());
+		//센터 버튼에 센터 이름 출력
+		model.addAttribute("centerName",scoreService.getCenterName(emptyVO));
+		
+		return "jsp/score/indexListAjax";
+	}
 
 	/*
 	 * 정윤선
@@ -186,18 +277,13 @@ public class ScoreController {
 	
 	/*
 	 * 정윤선
-	 * 버튼에 센터(담당자 별 센터)를 설정하기 위해
-	 * */   
-	@RequestMapping(value="/getCenterName/{centerCode}")
-	public @ResponseBody List<ScoreVO> getCenterName(@PathVariable int centerCode,Model model){
-		model.addAttribute("centerNameList",centerCode);
-		return scoreService.getCenterName(centerCode);
+	 * 버튼을 누르면 해당 센터(담당자 별 센터) 점수 리스트 설정
+	 * */  
+	@RequestMapping(value="/getCenters/{userCode}")
+	public @ResponseBody List<ScoreVO> getCenterName(@PathVariable ScoreVO userCode,Model model){
+		return scoreService.getCenterName(userCode);
 		
 	}
-
-	
-	
-	
 	
 	/**
 	 * 임유진

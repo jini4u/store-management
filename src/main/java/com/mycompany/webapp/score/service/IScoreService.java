@@ -31,6 +31,6 @@ public interface IScoreService {
 	//페이징처리를 위한 갯수
 	int CountAllList();
 	//센터리스트 가져오기
-	List<ScoreVO> getCenterName(int centerCode);
+	List<ScoreVO> getCenterName(ScoreVO userCode);
 
 }

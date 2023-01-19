@@ -6,11 +6,14 @@ import java.util.List;
 import com.mycompany.webapp.score.vo.ScoreVO;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 /**
  * 점수 관리
  * ScoreMapper.xml과 매핑되어있음
  * 
  * */
+@Repository
 public interface IScoreRepository {
 	//유진
 	List<Map<String, String>> getAllGroupCodes();
@@ -37,7 +40,7 @@ public interface IScoreRepository {
 	int updateScore(ScoreVO score);
 	/*점수리스트 수 받아오기*/
 	int CountAllList();
-	/* 수 받아오기*/
-	List<ScoreVO> getCenterName(int centerCode);
+	/*username 받아오기*/
+	List<ScoreVO> getCenterName(ScoreVO userCode);
 }
 
