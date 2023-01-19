@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.webapp.center.vo.CenterVO;
@@ -128,10 +130,20 @@ public class ManagerController {
 	 * @author 임유진
 	 * */
 	@RequestMapping(value="/managerMapping")
-	public String managerMapping(@RequestParam(defaultValue="1") int pageNo, Model model) {
-		int totalRows = managerService.countAllMgr();
-		Pager pager = new Pager(10, 10, totalRows, pageNo);
-		model.addAttribute("managerList", managerService.selectManagerList(pager));
+	public String managerMapping(@RequestParam(defaultValue="1") int pageNo, @RequestParam(required=false) String keyword, Model model) {
+		Pager pager;
+		int totalRows;
+		if(keyword==null || keyword.equals("")) {
+			totalRows = managerService.countAllMgr();
+			pager = new Pager(12, 5, totalRows, pageNo);
+			model.addAttribute("managerList", managerService.selectManagerList(pager));			
+		} else {
+			totalRows = managerService.managerCountByKeyword(keyword);
+			pager = new Pager(12, 5, totalRows, pageNo);
+			model.addAttribute("managerList", managerService.managerSearch(pager, keyword));
+		}
+		model.addAttribute("totalManagers", totalRows);
+		model.addAttribute("pager", pager);
 		return "jsp/manager/managermapping";
 	}
 
@@ -182,5 +194,22 @@ public class ManagerController {
 		int centerCode = Integer.parseInt(map.get("centerCode"));
 		
 		return managerService.mapping(userCode, centerCode);
+	}
+	/* author 은별
+	  담담자 엑셀 파일  히스토리  */
+	@RequestMapping(value="/managerFileUploadHistory" , method=RequestMethod.GET)
+	public String mgrUploadFileHistory(Model model) {
+		model.addAttribute("mgrHistoryMapList", managerService.mgrUploadFileHistory());
+		return  "jsp/manager/managerFileUpload";
+	}
+	
+	/* author 은별
+	  담담자 엑셀 파일 업로드 POSt 요청 */
+	@RequestMapping(value="/managerFileUpload", method=RequestMethod.POST)
+	public String managerFileUpload(MultipartHttpServletRequest request) {
+		//MultipartHttpServletRequest을 사용하면 getFile 메소드를 통해 List 형태로 받을 수 있다
+		MultipartFile file = request.getFile("mgrExcelFile");
+		managerService.mgrUploadFileInfo(file, 3);
+		return "redirect: /manager/mgrFileUploadHistory";
 	}
 }

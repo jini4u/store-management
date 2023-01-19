@@ -9,46 +9,6 @@
 	float: right;
 }
 
-/* .mappingButton, .releaseButton {
-	border-radius: 9px;
-	display: inline-block;
-	cursor: pointer;
-	font-family: Arial;
-	font-size: 18px;
-	padding: 6px 25px;
-	text-decoration: none;
-	font-weight: 550;
-}
-
-.mappingButton:active, .releaseButton:active {
-	position: relative;
-	top: 1px;
-}
-
-.mappingButton {
-	background-color: #FF8787;
-	border: 1px solid #FF8787;
-	color: #fff;
-}
-
-.mappingButton:hover {
-	background-color: #E26868;
-	color: #fff;
-	border: 1px solid #E26868;
-}
-
-.releaseButton {
-	background-color: #ededed;
-	border: 1px solid #ededed;
-	color: #000000;
-}
-
-.releaseButton:hover {
-	background-color: #bebebe;
-	color: #000000;
-	border: 1px solid #bebebe;
-}
- */
 .graphbox {
 	border-top: 1px solid #ccc;
 	margin-top: 20px;
@@ -62,8 +22,13 @@
 	border: 1px solid #ccc;
 }
 
-.managerbox>p, 
-.centerbox>p {
+#managerTitle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.managerbox p, 
+.centerbox p {
 	font-size: 20px;
 	font-weight: 550;
 	margin: 0px 0px 6px 10px;

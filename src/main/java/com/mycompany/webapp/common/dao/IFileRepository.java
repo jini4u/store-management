@@ -13,6 +13,4 @@ public interface IFileRepository {
 	int insertFileUploadHistory(Map<String, Integer> historyMap);
 	//파일 업로드시 fileinfo 테이블에 파일 정보 저장 
 	int insertFile(FileInfoVO file);
-	//기존 파일명으로 테이블에 저장된 정보 조회 
-	FileInfoVO getFileInfoByOriginalName (String originalFileName);
 }

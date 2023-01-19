@@ -8,23 +8,23 @@
    담당자 목록 조회-->
 <select id="selectManagerList" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
 <![CDATA[   
-   select * from(
-      select rownum as rnum, userCode, userName, userBirth, userTel, userEmail, userTeamCode, userHireDate, userResignDate 
-      from (
-         select
+   SELECT * FROM(
+      SELECT rownum as rnum, userCode, userName, userBirth, userTel, userEmail, userTeamCode, userHireDate, userResignDate 
+      FROM (
+         SELECT
                user_code as userCode,
-              user_name as userName,
+               user_name as userName,
                user_birth as userBirth,
                user_tel as userTel,
                user_email as userEmail,
                user_team_code as userTeamCode,
-              user_hire_date as userHireDate,
+               user_hire_date as userHireDate,
                user_resign_date as userResignDate
-         from  userinfo
-         where user_code < 20000 
-         order by user_code desc
+         FROM  userinfo
+         WHERE user_code < 20000 
+         ORDER BY user_code desc
       )
-      where rownum <= #{endRowNo}
+      WHERE rownum <= #{endRowNo}
    )
    WHERE rnum >= #{startRowNo}
          
@@ -35,8 +35,8 @@
     담당자 등록-->
 <insert id="insertManager" parameterType="com.mycompany.webapp.manager.vo.ManagerVO">
 <![CDATA[   
-insert into userInfo(user_code, user_password, user_name, user_birth, user_tel, user_email,user_team_code, user_hire_Date)
-values   (
+INSERT INTO userInfo(user_code, user_password, user_name, user_birth, user_tel, user_email,user_team_code, user_hire_Date)
+VALUES   (
          (SELECT NVL(MAX(user_code)+1, 10001) FROM userinfo), 
          #{userPassword}, #{userName}, #{userBirth}, #{userTel}, #{userEmail}, #{userTeamCode}, #{userHireDate})
 ]]>
@@ -45,15 +45,15 @@ values   (
 <!--author 고은별  
    담당자 최대 코드 -->
 <select id="selectMaxManagerNo" parameterType="int" resultType="int">
-   select NVL(max(user_code),10001) as "userCode"
-   from userInfo
+   SELECT NVL(max(user_code),10001) as "userCode"
+   FROM userInfo
 </select>  
 
 <!--담당자 정보 수정  -->
 <update id="updateManagerInfo" parameterType="com.mycompany.webapp.manager.vo.ManagerVO">
-   update userInfo
-   set user_tel=#{userTel}, user_email=#{userEmail}, user_team_code=#{userTeamCode}, user_resign_date=#{userResignDate,jdbcType=DATE} 
-   where user_code= #{userCode}
+   UPDATE userInfo
+   SET user_tel=#{userTel}, user_email=#{userEmail}, user_team_code=#{userTeamCode}, user_resign_date=#{userResignDate,jdbcType=DATE} 
+   WHERE user_code= #{userCode}
 </update>
 
  <!--담당자 전체 인원 수
@@ -66,53 +66,73 @@ SELECT COUNT(*) FROM userInfo
 <!-- 키워드별 담당자 수  -->
 <select id="managerCountByKeyword" parameterType="string" resultType="int">
 <![CDATA[ 
-	select count(*) from userinfo
-	where  user_name like ('%' ||#{keyword}||'%')
+	SELECT count(*) from userinfo
+	WHERE  user_name like ('%' ||#{keyword}||'%')
 ]]>
 </select>
 
 <!-- 키워드 별 담당자 검색 -->
 <select id="managerSearch" parameterType="map" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
 <![CDATA[
-select * from(
-      select rownum as rnum, userCode, userName, userBirth, userTel, userEmail, userTeamCode, userHireDate, userResignDate 
-      from (
+SELECT * FROM(
+      SELECT rownum as rnum, userCode, userName, userBirth, userTel, userEmail, userTeamCode, userHireDate, userResignDate 
+      FROM (
          select
                user_code as userCode,
-              user_name as userName,
+               user_name as userName,
                user_birth as userBirth,
                user_tel as userTel,
                user_email as userEmail,
                user_team_code as userTeamCode,
               user_hire_date as userHireDate,
                user_resign_date as userResignDate
-         from  userinfo
-         where user_code < 20000 
+         FROM  userinfo
+         WHERE user_code < 20000 
          ]]> 
         <if test="keyword != null or keyword != ''">
-		  and user_name like ('%' ||#{keyword}||'%')
+		  AND user_name like ('%' ||#{keyword}||'%')
 		</if>
 <![CDATA[
-         order by user_code desc
+         ORDER BY user_code desc
       )
-      where rownum <= #{pager.endRowNo}
+      WHERE rownum <= #{pager.endRowNo}
    )
    WHERE rnum >= #{pager.startRowNo} 
 ]]>
 </select>
 
+<!-- author 고은별
+	담당자 코드가 같은  데이터가 있는지 조회
+ -->
+<select id="mgrIsDataExist" parameterType="com.mycompany.webapp.manager.vo.ManagerVO">
+ <![CDATA[
+SELECT count(*) 
+FROM userinfo
+WHERE user_code = #{userCode} ;
+]]>
+</select>
+
+<!-- author 고은별
+	파일 업로드 히스토리
+ -->
+<select id="mgrUploadFileHistory" resultType="map">
+  <![CDATA[
+ 	SELECT TO_CHAR(F.file_post_date, 'YYYY-MM-DD') AS "postDate"
+			, U.user_name AS "userName"
+			, F.file_original_name AS "originalName"
+			, H.history_insert AS "insert"
+			, H.history_update AS "update"
+	FROM history H
+		JOIN fileinfo F ON H.file_no = F.file_no
+		JOIN userinfo U ON H.user_code = U.user_code
+	]]>
+</select> 
+ 
 <!-- 
    userCode로 담당 센터 조회
    임유진
  -->
 <select id="getCenterByManager" parameterType="int" resultType="com.mycompany.webapp.center.vo.CenterVO">
-<!-- SELECT C.center_code AS "centerCode"
-      , C.center_name AS "centerName"
-      , C.center_address AS "centerAddress"
-FROM mapping M
-   JOIN center C
-    ON M.center_code = C.center_code
-WHERE M.user_code = #{userCode} -->
 
 SELECT center_code AS centerCode,
        center_name AS centerName,

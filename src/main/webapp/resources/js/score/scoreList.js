@@ -11,11 +11,11 @@
  * **/
 
 window.onload = function(){
-   //모달창
-   $('#testBtn').click(function(e){
-      e.preventDefault();
-      $('#testModal').modal("show");
-   });
+	//모달창
+	$('#testBtn').click(function(e){
+		e.preventDefault();
+		$('#testModal').modal("show");
+	});
 
 
 }
@@ -32,48 +32,53 @@ function changeColor(){
 
 changeColor();
 
-
-
-$('#firstCenter').click('submit', function(e) {
+//지점버튼 누르면 점수 리스트로 이동
+$(".firstCenter").click(function list() {
 	let firstCenter=$(this).val();
-	e.preventDefault();
-
-	//$("#firstCenter").html("");
-	if(confirm('지점 1이 맞습니까?')) //확인 누르면 true, 취소 누르면 false
-
-	{   
-		$.ajax({
-			type: "GET",
-			url: "/score/scoreList",
-			dataType:"JSON",
-			data: {
-				centerCode : firstCenter 
-			}, 
-			//contentType: false,
-
-			success: function(data)
-			{
-				alert("성공");
-				// 전체 테이블 지우기
-				$("#scoreListTable").html("<h1>centerlist</h1>");
-			},
-			fail: function(data)
-			{
-				alert('failed');
-			},
-			error: function(data)
-			{
-				if (data.status == 401) {
-					alert('1 지점 입니다.');
-					return;
-				}
-			}
-		});
-	}});
+	let hiddenCenterCode =$(this).next().val();
+	let checkYear =$(".checkYear").next().val();
+	let checkSeason  =$(".checkSeason").next().val();
+	let checkGroupContent  =$(".checkGroupContent").next().val();
+	let checkDetailContent  =$(".checkDetailContent").next().val();
+	let checkScore  =$(".checkScore").next().val();
+//	let userCode = $(this).next().next().val();
 
 
+//	 console.log(userCode);
+//	 console.log(hiddenCenterCode);
 
+	   let data = {
+		         centerName : firstCenter, 
+		         centerCode : hiddenCenterCode,
+		         checkYear   : checkYear,
+		         checkSeason   : checkSeason,
+		         checkGroupContent : checkGroupContent,
+		         checkDetailContent : checkDetailContent,
+		         checkScore   : checkScore
+		      };
 
+	 
+			$.ajax({
+				url : "/score/indexListAjax?hiddenCenterCode="+hiddenCenterCode, //호출 URL
+				type : "post",		//http타입
+				dataType : "text"	//http 통신 후 응답 데이터 타입
+		    }).done(function(result) {
+				  console.log("결과확인");
+		     		var html = jQuery('<div>').html(result);
+					var contents = html.find("div#indexListAjax").html();/*div태그 중에서 id를 indexListAjax를 찾아서
+																			contents라는 변수에 할당
+																			jQuery('<div>') 이부분은 result를 넣은 html로 선언한 것
+																			*/
+						$("#tabl1").html(contents);
+				
+			}).fail(function (jqXHR, textStatus, errorThrown) {
+				console.log("에러");
+//				console.log(jqXHR);
+//				console.log(textStatus);
+//				console.log(errorThrown);
+			});
+		
+});
 
 
 

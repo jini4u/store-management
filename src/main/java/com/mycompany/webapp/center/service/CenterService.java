@@ -284,10 +284,7 @@ public class CenterService implements ICenterService{
 		//내 추측, history에는 fileno가 있는데 이 fileno를 받아오기 위해 사용하는 건강?
 		fileRepository.insertFile(fileInfoVO);
 		
-		//fileno 왜 필요하지?
-		int fileNo = fileRepository.getFileInfoByOriginalName(fileInfoVO.getOriginalName()).getFileNo();
-		
-		resultMap.replace("fileNo",0, fileNo);
+		resultMap.replace("fileNo",0, fileInfoVO.getFileNo());
 		resultMap.replace("userCode",0, fileInfoVO.getUploadUserCode());
 		System.out.println("userCode확인 :" + fileInfoVO.getUploadUserCode());
 		

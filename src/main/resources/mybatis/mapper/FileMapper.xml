@@ -23,6 +23,9 @@ VALUES (
 	, #{uploadUserCode}
 	)
 ]]>
+<selectKey keyProperty="fileNo" resultType="Integer" order="AFTER">
+SELECT MAX(file_no) AS "fileNo" FROM fileinfo
+</selectKey>
 </insert>
 
  <!-- 
@@ -37,19 +40,5 @@ VALUES ((SELECT NVL(MAX(history_no)+1, 1) FROM history)
 		, #{update})
 </insert>
 
-<select id="getFileInfoByOriginalName" parameterType="String" resultType="com.mycompany.webapp.common.vo.FileInfoVO">
-SELECT file_no AS "fileNo"
-		, file_saved_name AS "fileSavedName"
-		, file_type AS "fileType"
-		, file_path AS "filePath"
-		, TO_CHAR(file_post_date, 'YYYY-MM-DD')  AS "filePostDate"
-		, (SELECT user_name 
-			FROM userinfo 
-			WHERE user_code = (SELECT DISTINCT file_upload_user_code
-					FROM fileinfo
-					WHERE file_original_name = #{originalName})
-			)AS "uploadUserName"
-FROM fileinfo
-WHERE file_original_name = #{originalName}
-</select>
+
 </mapper>
