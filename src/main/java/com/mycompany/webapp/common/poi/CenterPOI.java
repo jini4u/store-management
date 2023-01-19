@@ -3,9 +3,9 @@ package com.mycompany.webapp.common.poi;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DataFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.mycompany.webapp.center.vo.CenterVO;
 
@@ -13,6 +13,7 @@ public class CenterPOI extends POIClass{
 	private static final Logger logger = LoggerFactory.getLogger(POIClass.class);
 
 	CenterVO center;
+	
 	@Override
 	public void handlingData(Cell cell, List<Object> VOList) {
 		int col = cell.getAddress().getColumn();

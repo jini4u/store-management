@@ -25,7 +25,7 @@ import com.mycompany.webapp.manager.vo.ManagerVO;
 
 @Service
 public class ManagerService implements IManagerService {
-	static final Logger logger=LoggerFactory.getLogger(ManagerController.class);
+	static final Logger logger=LoggerFactory.getLogger(ManagerService.class);
 	
 	@Autowired
 	IManagerRepository managerRepository;

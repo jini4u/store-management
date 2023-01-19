@@ -6,19 +6,17 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/layout/layoutheader.css">
 
-	<a href="/"> <img class="logoImage" src="${pageContext.request.contextPath}/resources/images/logo.png">
-	</a>
+<a href="/"> <img class="logoImage"
+	src="${pageContext.request.contextPath}/resources/images/logo.png">
+</a>
 
-		<ul class="sidebox">
-			<li>
-				<a class="mypage"> <img src="${pageContext.request.contextPath}/resources/images/user.png">
-				</a>
-			</li>
-			<c:set var="titleUserName" value="고은별"/>
-			<li><c:out value="${titleUserName}"/> 담당자<!-- 로그인하는 사람마다 달라짐 --></li>
-			<li class="bar">|</li>
-			<li>
-				<a>로그아웃</a>
-			</li>
-		</ul>
+<ul class="sidebox">
+	<li><a class="mypage"> <img
+			src="${pageContext.request.contextPath}/resources/images/user.png">
+	</a></li>
+	<c:set var="titleUserName" value="고은별" />
+	<li><c:out value="${titleUserName}" /> 담당자<!-- 로그인하는 사람마다 달라짐 --></li>
+	<li class="bar">|</li>
+	<li><a>로그아웃</a></li>
+</ul>
 

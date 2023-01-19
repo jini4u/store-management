@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.LoginMapper">
+
+<!--author 고은별 
+	회원 조회 -->
+<select id="selectMember" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
+<![CDATA[  
+	SELECT user_code, user_name, user_password, user_email
+    FROM userinfo
+    WHERE user_code=#{userCode}
+]]>
+</select>
+
+<!--author 고은별 
+	회원 정보 수정  -->
+<update id="updateMember">
+<![CDATA[ 
+	UPDATE userinfo
+    SET user_password = #{userPassword}
+    WHERE user_code= #{userCode}
+]]>
+</update>
+
+<!-- author 고은별 
+	 비밀번호 조회 -->
+<select id="getPassword" parameterType="string" resultType="string">
+<![CDATA[
+    SELECT user_password
+    FROM userinfo
+    WHERE user_code= #{userCode}
+]]> 
+</select>
+</mapper>
+	
+    

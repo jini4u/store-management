@@ -20,10 +20,7 @@ public class ManagerVO {
 	private String userEmail;
 	private int userTeamCode;
 	
-	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private String userHireDate;
-	
-	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private String userResignDate;
 	
 	private List<CenterVO> centerList;
