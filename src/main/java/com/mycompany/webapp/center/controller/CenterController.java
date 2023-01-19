@@ -152,9 +152,9 @@ public class CenterController {
 	 * @return {List<맵핑가능센터>}
 	 * */
 	@RequestMapping("/availCenter")
-	public @ResponseBody List<CenterVO> getAvailableCenterList(){
+	public @ResponseBody List<CenterVO> getAvailableCenterList(@RequestParam(defaultValue="1") int pageNo){
 		int totalRows = centerService.countAllCenters();
-		Pager pager = new Pager(totalRows, 10, totalRows, 1);
+		Pager pager = new Pager(9, 5, totalRows, pageNo);
 		List<CenterVO> allCenterList = centerService.centerList(pager);
 		List<CenterVO> result = new ArrayList<>();
 		for(CenterVO center:allCenterList) {
