@@ -45,7 +45,7 @@ SELECT file_no AS "fileNo"
 		, TO_CHAR(file_post_date, 'YYYY-MM-DD')  AS "filePostDate"
 		, (SELECT user_name 
 			FROM userinfo 
-			WHERE user_code = (SELECT file_upload_user_code
+			WHERE user_code = (SELECT DISTINCT file_upload_user_code
 					FROM fileinfo
 					WHERE file_original_name = #{originalName})
 			)AS "uploadUserName"
