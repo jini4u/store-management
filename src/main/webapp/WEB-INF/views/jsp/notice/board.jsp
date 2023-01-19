@@ -17,7 +17,7 @@
 	</tr>
 <c:forEach var="post" items="${allPosts}">
 	<tr>
-		<td><a href="board/update?postno=${post.postno}">${post.postno}</a></td>
+		<td><a href="${pageContext.request.contextPath}/board/update?postno=${post.postno}">${post.postno}</a></td>
 		<td>${post.title}</td>
 		<td>${post.content}</td>
 		<td>${post.author}</td>
@@ -26,4 +26,4 @@
 </c:forEach>
 </table>
 </div>
-<a href="board/create"><button>글쓰기</button></a>
+<a href="create"><button>글쓰기</button></a>

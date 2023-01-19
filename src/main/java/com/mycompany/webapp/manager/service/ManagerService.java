@@ -157,10 +157,8 @@ public class ManagerService implements IManagerService {
 		
 		fileRepository.insertFile(fileVO);
 		
-		//오리지널 이름으로 정보를 가져와서 정보에 파일 번호를 저장, 방금 등록한 파일 번호 가져옴
-		int fileNo = fileRepository.getFileInfoByOriginalName(fileVO.getOriginalName()).getFileNo();
 		
-		resultMap.replace("fileNo", 0, fileNo);
+		resultMap.replace("fileNo", 0, fileVO.getFileNo());
 		resultMap.replace("userCode", 0, fileVO.getUploadUserCode());
 		
 		//업로드 히스토리 등록
