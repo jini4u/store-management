@@ -4,15 +4,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.center.service.ICenterService;
 import com.mycompany.webapp.common.vo.Pager;
+import com.mycompany.webapp.manager.controller.ManagerController;
 import com.mycompany.webapp.manager.service.IManagerService;
 import com.mycompany.webapp.score.service.IScoreService;
 import com.mycompany.webapp.score.vo.ScoreVO;
@@ -23,15 +27,16 @@ import com.mycompany.webapp.stat.service.IStatService;
  * */
 @Controller
 public class StatController {
+	static final Logger logger=LoggerFactory.getLogger(StatController.class);
 	
 	@Autowired
-	ICenterService centerService;
+	private ICenterService centerService;
 	@Autowired
-	IManagerService managerService;
+	private IManagerService managerService;
 	@Autowired
-	IScoreService scoreService;
+	private IScoreService scoreService;
 	@Autowired
-	IStatService statService;
+	private IStatService statService;
 	
 	/**
 	 * 통계 화면에서 각 항목들에 필요한 리스트를 담아 뷰페이지 리턴 
@@ -71,5 +76,10 @@ public class StatController {
 	@RequestMapping("/managerAvgScore/{userCode}")
 	public @ResponseBody Map<String, List<ScoreVO>> getManagerAvgScores(@PathVariable int userCode){
 		return statService.getManagerAvgScores(userCode);
+	}
+	
+	@RequestMapping("/codeAvgScore/{userCode}")
+	public @ResponseBody Map<String, List<ScoreVO>> getCodeAvgScores(@PathVariable int userCode, @RequestParam(name="group") String groupCode, @RequestParam(name="detail") int detailCode){
+		return statService.getAvgScoreByCheckCode(groupCode, detailCode, userCode);
 	}
 }
