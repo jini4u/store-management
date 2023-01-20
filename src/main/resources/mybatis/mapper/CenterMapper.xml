@@ -24,7 +24,7 @@
       , #{centerGuide}
       , #{centerOpeningDate,jdbcType=DATE}
       , #{centerClosingDate,jdbcType=DATE})
-</insert>
+</insert> 
 
 <select id="centerCondition" resultType="String"
       parameterType="com.mycompany.webapp.center.vo.CenterVO">
