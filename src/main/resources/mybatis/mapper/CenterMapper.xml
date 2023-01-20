@@ -12,7 +12,12 @@
       , center_opening_date
       , center_closing_date)
    VALUES (
+   <if test="centerCode == 0">
         (SELECT NVL(MAX(center_code)+1, 1)FROM center)
+   </if>
+   <if test="centerCode != 0">
+   		(SELECT NVL(MAX(center_code)+1, 1)FROM center)
+   </if>
       , #{centerName}
       , #{centerTel}
       , #{centerAddress}

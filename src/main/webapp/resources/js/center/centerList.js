@@ -157,7 +157,7 @@ function getDetailAjax() {
 			for(i=0; i<results.length; i++) {
 				let image = results[i];
 				strDOM += "<div>";
-				strDOM += "<img id='centerPhotoSize' src=/image/"+image.fileSavedName + "/> </c:if>"
+				strDOM += "<img id='centerPhotoSize' src=/file/"+image.fileSavedName + "/> </c:if>"
 				strDOM += "</div>";
 			}
 			centerPhotoList.append(strDOM);

@@ -14,6 +14,7 @@
 	<input type="file" name="mgrExcelFile">
 	<input type="submit" value="upload">
 	</form>
+	<a href='/file/managerUplaod_form.xlsx' download="" class="btn btn btn-primary btn-lg">양식파일 다운로드</a>
 </div>
 
 <table class="verticalTable">
@@ -27,7 +28,7 @@
 		<tr>
 			<td>${historyMap.postDate}</td>
 			<td>${historyMap.userName}</td>
-			<td>${historyMap.originalName}</td>
+			<td><a href='/file/manager_${historyMap.originalName}' download="">${historyMap.originalName}</a>${historyMap.originalName}</td>
 			<td>${historyMap.result}</td>
 		</tr>
 	</c:forEach>

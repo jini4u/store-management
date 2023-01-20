@@ -260,7 +260,7 @@ public class CenterService implements ICenterService{
 			int exisData = centerRepository.centerDataExist(center);
 
 			//기존 데이터가 없으면 
-			if (exisData == 0) {
+			if (center.getCenterCode() == 0) {
 				centerRepository.insertCenter(center);
 				System.out.println();
 				//replace(첫번쨰는 key, 두번째는 oldValue, 세번째는 newValue) ->저장된 key의 value가 oldvalue
