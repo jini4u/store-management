@@ -72,8 +72,8 @@ function getCenterImages(){
 	for(var i=0;i<result.length;i++){
 		//<img> 생성 
 		var img = document.createElement('img');
-		//생성한 img에 속성 추가. src='/image/저장된사진이름'
-		img.setAttribute('src', '/image/'+result[i].fileSavedName);
+		//생성한 img에 속성 추가. src='/file/저장된사진이름'
+		img.setAttribute('src', '/file/'+result[i].fileSavedName);
 		//class='photo-img'
 		img.setAttribute('class','photo-img');
 		//data-img-name='사진이름'
