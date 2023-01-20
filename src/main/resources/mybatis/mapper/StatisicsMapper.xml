@@ -3,21 +3,29 @@
 <mapper namespace="com.mycompany.webapp.stat.dao.IStatRepository">
 
 <select id="getAvgScoreByCenterCode" parameterType="int" resultType="com.mycompany.webapp.score.vo.ScoreVO">
+<if test="centerCode != 0">
 SELECT check_year AS "checkYear"
 		, check_season AS "checkSeason"
 		, FLOOR(AVG(check_score)) AS "checkScore"
-	<if test="centerCode != 0">
 		, center_code AS "centerCode"
 	FROM inspection
 	WHERE center_code = #{centerCode}
 	GROUP BY center_code, check_season, check_year
 	ORDER BY check_year, check_season
-	</if>
-	<if test="centerCode == 0">
-	FROM inspection
-	GROUP BY check_season, check_year
-	ORDER BY check_year, check_season
-	</if>
+</if>
+<if test="centerCode == 0">
+SELECT check_year AS "checkYear"
+		, check_season AS "checkSeason"
+		, FLOOR(AVG(checkscore)) AS "checkScore"
+FROM ( SELECT check_year
+			, check_season
+			, AVG(check_score) AS checkScore
+		FROM inspection
+		GROUP BY check_season, check_year, center_code
+	)	
+GROUP BY check_season, check_year
+ORDER BY check_year, check_season
+</if>
 </select>
 
 <select id="getAvgScoreByUserCode" parameterType="int" resultType="com.mycompany.webapp.score.vo.ScoreVO">
@@ -50,6 +58,19 @@ FROM (SELECT check_year
 GROUP BY check_year, check_season
 ORDER BY check_year, check_season
 </if>
+</select>
+<select id="getAvgScoreByCheckCode" resultType="com.mycompany.webapp.score.vo.ScoreVO">
+SELECT check_year AS "checkYear"
+		, check_season AS "checkSeason"
+		, check_score AS "checkScore"
+		, (SELECT center_name
+			FROM center
+			WHERE center_code = #{centerCode}) AS "centerName"
+FROM inspection
+WHERE user_code = #{userCode}
+	AND check_group_code = #{groupCode}
+	AND check_detail_code = #{detailCode}
+	AND center_code = #{centerCode}
 </select>
 
 </mapper>

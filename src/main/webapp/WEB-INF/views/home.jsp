@@ -47,6 +47,7 @@
 
 		<div class="announcement">
 			<h2>공지사항</h2>
+			<a href="/board/list">>></a>
 			<div class="line"></div>
 			<div>
 				<ul class="announcementList">

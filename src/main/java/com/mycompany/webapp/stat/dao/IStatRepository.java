@@ -2,6 +2,7 @@ package com.mycompany.webapp.stat.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.mycompany.webapp.score.vo.ScoreVO;
@@ -10,4 +11,5 @@ import com.mycompany.webapp.score.vo.ScoreVO;
 public interface IStatRepository {
 	List<ScoreVO> getAvgScoreByCenterCode(int centerCode);
 	List<ScoreVO> getAvgScoreByUserCode(int userCode);
+	List<ScoreVO> getAvgScoreByCheckCode(@Param("groupCode") String groupCode, @Param("detailCode") int detailCode, @Param("userCode") int userCode, @Param("centerCode") int centerCode);
 }

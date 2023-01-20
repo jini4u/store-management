@@ -72,6 +72,12 @@ function listClick(event){
 	} else if(clickedMenu == 'manager'){
 		userCode = event.target.id.substr(7);
 		makeRequest(makeManagerGraph, 'GET', '/managerAvgScore/'+userCode);
+	} else if(clickedMenu == 'code'){
+		userCode = 10016 //로그인 기능 되면 로그인한 담당자 번호로 바꾸기 
+		code = event.target.id.substr(4).split('.');
+		groupCode = code[0];
+		detailCode = code[1];
+		makeRequest(makeCodeGraph, 'GET', '/codeAvgScore/'+userCode+'?group='+groupCode+'&detail='+detailCode);
 	}
 	//차트 그리는 부분
 	Highcharts.chart('container', {
@@ -100,13 +106,7 @@ function listClick(event){
 	      enableMouseTracking: true
 	    }
 	  },
-	  series: [{
-	    name: entireStr,
-	    data: entireAvgArr
-	  }, {
-	    name: itemStr,
-	    data: itemAvgArr
-	  }]
+	  series: seriesArr
 	});
 
 }
@@ -139,6 +139,14 @@ function makeCenterGraph(){
 	
 	entireStr = '전체 센터 점수 평균';
 	itemStr = '선택 센터 점수 평균';
+	
+	seriesArr = [{
+	    name: entireStr,
+	    data: entireAvgArr
+	  }, {
+	    name: itemStr,
+	    data: itemAvgArr
+	  }];
 }
 
 //담당자 통계 그래프 그리기 위한 정보 처리 부분
@@ -168,6 +176,64 @@ function makeManagerGraph(){
 	}
 	entireStr = '전체 담당자 점수 평균';
 	itemStr = '선택 담당자 점수 평균';
+	
+	seriesArr = [{
+	    name: entireStr,
+	    data: entireAvgArr
+	  }, {
+	    name: itemStr,
+	    data: itemAvgArr
+	  }];
+}
+
+function makeCodeGraph(){
+	let response = JSON.parse(httpRequest.responseText);
+	
+	categories = [];
+	var entireAvgArr = [];
+	seriesArr = [];
+	//key값들 얻어오기 
+	let keyArr = Object.keys(response);
+	
+	let values = Object.values(response);
+	let maxLength = 0;
+	for(var i=0;i<values.length;i++){
+		maxLength = Math.max(maxLength,values[i].length);
+	}
+	
+	entireAvgArr = Array(maxLength).fill(0);
+	
+	let categoryCheck = false;
+	
+	//key 갯수만큼 반복 
+	for(var i=0;i<keyArr.length;i++){
+		var key = keyArr[i];
+		var itemAvgArr = [];
+		//key에 해당하는 value 얻어오기 
+		var value = response[key];
+		
+		if(value.length==maxLength && categoryCheck==false){
+			categoryCheck = true;
+			for(var j=0;j<value.length;j++){
+				categories.push(value[j].checkYear+'/'+value[j].checkSeason);
+			}
+		}
+		
+		for(var j=0;j<maxLength;j++){
+			if(value[j] != undefined){
+				itemAvgArr.push(value[j].checkScore);
+			} else {
+				itemAvgArr.push(0);
+			}
+			entireAvgArr[j] += itemAvgArr[j];
+		}
+		
+		seriesArr.push({name:key.substr(9), data:itemAvgArr});
+	}
+	for(var j=0;j<entireAvgArr.length;j++){
+		entireAvgArr[j] /= keyArr.length;
+	}
+	seriesArr.push({name:"담당 센터 평균", data:entireAvgArr});
 }
 
 

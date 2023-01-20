@@ -163,7 +163,6 @@ public class ManagerService implements IManagerService {
 		fileVO.setUploadUserCode(10002);
 		
 		fileRepository.insertFile(fileVO);
-		
 		resultMap.replace("fileNo", 0, fileVO.getFileNo());
 		resultMap.replace("userCode", 0, fileVO.getUploadUserCode());
 		

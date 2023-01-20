@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mycompany.webapp.center.vo.CenterVO;
+import com.mycompany.webapp.manager.dao.IManagerRepository;
 import com.mycompany.webapp.score.controller.ScoreController;
 import com.mycompany.webapp.score.dao.IScoreRepository;
 import com.mycompany.webapp.score.vo.ScoreVO;
@@ -19,9 +21,11 @@ public class StatService implements IStatService {
 	private static Logger logger = LoggerFactory.getLogger(StatService.class);
 	
 	@Autowired
-	IStatRepository statRepository;
+	private IStatRepository statRepository;
 	@Autowired
-	IScoreRepository scoreRepository;
+	private IScoreRepository scoreRepository;
+	@Autowired
+	private IManagerRepository managerRepository;
 	
 	/**
 	 * 	센터 코드를 이용한 센터 평균 점수와 모든 센터들의 점수 조회
@@ -63,6 +67,16 @@ public class StatService implements IStatService {
 			String groupCode = (String) groupCodeMap.get("CHECK_GROUP_CODE");
 			List<Map<String, Object>> detailCodes = scoreRepository.getDetailCodes(groupCode);
 			groupCodeMap.put("detailCodes", detailCodes);
+		}
+		return responseMap;
+	}
+	
+	@Override
+	public Map<String, List<ScoreVO>> getAvgScoreByCheckCode(String groupCode, int detailCode, int userCode) {
+		Map<String, List<ScoreVO>> responseMap = new HashMap<String, List<ScoreVO>>();
+		List<CenterVO> centers = managerRepository.getCenterByManager(userCode);
+		for(CenterVO center:centers) {
+			responseMap.put("centerAvg"+center.getCenterName(), statRepository.getAvgScoreByCheckCode(groupCode, detailCode, userCode, center.getCenterCode()));
 		}
 		return responseMap;
 	}
