@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,9 +28,10 @@ public class CenterService implements ICenterService{
 
 	@Autowired
 	ICenterRepository centerRepository;
-	
+
 	@Autowired
 	IFileRepository fileRepository;
+	
 	@Value("${file.path}")
 	private String filePath;
 
@@ -222,26 +225,25 @@ public class CenterService implements ICenterService{
 	public List<Map<String, String>> getCenterUploadHistory() {
 		List<Map<String, Object>> historyList = centerRepository.getCenterUploadHistory();
 		List<Map<String, String>> resultList = new ArrayList<Map<String, String>>();
-		
+
 		for(Map<String, Object> history:historyList) {
 			String postDate = (String)history.get("postDate");
 			String userName = (String)history.get("userName");
 			String originalName = (String)history.get("originalName");
 			String insert = String.valueOf(history.get("insert"));
 			String update = String.valueOf(history.get("update"));
-			
+
 			Map<String, String> resultMap = new HashMap<String, String>();
 			resultMap.put("postDate", postDate);
 			resultMap.put("userName", userName);
 			resultMap.put("originalName", originalName);
 			resultMap.put("result", "입력: "+insert+"건, 수정: "+update+"건");
-			
+
 			resultList.add(resultMap);
-			
+
 		}
 		return resultList;
 	}
-	
 	@Override
 	public Map<String, Integer> centerUploadFile(MultipartFile file, int startRow) {
 		//리턴할 Map생성
@@ -250,13 +252,13 @@ public class CenterService implements ICenterService{
 		resultMap.put("userCode", 0);
 		resultMap.put("insert", 0);
 		resultMap.put("update", 0);
-		
+
 		POIClass poi = new CenterPOI();
 		List<Object> VOList = poi.readWorkBook(file, startRow);
 		for(Object vo : VOList) {
 			CenterVO center = (CenterVO)vo;
 			int exisData = centerRepository.centerDataExist(center);
-			
+
 			//기존 데이터가 없으면 
 			if (exisData == 0) {
 				centerRepository.insertCenter(center);
@@ -269,35 +271,35 @@ public class CenterService implements ICenterService{
 				resultMap.replace("update", resultMap.get("update"), resultMap.get("update")+1);
 			}
 		}
-		String filePathName = filePath+"center_" + file.getOriginalFilename();
-		
+		String filePathName = filePath+"centerExcel_" + file.getOriginalFilename();
+
 		FileInfoVO fileInfoVO = new FileInfoVO();
-		fileInfoVO.setFileSavedName("center_"+file.getOriginalFilename());
+		fileInfoVO.setFileSavedName("centerExcel_"+file.getOriginalFilename());
 		fileInfoVO.setOriginalName(file.getOriginalFilename());
 		fileInfoVO.setFileType(file.getContentType());
 		fileInfoVO.setFilePath(filePathName);
-		
+
 		fileInfoVO.setUploadUserCode(10008);
 		System.out.println("fileInfoVo" + fileInfoVO);
-		
+
 		//파일은 왜 저장해야 하지? 히스토리에만 저장해주면 되는거 아닌강? 물어보기
 		//내 추측, history에는 fileno가 있는데 이 fileno를 받아오기 위해 사용하는 건강?
 		fileRepository.insertFile(fileInfoVO);
-		
+
 		resultMap.replace("fileNo",0, fileInfoVO.getFileNo());
 		resultMap.replace("userCode",0, fileInfoVO.getUploadUserCode());
 		System.out.println("userCode확인 :" + fileInfoVO.getUploadUserCode());
-		
+
 		//historyNo는 0일 때 사용하는 코드가 어디에 있는?
 		fileRepository.insertFileUploadHistory(resultMap);
-		
+
 		try {
 			//이친구는 왜 하는거징? -> 업로드한 파일 데이터를  지정한 파일에 저장한다
 			file.transferTo(new File(filePathName));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return resultMap;
 	}
 

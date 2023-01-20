@@ -25,7 +25,7 @@ import com.mycompany.webapp.manager.vo.ManagerVO;
 
 @Service
 public class ManagerService implements IManagerService {
-	static final Logger logger=LoggerFactory.getLogger(ManagerController.class);
+	static final Logger logger=LoggerFactory.getLogger(ManagerService.class);
 	
 	@Autowired
 	IManagerRepository managerRepository;
@@ -163,7 +163,6 @@ public class ManagerService implements IManagerService {
 		fileVO.setUploadUserCode(10002);
 		
 		fileRepository.insertFile(fileVO);
-		
 		resultMap.replace("fileNo", 0, fileVO.getFileNo());
 		resultMap.replace("userCode", 0, fileVO.getUploadUserCode());
 		

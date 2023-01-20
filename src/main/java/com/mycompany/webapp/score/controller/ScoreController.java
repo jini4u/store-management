@@ -150,7 +150,7 @@ public class ScoreController {
 	
 //ajax를 위한  .........................................................
 	@RequestMapping(value="/indexListAjax", method = RequestMethod.POST)
-	public String centerscoreinquiry(@RequestParam(defaultValue="1") int pageNo,@RequestParam String hiddenCenterCode,ScoreVO scoreVO, Model model,HttpSession session) {
+	public String centerscoreinquiry(@RequestParam(defaultValue="1") int pageNo, @RequestParam String hiddenCenterCode, ScoreVO scoreVO, Model model,HttpSession session) {
 //		log.info("aaaaa:"+hiddenCenterCode);
 		int totalRows = scoreService.CountAllList();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);

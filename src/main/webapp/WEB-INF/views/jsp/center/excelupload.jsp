@@ -10,9 +10,8 @@
 
 <div class='uploadbutton'>
 <form id="file-upload-form" enctype="multipart/form-data" action="centerExcelUpload" method="post">
-<label for="file-select-button" class="greyButton">파일선택</label>
-<input type="file" id="file-select-button" name="centerExcelFile">
-<input type="submit" id="file-upload-button" class="pinkButton">
+<input type="file"  name="centerExcelFile">
+<input type="submit"  class="pinkButton">
 </form>
 <!-- <button id="file-upload-button" class="pinkButton">업로드</button> -->
 </div>
