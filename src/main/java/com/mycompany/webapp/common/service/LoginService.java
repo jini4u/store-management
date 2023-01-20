@@ -25,6 +25,7 @@ public class LoginService implements ILoginService {
 	 */
 	@Override
 	public void updateMember(ManagerVO member) {
+		System.out.println("여긴가");
 		loginRepository.updateMember(member);
 		
 	}
