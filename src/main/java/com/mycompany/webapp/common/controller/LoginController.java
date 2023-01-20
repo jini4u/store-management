@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.mycompany.webapp.common.service.ILoginService;
 import com.mycompany.webapp.manager.vo.ManagerVO;
 
-@RequestMapping("/member")
+/*@RequestMapping("/member")*/
 @Controller
 public class LoginController {
 
@@ -34,6 +34,7 @@ public class LoginController {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(int userCode, String password, HttpSession session, Model model) {
 		ManagerVO member = loginService.selectMember(userCode);
+		System.out.println(member);
 		//회원일때
 		if(member != null) {
 			String userPW = member.getUserPassword();
@@ -47,7 +48,7 @@ public class LoginController {
 					//비밀번호 일치
 					session.setAttribute("userCode", userCode);
 					session.setAttribute("userName", member.getUserName());
-					return "/";
+					return "home";
 				}else {
 					//비밀번호 불일치
 					//국제화처리
@@ -56,10 +57,12 @@ public class LoginController {
 			}
 		}else {
 			//회원 아닐때
+			System.out.println(password);
+			System.out.println("로그인 실패");
 			model.addAttribute("message","회원이 아닙니다.");
 		}
 		session.invalidate();
-		return "/login";
+		return "login";
 	}
 
 

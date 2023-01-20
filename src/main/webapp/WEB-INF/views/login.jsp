@@ -8,7 +8,7 @@
 
 		<div class="login_blank"></div>
 
-		<form action="/member/login" method="post">
+		<form action="/login" method="post">
 		<div class="login_pw_form">
 			<div class="image_placeholder">
 				<img src="resources/images/person-icon.png"> 
@@ -19,7 +19,7 @@
 
 			<div class="image_placeholder">
 				<img src="resources/images/key-icon.png"> 
-				<input type="password" name="userPassword" class="login_pw" placeholder="비밀번호">
+				<input type="password" name="password" class="login_pw" placeholder="비밀번호">
 			</div>
 		</div>
 		<div class="blank"></div>

@@ -4,9 +4,9 @@
 
 <!--author 고은별 
 	회원 조회 -->
-<select id="selectMember" parameterType="string" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
+<select id="selectMember" parameterType="int" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
 <![CDATA[  
-	SELECT user_code, user_name, user_password, user_email
+	SELECT user_code as userCode, user_name as userName, user_password as userPassword, user_email as userEmail
     FROM userinfo
     WHERE user_code=#{userCode}
 ]]>
@@ -28,7 +28,7 @@
 <![CDATA[
     SELECT user_password
     FROM userinfo
-    WHERE user_code= #{userCode}
+    WHERE user_code= #{int}
 ]]> 
 </select>
 </mapper>

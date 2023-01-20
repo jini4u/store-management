@@ -17,6 +17,7 @@ public class LoginService implements ILoginService {
 	 */
 	@Override
 	public ManagerVO selectMember(int userCode) {
+		System.out.println("여긴가"+loginRepository.selectMember(userCode));
 		return loginRepository.selectMember(userCode);
 	}
 	/*  @author 고은별
