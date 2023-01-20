@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,7 @@ public class CenterService implements ICenterService{
 
 	@Autowired
 	IFileRepository fileRepository;
+	
 	@Value("${file.path}")
 	private String filePath;
 
@@ -241,7 +244,6 @@ public class CenterService implements ICenterService{
 		}
 		return resultList;
 	}
-
 	@Override
 	public Map<String, Integer> centerUploadFile(MultipartFile file, int startRow) {
 		//리턴할 Map생성

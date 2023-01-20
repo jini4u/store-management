@@ -11,16 +11,16 @@
 	<tr>
 		<th>글번호</th>
 		<th>제목</th>
-		<th>내용</th>
-		<th>작성자</th>
+		<th class="board-hidden">내용</th>
+		<th class="board-hidden">작성자</th>
 		<th>게시일</th>
 	</tr>
 <c:forEach var="post" items="${allPosts}">
 	<tr>
 		<td><a href="${pageContext.request.contextPath}/board/update?postno=${post.postno}">${post.postno}</a></td>
 		<td>${post.title}</td>
-		<td>${post.content}</td>
-		<td>${post.author}</td>
+		<td class="board-hidden">${post.content}</td>
+		<td class="board-hidden">${post.author}</td>
 		<td>${post.posttime}</td>
 	</tr>
 </c:forEach>

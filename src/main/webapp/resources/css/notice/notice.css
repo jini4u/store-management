@@ -15,3 +15,6 @@
 #fullnoticetable tr th{
 	background: #EDEDED;
 }
+.board-hidden{
+	display: none;
+}

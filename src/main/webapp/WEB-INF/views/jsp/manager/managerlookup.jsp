@@ -61,15 +61,12 @@
 					<tr>
 						<td>${managerVO.userCode}</td>
 						<td>${managerVO.userName}</td>
-						<td><fmt:formatDate value="${managerVO.userBirth}"
-								pattern="yyyy-MM-dd" /></td>
+						<td>${managerVO.userBirth}</td>
 						<td>${managerVO.userTel}</td>
 						<td>${managerVO.userEmail}</td>
 						<td>${managerVO.userTeamCode}</td>
-						<td><fmt:formatDate value="${managerVO.userHireDate}"
-								pattern="yyyy-MM-dd" /></td>
-						<td><fmt:formatDate value="${managerVO.userResignDate}"
-								pattern="yyyy-MM-dd" /></td>
+						<td>${managerVO.userHireDate}</td>
+						<td>${managerVO.userResignDate}</td>
 						<td><button  class='updateModal greyButton'
 								   data-toggle='modal' data-target='#updateModal'>수정</button></td>
 					</tr>

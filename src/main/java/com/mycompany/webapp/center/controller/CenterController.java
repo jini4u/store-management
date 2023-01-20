@@ -46,7 +46,7 @@ public class CenterController {
 	 * 센터별 사진을 조회
 	 * @author 임유진
 	 * @param {int} 페이지 번호
-	 * @return centerlist.jsp
+	 * @return centerphoto.jsp
 	 * */
 	@RequestMapping(value="/centerPhoto")
 	public String manageCenterPhoto(@RequestParam(defaultValue="1") int pageNo, Model model) {
@@ -82,13 +82,13 @@ public class CenterController {
 	 * @return centerlist.jsp
 	 * */
 	@GetMapping(value="/centerList")
-	public String centerList(@RequestParam(defaultValue="1")int pageNo,@RequestParam(value="keyword", required=false)String keyword, Model model, CenterVO centerVO){
+	public String centerList(@RequestParam(defaultValue="1")int pageNo, @RequestParam(value="keyword", required=false) String keyword, Model model, CenterVO centerVO){
 		if (keyword == null) {
-		int totalRows = centerService.countAllCenters();
-		Pager pager = new Pager(10, 10, totalRows, pageNo);
-		model.addAttribute("pager", pager);	
-		model.addAttribute("centerList", centerService.findCenter(pager, keyword));
-		logger.info( "센터리스트" +centerVO.getCenterName());
+			int totalRows = centerService.countAllCenters();
+			Pager pager = new Pager(10, 10, totalRows, pageNo);
+			model.addAttribute("pager", pager);	
+			model.addAttribute("centerList", centerService.findCenter(pager, keyword));
+			logger.info( "센터리스트" +centerVO.getCenterName());
 		}else{
 			int filterTotalRows = centerService.filterCountAllCenters(keyword);
 			Pager filterPager = new Pager(10, 10, filterTotalRows, pageNo);
@@ -100,7 +100,6 @@ public class CenterController {
 			}else {
 				model.addAttribute("pager", new Pager(1, 1, 1, 1));
 				model.addAttribute("centerListN" , "empty");
-				
 			}
 		}
 		return "jsp/center/centerlist";
@@ -114,14 +113,12 @@ public class CenterController {
 	 * */
 	@ResponseBody
 	@PostMapping(value ="/centerUpdate")
-	public CenterVO centerUpdate(@RequestParam(defaultValue="1")int pageNo, Model model, CenterVO centerVO){
+	public CenterVO centerUpdate(@RequestParam(defaultValue="1") int pageNo, Model model, CenterVO centerVO){
 		int totalRows = centerService.countAllCenters();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		centerService.centerUpdate(centerVO);
-
 		return centerVO;
 	}
-
 	
 	/*	
 	@ResponseBody

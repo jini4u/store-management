@@ -209,7 +209,8 @@ public class ManagerController {
 	public String managerFileUpload(MultipartHttpServletRequest request) {
 		//MultipartHttpServletRequest을 사용하면 getFile 메소드를 통해 List 형태로 받을 수 있다
 		MultipartFile file = request.getFile("mgrExcelFile");
-		managerService.mgrUploadFileInfo(file, 3);
-		return "redirect: /manager/mgrFileUploadHistory";
+		managerService.mgrUploadFileInfo(file, 1);
+		logger.info("엑셀 등록"+file.toString());
+		return "redirect: /manager/managerFileUploadHistory";
 	}
 }

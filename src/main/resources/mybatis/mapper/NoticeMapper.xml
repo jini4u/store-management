@@ -12,6 +12,7 @@
 		author,
 		posttime
 	FROM testboard
+	ORDER BY posttime
 </select>
 <select id="getPost" parameterType="int" resultType="com.mycompany.webapp.notice.vo.PostVO">
 	SELECT

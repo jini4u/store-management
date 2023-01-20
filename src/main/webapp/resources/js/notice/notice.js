@@ -7,5 +7,7 @@ $("#btnList").click(function (){
 });
 
 $("#btnUpdate").click(function (){
-	$("#form").submit();
+	$("#btnUpdate").hide();
+	$("#btnSave").show();
+	$(".form-control").attr("readonly", false);
 });
