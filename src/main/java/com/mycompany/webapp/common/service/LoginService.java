@@ -1,10 +1,12 @@
 package com.mycompany.webapp.common.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.common.dao.ILoginRepository;
 import com.mycompany.webapp.manager.vo.ManagerVO;
 
+@Service
 public class LoginService implements ILoginService {
 	
 	@Autowired

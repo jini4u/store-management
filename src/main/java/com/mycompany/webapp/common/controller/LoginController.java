@@ -34,12 +34,31 @@ public class LoginController {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(int userCode, String password, HttpSession session, Model model) {
 		ManagerVO member = loginService.selectMember(userCode);
+		//회원일때
 		if(member != null) {
-		/*	String userPSWassword = ManagerVO.get*/
+			String userPW = member.getUserPassword();
+			if(userPW == null) {
+				//아이디 존재하지 않음
+				//국제화처리
+				model.addAttribute("message","아이디 또는 비밀번호를 잘못 입력했습니다.");
+			}else {
+				//아이디 존재
+				if(userPW.equals(password)){
+					//비밀번호 일치
+					session.setAttribute("userCode", userCode);
+					session.setAttribute("userName", member.getUserName());
+					return "/";
+				}else {
+					//비밀번호 불일치
+					//국제화처리
+					model.addAttribute("message","아이디 또는 비밀번호를 잘못 입력했습니다.");
+				}
+			}
 		}else {
-			
+			//회원 아닐때
+			model.addAttribute("message","회원이 아닙니다.");
 		}
-		
+		session.invalidate();
 		return "/login";
 	}
 
