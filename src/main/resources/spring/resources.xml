@@ -9,5 +9,5 @@
 	
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<!-- location은 서버의 파일시스템으로 수정하기 -->
-	<mvc:resources mapping="/image/**" location="file:///${file.path}" />
+	<mvc:resources mapping="/file/**" location="file:///${file.path}" />
 </beans>

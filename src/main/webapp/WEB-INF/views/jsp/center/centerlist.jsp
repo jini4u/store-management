@@ -146,7 +146,6 @@
  
 <div class="center-button-group"></div>
 
-
 <button id="centerInsertBtn" class="centerSize" data-toggle="modal"
    data-target="#myModal">등록</button>
 <!--insert Modal -->

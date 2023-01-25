@@ -130,10 +130,20 @@ public class ManagerController {
 	 * @author 임유진
 	 * */
 	@RequestMapping(value="/managerMapping")
-	public String managerMapping(@RequestParam(defaultValue="1") int pageNo, Model model) {
-		int totalRows = managerService.countAllMgr();
-		Pager pager = new Pager(10, 10, totalRows, pageNo);
-		model.addAttribute("managerList", managerService.selectManagerList(pager));
+	public String managerMapping(@RequestParam(defaultValue="1") int pageNo, @RequestParam(required=false) String keyword, Model model) {
+		Pager pager;
+		int totalRows;
+		if(keyword==null || keyword.equals("")) {
+			totalRows = managerService.countAllMgr();
+			pager = new Pager(12, 5, totalRows, pageNo);
+			model.addAttribute("managerList", managerService.selectManagerList(pager));			
+		} else {
+			totalRows = managerService.managerCountByKeyword(keyword);
+			pager = new Pager(12, 5, totalRows, pageNo);
+			model.addAttribute("managerList", managerService.managerSearch(pager, keyword));
+		}
+		model.addAttribute("totalManagers", totalRows);
+		model.addAttribute("pager", pager);
 		return "jsp/manager/managermapping";
 	}
 
@@ -200,6 +210,7 @@ public class ManagerController {
 		//MultipartHttpServletRequest을 사용하면 getFile 메소드를 통해 List 형태로 받을 수 있다
 		MultipartFile file = request.getFile("mgrExcelFile");
 		managerService.mgrUploadFileInfo(file, 3);
-		return "redirect: /manager/mgrFileUploadHistory";
+		logger.info("엑셀 등록"+file.toString());
+		return "redirect: /manager/managerFileUploadHistory";
 	}
 }

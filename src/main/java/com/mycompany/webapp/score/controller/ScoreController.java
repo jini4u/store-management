@@ -71,27 +71,19 @@ public class ScoreController {
 	
 	@RequestMapping(value="/scorelist", method = RequestMethod.GET)
 	public String centerscoreinquiry(@RequestParam(defaultValue="1") int pageNo,@RequestParam(defaultValue="0")int centerCode, Model model,HttpSession session) {
-		/**
-		 * 데이터가 없는 list<centervo>, pager 만들고
-		 * centercode가 0이 아닐때만 mapper접근해서 list값 가져오기 + 페이저 처리(if문)
-		 * 
-		 */
-	      //로그인에 처리할 내용-------------------------------------
-	      session.setAttribute("centerCode",1);
-	      session.setAttribute("userCode",10004);
-	      //------------------------------------------------
 
-	      int userCode = 10004;
-		
-	ScoreVO scoreVO = new ScoreVO();
-	/*		//세션에서 가져와서 값을 넣을 수 있도록 변경----------------------
+		int userCode = 10004;
+
+		ScoreVO scoreVO = new ScoreVO();
+		/*		
+	 	//세션에서 가져와서 값을 넣을 수 있도록 변경----------------------
 		//int centerCode = (Integer) session.getAttribute("centerCode");
 		//int centerCode = 3;
 		scoreVO.setCenterCode(centerCode);
 		//int userCode = (Integer) session.getAttribute("userCode");
+
+		//------------------------------------------------  */	
 		
-		//------------------------------------------------
-*/		
 		//scoreVo를 getScoreList로 담아 socreList로 만듬
 		int totalRows = scoreService.countListByCenterCode(scoreVO);
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
@@ -100,7 +92,7 @@ public class ScoreController {
 		model.addAttribute("scoreList",scoreList);
 
 			
-/*		model.addAttribute("centerName",scoreService.getCenterName(userCode));
+		model.addAttribute("centerName",scoreService.getCenterName(userCode));
 		//비어있는 ScoreVO 생성
 		ScoreVO emptyVO = new ScoreVO();
 		//getScoreList 하기위해서 centerCode는 무조건 필요하므로 1로 set
@@ -116,7 +108,7 @@ public class ScoreController {
 			//뷰페이지로 가져갈수있게 담아주기
 			model.addAttribute("maxYear", maxYear);
 			model.addAttribute("maxSeason", maxSeason);
-		}*/
+		}
 		
 		Calendar now = Calendar.getInstance();
 		int yy = now.get(Calendar.YEAR);
@@ -157,16 +149,19 @@ public class ScoreController {
 		return "jsp/score/scoreList";
 	}
 	
+
 	@RequestMapping(value="/scorelist", method = RequestMethod.POST)
 	public String centerscoreinquiry(@RequestParam(defaultValue="1") int pageNo, ScoreVO scoreVO, Model model,HttpSession session) {
+		
+		int userCode = 10004;
+		model.addAttribute("centerName",scoreService.getCenterName(userCode));
+		
 		//scoreVo를 getScoreList로 담아 socreList로 만듬
 		int totalRows = scoreService.countListByCenterCode(scoreVO);
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		List<ScoreVO> scoreList = scoreService.getScoreList(scoreVO, pager);
 		System.out.println("scolist" + scoreList );
-		
-		int userCode = 10004;
-		model.addAttribute("centerName",scoreService.getCenterName(userCode));
+
 		//scoreList를 view페이지로 보내주기 위해서 model에 담음
 		model.addAttribute("scoreList",scoreList);
 		model.addAttribute("pager",pager);

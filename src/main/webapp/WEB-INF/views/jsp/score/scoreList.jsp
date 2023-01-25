@@ -58,7 +58,7 @@
 
 
 <!-- 점수리스트 테이블 -->
-  <form action="/score/updateScore" name="updatescore" method="post">
+  <form action="/score/updateScore" name="updateScore" method="post">
 
 	<table class="scoretable" id ="scoreListTable" border="1">
 		<tr>

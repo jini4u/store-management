@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,8 @@ import com.mycompany.webapp.score.vo.ScoreVO;
 
 @Service
 public class ScoreService implements IScoreService {
-
+	private static Logger logger = LoggerFactory.getLogger(ScoreService.class);
+	
 	@Autowired
 	IScoreRepository scoreRepository;
 	@Autowired
@@ -224,8 +227,7 @@ public class ScoreService implements IScoreService {
 		fileVO.setUploadUserCode(10004);
 		
 		fileRepository.insertFile(fileVO);
-		
-		int fileNo = fileRepository.getFileInfoByOriginalName(fileVO.getOriginalName()).getFileNo();
+		int fileNo = fileVO.getFileNo();
 		
 		resultMap.replace("fileNo", 0, fileNo);
 		resultMap.replace("userCode", 0, fileVO.getUploadUserCode());

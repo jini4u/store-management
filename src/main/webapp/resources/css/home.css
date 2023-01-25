@@ -157,21 +157,22 @@ label.right {
 .announcement h2 {
 	padding-bottom: 20px;
 	padding-left: 28px;
+	float: left;
+    margin-right: 400px;
 }
 
 .announcementList {
-	padding-top: 10px;
 	margin-left: 53px;
 }
 
 .announcementList li {
 	font-size: 20px;
-	padding-top: 20px;
+	padding-top: 15px;
 }
 .line {
 	border-bottom: 1.5px solid #ccc;
 	width: 530px;
-	margin: 0 auto;
+	margin: 25px auto;
 }
 /* 헌혈의 집 소개*/
 .introduce {

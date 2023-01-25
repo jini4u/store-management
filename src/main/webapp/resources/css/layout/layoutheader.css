@@ -4,10 +4,18 @@ body {
 	margin: 0px;
 }
 
-a {
-	text-decoration: none;
+#userName{
+	display: flex;
 }
-
+#aTag{
+	text-decoration: none !important;
+}
+#userName p{
+	font-weight: 700;
+}
+.updateA{
+	color: black !important;
+}
 .logoImage {
 	height: 75px;
 	width: 228px;
@@ -39,4 +47,7 @@ a {
 .mypage>img {
 	height: 20px;
 	margin-right: 4px;
+}
+.pwUpdate{
+	z-index: 1100;
 }
