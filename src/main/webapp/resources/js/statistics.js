@@ -44,6 +44,7 @@ searchBtn.addEventListener("click", function(){
 	let nowMenu = document.querySelector(".clicked").classList[1];
 	let nowTable = document.getElementById(nowMenu+"listtable");
 	for(var i=0;i<list.length;i++){
+		list[i].parentElement.style.display = 'block';
 		if(list[i].closest("table") == nowTable){
 			var str = list[i].innerText;
 			if(str.indexOf(keywordValue) == -1){
@@ -96,7 +97,9 @@ function listClick(event){
 	  yAxis: {
 	    title: {
 	      text: '평균 점수'
-	    }
+	    },
+		max: 100,
+		min: 0
 	  },
 	  plotOptions: {
 	    line: {
@@ -233,7 +236,7 @@ function makeCodeGraph(){
 	for(var j=0;j<entireAvgArr.length;j++){
 		entireAvgArr[j] /= keyArr.length;
 	}
-	seriesArr.push({name:"담당 센터 평균", data:entireAvgArr});
+	seriesArr.push({type:'line', dashStyle:'LongDash', name:"담당 센터 평균", data:entireAvgArr});
 }
 
 
