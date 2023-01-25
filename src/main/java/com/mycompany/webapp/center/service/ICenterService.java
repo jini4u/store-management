@@ -27,7 +27,7 @@ public interface ICenterService {
 	int addCenterImage(String fileDetail, int centerCode, int uploadUserCode, List<MultipartFile> files);
 
 	//센터 검색
-	public List<CenterVO> findCenter(Pager filterPager, String keyword);
+	public List<CenterVO> findCenter(Pager filterPager, String keyword, String keywordType);
 
 	//센터 사진 조회
 	List<FileInfoVO> getCenterImageNames(int centerCode);
@@ -39,7 +39,7 @@ public interface ICenterService {
 	int deleteImage(List<Integer> fileNoList, int centerCode);
 
 	//센터 검색된 수
-	int filterCountAllCenters(String keyword);
+	int filterCountAllCenters(String keyword, String keywordType);
 
 	public Map<String, Integer> centerUploadFile(MultipartFile file, int startRow);
 

@@ -26,6 +26,11 @@
 <div class="center-search-button">
    <div class="search-box center">
       <form action="centerList">
+      <select name="keywordType">
+      	<option value="CN">센터명</option>
+      	<option value="CC">센터코드</option>
+      	<option value="CL">지역</option>
+      </select>
       <input type="text" name="keyword" id="findCenterName" class="search-txt search-button"> 
       <input type="submit" class="search-btn" id="findCenterList"> 
       <i class="fas fa-search"></i>
@@ -109,32 +114,32 @@
          </tr>
       </thead>
       <tbody id="centerList">
-           <tr> <td colspan="7">등록된 담당자가 없습니다.</td></tr>
+           <tr> <td colspan="7">등록된 센터가 없습니다.</td></tr>
       </tbody>
    </table>
   
    <div class="center-pagging">
       <ul class="pagination pageModal">
-         <li><a class="innerPager first" href="centerList?pageNo=1&keyword=${keyword}">처음</a></li>
+         <li><a class="innerPager first" href="centerList?pageNo=1&keywordType=${keywordType}&keyword=${keyword}">처음</a></li>
          <li><c:if test="${pager.groupNo>1}">
                <a class="innerPager arrow left"
-                  href="centerList?pageNo=${pager.startPageNo-1}&keyword=${keyword}">이전</a>
+                  href="centerList?pageNo=${pager.startPageNo-1}&keywordType=${keywordType}&keyword=${keyword}">이전</a>
             </c:if></li>
          <c:forEach var="i" begin="${pager.startPageNo}"
             end="${pager.endPageNo}">
             <li><c:if test="${pager.pageNo != i}">
-                  <a class="innerPager active num" href="centerList?pageNo=${i}&keyword=${keyword}">${i}</a>
+                  <a class="innerPager active num" href="centerList?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}">${i}</a>
                </c:if></li>
             <li><c:if test="${pager.pageNo == i}">
-                  <a id="now-page" class="innerPager num" href="centerList?pageNo=${i}&keyword=${keyword}">${i}</a>
+                  <a id="now-page" class="innerPager num" href="centerList?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}">${i}</a>
                </c:if></li>
          </c:forEach>
          <li><c:if test="${pager.groupNo<pager.totalGroupNo}">
                <a class="innerPager arrow right"
-                  href="centerList?pageNo=${pager.endPageNo+1}&keyword=${keyword}">다음</a>
+                  href="centerList?pageNo=${pager.endPageNo+1}&keywordType=${keywordType}&keyword=${keyword}">다음</a>
             </c:if></li>
          <li><a class="innerPager last"
-            href="centerList?pageNo=${pager.totalPageNo}&keyword=${keyword}">맨끝</a></li>
+            href="centerList?pageNo=${pager.totalPageNo}&keywordType=${keywordType}&keyword=${keyword}">맨끝</a></li>
       </ul>
    </div>
 </div>
@@ -206,7 +211,7 @@
                         aria-describedby="inputGroup-sizing-sm">
                   </div>
                   <div class="col-md-6 mb-3">
-                     <label for="name">폐점일</label> <input type="date"
+             `        <label for="name">폐점일</label> <input type="date"
                         name="centerClosingDate" id="centerClosingDate"
                         class="form-control centerDate"
                         aria-label="Sizing example input"
@@ -216,8 +221,10 @@
             </form>
             <div id="showPhoto">
                <div class="col-md-6 mb-3">
-                  <label for="name">사진</label> 
-                  <div id="centerPhotoList"></div>
+                  <label for="name">사진</label>
+                  <div id="centerPhotoList" class="slider">
+                  	<div class="bullets"></div>
+                  </div>
                </div>
             </div>
          </div>
@@ -229,10 +236,5 @@
       </div>
    </div>
 </div>
-</div>
-
-
-
-
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/center/centerList.js"></script>

@@ -85,9 +85,17 @@ SELECT rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGu
    FROM center C LEFT OUTER JOIN mapping M ON C.center_code = M.center_code
                   LEFT OUTER JOIN userinfo U ON M.user_code = U.user_code
     ]]>
-    <if test= "keyword != null" >
+    <choose>
+    <when test="keywordType == 'CN'">
     WHERE C.center_name like('%' ||#{keyword}||'%')
-    </if>
+    </when>
+    <when test="keywordType == 'CC'">
+    WHERE C.center_code like ('%' || #{keyword} || '%')
+    </when>
+    <when test="keywordType == 'CL'">
+    WHERE C.center_address like ('%' || #{keyword} || '%')
+    </when>
+    </choose>
     <![CDATA[
     ORDER BY "centerCode"
     )
@@ -105,7 +113,17 @@ SELECT COUNT(*) FROM center
 <select id="filterCountAllCenters" parameterType="String" resultType="int">
     select count(*) 
     from center
-    where center_name like ('%' || #{keyword} ||'%')
+    <choose>
+    <when test="keywordType == 'CN'">
+    WHERE center_name like ('%' || #{keyword} ||'%')
+    </when>
+    <when test="keywordType == 'CC'">
+    WHERE center_code like ('%' || #{keyword} || '%')
+    </when>
+    <when test="keywordType == 'CL'">
+    WHERE center_address like ('%' || #{keyword} || '%')
+    </when>
+    </choose>
 </select>
 
 <insert id="addCenterImage" parameterType="com.mycompany.webapp.common.vo.FileInfoVO">

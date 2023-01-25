@@ -195,7 +195,7 @@ function getCenterImages(){
 //-> click 했을때 12~14라인 작동하도록 (그럼 아마도 12~14라인을 함수로 묶어놔야겠찌?)
 
 //querySelectorAll을 이용해 등록,수정,삭제 모든 버튼의 요소들을 가지고 온다
-const buttonClick = document.querySelectorAll(".centerButton");
+/*const buttonClick = document.querySelectorAll(".centerButton");
 const closeBtns = document.querySelectorAll(".centermodal-close-btn");
 //등록, 수정, 삭제 각각의 모달창
 let modalOpen;
@@ -216,7 +216,7 @@ buttonClick.forEach(function (element) {
 			});
 		}
 	});
-});
+});*/
 
 //등록 모달 안 사진 선택 input 선택자
 var fileSelect = document.querySelector("input[name='centerImage']");
