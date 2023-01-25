@@ -1,11 +1,12 @@
 package com.mycompany.webapp.score.service;
 
 import java.util.List;
-
-import com.mycompany.webapp.score.vo.ScoreVO;
 import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import com.mycompany.webapp.common.vo.Pager;
+import com.mycompany.webapp.score.vo.ScoreVO;
 
 public interface IScoreService {
 	//유진
@@ -21,7 +22,7 @@ public interface IScoreService {
 	List<Map<String, String>> getScoreUploadHistory();
 	
 	//윤선
-	List<ScoreVO> getScoreList(ScoreVO scoreVO);
+	List<ScoreVO> getScoreList(ScoreVO scoreVO, Pager pager);
 	//점수등록	
 	int insertScore(ScoreVO score);
 	//모달 점수 등록
@@ -29,8 +30,9 @@ public interface IScoreService {
 	//점수 수정
 	int updateScore(ScoreVO score);
 	//페이징처리를 위한 갯수
-	int CountAllList();
+	int countAllList();
+	int countListByCenterCode(ScoreVO score);
 	//센터리스트 가져오기
-	List<ScoreVO> getCenterName(ScoreVO userCode);
+	List<ScoreVO> getCenterName(int userCode);
 
 }

@@ -26,9 +26,10 @@
 <div class="center-search-button">
    <div class="search-box center">
       <form action="centerList">
+      <div class="search-div">
       <input type="text" name="keyword" id="findCenterName" class="search-txt search-button"> 
       <input type="submit" class="search-btn" id="findCenterList"> 
-      <i class="fas fa-search"></i>
+      </div>
       </form>
    </div>
 </div>
@@ -145,8 +146,6 @@
  
 <div class="center-button-group"></div>
 
-<%-- 울엉니 공부안하고 뭐해 자꾸 돌아다니지 ㅏㅁㄹ구 
-	얼렁 코	딩	해 --%>
 
 <button id="centerInsertBtn" class="centerSize" data-toggle="modal"
    data-target="#myModal">등록</button>

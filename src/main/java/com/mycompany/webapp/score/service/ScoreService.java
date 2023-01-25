@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import com.mycompany.webapp.common.dao.IFileRepository;
 import com.mycompany.webapp.common.poi.POIClass;
 import com.mycompany.webapp.common.poi.ScorePOI;
 import com.mycompany.webapp.common.vo.FileInfoVO;
+import com.mycompany.webapp.common.vo.Pager;
 import com.mycompany.webapp.score.dao.IScoreRepository;
 import com.mycompany.webapp.score.vo.ScoreVO;
 
@@ -104,8 +106,14 @@ public class ScoreService implements IScoreService {
 
 	//전체 점수 조회
 	@Override
-	public List<ScoreVO> getScoreList(ScoreVO scoreVO) {	
-		return scoreRepository.getScoreList(scoreVO);
+	public List<ScoreVO> getScoreList(ScoreVO scoreVO, Pager pager) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("centerCode", scoreVO.getCenterCode());
+		map.put("checkYear", scoreVO.getCheckYear());
+		map.put("checkSeason", scoreVO.getCheckSeason());
+		map.put("startRowNo", pager.getStartRowNo());
+		map.put("endRowNo", pager.getEndRowNo());
+		return scoreRepository.getScoreList(map);
 	}
 
 	//점수 수정
@@ -153,12 +161,17 @@ public class ScoreService implements IScoreService {
 	
 	//점수리스트 수 받아오기
 	@Override
-	public int CountAllList() {
-		return scoreRepository.CountAllList();
+	public int countAllList() {
+		return scoreRepository.countAllList();
+	}
+	
+	@Override
+	public int countListByCenterCode(ScoreVO score) {
+		return scoreRepository.countListByCenterCode(score);
 	}
 
 	@Override
-	public List<ScoreVO> getCenterName(ScoreVO userCode) {
+	public List<ScoreVO> getCenterName(int userCode) {
 		return scoreRepository.getCenterName(userCode);
 	}
 
