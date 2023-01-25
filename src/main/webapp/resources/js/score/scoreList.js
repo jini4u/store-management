@@ -33,61 +33,72 @@ function changeColor(){
 changeColor();
 
 //지점버튼 누르면 점수 리스트로 이동
-$(".firstCenter").click(function list() {
-	let firstCenter=$(this).val();
-	let hiddenCenterCode =$(this).next().val();
+//$(".firstCenter").click(function list() {
+/*$(document).ready(function () {
+$(document).on('click', '.firstCenter', function(){
+
+	let firstCenter=$(this).val(); //이벤트 핸들러가 등록된 dom $("firstCenter") 이것이 html에서 포함되어 있는 태그
+	let hiddenCenterCode =$(this).next().val();//.next : 해당 태그의 다음 태그를 찾는다
 	let checkYear =$(".checkYear").next().val();
 	let checkSeason  =$(".checkSeason").next().val();
 	let checkGroupContent  =$(".checkGroupContent").next().val();
 	let checkDetailContent  =$(".checkDetailContent").next().val();
 	let checkScore  =$(".checkScore").next().val();
-//	let userCode = $(this).next().next().val();
+
+//	console.log(firstCenter);
+//	console.log(hiddenCenterCode);
+
+	let data = {
+			centerName : firstCenter, 
+			centerCode : hiddenCenterCode,
+			checkYear   : checkYear,
+			checkSeason   : checkSeason,
+			checkGroupContent : checkGroupContent,
+			checkDetailContent : checkDetailContent,
+			checkScore   : checkScore
+	};
 
 
-//	 console.log(userCode);
-//	 console.log(hiddenCenterCode);
+	$.ajax({
+		url : "/score/ListAjax", //호출 URL
+		data: data,
+		type : "post",	
 
-	   let data = {
-		         centerName : firstCenter, 
-		         centerCode : hiddenCenterCode,
-		         checkYear   : checkYear,
-		         checkSeason   : checkSeason,
-		         checkGroupContent : checkGroupContent,
-		         checkDetailContent : checkDetailContent,
-		         checkScore   : checkScore
-		      };
-
-	 
-			$.ajax({
-				url : "/score/indexListAjax?hiddenCenterCode="+hiddenCenterCode, //호출 URL
-				type : "post",		//http타입
-				dataType : "text"	//http 통신 후 응답 데이터 타입
-		    }).done(function(result) {
-				  console.log("결과확인");
-		     		var html = jQuery('<div>').html(result);
-					var contents = html.find("div#indexListAjax").html();/*div태그 중에서 id를 indexListAjax를 찾아서
+	}).done(function(result) {
+//		console.log("결과확인");
+		var html = $('<div>').html(result); 
+		var contents = html.find("div#indexListAjax").html();div태그 중에서 id를 indexListAjax를 찾아서
 																			contents라는 변수에 할당
-																			jQuery('<div>') 이부분은 result를 넣은 html로 선언한 것
-																			*/
-						$("#tabl1").html(contents);
-				
-			}).fail(function (jqXHR, textStatus, errorThrown) {
-				console.log("에러");
-//				console.log(jqXHR);
-//				console.log(textStatus);
-//				console.log(errorThrown);
-			});
+																			jQuery('<div>') 이부분은 result를 넣은 html로 선언한 것 
 		
-});
+		$("#tabl1").html(contents);
 
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		console.log("에러");
+//		console.log(jqXHR);
+//		console.log(textStatus);
+//		console.log(errorThrown);
+	});
 
+});*/
 
+	
 
+//년도 select박스
+//$(document).ready()는 문서가 준비되면 매개변수로 넣은 콜백 함수를 실행하라는 의미
+$(document).ready(function(){			
+	setYearBox();
+});    
+function setYearBox(){
+	var dt = new Date();
+	var year = "";
+	var com_year = dt.getFullYear();
+	$("#yearbox").append("<option value=''>년도</option>");
 
-
-
-
-
+	for(var y = (com_year); y >= (com_year-10); y--){ 								// 올해 기준으로 -10 까지
+		$("#yearbox").append("<option value='"+ y +"'>"+ y + " 년" +"</option>");
+	}
+};
 
 
 

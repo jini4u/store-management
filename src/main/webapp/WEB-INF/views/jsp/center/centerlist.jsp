@@ -31,9 +31,10 @@
       	<option value="CC">센터코드</option>
       	<option value="CL">지역</option>
       </select>
+      <div class="search-div">
       <input type="text" name="keyword" id="findCenterName" class="search-txt search-button"> 
       <input type="submit" class="search-btn" id="findCenterList"> 
-      <i class="fas fa-search"></i>
+      </div>
       </form>
    </div>
 </div>

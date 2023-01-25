@@ -55,6 +55,13 @@
 .changeColor {
 	background-color: #EDEDED;
 }
+.search-btn{
+	margin: -14%;
+}
+.search-div{
+	margin-right: -43%;
+ 
+}
 
 /*  .modal-dialog{  */
 /*  max-width: 552px; */

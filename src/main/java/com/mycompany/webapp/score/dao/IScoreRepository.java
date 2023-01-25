@@ -2,11 +2,11 @@
 package com.mycompany.webapp.score.dao;
 
 import java.util.List;
-
-import com.mycompany.webapp.score.vo.ScoreVO;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
+
+import com.mycompany.webapp.score.vo.ScoreVO;
 
 /**
  * 점수 관리
@@ -33,7 +33,7 @@ public interface IScoreRepository {
 	List<Map<String, Object>> getScoreUploadHistory();
 	
 	//윤선
-	List<ScoreVO> getScoreList(ScoreVO scoreVO);
+	List<ScoreVO> getScoreList(Map<String, Integer> map);
 	
 	/*점수 등록*/
 	int insertScore(ScoreVO score);
@@ -45,8 +45,9 @@ public interface IScoreRepository {
 	/*점수 수정,저장*/
 	int updateScore(ScoreVO score);
 	/*점수리스트 수 받아오기*/
-	int CountAllList();
+	int countAllList();
+	int countListByCenterCode(ScoreVO score);
 	/*username 받아오기*/
-	List<ScoreVO> getCenterName(ScoreVO userCode);
+	List<ScoreVO> getCenterName(int userCode);
 }
 

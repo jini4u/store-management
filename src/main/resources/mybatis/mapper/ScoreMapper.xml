@@ -28,32 +28,40 @@
 점수조회,해당년도/해당분기 조회
 정윤선
  -->
-<select id="getScoreList" parameterType="com.mycompany.webapp.score.vo.ScoreVO" resultType="com.mycompany.webapp.score.vo.ScoreVO">
-	SELECT
-		I.center_code as "centerCode",
-		I.user_code as "userCode",
-		I.check_detail_code as "checkDetailCode",
-		I.check_year as "checkYear",
-		I.check_season as "checkSeason",
-		D.check_group_code as "checkGroupCode",
-		G.check_group_content as "checkGroupContent",
-		D.check_detail_content as "checkDetailContent",
-		I.check_score as "checkScore"
-	FROM check_detail D
-		LEFT OUTER JOIN Inspection I
-			ON D.check_group_code = I.check_group_code
-			AND D.check_detail_code = I.check_detail_code
-		LEFT OUTER JOIN check_group G
-			ON I.check_group_code = G.check_group_code
-	WHERE
-		I.center_code = #{centerCode}
-		<if test="checkYear != 0">
-		AND I.check_year = #{checkYear}
-		</if>
-		<if test="checkSeason != 0">
-		AND I.check_season = #{checkSeason}
-		</if>
-	ORDER BY I.check_year DESC, I.check_season DESC NULLS LAST
+<select id="getScoreList" parameterType="map" resultType="com.mycompany.webapp.score.vo.ScoreVO">
+	SELECT rnum, "centerCode", "userCode", "checkDetailCode", "checkYear","checkSeason","checkGroupCode","checkGroupContent","checkDetailContent","checkScore"
+	FROM (
+	  SELECT ROWNUM as rnum, "centerCode", "userCode", "checkDetailCode", "checkYear","checkSeason","checkGroupCode","checkGroupContent","checkDetailContent","checkScore"
+	  FROM (
+		SELECT
+			I.center_code as "centerCode",
+			I.user_code as "userCode",
+			I.check_detail_code as "checkDetailCode",
+			I.check_year as "checkYear",
+			I.check_season as "checkSeason",
+			D.check_group_code as "checkGroupCode",
+			G.check_group_content as "checkGroupContent",
+			D.check_detail_content as "checkDetailContent",
+			I.check_score as "checkScore"
+		FROM check_detail D
+			LEFT OUTER JOIN Inspection I
+				ON D.check_group_code = I.check_group_code
+				AND D.check_detail_code = I.check_detail_code
+			LEFT OUTER JOIN check_group G
+				ON I.check_group_code = G.check_group_code
+		WHERE
+			I.center_code = #{centerCode}
+			<if test="checkYear != 0">
+			AND I.check_year = #{checkYear}
+			</if>
+			<if test="checkSeason != 0">
+			AND I.check_season = #{checkSeason}
+			</if>
+		ORDER BY I.check_year DESC, I.check_season DESC NULLS LAST
+	  )
+	  WHERE rownum &lt;= #{endRowNo}  
+	)
+	WHERE rnum &gt;= #{startRowNo}
 </select>
 <!-- 
  점수 항목 조회
@@ -131,15 +139,34 @@ VALUES(
 페이징처리
 정윤선
  -->
-<select id="CountAllList" resultType="int">
+<select id="countAllList" resultType="int">
 SELECT COUNT(*) FROM INSPECTION
+</select>
+
+<select id="countListByCenterCode" parameterType="com.mycompany.webapp.score.vo.ScoreVO" resultType="int">
+	SELECT count(*)
+	FROM check_detail D
+		LEFT OUTER JOIN Inspection I
+			ON D.check_group_code = I.check_group_code
+			AND D.check_detail_code = I.check_detail_code
+		LEFT OUTER JOIN check_group G
+			ON I.check_group_code = G.check_group_code
+	WHERE
+		I.center_code = #{centerCode}
+		<if test="checkYear != 0">
+		AND I.check_year = #{checkYear}
+		</if>
+		<if test="checkSeason != 0">
+		AND I.check_season = #{checkSeason}
+		</if>
+	ORDER BY I.check_year DESC, I.check_season DESC NULLS LAST
 </select>
 
 <!-- 
 센터이름 가져오기
 정윤선 -->
 
-<select id="getCenterName" parameterType="com.mycompany.webapp.score.vo.ScoreVO" resultType="com.mycompany.webapp.score.vo.ScoreVO">
+<select id="getCenterName" parameterType="int" resultType="com.mycompany.webapp.score.vo.ScoreVO">
 
 SELECT DISTINCT
 I.center_code as "centerCode",
