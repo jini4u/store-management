@@ -24,7 +24,7 @@ public interface ICenterRepository {
 	public String centerCondition(CenterVO centerVO);
 	
 	//센터 검색
-	public List<CenterVO> findCenter(@Param("filterPager")Pager filterPager, @Param("keyword")String keyword);
+	public List<CenterVO> findCenter(@Param("filterPager")Pager filterPager, @Param("keyword")String keyword, @Param("keywordType")String keywordType);
 	
 	//유진
 	int countAllCenters();
@@ -35,7 +35,7 @@ public interface ICenterRepository {
 	int deleteImage(int fileNo);
 	
 	//센터 검색된 수 받아오는 것
-	int filterCountAllCenters(String keyword);
+	int filterCountAllCenters(@Param("keyword")String keyword, @Param("keywordType")String keywordType);
 
 	//센터코드 총 갯수
 	int centerDataExist(CenterVO center);

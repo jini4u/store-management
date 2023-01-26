@@ -207,8 +207,8 @@ public class CenterService implements ICenterService{
 	 * @return 검색된 센터 정보 리스트
 	 * */
 	@Override
-	public List<CenterVO> findCenter(Pager filterPager, String keyword) {
-		return centerRepository.findCenter(filterPager, keyword);
+	public List<CenterVO> findCenter(Pager filterPager, String keyword, String keywordType) {
+		return centerRepository.findCenter(filterPager, keyword, keywordType);
 	}
 
 	/**
@@ -218,8 +218,8 @@ public class CenterService implements ICenterService{
 	 * @return 검색된 센터 정보 수
 	 * */
 	@Override
-	public int filterCountAllCenters(String keyword) {
-		return centerRepository.filterCountAllCenters(keyword);
+	public int filterCountAllCenters(String keyword, String keywordType) {
+		return centerRepository.filterCountAllCenters(keyword, keywordType);
 	}
 	@Override
 	public List<Map<String, String>> getCenterUploadHistory() {

@@ -89,38 +89,38 @@ var clickTd;
 var imgCenterCode;
 //테이블 클릭시 td값
 $("#center-left tr").click(function (){
-	
+
 	$("#centerInsertModal").removeAttr('class', 'modal-lg');
 	$("#centerInsertModal").attr('class', 'modal-dialog modal-xl modal-dialog-centered');
-	
-	$("#centerPhotoList").empty();
-   str =""
-   tdArr = new Array(); //배열 선언
 
-   //현재 클릭된 Row(<tr>)
-   tr = $(this);
-   clickTd = tr.children();
-   
+	$("#centerPhotoList").empty();
+	str =""
+		tdArr = new Array(); //배열 선언
+
+	//현재 클릭된 Row(<tr>)
+	tr = $(this);
+	clickTd = tr.children();
+
 	var centerCode = clickTd.eq(0).text();	
 	imgCenterCode = clickTd.eq(0).text();
 	console.log(imgCenterCode);
 	var centerName = clickTd.eq(1).text();
 	var centerTel = clickTd.eq(2).text();
 	var centAddress = clickTd.eq(3).text();
-	
+
 	var centOpeningDate = '';
 	if (clickTd.eq(4).text()) {
 		centOpeningDate = clickTd.eq(4).text();
 	};
 	var centCondition =clickTd.eq(5).text();
-	
+
 	var centGuide = clickTd.eq(6).text();
 	var centClosingDate = '';
-	
+
 	if (clickTd.eq(7).text()) {
 		centClosingDate = clickTd.eq(7).text();
 	}
-   
+
 	$("#centerCode").val(centerCode);
 	$("#centerName").val(centerName);
 	$("#centerTel").val(centerTel);
@@ -129,15 +129,15 @@ $("#center-left tr").click(function (){
 	$("#centerCondition").val(centCondition);
 	$("#centerClosingDate").val(centClosingDate);
 	$("#centerGuide").val(centGuide);
-	
-   console.log("클릭한 td데이터 :" + clickTd.text());
-   
+
+	console.log("클릭한 td데이터 :" + clickTd.text());
+
 	if (imgCenterCode !=null) {
 		$("#showPhoto").show();
 		$(".modal-body").attr('id', 'centerphoto');
 		getDetailAjax()
 	}
-   
+
 });
 
 function getDetailAjax() {
@@ -148,20 +148,35 @@ function getDetailAjax() {
 		},
 		success : function(results) {
 			let centerPhotoList = $("#centerPhotoList");
-			let strDOM = "";
+			let imgholder = $("#imgholder");
+			let bullets = $(".bullets");
+			let strDOMinput = "";
+			let strDOMul ="";
+			let strDOMdiv ="";
 			if (results.length == 0) {
-				strDOM +="<div>"
-					strDOM += "<img src='/resources/images/center/no_image.png'>"
-						strDOM += "</div>";
+				strDOMdiv +="<div>"
+				strDOMdiv += "<img src='/resources/images/center/no_image.png'>"
+				strDOMdiv += "</div>";
 			}
 			for(i=0; i<results.length; i++) {
-				let image = results[i];
-				strDOM += "<div>";
-				strDOM += "<img id='centerPhotoSize' src=/file/"+image.fileSavedName + "/> </c:if>"
-				strDOM += "</div>";
+				strDOMinput += "<input type='radio' name='slide' id='slide"+i+"' checked>";
 			}
-			centerPhotoList.append(strDOM);
-
+			centerPhotoList.append(strDOMinput);
+			
+			strDOMul += "<ul id='imgholder' class='imgs'>";
+			for(i=0; i<results.length; i++) {
+				let image = results[i];
+				strDOMul += "<li><img id='centerPhotoSize' src=/file/"+image.fileSavedName + "/></li>";
+			} 
+			strDOMul += "</ul>";
+			centerPhotoList.append(strDOMul);
+			
+			strDOMdiv += "<div class='bullets'>";
+			for(i=0; i<results.length; i++) {
+				strDOMdiv += "<label for=slide" +i+ ">&nbsp;&nbsp;</label>";
+			} 
+			strDOMdiv +="</div>";
+			centerPhotoList.append(strDOMdiv);
 		},
 		error : error
 	});
@@ -203,57 +218,57 @@ $("#centerSavedBtn").click(function (){
 			error: error
 		});
 	}else{
-		  let updateURL = "centerUpdate";
-	      let centercondition = document.querySelector("#centerCondition").value;
-	      let pageNo = $("#now-page").text();
-	      alert(pageNo);
-	      console.log("centerCondition"+centercondition);
-	      $.ajax({
-	         type : "POST",
-	         url : updateURL,
-	         data : {
-	        	pageNo : pageNo,
-	            centerCode : centercode,
-	            centerName : centername,
-	            centerTel : centertel,
-	            centerAddress : centeraddress,
-	            centerOpeningDate  : centeropeningDate,
-	            centerCondition  : centercondition,
-	            centerGuide : centerguide,
-	            centerClosingDate : centerclosingDate
-	         },
-	         success : function(results){
-	        			if(results.centerOpeningDate == null) {
-	        				results.centerOpeningDate = '-';
-	        			}else {
-	        				results.centerOpeningDate = results.centerOpeningDate.substring(0,10);
-	        			}
-	        			clickTd.eq(0).text(results.centerCode);
-	        			clickTd.eq(1).text(results.centerName);
-	        			clickTd.eq(2).text(results.centerTel);
-	        			clickTd.eq(3).text(results.centerAddress);
-	        			clickTd.eq(4).text(results.centerOpeningDate);
-	        			clickTd.eq(5).text(results.centerCondition);
-	        			clickTd.eq(6).text(results.centerguide);
-	        			clickTd.eq(7).text(results.centerclosingDate);
-	        		$("#findCenterName").val('');
-	        	},
-	         error: error
-	      });
-	   }
-	});
+		let updateURL = "centerUpdate";
+		let centercondition = document.querySelector("#centerCondition").value;
+		let pageNo = $("#now-page").text();
+		alert(pageNo);
+		console.log("centerCondition"+centercondition);
+		$.ajax({
+			type : "POST",
+			url : updateURL,
+			data : {
+				pageNo : pageNo,
+				centerCode : centercode,
+				centerName : centername,
+				centerTel : centertel,
+				centerAddress : centeraddress,
+				centerOpeningDate  : centeropeningDate,
+				centerCondition  : centercondition,
+				centerGuide : centerguide,
+				centerClosingDate : centerclosingDate
+			},
+			success : function(results){
+				if(results.centerOpeningDate == null) {
+					results.centerOpeningDate = '-';
+				}else {
+					results.centerOpeningDate = results.centerOpeningDate.substring(0,10);
+				}
+				clickTd.eq(0).text(results.centerCode);
+				clickTd.eq(1).text(results.centerName);
+				clickTd.eq(2).text(results.centerTel);
+				clickTd.eq(3).text(results.centerAddress);
+				clickTd.eq(4).text(results.centerOpeningDate);
+				clickTd.eq(5).text(results.centerCondition);
+				clickTd.eq(6).text(results.centerguide);
+				clickTd.eq(7).text(results.centerclosingDate);
+				$("#findCenterName").val('');
+			},
+			error: error
+		});
+	}
+});
 
 
 //등록버튼
 $("#centerInsertBtn").click(function () {
 
 	$("#centerPhotoList").empty();
-	
+
 
 	$("#showPhoto").hide();
 	$(".modal-body").removeAttr('id', 'centerphoto' );
 	$("#centerInsertModal").removeAttr('class', 'modal-xl');
-	
+
 
 	$("#centerName").attr("readonly", false);
 	$("#centerInsertModal").attr('class', 'modal-dialog modal-lg modal-dialog-centered');

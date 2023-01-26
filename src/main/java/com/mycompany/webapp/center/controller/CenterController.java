@@ -82,21 +82,24 @@ public class CenterController {
 	 * @return centerlist.jsp
 	 * */
 	@GetMapping(value="/centerList")
-	public String centerList(@RequestParam(defaultValue="1")int pageNo, @RequestParam(value="keyword", required=false) String keyword, Model model, CenterVO centerVO){
+	public String centerList(@RequestParam(defaultValue="1")int pageNo, @RequestParam(value="keywordType", required=false) String keywordType, 
+			@RequestParam(required=false)String keyword, Model model, CenterVO centerVO){
+			System.out.println("keywordType" + keywordType);
 		if (keyword == null) {
 			int totalRows = centerService.countAllCenters();
 			Pager pager = new Pager(10, 10, totalRows, pageNo);
 			model.addAttribute("pager", pager);	
-			model.addAttribute("centerList", centerService.findCenter(pager, keyword));
+			model.addAttribute("centerList", centerService.findCenter(pager, keyword ,keywordType));
 			logger.info( "센터리스트" +centerVO.getCenterName());
 		}else{
-			int filterTotalRows = centerService.filterCountAllCenters(keyword);
+			int filterTotalRows = centerService.filterCountAllCenters(keyword, keywordType);
 			Pager filterPager = new Pager(10, 10, filterTotalRows, pageNo);
-			List<CenterVO> filterCenterList = centerService.findCenter(filterPager, keyword);
+			List<CenterVO> filterCenterList = centerService.findCenter(filterPager, keyword ,keywordType);
 			if (filterCenterList.size() != 0) {
 				model.addAttribute("centerList", filterCenterList);
 				model.addAttribute("pager", filterPager);
 				model.addAttribute("keyword", keyword);
+				model.addAttribute("keywordType", keywordType);
 			}else {
 				model.addAttribute("pager", new Pager(1, 1, 1, 1));
 				model.addAttribute("centerListN" , "empty");
