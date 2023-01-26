@@ -7,7 +7,7 @@ body {
 #userName{
 	display: flex;
 }
-#aTag{
+.aTag{
 	text-decoration: none !important;
 }
 #userName p{
@@ -50,4 +50,50 @@ body {
 }
 .pwUpdate{
 	z-index: 1100;
+}
+
+
+
+.container{
+    height: 100vh;
+}
+.dropdown-toggle{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    font-weight: 600;
+    color:black;
+    border: 0;
+}
+.dropdown-toggle:focus{
+    box-shadow: none !important;
+}
+
+
+.dropdown-toggle::after {
+
+    display: none;
+
+}
+
+.dropdown-menu{
+    width: 200px;
+    border: 2px solid #E26868;
+    padding: 0rem 0;
+    transform: translate3d(0px, 50px, 0px) !important;
+
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+    color: #ffffff;
+    background-color: #E26868;
+    padding: 12px;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 12px;
 }
