@@ -10,15 +10,24 @@
  * @author 정윤선
  * **/
 
-window.onload = function(){
+$(function(){
+	
 	//모달창
-	$('#testBtn').click(function(e){
+	/*$('#testBtn').click(function(e){
 		e.preventDefault();
 		$('#testModal').modal("show");
-	});
+	});*/
 
+	 // 모달 버튼에 이벤트를 건다.
+	  $('#openModalBtn').on('click', function(){
+	    $('#modalBox').modal('show');
+	  });
+	  // 모달 안의 취소 버튼에 이벤트를 건다.
+	  $('#closeModalBtn').on('click', function(){
+	    $('#modalBox').modal('hide');
+	  });
 
-}
+});
 
 
 //점수리스트 마우스 오버시 색 변화
@@ -31,58 +40,6 @@ function changeColor(){
 }
 
 changeColor();
-
-//지점버튼 누르면 점수 리스트로 이동
-//$(".firstCenter").click(function list() {
-/*$(document).ready(function () {
-$(document).on('click', '.firstCenter', function(){
-
-	let firstCenter=$(this).val(); //이벤트 핸들러가 등록된 dom $("firstCenter") 이것이 html에서 포함되어 있는 태그
-	let hiddenCenterCode =$(this).next().val();//.next : 해당 태그의 다음 태그를 찾는다
-	let checkYear =$(".checkYear").next().val();
-	let checkSeason  =$(".checkSeason").next().val();
-	let checkGroupContent  =$(".checkGroupContent").next().val();
-	let checkDetailContent  =$(".checkDetailContent").next().val();
-	let checkScore  =$(".checkScore").next().val();
-
-//	console.log(firstCenter);
-//	console.log(hiddenCenterCode);
-
-	let data = {
-			centerName : firstCenter, 
-			centerCode : hiddenCenterCode,
-			checkYear   : checkYear,
-			checkSeason   : checkSeason,
-			checkGroupContent : checkGroupContent,
-			checkDetailContent : checkDetailContent,
-			checkScore   : checkScore
-	};
-
-
-	$.ajax({
-		url : "/score/ListAjax", //호출 URL
-		data: data,
-		type : "post",	
-
-	}).done(function(result) {
-//		console.log("결과확인");
-		var html = $('<div>').html(result); 
-		var contents = html.find("div#indexListAjax").html();div태그 중에서 id를 indexListAjax를 찾아서
-																			contents라는 변수에 할당
-																			jQuery('<div>') 이부분은 result를 넣은 html로 선언한 것 
-		
-		$("#tabl1").html(contents);
-
-	}).fail(function (jqXHR, textStatus, errorThrown) {
-		console.log("에러");
-//		console.log(jqXHR);
-//		console.log(textStatus);
-//		console.log(errorThrown);
-	});
-
-});*/
-
-	
 
 //년도 select박스
 //$(document).ready()는 문서가 준비되면 매개변수로 넣은 콜백 함수를 실행하라는 의미

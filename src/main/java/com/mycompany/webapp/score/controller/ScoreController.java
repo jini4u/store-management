@@ -14,7 +14,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -75,14 +78,13 @@ public class ScoreController {
 		int userCode = 10004;
 
 		ScoreVO scoreVO = new ScoreVO();
-		/*		
-	 	//세션에서 가져와서 값을 넣을 수 있도록 변경----------------------
-		//int centerCode = (Integer) session.getAttribute("centerCode");
-		//int centerCode = 3;
 		scoreVO.setCenterCode(centerCode);
-		//int userCode = (Integer) session.getAttribute("userCode");
-
-		//------------------------------------------------  */	
+		System.out.println("centerCode"+centerCode);
+		/*		
+	 	세션에서 가져와서 값을 넣을 수 있도록 변경----------------------
+		int centerCode = (Integer) session.getAttribute("centerCode");
+		int userCode = (Integer) session.getAttribute("userCode");
+		------------------------------------------------  */	
 		
 		//scoreVo를 getScoreList로 담아 socreList로 만듬
 		int totalRows = scoreService.countListByCenterCode(scoreVO);
@@ -90,9 +92,9 @@ public class ScoreController {
 		List<ScoreVO> scoreList = scoreService.getScoreList(scoreVO, pager);
 		//scoreList를 view페이지로 보내주기 위해서 model에 받음
 		model.addAttribute("scoreList",scoreList);
-
-			
+		model.addAttribute("pager", pager);	
 		model.addAttribute("centerName",scoreService.getCenterName(userCode));
+		
 		//비어있는 ScoreVO 생성
 		ScoreVO emptyVO = new ScoreVO();
 		//getScoreList 하기위해서 centerCode는 무조건 필요하므로 1로 set
@@ -103,7 +105,7 @@ public class ScoreController {
 		if(allScoreList.size() > 0) {
 
 			//제일 최근 정보가 0번이므로 0번의 정보를 담아줌
-			int maxYear = allScoreList.get(0).getCheckYear();         
+			int maxYear = allScoreList.get(0).getCheckYear();  
 			int maxSeason = allScoreList.get(0).getCheckSeason();
 			//뷰페이지로 가져갈수있게 담아주기
 			model.addAttribute("maxYear", maxYear);
@@ -149,33 +151,12 @@ public class ScoreController {
 		return "jsp/score/scoreList";
 	}
 	
-
-	@RequestMapping(value="/scorelist", method = RequestMethod.POST)
-	public String centerscoreinquiry(@RequestParam(defaultValue="1") int pageNo, ScoreVO scoreVO, Model model,HttpSession session) {
-		
-		int userCode = 10004;
-		model.addAttribute("centerName",scoreService.getCenterName(userCode));
-		
-		//scoreVo를 getScoreList로 담아 socreList로 만듬
-		int totalRows = scoreService.countListByCenterCode(scoreVO);
-		Pager pager = new Pager(10, 10, totalRows, pageNo);
-		List<ScoreVO> scoreList = scoreService.getScoreList(scoreVO, pager);
-		System.out.println("scolist" + scoreList );
-
-		//scoreList를 view페이지로 보내주기 위해서 model에 담음
-		model.addAttribute("scoreList",scoreList);
-		model.addAttribute("pager",pager);
-		return "jsp/score/scoreList";
-	}
-	
-
-	
 	/*
 	 * 정윤선
 	 * 점수 수정
 	 * 값을 화면에 보내줌
 	 * */
-	@RequestMapping(value="/updateScore")
+	@RequestMapping(value="/updateScore", method=RequestMethod.POST)
 	public String updateGetScore(ScoreVO score, Model model) {		
 		scoreService.updateScore(score);		
 		return "redirect:/score/scorelist";
@@ -186,12 +167,18 @@ public class ScoreController {
 	 * 점수 등록
 	 * (모달창에서)
 	 * */   
-	@RequestMapping(value="/insertScore", method=RequestMethod.POST)
+/*	@RequestMapping(value="/insertScore", method=RequestMethod.POST)
 	public String insertsocre(ScoreVO scoreVO) {
 		scoreService.insertScore(scoreVO);
-
 		return "redirect:/score/scorelist";
-	}
+	}*/
+	
+	/*@PostMapping("/insertScore")
+	public String insertsocre(ScoreVO scoreVO) {
+	//	scoreService.insertScore(scoreVO);
+		log.info(scoreVO.toString());
+		return "redirect:/score/scorelist";
+	}*/
 	
 	/*
 	 * 정윤선
