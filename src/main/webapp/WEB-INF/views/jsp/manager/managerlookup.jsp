@@ -2,14 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="https://kit.fontawesome.com/809e779c97.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/809e779c97.js"
+	crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/manager/managerlookup.css">
 <!--  Font Awesome 라이브러리 -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
-  />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 
 <div class="titleBox">
@@ -20,16 +19,23 @@
 
 <div class="search_insert">
 	<!-- 검색 -->
-	<div class="search-box">
-		<form action="/manager/managerSearch" method="get">
+
+	<form class="search-form" action="/manager/managerSearch" method="get">
+			<select class="search-select" name="keywordType">
+				<option value="UC">담당자 코드</option>
+				<option value="UN">담당자명</option>
+				<option value="UTC">팀코드</option>
+			</select> 
+		<div class="search-box">
 			<input type="text" class="search-txt" id="searchTxt" name="keyword"
-				placeholder="담당자 검색">
+				placeholder="search">
 			<button type="submit" value="search" class="search-btn">
 				<i class="fa fa-search"></i>
 			</button>
-		</form>
-	</div>
-	<button class="pinkButton" data-toggle="modal" data-target="#insertModal">등록</button>
+		</div>
+	</form>
+	<button class="pinkButton" data-toggle="modal"
+		data-target="#insertModal">등록</button>
 </div>
 
 <div class="managerbox">
@@ -46,7 +52,7 @@
 				<th>팀코드</th>
 				<th>입사일자</th>
 				<th>퇴사일자</th>
-				<th>상세보기</th>
+				<th class="updateCell">상세보기</th>
 			</tr>
 		</thead>
 		<c:if test="${managerListCheck != 'empty' }">
@@ -61,8 +67,11 @@
 						<td>${managerVO.userTeamCode}</td>
 						<td>${managerVO.userHireDate}</td>
 						<td>${managerVO.userResignDate}</td>
-						<td><button class="updateBtn" data-toggle='modal' data-target='#updateModal'>
-							<i class="fa-regular fa-pen-to-square fa-2x"></i></button></td>
+						<td><button class="updateBtn" data-toggle='modal'
+								data-target='#updateModal'>
+									<img
+		src="${pageContext.request.contextPath}/resources/images/edit-tools.png">
+							</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -70,28 +79,28 @@
 	<div class="center-pagging">
 		<ul class="pagination">
 			<li><a class="innerPager first"
-				href="${mgrURL}?pageNo=1&keyword=${keyword}">처음</a></li>
+				href="${mgrURL}?pageNo=1&keywordType=${keywordType}&keyword=${keyword}">처음</a></li>
 			<li><c:if test="${pager.groupNo>1}">
 					<a class="innerPager arrow left"
-						href="${mgrURL}?pageNo=${pager.startPageNo-1}&keyword=${keyword}">이전</a>
+						href="${mgrURL}?pageNo=${pager.startPageNo-1}&keywordType=${keywordType}&keyword=${keyword}">이전</a>
 				</c:if></li>
 			<c:forEach var="i" begin="${pager.startPageNo}"
 				end="${pager.endPageNo}">
 				<li><c:if test="${pager.pageNo != i}">
 						<a class="innerPager active num"
-							href="${mgrURL}?pageNo=${i}&keyword=${keyword}">${i}</a>
+							href="${mgrURL}?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}">${i}</a>
 					</c:if></li>
 				<li><c:if test="${pager.pageNo == i}">
 						<a id="now-page" class="innerPager num"
-							href="${mgrURL}?pageNo=${i}&keyword=${keyword}">${i}</a>
+							href="${mgrURL}?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}">${i}</a>
 					</c:if></li>
 			</c:forEach>
 			<li><c:if test="${pager.groupNo<pager.totalGroupNo}">
 					<a class="innerPager arrow right"
-						href="${mgrURL}?pageNo=${pager.endPageNo+1}&keyword=${keyword}">다음</a>
+						href="${mgrURL}?pageNo=${pager.endPageNo+1}&keywordType=${keywordType}&keyword=${keyword}">다음</a>
 				</c:if></li>
 			<li><a class="innerPager last"
-				href="${mgrURL}?pageNo=${pager.totalPageNo}&keyword=${keyword}">맨끝</a></li>
+				href="${mgrURL}?pageNo=${pager.totalPageNo}&keywordType=${keywordType}&keyword=${keyword}">맨끝</a></li>
 		</ul>
 	</div>
 	</c:if>

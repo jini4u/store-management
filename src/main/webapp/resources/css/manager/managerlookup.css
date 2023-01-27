@@ -13,8 +13,11 @@
 }    
 .updateBtn{
     border: 0;
-    background: #fff;
+    background: none;
 }
 .updateBtn:hover{
 	background: #EDEDED;
+}
+.updateCell{
+	width: 109px;
 }

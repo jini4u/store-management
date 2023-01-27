@@ -11,6 +11,9 @@
 *{
    font-family: NanumSquareRound;
 }
+table{
+	user-select: none;
+}
 .header {
    display: flex;
    align-items: center;
@@ -77,6 +80,7 @@
 
 .verticalTable th, td, .rowTable th, td {
    padding: 10px;
+   text-align: center;
 }
 .rowTable th {
    background: #EDEDED;
@@ -92,9 +96,13 @@
 .search-txt:-ms-input-placeholder{
 	color: #65737e;
 }
+.search-form{
+	display: flex;
+	align-items: center;
+}
 .search-txt{
 	font-size: 16px;
-	width: 325px;
+	width: 200spx;
 	padding: 10px;
 	border: 0px;
 	outline: none;
@@ -103,11 +111,19 @@
 }
 .search-box{
 	height: 47px;
-	width: 400px;
 	border: 1px solid #E26868;
 	background: #ffffff;
 	margin: 20px 0 20px 10px;
 	border-radius: 10px;
+	display: flex;
+}
+.search-select{
+    border: 0px;
+    font-size: 15px;
+    padding: 0 10px;
+    border-radius: 10px;
+    border: 1px solid #E26868;
+    height: 47px;
 }
 .search-btn{
 	width: 50px;
@@ -160,83 +176,6 @@
    background-color: #bebebe;
    color: #000000;
    border: 1px solid #bebebe;
-}
-
-.header {
-   display: flex;
-   align-items: center;
-   background: #fff;
-   justify-content: space-between;
-   height: 75px;
-   position: sticky;
-   top: 0px;
-   border-bottom: 1px solid #ccc;
-   z-index: 22;
-}
-
-.header>a {
-   margin-left: 12px;
-}
-
-.middlebox {
-   display: flex;
-   height: 880px;
-}
-
-.leftbox {
-   max-height: 1000px;
-   width: 220px;
-   border-right: 1px solid #ccc;
-   background: #fff;
-   flex-shrink: 0;
-   z-index: 0;
-   height: 960px;
-}
-
-.contentbox {
-   width: 1486.33px;
-   flex-grow: 1;
-   flex-direction: column;
-   padding: 20px;
-   max-width: 1486.33px;
-}
-/* 제목 디자인 */
-.titleBox {
-   display: flex;
-   align-items: center;
-   border-bottom: 1px solid #ccc;
-   padding-bottom: 10px;
-}
-
-.titleBox>img {
-   height: 40px;
-   margin: 0px 15px
-}
-
-.titleBox>h2 {
-   font-size: 32px;
-}
-/* 표 디자인 */
-.verticalTable, .rowTable {
-   font-size: 17px;
-   width: 100%;
-   border-top: 1.5px solid #CCC;
-   border-bottom: 1.5px solid #ccc;
-   border-collapse: collapse;
-   text-align: center;
-}
-
-.verticalTable th, td, .rowTable th, td {
-   padding: 10px;
-}
-
-.rowTable th {
-   background: #EDEDED;
-}
-
-.verticalTable tbody tr, .rowTable tr {
-   border-top: 1.5px solid #CCC;
-   text-align: center;
 }
 
 .centerSize {
@@ -348,4 +287,8 @@
 /*리스트 마우스 오버시 색 변화*/
 .changeColor{
    background-color: #EDEDED;
+}
+
+.updateBtn img{
+	width: 30%;
 }

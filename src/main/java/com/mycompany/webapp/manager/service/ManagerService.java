@@ -105,16 +105,16 @@ public class ManagerService implements IManagerService {
 	 * 	담당자 검색
 	 */
 	@Override
-	public List<ManagerVO> managerSearch(Pager pager, String keyword) {
-		return managerRepository.managerSearch(pager, keyword);
+	public List<ManagerVO> managerSearch(Pager pager, String keyword, String keywordType) {
+		return managerRepository.managerSearch(pager, keyword, keywordType);
 	}
 	
 	/*  @author 고은별
 	 * 	키워드별 담당자 수 카운트
 	 */
 	@Override
-	public int managerCountByKeyword(String keyword) {
-		return managerRepository.managerCountByKeyword("%"+keyword+"%");
+	public int managerCountByKeyword(String keyword, String keywordType) {
+		return managerRepository.managerCountByKeyword(keyword,keywordType);
 	}
 	
 	/*  @author 고은별

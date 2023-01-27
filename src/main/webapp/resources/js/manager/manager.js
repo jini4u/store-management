@@ -1,7 +1,7 @@
 window.onload = function(){
 
 var mgrListTd;
-$(".updateModal").click(function(){ 
+$(".updateBtn").click(function(){ 
    
    var str = ""
    var mgrTdArr = new Array();   // 배열 선언
