@@ -104,23 +104,26 @@ public class ManagerController {
 	/* author 은별
 	  담담자 검색 */
 	@GetMapping(value="/managerSearch")
-	public String managerSearch(@RequestParam(defaultValue="1")int pageNo, @RequestParam("keyword") String keyword,Model model){
-		  int keywordTotalRows = managerService.managerCountByKeyword(keyword);
+	public String managerSearch(@RequestParam(defaultValue="1")int pageNo, @RequestParam("keyword") String keyword,
+			@RequestParam("keywordType") String keywordType,Model model){
+		  int keywordTotalRows = managerService.managerCountByKeyword(keyword, keywordType);
+		  logger.info("검색11"+keywordTotalRows);
 	      Pager searchPager = new Pager(10, 10, keywordTotalRows, pageNo);
 	      model.addAttribute("pager", searchPager);
 	      
-	      List<ManagerVO> mgrSearchList = managerService.managerSearch(searchPager, keyword);
+	      List<ManagerVO> mgrSearchList = managerService.managerSearch(searchPager, keyword, keywordType);
 	      if (mgrSearchList.size() != 0) {
 	            model.addAttribute("managerList", mgrSearchList);
 	            model.addAttribute("pager", searchPager);
 	            model.addAttribute("mgrURL","/manager/managerSearch");
+	            logger.info("검색"+searchPager.toString());
 	         }else {
 	            model.addAttribute("pager", new Pager(1, 1, 1, 1));
 	            model.addAttribute("managerListCheck", "empty");
 	         }
-	      
+          model.addAttribute("keyword",keyword);
+          model.addAttribute("keywordType",keywordType);
 	      logger.info(searchPager.toString());
-	      model.addAttribute("keyword",keyword);
 	      return "jsp/manager/managerlookup";
 
 	}
@@ -130,17 +133,19 @@ public class ManagerController {
 	 * @author 임유진
 	 * */
 	@RequestMapping(value="/managerMapping")
-	public String managerMapping(@RequestParam(defaultValue="1") int pageNo, @RequestParam(required=false) String keyword, Model model) {
+	public String managerMapping(@RequestParam(defaultValue="1") int pageNo, @RequestParam(required=false) String keyword, 
+			@RequestParam(required=false) String keywordType, Model model) {
 		Pager pager;
 		int totalRows;
 		if(keyword==null || keyword.equals("")) {
 			totalRows = managerService.countAllMgr();
-			pager = new Pager(12, 5, totalRows, pageNo);
+			pager = new Pager(10, 5, totalRows, pageNo);
 			model.addAttribute("managerList", managerService.selectManagerList(pager));			
 		} else {
-			totalRows = managerService.managerCountByKeyword(keyword);
-			pager = new Pager(12, 5, totalRows, pageNo);
-			model.addAttribute("managerList", managerService.managerSearch(pager, keyword));
+			keywordType = "UN";
+			totalRows = managerService.managerCountByKeyword(keyword, keywordType);
+			pager = new Pager(10, 5, totalRows, pageNo);
+			model.addAttribute("managerList", managerService.managerSearch(pager, keyword, keywordType));
 		}
 		model.addAttribute("totalManagers", totalRows);
 		model.addAttribute("pager", pager);

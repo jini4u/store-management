@@ -65,10 +65,18 @@ SELECT COUNT(*) FROM userInfo
 
 <!-- 키워드별 담당자 수  -->
 <select id="managerCountByKeyword" parameterType="string" resultType="int">
-<![CDATA[ 
-	SELECT count(*) from userinfo
-	WHERE  user_name like ('%' ||#{keyword}||'%')
-]]>
+	SELECT count(*) from userInfo
+	<choose>
+		<when test="keywordType == 'UC'">
+		   WHERE user_code like ('%' ||#{keyword}||'%')
+		</when>
+		<when test="keywordType == 'UN'">
+		  WHERE user_name like ('%' ||#{keyword}||'%')
+		</when>
+		<when test="keywordType == 'UTC'">
+		  WHERE user_team_code like ('%' ||#{keyword}||'%')
+		</when>
+	 </choose>
 </select>
 
 <!-- 키워드 별 담당자 검색 -->
@@ -80,18 +88,27 @@ SELECT * FROM(
          select
                user_code as userCode,
                user_name as userName,
-               user_birth as userBirth,
+               TO_CHAR(user_birth, 'YYYY-MM-DD') as userBirth,
                user_tel as userTel,
                user_email as userEmail,
                user_team_code as userTeamCode,
-              user_hire_date as userHireDate,
-               user_resign_date as userResignDate
+               TO_CHAR(user_hire_date, 'YYYY-MM-DD') as userHireDate,
+               TO_CHAR(user_resign_date, 'YYYY-MM-DD') as userResignDate
          FROM  userinfo
          WHERE user_code < 20000 
          ]]> 
-        <if test="keyword != null or keyword != ''">
-		  AND user_name like ('%' ||#{keyword}||'%')
-		</if>
+		<choose>
+		    <when test="keywordType == 'UC'">
+		     AND user_code like ('%' ||#{keyword}||'%')
+		    </when>
+		    <when test="keywordType == 'UN'">
+		     AND user_name like ('%' ||#{keyword}||'%')
+		    </when>
+		    <when test="keywordType == 'UTC'">
+		     AND user_team_code like ('%' ||#{keyword}||'%')
+		    </when>
+	    </choose>
+
 <![CDATA[
          ORDER BY user_code desc
       )

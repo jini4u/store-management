@@ -44,9 +44,9 @@ public interface IManagerRepository {
 	List<Map<String, Object>> mgrUploadFileHistory();
 	
 	//키워드별 담당자 검색
-	List<ManagerVO> managerSearch(@Param("pager")Pager pager, @Param("keyword") String keyword);
+	List<ManagerVO> managerSearch(@Param("pager")Pager pager, @Param("keyword") String keyword,@Param("keywordType") String keywordType);
 	// 키워드별 담당자 수  
-	int managerCountByKeyword(String keyword);
+	int managerCountByKeyword(@Param("keyword") String keyword, @Param("keywordType") String keywordType);
 	
 
 	//임유진

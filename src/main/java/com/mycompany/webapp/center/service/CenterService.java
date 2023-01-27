@@ -10,11 +10,14 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mycompany.webapp.center.controller.CenterController;
 import com.mycompany.webapp.center.dao.ICenterRepository;
 import com.mycompany.webapp.center.vo.CenterVO;
 import com.mycompany.webapp.common.dao.IFileRepository;
@@ -25,7 +28,8 @@ import com.mycompany.webapp.common.vo.Pager;
 
 @Service
 public class CenterService implements ICenterService{
-
+	private static Logger logger = LoggerFactory.getLogger(CenterService.class);
+	
 	@Autowired
 	ICenterRepository centerRepository;
 
@@ -171,7 +175,8 @@ public class CenterService implements ICenterService{
 				//원래 파일 삭제 
 				oldFile.delete();
 			} catch (Exception e) {
-				return 0;
+				e.printStackTrace();
+				return 100;
 			}
 		}
 		return centerRepository.updateImage(file);

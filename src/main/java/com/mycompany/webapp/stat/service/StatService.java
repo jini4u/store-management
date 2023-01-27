@@ -71,6 +71,14 @@ public class StatService implements IStatService {
 		return responseMap;
 	}
 	
+	/**
+	 * 점수코드별 담당 센터들 점수 조회
+	 * @author 임유진
+	 * @param {String} 그룹코드
+	 * @param {int} 상세코드
+	 * @param {int} 담당자 코드
+	 * @return {Map<String, List<ScoreVO>>} 요청한 코드의 담당센터별 평균 점수들을 담은 Map 
+	 * */
 	@Override
 	public Map<String, List<ScoreVO>> getAvgScoreByCheckCode(String groupCode, int detailCode, int userCode) {
 		Map<String, List<ScoreVO>> responseMap = new HashMap<String, List<ScoreVO>>();
@@ -78,6 +86,59 @@ public class StatService implements IStatService {
 		for(CenterVO center:centers) {
 			responseMap.put("centerAvg"+center.getCenterName(), statRepository.getAvgScoreByCheckCode(groupCode, detailCode, userCode, center.getCenterCode()));
 		}
+		return responseMap;
+	}
+	
+	/**
+	 * 센터 서브 통계 (최고점수항목, 최저점수항목, 해당분기 담당자)
+	 * @author 임유진
+	 * @param {int} 센터코드
+	 * @param {int} 년도
+	 * @param {int} 분기
+	 * @return {Map<String, String>} 각 정보를 담은 Map
+	 * */
+	@Override
+	public Map<String, String> getCenterSubStat(int centerCode, int checkYear, int checkSeason) {
+		Map<String, String> responseMap = new HashMap<>();
+		responseMap.put("bestCodeName", statRepository.getBestCenterScoreCodeInSeason(centerCode, checkYear, checkSeason));
+		responseMap.put("countBestCode", String.valueOf(statRepository.countBestCenterScoreCodeInSeason(centerCode, checkYear, checkSeason)));
+		
+		responseMap.put("worstCodeName", statRepository.getWorstCenterScoreCodeInSeason(centerCode, checkYear, checkSeason));
+		responseMap.put("countWorstCode", String.valueOf(statRepository.countWorstCenterScoreCodeInSeason(centerCode, checkYear, checkSeason)));
+		
+		responseMap.put("managerName", statRepository.getCenterManagerInSeason(centerCode, checkYear, checkSeason));
+		return responseMap;
+	}
+	
+	/**
+	 * 담당자 서브 통계 (최고점수항목, 해당분기우수담당자, 해당분기신입사원수)
+	 * @author 임유진
+	 * @param {int} 담당자코드
+	 * @param {int} 년도
+	 * @param {int} 분기
+	 * @return {Map<String, String>} 각 정보를 담은 Map
+	 * */
+	@Override
+	public Map<String, String> getManagerSubStat(int userCode, int checkYear, int checkSeason) {
+		Map<String, String> responseMap = new HashMap<>();
+		responseMap.put("bestCodeName", statRepository.getBestManagerScoreCodeInSeason(userCode, checkYear, checkSeason));
+		responseMap.put("countBestCode", String.valueOf(statRepository.countBestManagerScoreCodeInSeason(userCode, checkYear, checkSeason)));
+		
+		responseMap.put("bestManager", statRepository.getBestManagerInSeason(checkYear, checkSeason));
+		responseMap.put("countBestManager", String.valueOf(statRepository.countBestManagerInSeason(checkYear, checkSeason)));
+		
+		String fromDate = String.valueOf(checkYear-1)+"/12/31";
+		String toDate = String.valueOf(checkYear+1)+"/01/01";
+		responseMap.put("countNewManager", String.valueOf(statRepository.countNewManagerInSeason(fromDate, toDate, checkSeason)));
+		return responseMap;
+	}
+	
+	@Override
+	public Map<String, String> getCodeSubStat(int userCode, int checkYear, int checkSeason) {
+		Map<String, String> responseMap = new HashMap<>();
+		responseMap.put("bestCenter", statRepository.getBestCenterInSeason(userCode, checkYear, checkSeason));
+		responseMap.put("bestCode", statRepository.getBestCodeInSeason(userCode, checkYear, checkSeason));
+		responseMap.put("worstCode", statRepository.getWorstCodeInSeason(userCode, checkYear, checkSeason));
 		return responseMap;
 	}
 }

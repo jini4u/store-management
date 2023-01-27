@@ -1,7 +1,7 @@
 window.onload = function(){
 
 var mgrListTd;
-$(".updateModal").click(function(){ 
+$(".updateBtn").click(function(){ 
    
    var str = ""
    var mgrTdArr = new Array();   // 배열 선언
@@ -117,7 +117,7 @@ $("#updatemgr").click(function (){
    
    //담당자 리스트 마우스 오버시 색 변화
    function changeColor(){
-      $('#managerTable tr').mouseover(function(){
+      $('#mgrList tr').mouseover(function(){
          $(this).addClass('changeColor');
       }).mouseout(function() {
          $(this).removeClass('changeColor');
