@@ -12,4 +12,8 @@ public interface IStatService {
 	Map<String, List<ScoreVO>> getManagerAvgScores(int userCode);
 	List<Map<String, Object>> getCodes();
 	Map<String, List<ScoreVO>> getAvgScoreByCheckCode(String groupCode, int detailCode, int userCode);
+	
+	Map<String, String> getCenterSubStat(int centerCode, int checkYear, int checkSeason);
+	Map<String, String> getManagerSubStat(int userCode, int checkYear, int checkSeason);
+	Map<String, String> getCodeSubStat(int userCode, int checkYear, int checkSeason);
 }
