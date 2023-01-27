@@ -54,7 +54,7 @@ button.menubtn.clicked {
 	display: contents;
 }
 
-#graphdiv #centername {
+#graphdiv #itemname {
 	color: #E26868;
 }
 
@@ -68,13 +68,13 @@ button.menubtn.clicked {
 }
 
 .table{
-	width: 210px;
+	width: 200px;
 }
 
 .table tr {
 	border: none;
-	height: 30px;
-	width: 210px;
+	height: 100%;
+	width: 196px;
 }
 
 .table tr:hover{
@@ -93,7 +93,7 @@ button.menubtn.clicked {
 
 .tablediv {
 	overflow-y: scroll;
-	height: 500px;
+	height: 450px;
 	width: 220px;
 }
 
@@ -124,7 +124,7 @@ button.menubtn.clicked {
 }
 
 .colored-p{
-	font-size: 30px; 
+	font-size: 10px; 
 	color: #E26868;
 }
 

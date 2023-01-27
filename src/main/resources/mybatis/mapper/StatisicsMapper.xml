@@ -59,6 +59,7 @@ GROUP BY check_year, check_season
 ORDER BY check_year, check_season
 </if>
 </select>
+
 <select id="getAvgScoreByCheckCode" resultType="com.mycompany.webapp.score.vo.ScoreVO">
 SELECT check_year AS "checkYear"
 		, check_season AS "checkSeason"
@@ -73,4 +74,320 @@ WHERE user_code = #{userCode}
 	AND center_code = #{centerCode}
 </select>
 
+<select id="getBestCenterScoreCodeInSeason" resultType="String">
+SELECT check_detail_content
+FROM check_detail
+WHERE check_group_code = (SELECT check_group_code
+                            FROM (SELECT ROWNUM, check_group_code, check_detail_code
+                                    FROM inspection 
+                                    WHERE check_score = (SELECT MAX(check_score)
+                                                        FROM inspection
+                                                        WHERE center_code = #{centerCode}
+                                                            AND check_year = #{checkYear}
+                                                            AND check_season = #{checkSeason}
+                                                        )
+                                          AND center_code = #{centerCode}
+                                          AND check_year = #{checkYear}
+                                          AND check_season = #{checkSeason}
+                                )
+                            WHERE ROWNUM = 1
+                        )
+    AND check_detail_code = (SELECT check_detail_code
+                            FROM (SELECT ROWNUM, check_group_code, check_detail_code
+                                    FROM inspection 
+                                    WHERE check_score = (SELECT MAX(check_score)
+                                                        FROM inspection
+                                                        WHERE center_code = #{centerCode}
+                                                            AND check_year = #{checkYear}
+                                                            AND check_season = #{checkSeason}
+                                                        )
+                                          AND center_code = #{centerCode}
+                                          AND check_year = #{checkYear}
+                                          AND check_season = #{checkSeason}
+                                )
+                            WHERE ROWNUM = 1
+                        )
+</select>
+
+<select id="countBestCenterScoreCodeInSeason" resultType="int">
+SELECT COUNT(*)
+FROM inspection 
+WHERE check_score = (SELECT MAX(check_score)
+					FROM inspection
+					WHERE center_code = #{centerCode}
+						AND check_year = #{checkYear}
+						AND check_season = #{checkSeason}
+					)
+	  AND center_code = #{centerCode}
+      AND check_year = #{checkYear}
+      AND check_season = #{checkSeason}
+</select>
+
+<select id="getWorstCenterScoreCodeInSeason" resultType="String">
+SELECT check_detail_content
+FROM check_detail
+WHERE check_group_code = (SELECT check_group_code
+                            FROM (SELECT ROWNUM, check_group_code, check_detail_code
+                                    FROM inspection 
+                                    WHERE check_score = (SELECT MIN(check_score)
+                                                        FROM inspection
+                                                        WHERE center_code = #{centerCode}
+                                                            AND check_year = #{checkYear}
+                                                            AND check_season = #{checkSeason}
+                                                        )
+                                          AND center_code = #{centerCode}
+                                          AND check_year = #{checkYear}
+                                          AND check_season = #{checkSeason}
+                                )
+                            WHERE ROWNUM = 1
+                        )
+    AND check_detail_code = (SELECT check_detail_code
+                            FROM (SELECT ROWNUM, check_group_code, check_detail_code
+                                    FROM inspection 
+                                    WHERE check_score = (SELECT MIN(check_score)
+                                                        FROM inspection
+                                                        WHERE center_code = #{centerCode}
+                                                            AND check_year = #{checkYear}
+                                                            AND check_season = #{checkSeason}
+                                                        )
+                                          AND center_code = #{centerCode}
+                                          AND check_year = #{checkYear}
+                                          AND check_season = #{checkSeason}
+                                )
+                            WHERE ROWNUM = 1
+                        )
+</select>
+
+<select id="countWorstCenterScoreCodeInSeason" resultType="int">
+SELECT COUNT(*)
+FROM inspection 
+WHERE check_score = (SELECT MIN(check_score)
+					FROM inspection
+					WHERE center_code = #{centerCode}
+						AND check_year = #{checkYear}
+						AND check_season = #{checkSeason}
+					)
+      AND center_code = #{centerCode}
+      AND check_year = #{checkYear}
+      AND check_season = #{checkSeason}
+</select>
+
+<select id="getCenterManagerInSeason" resultType="String">
+SELECT user_name
+FROM userinfo
+WHERE user_code = (SELECT user_code
+					FROM inspection
+					WHERE center_code = #{centerCode}
+                          AND check_year = #{checkYear}
+                          AND check_season = #{checkSeason}
+                    GROUP BY user_code
+                  )
+</select>
+
+<select id="getBestManagerScoreCodeInSeason" resultType="String">
+SELECT check_detail_content
+FROM check_detail
+WHERE check_group_code = (SELECT check_group_code
+                            FROM (SELECT ROWNUM, check_group_code, check_detail_code
+                                    FROM inspection 
+                                    WHERE check_score = (SELECT MAX(check_score)
+                                                        FROM inspection
+                                                        WHERE user_code = #{userCode}
+                                                            AND check_year = #{checkYear}
+                                                            AND check_season = #{checkSeason}
+                                                        )
+                                          AND user_code = #{userCode}
+                                          AND check_year = #{checkYear}
+                                          AND check_season = #{checkSeason}
+                                )
+                            WHERE ROWNUM = 1
+                        )
+    AND check_detail_code = (SELECT check_detail_code
+                            FROM (SELECT ROWNUM, check_group_code, check_detail_code
+                                    FROM inspection 
+                                    WHERE check_score = (SELECT MAX(check_score)
+                                                        FROM inspection
+                                                        WHERE user_code = #{userCode}
+                                                            AND check_year = #{checkYear}
+                                                            AND check_season = #{checkSeason}
+                                                        )
+                                          AND user_code = #{userCode}
+                                          AND check_year = #{checkYear}
+                                          AND check_season = #{checkSeason}
+                                )
+                            WHERE ROWNUM = 1
+                        )
+</select>
+
+<select id="countBestManagerScoreCodeInSeason" resultType="int">
+SELECT COUNT(*)
+FROM inspection 
+WHERE check_score = (SELECT MAX(check_score)
+					FROM inspection
+					WHERE user_code = #{userCode}
+						AND check_year = #{checkYear}
+						AND check_season = #{checkSeason}
+					)
+	  AND user_code = #{userCode}
+      AND check_year = #{checkYear}
+      AND check_season = #{checkSeason}
+</select>
+
+<select id="getBestManagerInSeason" resultType="String">
+SELECT user_name
+FROM userinfo
+WHERE user_code = (SELECT user_code
+					FROM (SELECT ROWNUM, user_code, avgscore 
+							FROM (SELECT user_code, AVG(check_score) AS avgscore
+									FROM inspection
+									WHERE check_year = #{checkYear}
+    									AND check_season = #{checkSeason}
+									GROUP BY user_code)
+						)
+					WHERE avgscore = (SELECT MAX(avgscore) 
+										FROM (SELECT user_code, AVG(check_score) AS avgScore
+												FROM inspection
+												WHERE check_year = #{checkYear}
+    												AND check_season = #{checkSeason}
+												GROUP BY user_code)
+									)
+						AND ROWNUM = 1
+					)
+</select>
+
+<select id="countBestManagerInSeason" resultType="int">
+SELECT COUNT(user_code)
+FROM (SELECT user_code, AVG(check_score) AS avgscore
+		FROM inspection
+		WHERE check_year = #{checkYear}
+    		AND check_season = #{checkSeason}
+		GROUP BY user_code)
+WHERE avgscore = (SELECT MAX(avgscore) 
+					FROM (SELECT user_code, AVG(check_score) AS avgScore
+							FROM inspection
+							WHERE check_year = #{checkYear}
+									AND check_season = #{checkSeason}
+							GROUP BY user_code)
+				)
+</select>
+
+<select id="countNewManagerInSeason" resultType="int">
+<![CDATA[
+SELECT COUNT(*)
+FROM (SELECT FLOOR(TO_NUMBER(TO_CHAR(user_hire_date, 'MM'))/4)+1 AS hireseason, user_hire_date
+		FROM userinfo
+		WHERE TO_DATE('${fromDate}','YY/MM/DD') < user_hire_date 
+    AND user_hire_date < TO_DATE('${toDate}','YY/MM/DD')
+    )
+WHERE hireseason = #{checkSeason}
+]]>
+</select>
+
+<select id="getBestCenterInSeason" resultType="String">
+SELECT center_name
+FROM center
+WHERE center_code = (SELECT center_code 
+                    FROM (SELECT ROWNUM, center_code
+                            FROM (SELECT AVG(check_score) AS avgscore, center_code
+                                    FROM inspection
+                                    WHERE user_code = #{userCode}
+                                        AND check_year = #{checkYear}
+                                        AND check_season = #{checkSeason}
+                                    GROUP BY center_code
+                                )
+                            WHERE avgscore = (SELECT MAX(avgscore)
+                                                FROM
+                                                (SELECT AVG(check_score) AS avgscore, center_code
+                                                    FROM inspection
+                                                    WHERE user_code = #{userCode}
+                                                        AND check_year = #{checkYear}
+                                                        AND check_season = #{checkSeason}
+                                                    GROUP BY center_code)
+                    						)
+                    	)
+                    WHERE ROWNUM = 1
+                    )
+</select>
+
+<select id="getBestCodeInSeason" resultType="String">
+SELECT check_detail_content
+FROM check_detail
+WHERE check_detail_code = (SELECT check_detail_code
+                            FROM (SELECT AVG(check_score) AS avgscore, check_detail_code
+                                  FROM inspection
+                                  WHERE user_code = #{userCode}
+                                  	AND check_year = #{checkYear}
+                                   	AND check_season = #{checkSeason}
+                                  GROUP BY check_detail_code
+                                  )
+                            WHERE avgscore = (SELECT MAX(avgscore)
+                                                    FROM (SELECT AVG(check_score) AS avgscore, check_detail_code
+                                                            FROM inspection
+                                                            WHERE user_code = #{userCode}
+                                                                AND check_year = #{checkYear}
+                                                                AND check_season = #{checkSeason}
+                                                            GROUP BY check_detail_code
+                                                        )
+                                                )
+                        	)
+    AND check_group_code = (SELECT check_group_code
+                            FROM (SELECT AVG(check_score) AS avgscore, check_group_code, check_detail_code
+                                  FROM inspection
+                                  WHERE user_code = #{userCode}
+                                  	AND check_year = #{checkYear}
+                                  	AND check_season = #{checkSeason}
+                                  GROUP BY check_detail_code, check_group_code
+                                  )
+                            WHERE avgscore = (SELECT MAX(avgscore)
+                                              FROM (SELECT AVG(check_score) AS avgscore, check_group_code, check_detail_code
+                                                    FROM inspection
+                                                    WHERE user_code = #{userCode}
+                                                    	AND check_year = #{checkYear}
+                                                    	AND check_season = #{checkSeason}
+                                                    GROUP BY check_detail_code, check_group_code
+                                                    )
+                                              )
+                             )
+</select>
+
+<select id="getWorstCodeInSeason" resultType="String">
+SELECT check_detail_content
+FROM check_detail
+WHERE check_detail_code = (SELECT check_detail_code
+                            FROM (SELECT AVG(check_score) AS avgscore, check_detail_code
+                                  FROM inspection
+                                  WHERE user_code = #{userCode}
+                                  	AND check_year = #{checkYear}
+                                   	AND check_season = #{checkSeason}
+                                  GROUP BY check_detail_code
+                                  )
+                            WHERE avgscore = (SELECT MIN(avgscore)
+                                                    FROM (SELECT AVG(check_score) AS avgscore, check_detail_code
+                                                            FROM inspection
+                                                            WHERE user_code = #{userCode}
+                                                                AND check_year = #{checkYear}
+                                                                AND check_season = #{checkSeason}
+                                                            GROUP BY check_detail_code
+                                                        )
+                                                )
+                        	)
+    AND check_group_code = (SELECT check_group_code
+                            FROM (SELECT AVG(check_score) AS avgscore, check_group_code, check_detail_code
+                                  FROM inspection
+                                  WHERE user_code = #{userCode}
+                                  	AND check_year = #{checkYear}
+                                  	AND check_season = #{checkSeason}
+                                  GROUP BY check_detail_code, check_group_code
+                                  )
+                            WHERE avgscore = (SELECT MIN(avgscore)
+                                              FROM (SELECT AVG(check_score) AS avgscore, check_group_code, check_detail_code
+                                                    FROM inspection
+                                                    WHERE user_code = #{userCode}
+                                                    	AND check_year = #{checkYear}
+                                                    	AND check_season = #{checkSeason}
+                                                    GROUP BY check_detail_code, check_group_code
+                                                    )
+                                              )
+                             )
+</select>
 </mapper>
