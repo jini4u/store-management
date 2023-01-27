@@ -64,6 +64,7 @@
 
 .titleBox>h2 {
    font-size: 32px;
+   margin: 0;
 }
 /* 표 디자인 */
 .verticalTable, .rowTable {
@@ -77,8 +78,7 @@
 .verticalTable th, td, .rowTable th, td {
    padding: 10px;
 }
-
-.verticalTable thead, .rowTable th {
+.rowTable th {
    background: #EDEDED;
 }
 
@@ -86,46 +86,41 @@
    border-top: 1.5px solid #CCC;
    text-align: center;
 }
+
 /* 검색 */
-.search-box {
-
-   top: 50%;
-   left: 50%;
-   height: 40px;
-   background-color: #fff;
-   border: 2px solid #E26868;
-   border-radius: 7px;
-   width: 282px;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   margin: 20px 0 20px 5px;
-
+/* placeholder 브라우저 별로 색상 조정 */
+.search-txt:-ms-input-placeholder{
+	color: #65737e;
+}
+.search-txt{
+	font-size: 16px;
+	width: 325px;
+	padding: 10px;
+	border: 0px;
+	outline: none;
+	float: left;
+	border-radius: 10px;
+}
+.search-box{
+	height: 47px;
+	width: 400px;
+	border: 1px solid #E26868;
+	background: #ffffff;
+	margin: 20px 0 20px 10px;
+	border-radius: 10px;
+}
+.search-btn{
+	width: 50px;
+	height: 47px;
+	border: 0px;
+	background: #E26868;
+	outline: none;
+	float: right;
+	color: #ffffff;
+	border-radius: 0 10px 10px 0;
 }
 
-.search-btn {
-   text-decoration: none;
-   float: right;
-   width: 40px;
-   height: 40px;
-   background-color: #E26868;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   color: #fff;
-}
 
-.search-txt {
-   display: flex;
-   width: 200px;
-   padding-left: 15px;
-   border: none;
-   background: none;
-   outline: none;
-   font-size: 1rem;
-   line-height: 30px;
-   height: 40px;
-}
 /*버튼 */
 .pinkButton, .greyButton {
    border-radius: 9px;
@@ -235,7 +230,7 @@
    padding: 10px;
 }
 
-.verticalTable thead, .rowTable th {
+.rowTable th {
    background: #EDEDED;
 }
 
@@ -243,61 +238,6 @@
    border-top: 1.5px solid #CCC;
    text-align: center;
 }
-/* 검색 */
-.search-box {
-   top: 50%;
-   left: 50%;
-   height: 40px;
-   background-color: #fff;
-   border: 2px solid #E26868;
-   border-radius: 7px;
-   width: 282px;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   margin: 20px 0 20px 5px;
-}
-
-.search-btn {
-   text-decoration: none;
-   float: right;
-   width: 40px;
-   height: 40px;
-   background-color: #E26868;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   color: #fff;
-}
-
-.search-txt {
-   display: flex;
-   width: 200px;
-   padding-left: 15px;
-   border: none;
-   background: none;
-   outline: none;
-   font-size: 1rem;
-   line-height: 30px;
-   height: 40px;
-}
-/*버튼 */
-.pinkButton, .greyButton {
-   border-radius: 9px;
-   display: inline-block;
-   cursor: pointer;
-   font-family: Arial;
-   font-size: 18px;
-   padding: 6px 25px;
-   text-decoration: none;
-   font-weight: 550;
-}
-
-.pinkButton:active, .greyButton:active {
-   position: relative;
-   top: 1px;
-}
-
 
 .centerSize {
    width: 60px;
@@ -325,29 +265,6 @@
    border: 1px solid #E26868;
 }
 
-.pinkButton {
-   background-color: #FF8787;
-   border: 1px solid #FF8787;
-   color: #fff;
-}
-
-.pinkButton:hover {
-   background-color: #E26868;
-   color: #fff;
-   border: 1px solid #E26868;
-}
-
-.greyButton {
-   background-color: #ededed;
-   border: 1px solid #ededed;
-   color: #000000;
-}
-
-.greyButton:hover {
-   background-color: #bebebe;
-   color: #000000;
-   border: 1px solid #bebebe;
-}
 
 /* 페이지네이션 */
 .center-pagging {
