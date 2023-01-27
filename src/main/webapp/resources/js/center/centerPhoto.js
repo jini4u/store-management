@@ -29,7 +29,7 @@ function appearTable(e) {
 			centerBody.children[i].classList.remove("selectedtr");
 		}
 	}
-	
+
 	//선택된 행에 selectedtr 클래스 추가
 	e.target.parentElement.classList.add("selectedtr");
 	//센터 사진 기록 테이블 선택자
@@ -50,7 +50,7 @@ function appearTable(e) {
 	centerCode.setAttribute("value", centerNameArr[4].innerText); 
 	//센터명 옆 td에 센터명 지정
 	insertModalCenterName.innerText = centerNameArr[0].innerText;
-	
+
 	//선택한 센터 사진들 요청하는 ajax요청
 	makeRequest(getCenterImages,'GET','/center/getCenterImages/'+centerNameArr[4].innerText);
 }; 
@@ -68,16 +68,45 @@ function getCenterImages(){
 	let result = JSON.parse(httpRequest.responseText);
 	//사진 들어갈 div 초기화
 	imgDiv.innerHTML = ''
+		var photoDiv = document.createElement('div');
+	photoDiv.setAttribute('class', 'photo-slider');
+	var ul = document.createElement('ul');
+	ul.setAttribute('id', 'photo-imgholder');
+	ul.setAttribute('class', 'photo-imgs');
+
+	for(let i=0; i<result.length; i++) {
+		var input = document.createElement('input');
+		input.setAttribute('type', 'radio');
+		input.setAttribute('name', 'photoslide');
+		input.setAttribute('id', 'photoslide'+i);
+		if (i == 0) {
+			input.setAttribute('checked', 'checked');
+		}
+		photoDiv.append(input);
+	}
 	//응답으로 받은 사진 수 만큼 반복
-	for(var i=0;i<result.length;i++){
+	for(let i=0;i<result.length;i++){
+		//<li>생성
+		var li = document.createElement('li');
 		//<img> 생성 
 		var img = document.createElement('img');
 		//생성한 img에 속성 추가. src='/file/저장된사진이름'
 		img.setAttribute('src', '/file/'+result[i].fileSavedName);
 		//class='photo-img'
 		img.setAttribute('class','photo-img');
-		//data-img-name='사진이름'
-		img.setAttribute('data-img-name',result[i].originalName);
+		li.append(img);
+		ul.append(li);
+	}
+	photoDiv.append(ul);
+
+	var div = document.createElement('div');
+	div.setAttribute('class', 'photo-bullets');
+
+	for(let i=0; i<result.length; i++) {
+		var label = document.createElement('label');
+		label.htmlFor = 'photoslide'+i;
+		label.setAttribute('class', 'photoSlideInfo');
+		label.setAttribute('data-img-name',result[i].originalName);
 		//imageDetail 값 설정위해 선언
 		let imageDetail;
 		//imageDetail 값 지정 위해 분기처리
@@ -87,12 +116,36 @@ function getCenterImages(){
 			imageDetail = '외부';
 		}
 		//data-img-detail='내부'또는'외부'
-		img.setAttribute('data-img-detail', imageDetail);
+		label.setAttribute('data-img-detail', imageDetail);
 		//data-img-fileNo='파일번호'
-		img.setAttribute('data-img-fileNo',result[i].fileNo);
-		
-		//img에 클릭 이벤트 등록
-		img.onclick = function(e) {
+		label.setAttribute('data-img-fileNo',result[i].fileNo);
+		div.append(label);
+	}
+	photoDiv.append(div);
+
+	var updateBtn = document.querySelector("#update-center-modal");
+	var labelTag = document.getElementsByName('label');
+
+	let centertable = document.querySelector('#centertable');
+	var labelClass = document.getElementsByClassName('photoSlideInfo');
+
+	var input = document.createElement('input');
+
+	centertable.addEventListener('click', function() {
+
+		var labelClass = document.getElementsByClassName('photoSlideInfo');
+		for(let i = 0; i < labelClass.length; i++) {			
+			labelClass[i].addEventListener('click', updateCenterInfo, false);
+		}//for문을 통해 click이벤트를 생성, .click을 통해, clicl하지 않아도 함수 실행할 수 있다.
+		if (labelClass[0]) {
+			labelClass[0].click();
+		}
+	});
+
+
+//	label 클릭 시 사진 정보 가져오는 함수
+	var updateCenterInfo = function(e) {
+		for(let i=0;i<result.length;i++){
 			//수정 모달 내부 테이블 초기화
 			imgDetailTable.tBodies[0].innerHTML = '';
 			//사진 정보를 담을 <tr></tr> 생성
@@ -109,7 +162,7 @@ function getCenterImages(){
 			nameInput.setAttribute('value', e.target.getAttribute('data-img-name'));
 			//nameTd에 nameInput 넣기
 			nameTd.append(nameInput);
-			
+
 			//사진 상세 정보 담을 <td></td> 생성
 			var detailTd = document.createElement('td');
 			//내부,외부 선택가능하게 할 <select></select> 생성
@@ -134,14 +187,14 @@ function getCenterImages(){
 			detailSelect.append(detailOutside);
 			//사진 상세 정보 td에 select 추가
 			detailTd.append(detailSelect);
-			
+
 			//사진 정보  tr에 이름td 추가
 			imgDetailTr.append(nameTd);
 			//사진 정보 tr에 상세 정보td 추가
 			imgDetailTr.append(detailTd);
 			//수정 모달 사진 정보 table에 사진정보tr 추가
 			imgDetailTable.tBodies[0].append(imgDetailTr);
-			
+
 			//수정 전 사진 이름을 담을 <td></td> 생성
 			var oldNameTd = document.createElement('td');
 			//<input> 생성
@@ -155,68 +208,28 @@ function getCenterImages(){
 			oldNameInput.setAttribute('class','hidden-file-no');
 			//테이블에 nameInput 넣기
 			imgDetailTable.tBodies[0].append(oldNameInput);
-			
+
 			//파일번호를 담을 <input> 생성
 			var fileNoInput = document.createElement('input');
 			fileNoInput.setAttribute('name', 'fileNo');
 			fileNoInput.setAttribute('value', e.target.getAttribute('data-img-fileNo'));
 			fileNoInput.setAttribute('class','hidden-file-no');
-			
+
 			imgDetailTable.tBodies[0].append(fileNoInput);
-			
-			//클릭시 화면에 보이도록
-//			updateModal.style.display = "block";
-			//닫기 버튼들에 모달 보이지않게하는 이벤트 등록
-/*			for(var i=0;i<closeBtns.length;i++){
-				closeBtns[i].addEventListener("click", function() {
-					updateModal.style.display ="none";
-				});
-			}*/
-		};
-		//사진 들어갈 div에 사진 넣기
-		imgDiv.appendChild(img);
-	}
-	
-	//사진 정보 기록 테이블 초기화
+		}
+	} 
+	imgDiv.appendChild(photoDiv);
+//	사진 정보 기록 테이블 초기화
 	imgHistoryTable.tBodies[0].innerHTML = '';
-	//삭제 모달 테이블 초기화
+//	삭제 모달 테이블 초기화
 	deleteModalBody.innerHTML = '';
-	//응답 받은 사진 수만큼 반복
+//	응답 받은 사진 수만큼 반복
 	for(var i=0;i<result.length;i++){
 		//파일 이름, 등록자, 등록일, 수정일 넣어주기
 		imgHistoryTable.tBodies[0].innerHTML += '<tr><td>'+result[i].originalName+'</td><td>'+result[i].uploadUserName+"</td><td>"+result[i].filePostDate+"</td><td>"+result[i].fileModifyDate+"</td></tr>";
 		deleteModalBody.innerHTML += '<tr><td><input type="checkbox" name="deleteCheck" value="'+result[i].fileNo+'"></td><td>'+result[i].originalName+'</td></tr>';
 	}
-	
-	
 }//사진 선택 요청 시 실행되는 함수 끝
-
-//세 버튼을 선택할수있도록 -> 리스트로 반환됨 -> foreach?로 반복하면서 click Event 달아주기
-//-> click 했을때 12~14라인 작동하도록 (그럼 아마도 12~14라인을 함수로 묶어놔야겠찌?)
-
-//querySelectorAll을 이용해 등록,수정,삭제 모든 버튼의 요소들을 가지고 온다
-/*const buttonClick = document.querySelectorAll(".centerButton");
-const closeBtns = document.querySelectorAll(".centermodal-close-btn");
-//등록, 수정, 삭제 각각의 모달창
-let modalOpen;
-//forEach문을 이용해 각 요소를 하나씩 뽑아온 뒤 element에 넣어준다
-buttonClick.forEach(function (element) {
-	//classList[0] -> class의(첫번째로 있는) 이름을 가지고 올 수 있다
-	let action = element.classList[0];
-	//element에는 각 버튼의 요소가 들어있다, 즉 그냥 버튼이라고 생각해도 ok
-	//click하면 modalOpen해주는 함수 실행->이 때 class이름과 Modal을
-	//합쳐서 각각의 모달창을 열어줄 수 있게 된다, 
-	//이제 마지막으로 각 modal창에 display를 block으로 해주면 끝
-	element.addEventListener("click", function() {
-		modalOpen = document.querySelector("."+action+"Modal");
-		modalOpen.style.display = "block";
-		for(var i=0;i<closeBtns.length;i++){
-			closeBtns[i].addEventListener("click", function() {
-				modalOpen.style.display ="none";
-			});
-		}
-	});
-});*/
 
 //등록 모달 안 사진 선택 input 선택자
 var fileSelect = document.querySelector("input[name='centerImage']");
@@ -252,7 +265,7 @@ insertImgBtn.addEventListener("click",function(){
 function addCenterImage(){
 	let response = JSON.parse(httpRequest.responseText);
 	console.log(response+"개 저장됨");
-//	modalOpen.style.display ="none";
+	$("#insertModal .close").click();
 	makeRequest(getCenterImages,'GET','/center/getCenterImages/'+centerNameArr[4].innerText);
 }
 
@@ -269,7 +282,7 @@ updateBtn.addEventListener("click", function(){
 
 //수정 요청 후 실행되는 함수
 function afterUpdateImg(){
-//	updateModal.style.display ="none";
+	$("#updateModal .close").click();
 	makeRequest(getCenterImages,'GET','/center/getCenterImages/'+centerNameArr[4].innerText);
 }
 
@@ -288,6 +301,6 @@ deleteBtn.addEventListener("click", function(){
 });
 
 function afterDeleteImg(){
-//	deleteModal.style.display = "none";
+	$("#deleteModal .close").click();
 	makeRequest(getCenterImages,'GET','/center/getCenterImages/'+centerNameArr[4].innerText);
 }

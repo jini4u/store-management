@@ -4,20 +4,99 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <link rel="stylesheet" href="/resources/css/center/centerList.css">
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-
-<!-- jQuery library -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 <script
    src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
-
 <!-- Popper JS -->
-<script
-   src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
-<script
-   src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<button id="centerInsertBtn" class="centerSize" data-toggle="modal"
+   data-target="#myModal">등록</button>
+<!--insert Modal -->
+
+<div class="modal fade" data-backdrop="static" id="myModal"
+   role="dialog">
+   <!-- 사용자 지정 부분① : id명 -->
+   <div class="modal-dialog modal-xl modal-dialog-centered" id="centerInsertModal">
+      <!-- Modal content-->
+      <div class="modal-content p-6">
+         <div class="modal-header">
+            <h4 class="modal-title">센터 등록</h4>
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <!-- 사용자 지정 부분② : 타이틀 -->
+         </div>
+         <div class="modal-body">
+            <!--   disabled="disabled" class="form-control removeDisabled"  <table class="rowTable" id="center-right">  -->
+
+            <form id="centerForm">
+               <div class="row">
+                  <div class="col-md-6 mb-3">
+                     <input type="hidden" name="${centerCode}" id="centerCode">
+                     <label for="name">센터명</label> <input type="text"
+                        name="centerName" id="centerName" class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm" readonly="readonly">
+                  </div>
+                  <div class="col-md-6 mb-3">
+                     <label for="name">운영여부</label> <input type="text"
+                        id="centerCondition" name="centerCondition" class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm">
+                  </div>
+               </div>
+               <div class="mb-3">
+                  <label for="email">전화번호</label> <input type="text"
+                     name="centerTel" id="centerTel" class="form-control"
+                     aria-label="Sizing example input"
+                     aria-describedby="inputGroup-sizing-sm">
+               </div>
+               <div class="mb-3">
+                  <label for="email">주소</label> <input type="text"
+                     name="centerAddress" id="centerAddress" class="form-control"
+                     aria-label="Sizing example input"
+                     aria-describedby="inputGroup-sizing-sm">
+               </div>
+               <div class="mb-3">
+                  <label for="email">오시는 길</label> <input type="text"
+                     name="centerGuide" id="centerGuide" class="form-control"
+                     aria-label="Sizing example input"
+                     aria-describedby="inputGroup-sizing-sm">
+               </div>
+               <div class="row">
+                  <div class="col-md-6 mb-3">
+                     <label for="name">오픈일</label> <input type="date"
+                        name="centerOpeningDate" id="centerOpeningDate"
+                        class="form-control centerDate"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                  <div class="col-md-6 mb-3">
+             `        <label for="name">폐점일</label> <input type="date"
+                        name="centerClosingDate" id="centerClosingDate"
+                        class="form-control centerDate"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm">
+                  </div>
+               </div>
+            </form>
+            <div id="showPhoto">
+               <div class="col-md-6 mb-3">
+                  <label for="name">사진</label>
+                  <div id="centerPhotoList" class="slider">
+                  	<div class="bullets"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer">
+            <!--             <button type="button" class="centerSize" data-dismiss="modal" >Close</button> -->
+            <input type="button" class="centerSize  btn-lg btn-block"
+               id="centerSavedBtn" data-dismiss="modal" value="저장">
+         </div>
+      </div>
+   </div>
+</div>
 <div class="titleBox">
    <img
       src="${pageContext.request.contextPath}/resources/images/blood-bank.png" />
@@ -151,91 +230,6 @@
  
 <div class="center-button-group"></div>
 
-<button id="centerInsertBtn" class="centerSize" data-toggle="modal"
-   data-target="#myModal">등록</button>
-<!--insert Modal -->
 
-<div class="modal fade" data-backdrop="static" id="myModal"
-   role="dialog">
-   <!-- 사용자 지정 부분① : id명 -->
-   <div class="modal-dialog modal-xl modal-dialog-centered" id="centerInsertModal">
-      <!-- Modal content-->
-      <div class="modal-content p-6">
-         <div class="modal-header">
-            <h4 class="modal-title">센터 등록</h4>
-            <button type="button" class="close" data-dismiss="modal">×</button>
-            <!-- 사용자 지정 부분② : 타이틀 -->
-         </div>
-         <div class="modal-body">
-            <!--   disabled="disabled" class="form-control removeDisabled"  <table class="rowTable" id="center-right">  -->
-
-            <form id="centerForm">
-               <div class="row">
-                  <div class="col-md-6 mb-3">
-                     <input type="hidden" name="${centerCode}" id="centerCode">
-                     <label for="name">센터명</label> <input type="text"
-                        name="centerName" id="centerName" class="form-control"
-                        aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-sm" readonly="readonly">
-                  </div>
-                  <div class="col-md-6 mb-3">
-                     <label for="name">운영여부</label> <input type="text"
-                        id="centerCondition" name="centerCondition" class="form-control"
-                        aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-sm">
-                  </div>
-               </div>
-               <div class="mb-3">
-                  <label for="email">전화번호</label> <input type="text"
-                     name="centerTel" id="centerTel" class="form-control"
-                     aria-label="Sizing example input"
-                     aria-describedby="inputGroup-sizing-sm">
-               </div>
-               <div class="mb-3">
-                  <label for="email">주소</label> <input type="text"
-                     name="centerAddress" id="centerAddress" class="form-control"
-                     aria-label="Sizing example input"
-                     aria-describedby="inputGroup-sizing-sm">
-               </div>
-               <div class="mb-3">
-                  <label for="email">오시는 길</label> <input type="text"
-                     name="centerGuide" id="centerGuide" class="form-control"
-                     aria-label="Sizing example input"
-                     aria-describedby="inputGroup-sizing-sm">
-               </div>
-               <div class="row">
-                  <div class="col-md-6 mb-3">
-                     <label for="name">오픈일</label> <input type="date"
-                        name="centerOpeningDate" id="centerOpeningDate"
-                        class="form-control centerDate"
-                        aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-sm">
-                  </div>
-                  <div class="col-md-6 mb-3">
-             `        <label for="name">폐점일</label> <input type="date"
-                        name="centerClosingDate" id="centerClosingDate"
-                        class="form-control centerDate"
-                        aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-sm">
-                  </div>
-               </div>
-            </form>
-            <div id="showPhoto">
-               <div class="col-md-6 mb-3">
-                  <label for="name">사진</label>
-                  <div id="centerPhotoList" class="slider">
-                  	<div class="bullets"></div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="modal-footer">
-            <!--             <button type="button" class="centerSize" data-dismiss="modal" >Close</button> -->
-            <input type="button" class="centerSize  btn-lg btn-block"
-               id="centerSavedBtn" data-dismiss="modal" value="저장">
-         </div>
-      </div>
-   </div>
-</div>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/center/centerList.js"></script>

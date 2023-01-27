@@ -104,7 +104,7 @@ public class CenterService implements ICenterService{
 			String fileSavedName = "centerCode_"+centerCode+"+originalName_"+file.getOriginalFilename();
 			newFile.setFileSavedName(fileSavedName);
 			newFile.setFileType(file.getContentType());
-			newFile.setFilePath(filePath);
+			newFile.setFilePath(filePath+fileSavedName);
 			try {
 				//파일 저장
 				file.transferTo(new File(filePath+fileSavedName));
