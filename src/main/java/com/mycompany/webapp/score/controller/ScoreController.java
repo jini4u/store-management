@@ -62,7 +62,7 @@ public class ScoreController {
 	public String scoreFileUpload(MultipartHttpServletRequest request){
 		//request에서 업로드한 파일 얻기
 		MultipartFile file = request.getFile("scoreExcelFile");
-		//service에서 인덱스 3까지는 무시하고 처리하도록 넘겨주고 결과 리턴
+		//service에서 인덱스 3까지는 무시하고 처리하도록 함
 		scoreService.uploadFileInfo(file, 3);
 		return "redirect: /score/scoreupload";
 	}

@@ -61,26 +61,44 @@ public class ScoreService implements IScoreService {
 		return resultList;
 	}
 	
-	//유진
-	//전체 그룹코드 조회
+	/**
+	 * 전체 그룹코드 조회
+	 * @author 임유진
+	 * @return {List<Map<String, Object>>} 그룹코드, 그룹코드명, 사용여부
+	 * */
 	@Override
 	public List<Map<String, Object>> getAllGroupCodes() {
 		return scoreRepository.getAllGroupCodes();
 	}
 
-	//그룹코드별 상세코드 조회
+	/**
+	 * 그룹코드에 따른 상세코드 조회
+	 * @author 임유진
+	 * @param {String} 그룹코드
+	 * @return {List<Map<String, Object>>} 상세코드, 상세코드명, 사용여부
+	 * */
 	@Override
 	public List<Map<String, Object>> getDetailCodes(String groupCode) {
 		return scoreRepository.getDetailCodes(groupCode);
 	}
 
-	//상세코드 수정
+	/**
+	 * 상세코드명, 사용여부 수정
+	 * @author 임유진
+	 * @param {Map<String, String>} 수정한 상세코드, 상세코드명, 사용여부
+	 * @return {int} 수정된 상세 코드 수 (0 또는 1)
+	 * */
 	@Override
 	public int updateDetailCode(Map<String, String> detailCodeMap) {
 		return scoreRepository.updateDetailCode(detailCodeMap);
 	}
 
-	//그룹코드 수정
+	/**
+	 * 그룹코드명, 사용여부 수정
+	 * @author 임유진
+	 * @param {Map<String, String>} 수정한 그룹코드, 그룹코드명, 사용여부
+	 * @return {int} 수정된 그룹 코드 수 (0 또는 1)
+	 * */
 	@Override
 	public int updateGroupCode(Map<String, String> groupCodeMap) {
 		//그룹코드 사용여부가 N이면 하위 상세코드들도 사용중지되도록
@@ -93,13 +111,23 @@ public class ScoreService implements IScoreService {
 		return scoreRepository.updateGroupCode(groupCodeMap);
 	}
 
-	//상세코드 추가
+	/**
+	 * 상세코드 추가
+	 * @author 임유진
+	 * @param {Map<String, String>} 추가될 상세코드, 상세코드명, 사용여부
+	 * @return {int} 추가된 상세코드 수 (0 또는 1)
+	 * */
 	@Override
 	public int insertDetailCode(Map<String, String> detailCodeMap) {
 		return scoreRepository.insertDetailCode(detailCodeMap);
 	}
 
-	//그룹코드 추가
+	/**
+	 * 그룹코드 추가
+	 * @author 임유진
+	 * @param {Map<String, String>} 추가될 그룹코드, 그룹코드명, 사용여부
+	 * @return {int} 추가된 그룹코드 수 (0 또는 1)
+	 * */
 	@Override
 	public int insertGroupCode(Map<String, String> groupCodeMap) {
 		return scoreRepository.insertGroupCode(groupCodeMap);
