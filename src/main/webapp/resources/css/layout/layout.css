@@ -114,14 +114,15 @@ table{
 	border: 1px solid #E26868;
 	background: #ffffff;
 	margin: 20px 0 20px 10px;
-	border-radius: 10px;
+	border-radius: 4px;
 	display: flex;
+	align-items: center;
 }
 .search-select{
     border: 0px;
     font-size: 15px;
     padding: 0 10px;
-    border-radius: 10px;
+    border-radius: 4px;
     border: 1px solid #E26868;
     height: 47px;
 }
@@ -133,16 +134,15 @@ table{
 	outline: none;
 	float: right;
 	color: #ffffff;
-	border-radius: 0 10px 10px 0;
+	border-radius: 0 4px 4px 0;
 }
 
 
 /*버튼 */
 .pinkButton, .greyButton {
-   border-radius: 9px;
+   border-radius: 4px;
    display: inline-block;
    cursor: pointer;
-   font-family: Arial;
    font-size: 18px;
    padding: 6px 25px;
    text-decoration: none;
@@ -155,27 +155,30 @@ table{
 }
 
 .pinkButton {
-   background-color: #FF8787;
-   border: 1px solid #FF8787;
+   background-color: #E26868;
+   border: 2px solid #E26868;
    color: #fff;
 }
 
 .pinkButton:hover {
-   background-color: #E26868;
-   color: #fff;
-   border: 1px solid #E26868;
+   background-color: #fff;
+   color: #E26868;
+   border: 2px solid #E26868;
 }
 
 .greyButton {
-   background-color: #ededed;
-   border: 1px solid #ededed;
-   color: #000000;
+   background-color: #C0C0C0;
+   border: 2px solid #C0C0C0;
+   color: #fff;
 }
 
 .greyButton:hover {
-   background-color: #bebebe;
-   color: #000000;
-   border: 1px solid #bebebe;
+   background-color: #fff;
+   color: #C0C0C0;
+   border: 2px solid #C0C0C0;
+}
+.modal-greyBtn, .modal-pinkBtn{
+	height: 38px;
 }
 
 .centerSize {

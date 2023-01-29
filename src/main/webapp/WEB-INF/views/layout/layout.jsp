@@ -63,9 +63,9 @@
 						
 					</div>
 					<div class="modal-footer">
-						<input type="submit" class="pinkButton" value="저장">
+						<input type="submit" class="pinkButton modal-pinkBtn" value="저장">
 						</form>
-						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>	
+						<button type="button" class="greyButton modal-greyBtn" data-dismiss="modal">닫기</button>	
 					</div>
 				</div>
 			</div>

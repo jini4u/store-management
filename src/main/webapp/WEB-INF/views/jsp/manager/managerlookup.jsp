@@ -34,7 +34,7 @@
 			</button>
 		</div>
 	</form>
-	<button class="pinkButton" data-toggle="modal"
+	<button class="pinkButton mgrInsertBtn" data-toggle="modal"
 		data-target="#insertModal">등록</button>
 </div>
 
@@ -184,8 +184,8 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="greyButton" id="resetBtn">초기화</button>
-				<button type="button" class="pinkButton" id="savemgr"
+				<button type="button" class="greyButton modal-greyBtn" id="resetBtn">초기화</button>
+				<button type="button" class="pinkButton modal-pinkBtn" id="savemgr"
 					data-dismiss="modal">저장</button>
 
 				<!-- <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button> -->
@@ -273,10 +273,10 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="pinkButton" id="updatemgr"
+				<button type="button" class="pinkButton modal-pinkBtn" id="updatemgr"
 					data-dismiss="modal">수정</button>
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				<button type="button" class="greyButton modal-greyBtn" data-dismiss="modal">닫기</button>
 			</div>
 		</div>
 	</div>

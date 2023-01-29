@@ -10,11 +10,11 @@
 </div>
 
 <div id="fileuplod_collection">
+	<a class="greyButton" href='/file/managerUplaod_form.xlsx' download="" class="btn btn btn-primary btn-lg">양식파일 다운로드</a>
 	<form action="/manager/managerFileUpload" method="post" enctype="multipart/form-data">
 	<input type="file" name="mgrExcelFile">
-	<input type="submit" value="upload">
+	<input class="pinkButton" type="submit" value="UPLOAD">
 	</form>
-	<a href='/file/managerUplaod_form.xlsx' download="" class="btn btn btn-primary btn-lg">양식파일 다운로드</a>
 </div>
 
 <table class="verticalTable">
