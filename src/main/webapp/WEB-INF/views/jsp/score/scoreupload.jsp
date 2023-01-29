@@ -15,7 +15,7 @@
 </form>
 <button id="file-upload-button" class="pinkButton">업로드</button>
 </div>
-<a href='/file/' download="" class="btn btn btn-primary btn-lg">양식파일 다운로드</a>
+<a href='${pageContext.request.contextPath}/resources/templates/template_점수.xlsx' download="" class="btn btn btn-primary btn-lg">양식파일 다운로드</a>
 
 <table class="scoretable">
 	<tr>
@@ -28,7 +28,7 @@
 	<tr>
 		<td>${historyMap.postDate}</td>
 		<td>${historyMap.userName}</td>
-		<td><a href='/file/score_${historyMap.originalName}' download="">${historyMap.originalName}</a>${historyMap.originalName}</td>
+		<td><a href='/file/score_${historyMap.originalName}' download="">${historyMap.originalName}</a></td>
 		<td>${historyMap.result}</td>
 	</tr>
 	</c:forEach>
