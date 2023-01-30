@@ -129,12 +129,8 @@ mappingBtn.addEventListener("click", function(){
 	}
 	let centerTbody = centerTable.tBodies[0];
 	centerTbody.innerHTML = '';
-<<<<<<< HEAD
 	makeRequest(getCenterList, 'GET', '/manager/getcenters/'+userCode);
 	modal.classList.add("hide");
-=======
-	makeRequest(getCenterList, 'GET', '/manager/getCenters/'+userCode);
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 });
 
 //저장버튼 클릭시 담당 센터 재조회 

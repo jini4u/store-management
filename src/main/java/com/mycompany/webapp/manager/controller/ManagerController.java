@@ -70,15 +70,13 @@ public class ManagerController {
 
 	}
 
-<<<<<<< HEAD
+
 	/* author 은별
 	  담담자 수정 GET*/
 	@GetMapping(value="/managerupdate")
 	public  String managerUpdate() {
 		return "jsp/manager/managerlookup";
 	}
-=======
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 
 	/* author 은별
 	  담담자 수정 POST*/

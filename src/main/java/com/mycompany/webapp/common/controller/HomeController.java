@@ -27,9 +27,5 @@ public class HomeController {
 		model.addAttribute("allPosts", noticeService.getAllPosts());
 		return "home";
 	}
-<<<<<<< HEAD
 
-
-=======
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 }
