@@ -11,7 +11,7 @@
 		content,
 		author,
 		posttime
-	FROM testboard
+	FROM noticeboard
 	ORDER BY posttime
 </select>
 <select id="getPost" parameterType="int" resultType="com.mycompany.webapp.notice.vo.PostVO">
@@ -21,20 +21,20 @@
 		content,
 		author,
 		posttime
-	FROM testboard
+	FROM noticeboard
 	WHERE postno=#{postno}
 </select>
 <insert id="createPost" parameterType="com.mycompany.webapp.notice.vo.PostVO">
-	INSERT INTO testboard
+	INSERT INTO noticeboard
 		VALUES (postno_seq.NEXTVAL, #{title}, #{content}, #{author}, SYSDATE)
 </insert>
 <update id="updatePost" parameterType="com.mycompany.webapp.notice.vo.PostVO">
-	UPDATE testboard
+	UPDATE noticeboard
 		SET title=#{title}, content=#{content}, author=#{author}
 		WHERE postno=#{postno}
 </update>
 <delete id="deletePost" parameterType="int">
-	DELETE FROM testboard
+	DELETE FROM noticeboard
 		WHERE postno=#{postno}
 </delete>
 </mapper>

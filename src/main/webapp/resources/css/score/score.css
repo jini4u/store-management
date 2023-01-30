@@ -43,8 +43,9 @@ display: inline-block;
 
 .uploadbutton{
 	display: flex;
-    justify-content: flex-end;
-    margin-top: 5px;
+	justify-content: space-between;
+    align-items: center;
+    margin: 15px 10px;
 } 
 
 .scoretable {
@@ -78,6 +79,8 @@ table.scoretable td {
     border-bottom: 1px solid #ccc;
 }
 
-#file-select-button {
-	display: none;
+.greyButton, .pinkButton{
+	height: 35px;
+	font-size: 15px;
+	padding: 6px 10px;
 }

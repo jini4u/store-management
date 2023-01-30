@@ -51,11 +51,9 @@
 			<div class="line"></div>
 			<div>
 				<ul class="announcementList">
-					<li>[전국]2023년 대한적십자사 회장 신년사</li>
-					<li>[전국]혈액관리본부 홈페이지 서비스 신규 오픈 안내</li>
-					<li>[전국]다회헌혈자 블러드도너 컬렉션 수여 안내</li>
-					<li>[전국]대한적십자사 헌혈유공패(장) 수여기준 변경 안내</li>
-					<li>[전국]코로나19 관련 헌혈금지기간 안내</li>
+					<c:forEach var="i" begin="0" end="4" >
+						<li>${allPosts[i].title}</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>

@@ -38,26 +38,36 @@ var releaseBtn = document.querySelector(".releaseButton");
 //해제 버튼 클릭 이벤트 지정 
 releaseBtn.addEventListener("click", function(){
 	let userCode = document.querySelector(".selectedtr").children[0].innerText;
-	let centerCode = document.querySelector("input[name='center']:checked").value;
-	let reqList = {"userCode":userCode, "centerCode":centerCode};
+	let centerCode = document.querySelectorAll("input[name='center']:checked");
+	let reqList = [];
+	for(var i=0;i<centerCode.length;i++){
+		reqList.push({"userCode":userCode, "centerCode":centerCode[i].value});		
+	}
 	makeRequest(function(){	
 		makeRequest(getCenterList, 'GET', '/manager/getCenters/'+userCode);
 	}, 'POST', '/manager/cancelMapping', JSON.stringify(reqList));
 })
 
-//맵핑 버튼, 모달 선택자
+//맵핑 버튼 선택자
 var mappingBtn = document.querySelector(".mappingButton");
-var modal = document.querySelector(".hiddenmodal");
 //모달 안 맵핑가능센터 테이블 선택자 
 var availTable = document.getElementById("availtable");
 
 //맵핑 버튼 클릭 이벤트 지정 
 mappingBtn.addEventListener("click", function(){
-	modal.classList.remove("hide");
-	modal.classList.remove("fadeout")
-	modal.classList.add("fadein");
-	
-	makeRequest(getAvailCenters,'GET','/center/availCenter');
+	let mngSelected = false;
+	for(var i=0;i<allTr.length;i++){
+		if(allTr[i].classList.contains("selectedtr")){
+			mngSelected = true;
+		}
+	}
+	if(mngSelected == true){
+		document.getElementById("mappingModal").classList.add("mappingModal");
+		makeRequest(getAvailCenters,'GET','/center/availCenter');		
+	} else {
+		alert('담당자를 먼저 선택해 주세요');
+		document.getElementById("mappingModal").classList.remove("mappingModal");
+	}
 });
 
 //맵핑 버튼 클릭시 응답 받아 맵핑가능센터 조회 이벤트 
@@ -105,20 +115,6 @@ availTable.addEventListener("click", function(e){
 	}
 })
 
-//닫기버튼 선택자 (모달 안 저장, 취소 버튼)
-var closeBtn = document.querySelectorAll(".close-btn");
-
-//모달 안 저장버튼, 취소버튼 클릭시 모달 닫히는 이벤트 
-closeBtn[0].addEventListener("click", function(){
-	modal.classList.remove("fadein");
-	modal.classList.add("fadeout");
-});
-
-closeBtn[1].addEventListener("click", function(){
-	modal.classList.remove("fadein");
-	modal.classList.add("fadeout");
-});
-
 //모달 안 저장버튼만 선택 
 var mappingBtn = document.getElementById("mappingbutton");
 
@@ -134,7 +130,6 @@ mappingBtn.addEventListener("click", function(){
 	let centerTbody = centerTable.tBodies[0];
 	centerTbody.innerHTML = '';
 	makeRequest(getCenterList, 'GET', '/manager/getCenters/'+userCode);
-	modal.classList.add("hide");
 });
 
 //저장버튼 클릭시 담당 센터 재조회 
