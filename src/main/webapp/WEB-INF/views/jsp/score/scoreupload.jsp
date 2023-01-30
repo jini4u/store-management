@@ -8,16 +8,14 @@
 	<h2>점수 일괄 등록</h2>
 </div>
 <div class='uploadbutton'>
+<a href='${pageContext.request.contextPath}/resources/templates/template_점수.xlsx' download="" class="greyButton btn btn btn-primary btn-lg">양식파일 다운로드</a>
 <form id="file-upload-form">
-<p id="file-name">선택된 파일 없음</p>
-<label for="file-select-button" class="greyButton">파일선택</label>
 <input type="file" id="file-select-button" name="scoreExcelFile">
+<button id="file-upload-button" class="pinkButton">UPLOAD</button>
 </form>
-<button id="file-upload-button" class="pinkButton">업로드</button>
 </div>
-<a href='${pageContext.request.contextPath}/resources/templates/template_점수.xlsx' download="" class="btn btn btn-primary btn-lg">양식파일 다운로드</a>
 
-<table class="scoretable">
+<table class="verticalTable">
 	<tr>
 		<th>업로드 날짜</th>
 		<th>업로드 한 담당자</th>

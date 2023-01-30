@@ -28,3 +28,5 @@ $(function() {
 
 	var accordion = new Accordion($('.accordion-menu'), false);
 })
+
+loginUserCode = document.querySelector('input[name="userCode"]').value;

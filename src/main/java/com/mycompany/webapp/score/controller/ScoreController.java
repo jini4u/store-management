@@ -78,6 +78,10 @@ public class ScoreController {
 
 		int userCode = 10004;
 
+		if(centerCode == 0) {
+			return "redirect:/score/scorelist?centerCode="+scoreService.getCenterName(userCode).get(0).getCenterCode();
+		} else {
+			
 		ScoreVO scoreVO = new ScoreVO();
 		scoreVO.setCenterCode(centerCode);
 		System.out.println("centerCode"+centerCode);
@@ -150,6 +154,7 @@ public class ScoreController {
 		model.addAttribute("centerName",scoreService.getCenterName(userCode));
 		
 		return "jsp/score/scoreList";
+		}
 	}
 	
 	/*

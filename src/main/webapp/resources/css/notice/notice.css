@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
-#noticediv{
-	margin-top: 30px;
+.noticediv{
+	margin: 30px 0px;
 }
 
 #fullnoticetable{
@@ -12,9 +12,28 @@
 	border-bottom: 1px solid;
 }
 
-#fullnoticetable tr th{
-	background: #EDEDED;
-}
 .board-hidden{
 	display: none;
 }
+
+#buttonsdiv {
+	display: flex;
+	justify-content: space-between;
+}
+
+.subheading {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0px 12px 20px 0px;
+    text-decoration-line: underline;
+    text-decoration-thickness: 3px;
+    text-decoration-color: #E26868;
+    text-underline-position: under;
+}
+
+textarea {
+        resize: none;
+        overflow-y: hidden;
+        height: auto;
+        padding: 10px;
+    }
