@@ -176,8 +176,12 @@ function listClick(event){
 	//차트 그리는 부분
 	Highcharts.chart('container', {
 	  chart: {
-	    type: 'line'
+	    type: 'line',
+	    width: 950
 	  },
+	 subtitle: {
+	         text: '마커 클릭시 그 분기에 해당하는 통계 제공'
+	       },
 	  //그래프 내 타이틀 내용 없게(사용X)
 	  title: {
 	    text: ''

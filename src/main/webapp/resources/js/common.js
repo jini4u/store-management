@@ -51,6 +51,3 @@ function ajaxCmm(type, url, param, callback) {
 		}
 	});
 }
-
-
-loginUserCode = document.querySelector('input[name="userCode"]').value;

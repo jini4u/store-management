@@ -6,8 +6,8 @@
 	<img src="/resources/images/notification-bell.png">
 	<h2>공지사항</h2>
 </div>
-<div id="noticediv">
-<table id="fullnoticetable">
+<div class="noticediv">
+<table id="fullnoticetable" class="verticalTable">
 	<tr>
 		<th>글번호</th>
 		<th>제목</th>
@@ -17,8 +17,8 @@
 	</tr>
 <c:forEach var="post" items="${allPosts}">
 	<tr>
-		<td><a href="${pageContext.request.contextPath}/board/update?postno=${post.postno}">${post.postno}</a></td>
-		<td>${post.title}</td>
+		<td>${post.postno}</td>
+		<td><a href="${pageContext.request.contextPath}/board/update?postno=${post.postno}">${post.title}</a></td>
 		<td class="board-hidden">${post.content}</td>
 		<td class="board-hidden">${post.author}</td>
 		<td>${post.posttime}</td>
@@ -26,4 +26,6 @@
 </c:forEach>
 </table>
 </div>
-<a href="create"><button>글쓰기</button></a>
+<a href="create" id="createnotice"><button class="greyButton btn btn btn-primary btn-lg">글쓰기</button></a>
+
+<script src="${pageContext.request.contextPath}/resources/js/notice/notice.js"></script>

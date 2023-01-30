@@ -6,21 +6,20 @@
 }
 
 button {
-	background-color: #FF8787;
+	background-color: #EDEDED;
 	border: none;
 	width: 100px;
-	color: white;
-	border-radius: 10px 10px 0px 0px;
+	border-radius: 4px 4px 0px 0px;
 	margin-right: 1px;
 	font-size: 1em;
 }
-
-button:hover {
-	background-color: #E26868;
-}
-
 button.menubtn.clicked {
-	background-color: #E26868;
+    background: #fff;
+    border-top: 5px solid #E26868;
+	z-index: 2;
+    position: relative;
+    margin-bottom: -1px;
+    font-weight: 700;
 }
 
 #buttonsdiv{
@@ -31,13 +30,14 @@ button.menubtn.clicked {
 }
 
 #searchlistdiv{
-	width: 300px;
-	padding-left: 80px;
+	width: 1420px;
+	padding: 55px 70px;
+	display: flex;
+	justify-content: space-between;
 }
 
 #graphdiv {
 	text-align: center;
-	margin: 25px 0px;
 }
 
 #graphdiv img {
@@ -56,25 +56,25 @@ button.menubtn.clicked {
 
 #graphdiv #itemname {
 	color: #E26868;
+	font-weight: 600;
 }
 
 #statisticcontentdiv {
-	display: flex;
-	border: 1px solid;
 	height: 600px;
 	width: 99%;
 	padding-top: 50px;
 	justify-content: space-between;
+	z-index: 1;
+    position: relative;
+    border-top: 1px solid #ccc;
 }
-
 .table{
-	width: 200px;
+	border: 0;
 }
-
 .table tr {
 	border: none;
 	height: 100%;
-	width: 196px;
+	width: 227px;
 }
 
 .table tr:hover{
@@ -88,48 +88,52 @@ button.menubtn.clicked {
 .table td{
 	border-width: 0px 0px 2px 0px;
 	padding: 6px;
-	width: 206px;
+	width: 223px;
 }
 
 .tablediv {
 	overflow-y: scroll;
-	height: 450px;
-	width: 220px;
-}
-
-#rightdiv{
-	display: flex;
-	margin-right: 100px;
+	height: 393px;
+	width: 244px;
+	margin-top: 20px;
 }
 
 #infodiv {
-	margin-left: 180px;	
-    display: inline-grid;
+    display: flex;
+    padding: 0 70px;
+    height: 104px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 26px;
 }
 
 #infodiv div {
-	box-shadow: 5px 5px 5px #FF8787;
-	text-align: center;
-	margin-bottom: 30px;
-	
+	width: 324px;
+    border-left: 4px solid #FF8787;
+    box-shadow: 10px 10px 5px #ededed;
+    height: 90px;
 }
 #infodiv p {
-	height: 45px;
-    padding: 0px 7px;
-    margin: 25px 0px;
+	height: 40px;
+	margin-top: 5px;
+    text-align: left;
+    padding-left: 24px;
+	margin: 0;
 }
 
 .title-p{
-	font-size: 23px;
+	font-size: 21px;
+	padding-top: 7px;
 }
 
 .colored-p{
-	font-size: 10px; 
+	font-size: 25px; 
 	color: #E26868;
+	font-weight: 600;
 }
 
 #container{
-	width: 500px;
+	width: 950px;
 }
 
 .highcharts-figure,
@@ -173,4 +177,21 @@ button.menubtn.clicked {
 
 .highcharts-data-table tr:hover {
   background: #f1f7ff;
+}
+
+.search-box{
+	width: 244px;
+    margin: 0;
+}
+.search-btn{
+	text-align: center;
+    display: grid;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+}
+.line{
+	border-top: 1px solid #ccc;
+    width: 1318px;
+    margin: auto;
 }
