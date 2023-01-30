@@ -35,7 +35,6 @@
 		<a class="mypage"> <img
 			src="${pageContext.request.contextPath}/resources/images/user.png"></a>
 		<span>&nbsp;${sessionScope.userName}&nbsp;</span>
-		<input type="hidden" id="loginUserCode" value="${userCode}">
 		<c:choose>
 			<c:when test="${userCode<20000}">담당자&nbsp;</c:when>
 			<c:when test="${userCode<30000}">담당자 관리자 &nbsp;</c:when>

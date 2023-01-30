@@ -21,6 +21,7 @@ var colorP = document.querySelectorAll(".colored-p");
 
 //메뉴 버튼 클릭시 등록될 함수
 function menuClick(event){
+
 	//검색창 비우기
 	keyword.value='';
 	//선택되어있엇던 메뉴 해제, 그래프 숨기기
@@ -380,7 +381,7 @@ function makeCodeGraph(){
 
 
 //메뉴 버튼, 리스트 항목에 이벤트 달아줌 
-function init(){
+function init(){	
 	for(var i=0;i<menu.length;i++){
 		menu[i].addEventListener("click", menuClick);
 	}
@@ -389,8 +390,16 @@ function init(){
 	}
 	managerTb.style.display = 'none';
 	codeTb.style.display = 'none';
-
+	
 	menu[0].click();
 }
 
 init();
+
+window.onload = function(){
+	if(loginUserCode < 20000){	//담당자면 담당자별 통계X
+		menu[1].style.display = 'none';
+	} else {	//시스템이나 관리자면 점수항목별 통계X
+		menu[2].style.display = 'none';
+	}	
+}
