@@ -78,7 +78,7 @@ function getCenterImages(){
 		var input = document.createElement('input');
 		input.setAttribute('type', 'radio');
 		input.setAttribute('name', 'photoslide');
-		input.setAttribute('id', 'photoslide'+i);
+		input.setAttribute('id', 'photoslide');
 		if (i == 0) {
 			input.setAttribute('checked', 'checked');
 		}
@@ -98,7 +98,7 @@ function getCenterImages(){
 		ul.append(li);
 	}
 	photoDiv.append(ul);
-
+	
 	var div = document.createElement('div');
 	div.setAttribute('class', 'photo-bullets');
 

@@ -224,10 +224,7 @@
    </div>
 </div>
  </c:if>
- 
- 
- 
- 
+
 <div class="center-button-group"></div>
 
 
