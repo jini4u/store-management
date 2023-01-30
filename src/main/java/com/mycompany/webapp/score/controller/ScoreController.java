@@ -1,30 +1,26 @@
 package com.mycompany.webapp.score.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import com.mycompany.webapp.common.vo.Pager;
 import com.mycompany.webapp.score.service.IScoreService;
 import com.mycompany.webapp.score.vo.ScoreVO;
@@ -52,7 +48,7 @@ public class ScoreController {
 		model.addAttribute("historyMapList", scoreService.getScoreUploadHistory());
 		return "jsp/score/scoreupload";
 	}
-	
+
 	/**
 	 * 엑셀 파일 업로드 POST 요청을 처리
 	 * @author 임유진
@@ -67,14 +63,14 @@ public class ScoreController {
 		scoreService.uploadFileInfo(file, 3, userCode);
 		return "redirect: /score/scoreupload";
 	}
-	
+
 	/*
 	 *정윤선
 	 * DB에 존재하는 값중에 점검년도,분기,항목,상세항목,점수 전체의 정보를 조회
 	 * */
-	
+
 	@RequestMapping(value="/scorelist", method = RequestMethod.GET)
-	public String centerscoreinquiry(@RequestParam(defaultValue="1") int pageNo,@RequestParam(defaultValue="0")int centerCode, Model model,HttpSession session) {
+	public String centerscoreinquiry(@RequestParam(defaultValue="1") int pageNo,@RequestParam(defaultValue="0")int centerCode, @RequestParam(defaultValue="0")int checkYear, @RequestParam(defaultValue="0")int checkSeason,Model model,HttpSession session) {
 
 		int userCode = 10004;
 
@@ -84,13 +80,15 @@ public class ScoreController {
 			
 		ScoreVO scoreVO = new ScoreVO();
 		scoreVO.setCenterCode(centerCode);
-		System.out.println("centerCode"+centerCode);
+		scoreVO.setCheckYear(checkYear);
+		scoreVO.setCheckSeason(checkSeason);
+
 		/*		
 	 	세션에서 가져와서 값을 넣을 수 있도록 변경----------------------
 		int centerCode = (Integer) session.getAttribute("centerCode");
 		int userCode = (Integer) session.getAttribute("userCode");
 		------------------------------------------------  */	
-		
+
 		//scoreVo를 getScoreList로 담아 socreList로 만듬
 		int totalRows = scoreService.countListByCenterCode(scoreVO);
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
@@ -99,7 +97,9 @@ public class ScoreController {
 		model.addAttribute("scoreList",scoreList);
 		model.addAttribute("pager", pager);	
 		model.addAttribute("centerName",scoreService.getCenterName(userCode));
-		
+		model.addAttribute("userCode",userCode);
+
+
 		//비어있는 ScoreVO 생성
 		ScoreVO emptyVO = new ScoreVO();
 		//getScoreList 하기위해서 centerCode는 무조건 필요하므로 1로 set
@@ -116,7 +116,7 @@ public class ScoreController {
 			model.addAttribute("maxYear", maxYear);
 			model.addAttribute("maxSeason", maxSeason);
 		}
-		
+
 		Calendar now = Calendar.getInstance();
 		int yy = now.get(Calendar.YEAR);
 		int mm = now.get(Calendar.MONTH) +1;
@@ -137,7 +137,7 @@ public class ScoreController {
 		}else{
 			season = 0;
 		}
-		
+
 		//2번째 i문 mm(월)이 3보다 작거나 같으면 yy(년)에 -1 
 		//그게 아니라면 현재 년도가 나오면 됨
 		if((mm-3)<=0) {
@@ -145,47 +145,55 @@ public class ScoreController {
 		}else {
 			year = yy;
 		}
-		
 		model.addAttribute("year",year);
 		model.addAttribute("season",season);
 		//모달창 점수 항목 출력 리스트
 		model.addAttribute("usingCodeList", scoreService.usingCodeList());
 		//센터 버튼에 센터 이름 출력
 		model.addAttribute("centerName",scoreService.getCenterName(userCode));
-		
+
 		return "jsp/score/scoreList";
 		}
 	}
-	
+
 	/*
 	 * 정윤선
 	 * 점수 수정
 	 * 값을 화면에 보내줌
 	 * */
-	@RequestMapping(value="/updateScore", method=RequestMethod.POST)
-	public String updateGetScore(ScoreVO score, Model model) {		
-		scoreService.updateScore(score);		
-		return "redirect:/score/scorelist";
-	}
 
+	@RequestMapping(value="/updateScore", method=RequestMethod.POST)
+	public String updateGetScore(int[] arrayScore, int[] arrayDetailCode,
+			String[] arrayGroupCode, ScoreVO scoreVO,HttpServletRequest request) {		
+		
+		scoreVO.setArrayScore(arrayScore);
+		/*System.out.println(Arrays.toString(scoreVO.getArrayScore()));*/
+		scoreVO.setArrayCheckGroupCode(arrayGroupCode);
+		scoreVO.setArrayCheckDetailCode(arrayDetailCode);
+		
+		scoreService.updateScore(scoreVO);
+		return "redirect:/score/scorelist?centerCode="+scoreVO.getCenterCode()+"&checkYear="+scoreVO.getCheckYear()+"&checkSeason="+scoreVO.getCheckSeason();
+	}
 	/*
 	 * 정윤선
 	 * 점수 등록
 	 * (모달창에서)
-	 * */   
-/*	@RequestMapping(value="/insertScore", method=RequestMethod.POST)
-	public String insertsocre(ScoreVO scoreVO) {
+	 * */ 
+	
+	@RequestMapping(value="/insertScore/", method=RequestMethod.POST)
+	public String insertsocre(int[] arrayScore, int[] arrayDetailCode,
+								String[] arrayGroupCode, ScoreVO scoreVO, HttpServletRequest request, Model model) {
+
+		scoreVO.setArrayScore(arrayScore);
+		scoreVO.setArrayCheckGroupCode(arrayGroupCode);
+		scoreVO.setArrayCheckDetailCode(arrayDetailCode);
+		//다 담기
 		scoreService.insertScore(scoreVO);
-		return "redirect:/score/scorelist";
-	}*/
-	
-	/*@PostMapping("/insertScore")
-	public String insertsocre(ScoreVO scoreVO) {
-	//	scoreService.insertScore(scoreVO);
-		log.info(scoreVO.toString());
-		return "redirect:/score/scorelist";
-	}*/
-	
+		
+
+		return "redirect:/score/scorelist?centerCode="+scoreVO.getCenterCode();
+	}	
+
 	/*
 	 * 정윤선
 	 * 버튼을 누르면 해당 센터(담당자 별 센터) 점수 리스트 설정
@@ -193,7 +201,7 @@ public class ScoreController {
 	@RequestMapping(value="/getCenters/{userCode}")
 	public @ResponseBody List<ScoreVO> getCenterName(@PathVariable int userCode,Model model){
 		return scoreService.getCenterName(userCode);
-		
+
 	}
 	/**
 	 * DB에 존재하는 그룹코드 전체의 정보를 조회, 코드 관리 화면으로 이동
