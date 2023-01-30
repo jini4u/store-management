@@ -165,13 +165,13 @@ function getCenterImages(){
 			imgDetailTable.tBodies[0].append(fileNoInput);
 			
 			//클릭시 화면에 보이도록
-			updateModal.style.display = "block";
+//			updateModal.style.display = "block";
 			//닫기 버튼들에 모달 보이지않게하는 이벤트 등록
-			for(var i=0;i<closeBtns.length;i++){
+/*			for(var i=0;i<closeBtns.length;i++){
 				closeBtns[i].addEventListener("click", function() {
 					updateModal.style.display ="none";
 				});
-			}
+			}*/
 		};
 		//사진 들어갈 div에 사진 넣기
 		imgDiv.appendChild(img);
@@ -252,7 +252,7 @@ insertImgBtn.addEventListener("click",function(){
 function addCenterImage(){
 	let response = JSON.parse(httpRequest.responseText);
 	console.log(response+"개 저장됨");
-	modalOpen.style.display ="none";
+//	modalOpen.style.display ="none";
 	makeRequest(getCenterImages,'GET','/center/getCenterImages/'+centerNameArr[4].innerText);
 }
 
@@ -269,7 +269,7 @@ updateBtn.addEventListener("click", function(){
 
 //수정 요청 후 실행되는 함수
 function afterUpdateImg(){
-	updateModal.style.display ="none";
+//	updateModal.style.display ="none";
 	makeRequest(getCenterImages,'GET','/center/getCenterImages/'+centerNameArr[4].innerText);
 }
 
@@ -288,6 +288,6 @@ deleteBtn.addEventListener("click", function(){
 });
 
 function afterDeleteImg(){
-	deleteModal.style.display = "none";
+//	deleteModal.style.display = "none";
 	makeRequest(getCenterImages,'GET','/center/getCenterImages/'+centerNameArr[4].innerText);
 }

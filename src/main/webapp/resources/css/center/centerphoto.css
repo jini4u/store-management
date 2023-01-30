@@ -211,3 +211,6 @@ tbody {
 	width: 55px;
 	height: 30px;
 }
+.modal-show-none{
+	z-index : 1100;
+}

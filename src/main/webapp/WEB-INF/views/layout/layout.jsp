@@ -27,8 +27,6 @@
 	href="${pageContext.request.contextPath}/resources/css/layout/layout.css">
 <meta charset="UTF-8">
 <title>헌혈의 집 관리 시스템</title>
-<!-- 공통함수 부분 -->
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 </head>
 <body class="totalbox">
 
@@ -63,9 +61,9 @@
 						
 					</div>
 					<div class="modal-footer">
-						<input type="submit" class="pinkButton" value="저장">
+						<input type="submit" class="pinkButton modal-pinkBtn" value="저장">
 						</form>
-						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>	
+						<button type="button" class="greyButton modal-greyBtn" data-dismiss="modal">닫기</button>	
 					</div>
 				</div>
 			</div>
@@ -86,4 +84,6 @@
 	</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<!-- 공통함수 부분 -->
+<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 </html>

@@ -7,7 +7,7 @@
 <h2>통계보기</h2>
 </div>
 <div id="buttonsdiv">
-	<button class="menubtn center clicked">센터별</button><button class="menubtn manager">담당자별</button><button class="menubtn code">점수항목별</button><button class="menubtn">TOP3</button>
+	<button class="menubtn center clicked">센터별</button><button class="menubtn manager">담당자별</button><button class="menubtn code">점수항목별</button>
 </div>
 <div id="statisticcontentdiv">
 	<div id="searchlistdiv">
@@ -50,21 +50,21 @@
 	<div id="rightdiv">
 
 		<div id="graphdiv">
-			<h2 id="graphtitle"><p id="centername"></p> <p id="statisticcontent">평균 점수 추이</p></h2>
+			<h2 id="graphtitle"><p id="itemname"></p> <p id="statisticcontent">평균 점수 추이</p></h2>
 			<div id="container"></div>
 		</div>
 		<div id="infodiv">
 			<div>
-			<p class="title-p">전체 센터 수</p>
-		 	<p class="colored-p">127</p>
+			<p class="title-p"></p>
+		 	<p class="colored-p"></p>
 		 	</div>
 		 	<div>
-		 	<p class="title-p">전체 센터 평균 점수</p>
-		 	<p class="colored-p">68.9</p>
+		 	<p class="title-p"></p>
+		 	<p class="colored-p"></p>
 		 	</div>
 		 	<div>
-		 	<p class="title-p">선택 센터 1년 평균 점수</p>
-		 	<p class="colored-p">73.5</p>
+		 	<p class="title-p"></p>
+		 	<p class="colored-p"></p>
 		 	</div>
 		</div>
 		

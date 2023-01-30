@@ -1,7 +1,4 @@
 @charset "UTF-8";
-.contentbox{
-	background: #EDEDED;
-}
 .smallGroupBox {
 	display: flex;
 	padding: 20px 20px 0 20px;
@@ -152,6 +149,8 @@ label.right {
 	padding-top: 19px;
 	background: #fff;
     border-radius: 20px;
+    box-shadow: 10px 10px 5px #ededed;
+    height: 350px;
 }
 
 .announcement h2 {
@@ -159,6 +158,7 @@ label.right {
 	padding-left: 28px;
 	float: left;
     margin-right: 400px;
+    font-weight: 700;  
 }
 
 .announcementList {
@@ -185,6 +185,7 @@ label.right {
 .linkBox {
     background: #fff;
     border-radius: 20px;
+    box-shadow: 10px 10px 5px #ededed;
 }
 .introduceTitle p {
 	text-align: left;

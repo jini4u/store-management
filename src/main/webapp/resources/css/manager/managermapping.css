@@ -1,45 +1,46 @@
 @charset "UTF-8";
-
-.buttonBox {
-	padding-top: 20px;
-	height: 38px;
+.search_btn_collection{
+	display: flex;
+    align-items: center;
+    justify-content: space-between;	
+    height: 47px;
+    margin: 20px 0 20px 0;
 }
-
-.buttonBox>div {
-	float: right;
-}
-
 .graphbox {
-	border-top: 1px solid #ccc;
-	margin-top: 20px;
 	display: flex;
 	height: 73%;
 }
 
 .managerbox, .centerbox {
 	height: 100%;
-	padding: 14px;
-	border: 1px solid #ccc;
 }
-
+.managerbox{
+	padding: 20px 30px 14px 14px;
+	border-right: 1px solid #ccc;
+	width: 35%;
+	height: 645px;
+}
+.centerbox{
+	padding: 20px 14px 14px 30px;
+	width: 65%;	
+}
 #managerTitle {
     display: flex;
     justify-content: space-between;
 }
 
-.managerbox p, 
-.centerbox p {
+.subheading {
 	font-size: 20px;
-	font-weight: 550;
-	margin: 0px 0px 6px 10px;
+	font-weight: 600;
+	margin-left: 12px;
+	text-decoration-line: underline;
+    text-decoration-thickness: 3px;
+    text-decoration-color: #E26868;
+    text-underline-position: under;
 }
-
-.managerbox {
-	width: 35%;
-}
-
-.centerbox {
-	width: 65%;
+.mgrCount{
+  font-size: 20px;
+  margin-right: 12px;
 }
 
 .managertable {
@@ -139,3 +140,6 @@ transform: translate(-50%, -50%);
 #availtable tbody tr:hover{
 	background: #EDEDED;
 }
+.search-box{
+ 	width: 246px;
+ } 

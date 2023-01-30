@@ -2,17 +2,13 @@
 /**
  * @code.js
  * @Description : 코드관리 js
- * @Modification 
- *     수정일      	수정자      	  	수정내용
- *  =========== =========  =====================
- * 	
  * @author 임유진
  * **/
 //그룹코드 테이블 선택자
 var groupTable = document.getElementById("grouptable");
 //상세코드 테이블 선택자 
 var detailTable = document.getElementById("detailtable");
-//그룹코드 입력창 선택자  > 두개를 분리해서 각각 id selector 를 사용하는것이 좋음.
+//그룹코드 입력창 선택자
 var groupCodeInput = document.getElementById("groupcode");
 var groupContentInput = document.getElementById("groupcontent");
 //그룹코드 select 선택자 

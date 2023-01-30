@@ -82,4 +82,19 @@ public class StatController {
 	public @ResponseBody Map<String, List<ScoreVO>> getCodeAvgScores(@PathVariable int userCode, @RequestParam(name="group") String groupCode, @RequestParam(name="detail") int detailCode){
 		return statService.getAvgScoreByCheckCode(groupCode, detailCode, userCode);
 	}
+	
+	@RequestMapping("/centerSubStat/{centerCode}")
+	public @ResponseBody Map<String, String> getCenterSubStat(@PathVariable int centerCode, @RequestParam(name="year") int checkYear, @RequestParam(name="season") int checkSeason){
+		return statService.getCenterSubStat(centerCode, checkYear, checkSeason);
+	}
+	
+	@RequestMapping("/managerSubStat/{userCode}")
+	public @ResponseBody Map<String, String> getManagerSubStat(@PathVariable int userCode, @RequestParam(name="year") int checkYear, @RequestParam(name="season") int checkSeason){
+		return statService.getManagerSubStat(userCode, checkYear, checkSeason);
+	}
+	
+	@RequestMapping("/codeSubStat/{userCode}")
+	public @ResponseBody Map<String, String> getCodeSubStat(@PathVariable int userCode, @RequestParam(name="year") int checkYear, @RequestParam(name="season") int checkSeason){
+		return statService.getCodeSubStat(userCode, checkYear, checkSeason);
+	}
 }
