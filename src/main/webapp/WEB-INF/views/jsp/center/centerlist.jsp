@@ -25,7 +25,7 @@
 </div>
 <div class="center-search-button">
    <div class="search-box center">
-      <form action="centerList">
+      <form action="centerlist">
       <select name="keywordType">
       	<option value="CN">센터명</option>
       	<option value="CC">센터코드</option>
@@ -75,26 +75,26 @@
   
    <div class="center-pagging">
       <ul class="pagination pageModal">
-         <li><a class="innerPager first" href="centerList?pageNo=1">처음</a></li>
+         <li><a class="innerPager first" href="centerlist?pageNo=1">처음</a></li>
          <li><c:if test="${pager.groupNo>1}">
                <a class="innerPager arrow left"
-                  href="centerList?pageNo=${pager.startPageNo-1}">이전</a>
+                  href="centerlist?pageNo=${pager.startPageNo-1}">이전</a>
             </c:if></li>
          <c:forEach var="i" begin="${pager.startPageNo}"
             end="${pager.endPageNo}">
             <li><c:if test="${pager.pageNo != i}">
-                  <a class="innerPager active num" href="centerList?pageNo=${i}">${i}</a>
+                  <a class="innerPager active num" href="centerlist?pageNo=${i}">${i}</a>
                </c:if></li>
             <li><c:if test="${pager.pageNo == i}">
-                  <a id="now-page" class="innerPager num" href="centerList?pageNo=${i}">${i}</a>
+                  <a id="now-page" class="innerPager num" href="centerlist?pageNo=${i}">${i}</a>
                </c:if></li>
          </c:forEach>
          <li><c:if test="${pager.groupNo<pager.totalGroupNo}">
                <a class="innerPager arrow right"
-                  href="centerList?pageNo=${pager.endPageNo+1}">다음</a>
+                  href="centerlist?pageNo=${pager.endPageNo+1}">다음</a>
             </c:if></li>
          <li><a class="innerPager last"
-            href="centerList?pageNo=${pager.totalPageNo}">맨끝</a></li>
+            href="centerlist?pageNo=${pager.totalPageNo}">맨끝</a></li>
       </ul>
    </div>
 </div>
@@ -121,26 +121,26 @@
   
    <div class="center-pagging">
       <ul class="pagination pageModal">
-         <li><a class="innerPager first" href="centerList?pageNo=1&keywordType=${keywordType}&keyword=${keyword}">처음</a></li>
+         <li><a class="innerPager first" href="centerlist?pageNo=1&keywordType=${keywordType}&keyword=${keyword}">처음</a></li>
          <li><c:if test="${pager.groupNo>1}">
                <a class="innerPager arrow left"
-                  href="centerList?pageNo=${pager.startPageNo-1}&keywordType=${keywordType}&keyword=${keyword}">이전</a>
+                  href="centerlist?pageNo=${pager.startPageNo-1}&keywordType=${keywordType}&keyword=${keyword}">이전</a>
             </c:if></li>
          <c:forEach var="i" begin="${pager.startPageNo}"
             end="${pager.endPageNo}">
             <li><c:if test="${pager.pageNo != i}">
-                  <a class="innerPager active num" href="centerList?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}">${i}</a>
+                  <a class="innerPager active num" href="centerlist?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}">${i}</a>
                </c:if></li>
             <li><c:if test="${pager.pageNo == i}">
-                  <a id="now-page" class="innerPager num" href="centerList?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}">${i}</a>
+                  <a id="now-page" class="innerPager num" href="centerlist?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}">${i}</a>
                </c:if></li>
          </c:forEach>
          <li><c:if test="${pager.groupNo<pager.totalGroupNo}">
                <a class="innerPager arrow right"
-                  href="centerList?pageNo=${pager.endPageNo+1}&keywordType=${keywordType}&keyword=${keyword}">다음</a>
+                  href="centerlist?pageNo=${pager.endPageNo+1}&keywordType=${keywordType}&keyword=${keyword}">다음</a>
             </c:if></li>
          <li><a class="innerPager last"
-            href="centerList?pageNo=${pager.totalPageNo}&keywordType=${keywordType}&keyword=${keyword}">맨끝</a></li>
+            href="centerlist?pageNo=${pager.totalPageNo}&keywordType=${keywordType}&keyword=${keyword}">맨끝</a></li>
       </ul>
    </div>
 </div>

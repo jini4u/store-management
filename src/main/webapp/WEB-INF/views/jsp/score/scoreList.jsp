@@ -48,7 +48,7 @@
 
 
 <!-- 점수리스트 테이블 -->
-<form action="${pageContext.request.contextPath}/score/updateScore" method="post">
+<form action="${pageContext.request.contextPath}/score/updatescore" method="post">
 <input type="hidden" name="centerCode" value="${param.centerCode}">
 	<table class="scoretable" id="scoreListTable" border="1">
 		<tr>
@@ -129,7 +129,7 @@
 					<span aria-hidden="true">×</span>
 				</button>
 			</div>
-			<form action="${pageContext.request.contextPath}/score/insertScore" method="post" >
+			<form action="${pageContext.request.contextPath}/score/insertscore" method="post" >
 			<div class="modal-body">
 
 				<!-- 모달창 안 테이블 -->

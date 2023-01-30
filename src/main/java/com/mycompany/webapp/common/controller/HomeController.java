@@ -25,11 +25,5 @@ public class HomeController {
 		return "home";
 	}
 
-/*	*//**
-	 * 로그인 페이지 
-	 * *//*
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
-	}*/
+
 }

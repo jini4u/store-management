@@ -20,7 +20,7 @@
 <div class="search_insert">
 	<!-- 검색 -->
 
-	<form class="search-form" action="/manager/managerSearch" method="get">
+	<form class="search-form" action="/manager/managersearch" method="get">
 			<select class="search-select" name="keywordType">
 				<option value="UC">담당자 코드</option>
 				<option value="UN">담당자명</option>

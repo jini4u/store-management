@@ -59,28 +59,28 @@
       <div class="center-pagging">
          <ul class="pagination">
             <li><a class="innerPager first"
-               href="managerMapping?pageNo=1&keyword=${keyword}">처음</a></li>
+               href="managermapping?pageNo=1&keyword=${keyword}">처음</a></li>
             <li><c:if test="${pager.groupNo>1}">
                   <a class="innerPager arrow left"
-                     href="managerMapping?pageNo=${pager.startPageNo-1}&keyword=${keyword}">이전</a>
+                     href="managermapping?pageNo=${pager.startPageNo-1}&keyword=${keyword}">이전</a>
                </c:if></li>
             <c:forEach var="i" begin="${pager.startPageNo}"
                end="${pager.endPageNo}">
                <li><c:if test="${pager.pageNo != i}">
                      <a class="innerPager active num"
-                        href="managerMapping?pageNo=${i}&keyword=${keyword}">${i}</a>
+                        href="managermapping?pageNo=${i}&keyword=${keyword}">${i}</a>
                   </c:if></li>
                <li><c:if test="${pager.pageNo == i}">
                      <a id="now-page" class="innerPager num"
-                        href="managerMapping?pageNo=${i}&keyword=${keyword}">${i}</a>
+                        href="managermapping?pageNo=${i}&keyword=${keyword}">${i}</a>
                   </c:if></li>
             </c:forEach>
             <li><c:if test="${pager.groupNo<pager.totalGroupNo}">
                   <a class="innerPager arrow right"
-                     href="managerMapping?pageNo=${pager.endPageNo+1}&keyword=${keyword}">다음</a>
+                     href="managermapping?pageNo=${pager.endPageNo+1}&keyword=${keyword}">다음</a>
                </c:if></li>
             <li><a class="innerPager last"
-               href="managerMapping?pageNo=${pager.totalPageNo}&keyword=${keyword}">맨끝</a></li>
+               href="managermapping?pageNo=${pager.totalPageNo}&keyword=${keyword}">맨끝</a></li>
          </ul>
       </div>
    </div>

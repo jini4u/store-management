@@ -48,28 +48,28 @@
 					<tr>
 						<td id="pager" colspan="4">
 							<div>
-								<a class="innerPager" href="centerPhoto?pageNo=1">처음</a>
+								<a class="innerPager" href="centerphoto?pageNo=1">처음</a>
 								<c:if test="${pager.groupNo>1}">
 									<a class="innerPager"
-										href="centerPhoto?pageNo=${pager.startPageNo-1}">이전</a>
+										href="centerphoto?pageNo=${pager.startPageNo-1}">이전</a>
 								</c:if>
 
 								<c:forEach var="i" begin="${pager.startPageNo}"
 									end="${pager.endPageNo}">
 									<c:if test="${pager.pageNo != i}">
-										<a class="innerPager" href="centerPhoto?pageNo=${i}">${i}</a>
+										<a class="innerPager" href="centerphoto?pageNo=${i}">${i}</a>
 									</c:if>
 									<c:if test="${pager.pageNo == i}">
-										<a class="innerPager" href="centerPhoto?pageNo=${i}">${i}</a>
+										<a class="innerPager" href="centerphoto?pageNo=${i}">${i}</a>
 									</c:if>
 								</c:forEach>
 
 								<c:if test="${pager.groupNo<pager.totalGroupNo}">
 									<a class="innerPager"
-										href="centerPhoto?pageNo=${pager.endPageNo+1}">다음</a>
+										href="centerphoto?pageNo=${pager.endPageNo+1}">다음</a>
 								</c:if>
 								<a class="innerPager"
-									href="centerPhoto?pageNo=${pager.totalPageNo}">맨끝</a>
+									href="centerphoto?pageNo=${pager.totalPageNo}">맨끝</a>
 							</div>
 						</td>
 					</tr>

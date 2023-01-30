@@ -38,14 +38,14 @@ public class ManagerController {
 	   IManagerService managerService;
 	   /* author 은별
 	       담당자 목록조회*/
-	   @RequestMapping(value="/managerList")
+	   @RequestMapping(value="/managerlist")
 	   public String selectManagerList(@RequestParam(defaultValue="1") int pageNo,Model model) {
 	      int totalRows = managerService.countAllMgr();
 	      Pager pager = new Pager(10, 10, totalRows, pageNo);
 	      List<ManagerVO> managerList = managerService.selectManagerList(pager);
 	      model.addAttribute("managerList", managerList);
 	      model.addAttribute("pager", pager);
-	      model.addAttribute("mgrURL","/manager/managerList");
+	      model.addAttribute("mgrURL","/manager/managerlist");
 
 	      logger.info("managerList : " + managerList);
 	      return "jsp/manager/managerlookup";
@@ -82,7 +82,7 @@ public class ManagerController {
 
 	/* author 은별
 	  담담자 수정 GET*/
-	@GetMapping(value="/managerUpdate")
+	@GetMapping(value="/managerupdate")
 	public  String managerUpdate() {
 		return "jsp/manager/managerlookup";
 	}
@@ -90,7 +90,7 @@ public class ManagerController {
 	/* author 은별
 	  담담자 수정 POST*/
 	@ResponseBody
-	@PostMapping(value="/managerUpdate")
+	@PostMapping(value="/managerupdate")
 	public  ManagerVO managerUpdate(@RequestParam(defaultValue="1") int pageNo, ManagerVO mgr) {
 		logger.info(mgr.toString());
 		managerService.managerUpdate(mgr);
@@ -103,7 +103,7 @@ public class ManagerController {
 
 	/* author 은별
 	  담담자 검색 */
-	@GetMapping(value="/managerSearch")
+	@GetMapping(value="/managersearch")
 	public String managerSearch(@RequestParam(defaultValue="1")int pageNo, @RequestParam("keyword") String keyword,
 			@RequestParam("keywordType") String keywordType,Model model){
 		  int keywordTotalRows = managerService.managerCountByKeyword(keyword, keywordType);
@@ -115,7 +115,7 @@ public class ManagerController {
 	      if (mgrSearchList.size() != 0) {
 	            model.addAttribute("managerList", mgrSearchList);
 	            model.addAttribute("pager", searchPager);
-	            model.addAttribute("mgrURL","/manager/managerSearch");
+	            model.addAttribute("mgrURL","/manager/managersearch");
 	            logger.info("검색"+searchPager.toString());
 	         }else {
 	            model.addAttribute("pager", new Pager(1, 1, 1, 1));
@@ -132,7 +132,7 @@ public class ManagerController {
 	 * 담당자 맵핑 페이지로 이동 
 	 * @author 임유진
 	 * */
-	@RequestMapping(value="/managerMapping")
+	@RequestMapping(value="/managermapping")
 	public String managerMapping(@RequestParam(defaultValue="1") int pageNo, @RequestParam(required=false) String keyword, 
 			@RequestParam(required=false) String keywordType, Model model) {
 		Pager pager;
@@ -158,7 +158,7 @@ public class ManagerController {
 	 * @param {Integer} 담당자 userCode
 	 * @return {List<CenterVO>} 담당하고 있는 센터 리스트 
 	 * */
-	@RequestMapping(value="/getCenters/{userCode}")
+	@RequestMapping(value="/getcenters/{userCode}")
 	public @ResponseBody List<CenterVO> getCenterByManager(@PathVariable int userCode){
 		return managerService.getCenterByManager(userCode);
 	}
@@ -169,7 +169,7 @@ public class ManagerController {
 	 * @param {String} {userCode:담당자코드, centerCode:센터코드} 형태
 	 * @return {int} 해제된 맵핑 관계 수
 	 * */
-	@RequestMapping(value="/cancelMapping", method=RequestMethod.POST)
+	@RequestMapping(value="/cancelmapping", method=RequestMethod.POST)
 	public @ResponseBody int cancelMapping(@RequestBody String req) throws Exception {
 		//JSON 객체를 Map으로 받기위해 Jackson 라이브러리의 ObjectMapper 생성 
 		ObjectMapper mapper = new ObjectMapper();
@@ -202,7 +202,7 @@ public class ManagerController {
 	}
 	/* author 은별
 	  담담자 엑셀 파일  히스토리  */
-	@RequestMapping(value="/managerFileUploadHistory" , method=RequestMethod.GET)
+	@RequestMapping(value="/managerfileuploadhistory" , method=RequestMethod.GET)
 	public String mgrUploadFileHistory(Model model) {
 		model.addAttribute("mgrHistoryMapList", managerService.mgrUploadFileHistory());
 		return  "jsp/manager/managerFileUpload";
@@ -216,6 +216,6 @@ public class ManagerController {
 		MultipartFile file = request.getFile("mgrExcelFile");
 		managerService.mgrUploadFileInfo(file, 3);
 		logger.info("엑셀 등록"+file.toString());
-		return "redirect: /manager/managerFileUploadHistory";
+		return "redirect: /manager/managerfileuploadhistory";
 	}
 }

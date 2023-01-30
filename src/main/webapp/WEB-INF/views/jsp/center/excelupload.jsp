@@ -11,7 +11,7 @@
 </div>
 
 <div class='uploadbutton'>
-<form id="file-upload-form" enctype="multipart/form-data" action="centerExcelUpload" method="post">
+<form id="file-upload-form" enctype="multipart/form-data" action="centerexcelupload" method="post">
 <input type="file"  name="centerExcelFile" accept=".xlsx, .xls">
 <input type="submit"  class="pinkButton">
 </form>
