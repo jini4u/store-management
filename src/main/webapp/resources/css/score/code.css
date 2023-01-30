@@ -33,12 +33,12 @@
 	border-bottom: 1px solid #D8D9CF;
 }
 
-.codetable tr:hover {
+.codetable tbody tr:hover {
 	background: #EDEDED;
 }
 
 .codetable tr:active {
-	background: #D8D9CF;
+	background: #EDEDED;
 }
 
 .codetable th {
@@ -101,4 +101,7 @@ button:hover {
 .pinkButton {
 	padding: 0px;
 	font-size: 0.95em;
+}
+.selectedtr {
+	background: #EDEDED;
 }

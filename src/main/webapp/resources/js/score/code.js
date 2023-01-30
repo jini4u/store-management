@@ -30,7 +30,28 @@ var saveDetailBtn = document.getElementById("savedetail");
 var insertGroupBtn = document.getElementById("insertgroup");
 //상세코드 추가 버튼 선택자
 var insertDetailBtn = document.getElementById("insertdetail");
+//전체 센터 목록 표시될 테이블 tbody 선택자
+var grouptableBody = document.getElementById("grouptable").tBodies[0];
 
+function appearTable(e) {
+	//테이블의 행 수-1만큼 반복
+	for(var i=0;i<grouptableBody.children.length-1;i++){
+		//모든 행에 selectedtr 클래스 제거
+		if(grouptableBody.children[i].classList.contains("selectedtr")){
+			grouptableBody.children[i].classList.remove("selectedtr");
+		}
+	}
+	//선택된 행에 selectedtr 클래스 추가
+	e.target.parentElement.classList.add("selectedtr");
+}	
+//그룹코드 테이블의 tr들에 클릭 이벤트 추가
+function setTrEvent(){
+	//마지막 줄은 페이징 처리이므로 제외(-1)
+	for(var i=0;i<grouptableBody.children.length-1;i++){
+		grouptableBody.children[i].addEventListener("click", appearTable);	
+	}
+}
+setTrEvent();
 
 //각 요소에 이벤트 달아주는 함수
 function addEvent(){	
@@ -49,7 +70,7 @@ function addEvent(){
 				groupSelect[i].selected = true;
 			}
 		}
-	
+		
 		//ajax 요청해서 상세코드 내용 채우기
 		makeRequest(getDetailCodes, 'GET', '/score/getDetailCodes/'+groupTextArr[1]);
 	});

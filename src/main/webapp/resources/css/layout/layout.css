@@ -93,6 +93,12 @@ table{
 
 /* 검색 */
 /* placeholder 브라우저 별로 색상 조정 */
+.search_insert{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 15px 0 15px;
+}
 .search-txt:-ms-input-placeholder{
 	color: #65737e;
 }

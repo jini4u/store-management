@@ -51,21 +51,6 @@ public class ManagerController {
 	      return "jsp/manager/managerlookup";
 	   }
 
-
-	@RequestMapping(value="/managerDetail")
-	public String selectManagerDetail(Model model, @PathVariable int userCode) {
-		List<CenterVO> centerName = managerService.getCenterByManager(userCode);
-		model.addAttribute("centerName",centerName);
-		return "jsp/manager/managerdetail";
-	}
-
-	/* author 은별
-	  담당자 등록 GET*/
-	@GetMapping(value="/managerInsert")
-	public String insertManager() {
-		return "jsp/manager/managerlookup";
-	}
-
 	/* author 은별
 	  담당자 등록 POST*/
 	@ResponseBody
@@ -80,12 +65,6 @@ public class ManagerController {
 
 	}
 
-	/* author 은별
-	  담담자 수정 GET*/
-	@GetMapping(value="/managerUpdate")
-	public  String managerUpdate() {
-		return "jsp/manager/managerlookup";
-	}
 
 	/* author 은별
 	  담담자 수정 POST*/
