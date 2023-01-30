@@ -21,6 +21,7 @@ var colorP = document.querySelectorAll(".colored-p");
 
 //메뉴 버튼 클릭시 등록될 함수
 function menuClick(event){
+	alert(loginUserCode);
 	//검색창 비우기
 	keyword.value='';
 	//선택되어있엇던 메뉴 해제, 그래프 숨기기
@@ -181,6 +182,9 @@ function listClick(event){
 	  title: {
 	    text: ''
 	  },
+	  subtitle: {
+	    text: '마커 클릭시 그 분기에 해당하는 통계 제공'
+	  },
 	  //가로축에 들어갈 내용
 	  xAxis: {
 		//value: makeXXGraph 함수에서 지정됨
@@ -205,12 +209,10 @@ function listClick(event){
 	      enableMouseTracking: true
 	    },
 	    series: {
-	    	//점
 	    	marker: {
 	    		//크기
 	    		radius:3
 	    	},
-	    	//좌표
 	    	point: {
 	    		events: {
 	    			//클릭 이벤트 지정
@@ -270,11 +272,11 @@ function makeCenterGraph(){
 	itemStr = '선택 센터 점수 평균';
 	
 	seriesArr = [{
+		name: itemStr,
+		data: itemAvgArr
+	  }, {
 	    name: entireStr,
 	    data: entireAvgArr
-	  }, {
-	    name: itemStr,
-	    data: itemAvgArr
 	  }];
 	
 	subUrl = '/centerSubStat/'+centerCode;
@@ -309,11 +311,11 @@ function makeManagerGraph(){
 	itemStr = '선택 담당자 점수 평균';
 	
 	seriesArr = [{
-	    name: entireStr,
-	    data: entireAvgArr
+		name: itemStr,
+		data: itemAvgArr
 	  }, {
-	    name: itemStr,
-	    data: itemAvgArr
+		name: entireStr,
+		data: entireAvgArr
 	  }];
 	
 	subUrl = '/managerSubStat/'+userCode;
