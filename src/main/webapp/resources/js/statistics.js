@@ -21,7 +21,6 @@ var colorP = document.querySelectorAll(".colored-p");
 
 //메뉴 버튼 클릭시 등록될 함수
 function menuClick(event){
-	alert(loginUserCode);
 	//검색창 비우기
 	keyword.value='';
 	//선택되어있엇던 메뉴 해제, 그래프 숨기기
@@ -158,7 +157,7 @@ function listClick(event){
 			colorP[2].innerText = response.countNewManager+'명';
 		}
 	} else if(clickedMenu == 'code'){	//점수항목별
-		userCode = 10016 //로그인 기능 되면 로그인한 담당자 번호로 바꾸기 
+		userCode = loginUserCode; //로그인 기능 되면 로그인한 담당자 번호로 바꾸기 
 		//선택한 항목 id에서 점수 그룹코드, 상세코드 얻어와 분리 (codeXX.00 형태)
 		code = event.target.id.substr(4).split('.');
 		//그룹코드

@@ -56,14 +56,15 @@ public class ScoreController {
 	/**
 	 * 엑셀 파일 업로드 POST 요청을 처리
 	 * @author 임유진
-	 * @return {Map<String, Integer>} <insert, 입력된 행 수>,<update, 수정된 행 수> 가 담긴 맵
+	 * @return 엑셀 파일 업로드 화면으로 redirect
 	 * */
 	@RequestMapping(value="/scorefileupload", method=RequestMethod.POST)
-	public String scoreFileUpload(MultipartHttpServletRequest request){
+	public String scoreFileUpload(MultipartHttpServletRequest request, HttpSession session){
 		//request에서 업로드한 파일 얻기
 		MultipartFile file = request.getFile("scoreExcelFile");
+		int userCode = (int)session.getAttribute("userCode");
 		//service에서 인덱스 3까지는 무시하고 처리하도록 함
-		scoreService.uploadFileInfo(file, 3);
+		scoreService.uploadFileInfo(file, 3, userCode);
 		return "redirect: /score/scoreupload";
 	}
 	

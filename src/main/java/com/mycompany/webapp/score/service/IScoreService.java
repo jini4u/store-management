@@ -18,7 +18,7 @@ public interface IScoreService {
 	int insertDetailCode(Map<String, String> detailCodeMap);
 	int insertGroupCode(Map<String, String> groupCodeMap);
 	
-	Map<String, Integer> uploadFileInfo(MultipartFile file, int startRow);
+	Map<String, Integer> uploadFileInfo(MultipartFile file, int startRow, int userCode);
 	List<Map<String, String>> getScoreUploadHistory();
 	
 	//윤선
