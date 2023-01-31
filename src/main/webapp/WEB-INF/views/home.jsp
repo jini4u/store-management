@@ -46,8 +46,10 @@
 		</div>
 
 		<div class="announcement">
-			<h2>공지사항</h2>
-			<a href="/board/list">>></a>
+			<div class="announcementTitle">
+				<h2>공지사항</h2>
+				<a href="/board/list">>></a>
+			</div>
 			<div class="line"></div>
 			<div>
 				<ul class="announcementList">
