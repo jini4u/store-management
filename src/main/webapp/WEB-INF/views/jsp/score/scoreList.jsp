@@ -9,7 +9,7 @@
 <div class="titleBox">
 	<img
 		src="${pageContext.request.contextPath}/resources/images/checklist.png">
-	<h2>점포 점수 조회</h2>
+	<h2>센터 점수 조회</h2>
 </div>
 
 <c:forEach items="${centerName}" var="center">

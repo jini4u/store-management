@@ -41,7 +41,7 @@ let getToday = function() {
 
 //담당자 리스트 마우스 오버시 색 변화
 function changeColor(){
-	$('#center-left tr').mouseover(function(){
+	$('#centerList tr').mouseover(function(){
 		$(this).addClass('changeColor');
 	}).mouseout(function() {
 		$(this).removeClass('changeColor');
@@ -155,7 +155,7 @@ function getDetailAjax() {
 			let strDOMdiv ="";
 			if (results.length == 0) {
 				strDOMdiv +="<div>"
-				strDOMdiv += "<img src='/resources/images/center/no_image.png'>"
+				strDOMdiv += "<img src='/resources/images/center/no_image.png' class='center-noimage'>"
 				strDOMdiv += "</div>";
 			}
 			for(i=0; i<results.length; i++) {

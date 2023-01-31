@@ -12,7 +12,7 @@
    font-family: NanumSquareRound;
 }
 table{
-	user-select: none;
+   user-select: none;
 }
 .header {
    display: flex;
@@ -94,35 +94,35 @@ table{
 /* 검색 */
 /* placeholder 브라우저 별로 색상 조정 */
 .search_insert{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 0 15px 0 15px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 0 15px 0 15px;
 }
 .search-txt:-ms-input-placeholder{
-	color: #65737e;
+   color: #65737e;
 }
 .search-form{
-	display: flex;
-	align-items: center;
+   display: flex;
+   align-items: center;
 }
 .search-txt{
-	font-size: 16px;
-	width: 200spx;
-	padding: 10px;
-	border: 0px;
-	outline: none;
-	float: left;
-	border-radius: 10px;
+   font-size: 16px;
+   width: 200spx;
+   padding: 10px;
+   border: 0px;
+   outline: none;
+   float: left;
+   border-radius: 10px;
 }
 .search-box{
-	height: 47px;
-	border: 1px solid #E26868;
-	background: #ffffff;
-	margin: 20px 0 20px 10px;
-	border-radius: 4px;
-	display: flex;
-	align-items: center;
+   height: 47px;
+   border: 1px solid #E26868;
+   background: #ffffff;
+   margin: 20px 0 20px 10px;
+   border-radius: 4px;
+   display: flex;
+   align-items: center;
 }
 .search-select{
     border: 0px;
@@ -133,14 +133,14 @@ table{
     height: 47px;
 }
 .search-btn{
-	width: 50px;
-	height: 47px;
-	border: 0px;
-	background: #E26868;
-	outline: none;
-	float: right;
-	color: #ffffff;
-	border-radius: 0 4px 4px 0;
+   width: 50px;
+   height: 47px;
+   border: 0px;
+   background: #E26868;
+   outline: none;
+   float: right;
+   color: #ffffff;
+   border-radius: 0 4px 4px 0;
 }
 
 
@@ -184,7 +184,7 @@ table{
    border: 2px solid #C0C0C0;
 }
 .modal-greyBtn, .modal-pinkBtn{
-	height: 38px;
+   height: 38px;
 }
 
 .centerSize {
@@ -299,5 +299,5 @@ table{
 }
 
 .updateBtn img{
-	width: 30%;
+   width: 30%;
 }
