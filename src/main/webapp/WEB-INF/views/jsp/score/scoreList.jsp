@@ -5,11 +5,18 @@
 	href="${pageContext.request.contextPath}/resources/css/score/score.css" />
 
 <!-- 점검년도 리스트 -->
+<div class="menuRoute">
+		<img
+		src="${pageContext.request.contextPath}/resources/images/home.png">
+		<a href="/">&nbsp; Home &nbsp; ></a>
+		<span>&nbsp; 점수  &nbsp; ></span>
+		<a href="">&nbsp; 센터 점수 조회</a>	
+</div>
 
 <div class="titleBox">
 	<img
 		src="${pageContext.request.contextPath}/resources/images/checklist.png">
-	<h2>점포 점수 조회</h2>
+	<h2>센터 점수 조회</h2>
 </div>
 
 <c:forEach items="${centerName}" var="center">

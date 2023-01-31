@@ -13,6 +13,5 @@
 	<!-- decorators를 적용시키지 않을 url 패턴 -->
 	<excludes>
 		<pattern>/login</pattern>
-		<pattern>/managerList/${userCode}</pattern>
 	</excludes>
 </decorators>

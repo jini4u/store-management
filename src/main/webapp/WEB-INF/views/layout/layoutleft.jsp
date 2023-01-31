@@ -5,6 +5,13 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="https://kit.fontawesome.com/0b3bdf6c61.js" crossorigin="anonymous"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+<a href="/" class="logoAtag"> <img class="logoImage"
+	src="${pageContext.request.contextPath}/resources/images/logo.png">
+</a>
+
 <ul class="accordion-menu">
 	<li>
 		<div class="dropdownlink">
@@ -44,4 +51,24 @@
 	</li>
 </ul>
 
+<div class="userInfo btn-group dropup">
+		 <button class="userName btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    		<img src="${pageContext.request.contextPath}/resources/images/avatar.png">
+	
+			<p>&nbsp;${sessionScope.userName}&nbsp;</p>
+			<c:choose>
+				<c:when test="${userCode<20000}">담당자</c:when>
+				<c:when test="${userCode<30000}">담당자 관리자</c:when>
+				<c:when test="${userCode<40000}">시스템 관리자</c:when>
+			</c:choose>
+  		</button>
+
+  <ul class="dropdown-menu">
+	    <li>
+	    	<a class="aTag dropdown-item" data-toggle="modal"
+         data-backdrop="static" href="#pwUpdate">비밀번호 변경</a>
+	    </li>
+	    <li><a class="dropdown-item" href="/logout">로그아웃</a></li>
+  </ul>
+</div>
 <script src="${pageContext.request.contextPath}/resources/js/layoutleft.js"></script>

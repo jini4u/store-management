@@ -7,6 +7,14 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
+<div class="menuRoute">
+		<img
+		src="${pageContext.request.contextPath}/resources/images/home.png">
+		<a href="/">&nbsp; Home &nbsp; ></a>
+		<span>&nbsp; 담당자  &nbsp; ></span>
+		<a href="">&nbsp; 담당자 맵핑</a>	
+</div>
+
 <div class="titleBox">
 	<img
 		src="${pageContext.request.contextPath}/resources/images/manager.png">
@@ -31,12 +39,12 @@
 </div>
 
 <div class="graphbox">
-<<<<<<< HEAD
    <div class="managerbox">
       <div id="managerTitle">
          <p class="subheading">담당자</p>
          <p class="mgrCount">총&nbsp;${totalManagers}명</p>
       </div>
+      <div class="userTitleLine"></div>
       <table class="verticalTable" id="managertable">
          <thead>
             <tr>
@@ -83,6 +91,7 @@
    </div>
    <div class="centerbox">
       <p class="subheading">센터
+      <div class="centerTitleLine"></div>
       <table class="verticalTable" id="centertable">
          <thead>
             <tr>
@@ -96,72 +105,6 @@
          </tbody>
       </table>
    </div>
-=======
-	<div class="managerbox">
-		<div id="managerTitle">
-			<p class="subheading">담당자</p>
-			<p class="mgrCount">총&nbsp;${totalManagers}명</p>
-		</div>
-		<table class="verticalTable" id="managertable">
-			<thead>
-				<tr>
-					<th>담당자 코드</th>
-					<th>담당자명</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${managerList}" var="manager">
-					<tr>
-						<td>${manager.userCode}</td>
-						<td>${manager.userName}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-		<div class="center-pagging">
-			<ul class="pagination">
-				<li><a class="innerPager first"
-					href="managerMapping?pageNo=1&keyword=${keyword}">처음</a></li>
-				<li><c:if test="${pager.groupNo>1}">
-						<a class="innerPager arrow left"
-							href="managerMapping?pageNo=${pager.startPageNo-1}&keyword=${keyword}">이전</a>
-					</c:if></li>
-				<c:forEach var="i" begin="${pager.startPageNo}"
-					end="${pager.endPageNo}">
-					<li><c:if test="${pager.pageNo != i}">
-							<a class="innerPager active num"
-								href="managerMapping?pageNo=${i}&keyword=${keyword}">${i}</a>
-						</c:if></li>
-					<li><c:if test="${pager.pageNo == i}">
-							<a id="now-page" class="innerPager num"
-								href="managerMapping?pageNo=${i}&keyword=${keyword}">${i}</a>
-						</c:if></li>
-				</c:forEach>
-				<li><c:if test="${pager.groupNo<pager.totalGroupNo}">
-						<a class="innerPager arrow right"
-							href="managerMapping?pageNo=${pager.endPageNo+1}&keyword=${keyword}">다음</a>
-					</c:if></li>
-				<li><a class="innerPager last"
-					href="managerMapping?pageNo=${pager.totalPageNo}&keyword=${keyword}">맨끝</a></li>
-			</ul>
-		</div>
-	</div>
-	<div class="centerbox">
-		<p class="subheading">센터
-		<table class="verticalTable" id="centertable">
-			<thead>
-				<tr>
-					<th></th>
-					<th>센터코드</th>
-					<th>센터명</th>
-					<th id="address">주소</th>
-				</tr>
-			</thead>
-			<tbody>
-			</tbody>
-		</table>
-	</div>
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 </div>
 
 <div class="modal fade mappingModal" data-backdrop="static" role="dialog" id="mappingModal">

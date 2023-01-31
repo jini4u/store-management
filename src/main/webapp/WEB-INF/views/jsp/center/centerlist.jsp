@@ -4,7 +4,13 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <link rel="stylesheet" href="/resources/css/center/centerList.css">
 
-
+<div class="menuRoute">
+		<img
+		src="${pageContext.request.contextPath}/resources/images/home.png">
+		<a href="/">&nbsp; Home &nbsp; ></a>
+		<span>&nbsp; 센터  &nbsp; ></span>
+		<a href="">&nbsp; 센터관리</a>	
+</div>
 
 <div class="titleBox">
 	<img

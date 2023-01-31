@@ -32,17 +32,17 @@ table{
 
 .middlebox {
    display: flex;
-   height: 880px;
+   height: 960px;
 }
 
 .leftbox {
    max-height: 1000px;
-   width: 220px;
-   border-right: 1px solid #ccc;
-   background: #fff;
+   width: 230px;
+   background: #FFEEEE;
    flex-shrink: 0;
    z-index: 0;
    height: 960px;
+   position: fixed;
 }
 
 .contentbox {
@@ -51,23 +51,26 @@ table{
    flex-direction: column;
    padding: 20px;
    max-width: 1486.33px;
+   margin-left: 13%;
 }
 /* 제목 디자인 */
 .titleBox {
    display: flex;
    align-items: center;
    border-bottom: 1px solid #ccc;
-   padding-bottom: 10px;
+   padding: 20px 10px;
 }
 
 .titleBox>img {
    height: 40px;
-   margin: 0px 15px
+   margin: 0px 15px;
+   width: 43px;
 }
 
 .titleBox>h2 {
    font-size: 32px;
    margin: 0;
+   font-weight: 600;
 }
 /* 표 디자인 */
 .verticalTable, .rowTable {
@@ -98,6 +101,7 @@ table{
    justify-content: space-between;
    align-items: center;
    padding: 0 15px 0 15px;
+   margin-top: 10px;
 }
 .search-txt:-ms-input-placeholder{
    color: #65737e;
@@ -300,4 +304,18 @@ table{
 
 .updateBtn img{
    width: 30%;
+}
+/* 메뉴 경로 */
+.menuRoute {
+    display: flex;
+    align-items: center;
+    margin: 15px 0 9px 20px;
+    color: #aaaaaa;
+}
+.menuRoute img{
+    width: 20px;
+}
+.menuRoute a{
+	text-decoration-line: none;
+    color: #aaaaaa;
 }
