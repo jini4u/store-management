@@ -24,8 +24,7 @@
 
 	<!-- 년도,분기 찾기 -->
 
-	<form action="${pageContext.request.contextPath}/score/scorelist"
-		name="score" method="get">
+	<form action="${pageContext.request.contextPath}/score/scorelist" name="score" method="get">
 		<input type="hidden" name="centerCode" value="${param.centerCode}">
 		<select name="checkYear" id="yearbox" title="년도">년도
 		</select> <select name="checkSeason">
@@ -122,7 +121,6 @@
 </div>
 
 <!--입력 모달 영역 -->
-<<<<<<< HEAD
 <c:if test="${(maxYear eq year and maxSeason eq season) == false}"> 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">

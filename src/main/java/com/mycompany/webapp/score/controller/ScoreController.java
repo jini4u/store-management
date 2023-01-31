@@ -160,7 +160,7 @@ public class ScoreController {
 	 * 값을 화면에 보내줌
 	 * */
 
-	@RequestMapping(value="/updateScore", method=RequestMethod.POST)
+	@RequestMapping(value="/updatescore", method=RequestMethod.POST)
 	public String updateGetScore(int[] arrayScore, int[] arrayDetailCode,
 			String[] arrayGroupCode, ScoreVO scoreVO,HttpServletRequest request) {		
 		
