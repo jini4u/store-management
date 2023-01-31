@@ -154,10 +154,10 @@ label.right {
 }
 
 .announcement h2 {
-	padding-bottom: 20px;
+	margin-bottom: 0;
 	padding-left: 28px;
 	float: left;
-    margin-right: 400px;
+    margin-right: 372px;
     font-weight: 700;  
 }
 
@@ -208,4 +208,13 @@ label.right {
 	align-items: center;
 	justify-content: space-between;
 	padding: 15px 15px 15px 18px;
+}
+.announcementTitle{
+	display: flex;
+	align-items: center;
+}
+.announcementTitle a{
+    color: black;
+    text-decoration-line: none;
+    font-weight: 800;
 }
