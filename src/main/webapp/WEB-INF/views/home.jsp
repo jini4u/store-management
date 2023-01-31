@@ -46,33 +46,39 @@
 		</div>
 	</div>
 	<div class="introduce">
-		<div class="linkBox">
-			<div class="introduceImg">
-				<img src="resources/images/소개사진1.jpg">
+		<a
+			href="https://www.redcross.or.kr/redcross_krc/redcross_krc_introduce.do">
+			<div class="linkBox">
+				<div class="introduceImg">
+					<img src="resources/images/소개사진1.jpg">
+				</div>
+				<div class="introduceTitle">
+					<p>대한적십자 기관소개</p>
+					<img src="resources/images/right.png">
+				</div>
 			</div>
-			<div class="introduceTitle">
-				<p>대한적십자 기관소개</p>
-				<img src="resources/images/right.png">
+		</a> <a
+			href="https://www.redcross.or.kr/redcross_rcmovement/redcross_rcmovement_movement.do">
+			<div class="linkBox">
+				<div class="introduceImg">
+					<img src="resources/images/소개사진2.jpg">
+				</div>
+				<div class="introduceTitle">
+					<p>적십자운동 기본원칙</p>
+					<img src="resources/images/right.png">
+				</div>
 			</div>
-		</div>
-		<div class="linkBox">
-			<div class="introduceImg">
-				<img src="resources/images/소개사진2.jpg">
+		</a> <a href="https://www.redcross.or.kr/business/business_main.do">
+			<div class="linkBox">
+				<div class="introduceImg">
+					<img src="resources/images/소개사진3.jpg">
+				</div>
+				<div class="introduceTitle">
+					<p>대학적십자사 사업소개</p>
+					<img src="resources/images/right.png">
+				</div>
 			</div>
-			<div class="introduceTitle">
-				<p>적십자운동 기본원칙</p>
-				<img src="resources/images/right.png">
-			</div>
-		</div>
-		<div class="linkBox">
-			<div class="introduceImg">
-				<img src="resources/images/소개사진3.jpg">
-			</div>
-			<div class="introduceTitle">
-				<p>대학적십자사 사업소개</p>
-				<img src="resources/images/right.png">
-			</div>
-		</div>
+		</a>
 	</div>
 
 
