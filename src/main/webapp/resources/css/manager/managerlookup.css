@@ -2,12 +2,12 @@
 .rowTable th{
 	width: 15%;
 }
-.search_insert{
+/* .search_insert{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 0 15px 0 15px;
-}
+} */
 .mgrInsertBtn{
 	height: 41px;
 }    

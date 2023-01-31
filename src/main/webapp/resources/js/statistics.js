@@ -21,6 +21,7 @@ var colorP = document.querySelectorAll(".colored-p");
 
 //메뉴 버튼 클릭시 등록될 함수
 function menuClick(event){
+
 	//검색창 비우기
 	keyword.value='';
 	//선택되어있엇던 메뉴 해제, 그래프 숨기기
@@ -157,7 +158,7 @@ function listClick(event){
 			colorP[2].innerText = response.countNewManager+'명';
 		}
 	} else if(clickedMenu == 'code'){	//점수항목별
-		userCode = 10016 //로그인 기능 되면 로그인한 담당자 번호로 바꾸기 
+		userCode = loginUserCode; //로그인 기능 되면 로그인한 담당자 번호로 바꾸기 
 		//선택한 항목 id에서 점수 그룹코드, 상세코드 얻어와 분리 (codeXX.00 형태)
 		code = event.target.id.substr(4).split('.');
 		//그룹코드
@@ -175,11 +176,18 @@ function listClick(event){
 	//차트 그리는 부분
 	Highcharts.chart('container', {
 	  chart: {
-	    type: 'line'
+	    type: 'line',
+	    width: 950
 	  },
+	 subtitle: {
+	         text: '마커 클릭시 그 분기에 해당하는 통계 제공'
+	       },
 	  //그래프 내 타이틀 내용 없게(사용X)
 	  title: {
 	    text: ''
+	  },
+	  subtitle: {
+	    text: '마커 클릭시 그 분기에 해당하는 통계 제공'
 	  },
 	  //가로축에 들어갈 내용
 	  xAxis: {
@@ -205,12 +213,10 @@ function listClick(event){
 	      enableMouseTracking: true
 	    },
 	    series: {
-	    	//점
 	    	marker: {
 	    		//크기
 	    		radius:3
 	    	},
-	    	//좌표
 	    	point: {
 	    		events: {
 	    			//클릭 이벤트 지정
@@ -270,11 +276,11 @@ function makeCenterGraph(){
 	itemStr = '선택 센터 점수 평균';
 	
 	seriesArr = [{
+		name: itemStr,
+		data: itemAvgArr
+	  }, {
 	    name: entireStr,
 	    data: entireAvgArr
-	  }, {
-	    name: itemStr,
-	    data: itemAvgArr
 	  }];
 	
 	subUrl = '/centerSubStat/'+centerCode;
@@ -309,11 +315,11 @@ function makeManagerGraph(){
 	itemStr = '선택 담당자 점수 평균';
 	
 	seriesArr = [{
-	    name: entireStr,
-	    data: entireAvgArr
+		name: itemStr,
+		data: itemAvgArr
 	  }, {
-	    name: itemStr,
-	    data: itemAvgArr
+		name: entireStr,
+		data: entireAvgArr
 	  }];
 	
 	subUrl = '/managerSubStat/'+userCode;
@@ -379,7 +385,7 @@ function makeCodeGraph(){
 
 
 //메뉴 버튼, 리스트 항목에 이벤트 달아줌 
-function init(){
+function init(){	
 	for(var i=0;i<menu.length;i++){
 		menu[i].addEventListener("click", menuClick);
 	}
@@ -388,8 +394,16 @@ function init(){
 	}
 	managerTb.style.display = 'none';
 	codeTb.style.display = 'none';
-
+	
 	menu[0].click();
 }
 
 init();
+
+window.onload = function(){
+	if(loginUserCode < 20000){	//담당자면 담당자별 통계X
+		menu[1].style.display = 'none';
+	} else {	//시스템이나 관리자면 점수항목별 통계X
+		menu[2].style.display = 'none';
+	}	
+}

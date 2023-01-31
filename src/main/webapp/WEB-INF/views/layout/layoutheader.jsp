@@ -36,9 +36,9 @@
 			src="${pageContext.request.contextPath}/resources/images/user.png"></a>
 		<span>&nbsp;${sessionScope.userName}&nbsp;</span>
 		<c:choose>
-			<c:when test="${userCode<20000}">시스템 관리자 &nbsp;</c:when>
+			<c:when test="${userCode<20000}">담당자&nbsp;</c:when>
 			<c:when test="${userCode<30000}">담당자 관리자 &nbsp;</c:when>
-			<c:when test="${userCode<40000}">담당자 &nbsp;</c:when>
+			<c:when test="${userCode<40000}">시스템 관리자 &nbsp;</c:when>
 		</c:choose>
 	</button>
 	<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">

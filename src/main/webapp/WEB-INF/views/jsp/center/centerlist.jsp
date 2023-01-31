@@ -11,9 +11,8 @@
 		src="${pageContext.request.contextPath}/resources/images/blood-bank.png" />
 	<h2>센터관리</h2>
 </div>
-
 <div class="search_insert">
-	<form action="centerList" class="search-form">
+	<form action="centerlist" class="search-form">
 		<select name="keywordType" class="search-select">
 			<option value="CN">센터명</option>
 			<option value="CC">센터코드</option>
@@ -55,7 +54,6 @@
 						<td>${centerList.centerAddress}</td>
 						<td>${fn:substring(centerList.centerOpeningDate,0,10)}</td>
 						<td>${centerList.centerCondition}</td>
-
 						<td style="display: none">${centerList.centerGuide}</td>
 						<td style="display: none">${fn:substring(centerList.centerClosingDate,0,10)}</td>
 						<td><button id="centerDetails" class="updateBtn"
@@ -69,28 +67,28 @@
 	<div class="center-pagging">
 			<ul class="pagination pageModal">
 				<li><a class="innerPager first"
-					href="centerList?pageNo=1&keywordType=${keywordType}&keyword=${keyword}">처음</a></li>
+					href="centerlist?pageNo=1&keywordType=${keywordType}&keyword=${keyword}">처음</a></li>
 				<li><c:if test="${pager.groupNo>1}">
 						<a class="innerPager arrow left"
-							href="centerList?pageNo=${pager.startPageNo-1}&keywordType=${keywordType}&keyword=${keyword}">이전</a>
+							href="centerlist?pageNo=${pager.startPageNo-1}&keywordType=${keywordType}&keyword=${keyword}">이전</a>
 					</c:if></li>
 				<c:forEach var="i" begin="${pager.startPageNo}"
 					end="${pager.endPageNo}">
 					<li><c:if test="${pager.pageNo != i}">
 							<a class="innerPager active num"
-								href="centerList?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}">${i}</a>
+								href="centerlist?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}">${i}</a>
 						</c:if></li>
 					<li><c:if test="${pager.pageNo == i}">
 							<a id="now-page" class="innerPager num"
-								href="centerList?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}">${i}</a>
+								href="centerlist?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}">${i}</a>
 						</c:if></li>
 				</c:forEach>
 				<li><c:if test="${pager.groupNo<pager.totalGroupNo}">
 						<a class="innerPager arrow right"
-							href="centerList?pageNo=${pager.endPageNo+1}&keywordType=${keywordType}&keyword=${keyword}">다음</a>
+							href="centerlist?pageNo=${pager.endPageNo+1}&keywordType=${keywordType}&keyword=${keyword}">다음</a>
 					</c:if></li>
 				<li><a class="innerPager last"
-					href="centerList?pageNo=${pager.totalPageNo}&keywordType=${keywordType}&keyword=${keyword}">맨끝</a></li>
+					href="centerlist?pageNo=${pager.totalPageNo}&keywordType=${keywordType}&keyword=${keyword}">맨끝</a></li>
 			</ul>
 		</div>
 	</div>
@@ -118,7 +116,6 @@
 		</table>
 	</div>
 </c:if>
-
 
 <!--insert Modal -->
 

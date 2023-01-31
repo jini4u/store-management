@@ -32,7 +32,7 @@
 						<button type="button" id="savegroup" class="pinkButton">저장</button>
 					</div>
 			</form>
-			<table id="grouptable" class="codetable">
+			<table id="grouptable" class="codetable verticalTable">
 			<thead>
 			<tr>
 				<th>번호</th>
@@ -71,7 +71,7 @@
 						<button type="button" id="savedetail" class="pinkButton">저장</button>
 					</div>
 			</form>
-			<table id="detailtable" class="codetable">
+			<table id="detailtable" class="codetable verticalTable">
 			<thead>
 			<tr>
 				<th>번호</th>

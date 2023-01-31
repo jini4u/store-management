@@ -215,12 +215,12 @@ public class ScoreService implements IScoreService {
 	 * @return {Map<String, Integer>} <insert, 입력된 행 수>,<update, 수정된 행 수> 가 담긴 맵
 	 * */
 	@Override
-	public Map<String, Integer> uploadFileInfo(MultipartFile file, int startRow) {
+	public Map<String, Integer> uploadFileInfo(MultipartFile file, int startRow, int userCode) {
 		
 		//리턴할 Map 생성
 		Map<String, Integer> resultMap = new HashMap<String, Integer>();
 		resultMap.put("fileNo", 0);
-		resultMap.put("userCode", 0);
+		resultMap.put("userCode", userCode);
 		resultMap.put("insert", 0);
 		resultMap.put("update", 0);
 		
@@ -252,13 +252,12 @@ public class ScoreService implements IScoreService {
 		fileVO.setFileType(file.getContentType());
 		fileVO.setFilePath(filePathName);
 		//로그인 기능 되면 얻어오는걸로 수정하기
-		fileVO.setUploadUserCode(10004);
+		fileVO.setUploadUserCode(userCode);
 		
 		fileRepository.insertFile(fileVO);
 		int fileNo = fileVO.getFileNo();
 		
 		resultMap.replace("fileNo", 0, fileNo);
-		resultMap.replace("userCode", 0, fileVO.getUploadUserCode());
 		
 		fileRepository.insertFileUploadHistory(resultMap);
 		

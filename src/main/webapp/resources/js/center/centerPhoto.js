@@ -55,7 +55,7 @@ function appearTable(e) {
 
 
 	//선택한 센터 사진들 요청하는 ajax요청
-	makeRequest(getCenterImages,'GET','/center/getCenterImages/'+centerNameArr[4].innerText);
+	makeRequest(getCenterImages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
 }; 
 
 //센터 선택시 사진들이 들어갈 div 선택자
@@ -284,15 +284,15 @@ var insertForm = document.getElementById("photoinsertform");
 //사진 등록 모달에서 등록버튼에 클릭 이벤트 등록
 insertImgBtn.addEventListener("click",function(){
 	let insertFormData = new FormData(insertForm);
-	makeRequest(addCenterImage, 'POST', '/center/addCenterImage', insertFormData);
+	makeRequest(addcenterImage, 'POST', '/center/addcenterimage', insertFormData);
 });
 
 //센터 사진 등록 ajax 요청시 실행될 함수
-function addCenterImage(){
+function addcenterImage(){
 	let response = JSON.parse(httpRequest.responseText);
 	console.log(response+"개 저장됨");
 	$("#insertModal .close").click();
-	makeRequest(getCenterImages,'GET','/center/getCenterImages/'+centerNameArr[4].innerText);
+	makeRequest(getcenterImages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
 }
 
 //수정 모달 내부 수정 버튼
@@ -303,13 +303,13 @@ updateBtn.addEventListener("click", function(){
 	var imgUpdateForm = document.getElementById("imageUpdateForm");
 	var imgUpdateFormData = new FormData(imgUpdateForm);
 	imgUpdateFormData.append("centerCode", centerNameArr[4].innerText);
-	makeRequest(afterUpdateImg, 'POST', '/center/updateImage', imgUpdateFormData);
+	makeRequest(afterUpdateImg, 'POST', '/center/updateimage', imgUpdateFormData);
 });
 
 //수정 요청 후 실행되는 함수
 function afterUpdateImg(){
 	$("#updateModal .close").click();
-	makeRequest(getCenterImages,'GET','/center/getCenterImages/'+centerNameArr[4].innerText);
+	makeRequest(getcenterImages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
 }
 
 //삭제 모달 내부 삭제 버튼 선택자
@@ -328,5 +328,5 @@ deleteBtn.addEventListener("click", function(){
 
 function afterDeleteImg(){
 	$("#deleteModal .close").click();
-	makeRequest(getCenterImages,'GET','/center/getCenterImages/'+centerNameArr[4].innerText);
+	makeRequest(getcenterImages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
 }

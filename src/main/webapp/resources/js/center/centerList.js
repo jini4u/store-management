@@ -142,7 +142,7 @@ $("#center-left tr").click(function (){
 
 function getDetailAjax() {
 	$.ajax({
-		url : "getCenterImages/" + imgCenterCode,
+		url : "getcenterimages/" + imgCenterCode,
 		data : {
 			centerCode : imgCenterCode
 		},
@@ -199,7 +199,7 @@ $("#centerSavedBtn").click(function (){
 		console.log(centercondition);
 	}
 	if(!$("#centerName").attr("readonly")) {
-		let insertURL = "centerInsert";
+		let insertURL = "centerinsert";
 		$.ajax({
 			type:"POST",
 			url :insertURL,	
@@ -213,12 +213,12 @@ $("#centerSavedBtn").click(function (){
 				centerCondition : centercondition
 			},
 			success: function(results){
-				location.href="centerList"
+				location.href="centerlist"
 			},
 			error: error
 		});
 	}else{
-		let updateURL = "centerUpdate";
+		let updateURL = "centerupdate";
 		let centercondition = document.querySelector("#centerCondition").value;
 		let pageNo = $("#now-page").text();
 		alert(pageNo);

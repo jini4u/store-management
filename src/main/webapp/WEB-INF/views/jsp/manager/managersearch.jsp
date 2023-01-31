@@ -42,25 +42,25 @@
 <!-- 페이징 처리  -->
 <div class="center-pagging">
 	<ul class="pagination pageModal">
-		<li><a class="innerPager first" href="managerList?pageNo=1">처음</a></li>
+		<li><a class="innerPager first" href="managerlist?pageNo=1">처음</a></li>
 		<li><c:if test="${pager.groupNo>1}">
 				<a class="innerPager arrow left"
-					href="managerList?pageNo=${pager.startPageNo-1}">이전</a>
+					href="managerlist?pageNo=${pager.startPageNo-1}">이전</a>
 			</c:if></li>
 		<c:forEach var="i" begin="${pager.startPageNo}"
 			end="${pager.endPageNo}">
 			<li><c:if test="${pager.pageNo != i}">
-					<a class="innerPager active num" href="managerList?pageNo=${i}">${i}</a>
+					<a class="innerPager active num" href="managerlist?pageNo=${i}">${i}</a>
 				</c:if></li>
 			<li><c:if test="${pager.pageNo == i}">
-					<a class="innerPager num" href="managerList?pageNo=${i}">${i}</a>
+					<a class="innerPager num" href="managerlist?pageNo=${i}">${i}</a>
 				</c:if></li>
 		</c:forEach>
 		<li><c:if test="${pager.groupNo<pager.totalGroupNo}">
 				<a class="innerPager arrow right"
-					href="managerList?pageNo=${pager.endPageNo+1}">다음</a>
+					href="managerlist?pageNo=${pager.endPageNo+1}">다음</a>
 			</c:if></li>
 		<li><a class="innerPager last"
-			href="managerList?pageNo=${pager.totalPageNo}">맨끝</a></li>
+			href="managerlist?pageNo=${pager.totalPageNo}">맨끝</a></li>
 	</ul>
 </div>

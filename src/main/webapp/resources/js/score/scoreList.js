@@ -11,7 +11,6 @@
  * **/
 
 $(function(){
-	
 	//모달창
 	/*$('#testBtn').click(function(e){
 		e.preventDefault();
@@ -45,6 +44,7 @@ changeColor();
 //$(document).ready()는 문서가 준비되면 매개변수로 넣은 콜백 함수를 실행하라는 의미
 $(document).ready(function(){			
 	setYearBox();
+	
 });    
 function setYearBox(){
 	var dt = new Date();
@@ -56,7 +56,6 @@ function setYearBox(){
 		$("#yearbox").append("<option value='"+ y +"'>"+ y + " 년" +"</option>");
 	}
 };
-
 
 
 
