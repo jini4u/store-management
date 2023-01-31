@@ -1,5 +1,22 @@
 @charset "UTF-8";
-
+.codediv{
+    border-top: 1px solid #ccc;
+    padding-top: 25px;
+}
+.codeTotalDiv p{
+    font-size: 23px;
+    font-weight: 600;
+    margin: 0;
+}
+.codeTotalDiv p, .titleLine{
+    margin-left: 10px;
+}
+.codeTotalDiv{
+	width: 600px;
+}
+.codenamediv{
+    margin-left: 67px;
+}
 #wrapcodediv {
 	margin-left: 30px;
 	width: -webkit-fill-available;
@@ -8,19 +25,18 @@
 
 #twocodedivs {
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	margin-top: 50px;
+	padding: 0 49px;
 }
 
-#twocodedivs div {
+/* #twocodedivs div {
 	width: 500px;
-	border-radius: 10px;
+} */
+.codeLine{
+	width: 0;
+    border-right: 1px solid #ccc;
 }
-
-.codediv{
-	padding: 80px 35px;
-}
-
 .codetable {
 	min-width: -webkit-fill-available;
 	margin-top: 20px;
@@ -46,8 +62,9 @@
 	width: 277px;
 }
 
-form div {
+.inputDiv div {
 	display: flex;
+	align-items: center;
 }
 
 .codedetailtopdiv {
@@ -101,4 +118,22 @@ button:hover {
 }
 .selectedtr {
 	background: #EDEDED;
+}
+.groupOccupied, .detailOccupied{
+    height: 28px;
+}
+.pinkButton{
+    margin-left: 12px;
+}
+.titleLine{
+	border-bottom: 3.5px solid #FF8787;
+    width: 89px;
+    margin-bottom: 22px;
+}
+.widthLine{
+	height: 0;
+	border-top: 1px solid #ccc;
+}
+.inputDiv{
+	margin-left: 26px;
 }

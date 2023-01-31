@@ -4,45 +4,30 @@
 <div class="bigGroupBox">
 	<div class="smallGroupBox">
 		<div class="slidebox">
-			<!-- input 한개가 한개의 슬라이드 스크린 -->
-			<!-- checked: 슬라이드 첫 화면 설정 -->
-			<input type="radio" name="slide" id="slide1" checked> <input
-				type="radio" name="slide" id="slide2"> <input type="radio"
-				name="slide" id="slide3"> <input type="radio" name="slide"
-				id="slide4">
-			<ul class="slidelist">
-				<!--li는 장면의 갯수이므로 input 갯수랑 같게 만들어줌 -->
-				<li class="slideitem">
-					<div>
-						<!-- 왼쪽 화살표-->
-						<label for="slide4" class="left"></label>
-						<!-- 오른쪽 화살표-->
-						<label for="slide2" class="right"></label> <a><img
-							src="resources/images/center/양산센터-1.jpg"></a>
+			<div id="carouselExampleInterval" class="carousel slide"
+				data-ride="carousel">
+				<div class="carousel-inner">
+					<div class="carousel-item active" data-interval="5000">
+						<img src="resources/images/center/도남센터-1.jpg"class="d-block w-100" alt="...">
 					</div>
-				</li>
-				<li class="slideitem">
-					<div>
-						<label for="slide1" class="left"></label> <label for="slide3"
-							class="right"></label> <a><img
-							src="resources/images/center/송촌센터-1.jpg"></a>
+					<div class="carousel-item" data-interval="5000">
+						<img src="resources/images/center/송촌센터-1.jpg" class="d-block w-100" alt="...">
 					</div>
-				</li>
-				<li class="slideitem">
-					<div>
-						<label for="slide2" class="left"></label> <label for="slide4"
-							class="right"></label> <a><img
-							src="resources/images/center/함월센터-1.jpg"></a>
+					<div class="carousel-item">
+						<img src="resources/images/center/송촌센터-2.jpg" class="d-block w-100" alt="...">
 					</div>
-				</li>
-				<li class="slideitem">
-					<div>
-						<label for="slide3" class="left"></label> <label for="slide1"
-							class="right"></label> <a><img
-							src="resources/images/center/송촌센터-2.jpg"></a>
-					</div>
-				</li>
-			</ul>
+				</div>
+				<button class="carousel-control-prev" type="button"
+					data-target="#carouselExampleInterval" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button"
+					data-target="#carouselExampleInterval" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</button>
+			</div>
 		</div>
 
 		<div class="announcement">
@@ -53,7 +38,7 @@
 			<div class="line"></div>
 			<div>
 				<ul class="announcementList">
-					<c:forEach var="i" begin="0" end="4" >
+					<c:forEach var="i" begin="0" end="4">
 						<li>${allPosts[i].title}</li>
 					</c:forEach>
 				</ul>
@@ -89,4 +74,6 @@
 			</div>
 		</div>
 	</div>
+
+
 </div>
