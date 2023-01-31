@@ -63,7 +63,7 @@ mappingBtn.addEventListener("click", function(){
 	}
 	if(mngSelected == true){
 		document.getElementById("mappingModal").classList.add("mappingModal");
-		makeRequest(getAvailCenters,'GET','/center/availCenter');		
+		makeRequest(getAvailCenters,'GET','/center/availcenter');		
 	} else {
 		alert('담당자를 먼저 선택해 주세요');
 		document.getElementById("mappingModal").classList.remove("mappingModal");
@@ -87,7 +87,7 @@ var modalPageNums = document.querySelectorAll(".modal-pagging .num");
 [].forEach.call(modalPageNums, function(modalPageNum){
 	modalPageNum.addEventListener("click", function(e){
 		let clickedNum = e.target.innerText;
-		makeRequest(getAvailCenters,'GET','/center/availCenter?pageNo='+clickedNum);
+		makeRequest(getAvailCenters,'GET','/center/availcenter?pageNo='+clickedNum);
 	});
 });
 
@@ -97,11 +97,11 @@ var modalPageLast = document.querySelector(".modal-pagging .last");
 
 //모달 안 페이징 처음 선택 이벤트 
 modalPageFirst.addEventListener("click", function(){
-	makeRequest(getAvailCenters,'GET','/center/availCenter?pageNo=1');
+	makeRequest(getAvailCenters,'GET','/center/availcenter?pageNo=1');
 });
 //모달 안 페이징 끝 선택 이벤트
 modalPageLast.addEventListener("click", function(){
-	makeRequest(getAvailCenters,'GET','/center/availCenter?pageNo='+modalPageLast.children[0].value);
+	makeRequest(getAvailCenters,'GET','/center/availcenter?pageNo='+modalPageLast.children[0].value);
 });
 
 //맵핑가능센터 칸 클릭 이벤트 지정 

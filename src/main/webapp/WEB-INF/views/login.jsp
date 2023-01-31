@@ -24,11 +24,6 @@
 		</div>
 		<div class="blank"></div>
 
-		<div class="login_search">
-			<a href="#">로그인 정보 찾기</a>
-		</div>
-
-
 		<div class="blank"></div>
 		<input type="submit" class="pinkButton" value="로그인">
 		</form>
