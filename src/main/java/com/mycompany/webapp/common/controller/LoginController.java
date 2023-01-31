@@ -74,7 +74,7 @@ public class LoginController {
 	/* author 고은별
 	 * 회원 정보 수정
 	 * */
-	@RequestMapping(value="/passwordUpdate", method=RequestMethod.POST)
+	@RequestMapping(value="/passwordupdate", method=RequestMethod.POST)
 	public String passwordUpdate(ManagerVO member,HttpSession session, Model model) {
 		loginService.updateMember(member);
 		logger.info(member.toString());

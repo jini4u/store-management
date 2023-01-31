@@ -11,9 +11,9 @@
 			센터 <i class="fa fa-chevron-down" aria-hidden="true"></i>
 		</div>
 		<ul class="submenuItems">
-			<li><a href="<c:url value='/center/centerList'/>">센터 조회</a></li>
-			<li><a href="<c:url value='/center/centerPhoto'/>">센터 사진 관리</a></li>
-			<li><a href="${pageContext.request.contextPath}/center/centerExcelUpload">센터 정보 일괄 등록</a></li>
+			<li><a href="<c:url value='/center/centerlist'/>">센터 조회</a></li>
+			<li><a href="<c:url value='/center/centerphoto'/>">센터 사진 관리</a></li>
+			<li><a href="${pageContext.request.contextPath}/center/centerexcelupload">센터 정보 일괄 등록</a></li>
 		</ul>
 	</li>
 	<li>
@@ -21,9 +21,9 @@
 			담당자 <i class="fa fa-chevron-down" aria-hidden="true"></i>
 		</div>
 		<ul class="submenuItems">
-			<li><a href="${pageContext.request.contextPath}/manager/managerList">담당자 조회</a></li>
-			<li><a href="${pageContext.request.contextPath}/manager/managerMapping">담당자 맵핑</a></li>
-			<li><a href="${pageContext.request.contextPath}/manager/managerFileUploadHistory">담당자 정보 일괄 등록</a></li>
+			<li><a href="${pageContext.request.contextPath}/manager/managerlist">담당자 조회</a></li>
+			<li><a href="${pageContext.request.contextPath}/manager/managermapping">담당자 맵핑</a></li>
+			<li><a href="${pageContext.request.contextPath}/manager/managerfileuploadhistory">담당자 정보 일괄 등록</a></li>
 		</ul>
 	</li>
 	<li>

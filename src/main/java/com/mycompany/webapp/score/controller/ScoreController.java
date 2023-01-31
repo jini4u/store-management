@@ -1,9 +1,7 @@
 package com.mycompany.webapp.score.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +59,7 @@ public class ScoreController {
 		int userCode = (int)session.getAttribute("userCode");
 		//service에서 인덱스 3까지는 무시하고 처리하도록 함
 		scoreService.uploadFileInfo(file, 3, userCode);
-		return "redirect: /score/scoreupload";
+		return "redirect:/score/scoreupload";
 	}
 
 	/*
@@ -162,7 +160,7 @@ public class ScoreController {
 	 * 값을 화면에 보내줌
 	 * */
 
-	@RequestMapping(value="/updateScore", method=RequestMethod.POST)
+	@RequestMapping(value="/updatescore", method=RequestMethod.POST)
 	public String updateGetScore(int[] arrayScore, int[] arrayDetailCode,
 			String[] arrayGroupCode, ScoreVO scoreVO,HttpServletRequest request) {		
 		
@@ -180,7 +178,7 @@ public class ScoreController {
 	 * (모달창에서)
 	 * */ 
 	
-	@RequestMapping(value="/insertScore/", method=RequestMethod.POST)
+	@RequestMapping(value="/insertscore", method=RequestMethod.POST)
 	public String insertsocre(int[] arrayScore, int[] arrayDetailCode,
 								String[] arrayGroupCode, ScoreVO scoreVO, HttpServletRequest request, Model model) {
 
@@ -198,7 +196,7 @@ public class ScoreController {
 	 * 정윤선
 	 * 버튼을 누르면 해당 센터(담당자 별 센터) 점수 리스트 설정
 	 * */  
-	@RequestMapping(value="/getCenters/{userCode}")
+	@RequestMapping(value="/getcenters/{userCode}")
 	public @ResponseBody List<ScoreVO> getCenterName(@PathVariable int userCode,Model model){
 		return scoreService.getCenterName(userCode);
 
@@ -217,7 +215,7 @@ public class ScoreController {
 	 * @author 임유진
 	 * @return {List<Map<String, Object>>} 그룹코드번호, 코드명, 사용여부를 담은 Map의 List 
 	 * */
-	@RequestMapping("/getGroupCodes")
+	@RequestMapping("/getgroupcodes")
 	public @ResponseBody List<Map<String, Object>> getGroupCodes() {
 		return scoreService.getAllGroupCodes();
 	}
@@ -228,7 +226,7 @@ public class ScoreController {
 	 * @param {String} 그룹코드명 
 	 * @return {List<Map<String, Object>>} 상세코드번호, 코드명, 사용여부를 담은 Map의 List
 	 * */
-	@RequestMapping("/getDetailCodes/{groupCode}")
+	@RequestMapping("/getdetailcodes/{groupCode}")
 	public @ResponseBody List<Map<String, Object>> getDetailCodes(@PathVariable String groupCode) {
 		return scoreService.getDetailCodes(groupCode);
 	}
@@ -238,7 +236,7 @@ public class ScoreController {
 	 * @author 임유진
 	 * @return {int} 수정된 행 갯수
 	 * */
-	@RequestMapping(value="/updateDetailCode", method=RequestMethod.POST)
+	@RequestMapping(value="/updatedetailcode", method=RequestMethod.POST)
 	public @ResponseBody int updateDetailCode(MultipartHttpServletRequest request) {
 		//쿼리문 실행에 필요한 정보들을 담을 map 생성
 		Map<String, String> detailCodeMap = new HashMap<String, String>();
@@ -256,7 +254,7 @@ public class ScoreController {
 	 * @author 임유진
 	 * @return {List<String>} group, 수정된 행 갯수
 	 * */   
-	@RequestMapping(value="/updateGroupCode", method=RequestMethod.POST)
+	@RequestMapping(value="/updategroupcode", method=RequestMethod.POST)
 	public @ResponseBody List<String> updateGroupCode(MultipartHttpServletRequest request) {
 		Map<String, String> groupCodeMap = new HashMap<>();
 
@@ -275,7 +273,7 @@ public class ScoreController {
 	 * @author 임유진
 	 * @return {int} 입력된 행 갯수
 	 * */   
-	@RequestMapping(value="/insertDetailCode", method=RequestMethod.POST)
+	@RequestMapping(value="/insertdetailcode", method=RequestMethod.POST)
 	public @ResponseBody int insertDetailCode(MultipartHttpServletRequest request) {
 		//쿼리문 실행에 필요한 정보들을 담을 map 생성
 		Map<String, String> detailCodeMap = new HashMap<String, String>();
@@ -293,7 +291,7 @@ public class ScoreController {
 	 * @author 임유진
 	 * @return {List<String>} group, 입력된 행 갯수
 	 * */
-	@RequestMapping(value="/insertGroupCode", method=RequestMethod.POST)
+	@RequestMapping(value="/insertgroupcode", method=RequestMethod.POST)
 	public @ResponseBody List<String> insertGroupCode(MultipartHttpServletRequest request) {
 		Map<String, String> groupCodeMap = new HashMap<>();
 

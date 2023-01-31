@@ -16,14 +16,14 @@ var keyword = document.getElementById("search-txt");
 //검색버튼 클릭 이벤트 지정 
 searchBtn.addEventListener("click", function(){
 	let keywordValue = keyword.value;
-	location.replace("/manager/managerMapping?pageNo=1&keyword="+keywordValue);
+	location.replace("/manager/managermapping?pageNo=1&keyword="+keywordValue);
 });
 
 //담당자 칸 클릭 이벤트 지정 
 managerTable.addEventListener("click",function(e){
 	let targetTr = e.target.parentElement;
 	let clickedManagerCode = targetTr.innerText.split("\t")[0];
-	makeRequest(getCenterList, 'GET', '/manager/getCenters/'+clickedManagerCode);
+	makeRequest(getCenterList, 'GET', '/manager/getcenters/'+clickedManagerCode);
 	for(var i=0;i<allTr.length;i++){
 		if(allTr[i].classList.contains("selectedtr")){
 			allTr[i].classList.remove("selectedtr");
@@ -44,8 +44,8 @@ releaseBtn.addEventListener("click", function(){
 		reqList.push({"userCode":userCode, "centerCode":centerCode[i].value});		
 	}
 	makeRequest(function(){	
-		makeRequest(getCenterList, 'GET', '/manager/getCenters/'+userCode);
-	}, 'POST', '/manager/cancelMapping', JSON.stringify(reqList));
+		makeRequest(getCenterList, 'GET', '/manager/getcenters/'+userCode);
+	}, 'POST', '/manager/cancelmapping', JSON.stringify(reqList));
 })
 
 //맵핑 버튼 선택자
@@ -129,7 +129,8 @@ mappingBtn.addEventListener("click", function(){
 	}
 	let centerTbody = centerTable.tBodies[0];
 	centerTbody.innerHTML = '';
-	makeRequest(getCenterList, 'GET', '/manager/getCenters/'+userCode);
+	makeRequest(getCenterList, 'GET', '/manager/getcenters/'+userCode);
+	modal.classList.add("hide");
 });
 
 //저장버튼 클릭시 담당 센터 재조회 

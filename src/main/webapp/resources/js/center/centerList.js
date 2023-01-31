@@ -41,7 +41,7 @@ let getToday = function() {
 
 //담당자 리스트 마우스 오버시 색 변화
 function changeColor(){
-	$('#center-left tr').mouseover(function(){
+	$('#centerList tr').mouseover(function(){
 		$(this).addClass('changeColor');
 	}).mouseout(function() {
 		$(this).removeClass('changeColor');
@@ -142,7 +142,7 @@ $("#center-left tr").click(function (){
 
 function getDetailAjax() {
 	$.ajax({
-		url : "getCenterImages/" + imgCenterCode,
+		url : "getcenterimages/" + imgCenterCode,
 		data : {
 			centerCode : imgCenterCode
 		},
@@ -155,7 +155,7 @@ function getDetailAjax() {
 			let strDOMdiv ="";
 			if (results.length == 0) {
 				strDOMdiv +="<div>"
-				strDOMdiv += "<img src='/resources/images/center/no_image.png'>"
+				strDOMdiv += "<img src='/resources/images/center/no_image.png' class='center-noimage'>"
 				strDOMdiv += "</div>";
 			}
 			for(i=0; i<results.length; i++) {
@@ -199,7 +199,7 @@ $("#centerSavedBtn").click(function (){
 		console.log(centercondition);
 	}
 	if(!$("#centerName").attr("readonly")) {
-		let insertURL = "centerInsert";
+		let insertURL = "centerinsert";
 		$.ajax({
 			type:"POST",
 			url :insertURL,	
@@ -213,12 +213,12 @@ $("#centerSavedBtn").click(function (){
 				centerCondition : centercondition
 			},
 			success: function(results){
-				location.href="centerList"
+				location.href="centerlist"
 			},
 			error: error
 		});
 	}else{
-		let updateURL = "centerUpdate";
+		let updateURL = "centerupdate";
 		let centercondition = document.querySelector("#centerCondition").value;
 		let pageNo = $("#now-page").text();
 		alert(pageNo);

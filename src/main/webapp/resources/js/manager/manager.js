@@ -40,7 +40,7 @@ $(".updateBtn").click(function(){
    //담당 센터명 조회
     $.ajax({
         type: 'POST',
-        url:'/manager/getCenters/'+userCode,
+        url:'/manager/getcenters/'+userCode,
         success: function(result) {
            console.log(result);
            var view = '';
@@ -86,7 +86,7 @@ $("#updatemgr").click(function (){
 
       $.ajax({
          type:"POST",
-         url: "/manager/managerUpdate",
+         url: "/manager/managerupdate",
          data: data,
          success: function(results) {
         	 mgrListTd.eq(0).text(results.userCode);
@@ -182,7 +182,7 @@ $("#updatemgr").click(function (){
          url: "/manager/managerInsert",
          data: data,
          success: function(result) {
-        	 location.href = "/manager/managerList";  
+        	 location.href = "/manager/managerlist";  
           /*  $("#mgrList").html(str);*/
          },
          error: function() {
