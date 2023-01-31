@@ -15,8 +15,8 @@
 <div id="center-photo-total">
 	<div id="photo-left-frame">
 
-		<div class="search_insert">
-			<form action="centerPhoto" class="search-form">
+		<div class="search_insert removePadding">
+			<form action="centerphoto" class="search-form">
 				<div class="search-box">
 					<input type="text" name="keyword" id="findCenterName"
 						class="search-txt" placeholder="search">
@@ -28,97 +28,69 @@
 		</div>
 
 
-<c:if test="${centerListN != 'empty'}">
 		<div id="center-photo-first">
 			<table id="centertable" class="table click verticalTable">
 				<thead>
 					<tr>
-						<th>센터명</th>
-						<th>센터 담당자</th>
-						<th>전화번호</th>
-						<th>운영 여부</th>
+						<th class="centerPhoto-centerName">센터명</th>
+						<th class="centerPhoto-thead">센터 담당자</th>
+						<th class="centerPhoto-thead">전화번호</th>
+						<th class="centerPhoto-thead">운영 여부</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${centerList}" var="center">
 						<tr>
-							<td>${center.centerName}</td>
-							<td>${center.userName}</td>
-							<td>${center.centerTel}</td>
-							<td>${center.centerCondition}</td>
+							<td class="centerPhoto-centerName">${center.centerName}</td>
+							<td class="centerPhoto-thead">${center.userName}</td>
+							<td class="centerPhoto-thead">${center.centerTel}</td>
+							<td class="centerPhoto-thead">${center.centerCondition}</td>
 							<td class="centercode">${center.centerCode}</td>
 						</tr>
 					</c:forEach>
-					<tr>
-						<td id="pager" colspan="4">
-							<div>
-								<a class="innerPager"
-									href="centerphoto?pageNo=1&keyword=${keyword}">처음</a>
-								<c:if test="${pager.groupNo>1}">
-									<a class="innerPager"
-										href="centerphoto?pageNo=${pager.startPageNo-1}&keyword=${keyword}">이전</a>
-								</c:if>
-
-								<c:forEach var="i" begin="${pager.startPageNo}"
-									end="${pager.endPageNo}">
-									<c:if test="${pager.pageNo != i}">
-										<a class="innerPager"
-											href="centerphoto?pageNo=${i}&keyword=${keyword}">${i}</a>
-									</c:if>
-									<c:if test="${pager.pageNo == i}">
-										<a class="innerPager"
-											href="centerphoto?pageNo=${i}&keyword=${keyword}">${i}</a>
-									</c:if>
-								</c:forEach>
-
-								<c:if test="${pager.groupNo<pager.totalGroupNo}">
-									<a class="innerPager"
-										href="centerphoto?pageNo=${pager.endPageNo+1}&keyword=${keyword}">다음</a>
-								</c:if>
-								<a class="innerPager"
-									href="centerphoto?pageNo=${pager.totalPageNo}&keyword=${keyword}">맨끝</a>
-							</div>
-						</td>
-					</tr>
 				</tbody>
 			</table>
 		</div>
-		</c:if>
+					<tr>
+						<td id="pager" colspan="4">
+							<div class="center-pagging">
+							<ul class="pagination">
+								<li><a class="innerPager first"
+									href="centerphoto?pageNo=1&keyword=${keyword}">처음</a></li>
+								<li><c:if test="${pager.groupNo>1}">
+									<a class="innerPager arrow left"
+										href="centerphoto?pageNo=${pager.startPageNo-1}&keyword=${keyword}">이전</a>
+								</c:if></li>
 
-		<c:if test="${centerListN == 'empty'}">
-			<div id="center-form-pagging">
-				<table class="verticalTable" id="center-left">
-					<thead>
-						<tr>
-							<th>센터명</th>
-							<th>센터 담당자</th>
-							<th>전화번호</th>
-							<th>운영 여부</th>
-						</tr>
-					</thead>
-					<tbody id="centerList">
-						<tr>
-							<td colspan="7">등록된 센터가 없습니다.</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</c:if>
+								<c:forEach var="i" begin="${pager.startPageNo}"
+									end="${pager.endPageNo}">
+									<li><c:if test="${pager.pageNo != i}">
+										<a class="innerPager active num"
+											href="centerphoto?pageNo=${i}&keyword=${keyword}">${i}</a>
+									</c:if></li>
+									<li><c:if test="${pager.pageNo == i}">
+										<a class="innerPager num" id="now-page"
+											href="centerphoto?pageNo=${i}&keyword=${keyword}">${i}</a>
+									</c:if></li>
+								</c:forEach>
 
-
+								<li><c:if test="${pager.groupNo<pager.totalGroupNo}">
+									<a class="innerPager arrow right"
+										href="centerphoto?pageNo=${pager.endPageNo+1}&keyword=${keyword}">다음</a>
+								</c:if></li>
+								<li><a class="innerPager last"
+									href="centerphoto?pageNo=${pager.totalPageNo}&keyword=${keyword}">맨끝</a></li>
+							</ul>
+							</div>
+						</td>
+					</tr>
 	</div>
 
 	<div id="photo-right-frame">
 		<div id="button-frame">
-			<button type="button" id="insert-center-modal"
-				class="btn btn-primary" data-toggle="modal"
-				data-target="#insertModal">등록</button>
-			<button type="button" id="update-center-modal"
-				class="btn btn-primary" data-toggle="modal"
-				data-target="#updateModal">수정</button>
-			<button type="button" id="delete-center-modal"
-				class="btn btn-primary" data-toggle="modal"
-				data-target="#deleteModal">삭제</button>
+			<button type="button" id="insert-center-modal" class="pinkButton" data-toggle="modal" data-target="#insertModal">등록</button>
+			<button type="button" id="update-center-modal" class="pinkButton" data-toggle="modal" data-target="#updateModal">수정</button>
+			<button type="button" id="delete-center-modal" class="pinkButton" data-toggle="modal" data-target="#deleteModal">삭제</button>
 		</div>
 		<div id="photo-frame">
 			<div id="photo-main-size">
@@ -132,10 +104,10 @@
 			<table class="search verticalTable" id="imageHistory">
 				<thead>
 					<tr>
-						<th>사진 이름</th>
-						<th>사진 등록자</th>
-						<th>등록일</th>
-						<th>수정일</th>
+						<th class="thead-centerPhoto-file">사진 이름</th>
+						<th class="thead-allcenterPhoto-file">사진 등록자</th>
+						<th class="thead-allcenterPhoto-file">등록일</th>
+						<th class="thead-allcenterPhoto-file">수정일</th>
 					</tr>
 				</thead>
 				<tbody class="noImage">

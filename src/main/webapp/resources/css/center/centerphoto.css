@@ -6,11 +6,12 @@
 }
 
 #photo-left-frame {
-	width: 556px;
+	    width: 593px;
+	margin-left: 3%;
 }
 
 .photo-img {
-	width: 500px;
+	width: 640px;
 	height: 450px;
 }
 
@@ -20,8 +21,7 @@
 }
 
 #center-photo-first {
-	margin-top: 5%;
-	margin-bottom: 5%;
+	margin-bottom: -5%;
 }
 
 #centertable tr:hover {
@@ -36,11 +36,28 @@
 	display: flex;
 	align-items: center;
 }
-
+#center-photo-second{
+	width : 100%;
+}
 .search {
 	display: none;
+	display: block;
 }
-
+.noImage-size{
+	width: 637px;
+}
+.search tbody{
+	display: block;
+    overflow: auto;
+    /* height: 95px; */
+    height: 47px;
+}
+.thead-centerPhoto-file{
+	width: 220px;
+}
+.thead-allcenterPhoto-file{
+	width: 140px;
+}
 #photo-mini-size {
 	display: flex;
 	justify-content: center;
@@ -51,12 +68,12 @@
 	display: flex;
 	margin-bottom: 2%;
 	justify-content: flex-end;
-	margin-right: 4%;
+	margin-top: 40px;
 }
 
 #photo-right-frame {
-	margin: auto;
 	display: none;
+	margin: 0px 90px;
 }
 
 .paging {
@@ -102,14 +119,12 @@
 }
 
 #deletecheck {
-	width: 20px;
+	width: 60px;
 }
 
 #button-frame button {
 	margin-left: 7px;
-	border: none;
-	width: 55px;
-	height: 30px;
+	padding: 2px 15px;
 }
 .modal-show-none{
 	z-index : 1100;
@@ -117,7 +132,7 @@
 
 .photo-slider {
 	width: 640px;
-	height: 480px;
+	height: 467px;
 	position: relative;
 	margin: 0 auto;
 }
@@ -141,14 +156,14 @@ ul.photo-imgs li {
 
 .photo-bullets {
 	position: absolute;
-	left: 40%; /* 가로로 가운데 정렬 */
+	left: 50%; /* 가로로 가운데 정렬 */
 	transform: translateX(-50%);
 	bottom: 45px; /* 슬라이드 밑에서 20px 간격 띄움 */
 	z-index: 2; /* 슬라이드 위에 보이도록 레이어 순위를 높임 */
-	width: 85px;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+    width: 140px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 .photo-bullets label {
@@ -236,3 +251,14 @@ ul.photo-imgs li {
 	margin: 0;
 	transition-delay: 0.9s; /* 트랜지션 지연 시간 지정 */
 }
+.noImage-bullets{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.noImage-boreder{
+	border: solid 2px #ccc;
+}
+.removePadding{
+	padding : 0px;
+} 

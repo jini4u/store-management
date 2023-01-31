@@ -243,7 +243,7 @@ table{
 
 }
 
-.first:hover, .last:hover, .left:hover, .right:hover {
+.first:hover, .last:hover, .left:hover, .right:hover{
    color: #E26868;
    text-decoration-line: none;
 }
@@ -264,7 +264,7 @@ table{
    line-height: 30px;
 }
 
-
+/* 기억 */
 .num:hover {
    -moz-border-radius: 100%;
    -wekit-border-radius: 100%;

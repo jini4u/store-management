@@ -210,3 +210,6 @@ ul.imgs li {
     border: 0;
     background: none;
 }
+#center-left thead tr th{
+	pointer-events : none;
+}

@@ -74,16 +74,16 @@
 					</c:if></li>
 				<c:forEach var="i" begin="${pager.startPageNo}"
 					end="${pager.endPageNo}">
-					<li><c:if test="${pager.pageNo != i}">
+					<li ><c:if test="${pager.pageNo != i}">
 							<a class="innerPager active num"
-								href="centerlist?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}">${i}</a>
+								href="centerlist?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}"><span class="please">${i}</span></a>
 						</c:if></li>
 					<li><c:if test="${pager.pageNo == i}">
 							<a id="now-page" class="innerPager num"
-								href="centerlist?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}">${i}</a>
+								href="centerlist?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}"><span class="please">${i}</span></a>
 						</c:if></li>
 				</c:forEach>
-				<li><c:if test="${pager.groupNo<pager.totalGroupNo}">
+				<li ><c:if test="${pager.groupNo<pager.totalGroupNo}">
 						<a class="innerPager arrow right"
 							href="centerlist?pageNo=${pager.endPageNo+1}&keywordType=${keywordType}&keyword=${keyword}">다음</a>
 					</c:if></li>

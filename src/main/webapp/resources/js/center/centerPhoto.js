@@ -55,7 +55,7 @@ function appearTable(e) {
 
 
 	//선택한 센터 사진들 요청하는 ajax요청
-	makeRequest(getCenterImages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
+	makeRequest(getcenterimages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
 }; 
 
 //센터 선택시 사진들이 들어갈 div 선택자
@@ -70,7 +70,7 @@ var imgDetailTable = document.getElementById("image-detail-table");
 
 
 //센터 선택시 센터의 사진들 정보 얻어오기
-function getCenterImages(){
+function getcenterimages(){
 	//리턴받은 정보
 	let result = JSON.parse(httpRequest.responseText);
 	//사진 들어갈 div 초기화
@@ -85,7 +85,7 @@ function getCenterImages(){
 		var input = document.createElement('input');
 		input.setAttribute('type', 'radio');
 		input.setAttribute('name', 'photoslide');
-		input.setAttribute('id', 'photoslide');
+		input.setAttribute('id', 'photoslide'+i);
 		if (i == 0) {
 			input.setAttribute('checked', 'checked');
 		}
@@ -93,15 +93,25 @@ function getCenterImages(){
 	}
 	//사진이 없을 때 실행
 	if (result == 0) {
+		ul.removeAttribute('class');
+		ul.setAttribute('class', 'noImage-bullets')
+		var noImageLi = document.createElement('li');
+		var noImageImg = document.createElement('img');
+		noImageImg.setAttribute('src', '/resources/images/center/blood.jpg');
+		noImageImg.setAttribute('class', 'photo-img noImage-boreder');
+		noImageLi.append(noImageImg);
+		ul.append(noImageLi);
+		imgDiv.append(photoDiv);
 		var noImage = document.querySelector('.noImage');
 		var noImageTr = document.createElement('tr');
+		noImageTr.setAttribute('class', 'noImageTr');
 		noImageTr.innerHTML = '등록된 사진이 없습니다.';
 		noImage.append(noImageTr);
-	//사진이 있을 경우 실행
+		photoDiv.append(ul);
+		//사진이 있을 경우 실행
 	}else{
 		//응답으로 받은 사진 수 만큼 반복
 		for(let i=0;i<result.length;i++){
-			console.log(result);
 			//<li>생성
 			var li = document.createElement('li');
 			//<img> 생성 
@@ -245,12 +255,12 @@ function getCenterImages(){
 	deleteModalBody.innerHTML = '';
 	//사진이 없을 때
 	if (result == 0) {
-		imgHistoryTable.tBodies[0].innerHTML += "<tr><td>등록된 사진이 없습니다</td><td>";
+		imgHistoryTable.tBodies[0].innerHTML += "<tr><td class='noImage-size'>등록된 사진이 없습니다</td></tr>";
 	}else{
-//	응답 받은 사진 수만큼 반복
+//		응답 받은 사진 수만큼 반복
 		for(var i=0;i<result.length;i++){
 			//파일 이름, 등록자, 등록일, 수정일 넣어주기
-			imgHistoryTable.tBodies[0].innerHTML += '<tr><td>'+result[i].originalName+'</td><td>'+result[i].uploadUserName+"</td><td>"+result[i].filePostDate+"</td><td>"+result[i].fileModifyDate+"</td></tr>";
+			imgHistoryTable.tBodies[0].innerHTML += '<tr><td class="noImageTd thead-centerPhoto-file">'+result[i].originalName+'</td><td class="thead-allcenterPhoto-file">'+result[i].uploadUserName+"</td><td class='thead-allcenterPhoto-file'>"+result[i].filePostDate+"</td><td class='thead-allcenterPhoto-file'>"+result[i].fileModifyDate+"</td></tr>";
 			deleteModalBody.innerHTML += '<tr><td><input type="checkbox" name="deleteCheck" value="'+result[i].fileNo+'"></td><td>'+result[i].originalName+'</td></tr>';
 		}
 	}
@@ -292,7 +302,7 @@ function addcenterImage(){
 	let response = JSON.parse(httpRequest.responseText);
 	console.log(response+"개 저장됨");
 	$("#insertModal .close").click();
-	makeRequest(getcenterImages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
+	makeRequest(getcenterimages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
 }
 
 //수정 모달 내부 수정 버튼
@@ -309,7 +319,7 @@ updateBtn.addEventListener("click", function(){
 //수정 요청 후 실행되는 함수
 function afterUpdateImg(){
 	$("#updateModal .close").click();
-	makeRequest(getcenterImages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
+	makeRequest(getcenterimages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
 }
 
 //삭제 모달 내부 삭제 버튼 선택자
@@ -323,10 +333,10 @@ deleteBtn.addEventListener("click", function(){
 			checked.push(checkbox[i].value);
 		}
 	}
-	makeRequest(afterDeleteImg, 'POST', '/center/deleteImage/'+centerNameArr[4].innerText, checked);
+	makeRequest(afterDeleteImg, 'POST', '/center/deleteimage/'+centerNameArr[4].innerText, checked);
 });
 
 function afterDeleteImg(){
 	$("#deleteModal .close").click();
-	makeRequest(getcenterImages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
+	makeRequest(getcenterimages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
 }
