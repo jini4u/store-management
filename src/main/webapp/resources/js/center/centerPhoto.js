@@ -51,24 +51,31 @@ function appearTable(e) {
 	//센터명 옆 td에 센터명 지정
 	insertModalCenterName.innerText = centerNameArr[0].innerText;
 
+
+
+
 	//선택한 센터 사진들 요청하는 ajax요청
 	makeRequest(getCenterImages,'GET','/center/getCenterImages/'+centerNameArr[4].innerText);
 }; 
 
 //센터 선택시 사진들이 들어갈 div 선택자
 var imgDiv = document.getElementById("centerImagesDiv");
+
+var photoslider = document.querySelector('.photo-slider');
 //센터 선택시 사진 등록, 수정 기록이 들어갈 테이블 선택자
 var imgHistoryTable = document.getElementById("imageHistory");
 //수정 모달 내부 선택한 사진 정보가 들어갈 테이블 선택자
 var imgDetailTable = document.getElementById("image-detail-table");
+
+
 
 //센터 선택시 센터의 사진들 정보 얻어오기
 function getCenterImages(){
 	//리턴받은 정보
 	let result = JSON.parse(httpRequest.responseText);
 	//사진 들어갈 div 초기화
-	imgDiv.innerHTML = ''
-		var photoDiv = document.createElement('div');
+	imgDiv.innerHTML = '';
+	var photoDiv = document.createElement('div');
 	photoDiv.setAttribute('class', 'photo-slider');
 	var ul = document.createElement('ul');
 	ul.setAttribute('id', 'photo-imgholder');
@@ -84,152 +91,171 @@ function getCenterImages(){
 		}
 		photoDiv.append(input);
 	}
-	//응답으로 받은 사진 수 만큼 반복
-	for(let i=0;i<result.length;i++){
-		//<li>생성
-		var li = document.createElement('li');
-		//<img> 생성 
-		var img = document.createElement('img');
-		//생성한 img에 속성 추가. src='/file/저장된사진이름'
-		img.setAttribute('src', '/file/'+result[i].fileSavedName);
-		//class='photo-img'
-		img.setAttribute('class','photo-img');
-		li.append(img);
-		ul.append(li);
-	}
-	photoDiv.append(ul);
-	
-	var div = document.createElement('div');
-	div.setAttribute('class', 'photo-bullets');
-
-	for(let i=0; i<result.length; i++) {
-		var label = document.createElement('label');
-		label.htmlFor = 'photoslide'+i;
-		label.setAttribute('class', 'photoSlideInfo');
-		label.setAttribute('data-img-name',result[i].originalName);
-		//imageDetail 값 설정위해 선언
-		let imageDetail;
-		//imageDetail 값 지정 위해 분기처리
-		if(result[i].fileDetail == 'inside'){
-			imageDetail = '내부';
-		} else {
-			imageDetail = '외부';
-		}
-		//data-img-detail='내부'또는'외부'
-		label.setAttribute('data-img-detail', imageDetail);
-		//data-img-fileNo='파일번호'
-		label.setAttribute('data-img-fileNo',result[i].fileNo);
-		div.append(label);
-	}
-	photoDiv.append(div);
-
-	var updateBtn = document.querySelector("#update-center-modal");
-	var labelTag = document.getElementsByName('label');
-
-	let centertable = document.querySelector('#centertable');
-	var labelClass = document.getElementsByClassName('photoSlideInfo');
-
-	var input = document.createElement('input');
-
-	centertable.addEventListener('click', function() {
-
-		var labelClass = document.getElementsByClassName('photoSlideInfo');
-		for(let i = 0; i < labelClass.length; i++) {			
-			labelClass[i].addEventListener('click', updateCenterInfo, false);
-		}//for문을 통해 click이벤트를 생성, .click을 통해, clicl하지 않아도 함수 실행할 수 있다.
-		if (labelClass[0]) {
-			labelClass[0].click();
-		}
-	});
-
-
-//	label 클릭 시 사진 정보 가져오는 함수
-	var updateCenterInfo = function(e) {
+	//사진이 없을 때 실행
+	if (result == 0) {
+		var noImage = document.querySelector('.noImage');
+		var noImageTr = document.createElement('tr');
+		noImageTr.innerHTML = '등록된 사진이 없습니다.';
+		noImage.append(noImageTr);
+	//사진이 있을 경우 실행
+	}else{
+		//응답으로 받은 사진 수 만큼 반복
 		for(let i=0;i<result.length;i++){
-			//수정 모달 내부 테이블 초기화
-			imgDetailTable.tBodies[0].innerHTML = '';
-			//사진 정보를 담을 <tr></tr> 생성
-			var imgDetailTr = document.createElement('tr');
-			//사진 이름을 담을 <td></td> 생성
-			var nameTd = document.createElement('td');
-			//<input> 생성
-			var nameInput = document.createElement('input');
-			//input에 속성 추가. type='text'
-			nameInput.setAttribute('type', 'text');
-			//name='originalName'
-			nameInput.setAttribute('name', 'newOriginalName');
-			//value='클릭한 이미지의 data-img-name 속성 값'
-			nameInput.setAttribute('value', e.target.getAttribute('data-img-name'));
-			//nameTd에 nameInput 넣기
-			nameTd.append(nameInput);
-
-			//사진 상세 정보 담을 <td></td> 생성
-			var detailTd = document.createElement('td');
-			//내부,외부 선택가능하게 할 <select></select> 생성
-			var detailSelect = document.createElement('select');
-			//select에 속성 추가. name='fileDetail'
-			detailSelect.setAttribute('name', 'fileDetail');
-			//select에 들어갈 <option></option> 생성
-			var detailInside = document.createElement('option');
-			//option에 속성 추가. value='inside'
-			detailInside.setAttribute('value', 'inside');
-			//태그 안에 '내부' 문자열 추가
-			detailInside.innerHTML = '내부';
-			//select에 들어갈 <option></option> 생성
-			var detailOutside = document.createElement('option');
-			//option에 속성 추가. value='outside'
-			detailOutside.setAttribute('value', 'outside');
-			//태그 안에 '외부' 문자열 추가
-			detailOutside.innerHTML = '외부';
-			//select에 내부option 추가
-			detailSelect.append(detailInside);
-			//select에 외부option 추가
-			detailSelect.append(detailOutside);
-			//사진 상세 정보 td에 select 추가
-			detailTd.append(detailSelect);
-
-			//사진 정보  tr에 이름td 추가
-			imgDetailTr.append(nameTd);
-			//사진 정보 tr에 상세 정보td 추가
-			imgDetailTr.append(detailTd);
-			//수정 모달 사진 정보 table에 사진정보tr 추가
-			imgDetailTable.tBodies[0].append(imgDetailTr);
-
-			//수정 전 사진 이름을 담을 <td></td> 생성
-			var oldNameTd = document.createElement('td');
-			//<input> 생성
-			var oldNameInput = document.createElement('input');
-			//input에 속성 추가. type='text'
-			oldNameInput.setAttribute('type', 'text');
-			//name='originalName'
-			oldNameInput.setAttribute('name', 'oldOriginalName');
-			//value='클릭한 이미지의 data-img-name 속성 값'
-			oldNameInput.setAttribute('value', e.target.getAttribute('data-img-name'));
-			oldNameInput.setAttribute('class','hidden-file-no');
-			//테이블에 nameInput 넣기
-			imgDetailTable.tBodies[0].append(oldNameInput);
-
-			//파일번호를 담을 <input> 생성
-			var fileNoInput = document.createElement('input');
-			fileNoInput.setAttribute('name', 'fileNo');
-			fileNoInput.setAttribute('value', e.target.getAttribute('data-img-fileNo'));
-			fileNoInput.setAttribute('class','hidden-file-no');
-
-			imgDetailTable.tBodies[0].append(fileNoInput);
+			console.log(result);
+			//<li>생성
+			var li = document.createElement('li');
+			//<img> 생성 
+			var img = document.createElement('img');
+			//생성한 img에 속성 추가. src='/file/저장된사진이름'
+			img.setAttribute('src', '/file/'+result[i].fileSavedName);
+			//class='photo-img'
+			img.setAttribute('class','photo-img');
+			li.append(img);
+			ul.append(li);
 		}
-	} 
-	imgDiv.appendChild(photoDiv);
+		photoDiv.append(ul);
+
+		var div = document.createElement('div');
+		div.setAttribute('class', 'photo-bullets');
+
+		for(let i=0; i<result.length; i++) {
+			var label = document.createElement('label');
+			label.htmlFor = 'photoslide'+i;
+			label.setAttribute('class', 'photoSlideInfo');
+			label.setAttribute('data-img-name',result[i].originalName);
+			//imageDetail 값 설정위해 선언
+			let imageDetail;
+			//imageDetail 값 지정 위해 분기처리
+			if(result[i].fileDetail == 'inside'){
+				imageDetail = '내부';
+			} else {
+				imageDetail = '외부';
+			}
+			//data-img-detail='내부'또는'외부'
+			label.setAttribute('data-img-detail', imageDetail);
+			//data-img-fileNo='파일번호'
+			label.setAttribute('data-img-fileNo',result[i].fileNo);
+			div.append(label);
+		}
+		photoDiv.append(div);
+
+
+		var updateBtn = document.querySelector("#update-center-modal");
+		var labelTag = document.getElementsByName('label');
+
+		let centertable = document.querySelector('#centertable');
+		var labelClass = document.getElementsByClassName('photoSlideInfo');
+
+		var input = document.createElement('input');
+
+		centertable.addEventListener('click', function() {
+
+			var labelClass = document.getElementsByClassName('photoSlideInfo');
+			for(let i = 0; i < labelClass.length; i++) {			
+				labelClass[i].addEventListener('click', updateCenterInfo, false);
+			}//for문을 통해 click이벤트를 생성, .click을 통해, clicl하지 않아도 함수 실행할 수 있다.
+			if (labelClass[0]) {
+				labelClass[0].click();
+			}
+		});
+
+
+//		label 클릭 시 사진 정보 가져오는 함수
+		var updateCenterInfo = function(e) {
+			for(let i=0;i<result.length;i++){
+				//수정 모달 내부 테이블 초기화
+				imgDetailTable.tBodies[0].innerHTML = '';
+				//사진 정보를 담을 <tr></tr> 생성
+				var imgDetailTr = document.createElement('tr');
+				//사진 이름을 담을 <td></td> 생성
+				var nameTd = document.createElement('td');
+				//<input> 생성
+				var nameInput = document.createElement('input');
+				//input에 속성 추가. type='text'
+				nameInput.setAttribute('type', 'text');
+				//name='originalName'
+				nameInput.setAttribute('name', 'newOriginalName');
+				//value='클릭한 이미지의 data-img-name 속성 값'
+				nameInput.setAttribute('value', e.target.getAttribute('data-img-name'));
+				//nameTd에 nameInput 넣기
+				nameTd.append(nameInput);
+
+				//사진 상세 정보 담을 <td></td> 생성
+				var detailTd = document.createElement('td');
+				//내부,외부 선택가능하게 할 <select></select> 생성
+				var detailSelect = document.createElement('select');
+				//select에 속성 추가. name='fileDetail'
+				detailSelect.setAttribute('name', 'fileDetail');
+				//select에 들어갈 <option></option> 생성
+				var detailInside = document.createElement('option');
+				//option에 속성 추가. value='inside'
+				detailInside.setAttribute('value', 'inside');
+				//태그 안에 '내부' 문자열 추가
+				detailInside.innerHTML = '내부';
+				//select에 들어갈 <option></option> 생성
+				var detailOutside = document.createElement('option');
+				//option에 속성 추가. value='outside'
+				detailOutside.setAttribute('value', 'outside');
+				//태그 안에 '외부' 문자열 추가
+				detailOutside.innerHTML = '외부';
+				//select에 내부option 추가
+				detailSelect.append(detailInside);
+				//select에 외부option 추가
+				detailSelect.append(detailOutside);
+				//사진 상세 정보 td에 select 추가
+				detailTd.append(detailSelect);
+
+				//사진 정보  tr에 이름td 추가
+				imgDetailTr.append(nameTd);
+				//사진 정보 tr에 상세 정보td 추가
+				imgDetailTr.append(detailTd);
+				//수정 모달 사진 정보 table에 사진정보tr 추가
+				imgDetailTable.tBodies[0].append(imgDetailTr);
+
+				//수정 전 사진 이름을 담을 <td></td> 생성
+				var oldNameTd = document.createElement('td');
+				//<input> 생성
+				var oldNameInput = document.createElement('input');
+				//input에 속성 추가. type='text'
+				oldNameInput.setAttribute('type', 'text');
+				//name='originalName'
+				oldNameInput.setAttribute('name', 'oldOriginalName');
+				//value='클릭한 이미지의 data-img-name 속성 값'
+				oldNameInput.setAttribute('value', e.target.getAttribute('data-img-name'));
+				oldNameInput.setAttribute('class','hidden-file-no');
+				//테이블에 nameInput 넣기
+				imgDetailTable.tBodies[0].append(oldNameInput);
+
+				//파일번호를 담을 <input> 생성
+				var fileNoInput = document.createElement('input');
+				fileNoInput.setAttribute('name', 'fileNo');
+				fileNoInput.setAttribute('value', e.target.getAttribute('data-img-fileNo'));
+				fileNoInput.setAttribute('class','hidden-file-no');
+
+				imgDetailTable.tBodies[0].append(fileNoInput);
+			}
+		} 
+		imgDiv.appendChild(photoDiv);
+	}//if~else문 끝
+
+
 //	사진 정보 기록 테이블 초기화
 	imgHistoryTable.tBodies[0].innerHTML = '';
 //	삭제 모달 테이블 초기화
 	deleteModalBody.innerHTML = '';
+	//사진이 없을 때
+	if (result == 0) {
+		imgHistoryTable.tBodies[0].innerHTML += "<tr><td>등록된 사진이 없습니다</td><td>";
+	}else{
 //	응답 받은 사진 수만큼 반복
-	for(var i=0;i<result.length;i++){
-		//파일 이름, 등록자, 등록일, 수정일 넣어주기
-		imgHistoryTable.tBodies[0].innerHTML += '<tr><td>'+result[i].originalName+'</td><td>'+result[i].uploadUserName+"</td><td>"+result[i].filePostDate+"</td><td>"+result[i].fileModifyDate+"</td></tr>";
-		deleteModalBody.innerHTML += '<tr><td><input type="checkbox" name="deleteCheck" value="'+result[i].fileNo+'"></td><td>'+result[i].originalName+'</td></tr>';
+		for(var i=0;i<result.length;i++){
+			//파일 이름, 등록자, 등록일, 수정일 넣어주기
+			imgHistoryTable.tBodies[0].innerHTML += '<tr><td>'+result[i].originalName+'</td><td>'+result[i].uploadUserName+"</td><td>"+result[i].filePostDate+"</td><td>"+result[i].fileModifyDate+"</td></tr>";
+			deleteModalBody.innerHTML += '<tr><td><input type="checkbox" name="deleteCheck" value="'+result[i].fileNo+'"></td><td>'+result[i].originalName+'</td></tr>';
+		}
 	}
 }//사진 선택 요청 시 실행되는 함수 끝
+
 
 //등록 모달 안 사진 선택 input 선택자
 var fileSelect = document.querySelector("input[name='centerImage']");

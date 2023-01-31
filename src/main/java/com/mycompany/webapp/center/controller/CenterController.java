@@ -49,10 +49,25 @@ public class CenterController {
 	 * @return centerphoto.jsp
 	 * */
 	@RequestMapping(value="/centerPhoto")
-	public String manageCenterPhoto(@RequestParam(defaultValue="1") int pageNo, Model model) {
-		int totalRows = centerService.countAllCenters();
-		Pager pager = new Pager(10, 10, totalRows, pageNo);
-		List<CenterVO> centerList = centerService.centerList(pager);
+	public String manageCenterPhoto(@RequestParam(defaultValue="1") int pageNo, @RequestParam(required=false)String keyword, Model model) {
+		Pager pager = null; 
+		List<CenterVO> centerList = null;
+		if (keyword == null) {
+			int totalRows = centerService.countAllCenters();
+			pager = new Pager(10, 10, totalRows, pageNo);
+			centerList = centerService.centerList(pager);
+		}else {
+			String keywordType = "CN";
+			int totalRows = centerService.filterCountAllCenters(keyword, keywordType);
+			if (totalRows != 0) {
+				pager = new Pager(10, 10, totalRows, pageNo);
+				centerList = centerService.findCenter(pager, keyword, keywordType);
+				model.addAttribute("keyword", keyword);
+			}else {
+				model.addAttribute("pager", new Pager(1, 1, 1, 1));
+				model.addAttribute("centerListN" , "empty");
+			}
+		}
 		model.addAttribute("centerList", centerList);
 		model.addAttribute("pager", pager);
 		return "jsp/center/centerphoto";
@@ -82,9 +97,8 @@ public class CenterController {
 	 * @return centerlist.jsp
 	 * */
 	@GetMapping(value="/centerList")
-	public String centerList(@RequestParam(defaultValue="1")int pageNo, @RequestParam(value="keywordType", required=false) String keywordType, 
+	public String centerList(@RequestParam(defaultValue="1")int pageNo, @RequestParam(required=false) String keywordType, 
 			@RequestParam(required=false)String keyword, Model model, CenterVO centerVO){
-			System.out.println("keywordType" + keywordType);
 		if (keyword == null) {
 			int totalRows = centerService.countAllCenters();
 			Pager pager = new Pager(10, 10, totalRows, pageNo);
@@ -122,20 +136,7 @@ public class CenterController {
 		centerService.centerUpdate(centerVO);
 		return centerVO;
 	}
-	
-	/*	
-	@ResponseBody
-	@PostMapping(value ="/findCenter")
-	public List<CenterVO> findCenter(@RequestParam(defaultValue="1")int pageNo, CenterVO centerVO, Model model) {
-		int totalRows = centerService.filterCountAllCenters(centerVO.getCenterName());
-		Pager pager = new Pager(10, 10, totalRows, pageNo);
-		model.addAttribute("pager", pager);
-		System.out.println(centerVO.getCenterName());
-		List<CenterVO> centerList = centerService.findCenter(pager,centerVO);
-		logger.info(centerList+"");
-		return centerList;
-	}
-	*/
+
 	
 	/**
 	 * 센터 정보 일괄 업로드
@@ -198,7 +199,7 @@ public class CenterController {
 	 * @return {List<FileInfoVO>} 해당 코드의 사진들 리스트 
 	 * */
 	@RequestMapping("/getCenterImages/{centerCode}")
-	public @ResponseBody List<FileInfoVO> getCenterImages(@PathVariable int centerCode) {
+	public @ResponseBody List<FileInfoVO> getCenterImages(@PathVariable int centerCode, Model model) {
 		return centerService.getCenterImageNames(centerCode);
 	}
 	
@@ -226,7 +227,7 @@ public class CenterController {
 	 * @return {int} 삭제된 파일 수
 	 * */
 	@RequestMapping(value="/deleteImage/{centerCode}", method=RequestMethod.POST)
-	public @ResponseBody int deleteImage(@RequestBody String request, @PathVariable int centerCode) {
+	public @ResponseBody int deleteImage(@RequestBody String request,  int centerCode) {
 		List<Integer> fileNoList = new ArrayList<Integer>();
 		for(String fileNo:request.split(",")) {
 			fileNoList.add(Integer.parseInt(fileNo));

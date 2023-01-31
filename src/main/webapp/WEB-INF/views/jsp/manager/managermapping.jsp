@@ -3,31 +3,42 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" type="text/css"
    href="${pageContext.request.contextPath}/resources/css/manager/managermapping.css">
+<!--  Font Awesome 라이브러리 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 <div class="titleBox">
    <img
       src="${pageContext.request.contextPath}/resources/images/manager.png">
    <h2>담당자 맵핑</h2>
 </div>
-<div class="buttonBox">
+<!-- <div class="buttonBox">
    <div>
+      <button type="button" class="mappingButton pinkButton">맵핑</button>
+      <button type="button" class="releaseButton greyButton">해제</button>
+   </div>
+</div> -->
+
+<!-- 검색 -->
+<div class="search_btn_collection">
+	<div class="search-box">
+	   <input type="text" id="search-txt" class="search-txt" name=""
+	      placeholder="담당자 검색"> 
+	   <button type="submit" value="search" id="search-btn" class="search-btn">
+					<i class="fa fa-search"></i>
+	   </button>
+	</div>
+	<div>
       <button type="button" class="mappingButton pinkButton">맵핑</button>
       <button type="button" class="releaseButton greyButton">해제</button>
    </div>
 </div>
 
-<!-- 검색 -->
-<div class="search-box">
-   <input type="text" id="search-txt" class="search-txt" name=""
-      placeholder="담당자 검색"> <a id="search-btn" class="search-btn"><i
-      class="fas fa-search"></i></a>
-</div>
-
 <div class="graphbox">
    <div class="managerbox">
       <div id="managerTitle">
-         <p>담당자</p>
-         <p>${totalManagers}명</p>
+         <p class="subheading">담당자</p>
+         <p class="mgrCount">총&nbsp;${totalManagers}명</p>
       </div>
       <table class="verticalTable" id="managertable">
          <thead>
@@ -74,7 +85,7 @@
       </div>
    </div>
    <div class="centerbox">
-      <p>센터
+      <p class="subheading">센터
       <table class="verticalTable" id="centertable">
          <thead>
             <tr>

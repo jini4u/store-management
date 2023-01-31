@@ -6,10 +6,10 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	padding: 0 15px 0 15px;
 }
-.pinkButton{
-	height: 47px;
-	margin-right: 10px; 
+.mgrInsertBtn{
+	height: 41px;
 }    
 .updateBtn{
     border: 0;
@@ -21,3 +21,6 @@
 .updateCell{
 	width: 109px;
 }
+/* .modal-greyBtn, .modal-pinkBtn{
+	height: 38px;
+} */

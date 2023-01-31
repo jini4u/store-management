@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
-.fileuplod_collection {
+#fileuplod_collection {
 	display: flex;
+	justify-content: space-between;
+    align-items: center;
+    margin: 15px 10px;
+}
+.greyButton, .pinkButton{
+	height: 35px;
+	font-size: 15px;
+	padding: 6px 10px;
 }
