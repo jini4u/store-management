@@ -55,7 +55,7 @@
 		 <button class="userName btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     		<img src="${pageContext.request.contextPath}/resources/images/avatar.png">
 	
-			<p>&nbsp;${sessionScope.userName}&nbsp;</p>
+			<p>&nbsp;${userName}&nbsp;</p>
 			<c:choose>
 				<c:when test="${userCode<20000}">담당자</c:when>
 				<c:when test="${userCode<30000}">담당자 관리자</c:when>

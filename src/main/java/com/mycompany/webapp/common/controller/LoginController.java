@@ -77,10 +77,11 @@ public class LoginController {
 	@RequestMapping(value="/passwordupdate", method=RequestMethod.POST)
 	public String passwordUpdate(ManagerVO member,HttpSession session, Model model) {
 		loginService.updateMember(member);
-		logger.info(member.toString());
+		logger.info("비밀번호 수정 :"+member.toString());
 		/*model.addAttribute("message","");*/
-		model.addAttribute("member",member);		
-		return "redirect: /";
+		model.addAttribute("member",member);
+		session.invalidate();
+		return "redirect: /login";
 	}
 	
 	/* author 고은별
