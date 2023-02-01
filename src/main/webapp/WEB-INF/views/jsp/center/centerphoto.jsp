@@ -160,7 +160,7 @@
 							</tbody>
 						</table>
 						<!-- 일단 고정해둠.. 로그인한 사용자걸로 바꾸기 -->
-						<c:set var="titleUserCode" value="10002" />
+						<c:set var="titleUserCode" value='${sessionScope.userCode}' />
 						<input type="text" name='uploadUserCode' id="uploadUserCode"
 							value="<c:out value='${titleUserCode}'/>" />
 					</div>

@@ -57,7 +57,7 @@ SELECT rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGu
    FROM center C LEFT OUTER JOIN mapping M ON C.center_code = M.center_code
                   LEFT OUTER JOIN userinfo U ON M.user_code = U.user_code
     
-    ORDER BY "centerCode"
+    ORDER BY "centerCode" DESC
     )
     WHERE rownum <= #{endRowNo}
     )
@@ -98,7 +98,7 @@ SELECT rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGu
     </when>
     </choose>
     <![CDATA[
-    ORDER BY "centerCode"
+    ORDER BY "centerCode" DESC
     )
     WHERE rownum <= #{filterPager.endRowNo}
     )
@@ -197,12 +197,6 @@ WHERE file_no = #{fileNo}
 DELETE FROM fileinfo
 WHERE file_no = #{fileNo}
 </delete>
-
-<select id="centerDataExist" parameterType="com.mycompany.webapp.center.vo.CenterVO" resultType="int">
-	SELECT COUNT(*)
-	FROM center
-	WHERE center_code = #{centerCode}
-</select>
 
 <select id="getCenterUploadHistory" resultType="map">
 SELECT TO_CHAR(F.file_post_date, 'YYYY-MM-DD') AS "postDate"

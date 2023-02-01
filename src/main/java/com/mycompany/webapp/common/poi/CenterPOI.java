@@ -20,11 +20,12 @@ public class CenterPOI extends POIClass{
 		switch (col) {
 		case 1:
 			center = new CenterVO();
-			if (cell.getStringCellValue().equals("0")) {
+			if (cell.getNumericCellValue() == 0) {
 				center.setCenterCode(0);
 			}else {
-			String centerCode = cell.getStringCellValue();
-			center.setCenterCode(Integer.parseInt(centerCode));
+			int centerCode = (int)cell.getNumericCellValue();
+			center.setCenterCode(centerCode);
+			System.out.println("여기닝?" + center.getCenterCode());
 			}
 			break;
 		case 2:

@@ -4,20 +4,29 @@
 <!-- 엑셀 파일 다운로드 하기 위해 사용 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/score/score.css" />
 
-<div class="titleBox">
-	<img src="${pageContext.request.contextPath}/resources/images/업로드.png">
-
-	<h2>센터 정보 일괄 등록</h2>
+<div class="menuRoute">
+		<img
+		src="${pageContext.request.contextPath}/resources/images/home.png">
+		<a href="/">&nbsp; Home &nbsp; ></a>
+		<span>&nbsp; 센터  &nbsp; ></span>
+		<a href="">&nbsp; 센터 일괄 등록</a>	
 </div>
 
-<div class='uploadbutton'>
+<div class="titleBox">
+	<img
+		src="${pageContext.request.contextPath}/resources/images/upload.png">
+	<h2>센터 일괄 등록</h2>
+</div>
+
+<div class='uploadbutton' id="fileuplod_collection">
+<a href='${pageContext.request.contextPath}/resources/templates/template_센터.xlsx' download="" class="greyButton">양식파일 다운로드</a>
 <form id="file-upload-form" enctype="multipart/form-data" action="centerexcelupload" method="post">
+<input type="hidden" name="userCode" value="${ssesionScope.userCode}">
 <input type="file"  name="centerExcelFile" accept=".xlsx, .xls">
-<input type="submit"  class="pinkButton">
+<input type="submit"  class="pinkButton" value="UPLOAD"> 
 </form>
 <!-- <button id="file-upload-button" class="pinkButton">업로드</button> -->
 </div>
-<a href='/file/centerUpload_form.xlsx' download="" class="btn btn btn-primary btn-lg">양식파일 다운로드</a>
 
 <table class="scoretable">
 <tr>

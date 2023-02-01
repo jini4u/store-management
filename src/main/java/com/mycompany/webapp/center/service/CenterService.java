@@ -250,7 +250,7 @@ public class CenterService implements ICenterService{
 		return resultList;
 	}
 	@Override
-	public Map<String, Integer> centerUploadFile(MultipartFile file, int startRow) {
+	public Map<String, Integer> centerUploadFile(MultipartFile file, int startRow, int userCode) {
 		//리턴할 Map생성
 		Map<String, Integer> resultMap = new HashMap<String, Integer>();
 		resultMap.put("fileNo", 0);
@@ -262,7 +262,6 @@ public class CenterService implements ICenterService{
 		List<Object> VOList = poi.readWorkBook(file, startRow);
 		for(Object vo : VOList) {
 			CenterVO center = (CenterVO)vo;
-			int exisData = centerRepository.centerDataExist(center);
 
 			//기존 데이터가 없으면 
 			if (center.getCenterCode() == 0) {
@@ -284,7 +283,8 @@ public class CenterService implements ICenterService{
 		fileInfoVO.setFileType(file.getContentType());
 		fileInfoVO.setFilePath(filePathName);
 
-		fileInfoVO.setUploadUserCode(10008);
+		
+		fileInfoVO.setUploadUserCode(userCode);
 		System.out.println("fileInfoVo" + fileInfoVO);
 
 		//파일은 왜 저장해야 하지? 히스토리에만 저장해주면 되는거 아닌강? 물어보기
