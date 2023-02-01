@@ -38,11 +38,7 @@
 	</div>
 </div>
 
-<<<<<<< HEAD
 <div class="graphbox">
-=======
-<div class="graphbox">
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
    <div class="managerbox">
       <div id="managerTitle">
          <p class="subheading">담당자</p>
@@ -108,12 +104,7 @@
          <tbody>
          </tbody>
       </table>
-<<<<<<< HEAD
    </div>
-
-=======
-   </div>
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 </div>
 
 <div class="modal fade mappingModal" data-backdrop="static" role="dialog" id="mappingModal">
