@@ -16,11 +16,6 @@
 		</mvc:interceptor>
 		
 		<mvc:interceptor>
-			<mvc:mapping path="/score/**"/>
-			<bean class="com.mycompany.webapp.common.filter.ManagerInterceptor"/>
-		</mvc:interceptor>
-		
-		<mvc:interceptor>
 			<mvc:mapping path="/center/**"/>
 			<mvc:exclude-mapping path="/center/centerlist/**"/>
 			<mvc:exclude-mapping path="/center/availcenter"/>
