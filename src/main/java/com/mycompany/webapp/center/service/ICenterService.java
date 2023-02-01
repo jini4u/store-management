@@ -3,6 +3,8 @@ package com.mycompany.webapp.center.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.webapp.center.vo.CenterVO;
@@ -41,7 +43,7 @@ public interface ICenterService {
 	//센터 검색된 수
 	int filterCountAllCenters(String keyword, String keywordType);
 
-	public Map<String, Integer> centerUploadFile(MultipartFile file, int startRow);
+	public Map<String, Integer> centerUploadFile(MultipartFile file, int startRow, int userCode);
 
 	List<Map<String, String>>getCenterUploadHistory();
 }

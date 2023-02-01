@@ -221,7 +221,6 @@ $("#centerSavedBtn").click(function (){
 		let updateURL = "centerupdate";
 		let centercondition = document.querySelector("#centerCondition").value;
 		let pageNo = $("#now-page").text();
-		alert(pageNo);
 		console.log("centerCondition"+centercondition);
 		$.ajax({
 			type : "POST",
@@ -296,22 +295,15 @@ $("#centerInsertBtn").click(function () {
 		var pageNo = page[1];
 		
 		//페이지에 있는 페이지 번호 가져오기
-		alert(pageNo);
 		$('.pagination .please').each(function (index, item) {
-//		var ddd=$('.please');
 			index = index + 1;
 			$(item).addClass('good-'+index);
 	        if (pageNo === $(this).text()) {
-//	        	alert("여기는 들어가니?"+$(this).text() + "/"+ ddd[index]);
-//	        	var color = 'style="background-color : #E26868;"';
-//	        	$('.please').attr('id', 'good-luck');
 	        	$('.good-'+pageNo).css("background-color", "#E26868");
 	        		
 	        }
 	        
 		});
-	    alert("stopp!!!!!!!!!")
-	
 });
 
 

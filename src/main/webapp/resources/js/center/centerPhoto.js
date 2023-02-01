@@ -6,7 +6,7 @@ var centerNameArr;
 //센터 목록 테이블의 tr들에 클릭 이벤트 추가
 function setTrEvent(){
 	//마지막 줄은 페이징 처리이므로 제외(-1)
-	for(var i=0;i<centerBody.children.length-1;i++){
+	for(var i=0;i<centerBody.children.length;i++){
 		centerBody.children[i].addEventListener("click", appearTable);	
 	}
 }
@@ -23,7 +23,7 @@ var deleteModalBody = document.getElementById("image-delete-table").tBodies[0];
 //센터 목록 테이블 클릭시 실행되는 함수
 function appearTable(e) {
 	//테이블의 행 수-1만큼 반복
-	for(var i=0;i<centerBody.children.length-1;i++){
+	for(var i=0;i<centerBody.children.length;i++){
 		//모든 행에 selectedtr 클래스 제거
 		if(centerBody.children[i].classList.contains("selectedtr")){
 			centerBody.children[i].classList.remove("selectedtr");

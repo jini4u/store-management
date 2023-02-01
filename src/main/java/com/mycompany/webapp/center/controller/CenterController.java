@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,10 +152,11 @@ public class CenterController {
 	//MultipartHttpServletRequest 는 여러개의 파일을 업로드할 때 사용하는데 
 	//우리는 왜 사용? 값을 list로 받아올 수 있기 때문인가?
 	@PostMapping(value="/centerexcelupload")
-	public String excelUplaod(MultipartHttpServletRequest request) {
+	public String excelUplaod(MultipartHttpServletRequest request, HttpSession session) {
 		//request에서 업로드한 파일 얻기, getFile안에 있는 건 이름을 정해주는 건가?
 		MultipartFile file = request.getFile("centerExcelFile");
-		centerService.centerUploadFile(file, 3);
+		int userCode = (int)session.getAttribute("userCode");
+		centerService.centerUploadFile(file, 3, userCode);
 
 		return "redirect:/center/centerexcelupload";
 	}
