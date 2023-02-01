@@ -15,11 +15,9 @@ public class SysadminInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		int userCode = (int)request.getSession().getAttribute("userCode");
-		if(userCode < 30000) {
-			//요청 이전 페이지로 redirect
-			response.sendRedirect(request.getHeader("Referer"));
-			
+		String authority = (String)request.getSession().getAttribute("authority");
+		
+		if(!authority.equals("sysadmin")) {
 			return false;
 		}
 		
