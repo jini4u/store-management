@@ -70,9 +70,11 @@
 					<td class="score_td">${scoreCode.checkSeason}</td>
 					<td class="score_td">${scoreCode.checkGroupContent}</td>
 					<td class="score_td">${scoreCode.checkDetailContent}</td>
-					<td class="score_td"><input type="text" name="checkScore"
+					<td class="score_td">
+					<input id="inputNumber" type="number" name="checkScore"
 						class="placeholderstlye" size="5"
-						placeholder="${scoreCode.checkScore}"></td>
+						value="${scoreCode.checkScore}" value="0" min="0" max="100"></td>
+						
 
 				</tr>
 
@@ -129,6 +131,7 @@
 
 <!--입력 모달 영역 -->
 <c:if test="${(maxYear eq year and maxSeason eq season) == false}"> 
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -159,8 +162,8 @@
 									<td><input type="hidden" name="arrayGroupCode"
 										value="${usingCodeList.checkGroupCode}"> <input
 										type="hidden" name="arrayDetailCode"
-										value="${usingCodeList.checkDetailCode}"> <input
-										type="text" size="13" name="arrayScore" value="0"></td>
+										value="${usingCodeList.checkDetailCode}">  
+										<input id="inputNumber" type="number" size="13" name="arrayScore" value="0" min="0" max="100">
 								</tr>
 							</c:forEach>
 						</table>

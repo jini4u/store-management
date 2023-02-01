@@ -11,6 +11,7 @@ fileInput.addEventListener("change", function(){
 	if(fileType == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'){
 	} else {
 		alert('엑셀 파일을 선택해 주세요');
+		fileInput.value = '';
 	}
 });
 

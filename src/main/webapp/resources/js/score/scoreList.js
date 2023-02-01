@@ -57,7 +57,61 @@ function setYearBox(){
 	}
 };
 
+//값 입력 범위 지정 및 문자 입력 제한
+	$('#inputNumber').on('keyup', function() {
+	    if (/\D/.test(this.value)) {
+	        this.value = this.value.replace(/\D/g, '')
+	        alert('숫자만 입력가능합니다.');
+	    }
+	  if (this.value > 100) {
+	      this.value = 100;
+	      alert('점수는 0-100까지만 가능합니다.');
+	  }
+	});
 
+	
+	
+//scoreUpdate
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//버튼변함 고정	
+/*	var changeBtn = document.getElementsByClassName("#changeBtn");
 
+    function handleClick(event) {
+      console.log(event.target);
+      console.log(this);
+      console.log(event.target.classList);
 
+      if (event.target.forEach [1] === "clicked") {
+        event.target.forEach.remove("clicked");
+      } else {
+        for (var i = 0; i < div2.length; i++) {
+        	changeBtn[i].forEach.remove("clicked");
+        }
 
+        event.target.forEach.add("clicked");
+      }
+    }
+
+    function init() {
+      for (var i = 0; i < changeBtn.length; i++) {
+    	  changeBtn[i].addEventListener("click", handleClick);
+      }
+    }
+    init();*/
+/*    $('#changeBtn').click(function(){
+    	  if($(this).hasClass("active")){
+    	    $(this).removeClass("active");
+    	  }else{
+    	    $(this).addClass("active");  
+    	  }
+    	});*/
