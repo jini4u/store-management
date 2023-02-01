@@ -69,8 +69,8 @@ public class ScoreController {
 
 	@RequestMapping(value="/scorelist", method = RequestMethod.GET)
 	public String centerscoreinquiry(@RequestParam(defaultValue="1") int pageNo,@RequestParam(defaultValue="0")int centerCode, @RequestParam(defaultValue="0")int checkYear, @RequestParam(defaultValue="0")int checkSeason,Model model,HttpSession session) {
-
-		int userCode = 10004;
+		int userCode = (Integer) session.getAttribute("userCode");
+		/*int userCode = 10004;*/
 
 		if(centerCode == 0) {
 			return "redirect:/score/scorelist?centerCode="+scoreService.getCenterName(userCode).get(0).getCenterCode();
@@ -84,7 +84,7 @@ public class ScoreController {
 		/*		
 	 	세션에서 가져와서 값을 넣을 수 있도록 변경----------------------
 		int centerCode = (Integer) session.getAttribute("centerCode");
-		int userCode = (Integer) session.getAttribute("userCode");
+		
 		------------------------------------------------  */	
 
 		//scoreVo를 getScoreList로 담아 socreList로 만듬
