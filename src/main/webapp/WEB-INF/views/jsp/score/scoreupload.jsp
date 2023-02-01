@@ -3,6 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/score/score.css" />
 
+<div class="menuRoute">
+		<img
+		src="${pageContext.request.contextPath}/resources/images/home.png">
+		<a href="/">&nbsp; Home &nbsp; ></a>
+		<span>&nbsp; 점수  &nbsp; ></span>
+		<a href="">&nbsp; 점수 일괄 등록</a>	
+</div>
+
 <div class="titleBox">
 	<img src="${pageContext.request.contextPath}/resources/images/upload.png">
 	<h2>점수 일괄 등록</h2>

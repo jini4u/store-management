@@ -29,7 +29,7 @@ public class ManagerPOI extends POIClass {
 			}
 			break;
 		case 2:
-			String userPassword= String.valueOf(cell.getNumericCellValue());
+			String userPassword= String.valueOf((int)cell.getNumericCellValue());
 			mgr.setUserPassword(userPassword);
 			System.out.println("담당자 비번: "+userPassword);
 			break;
