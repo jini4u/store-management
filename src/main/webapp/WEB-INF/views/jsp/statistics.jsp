@@ -3,6 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/statistics.css" />
+	
+<div class="menuRoute">
+		<img
+		src="${pageContext.request.contextPath}/resources/images/home.png">
+		<a href="/">&nbsp; Home &nbsp; ></a>
+		<a href="/">&nbsp; 통계</a>
+</div>
+	
 <div class="titleBox">
 	<img
 		src="${pageContext.request.contextPath}/resources/images/trend.png">

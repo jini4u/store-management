@@ -126,7 +126,6 @@ public class ManagerService implements IManagerService {
 	public Map<String, Integer> mgrUploadFileInfo(MultipartFile file, int startRow) {
 		
 		Map<String, Integer> resultMap = new HashMap<String, Integer>();
-		//
 		resultMap.put("fileNo", 0);
 		resultMap.put("userCode", 0);
 		resultMap.put("insert", 0);
@@ -140,7 +139,7 @@ public class ManagerService implements IManagerService {
 			//managerVO로 형변환, 엑셀값이 vo에 담김
 			ManagerVO mgr = (ManagerVO)vo;
 			int mgrExisData = managerRepository.mgrIsDataExist(mgr);
-			if(mgrExisData == 0) {
+			if(mgr.getUserCode() == 0) {
 				managerRepository.insertManager(mgr);
 				logger.info("등록@@@@@@@@@@@@ : "+mgr.toString());
 				//replace(K key, V oldValue, V newValue): 저장된 key의 value가 oldValue와 동일할 때만 newValue로 변경해준다

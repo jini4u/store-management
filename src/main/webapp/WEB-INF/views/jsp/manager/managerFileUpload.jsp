@@ -3,6 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/manager/managerFileUpload.css">
+
+<div class="menuRoute">
+		<img
+		src="${pageContext.request.contextPath}/resources/images/home.png">
+		<a href="/">&nbsp; Home &nbsp; ></a>
+		<span>&nbsp; 담당자  &nbsp; ></span>
+		<a href="">&nbsp; 담당자 일괄 등록</a>	
+</div>
+
 <div class="titleBox">
 	<img
 		src="${pageContext.request.contextPath}/resources/images/upload.png">
@@ -28,7 +37,7 @@
 		<tr>
 			<td>${historyMap.postDate}</td>
 			<td>${historyMap.userName}</td>
-			<td><a href='/file/manager_${historyMap.originalName}' download="">${historyMap.originalName}</a>${historyMap.originalName}</td>
+			<td><a href='/file/manager_${historyMap.originalName}' download="">${historyMap.originalName}</a></td>
 			<td>${historyMap.result}</td>
 		</tr>
 	</c:forEach>

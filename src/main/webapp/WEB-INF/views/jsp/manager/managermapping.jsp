@@ -7,6 +7,14 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
+<div class="menuRoute">
+		<img
+		src="${pageContext.request.contextPath}/resources/images/home.png">
+		<a href="/">&nbsp; Home &nbsp; ></a>
+		<span>&nbsp; 담당자  &nbsp; ></span>
+		<a href="">&nbsp; 담당자 맵핑</a>	
+</div>
+
 <div class="titleBox">
 	<img
 		src="${pageContext.request.contextPath}/resources/images/manager.png">
@@ -30,12 +38,17 @@
 	</div>
 </div>
 
+<<<<<<< HEAD
 <div class="graphbox">
+=======
+<div class="graphbox">
+>>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
    <div class="managerbox">
       <div id="managerTitle">
          <p class="subheading">담당자</p>
          <p class="mgrCount">총&nbsp;${totalManagers}명</p>
       </div>
+      <div class="userTitleLine"></div>
       <table class="verticalTable" id="managertable">
          <thead>
             <tr>
@@ -82,6 +95,7 @@
    </div>
    <div class="centerbox">
       <p class="subheading">센터
+      <div class="centerTitleLine"></div>
       <table class="verticalTable" id="centertable">
          <thead>
             <tr>
@@ -94,8 +108,12 @@
          <tbody>
          </tbody>
       </table>
+<<<<<<< HEAD
    </div>
 
+=======
+   </div>
+>>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 </div>
 
 <div class="modal fade mappingModal" data-backdrop="static" role="dialog" id="mappingModal">

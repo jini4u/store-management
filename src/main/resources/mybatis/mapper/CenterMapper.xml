@@ -56,6 +56,7 @@ SELECT rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGu
 	     	  , U.user_name as "userName"
    FROM center C LEFT OUTER JOIN mapping M ON C.center_code = M.center_code
                   LEFT OUTER JOIN userinfo U ON M.user_code = U.user_code
+    
     ORDER BY "centerCode"
     )
     WHERE rownum <= #{endRowNo}

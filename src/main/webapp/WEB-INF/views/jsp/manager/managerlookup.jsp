@@ -10,6 +10,13 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
+<div class="menuRoute">
+		<img
+		src="${pageContext.request.contextPath}/resources/images/home.png">
+		<a href="/">&nbsp; Home &nbsp; ></a>
+		<span>&nbsp; 담당자  &nbsp; ></span>
+		<a href="">&nbsp; 담당자 조회</a>	
+</div>
 
 <div class="titleBox">
 	<img

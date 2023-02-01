@@ -21,9 +21,12 @@ public class ManagerPOI extends POIClass {
 		switch(col) {
 		case 1:	
 			mgr = new ManagerVO();
-			int userCode = (int)cell.getNumericCellValue();
-			mgr.setUserCode(userCode);
-			System.out.println("담당자 코드: "+userCode);
+			if(cell.getNumericCellValue() == 0) {
+				mgr.setUserCode(0);
+			}else {
+				int userCode = (int)cell.getNumericCellValue();
+				mgr.setUserCode(userCode);
+			}
 			break;
 		case 2:
 			String userPassword= String.valueOf(cell.getNumericCellValue());

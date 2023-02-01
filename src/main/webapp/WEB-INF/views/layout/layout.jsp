@@ -32,7 +32,6 @@
 </head>
 <body class="totalbox">
 
-	<div>
 		<!-- Modal -->
 		<div class="modal fade " id="pwUpdate" role="dialog">
 			<!-- 사용자 지정 부분① : id명 -->
@@ -44,7 +43,7 @@
 						<!-- 사용자 지정 부분② : 타이틀 -->
 					</div>
 					<div class="modal-body">
-						<form action="passwordUpdate" method="post">
+						<form action="passwordupdate" method="post">
 							<div class="col-md-6 mb-3" style="max-width: 100%">
 								<label for="name">아이디</label> 
 								<input type="text"
@@ -70,10 +69,6 @@
 			</div>
 		</div>
 
-		<div class="header">
-			<page:applyDecorator name="layoutheader" />
-		</div>
-
 		<div class="middlebox">
 			<div class="leftbox">
 				<page:applyDecorator name="layoutleft" />
@@ -82,7 +77,6 @@
 				<decorator:body />
 			</div>
 		</div>
-	</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 </html>

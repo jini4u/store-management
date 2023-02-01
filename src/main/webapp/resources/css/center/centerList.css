@@ -55,12 +55,13 @@
 .changeColor {
 	background-color: #EDEDED;
 }
-.search-btn{
+
+.search-btn {
 	margin: -14%;
 }
-.search-div{
+
+.search-div {
 	margin-right: -43%;
- 
 }
 
 /*  .modal-dialog{  */
@@ -72,13 +73,12 @@
 }
 
 #centerPhotoSize {
-	width: 605px;
+	width: 495px;
 	height: 410px;
-	margin-left: 25px;
 }
 
 .slider {
-	width: 640px;
+	width: 495px;
 	height: 480px;
 	position: relative;
 	margin: 0 auto;
@@ -105,7 +105,7 @@ ul.imgs li {
 	position: absolute;
 	left: 50%; /* 가로로 가운데 정렬 */
 	transform: translateX(-50%);
-	bottom: 75px; /* 슬라이드 밑에서 20px 간격 띄움 */
+	bottom: 88px; /* 슬라이드 밑에서 20px 간격 띄움 */
 	z-index: 2; /* 슬라이드 위에 보이도록 레이어 순위를 높임 */
 	width: 85px;
 	display: flex;
@@ -178,6 +178,38 @@ ul.imgs li {
 	margin: 0;
 	transition-delay: 0.9s; /* 트랜지션 지연 시간 지정 */
 }
-/*  #centerForm{ */
-/*      width: 576px; */
-/*  } */
+
+#centerForm {
+	width: 570px;
+	display: initial;
+	margin-top: 60px;
+
+}
+
+.search-box {
+	width: 217px;
+}
+
+.modal-footer {
+	margin-top: -10px;
+}
+
+.modal-body {
+	margin-top: -8px;
+}
+
+.center-label {
+	margin-top: 60px;
+
+}
+.center-noimage{
+    width: 495px;
+    height: 380px;
+}
+.updateBtn{
+    border: 0;
+    background: none;
+}
+#center-left thead tr th{
+	pointer-events : none;
+}
