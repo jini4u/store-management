@@ -148,6 +148,7 @@ public class ScoreService implements IScoreService {
 	}
 
 	//점수 수정
+	//점수 수정
 	@Override
 	public int updateScore(ScoreVO score) {
 		for(int i=0; i<score.getArrayScore().length; i++) {
@@ -164,6 +165,7 @@ public class ScoreService implements IScoreService {
 		}
 		return score.getArrayScore().length;
 	}
+
 
 	//점수등록
 	@Override

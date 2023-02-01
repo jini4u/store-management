@@ -159,8 +159,8 @@
 									<td><input type="hidden" name="arrayGroupCode"
 										value="${usingCodeList.checkGroupCode}"> <input
 										type="hidden" name="arrayDetailCode"
-										value="${usingCodeList.checkDetailCode}"> <input
-										type="text" size="13" name="arrayScore" value="0"></td>
+										value="${usingCodeList.checkDetailCode}">  
+										<input id="inputNumber" type="number" size="13" name="arrayScore" value="0" min="0" max="100">
 								</tr>
 							</c:forEach>
 						</table>

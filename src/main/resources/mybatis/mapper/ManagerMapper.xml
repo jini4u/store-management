@@ -21,7 +21,7 @@
                TO_CHAR(user_hire_date, 'YYYY-MM-DD') as userHireDate,
                TO_CHAR(user_resign_date, 'YYYY-MM-DD') as userResignDate
          FROM  userinfo
-         WHERE user_code < 20000 
+         WHERE user_code > 30000 
          ORDER BY user_code desc
       )
       WHERE rownum <= #{endRowNo}
@@ -45,7 +45,7 @@ VALUES   (
 <!--author 고은별  
    담당자 최대 코드 -->
 <select id="selectMaxManagerNo" parameterType="int" resultType="int">
-   SELECT NVL(max(user_code),10001) as "userCode"
+   SELECT NVL(max(user_code),30001) as "userCode"
    FROM userInfo
 </select>  
 
@@ -61,6 +61,7 @@ VALUES   (
   -->
 <select id="countAllMgr" resultType="int">
 SELECT COUNT(*) FROM userInfo
+WHERE user_code > 30000 
 </select>
 
 <!-- 키워드별 담당자 수  -->
@@ -77,6 +78,7 @@ SELECT COUNT(*) FROM userInfo
 		  WHERE user_team_code like ('%' ||#{keyword}||'%')
 		</when>
 	 </choose>
+	  AND user_code > 30000
 </select>
 
 <!-- 키워드 별 담당자 검색 -->
@@ -95,7 +97,7 @@ SELECT * FROM(
                TO_CHAR(user_hire_date, 'YYYY-MM-DD') as userHireDate,
                TO_CHAR(user_resign_date, 'YYYY-MM-DD') as userResignDate
          FROM  userinfo
-         WHERE user_code < 20000 
+         WHERE user_code > 30000 
          ]]> 
 		<choose>
 		    <when test="keywordType == 'UC'">

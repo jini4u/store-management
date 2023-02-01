@@ -43,7 +43,7 @@
 						<!-- 사용자 지정 부분② : 타이틀 -->
 					</div>
 					<div class="modal-body">
-						<form action="passwordUpdate" method="post">
+						<form action="passwordupdate" method="post">
 							<div class="col-md-6 mb-3" style="max-width: 100%">
 								<label for="name">아이디</label> 
 								<input type="text"
