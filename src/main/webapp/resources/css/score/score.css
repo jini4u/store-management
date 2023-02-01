@@ -84,3 +84,6 @@ table.scoretable td {
 	font-size: 15px;
 	padding: 6px 10px;
 }
+
+input{background-color:white;}
+.active{background-color:red;}

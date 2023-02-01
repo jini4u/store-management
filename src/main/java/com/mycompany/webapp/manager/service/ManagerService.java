@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,11 +126,11 @@ public class ManagerService implements IManagerService {
 	@Value("${file.path}")
 	String filePath;
 	@Override
-	public Map<String, Integer> mgrUploadFileInfo(MultipartFile file, int startRow) {
+	public Map<String, Integer> mgrUploadFileInfo(MultipartFile file, int startRow, int userCode) {
 		
 		Map<String, Integer> resultMap = new HashMap<String, Integer>();
 		resultMap.put("fileNo", 0);
-		resultMap.put("userCode", 0);
+		resultMap.put("userCode", userCode);
 		resultMap.put("insert", 0);
 		resultMap.put("update", 0);
 		
@@ -159,7 +162,7 @@ public class ManagerService implements IManagerService {
 		fileVO.setFileType(file.getContentType());
 		fileVO.setFilePath(filePathName);
 		//로그인 구현 후 수정
-		fileVO.setUploadUserCode(10002);
+		fileVO.setUploadUserCode(userCode);
 		
 		fileRepository.insertFile(fileVO);
 		resultMap.replace("fileNo", 0, fileVO.getFileNo());

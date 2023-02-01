@@ -69,8 +69,8 @@ public class ScoreController {
 
 	@RequestMapping(value="/scorelist", method = RequestMethod.GET)
 	public String centerscoreinquiry(@RequestParam(defaultValue="1") int pageNo,@RequestParam(defaultValue="0")int centerCode, @RequestParam(defaultValue="0")int checkYear, @RequestParam(defaultValue="0")int checkSeason,Model model,HttpSession session) {
-
-		int userCode = 10004;
+		int userCode = (Integer) session.getAttribute("userCode");
+		/*int userCode = 10004;*/
 
 		if(centerCode == 0) {
 			return "redirect:/score/scorelist?centerCode="+scoreService.getCenterName(userCode).get(0).getCenterCode();
@@ -84,7 +84,7 @@ public class ScoreController {
 		/*		
 	 	세션에서 가져와서 값을 넣을 수 있도록 변경----------------------
 		int centerCode = (Integer) session.getAttribute("centerCode");
-		int userCode = (Integer) session.getAttribute("userCode");
+		
 		------------------------------------------------  */	
 
 		//scoreVo를 getScoreList로 담아 socreList로 만듬
@@ -105,6 +105,7 @@ public class ScoreController {
 		//빈 VO를 이용해서 getScoreList : emptyVO에 센터코드만 있고 년도, 시즌 없으니까 쿼리문에서 WHERE절에 if조건으로 안걸려서 전체 점수 정보가 다 담겨있음
 		List<ScoreVO> allScoreList = scoreService.getScoreList(emptyVO, pager);
 		//전체 리스트 크기가 0보다 크면 (점수 테이블에 값이 있으면)
+		System.out.println();
 		if(allScoreList.size() > 0) {
 
 			//제일 최근 정보가 0번이므로 0번의 정보를 담아줌

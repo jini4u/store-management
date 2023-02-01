@@ -56,7 +56,7 @@
 </ul>
 
 <div class="userInfo btn-group dropup">
-		 <button class="userName btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+		 <button class="userName dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     		<img src="${pageContext.request.contextPath}/resources/images/avatar.png">
 	
 			<p>&nbsp;${userName}&nbsp;</p>

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<head>
+<title>헌혈의 집 관리 시스템 로그인</title>
+</head>
 <link rel="stylesheet" href="resources/css/login/login.css" />
 <div class="loginpage">
 	<div class="logindiv">

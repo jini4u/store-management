@@ -158,7 +158,7 @@ function listClick(event){
 			colorP[2].innerText = response.countNewManager+'명';
 		}
 	} else if(clickedMenu == 'code'){	//점수항목별
-		userCode = loginUserCode; //로그인 기능 되면 로그인한 담당자 번호로 바꾸기 
+		userCode = loginUserCode; 
 		//선택한 항목 id에서 점수 그룹코드, 상세코드 얻어와 분리 (codeXX.00 형태)
 		code = event.target.id.substr(4).split('.');
 		//그룹코드
@@ -401,7 +401,7 @@ function init(){
 init();
 
 window.onload = function(){
-	if(loginUserCode < 20000){	//담당자면 담당자별 통계X
+	if(loginUserCode >= 30000){	//담당자면 담당자별 통계X
 		menu[1].style.display = 'none';
 	} else {	//시스템이나 관리자면 점수항목별 통계X
 		menu[2].style.display = 'none';

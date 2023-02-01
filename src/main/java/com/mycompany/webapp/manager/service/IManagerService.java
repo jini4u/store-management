@@ -3,6 +3,8 @@ package com.mycompany.webapp.manager.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.webapp.center.vo.CenterVO;
@@ -39,9 +41,10 @@ public interface IManagerService {
 	
 	/* author 은별
 	 * 담당자 일괄 업로드*/
-	Map<String, Integer> mgrUploadFileInfo(MultipartFile file, int startRow);
-	/* author 은별
+	Map<String, Integer> mgrUploadFileInfo(MultipartFile file, int startRow, int userCode);	/* author 은별
 	 * 담당자 엑셀 업로드 히스토리 */
 	List<Map<String, String>> mgrUploadFileHistory();
+
+
 	 
 }

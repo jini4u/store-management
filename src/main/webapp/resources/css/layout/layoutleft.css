@@ -93,11 +93,12 @@ a {
     justify-content: center;
 	margin-bottom: 14px;
     font-size: 20px;
-	width: 206px;
+	width: 230px;
     border: 0;
     font-size: 17px;
     color: #716D66;
     background: #FFEEEE;
+    height: 55px;
 }
 .userName p{
 	margin-bottom: 0;
@@ -115,8 +116,11 @@ a {
     display: block;
     margin-top: 0;
 }
-.btn:hover{
+.userName:hover{
 	background: #fff;
 	color: #716D66;
 	box-shadow: 1px 1px 20px #ddd;
+}
+.userName:active{
+	background-color: #fff;
 }
