@@ -15,10 +15,9 @@ public class AdminInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		int userCode = (int)request.getSession().getAttribute("userCode");
+		String authority = (String)request.getSession().getAttribute("authority");
 		
-		if(userCode<20000 || userCode>=30000) {
-			response.sendRedirect(request.getHeader("referer"));
+		if(!authority.equals("admin")) {
 			return false;
 		}
 		

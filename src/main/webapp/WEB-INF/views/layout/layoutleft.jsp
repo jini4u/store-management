@@ -19,10 +19,13 @@
 		</div>
 		<ul class="submenuItems">
 			<li><a href="<c:url value='/center/centerlist'/>">센터 조회</a></li>
+			<c:if test="${authority eq 'sysadmin'}">
 			<li><a href="<c:url value='/center/centerphoto'/>">센터 사진 관리</a></li>
 			<li><a href="${pageContext.request.contextPath}/center/centerexcelupload">센터 정보 일괄 등록</a></li>
+			</c:if>
 		</ul>
 	</li>
+	<c:if test="${authority ne 'manager'}">
 	<li>
 		<div class="dropdownlink">
 			담당자 <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -33,6 +36,7 @@
 			<li><a href="${pageContext.request.contextPath}/manager/managerfileuploadhistory">담당자 정보 일괄 등록</a></li>
 		</ul>
 	</li>
+	</c:if>
 	<li>
 		<div class="dropdownlink">
 			점수 <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -57,9 +61,9 @@
 	
 			<p>&nbsp;${sessionScope.userName}&nbsp;</p>
 			<c:choose>
-				<c:when test="${userCode<20000}">담당자</c:when>
-				<c:when test="${userCode<30000}">담당자 관리자</c:when>
-				<c:when test="${userCode<40000}">시스템 관리자</c:when>
+				<c:when test="${authority eq 'manager'}">담당자</c:when>
+				<c:when test="${authority eq 'admin'}">담당자 관리자</c:when>
+				<c:when test="${authority eq 'sysadmin'}">시스템 관리자</c:when>
 			</c:choose>
   		</button>
 
