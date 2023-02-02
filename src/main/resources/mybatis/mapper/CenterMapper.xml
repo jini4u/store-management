@@ -19,7 +19,7 @@
    		(SELECT NVL(MAX(center_code)+1, 1)FROM center)
    </if>
       , #{centerName}
-      , #{centerTel}
+      , REGEXP_REPLACE(#{centerTel} , '[^0-9]')
       , #{centerAddress}
       , #{centerGuide}
       , #{centerOpeningDate,jdbcType=DATE}
@@ -46,7 +46,7 @@ SELECT rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGu
 	        SELECT
 		      C.center_code as "centerCode"
 		      , C.center_name as "centerName"
-		      , C.center_tel as "centerTel"
+		      , REGEXP_REPLACE(C.center_tel, '(02|.{3})(.+)(.{4})', '\1-\2-\3') as "centerTel"
 		      , C.center_address as "centerAddress"
 		      , C.center_guide as "centerGuide"
 		      , C.center_opening_date as "centerOpeningDate"
@@ -75,7 +75,7 @@ SELECT rnum, "centerCode", "centerName", "centerTel", "centerAddress", "centerGu
            SELECT
             C.center_code as "centerCode"
             , C.center_name as "centerName"
-            , C.center_tel as "centerTel"
+            , REGEXP_REPLACE(C.center_tel, '(02|.{3})(.+)(.{4})', '\1-\2-\3') as "centerTel"
             , C.center_address as "centerAddress"
             , C.center_guide as "centerGuide"
             , C.center_opening_date as "centerOpeningDate"
@@ -159,7 +159,7 @@ VALUES (
       UPDATE CENTER
       SET
       	center_name = #{centerName},
-      	center_tel = #{centerTel},
+      	center_tel = REGEXP_REPLACE(#{centerTel} , '[^0-9]'),
       	center_address = #{centerAddress},
       	center_guide = #{centerGuide},
       	center_opening_date = #{centerOpeningDate,jdbcType=DATE},

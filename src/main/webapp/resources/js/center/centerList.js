@@ -288,6 +288,9 @@ $(".updateBtn").click(function (){
 	$(".centerTitle").html("센터 정보 수정");
 })
 /*//클릭된 페이지 가지고 오기 위한 함수
+ *(function() {
+ } --> 함수 바로 실행, 페이지 로딩되면 바로 실행!!
+ *
 	$(function (){
 		//링크에 존재하는 페이지번호 가져오기
 		var href = location.href.split('?');
