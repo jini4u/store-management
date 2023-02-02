@@ -269,7 +269,12 @@ function getcenterimages(){
 //      응답 받은 사진 수만큼 반복
       for(var i=0;i<result.length;i++){
          //파일 이름, 등록자, 등록일, 수정일 넣어주기
-         imgHistoryTable.tBodies[0].innerHTML += '<tr><td class="noImageTd thead-centerPhoto-file">'+result[i].originalName+'</td><td class="thead-allcenterPhoto-file">'+result[i].uploadUserName+"</td><td class='thead-allcenterPhoto-file'>"+result[i].filePostDate+"</td><td class='thead-allcenterPhoto-file'>"+result[i].fileModifyDate+"</td></tr>";
+    	  if (result[i].fileDetail == "inside") {
+			var fileDetail = '내부';
+		}else{
+			fileDetail = '외부';
+		}
+         imgHistoryTable.tBodies[0].innerHTML += '<tr><td class="noImageTd thead-centerPhoto-file">'+result[i].originalName+'</td><td class="thead-allcenterPhoto-file" id="centerDetail">'+fileDetail+'</td><td class="thead-allcenterPhoto-file">'+result[i].uploadUserName+'</td><td class="thead-allcenterPhoto-file">'+result[i].filePostDate+'</td><td class="thead-allcenterPhoto-file">'+result[i].fileModifyDate+'</td></tr>';
          deleteModalBody.innerHTML += '<tr><td><input type="checkbox" name="deleteCheck" value="'+result[i].fileNo+'"></td><td>'+result[i].originalName+'</td></tr>';
       }
    }

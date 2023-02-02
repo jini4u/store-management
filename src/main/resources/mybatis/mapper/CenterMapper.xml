@@ -210,4 +210,9 @@ FROM history H
 WHERE F.file_saved_name like ('%' || 'centerExcel' || '%')
 </select>
 
+<select id="countUploadHistory" resultType="int">
+SELECT  COUNT(*) FROM fileinfo
+WHERE file_saved_name LIKE('%' || 'centerExcel' || '%')
+</select>
+
 </mapper>

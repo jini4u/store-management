@@ -105,7 +105,8 @@
 				<thead>
 					<tr>
 						<th class="thead-centerPhoto-file">사진 이름</th>
-						<th class="thead-allcenterPhoto-file">사진 등록자</th>
+						<th class="thead-allcenterPhoto-file" id="centerDetail">구분</th>
+						<th class="thead-allcenterPhoto-file">등록자</th>
 						<th class="thead-allcenterPhoto-file">등록일</th>
 						<th class="thead-allcenterPhoto-file">수정일</th>
 					</tr>
