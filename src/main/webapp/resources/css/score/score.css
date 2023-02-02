@@ -16,6 +16,13 @@ display: inline-block;
 	
 }
 
+#btn_group {
+	display: flex;
+}
+
+#score-update-button {
+	margin-right: 6px;
+}
 /*점수 리스트 테이블*/
 .scoretable {
     width: 100%;
@@ -86,8 +93,6 @@ table.scoretable td {
 }
 
 
-
-
 .clikedBtn{
 	background-color: #E26868;
 	border: 2px solid #E26868;
@@ -130,3 +135,4 @@ color: #fff;
     color:blue;
     outline: none;
 } 
+

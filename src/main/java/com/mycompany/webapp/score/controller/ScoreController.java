@@ -165,7 +165,6 @@ public class ScoreController {
 			String[] arrayGroupCode, ScoreVO scoreVO,HttpServletRequest request) {		
 		
 		scoreVO.setArrayScore(arrayScore);
-		/*System.out.println(Arrays.toString(scoreVO.getArrayScore()));*/
 		scoreVO.setArrayCheckGroupCode(arrayGroupCode);
 		scoreVO.setArrayCheckDetailCode(arrayDetailCode);
 		

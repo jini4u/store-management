@@ -65,11 +65,11 @@
 								<c:forEach var="i" begin="${pager.startPageNo}"
 									end="${pager.endPageNo}">
 									<li><c:if test="${pager.pageNo != i}">
-										<a class="innerPager active num"
+										<a class="innerPager num"
 											href="centerphoto?pageNo=${i}&keyword=${keyword}">${i}</a>
 									</c:if></li>
 									<li><c:if test="${pager.pageNo == i}">
-										<a class="innerPager num" id="now-page"
+										<a class="innerPager active num" id="now-page"
 											href="centerphoto?pageNo=${i}&keyword=${keyword}">${i}</a>
 									</c:if></li>
 								</c:forEach>
@@ -160,7 +160,7 @@
 							</tbody>
 						</table>
 						<!-- 일단 고정해둠.. 로그인한 사용자걸로 바꾸기 -->
-						<c:set var="titleUserCode" value="10002" />
+						<c:set var="titleUserCode" value='${sessionScope.userCode}' />
 						<input type="text" name='uploadUserCode' id="uploadUserCode"
 							value="<c:out value='${titleUserCode}'/>" />
 					</div>

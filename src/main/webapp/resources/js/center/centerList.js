@@ -221,7 +221,6 @@ $("#centerSavedBtn").click(function (){
 		let updateURL = "centerupdate";
 		let centercondition = document.querySelector("#centerCondition").value;
 		let pageNo = $("#now-page").text();
-		alert(pageNo);
 		console.log("centerCondition"+centercondition);
 		$.ajax({
 			type : "POST",
@@ -268,7 +267,7 @@ $("#centerInsertBtn").click(function () {
 	$("#showPhoto").hide();
 	$(".modal-body").removeAttr('id', 'centerphoto' );
 	$("#centerInsertModal").removeAttr('class', 'modal-xl');
-
+	$(".centerTitle").html("센터 등록");
 
 	$("#centerName").attr("readonly", false);
 	$("#centerInsertModal").attr('class', 'modal-dialog modal-lg modal-dialog-centered');
@@ -285,8 +284,10 @@ $("#centerInsertBtn").click(function () {
 	$("#centerOpeningDate").val('');
 	$("#centerClosingDate").val('');
 });
-
-//클릭된 페이지 가지고 오기 위한 함수
+$(".updateBtn").click(function (){
+	$(".centerTitle").html("센터 정보 수정");
+})
+/*//클릭된 페이지 가지고 오기 위한 함수
 	$(function (){
 		//링크에 존재하는 페이지번호 가져오기
 		var href = location.href.split('?');
@@ -296,22 +297,15 @@ $("#centerInsertBtn").click(function () {
 		var pageNo = page[1];
 		
 		//페이지에 있는 페이지 번호 가져오기
-		alert(pageNo);
 		$('.pagination .please').each(function (index, item) {
-//		var ddd=$('.please');
 			index = index + 1;
 			$(item).addClass('good-'+index);
 	        if (pageNo === $(this).text()) {
-//	        	alert("여기는 들어가니?"+$(this).text() + "/"+ ddd[index]);
-//	        	var color = 'style="background-color : #E26868;"';
-//	        	$('.please').attr('id', 'good-luck');
 	        	$('.good-'+pageNo).css("background-color", "#E26868");
 	        		
 	        }
 	        
 		});
-	    alert("stopp!!!!!!!!!")
-	
-});
+});*/
 
 

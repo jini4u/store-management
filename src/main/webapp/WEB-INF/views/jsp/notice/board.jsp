@@ -16,9 +16,9 @@
 		<th>게시일</th>
 	</tr>
 <c:forEach var="post" items="${allPosts}">
-	<tr>
+	<tr class="noticeTr">
 		<td>${post.postno}</td>
-		<td><a href="${pageContext.request.contextPath}/board/update?postno=${post.postno}">${post.title}</a></td>
+		<td class="noticeTitle"><a href="${pageContext.request.contextPath}/board/update?postno=${post.postno}">${post.title}</a></td>
 		<td class="board-hidden">${post.content}</td>
 		<td class="board-hidden">${post.author}</td>
 		<td>${post.posttime}</td>

@@ -21,15 +21,33 @@ public class ManagerPOI extends POIClass {
 		switch(col) {
 		case 1:	
 			mgr = new ManagerVO();
-			if(cell.getNumericCellValue() == 0) {
-				mgr.setUserCode(0);
+			int userCode;
+			
+			if(cell.getCellType().toString().equals("NUMERIC")) {
+				if(cell.getNumericCellValue() == 0) {
+					mgr.setUserCode(0);
+				}else {
+					userCode = (int)cell.getNumericCellValue();
+					mgr.setUserCode(userCode);
+				}
 			}else {
-				int userCode = (int)cell.getNumericCellValue();
-				mgr.setUserCode(userCode);
+				if(cell.getNumericCellValue() == 0) {
+					mgr.setUserCode(0);
+				}else {
+					userCode = Integer.parseInt(cell.getStringCellValue());
+					mgr.setUserCode(userCode);
+				}		
 			}
+
 			break;
 		case 2:
-			String userPassword= String.valueOf(cell.getNumericCellValue());
+			String userPassword;
+			if(cell.getCellType().toString().equals("NUMERIC")) {
+				userPassword= String.valueOf((int)cell.getNumericCellValue());
+
+			}else {
+				userPassword= cell.getStringCellValue();
+			}
 			mgr.setUserPassword(userPassword);
 			System.out.println("담당자 비번: "+userPassword);
 			break;
@@ -39,12 +57,22 @@ public class ManagerPOI extends POIClass {
 			System.out.println("담당자 이름: "+userName);
 			break;
 		case 4:
-			String userBirth =cell.getStringCellValue();
+			String userBirth;
+			if(cell.getCellType().toString().equals("NUMERIC")) {
+				userBirth =String.valueOf((int)cell.getNumericCellValue());
+			}else {
+				userBirth =cell.getStringCellValue();
+			}
 			mgr.setUserBirth(userBirth);
 			System.out.println("담당자 생일: "+userBirth);
 			break;
 		case 5:
-			String userTel = cell.getStringCellValue();
+			String userTel;
+			if(cell.getCellType().toString().equals("NUMERIC")) {
+				userTel =String.valueOf((int)cell.getNumericCellValue());
+			}else {
+				userTel =cell.getStringCellValue();
+			}
 			mgr.setUserTel(userTel);
 			System.out.println("담당자 전화번호: "+userTel);
 			break;

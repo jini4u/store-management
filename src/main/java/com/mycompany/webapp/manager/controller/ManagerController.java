@@ -3,6 +3,8 @@ package com.mycompany.webapp.manager.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.tomcat.util.json.JSONParser;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -207,10 +209,12 @@ public class ManagerController {
 	/* author 은별
 	  담담자 엑셀 파일 업로드 POSt 요청 */
 	@RequestMapping(value="/managerFileUpload", method=RequestMethod.POST)
-	public String managerFileUpload(MultipartHttpServletRequest request) {
+	public String managerFileUpload(MultipartHttpServletRequest request, HttpSession session) {
 		//MultipartHttpServletRequest을 사용하면 getFile 메소드를 통해 List 형태로 받을 수 있다
 		MultipartFile file = request.getFile("mgrExcelFile");
-		managerService.mgrUploadFileInfo(file, 3);
+		//getAttribute 하면 object로 받아와지므로 캐스팅 해줘야 한다
+		int userCode = (int)session.getAttribute("userCode");
+		managerService.mgrUploadFileInfo(file, 3, userCode);
 		logger.info("엑셀 등록"+file.toString());
 		return "redirect: /manager/managerfileuploadhistory";
 	}
