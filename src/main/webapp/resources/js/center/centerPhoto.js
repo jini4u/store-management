@@ -75,6 +75,7 @@ function getcenterimages(){
 	let result = JSON.parse(httpRequest.responseText);
 	//사진 들어갈 div 초기화
 	imgDiv.innerHTML = '';
+
 	var photoDiv = document.createElement('div');
 	photoDiv.setAttribute('class', 'photo-slider');
 	var ul = document.createElement('ul');
@@ -108,6 +109,9 @@ function getcenterimages(){
 		noImageTr.innerHTML = '등록된 사진이 없습니다.';
 		noImage.append(noImageTr);
 		photoDiv.append(ul);
+		imgDetailTable.tBodies[0].innerHTML = '';
+		//사진 정보를 담을 <tr></tr> 생성
+
 		//사진이 있을 경우 실행
 	}else{
 		//응답으로 받은 사진 수 만큼 반복
@@ -185,6 +189,7 @@ function getcenterimages(){
 				nameInput.setAttribute('type', 'text');
 				//name='originalName'
 				nameInput.setAttribute('name', 'newOriginalName');
+				nameInput.setAttribute('class', 'new-OriginalName');
 				//value='클릭한 이미지의 data-img-name 속성 값'
 				nameInput.setAttribute('value', e.target.getAttribute('data-img-name'));
 				//nameTd에 nameInput 넣기
@@ -199,7 +204,7 @@ function getcenterimages(){
 				//select에 들어갈 <option></option> 생성
 				var detailInside = document.createElement('option');
 				//option에 속성 추가. value='inside'
-				detailInside.setAttribute('value', 'inside');
+				detailInside.setAttribute('value', 'inside', 'selected');
 				//태그 안에 '내부' 문자열 추가
 				detailInside.innerHTML = '내부';
 				//select에 들어갈 <option></option> 생성
@@ -247,15 +252,16 @@ function getcenterimages(){
 		} 
 		imgDiv.appendChild(photoDiv);
 	}//if~else문 끝
-
-
 //	사진 정보 기록 테이블 초기화
 	imgHistoryTable.tBodies[0].innerHTML = '';
 //	삭제 모달 테이블 초기화
 	deleteModalBody.innerHTML = '';
+	imgDetailTable.tBodies[0].innerHTML = '';
 	//사진이 없을 때
 	if (result == 0) {
+
 		imgHistoryTable.tBodies[0].innerHTML += "<tr><td class='noImage-size'>등록된 사진이 없습니다</td></tr>";
+		imgDetailTable.tBodies[0].innerHTML = "<tr><td colspan='2'>등록된 사진이 없습니다</td></tr>";
 	}else{
 //		응답 받은 사진 수만큼 반복
 		for(var i=0;i<result.length;i++){
@@ -335,7 +341,7 @@ deleteBtn.addEventListener("click", function(){
 	}
 	makeRequest(afterDeleteImg, 'POST', '/center/deleteimage/'+centerNameArr[4].innerText, checked);
 });
- 
+
 function afterDeleteImg(){
 	$("#deleteModal .close").click();
 	makeRequest(getcenterimages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
