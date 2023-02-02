@@ -133,7 +133,7 @@
 		<!-- Modal content-->
 		<div class="modal-content p-6">
 			<div class="modal-header">
-				<h4 class="modal-title">센터 등록</h4>
+				<h4 class="modal-title centerTitle">센터 정보 수정</h4>
 				<button type="button" class="close" data-dismiss="modal">×</button>
 				<!-- 사용자 지정 부분② : 타이틀 -->
 			</div>
