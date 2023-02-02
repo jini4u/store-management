@@ -91,7 +91,18 @@ if(urlParams.get("checkYear")!=null && urlParams.get("checkSeason")!=null){
 }
 	
 	
+function Checkform() {
 
+    if( frm.name.value == "" ) {
+    
+        frm.name.focus();
+        alert("성명을 입력해 주십시오.");
+        
+        return false;
+        
+    }
+    
+}
 	
 	
 	
