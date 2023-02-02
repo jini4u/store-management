@@ -80,7 +80,26 @@
 .paging {
 	margin-left: 10%;
 }
-
+#targetCenterName{
+	width: 165px;
+}
+#centermodal-insert th{
+	font-size: 18px;
+}
+#selectSize{
+	width: 138px;
+}
+.centermodal-insertphoto-info{
+	width: 426px;
+}
+#center-search-bar input {
+	margin-left: 16px;
+    margin-bottom: 10px;
+}
+.modal-body{
+	display: flex;
+    justify-content: center;
+}
 .center-modal-mainbar {
 	background-color: #E26868;
 	display: flex;
@@ -90,12 +109,11 @@
 
 #centermodal-insert {
 	margin: 10px;
+	width: 100%;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 24px;
 }
 
-#center-search-bar {
-	margin: 30px;
-	text-align: center;
-}
 
 #centermodal-photo-list {
 	margin: 10px;
