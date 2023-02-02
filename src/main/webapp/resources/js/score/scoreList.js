@@ -91,8 +91,7 @@ if(urlParams.get("checkYear")!=null && urlParams.get("checkSeason")!=null){
 }
 	
 	
-	
-	
+
 	
 	
 	
