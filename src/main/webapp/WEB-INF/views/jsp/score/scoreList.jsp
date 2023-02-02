@@ -93,7 +93,7 @@
 		</tr>
 		<c:if test="${empty scoreList}">
 			데이터가 없습니다.
-		</c:if>
+					</c:if>
 		<c:if test="${not empty scoreList}">
 
 			<c:forEach items="${scoreList}" var="scoreCode">

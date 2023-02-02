@@ -12,7 +12,7 @@
       src="${pageContext.request.contextPath}/resources/images/home.png">
       <a href="/">&nbsp; Home &nbsp; ></a>
       <span>&nbsp; 담당자  &nbsp; ></span>
-      <a href="">&nbsp; 담당자 맵핑</a>   
+      <a href="${pageContext.request.contextPath}/manager/managermapping">&nbsp; 담당자 맵핑</a>   
 </div>
 
 <div class="titleBox">
@@ -76,7 +76,8 @@
                         href="managermapping?pageNo=${i}&keyword=${keyword}">${i}</a>
                   </c:if></li>
                <li><c:if test="${pager.pageNo == i}">
-                     <a id="now-page" class="innerPager active num"
+
+                     <a id="now-page" class="innerPager num active"
                         href="managermapping?pageNo=${i}&keyword=${keyword}">${i}</a>
                   </c:if></li>
             </c:forEach>
