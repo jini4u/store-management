@@ -49,14 +49,21 @@ $(document).ready(function(){
 	setYearBox();
 	
 });    
+
+var urlParams = new URLSearchParams(window.location.search);
+
 function setYearBox(){
 	var dt = new Date();
 	var year = "";
 	var com_year = dt.getFullYear();
 	$("#yearbox").append("<option value=''>년도</option>");
 
-	for(var y = (com_year); y >= (com_year-10); y--){ 								// 올해 기준으로 -10 까지
-		$("#yearbox").append("<option value='"+ y +"'>"+ y + " 년" +"</option>");
+	for(var y = (com_year); y >= (com_year-10); y--){ 	// 올해 기준으로 -10 까지
+		if(y == urlParams.get('checkYear')){
+			$("#yearbox").append("<option selected='selected' value='"+ y +"'>"+ y + " 년" +"</option>");
+		} else{
+			$("#yearbox").append("<option value='"+ y +"'>"+ y + " 년" +"</option>");
+		}
 	}
 };
 
@@ -76,7 +83,6 @@ function setYearBox(){
 //scoreUpdate
 	
 var updateBtn = document.getElementById("score-update-button");
-var urlParams = new URLSearchParams(window.location.search);
 
 if(urlParams.get("checkYear")!=null && urlParams.get("checkSeason")!=null){
 	updateBtn.style.display = 'block';
