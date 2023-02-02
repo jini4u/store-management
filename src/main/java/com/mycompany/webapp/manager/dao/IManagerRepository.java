@@ -41,7 +41,10 @@ public interface IManagerRepository {
 	//같은 데이터가 있는지 조회
 	int mgrIsDataExist(ManagerVO mgr);
 	//담당자 엑셀 업로드 히스토리 
-	List<Map<String, Object>> mgrUploadFileHistory();
+	List<Map<String, Object>> mgrUploadFileHistory(Pager pager);
+	/* author 은별
+	 * 엑셀 업로드한 총수*/
+	int mgrUploadFileTotalCount();
 	
 	//키워드별 담당자 검색
 	List<ManagerVO> managerSearch(@Param("pager")Pager pager, @Param("keyword") String keyword,@Param("keywordType") String keywordType);
