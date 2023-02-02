@@ -92,4 +92,47 @@ table.scoretable td {
 	padding: 6px 10px;
 }
 
-input{background-color:white;}
+
+.clikedBtn{
+	background-color: #E26868;
+	border: 2px solid #E26868;
+	color: #fff;
+	border-radius: 4px;
+   display: inline-block;
+   cursor: pointer;
+   font-size: 18px;
+   padding: 6px 25px;
+   text-decoration: none;
+   font-weight: 550;
+ }
+
+ /* 마우스 올렸을때 파란색 변하지 않도록, 하단 줄 뜨지않도록 조정 */
+ .clikedBtn:hover{
+text-decoration:none!important ;
+color: #fff;
+
+ }
+
+/* click했을때 변할 버튼, 글자색 지정 
+ ** js필요
+ ** 
+ */
+ .clicked {
+	background-color:#fff;
+	border: 2px solid #E26868;
+	color:#E26868;
+	border-radius: 4px;
+   display: inline-block;
+   cursor: pointer;
+   font-size: 18px;
+   padding: 6px 25px;
+   text-decoration: none;
+   font-weight: 550;
+
+	
+} 
+ a[tabindex]:focus {
+    color:blue;
+    outline: none;
+} 
+

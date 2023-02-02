@@ -335,7 +335,7 @@ deleteBtn.addEventListener("click", function(){
 	}
 	makeRequest(afterDeleteImg, 'POST', '/center/deleteimage/'+centerNameArr[4].innerText, checked);
 });
-
+ 
 function afterDeleteImg(){
 	$("#deleteModal .close").click();
 	makeRequest(getcenterimages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
