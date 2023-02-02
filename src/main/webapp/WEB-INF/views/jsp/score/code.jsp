@@ -16,6 +16,7 @@
 	<h2>코드관리</h2>
 </div>
 
+<div id="code-notice">코드 등록 또는 수정 시, 정보 입력 후 저장 버튼을 눌러주세요</div>
 <div id="twocodedivs">
 	<div class="codeTotalDiv">
 		<p>그룹코드
@@ -30,20 +31,20 @@
 						</div>
 						<div class="codenamediv">
 							그룹코드명 <input type="text" name="groupContent" id="groupcontent"
-								value="">
+								value="" readonly>
 						</div>
 					</div>
 					<div id="groupselectdiv" class="occupieddiv">
 						사용여부 <select name="groupOccupied" class="groupOccupied">
-							<option value="all">전체
-							<option value="y">사용중
-							<option value="n">사용안함
+							<option disabled="disabled" value="y">사용중
+							<option disabled="disabled" value="n">사용안함
 						</select>
 					</div>
 				</div>
 				<div class="widthLine"></div>
 				<div class="buttonsdiv">
 					<button type="button" id="insertgroup" class="pinkButton">추가</button>
+					<button type="button" id="updategroup" class="pinkButton">수정</button>
 					<button type="button" id="savegroup" class="pinkButton">저장</button>
 				</div>
 			</form>
@@ -76,20 +77,20 @@
 						</div>
 						<div class="codenamediv">
 							상세코드명 <input type="text" name="detailContent" id="detailcontent"
-								value="">
+								value="" readonly>
 						</div>
 					</div>
 					<div class="occupieddiv">
 						사용여부 <select name="detailOccupied" class="detailOccupied">
-							<option value="all">전체
-							<option value="y">사용중
-							<option value="n">사용안함
+							<option disabled="disabled" value="y">사용중
+							<option disabled="disabled" value="n">사용안함
 						</select>
 					</div>
 				</div>
 				<div class="widthLine"></div>
 				<div class="buttonsdiv">
 					<button type="button" id="insertdetail" class="pinkButton">추가</button>
+					<button type="button" id="updatedetail" class="pinkButton">수정</button>
 					<button type="button" id="savedetail" class="pinkButton">저장</button>
 				</div>
 			</form>
