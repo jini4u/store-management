@@ -52,7 +52,7 @@
 		<ul class="pagination">
 			<li><a class="innerPager first"
 				href="centerexcelupload?pageNo=1">처음</a></li>
-			<li><c:if test="${pager.groupNo>1}">
+			<li><c:if test="${pager.groupNo>1}"> 
 					<a class="innerPager arrow left"
 						href="centerexcelupload?pageNo=${pager.startPageNo-1}">이전</a>
 				</c:if></li>
