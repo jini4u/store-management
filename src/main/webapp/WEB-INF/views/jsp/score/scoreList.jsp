@@ -18,11 +18,22 @@
 		src="${pageContext.request.contextPath}/resources/images/checklist.png">
 	<h2>센터 점수 조회</h2>
 </div>
+ 
+<%-- <c:forEach items="${centerName}" var="center">
+	<a	id="changeBtn" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}"
+		class="pinkButton firstCenter ">${center.centerName}</a>
+</c:forEach> --%>
 
 <c:forEach items="${centerName}" var="center">
-	<a
-		href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}"
-		class="pinkButton firstCenter">${center.centerName}</a>
+	
+	<c:if test="${center.centerCode eq param.centerCode}">
+	<a class="clikedBtn clicked" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
+	</c:if>
+	<c:if test="${center.centerCode ne param.centerCode}">
+	<a class="clikedBtn" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
+	</c:if>
+
+		
 </c:forEach>
 
 
