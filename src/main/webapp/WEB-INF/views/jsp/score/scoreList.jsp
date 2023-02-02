@@ -71,7 +71,7 @@
 					<td class="score_td">${scoreCode.checkGroupContent}</td>
 					<td class="score_td">${scoreCode.checkDetailContent}</td>
 					<td class="score_td">
-					<input id="inputNumber" type="number" name="checkScore"
+					<input id="inputNumber" type="number" name="arrayScore"
 						class="placeholderstlye" size="5"
 						value="${scoreCode.checkScore}" value="0" min="0" max="100"></td>
 						
@@ -85,9 +85,9 @@
 				<input type="hidden" name="centerCode" value="${score.centerCode}" />
 				<input type="hidden" name="checkYear" value="${score.checkYear}" />
 				<input type="hidden" name="checkSeason" value="${score.checkSeason}" />
-				<input type="hidden" name="arrayCheckGroupCode"
+				<input type="hidden" name="arrayGroupCode"
 					value="${score.checkGroupCode}" />
-				<input type="hidden" name="arrayCheckDetailCode"
+				<input type="hidden" name="arrayDetailCode"
 					value="${score.checkDetailCode}" />
 			</c:forEach>
 		</c:if>
