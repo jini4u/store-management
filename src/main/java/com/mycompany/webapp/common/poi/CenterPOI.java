@@ -98,8 +98,6 @@ public class CenterPOI extends POIClass{
 			}else {
 				centerTel = cell.getStringCellValue();
 			}
-			centerTel.replaceAll("[^0-9]", "");
-			System.out.println(centerTel);
 			center.setCenterTel(centerTel);
 			VOList.add(center);
 			break;

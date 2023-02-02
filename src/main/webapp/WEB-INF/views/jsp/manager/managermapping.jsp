@@ -76,6 +76,7 @@
                         href="managermapping?pageNo=${i}&keyword=${keyword}">${i}</a>
                   </c:if></li>
                <li><c:if test="${pager.pageNo == i}">
+
                      <a id="now-page" class="innerPager num active"
                         href="managermapping?pageNo=${i}&keyword=${keyword}">${i}</a>
                   </c:if></li>
@@ -136,10 +137,10 @@
                   <c:forEach var="i" begin="${pager.startPageNo}"
                      end="${pager.endPageNo}">
                      <li><c:if test="${pager.pageNo != i}">
-                           <a class="innerPager active num">${i}</a>
+                           <a class="innerPager num">${i}</a>
                         </c:if></li>
                      <li><c:if test="${pager.pageNo == i}">
-                           <a id="now-page" class="innerPager num">${i}</a>
+                           <a id="now-page" class="innerPager active num">${i}</a>
                         </c:if></li>
                   </c:forEach>
                   <li><c:if test="${pager.groupNo<pager.totalGroupNo}">
