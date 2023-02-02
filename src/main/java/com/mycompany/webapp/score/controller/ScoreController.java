@@ -69,9 +69,9 @@ public class ScoreController {
 
 	@RequestMapping(value="/scorelist", method = RequestMethod.GET)
 	public String centerscoreinquiry(@RequestParam(defaultValue="1") int pageNo,@RequestParam(defaultValue="0")int centerCode, @RequestParam(defaultValue="0")int checkYear, @RequestParam(defaultValue="0")int checkSeason,Model model,HttpSession session) {
-		int userCode = (Integer) session.getAttribute("userCode");
-		/*int userCode = 10004;*/
 
+	/*	int userCode = 10004;*/
+		int userCode = (Integer) session.getAttribute("userCode");
 		if(centerCode == 0) {
 			return "redirect:/score/scorelist?centerCode="+scoreService.getCenterName(userCode).get(0).getCenterCode();
 		} else {
@@ -101,11 +101,10 @@ public class ScoreController {
 		//비어있는 ScoreVO 생성
 		ScoreVO emptyVO = new ScoreVO();
 		//getScoreList 하기위해서 centerCode는 무조건 필요하므로 1로 set
-		emptyVO.setCenterCode(1);
+		emptyVO.setCenterCode(centerCode);;
 		//빈 VO를 이용해서 getScoreList : emptyVO에 센터코드만 있고 년도, 시즌 없으니까 쿼리문에서 WHERE절에 if조건으로 안걸려서 전체 점수 정보가 다 담겨있음
 		List<ScoreVO> allScoreList = scoreService.getScoreList(emptyVO, pager);
 		//전체 리스트 크기가 0보다 크면 (점수 테이블에 값이 있으면)
-		System.out.println();
 		if(allScoreList.size() > 0) {
 
 			//제일 최근 정보가 0번이므로 0번의 정보를 담아줌
@@ -166,7 +165,6 @@ public class ScoreController {
 			String[] arrayGroupCode, ScoreVO scoreVO,HttpServletRequest request) {		
 		
 		scoreVO.setArrayScore(arrayScore);
-		/*System.out.println(Arrays.toString(scoreVO.getArrayScore()));*/
 		scoreVO.setArrayCheckGroupCode(arrayGroupCode);
 		scoreVO.setArrayCheckDetailCode(arrayDetailCode);
 		

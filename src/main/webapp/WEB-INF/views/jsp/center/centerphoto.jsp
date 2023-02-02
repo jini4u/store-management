@@ -65,11 +65,11 @@
 								<c:forEach var="i" begin="${pager.startPageNo}"
 									end="${pager.endPageNo}">
 									<li><c:if test="${pager.pageNo != i}">
-										<a class="innerPager active num"
+										<a class="innerPager num"
 											href="centerphoto?pageNo=${i}&keyword=${keyword}">${i}</a>
 									</c:if></li>
 									<li><c:if test="${pager.pageNo == i}">
-										<a class="innerPager num" id="now-page"
+										<a class="innerPager active num" id="now-page"
 											href="centerphoto?pageNo=${i}&keyword=${keyword}">${i}</a>
 									</c:if></li>
 								</c:forEach>

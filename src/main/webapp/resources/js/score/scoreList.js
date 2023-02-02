@@ -9,6 +9,9 @@
  * 2023.01.13	정윤선
  * @author 정윤선
  * **/
+function menuClick(event){
+	
+}
 
 $(function(){
 	//모달창
@@ -70,48 +73,33 @@ function setYearBox(){
 	});
 
 	
-	
 //scoreUpdate
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//버튼변함 고정	
-/*	var changeBtn = document.getElementsByClassName("#changeBtn");
+var updateBtn = document.getElementById("score-update-button");
+var urlParams = new URLSearchParams(window.location.search);
 
-    function handleClick(event) {
-      console.log(event.target);
-      console.log(this);
-      console.log(event.target.classList);
+if(urlParams.get("checkYear")!=null && urlParams.get("checkSeason")!=null){
+	updateBtn.style.display = 'block';
+} else {
+	updateBtn.style.display = 'none';
+}
+	
+	
+	
+	
+	
+	
+	
 
-      if (event.target.forEach [1] === "clicked") {
-        event.target.forEach.remove("clicked");
-      } else {
-        for (var i = 0; i < div2.length; i++) {
-        	changeBtn[i].forEach.remove("clicked");
-        }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
-        event.target.forEach.add("clicked");
-      }
-    }
-
-    function init() {
-      for (var i = 0; i < changeBtn.length; i++) {
-    	  changeBtn[i].addEventListener("click", handleClick);
-      }
-    }
-    init();*/
-/*    $('#changeBtn').click(function(){
-    	  if($(this).hasClass("active")){
-    	    $(this).removeClass("active");
-    	  }else{
-    	    $(this).addClass("active");  
-    	  }
-    	});*/
+	
