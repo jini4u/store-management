@@ -73,8 +73,14 @@ function setYearBox(){
 	
 //scoreUpdate
 	
-	
-	
+var updateBtn = document.getElementById("score-update-button");
+var urlParams = new URLSearchParams(window.location.search);
+
+if(urlParams.get("checkYear")!=null && urlParams.get("checkSeason")!=null){
+	updateBtn.style.display = 'block';
+} else {
+	updateBtn.style.display = 'none';
+}
 	
 	
 	

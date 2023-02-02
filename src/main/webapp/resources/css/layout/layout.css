@@ -269,7 +269,7 @@ table{
 }
 
 /* 기억 */
-.num:hover {
+.num:hover, .pagination a.active {
    -moz-border-radius: 100%;
    -wekit-border-radius: 100%;
    border-radius: 100%;
