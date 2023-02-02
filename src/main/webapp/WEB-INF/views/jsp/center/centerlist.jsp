@@ -81,11 +81,11 @@
 				<c:forEach var="i" begin="${pager.startPageNo}"
 					end="${pager.endPageNo}">
 					<li ><c:if test="${pager.pageNo != i}">
-							<a class="innerPager active num"
+							<a class="innerPager num"
 								href="centerlist?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}"><span class="please">${i}</span></a>
 						</c:if></li>
 					<li><c:if test="${pager.pageNo == i}">
-							<a id="now-page" class="innerPager num"
+							<a id="now-page" class="innerPager active num"
 								href="centerlist?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}"><span class="please">${i}</span></a>
 						</c:if></li>
 				</c:forEach>
