@@ -4,30 +4,31 @@
 <title>헌혈의 집 관리 시스템 로그인</title>
 </head>
 <link rel="stylesheet" href="resources/css/login/login.css" />
-<div class="loginpage">
-	<div class="logindiv">
-		<h1 class="loginh1">로그인</h1>
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'
+	rel='stylesheet'>
 
-		<div class="login_blank"></div>
 
-		<form action="/login" method="post">
-		<div class="login_pw_form">
-			<div class="image_placeholder">
-				<img src="resources/images/person-icon.png"> 
-				<input type ="text" name="userCode" class="login_pw" placeholder="아이디">
-			</div>
-
-			<div class="blank"></div>
-
-			<div class="image_placeholder">
-				<img src="resources/images/key-icon.png"> 
-				<input type="password" name="password" class="login_pw" placeholder="비밀번호">
-			</div>
+	<div class="login__content">
+		<div class="login__img">
+			<img
+				src="${pageContext.request.contextPath}/resources/images/헌혈의집 캐릭터.png" alt="user login">
 		</div>
-		<div class="blank"></div>
+		<div class="login__forms">
+			<!--         login form -->
 
-		<div class="blank"></div>
-		<input type="submit" class="pinkButton" value="로그인">
-		</form>
+        
+        <form action="/login" class="login__register" id="login-in" method="post">
+          <h1 class="login__title">Sign In</h1>
+          <div class="login__box">
+            <i class='bx bx-user login__icon'></i>
+            <input type="text" name="userCode" placeholder="Username" class="login__input">
+          </div>
+          <div class="login__box">
+            <i class='bx bx-lock login__icon'></i>
+            <input type="password" name="password" placeholder="Password" class="login__input">
+          </div>
+       <input type="submit" class="pinkButton" value="Sign Up">
+        </form>
+
+		</div>
 	</div>
-</div>
