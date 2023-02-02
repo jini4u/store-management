@@ -3,6 +3,8 @@ var centerBody = document.getElementById("centertable").tBodies[0];
 //tr 선택시 해당 tr 내 정보 담을 객체 선언
 var centerNameArr;
 
+var labelClass;
+
 //센터 목록 테이블의 tr들에 클릭 이벤트 추가
 function setTrEvent(){
 	//마지막 줄은 페이징 처리이므로 제외(-1)
@@ -154,7 +156,7 @@ function getcenterimages(){
 		var labelTag = document.getElementsByName('label');
 
 		let centertable = document.querySelector('#centertable');
-		var labelClass = document.getElementsByClassName('photoSlideInfo');
+		labelClass = document.getElementsByClassName('photoSlideInfo');
 
 		var input = document.createElement('input');
 
@@ -303,6 +305,7 @@ function addcenterImage(){
 	console.log(response+"개 저장됨");
 	$("#insertModal .close").click();
 	makeRequest(getcenterimages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
+	labelClass[0].click();
 }
 
 //수정 모달 내부 수정 버튼
