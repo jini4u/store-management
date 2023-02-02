@@ -24,15 +24,15 @@ public class ManagerPOI extends POIClass {
 			int userCode;
 			
 			if(cell.getCellType().toString().equals("NUMERIC")) {
-				if(cell.getNumericCellValue() == 0) {
-					mgr.setUserCode(0);
+				if(cell.getNumericCellValue() == 30000) {
+					mgr.setUserCode(30000);
 				}else {
 					userCode = (int)cell.getNumericCellValue();
 					mgr.setUserCode(userCode);
 				}
 			}else {
-				if(cell.getNumericCellValue() == 0) {
-					mgr.setUserCode(0);
+				if(cell.getStringCellValue().equals("30000")) {
+					mgr.setUserCode(30000);
 				}else {
 					userCode = Integer.parseInt(cell.getStringCellValue());
 					mgr.setUserCode(userCode);
@@ -87,7 +87,12 @@ public class ManagerPOI extends POIClass {
 			System.out.println("담당자 팀코드: "+userTeamCode);
 			break;
 		case 8: 
-			String userHireDate = cell.getStringCellValue();
+			String userHireDate;
+			if(cell.getCellType().toString().equals("NUMERIC")) {
+				userHireDate =String.valueOf((int)cell.getNumericCellValue());
+			}else {
+				userHireDate =cell.getStringCellValue();
+			}
 			mgr.setUserHireDate(userHireDate);
 			System.out.println("담당자 입사일: "+userHireDate);
 			VOList.add(mgr);

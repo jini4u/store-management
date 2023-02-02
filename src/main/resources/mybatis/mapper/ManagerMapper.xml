@@ -15,7 +15,7 @@
                user_code as userCode,
                user_name as userName,
                TO_CHAR(user_birth, 'YYYY-MM-DD') as userBirth,
-               user_tel as userTel,
+               REGEXP_REPLACE(user_tel, '(.{3})(.+)(.{4})', '\1-\2-\3') as userTel,
                user_email as userEmail,
                user_team_code as userTeamCode,
                TO_CHAR(user_hire_date, 'YYYY-MM-DD') as userHireDate,
@@ -38,7 +38,7 @@
 INSERT INTO userInfo(user_code, user_password, user_name, user_birth, user_tel, user_email,user_team_code, user_hire_Date)
 VALUES   (
          (SELECT NVL(MAX(user_code)+1, 10001) FROM userinfo), 
-         #{userPassword}, #{userName}, #{userBirth}, #{userTel}, #{userEmail}, #{userTeamCode}, #{userHireDate})
+         #{userPassword}, #{userName}, #{userBirth}, regexp_replace(#{userTel},'[[:punct:] ]',''), #{userEmail}, #{userTeamCode}, #{userHireDate})
 ]]>
 </insert>  
 
@@ -52,7 +52,7 @@ VALUES   (
 <!--담당자 정보 수정  -->
 <update id="updateManagerInfo" parameterType="com.mycompany.webapp.manager.vo.ManagerVO">
    UPDATE userInfo
-   SET user_tel=#{userTel}, user_email=#{userEmail}, user_team_code=#{userTeamCode}, user_resign_date=#{userResignDate,jdbcType=DATE} 
+   SET user_tel=regexp_replace(#{userTel},'[[:punct:] ]',''), user_email=#{userEmail}, user_team_code=#{userTeamCode}, user_resign_date=#{userResignDate,jdbcType=DATE} 
    WHERE user_code= #{userCode}
 </update>
 
