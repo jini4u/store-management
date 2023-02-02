@@ -313,15 +313,3 @@ $('.inputNumber').keyup(function(event) {
 
 });
 
-/*$('#uppertype').on('keyup', function() {
-    if (/\D/.test(this.value)) {
-        this.value = this.value.replace( /^|A-Z]{2,2}+$/, '')
-        alert('영어 대문자 2자리 만 입력가능합니다.');
-    }
-});*/
-
-/*$("#uppertype").on("keyup",function(){
-		 if (/\D/.test(this.value)) {
-		(this).val = $(this).val().replace(/[^ㄱ-힣a-zA-Z0-9]/gi,"") 
-		}
-		});*/
