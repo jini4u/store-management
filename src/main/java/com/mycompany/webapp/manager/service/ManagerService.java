@@ -142,7 +142,7 @@ public class ManagerService implements IManagerService {
 			//managerVO로 형변환, 엑셀값이 vo에 담김
 			ManagerVO mgr = (ManagerVO)vo;
 			int mgrExisData = managerRepository.mgrIsDataExist(mgr);
-			if(mgr.getUserCode() == 0) {
+			if(mgr.getUserCode() == 30000) {
 				managerRepository.insertManager(mgr);
 				logger.info("등록@@@@@@@@@@@@ : "+mgr.toString());
 				//replace(K key, V oldValue, V newValue): 저장된 key의 value가 oldValue와 동일할 때만 newValue로 변경해준다
