@@ -38,7 +38,7 @@
     border-right: 1px solid #ccc;
 }
 .codetable {
-	min-width: 117%;
+	min-width: 100%;
 	margin-top: 20px;
 	text-align: center;
 	border: none;
@@ -52,11 +52,6 @@
 .codetable tbody tr:hover {
 	background: #EDEDED;
 }
-
-.codetable tr:active {
-	background: #EDEDED;
-}
-
 
 #detailcontentth {
 	width: 277px;
@@ -96,7 +91,7 @@ h1 {
 }
 
 button {
-	margin-left: 7px;
+	margin-right: 10px;
 	color: white;
 	background: #FF8787;
 	border: none;
@@ -121,9 +116,6 @@ button:hover {
 }
 .groupOccupied, .detailOccupied{
     height: 28px;
-}
-.pinkButton{
-    margin-left: 12px;
 }
 .titleLine{
 	border-bottom: 3.5px solid #FF8787;
