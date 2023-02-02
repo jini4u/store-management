@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.tomcat.util.json.JSONParser;
 import org.json.JSONArray;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,7 +64,8 @@ public class ManagerController {
 	  담당자 등록 POST*/
 	@ResponseBody
 	@PostMapping(value="/managerInsert")
-	public List<ManagerVO> insertManager(@RequestParam(defaultValue="1") int pageNo, ManagerVO mgr) {
+	public List<ManagerVO> insertManager(@RequestParam(defaultValue="1") int pageNo, @Valid ManagerVO mgr, BindingResult result) {
+		System.out.println("유효성검사 :"+result);
 		managerService.insertManager(mgr);
 		int totalRows = managerService.countAllMgr();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
@@ -201,8 +204,12 @@ public class ManagerController {
 	/* author 은별
 	  담담자 엑셀 파일  히스토리  */
 	@RequestMapping(value="/managerfileuploadhistory" , method=RequestMethod.GET)
-	public String mgrUploadFileHistory(Model model) {
-		model.addAttribute("mgrHistoryMapList", managerService.mgrUploadFileHistory());
+	public String mgrUploadFileHistory(@RequestParam(defaultValue="1") int pageNo,Model model) {
+		int fileTotalRows = managerService.mgrUploadFileTotalCount();
+	    Pager pager = new Pager(10, 10, fileTotalRows, pageNo);
+		model.addAttribute("mgrHistoryMapList", managerService.mgrUploadFileHistory(pager));
+		 model.addAttribute("pager", pager);
+		model.addAttribute("mgrURL","/manager/managerfileuploadhistory");
 		return  "jsp/manager/managerFileUpload";
 	}
 	

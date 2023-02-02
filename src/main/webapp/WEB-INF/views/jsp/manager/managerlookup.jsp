@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script src="https://kit.fontawesome.com/809e779c97.js"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css"
@@ -15,7 +16,7 @@
 		src="${pageContext.request.contextPath}/resources/images/home.png">
 		<a href="/">&nbsp; Home &nbsp; ></a>
 		<span>&nbsp; 담당자  &nbsp; ></span>
-		<a href="">&nbsp; 담당자 조회</a>	
+		<a href="${pageContext.request.contextPath}/manager/managerlist">&nbsp; 담당자 조회</a>	
 </div>
 
 <div class="titleBox">
@@ -26,16 +27,19 @@
 
 <div class="search_insert">
 	<!-- 검색 -->
+				
 
 	<form class="search-form" action="/manager/managersearch" method="get">
 			<select class="search-select" name="keywordType">
-				<option value="UC">담당자 코드</option>
-				<option value="UN">담당자명</option>
-				<option value="UTC">팀코드</option>
+				<!-- 조건이 참일 경우 selected 출력 -->
+				<!-- option 태그의 selected 속성: 페이지가 로드될 때 옵션 중에서 미리 선택되어지는 옵션을 명시 -->
+				<option value="UC" <c:if test="${keywordType eq 'UC'}">selected</c:if>>담당자 코드</option>
+				<option value="UN" <c:if test="${keywordType eq 'UN'}">selected</c:if>>담당자명</option>
+				<option value="UTC" <c:if test="${keywordType eq 'UTC'}">selected</c:if>>팀코드</option>
 			</select> 
 		<div class="search-box">
 			<input type="text" class="search-txt" id="searchTxt" name="keyword"
-				placeholder="search">
+				placeholder="search" value="${keyword}">
 			<button type="submit" value="search" class="search-btn">
 				<i class="fa fa-search"></i>
 			</button>
@@ -94,11 +98,11 @@
 			<c:forEach var="i" begin="${pager.startPageNo}"
 				end="${pager.endPageNo}">
 				<li><c:if test="${pager.pageNo != i}">
-						<a class="innerPager active num"
+						<a class="innerPager num"
 							href="${mgrURL}?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}">${i}</a>
 					</c:if></li>
 				<li><c:if test="${pager.pageNo == i}">
-						<a id="now-page" class="innerPager num"
+						<a id="now-page" class="innerPager num active"
 							href="${mgrURL}?pageNo=${i}&keywordType=${keywordType}&keyword=${keyword}">${i}</a>
 					</c:if></li>
 			</c:forEach>

@@ -9,7 +9,7 @@
 		src="${pageContext.request.contextPath}/resources/images/home.png">
 		<a href="/">&nbsp; Home &nbsp; ></a>
 		<span>&nbsp; 담당자  &nbsp; ></span>
-		<a href="">&nbsp; 담당자 일괄 등록</a>	
+		<a href="${pageContext.request.contextPath}/manager/managerfileuploadhistory">&nbsp; 담당자 일괄 등록</a>	
 </div>
 
 <div class="titleBox">
@@ -42,5 +42,32 @@
 		</tr>
 	</c:forEach>
 </table>
+	<div class="center-pagging">
+		<ul class="pagination">
+			<li><a class="innerPager first"
+				href="${mgrURL}?pageNo=1">처음</a></li>
+			<li><c:if test="${pager.groupNo>1}">
+					<a class="innerPager arrow left"
+						href="${mgrURL}?pageNo=${pager.startPageNo-1}">이전</a>
+				</c:if></li>
+			<c:forEach var="i" begin="${pager.startPageNo}"
+				end="${pager.endPageNo}">
+				<li><c:if test="${pager.pageNo != i}">
+						<a class="innerPager num"
+							href="${mgrURL}?pageNo=${i}">${i}</a>
+					</c:if></li>
+				<li><c:if test="${pager.pageNo == i}">
+						<a id="now-page" class="innerPager num active"
+							href="${mgrURL}?pageNo=${i}">${i}</a>
+					</c:if></li>
+			</c:forEach>
+			<li><c:if test="${pager.groupNo<pager.totalGroupNo}">
+					<a class="innerPager arrow right"
+						href="${mgrURL}?pageNo=${pager.endPageNo+1}">다음</a>
+				</c:if></li>
+			<li><a class="innerPager last"
+				href="${mgrURL}?pageNo=${pager.totalPageNo}">맨끝</a></li>
+		</ul>
+	</div>
 
 <script src="${pageContext.request.contextPath}/resources/js/manager/managerFileUpload.js"></script>

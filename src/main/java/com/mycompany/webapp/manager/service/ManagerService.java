@@ -184,8 +184,8 @@ public class ManagerService implements IManagerService {
 	 * 	담당자 엑셀 업로드 히스토리
 	 */
 	@Override
-	public List<Map<String, String>> mgrUploadFileHistory() {
-		List<Map<String, Object>> mgrHistoryList = managerRepository.mgrUploadFileHistory();
+	public List<Map<String, String>> mgrUploadFileHistory(Pager pager) {
+		List<Map<String, Object>> mgrHistoryList = managerRepository.mgrUploadFileHistory(pager);
 		List<Map<String, String>> mgrResultList = new ArrayList<Map<String, String>>();
 		for(Map<String,Object> history:mgrHistoryList) {
 				String postDate = (String)history.get("postDate");
@@ -203,6 +203,12 @@ public class ManagerService implements IManagerService {
 				mgrResultList.add(mgrResultMap);
 			}
 			return mgrResultList;
+	}
+	
+	/* author 은별
+	 * 엑셀 업로드한 총수*/
+	public int mgrUploadFileTotalCount() {
+		return managerRepository.mgrUploadFileTotalCount();
 	}
 
 
