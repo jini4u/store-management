@@ -75,34 +75,77 @@ function getAvailCenters(){
 	let availBody = availTable.tBodies[0];
 	availBody.innerHTML = '';
 	let res = JSON.parse(httpRequest.responseText);
-	for(var i=0;i<res.length;i++){
+	
+	let pager = res[res.length-1];
+	let modalPager = document.getElementById("modal-pager");
+	
+	modalPager.innerHTML = '<li><a class="innerPager first">처음</a></li>';
+	
+	for(var i=pager.startRowIndex;i<pager.endRowIndex;i++){
+		if(i == res.length-1){
+			break;
+		}
 		availBody.innerHTML += "<tr><td>"+res[i].centerCode+"</td><td>"+res[i].centerName+"</td><td>"+res[i].centerAddress+"</td></tr>";
 	}
+	
+	if(pager.groupNo > 1){
+		modalPager.innerHTML += '<li><a class="innerPager arrow left">이전</a></li>';
+	}
+	
+	for(var i=pager.startPageNo;i<=pager.endPageNo;i++){
+		if(i == pager.pageNo){
+			modalPager.innerHTML += '<li><a id="now-page" class="innerPager active num">'+i+'</a></li>';
+		} else {
+			modalPager.innerHTML += '<li><a class="innerPager num">'+i+'</a></li>';
+		}
+	}
+	
+	if(pager.groupNo < pager.totalGroupNo){
+		modalPager.innerHTML += '<li><a class="innerPager arrow right">다음</a></li>';
+	}
+	modalPager.innerHTML += '<li><a class="innerPager last">맨끝<input type="hidden" value="'+pager.totalPageNo+'"></a></li>'
+	
+	modalPageNums = document.querySelectorAll(".modal-pagging .num");
+
+	//모달 안 페이징 숫자 선택 이벤트 
+	[].forEach.call(modalPageNums, function(modalPageNum){
+		modalPageNum.addEventListener("click", function(e){
+			let clickedNum = e.target.innerText;
+			makeRequest(getAvailCenters,'GET','/center/availcenter?pageNo='+clickedNum);
+		});
+		
+		modalPageFirst = document.querySelector(".modal-pagging .first");
+		modalPageLast = document.querySelector(".modal-pagging .last");
+
+		if(!modalPageFirst.classList.contains("hasEvent")){
+			//모달 안 페이징 처음 선택 이벤트 
+			modalPageFirst.addEventListener("click", function(){
+				makeRequest(getAvailCenters,'GET','/center/availcenter?pageNo=1');
+			});
+			
+			modalPageFirst.classList.add("hasEvent");
+		}
+		
+		if(!modalPageLast.classList.contains("hasEvent")){
+			//모달 안 페이징 끝 선택 이벤트
+			modalPageLast.addEventListener("click", function(){
+				makeRequest(getAvailCenters,'GET','/center/availcenter?pageNo='+pager.totalPageNo);
+			});
+			
+			modalPageLast.classList.add("hasEvent");
+		}
+
+	});
 }
 
 //모달 안 페이징 숫자 선택자 
-var modalPageNums = document.querySelectorAll(".modal-pagging .num");
+var modalPageNums;
 
-//모달 안 페이징 숫자 선택 이벤트 
-[].forEach.call(modalPageNums, function(modalPageNum){
-	modalPageNum.addEventListener("click", function(e){
-		let clickedNum = e.target.innerText;
-		makeRequest(getAvailCenters,'GET','/center/availcenter?pageNo='+clickedNum);
-	});
-});
 
 //모달 안 페이징 처음,끝 선택자 
-var modalPageFirst = document.querySelector(".modal-pagging .first");
-var modalPageLast = document.querySelector(".modal-pagging .last");
+var modalPageFirst;
+var modalPageLast;
 
-//모달 안 페이징 처음 선택 이벤트 
-modalPageFirst.addEventListener("click", function(){
-	makeRequest(getAvailCenters,'GET','/center/availcenter?pageNo=1');
-});
-//모달 안 페이징 끝 선택 이벤트
-modalPageLast.addEventListener("click", function(){
-	makeRequest(getAvailCenters,'GET','/center/availcenter?pageNo='+modalPageLast.children[0].value);
-});
 
 //맵핑가능센터 칸 클릭 이벤트 지정 
 availTable.addEventListener("click", function(e){
@@ -138,6 +181,9 @@ function getCenterList(){
 	let centerTbody = centerTable.tBodies[0];
 	centerTbody.innerHTML = '';
 	let res = JSON.parse(httpRequest.responseText); //응답으로 받은 문자열 형식을 json 형식으로 변환 
+	if(res.length == 0){
+		centerTbody.innerHTML += "<tr><td colspan='4'>담당 센터가 없습니다.</td></tr>"
+	}
 	for(var i=0;i<res.length;i++){
 		centerTbody.innerHTML += "<tr><td><input type='checkbox' name='center' value='"+res[i].centerCode+"'></td><td>"+res[i].centerCode+"</td><td>"+res[i].centerName+"</td><td>"+res[i].centerAddress+"</td></tr>";
 	}
