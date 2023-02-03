@@ -198,11 +198,11 @@
 						</div>
 					</div>
 				</div>
-			</div> 
+			</div>
 			<div class="modal-footer">
 				<!--             <button type="button" class="centerSize" data-dismiss="modal" >Close</button> -->
 				<input type="button" class="pinkButton  btn-lg btn-block"
-					id="centerSavedBtn" data-dismiss="modal" 	 value="저장">
+					id="centerSavedBtn"  value="저장">
 			</div>
 		</div>
 	</div>

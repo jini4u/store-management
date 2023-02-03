@@ -320,3 +320,10 @@ table{
 	text-decoration-line: none;
     color: #aaaaaa;
 }
+.danger_p{
+	color: #E26868;
+	display: contents;
+}
+.danger_img{
+	width: 24px;
+}

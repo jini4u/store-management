@@ -18,12 +18,21 @@ let centerlist = function centerList(results){
 		"<td style='display:none'>" + results[i].centerClosingDate +"</td>" +
 		"<td><button id='centerDetails' class='centerSize' data-toggle='modal' data-target='#myModal'>상세보기</button></td>";
 
+
 		str += "</tr>";
 	});
 	$("#center-left").append(str);
 	$("#findCenterName").val('');
 
 }
+$("#centerDetails").click(function (){
+	$("#centerName").attr("readonly", true);
+	$("#invalid-centerName").empty();
+	$("#invalid-tel").empty();
+	$("#invalid-Address").empty();
+});
+
+
 let error = function( request, status, error ){
 	alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
 };
@@ -155,14 +164,14 @@ function getDetailAjax() {
 			let strDOMdiv ="";
 			if (results.length == 0) {
 				strDOMdiv +="<div>"
-				strDOMdiv += "<img src='/resources/images/center/no_image.png' class='center-noimage'>"
-				strDOMdiv += "</div>";
+					strDOMdiv += "<img src='/resources/images/center/no_image.png' class='center-noimage'>"
+						strDOMdiv += "</div>";
 			}
 			for(i=0; i<results.length; i++) {
 				strDOMinput += "<input type='radio' name='slide' id='slide"+i+"' checked>";
 			}
 			centerPhotoList.append(strDOMinput);
-			
+
 			strDOMul += "<ul id='imgholder' class='imgs'>";
 			for(i=0; i<results.length; i++) {
 				let image = results[i];
@@ -170,7 +179,7 @@ function getDetailAjax() {
 			} 
 			strDOMul += "</ul>";
 			centerPhotoList.append(strDOMul);
-			
+
 			strDOMdiv += "<div class='bullets'>";
 			for(i=0; i<results.length; i++) {
 				strDOMdiv += "<label for=slide" +i+ ">&nbsp;&nbsp;</label>";
@@ -183,77 +192,82 @@ function getDetailAjax() {
 }
 
 //ceterInsert 해주는 자스
+
 $("#centerSavedBtn").click(function (){
-	let centercode = $("#centerCode").val();
-	let centername = $("#centerName").val();
-	let centertel = $("#centerTel").val();
-	let centeraddress = $("#centerAddress").val();
-	let centerguide = $("#centerGuide").val();
-	let centerclosingDate = $("#centerClosingDate").val();
-	let centercondition = $("#centerCondition").val();	
+	let check = centerInsert_check();
+	if(check){
+		let centercode = $("#centerCode").val();
+		let centername = $("#centerName").val();
+		let centertel = $("#centerTel").val();
+		let centeraddress = $("#centerAddress").val();
+		let centerguide = $("#centerGuide").val();
+		let centerclosingDate = $("#centerClosingDate").val();
+		let centercondition = $("#centerCondition").val();	
 
-	let centeropeningDate = $("#centerOpeningDate").val();
+		let centeropeningDate = $("#centerOpeningDate").val();
 
-	if (centeropeningDate  == '') {
-		centercondition = "notyet";
-		console.log(centercondition);
-	}
-	if(!$("#centerName").attr("readonly")) {
-		let insertURL = "centerinsert";
-		$.ajax({
-			type:"POST",
-			url :insertURL,	
-			data: {
-				centerName : centername,
-				centerTel : centertel,
-				centerAddress : centeraddress,
-				centerGuide : centerguide,
-				centerOpeningDate : centeropeningDate,
-				centerClosingDate : centerclosingDate,
-				centerCondition : centercondition
-			},
-			success: function(results){
-				location.href="centerlist"
-			},
-			error: error
-		});
-	}else{
-		let updateURL = "centerupdate";
-		let centercondition = document.querySelector("#centerCondition").value;
-		let pageNo = $("#now-page").text();
-		console.log("centerCondition"+centercondition);
-		$.ajax({
-			type : "POST",
-			url : updateURL,
-			data : {
-				pageNo : pageNo,
-				centerCode : centercode,
-				centerName : centername,
-				centerTel : centertel,
-				centerAddress : centeraddress,
-				centerOpeningDate  : centeropeningDate,
-				centerCondition  : centercondition,
-				centerGuide : centerguide,
-				centerClosingDate : centerclosingDate
-			},
-			success : function(results){
-				if(results.centerOpeningDate == null) {
-					results.centerOpeningDate = '-';
-				}else {
-					results.centerOpeningDate = results.centerOpeningDate.substring(0,10);
-				}
-				clickTd.eq(0).text(results.centerCode);
-				clickTd.eq(1).text(results.centerName);
-				clickTd.eq(2).text(results.centerTel);
-				clickTd.eq(3).text(results.centerAddress);
-				clickTd.eq(4).text(results.centerOpeningDate);
-				clickTd.eq(5).text(results.centerCondition);
-				clickTd.eq(6).text(results.centerguide);
-				clickTd.eq(7).text(results.centerclosingDate);
-				$("#findCenterName").val('');
-			},
-			error: error
-		});
+		if (centeropeningDate  == '') {
+			centercondition = "notyet";
+			console.log(centercondition);
+		}
+		if(!$("#centerName").attr("readonly")) {
+			let insertURL = "centerinsert";
+			$.ajax({
+				type:"POST",
+				url :insertURL,	
+				data: {
+					centerName : centername,
+					centerTel : centertel,
+					centerAddress : centeraddress,
+					centerGuide : centerguide,
+					centerOpeningDate : centeropeningDate,
+					centerClosingDate : centerclosingDate,
+					centerCondition : centercondition
+				},
+				success: function(results){
+					location.href="centerlist"
+				},
+				error: error
+			});
+		}else{
+			let updateURL = "centerupdate";
+			let centercondition = document.querySelector("#centerCondition").value;
+			let pageNo = $("#now-page").text();
+			console.log("centerCondition"+centercondition);
+			$.ajax({
+				type : "POST",
+				url : updateURL,
+				data : {
+					pageNo : pageNo,
+					centerCode : centercode,
+					centerName : centername,
+					centerTel : centertel,
+					centerAddress : centeraddress,
+					centerOpeningDate  : centeropeningDate,
+					centerCondition  : centercondition,
+					centerGuide : centerguide,
+					centerClosingDate : centerclosingDate
+				},
+				success : function(results){
+					if(results.centerOpeningDate == null) {
+						results.centerOpeningDate = '-';
+					}else {
+						results.centerOpeningDate = results.centerOpeningDate.substring(0,10);
+					}
+					clickTd.eq(0).text(results.centerCode);
+					clickTd.eq(1).text(results.centerName);
+					clickTd.eq(2).text(results.centerTel);
+					clickTd.eq(3).text(results.centerAddress);
+					clickTd.eq(4).text(results.centerOpeningDate);
+					clickTd.eq(5).text(results.centerCondition);
+					clickTd.eq(6).text(results.centerguide);
+					clickTd.eq(7).text(results.centerclosingDate);
+					$("#findCenterName").val('');
+					$("#myModal .close").click();
+				},
+				error: error
+			});
+		}
 	}
 });
 
@@ -298,22 +312,23 @@ $(".updateBtn").click(function (){
 		var paramPage = param[0];
 		var page = paramPage.split('=');
 		var pageNo = page[1];
-		
+
 		//페이지에 있는 페이지 번호 가져오기
 		$('.pagination .please').each(function (index, item) {
 			index = index + 1;
 			$(item).addClass('good-'+index);
 	        if (pageNo === $(this).text()) {
 	        	$('.good-'+pageNo).css("background-color", "#E26868");
-	        		
+
 	        }
-	        
+
 		});
 });*/
 
 //------------------유효성 검사--------------------------
 let checkKor = /^[가-힣]+$/;
-let checkNum = /^[0-9]*$/;
+let checkTel = /^\d{2,3}-\d{3,4}-\d{4}$/;
+
 
 //centerName
 $("#centerName").on("keyup", function(event){
@@ -337,14 +352,14 @@ $("#centerName").on("keyup", function(event){
 
 //centerTel11
 $("#centerTel").on("keyup", function() {
-	if (!checkNum.test($("#centerTel").val())) {
-		$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>숫자만 입력해 주세요</p>");
+	if (!checkTel.test($("#centerTel").val())) {
+		$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>'-'를 입력해 주세요</p>");
 		$("#invalid-tel").show();
 		$("#centerSavedBtn").attr("disabled", true);
 	}else{
 		$("#invalid-centerName").empty();
-		if ($("#centerTel").val().length >= 12 || $("#centerTel").val().length <= 8) {
-			$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>전화번호는 9~11사이로 입력해주세요</p>")
+		if ($("#centerTel").val().length >= 14 || $("#centerTel").val().length <= 10) {
+			$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>전화번호는 11~13사이로 입력해주세요</p>")
 			$("#invalid-tel").show();
 			$("#centerSavedBtn").attr("disabled", true);
 		}else{
@@ -356,7 +371,7 @@ $("#centerTel").on("keyup", function() {
 
 function centerInsert_check() {
 	var rgrxCenterName = $("#centerName");
-	var rgrxCneterTel = $("#ceterTel");
+	var rgrxCneterTel = $("#centerTel");
 	var rgrxCenterAddress = $("#centerAddress");
 	if (rgrxCenterName.val().length == 0) {
 		$("#invalid-centerName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>센터명을 입력해주세요</p>");
@@ -373,7 +388,7 @@ function centerInsert_check() {
 		return false;
 	}
 	return true;
-};
+}
 
 
 
