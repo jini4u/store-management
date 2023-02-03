@@ -20,13 +20,13 @@
 <div class="search_insert">
 	<form action="centerlist" class="search-form">
 		<select name="keywordType" class="search-select">
-			<option value="CN">센터명</option>
-			<option value="CC">센터코드</option>
-			<option value="CL">지역</option>
+			<option value="CN" <c:if test="${keywordType eq 'CN'}">selected</c:if>>센터명</option>
+			<option value="CC" <c:if test="${keywordType eq 'CC'}">selected</c:if>>센터코드</option>
+			<option value="CL" <c:if test="${keywordType eq 'CL'}">selected</c:if>>지역</option>
 		</select>
 		<div class="search-box">
 			<input type="text" name="keyword" id="findCenterName"
-				class="search-txt" placeholder="search">
+				class="search-txt" placeholder="search" value="${keyword}">
 			<button type="submit" class="search-btn" id="findCenterList">
 				<i class="fa fa-search"></i>
 			</button>
