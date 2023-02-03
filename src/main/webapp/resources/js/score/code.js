@@ -300,14 +300,41 @@ addEvent();
 
 
 //값 입력 범위 지정 및 문자 입력 제한
-$('.inputNumber').keyup(function(event) {
-	regexp = /[^A-Z]/g;
+$('.inputEnglish').keyup(function(event) {
+	regexp = /[^A-Z]{2}/g;
 	v = $(this).val();
 	if (regexp.test(v)) {
 
         alert("대문자 2자리만 입력가능합니다.");
 
         $(this).val(v.replace(regexp, ''));
+
+    }
+
+});
+
+$('.contentLimit').keyup(function(event) {
+	regexp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
+	groupcontent = $(this).val();
+	if (regexp.test(groupcontent)) {
+
+        alert("특수 문자는 입력할 수 없습니다.");
+
+        $(this).val(groupcontent.replace(regexp, ''));
+
+    }
+
+});
+
+
+$('.inputNumber').keyup(function(event) {
+	regexp = /[^0-9.]/g;
+	groupcontent = $(this).val();
+	if (regexp.test(groupcontent)) {
+
+        alert("숫자만 입력가능합니다.");
+
+        $(this).val(groupcontent.replace(regexp, ''));
 
     }
 
