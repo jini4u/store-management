@@ -28,8 +28,10 @@ img {
 }
 
 .login__content {
-  display: grid;
+	display: grid;
+	margin-top: 100
 }
+
 .login__img {
   justify-self: center;
 }
@@ -143,17 +145,18 @@ img {
   .login__register {
     bottom: -2rem;
   }
-.pinkButton, .greyButton {
+.pinkButton {
    border-radius: 4px;
    display: inline-block;
    cursor: pointer;
    font-size: 18px;
-   padding: 6px 25px;
+   padding: 10px 25px;
    text-decoration: none;
    font-weight: 550;
+   width: 100%;
 }
 
-.pinkButton:active, .greyButton:active {
+.pinkButton:active {
    position: relative;
    top: 1px;
 }
@@ -162,7 +165,8 @@ img {
    background-color: #E26868;
    border: 2px solid #E26868;
    color: #fff;
-   MARGIN: 40px;
+  margin-top: 43px;
+   
 }
 
 .pinkButton:hover {

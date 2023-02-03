@@ -307,5 +307,8 @@ public class CenterService implements ICenterService{
 
 		return resultMap;
 	}
+	public int countUploadHistory() {
+		return centerRepository.countUploadHistory();
+	}
 
 }

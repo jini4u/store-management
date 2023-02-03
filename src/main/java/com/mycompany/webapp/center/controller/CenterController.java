@@ -144,7 +144,10 @@ public class CenterController {
 	 * 센터 정보 일괄 업로드
 	 * */
 	@GetMapping(value="/centerexcelupload")
-	public String excelUplaod(Model model) {
+	public String excelUplaod(Model model, @RequestParam(defaultValue="1")int pageNo) {
+		int totalRows = centerService.countUploadHistory();
+		Pager pager = new Pager(10, 10, totalRows, pageNo);
+		model.addAttribute("pager", pager);
 		model.addAttribute("historyMapList", centerService.getCenterUploadHistory());
 		return "jsp/center/excelupload";
 	}
@@ -152,10 +155,13 @@ public class CenterController {
 	//MultipartHttpServletRequest 는 여러개의 파일을 업로드할 때 사용하는데 
 	//우리는 왜 사용? 값을 list로 받아올 수 있기 때문인가?
 	@PostMapping(value="/centerexcelupload")
-	public String excelUplaod(MultipartHttpServletRequest request, HttpSession session) {
+	public String excelUplaod(MultipartHttpServletRequest request, HttpSession session, @RequestParam(defaultValue="1")int pageNo, Model model) {
 		//request에서 업로드한 파일 얻기, getFile안에 있는 건 이름을 정해주는 건가?
 		MultipartFile file = request.getFile("centerExcelFile");
 		int userCode = (int)session.getAttribute("userCode");
+		int totalRows = centerService.countUploadHistory();
+		Pager pager = new Pager(10, 10, totalRows, pageNo);
+		model.addAttribute("pager", pager);
 		centerService.centerUploadFile(file, 3, userCode);
 
 		return "redirect:/center/centerexcelupload";

@@ -7,7 +7,7 @@
 <div class="menuRoute">
 	<img src="${pageContext.request.contextPath}/resources/images/home.png">
 	<a href="/">&nbsp; Home &nbsp; ></a> <span>&nbsp; 점수 &nbsp; ></span> <a
-		href="">&nbsp; 코드관리</a>
+		href="${pageContext.request.contextPath}/score/code">&nbsp; 코드관리</a>
 </div>
 
 <div class="titleBox">
@@ -16,7 +16,7 @@
 	<h2>코드관리</h2>
 </div>
 
-<div id="code-notice">코드 등록 또는 수정 시, 정보 입력 후 저장 버튼을 눌러주세요</div>
+
 <div id="twocodedivs">
 	<div class="codeTotalDiv">
 		<p>그룹코드
@@ -26,11 +26,11 @@
 				<div class="inputDiv">
 					<div id="groupinputs" class="codedetailtopdiv">
 						<div class="codenodiv">
-							그룹코드 <input type="text" name="groupCode" id="groupcode" value=""
-								readonly>
+							그룹코드 <input  type="text" name="groupCode" id="groupcode" maxlength="2" class="inputNumber" value="" style="text-transform:uppercase;"
+								readonly/>
 						</div>
 						<div class="codenamediv">
-							그룹코드명 <input type="text" name="groupContent" id="groupcontent"
+							그룹코드명 <input  type="text" name="groupContent" id="groupcontent"
 								value="" readonly>
 						</div>
 					</div>
@@ -42,6 +42,7 @@
 					</div>
 				</div>
 				<div class="widthLine"></div>
+				<div id="code-notice">코드 등록 또는 수정 시, 정보 입력 후 저장 버튼을 눌러주세요</div>
 				<div class="buttonsdiv">
 					<button type="button" id="insertgroup" class="pinkButton">추가</button>
 					<button type="button" id="updategroup" class="pinkButton">수정</button>
@@ -88,6 +89,7 @@
 					</div>
 				</div>
 				<div class="widthLine"></div>
+				<div id="code-notice">코드 등록 또는 수정 시, 정보 입력 후 저장 버튼을 눌러주세요</div>
 				<div class="buttonsdiv">
 					<button type="button" id="insertdetail" class="pinkButton">추가</button>
 					<button type="button" id="updatedetail" class="pinkButton">수정</button>

@@ -43,8 +43,9 @@ public interface IManagerService {
 	 * 담당자 일괄 업로드*/
 	Map<String, Integer> mgrUploadFileInfo(MultipartFile file, int startRow, int userCode);	/* author 은별
 	 * 담당자 엑셀 업로드 히스토리 */
-	List<Map<String, String>> mgrUploadFileHistory();
-
-
+	List<Map<String, String>> mgrUploadFileHistory(Pager pager);
+	/* author 은별
+	 * 엑셀 업로드한 총수*/
+	int mgrUploadFileTotalCount();
 	 
 }

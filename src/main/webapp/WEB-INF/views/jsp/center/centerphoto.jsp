@@ -105,7 +105,8 @@
 				<thead>
 					<tr>
 						<th class="thead-centerPhoto-file">사진 이름</th>
-						<th class="thead-allcenterPhoto-file">사진 등록자</th>
+						<th class="thead-allcenterPhoto-file" id="centerDetail">구분</th>
+						<th class="thead-allcenterPhoto-file">등록자</th>
 						<th class="thead-allcenterPhoto-file">등록일</th>
 						<th class="thead-allcenterPhoto-file">수정일</th>
 					</tr>
@@ -136,7 +137,7 @@
 							<tr>
 								<th>센터명</th>
 								<td id="targetCenterName"></td>
-								<th>외관/내부</th>
+								<th id="selectSize">외관/내부</th>
 								<td><select name="fileDetail">
 										<option value="outside">외관</option>
 										<option value="inside">내부</option>
@@ -149,7 +150,7 @@
 						<input type="file" name="centerImage" multiple>
 					</div>
 					<div id="centermodal-photo-list">
-						<table id="centermodal-originalphoto-info">
+						<table id="centermodal-originalphoto-info" class="verticalTable">
 							<thead>
 								<tr>
 									<th>사진 번호</th>

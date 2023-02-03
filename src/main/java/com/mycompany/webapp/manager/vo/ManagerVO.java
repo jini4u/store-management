@@ -3,23 +3,34 @@ package com.mycompany.webapp.manager.vo;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mycompany.webapp.center.vo.CenterVO;
+
+import lombok.NonNull;
 
 public class ManagerVO {
 	//담당자
 	private int userCode;
 	private String userPassword;
+	
+	@Pattern(regexp="[가-힣]{1,}", message="이름 입력")
 	private String userName;
 	
-	/*@DateTimeFormat(pattern="yyyy-MM-dd")*/
+	@NotNull
 	private String userBirth;
 	
+	@NotNull
 	private String userTel;
 	private String userEmail;
+	
+	@NotNull
 	private int userTeamCode;
 	
+	@NotNull
 	private String userHireDate;
 	private String userResignDate;
 	

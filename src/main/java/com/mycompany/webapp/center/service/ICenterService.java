@@ -46,4 +46,6 @@ public interface ICenterService {
 	public Map<String, Integer> centerUploadFile(MultipartFile file, int startRow, int userCode);
 
 	List<Map<String, String>>getCenterUploadHistory();
+	
+	int countUploadHistory();
 }

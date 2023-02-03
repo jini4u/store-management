@@ -41,4 +41,6 @@ public interface ICenterRepository {
 	int centerDataExist(CenterVO center);
 	
 	List<Map<String, Object>> getCenterUploadHistory();
+	//파일업로드 된 총 수 구하기
+	int countUploadHistory();
 }
