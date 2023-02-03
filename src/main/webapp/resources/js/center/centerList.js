@@ -311,4 +311,92 @@ $(".updateBtn").click(function (){
 		});
 });*/
 
+//------------------유효성 검사--------------------------
+let checkKor = /^[가-힣]+$/;
+let checkNum = /^[0-9]*$/;
+
+//centerName
+$("#centerName").on("keyup", function(event){
+	if (!checkKor.test($("#centerName").val())) {
+		$("#invalid-centerName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>한글만 입력해 주세요</p>");
+		$("#invalid-centerName").show();
+		//disabled false면 비활성화, true면 활성화
+		$("#centerSavedBtn").attr("disabled", true);
+	}else{
+		$("#invalid-centerName").empty();
+		if ($("#centerName").val().length >= 15 || $("#centerName").val().length  <= 1) {
+			$("#invalid-centerName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>센터명은 1~15사이로 입력해주세요</p>");
+			$("#invalid-centerName").show();
+			$("#centerSavedBtn").attr("disabled", true);
+		}else{
+			$("#invalid-centerName").empty();
+			$("#centerSavedBtn").attr("disabled", false);
+		}
+	}
+}); //센터name
+
+//centerTel11
+$("#centerTel").on("keyup", function() {
+	if (!checkNum.test($("#centerTel").val())) {
+		$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>숫자만 입력해 주세요</p>");
+		$("#invalid-tel").show();
+		$("#centerSavedBtn").attr("disabled", true);
+	}else{
+		$("#invalid-centerName").empty();
+		if ($("#centerTel").val().length >= 12 || $("#centerTel").val().length <= 8) {
+			$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>전화번호는 9~11사이로 입력해주세요</p>")
+			$("#invalid-tel").show();
+			$("#centerSavedBtn").attr("disabled", true);
+		}else{
+			$("#invalid-tel").empty();
+			$("#centerSavedBtn").attr("disabled", false);
+		}
+	}
+}); //centerTel
+
+function centerInsert_check() {
+	var rgrxCenterName = $("#centerName");
+	var rgrxCneterTel = $("#ceterTel");
+	var rgrxCenterAddress = $("#centerAddress");
+	if (rgrxCenterName.val().length == 0) {
+		$("#invalid-centerName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>센터명을 입력해주세요</p>");
+		$("#invalid-centerName").show();
+		rgrxCenterName.focus();
+		return false;
+	}else if (rgrxCneterTel.val().length == 0) {
+		$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>전화번호를 입력해주세요</p>")
+		$("#invalid-tel").show();
+		return false;
+	}else if (rgrxCenterAddress.val().length == 0) {
+		$("#invalid-Address").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>주소를 입력해주세요</p>")
+		$("#invalid-Address").show();
+		return false;
+	}
+	return true;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

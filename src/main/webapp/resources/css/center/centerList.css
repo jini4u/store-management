@@ -213,3 +213,10 @@ ul.imgs li {
 #center-left thead tr th{
 	pointer-events : none;
 }
+.danger_p{
+	color: #E26868;
+	display: contents;
+}
+.danger_img{
+	width: 24px;
+}

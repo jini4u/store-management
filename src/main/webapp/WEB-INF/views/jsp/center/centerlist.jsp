@@ -144,10 +144,9 @@
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<input type="hidden" name="${centerCode}" id="centerCode">
-							<label for="name">센터명</label> <input type="text"
-								name="centerName" id="centerName" class="form-control"
-								aria-label="Sizing example input"
-								aria-describedby="inputGroup-sizing-sm" readonly="readonly">
+							<label for="centerName">센터명</label> 
+							<input type="text" name="centerName" id="centerName" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly="readonly">
+							<div id="invalid-centerName"></div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="name">운영여부</label> <input type="text"
@@ -157,33 +156,33 @@
 						</div>
 					</div>
 					<div class="mb-3">
-						<label for="email">전화번호</label> <input type="text"
-							name="centerTel" id="centerTel" class="form-control"
-							aria-label="Sizing example input"
-							aria-describedby="inputGroup-sizing-sm">
+						<label for="centerTel">전화번호</label> 
+						<input type="text" name="centerTel" id="centerTel" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+						<div id="invalid-tel"></div>
 					</div>
 					<div class="mb-3">
-						<label for="email">주소</label> <input type="text"
+						<label for="centerAddress">주소</label> <input type="text"
 							name="centerAddress" id="centerAddress" class="form-control"
 							aria-label="Sizing example input"
 							aria-describedby="inputGroup-sizing-sm">
+							<div id="invalid-Address"></div>
 					</div>
 					<div class="mb-3">
-						<label for="email">오시는 길</label> <input type="text"
+						<label for="centerGuide">오시는 길</label> <input type="text"
 							name="centerGuide" id="centerGuide" class="form-control"
 							aria-label="Sizing example input"
 							aria-describedby="inputGroup-sizing-sm">
 					</div>
 					<div class="row">
 						<div class="col-md-6 mb-3">
-							<label for="name">오픈일</label> <input type="date"
+							<label for="centerOpeningDate">오픈일</label> <input type="date"
 								name="centerOpeningDate" id="centerOpeningDate"
 								class="form-control centerDate"
 								aria-label="Sizing example input"
 								aria-describedby="inputGroup-sizing-sm">
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="name">폐점일</label> <input type="date"
+							<label for="centerClosingDate">폐점일</label> <input type="date"
 								name="centerClosingDate" id="centerClosingDate"
 								class="form-control centerDate"
 								aria-label="Sizing example input"
@@ -203,7 +202,7 @@
 			<div class="modal-footer">
 				<!--             <button type="button" class="centerSize" data-dismiss="modal" >Close</button> -->
 				<input type="button" class="pinkButton  btn-lg btn-block"
-					id="centerSavedBtn" data-dismiss="modal" value="저장">
+					id="centerSavedBtn" data-dismiss="modal" 	 value="저장">
 			</div>
 		</div>
 	</div>
