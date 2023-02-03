@@ -20,7 +20,7 @@ table{
    background: #fff;
    justify-content: space-between;
    height: 75px;
-   position: sticky;
+   position: sticky; 
    top: 0px;
    border-bottom: 1px solid #ccc;
    z-index: 22;
