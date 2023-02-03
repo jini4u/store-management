@@ -129,25 +129,8 @@
             </table>
 
             <div class="center-pagging modal-pagging">
-               <ul class="pagination">
-                  <li><a class="innerPager first">처음</a></li>
-                  <li><c:if test="${pager.groupNo>1}">
-                        <a class="innerPager arrow left">이전</a>
-                     </c:if></li>
-                  <c:forEach var="i" begin="${pager.startPageNo}"
-                     end="${pager.endPageNo}">
-                     <li><c:if test="${pager.pageNo != i}">
-                           <a class="innerPager num">${i}</a>
-                        </c:if></li>
-                     <li><c:if test="${pager.pageNo == i}">
-                           <a id="now-page" class="innerPager active num">${i}</a>
-                        </c:if></li>
-                  </c:forEach>
-                  <li><c:if test="${pager.groupNo<pager.totalGroupNo}">
-                        <a class="innerPager arrow right">다음</a>
-                     </c:if></li>
-                  <li><a class="innerPager last">맨끝<input type="hidden"
-                        value="${pager.totalPageNo}"></a></li>
+               <ul id="modal-pager" class="pagination">
+                  
                </ul>
             </div>
          </div>

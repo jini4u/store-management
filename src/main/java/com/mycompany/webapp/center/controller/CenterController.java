@@ -173,16 +173,18 @@ public class CenterController {
 	 * @return {List<맵핑가능센터>}
 	 * */
 	@RequestMapping("/availcenter")
-	public @ResponseBody List<CenterVO> getAvailableCenterList(@RequestParam(defaultValue="1") int pageNo){
+	public @ResponseBody List<Object> getAvailableCenterList(@RequestParam(defaultValue="1") int pageNo){
 		int totalRows = centerService.countAllCenters();
-		Pager pager = new Pager(9, 5, totalRows, pageNo);
+		Pager pager = new Pager(totalRows, 1, totalRows, 1);
 		List<CenterVO> allCenterList = centerService.centerList(pager);
-		List<CenterVO> result = new ArrayList<>();
+		List<Object> result = new ArrayList<>();
 		for(CenterVO center:allCenterList) {
 			if(center.getUserCode() == 0) {
 				result.add(center);
 			}
 		}
+		pager = new Pager(9,4,result.size(), pageNo);
+		result.add(pager);
 		return result;
 	}
 

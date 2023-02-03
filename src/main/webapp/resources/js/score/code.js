@@ -295,3 +295,21 @@ function afterSendForm(){
 
 makeRequest(getGroupCodes, 'GET', '/score/getgroupcodes');		
 addEvent();
+
+
+
+
+//값 입력 범위 지정 및 문자 입력 제한
+$('.inputNumber').keyup(function(event) {
+	regexp = /[^A-Z]/g;
+	v = $(this).val();
+	if (regexp.test(v)) {
+
+        alert("대문자 2자리만 입력가능합니다.");
+
+        $(this).val(v.replace(regexp, ''));
+
+    }
+
+});
+

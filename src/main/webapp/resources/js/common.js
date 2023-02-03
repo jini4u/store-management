@@ -1,3 +1,36 @@
+function loadingMask() {
+	//화면의 높이와 너비를 구합니다.
+	var maskHeight = $(document).height();
+	var maskWidth  = window.document.body.clientWidth;
+
+	//화면에 출력할 마스크를 설정해줍니다.
+	var maskDiv = "<div id='mask' style='position:absolute; z-index:9000; background-color:#FFFFFF; display:flex; align-items: center; justify-content: center; left:0; top:0;'></div>";
+	var loadingImg = '';
+
+	loadingImg += " <img src='/resources/images/Spinner-1s-200px.gif' style='position: absolute; display: block; margin: 0px auto;'/>";
+
+	//화면에 레이어 추가
+	$('body')
+	.append(maskDiv)
+
+	//마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
+	$('#mask').css({
+		'width' : maskWidth,
+		'height': maskHeight,
+		'opacity' : '0.5'
+	}); 
+
+	//마스크 표시
+	//로딩중 이미지 표시
+	$('#mask').append(loadingImg);
+	$('#mask').show();
+}
+
+function closeLoadingWithMask() {
+	$('#mask, #loadingImg').hide();
+	$('#mask, #loadingImg').empty();  
+}
+
 /**
  * ajax 통신함수
  * @param {Function} callback 함수
@@ -6,47 +39,10 @@
  * @param {Object} 서버로 전송할 object
  *  */
 function makeRequest(callback, method, url, sendItem){
-	
+
 	//HTTP request 기능 제공하는 Object 생성
 	httpRequest = new XMLHttpRequest();
-	
-	function LoadingWithMask() {
-	    //화면의 높이와 너비를 구합니다.
-	    var maskHeight = $(document).height();
-	    var maskWidth  = window.document.body.clientWidth;
-	     
-	    //화면에 출력할 마스크를 설정해줍니다.
-	    var mask       = "<div id='mask' style='position:absolute; z-index:9000; background-color:#FFFFFF; display:flex; align-items: center; justify-content: center; left:0; top:0;'></div>";
-	    var loadingImg = '';
-	      
-	    loadingImg += " <img src='/resources/images/Spinner-1s-200px.gif' style='position: absolute; display: block; margin: 0px auto;'/>";
-	 
-	    //화면에 레이어 추가
-	    $('body')
-	        .append(mask)
-	 
-	    //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
-	    $('#mask').css({
-	            'width' : maskWidth,
-	            'height': maskHeight,
-	            'opacity' : '0.5'
-	    }); 
-	  
-	    //마스크 표시
-	    //로딩중 이미지 표시
-	    $('#mask').append(loadingImg);
-	    $('#mask').show();
-	}
-	 
-	function closeLoadingWithMask() {
-	    $('#mask, #loadingImg').hide();
-	    $('#mask, #loadingImg').empty();  
-	}
-	
-	if(url.endsWith('upload')){
-		httpRequest.addEventListener('loadstart', LoadingWithMask());
-	}
-	
+
 	if(!httpRequest){
 		alert('XMLHTTP 인스턴스 만들기 실패');
 		return false;
@@ -64,11 +60,13 @@ function makeRequest(callback, method, url, sendItem){
 			}
 		}
 	}
+
 	//.open, .send로 요청하기
 	//.open(request method, URL, [true | false]) : 세번째 파라미터는 비동기성. 기본값은 true
 	httpRequest.open(method, url, false);
 	httpRequest.send(sendItem); 
 }
+
 /**
  * ajax jquery 통신함수
  * @param {Function} callback 함수

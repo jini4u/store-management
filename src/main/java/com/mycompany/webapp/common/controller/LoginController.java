@@ -56,9 +56,9 @@ public class LoginController {
 					session.setAttribute("userPassword", member.getUserPassword());
 					int teamCode = member.getUserTeamCode();
 					String authority = "";
-					if(userCode >= 30000) {
+					if(teamCode >= 300) {
 						authority = "manager";
-					} else if(userCode < 20000) {
+					} else if(teamCode < 200) {
 						authority = "sysadmin";
 					} else {
 						authority = "admin";

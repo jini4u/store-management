@@ -20,7 +20,6 @@ public class ManagerVO {
 	@Pattern(regexp="[가-힣]{1,}", message="이름 입력")
 	private String userName;
 	
-	/*@DateTimeFormat(pattern="yyyy-MM-dd")*/
 	@NotNull
 	private String userBirth;
 	
