@@ -26,11 +26,11 @@
 				<div class="inputDiv">
 					<div id="groupinputs" class="codedetailtopdiv">
 						<div class="codenodiv">
-							그룹코드 <input  type="text" name="groupCode" id="groupcode" maxlength="2" class="inputNumber" value="" style="text-transform:uppercase;"
+							그룹코드 <input  type="text"  class="inputEnglish" name="groupCode" id="groupcode"   value="" style="text-transform:uppercase;"
 								readonly/>
 						</div>
 						<div class="codenamediv">
-							그룹코드명 <input  type="text" name="groupContent" id="groupcontent"
+							그룹코드명 <input  type="text" class="inputLimit "name="groupContent" id="groupcontent"
 								value="" readonly>
 						</div>
 					</div>
@@ -73,16 +73,17 @@
 				<div class="inputDiv">
 					<div class="codedetailtopdiv">
 						<div class="codenodiv">
-							상세코드 <input type="text" name="detailCode" id="detailcode"
+							상세코드 <input type="text" class="inputNumber" name="detailCode" id="detailcode"
 								value="" readonly>
 						</div>
 						<div class="codenamediv">
-							상세코드명 <input type="text" name="detailContent" id="detailcontent"
+							상세코드명 <input type="text" class="contentLimit" name="detailContent" id="detailcontent"
 								value="" readonly>
 						</div>
 					</div>
 					<div class="occupieddiv">
-						사용여부 <select name="detailOccupied" class="detailOccupied">
+						사용여부 
+						<select name="detailOccupied" class="detailOccupied">
 							<option disabled="disabled" value="y">사용중
 							<option disabled="disabled" value="n">사용안함
 						</select>
