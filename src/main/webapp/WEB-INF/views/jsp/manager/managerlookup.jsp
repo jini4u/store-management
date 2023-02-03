@@ -148,18 +148,17 @@
 				<form id="insertform">
 					<div class="row">
 						<div class="col-md-6 mb-3">
-							<label for="name">담당자명</label> <input type="hidden"
-								name="userCode" id="userCode"> <input type="hidden"
-								name="userPassword" id="userPassword"> <input
-								type="text" name="userName" id="userName" class="form-control"
-								aria-label="Sizing example input"
-								aria-describedby="inputGroup-sizing-sm">
+							<label for="name">담당자명</label> 
+							<input type="hidden" name="userCode" id="userCode"> 
+							<input type="hidden" name="userPassword" id="userPassword"> 
+							<input type="text" name="userName" id="userName" class="form-control"
+								aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+						<%-- 	<form:input path="userName"/> --%>
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="name">생년월일</label> <input type="date"
-								name="userBirth" id="userBirth" class="form-control"
-								aria-label="Sizing example input"
-								aria-describedby="inputGroup-sizing-sm">
+							<label for="name">생년월일</label> 
+							<input type="date" name="userBirth" id="userBirth" class="form-control"
+								aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
 						</div>
 					</div>
 

@@ -64,7 +64,7 @@ public class ManagerController {
 	  담당자 등록 POST*/
 	@ResponseBody
 	@PostMapping(value="/managerInsert")
-	public List<ManagerVO> insertManager(@RequestParam(defaultValue="1") int pageNo, @Valid ManagerVO mgr, BindingResult result) {
+	public List<ManagerVO> insertManager(@RequestParam(defaultValue="1") int pageNo, @RequestBody @Valid ManagerVO mgr, BindingResult result) {
 		System.out.println("유효성검사 :"+result);
 		managerService.insertManager(mgr);
 		int totalRows = managerService.countAllMgr();
