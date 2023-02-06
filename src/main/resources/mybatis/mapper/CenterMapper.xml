@@ -215,4 +215,16 @@ SELECT  COUNT(*) FROM fileinfo
 WHERE file_saved_name LIKE('%' || 'centerExcel' || '%')
 </select>
 
+<select id="centerNameCheck" resultType="int" parameterType="String">
+	SELECT COUNT(DISTINCT center_name) as "centerName"
+	FROM center 
+	WHERE center_name = #{centerName}
+</select>
+
+<select id="checkCenterTel" resultType="int" parameterType="String">
+	SELECT COUNT(DISTINCT center_tel) as "centerTel"
+    FROM center
+    WHERE center_tel = REPLACE(#{centerTel}, '-')
+</select>
+
 </mapper>

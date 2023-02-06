@@ -274,7 +274,10 @@ $("#centerSavedBtn").click(function (){
 
 //등록버튼
 $("#centerInsertBtn").click(function () {
-
+	
+	$("#invalid-tel").empty();
+	$("#invalid-centerName").empty();
+	
 	$("#centerPhotoList").empty();
 
 
@@ -369,6 +372,7 @@ $("#centerTel").on("keyup", function() {
 	}
 }); //centerTel
 
+//빈값일 때 유효성 확인
 function centerInsert_check() {
 	var rgrxCenterName = $("#centerName");
 	var rgrxCneterTel = $("#centerTel");
@@ -390,6 +394,47 @@ function centerInsert_check() {
 	return true;
 }
 
+//centerName 중복 확인 ajax
+function checkCenterName() {
+	var centerNameRegx = $("#centerName").val(); // id값이 "centerName"인 입력란의 값을 저장
+	$.ajax({
+		url : "centerNameCheck", //controller에서 요청 받을 주소
+		type : 'post', //post방식으로 전달
+		data : {centerName : centerNameRegx},
+		success : function(result) { //컨트롤러에서 넘어온 result 값을 받는다
+			if (result == 0) { //result가 1이 아니면 사용가능한 아이디
+				$("#invalid-centerName").html("<img src='/resources/images/center/icons_care_gr.png' class='pass_img'></img><p class='pass_p'>사용가능한 센터명입니다</p>");
+				$("#invalid-centerName").show();
+			} else {
+				$("#invalid-centerName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>이미 존재하는 센터명입니다. 다른 센터명을 입력해주세요</p>");
+				$("#invalid-centerName").show();
+				$("#centerSavedBtn").attr("disabled", true);
+			}
+		},
+		error : function() {
+			alert("에러");
+		}
+	}); //ajax끝
+} //checkCenterName 끝
+
+function checkCentertel() {
+	var centerTelRegx = $("#centerTel").val();
+	$.ajax({
+		url : "checkCenterTel",
+		type : "post",
+		data : { centerTel : centerTelRegx},
+		success : function(result) {
+			if (result == 0) {
+				$("#invalid-tel").html("<img src='/resources/images/center/icons_care_gr.png' class='pass_img'></img><p class='pass_p'>사용가능한 전화번호입니다</p>");
+				$("#invalid-tel").show();
+			} else {
+				$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>이미 존재하는 전화번호입니다.다른 전화번호를 입력해주세요</p>");
+				$("#invalid-tel").show();
+				$("#centerSavedBtn").attr("disabled", true);
+			}
+		},
+	});
+}
 
 
 

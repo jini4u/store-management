@@ -307,8 +307,34 @@ public class CenterService implements ICenterService{
 
 		return resultMap;
 	}
+	/**
+	 * 센터 일괄 업로드 파일 수
+	 * @author 이소정
+	 * @return 센터 일괄 업로드 파일 수
+	 * */
 	public int countUploadHistory() {
 		return centerRepository.countUploadHistory();
+	}
+	/**
+	 * 중복된 센터 이름 확인
+	 * @author 이소정
+	 * @param String 센터 이름
+	 * @return 저장된 센터 이름 있으면 1, 없으면 0
+	 * */
+	@Override
+	public int centerNameCheck(String centerName) {
+		int result = centerRepository.centerNameCheck(centerName);
+		return result;
+	}
+	/**
+	 * 중복된 전화번호 확인
+	 * @author 이소정
+	 * @param String 전화번호
+	 * @return 저장된 전화번호 있으면 1, 없으면 0
+	 * */
+	@Override
+	public int checkCenterTel(String centerTel) {
+		return centerRepository.checkCenterTel(centerTel);
 	}
 
 }

@@ -327,3 +327,11 @@ table{
 .danger_img{
 	width: 24px;
 }
+.pass_p{
+	color: #007015;
+	display: contents;
+}
+.pass_img{
+	width: 24px;
+	color: #AACB73;
+}
