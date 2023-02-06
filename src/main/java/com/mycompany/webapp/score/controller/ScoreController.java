@@ -42,8 +42,9 @@ public class ScoreController {
 	 * */
 
 	@RequestMapping(value="/scoreupload", method=RequestMethod.GET)
-	public String scoreupload(Model model) {
-		model.addAttribute("historyMapList", scoreService.getScoreUploadHistory());
+	public String scoreupload(@RequestParam(defaultValue="1") int pageNo, Model model) {
+		model.addAttribute("historyMapList", scoreService.getScoreUploadHistory(pageNo));
+		model.addAttribute("pager", scoreService.getHistoryPager(pageNo));
 		return "jsp/score/scoreupload";
 	}
 

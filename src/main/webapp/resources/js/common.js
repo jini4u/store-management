@@ -24,6 +24,7 @@ function loadingMask() {
 	//로딩중 이미지 표시
 	$('#mask').append(loadingImg);
 	$('#mask').show();
+	
 }
 
 function closeLoadingWithMask() {

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.mycompany.webapp.common.vo.Pager;
 import com.mycompany.webapp.score.vo.ScoreVO;
 
 /**
@@ -30,7 +31,8 @@ public interface IScoreRepository {
 	//점수가 존재여부 확인 
 	int isDataExist(ScoreVO scoreVO);
 	//점수 엑셀 파일 업로드 이력 조회 
-	List<Map<String, Object>> getScoreUploadHistory();
+	List<Map<String, Object>> getScoreUploadHistory(Pager pager);
+	int countScoreUploadHistory();
 	
 	//윤선
 	List<ScoreVO> getScoreList(Map<String, Integer> map);

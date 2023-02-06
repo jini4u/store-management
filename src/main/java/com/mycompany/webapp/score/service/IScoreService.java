@@ -19,7 +19,9 @@ public interface IScoreService {
 	int insertGroupCode(Map<String, String> groupCodeMap);
 	
 	Map<String, Integer> uploadFileInfo(MultipartFile file, int startRow, int userCode);
-	List<Map<String, String>> getScoreUploadHistory();
+	List<Map<String, String>> getScoreUploadHistory(int pageNo);
+	
+	Pager getHistoryPager(int pageNo);
 	
 	//윤선
 	List<ScoreVO> getScoreList(ScoreVO scoreVO, Pager pager);
