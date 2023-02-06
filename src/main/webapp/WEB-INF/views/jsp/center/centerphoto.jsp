@@ -126,9 +126,7 @@
 			<div class="modal-header">
 				<h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
 				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close" id="centerPhoto-close">
-					<span  aria-hidden="true">&times;</span>
-				</button>
+					aria-label="Close" id="centerPhoto-close">x</button>
 			</div>
 			<div class="modal-body">
 				<form id="photoinsertform">
