@@ -17,21 +17,31 @@
 </div>
 
 
+
+
 <div id="twocodedivs">
 	<div class="codeTotalDiv">
-		<p>그룹코드
+		<p class="textStyle">그룹코드
 		<div class="titleLine"></div>
 		<div class="codediv">
-			<form id="groupform">
+			<form name="selectBoxCheck" id="groupform" onsubmit="return checkForm();">
 				<div class="inputDiv">
+
 					<div id="groupinputs" class="codedetailtopdiv">
-						<div class="codenodiv">
-							그룹코드 <input  type="text"  class="inputEnglish" name="groupCode" id="groupcode"   value="" style="text-transform:uppercase;"
-								readonly/>
+						<div class="alretdiv">
+							<div class="codenodiv">
+								그룹코드 <input type="text" class="inputEnglish" name="groupCode"
+									id="groupcode" value="" style="text-transform: uppercase;"
+									readonly />
+							</div>
+							<div id="invalid-groupName"></div>
 						</div>
-						<div class="codenamediv">
-							그룹코드명 <input  type="text" class="inputLimit "name="groupContent" id="groupcontent"
-								value="" readonly>
+						<div class="alretDiv">
+							<div class="codenamediv">
+								그룹코드명 <input type="text" class="contentLimit "
+									name="groupContent" id="groupcontent" value="" readonly>
+							</div>
+							<div id="invalid-groupDetailName"></div>
 						</div>
 					</div>
 					<div id="groupselectdiv" class="occupieddiv">
@@ -40,6 +50,7 @@
 							<option disabled="disabled" value="n">사용안함
 						</select>
 					</div>
+					<div id="invalid-groupOccupied"></div>
 				</div>
 				<div class="widthLine"></div>
 				<div id="code-notice">코드 등록 또는 수정 시, 정보 입력 후 저장 버튼을 눌러주세요</div>
@@ -47,6 +58,7 @@
 					<button type="button" id="insertgroup" class="pinkButton">추가</button>
 					<button type="button" id="updategroup" class="pinkButton">수정</button>
 					<button type="button" id="savegroup" class="pinkButton">저장</button>
+					
 				</div>
 			</form>
 			<table id="grouptable" class="codetable verticalTable">
@@ -72,14 +84,20 @@
 			<form id="detailform">
 				<div class="inputDiv">
 					<div class="codedetailtopdiv">
+					<div class="alretdiv">
 						<div class="codenodiv">
 							상세코드 <input type="text" class="inputNumber" name="detailCode" id="detailcode"
 								value="" readonly>
 						</div>
+								<div id="invalid-detailCodeName"></div>
+						</div>
+						<div class="alretDiv">
 						<div class="codenamediv">
-							상세코드명 <input type="text" class="contentLimit" name="detailContent" id="detailcontent"
+							상세코드명 <input type="text" class="detailContentLimit" name="detailContent" id="detailcontent"
 								value="" readonly>
 						</div>
+						<div id="invalid-DetailName"></div>
+					</div>
 					</div>
 					<div class="occupieddiv">
 						사용여부 
