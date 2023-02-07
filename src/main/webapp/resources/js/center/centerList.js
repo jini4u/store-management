@@ -347,7 +347,6 @@ $("#centerName").on("keyup", function(event){
 			$("#invalid-centerName").show();
 			$("#centerSavedBtn").attr("disabled", true);
 		}else{
-			$("#invalid-centerName").empty();
 			$("#centerSavedBtn").attr("disabled", false);
 		}
 	}
