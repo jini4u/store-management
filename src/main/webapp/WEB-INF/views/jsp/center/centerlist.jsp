@@ -32,8 +32,11 @@
 			</button>
 		</div>
 	</form>
-	<button id="centerInsertBtn" class="pinkButton" data-toggle="modal"
-	data-target="#myModal">등록</button>
+	<div>
+		<button class="greyButton">엑셀로 다운로드</button>
+		<button id="centerInsertBtn" class="pinkButton" data-toggle="modal"
+		data-target="#myModal">등록</button>
+	</div>
 </div>
 <c:if test="${centerListN != 'empty'}">
 	<div id="center-form-pagging">

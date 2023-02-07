@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/mycompany/webapp/manager/dao/IManagerRepository.java=UTF-8
 encoding//src/main/java/com/mycompany/webapp/manager/service/IManagerService.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/jsp/score/scoreExcelUpload.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/jsp/score/scoreList.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/jsp/score/scoreupload.jsp=UTF-8

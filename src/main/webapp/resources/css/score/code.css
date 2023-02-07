@@ -3,12 +3,12 @@
     border-top: 1px solid #ccc;
     padding-top: 25px;
 }
-.codeTotalDiv p{
+.textStyle {
     font-size: 23px;
     font-weight: 600;
     margin: 0;
 }
-.codeTotalDiv p, .titleLine{
+.textStyle, .titleLine{
     margin-left: 10px;
 }
 .codeTotalDiv{
@@ -136,5 +136,24 @@ button:hover {
     font-family: "Open Sans", sans-serif;
     font-size: -22.5rem;
     margin-top: 1rem;
+}
+#invalid-centerName{
+	display: flex;
+}
+.danger_p{
+	color: #E26868;
+	display: contents;
+	font-size: 13px;
+}
+.danger_img{
+    width: 22px;
+    height: 22px;
+}
+.alretdiv {
+	flex-direction: column;
+	width:37%
+}
+.alretDiv{
+	flex-direction: column;
 }
 }
