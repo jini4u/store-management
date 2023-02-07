@@ -1,4 +1,4 @@
-var insertFormInputs = document.querySelectorAll('#create-form .form-control');
+var formInputs = document.querySelectorAll('.noticediv form .form-control');
 var invalidDivs = document.getElementsByClassName('invalid');
 
 $("#btnSave").click(function (){
@@ -7,8 +7,8 @@ $("#btnSave").click(function (){
 		invalidDivs[i].innerHTML = '';
 	}
 	
-	for(var i=0;i<insertFormInputs.length;i++){
-		var input = insertFormInputs[i];
+	for(var i=0;i<formInputs.length;i++){
+		var input = formInputs[i];
 		var invalid = invalidDivs[i];
 		if(input.value.trim() == ''){
 			filled = false;
@@ -18,12 +18,28 @@ $("#btnSave").click(function (){
 	}
 	if(filled == true){
 		$("#create-form").submit();
-		
 	}
 });
 
 $("#btnUpdate").click(function (){
-	$("#update-form").submit();
+	let filled = true;
+	for(var i=0;i<invalidDivs.length;i++){
+		invalidDivs[i].innerHTML = '';
+	}
+	
+	for(var i=0;i<formInputs.length;i++){
+		var input = formInputs[i];
+		var invalid = invalidDivs[i];
+		if(input.value.trim() == ''){
+			filled = false;
+			invalid.innerHTML = "<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>내용을 입력해주세요</p>";
+			input.focus();
+		}
+	}
+	if(filled == true){
+		$("#update-form").submit();
+	}
+	
 });
 
 $("#btnList").click(function (){
