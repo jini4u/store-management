@@ -23,7 +23,7 @@
 			</div>
 			<div class="mb-3">
 				<label for="content">내용</label>
-				<textarea class="form-control editable" rows="5" name="content" id="content" readonly="readonly" style="background-color: white;">${post.content}</textarea>
+				<textarea class="form-control editable" rows="${rows}" name="content" id="content" readonly="readonly" style="background-color: white;">${post.content}</textarea>
 			</div>
 			</form>
 		<div id="buttonsdiv">

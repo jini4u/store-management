@@ -6,7 +6,7 @@
 	회원 조회 -->
 <select id="selectMember" parameterType="int" resultType="com.mycompany.webapp.manager.vo.ManagerVO">
 <![CDATA[  
-	SELECT user_code as userCode, user_name as userName, user_password as userPassword, user_email as userEmail
+	SELECT user_code as userCode, user_name as userName, user_password as userPassword, user_email as userEmail, user_team_code as userTeamCode
     FROM userinfo
     WHERE user_code=#{userCode}
 ]]>

@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.notice.dao.INoticeRepository">
-<select id="test" resultType="int">
+<select id="countAllPosts" resultType="int">
 		SELECT COUNT(*) FROM testtable
 </select>
-<select id="getAllPosts" resultType="com.mycompany.webapp.notice.vo.PostVO">
-	SELECT
-		postno,
-		title,
-		content,
-		author,
-		posttime
-	FROM noticeboard
-	ORDER BY posttime
+<select id="getPosts" resultType="com.mycompany.webapp.notice.vo.PostVO">
+<![CDATA[
+   SELECT * FROM(
+      SELECT rownum as rnum, postno, title, author, posttime
+      FROM (
+			SELECT
+				postno,
+				title,
+				author,
+				posttime
+			FROM noticeboard
+			ORDER BY postno DESC
+     	 )
+      WHERE rownum <= #{endRowNo}
+   )
+   WHERE rnum >= #{startRowNo}
+]]>
+
+
 </select>
 <select id="getPost" parameterType="int" resultType="com.mycompany.webapp.notice.vo.PostVO">
 	SELECT

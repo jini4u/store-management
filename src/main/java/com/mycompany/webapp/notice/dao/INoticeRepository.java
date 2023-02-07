@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.mycompany.webapp.common.vo.Pager;
 import com.mycompany.webapp.notice.vo.PostVO;
 
 @Repository
 public interface INoticeRepository {
-	public int test();
-	List<PostVO> getAllPosts();
+	int countAllPosts();
+	List<PostVO> getPosts(Pager pager);
 	PostVO getPost(int postno);
 	void createPost(PostVO post);
 	void updatePost(PostVO post);

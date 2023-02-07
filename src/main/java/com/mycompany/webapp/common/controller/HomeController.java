@@ -24,7 +24,7 @@ public class HomeController {
 	 * */
 	@RequestMapping("/")
 	public String home(Model model) {
-		model.addAttribute("allPosts", noticeService.getAllPosts());
+		model.addAttribute("allPosts", noticeService.getPosts(1));
 		return "home";
 	}
 
