@@ -30,3 +30,4 @@ $(function() {
 })
 
 loginUserCode = document.querySelector('input[name="userCode"]').value;
+loginUserAuthority = document.querySelector('input[id="userAuthority"]').value;

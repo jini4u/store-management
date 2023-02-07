@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mycompany.webapp.common.vo.Pager;
 import com.mycompany.webapp.notice.dao.INoticeRepository;
 import com.mycompany.webapp.notice.vo.PostVO;
 
@@ -15,8 +16,14 @@ public class NoticeService implements INoticeService {
 	INoticeRepository noticeRepository;
 	
 	@Override
-	public List<PostVO> getAllPosts() {
-		return noticeRepository.getAllPosts();
+	public int countAllPosts() {
+		return noticeRepository.countAllPosts();
+	}
+	
+	@Override
+	public List<PostVO> getPosts(int pageNo) {
+		Pager pager = new Pager(10, 10, noticeRepository.countAllPosts(), pageNo);
+		return noticeRepository.getPosts(pager);
 	}
 	
 	@Override

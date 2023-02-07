@@ -194,7 +194,41 @@ $("#updatemgr").click(function (){
    
   
 	
-  
+/*  유효성 검사*/
+   //담당자명: 한글만 가능, 띄어쓰기 불가능
+   let checkName = /^[가-힣]+$/;
+   //이메일 형식만 가능
+   let checkEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+
+  //userName 유효성 검사
+   $("#userName").on("keyup",function(event){
+	   //담당자명이 한글이 아닐때
+	   if($("#userName").val().length == 0){
+			  $("#invalid-userName").empty();
+	   }else{
+			  if(!checkName.test($("#userName").val())){
+				  $("#invalid-userName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>한글만 입력해 주세요.</p>");
+				  $("#invalid-userName").show();
+				  $("#savemgr").attr("disabled", true); //disabled 속성 적용
+			  }else{//담당자명이 한글일때
+				  $("#invalid-userName").empty();
+				  //담당자명 길이 맞지 않을때
+				  if($("#userName").val().length >=10 || $("#userName").val().length <= 1){
+					  $("#invalid-userName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>담당자명 2~9자 사이로 입력해 주세요.</p>");
+					  $("#invalid-userName").show();
+					  $("#savemgr").attr("disabled", true); //disabled 속성 적용
+				  }else{ //담당자명 길이 맞을때
+					  $("#savemgr").attr("disabled", false); //disabled 속성 해제
+				  }
+			  }
+		   
+	   }
+	   
+
+	   
+	   
+   });
+   
   
 }
 

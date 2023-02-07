@@ -12,18 +12,22 @@
 			<div class="mb-3">
 				<label for="title">글번호</label> 
 				<input type="text" class="form-control" name="postno" id="title" value="${post.postno}" readonly="readonly" style="background-color: white;">
+				<div class="invalid"></div>
 			</div>
 			<div class="mb-3">
 				<label for="title">제목</label> 
 				<input type="text" class="form-control editable" name="title" id="title" value="${post.title}" readonly="readonly" style="background-color: white;">
+				<div class="invalid"></div>
 			</div>
 			<div class="mb-3">
 				<label for="reg_id">작성자</label> 
 				<input type="text" class="form-control editable" name="author" id="author" value="${post.author}" readonly="readonly" style="background-color: white;">
+				<div class="invalid"></div>
 			</div>
 			<div class="mb-3">
 				<label for="content">내용</label>
-				<textarea class="form-control editable" rows="5" name="content" id="content" readonly="readonly" style="background-color: white;">${post.content}</textarea>
+				<textarea class="form-control editable" rows="${rows}" name="content" id="content" readonly="readonly" style="background-color: white;">${post.content}</textarea>
+				<div class="invalid"></div>
 			</div>
 			</form>
 		<div id="buttonsdiv">

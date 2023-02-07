@@ -64,8 +64,7 @@ public class ManagerController {
 	  담당자 등록 POST*/
 	@ResponseBody
 	@PostMapping(value="/managerInsert")
-	public List<ManagerVO> insertManager(@RequestParam(defaultValue="1") int pageNo, @RequestBody @Valid ManagerVO mgr, BindingResult result) {
-		System.out.println("유효성검사 :"+result);
+	public List<ManagerVO> insertManager(@RequestParam(defaultValue="1") int pageNo,ManagerVO mgr) {		
 		managerService.insertManager(mgr);
 		int totalRows = managerService.countAllMgr();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
@@ -208,14 +207,14 @@ public class ManagerController {
 		int fileTotalRows = managerService.mgrUploadFileTotalCount();
 	    Pager pager = new Pager(10, 10, fileTotalRows, pageNo);
 		model.addAttribute("mgrHistoryMapList", managerService.mgrUploadFileHistory(pager));
-		 model.addAttribute("pager", pager);
+		model.addAttribute("pager", pager);
 		model.addAttribute("mgrURL","/manager/managerfileuploadhistory");
-		return  "jsp/manager/managerFileUpload";
+		return  "jsp/manager/managerExcelUpload";
 	}
 	
 	/* author 은별
 	  담담자 엑셀 파일 업로드 POSt 요청 */
-	@RequestMapping(value="/managerFileUpload", method=RequestMethod.POST)
+	@RequestMapping(value="/managerfileupload", method=RequestMethod.POST)
 	public String managerFileUpload(MultipartHttpServletRequest request, HttpSession session) {
 		//MultipartHttpServletRequest을 사용하면 getFile 메소드를 통해 List 형태로 받을 수 있다
 		MultipartFile file = request.getFile("mgrExcelFile");
