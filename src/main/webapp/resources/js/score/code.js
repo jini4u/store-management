@@ -126,31 +126,36 @@ function addEvent(){
 
 	//그룹코드 저장버튼 클릭 이벤트 등록
 	saveGroupBtn.addEventListener("click", function(){
-		//그룹코드 form 데이터 가져오기
-		let groupFormData = new FormData(groupForm);
-		if(!groupCodeInput.hasAttribute("readonly")){	//추가
-			makeRequest(afterSendForm, 'POST', '/score/insertgroupcode', groupFormData);
-			groupCodeInput.setAttribute("readonly", true);
-			//상세코드 칸들 비우기
-			detailCodeInput.value = '';
-			detailContentInput.value = '';
-			detailSelect[1].selected = false;
-			detailSelect[0].selected = false;
 
-			grouptableBody.lastChild.classList.add('selectedtr');
-		} else if(groupContentInput.hasAttribute('readonly')){
-			//잘못된 접근..
-		} else{	//수정
-			//POST 방식, /updateGroupCode로 groupFormData를 전송하는 요청
-			makeRequest(afterSendForm, 'POST', '/score/updategroupcode', groupFormData);			
+		//그룹코드 form 데이터 가져오기
+		if(Checkform()!=false){
+			
+			let groupFormData = new FormData(groupForm);
+			if(!groupCodeInput.hasAttribute("readonly")){	//추가
+				makeRequest(afterSendForm, 'POST', '/score/insertgroupcode', groupFormData);
+				groupCodeInput.setAttribute("readonly", true);
+				//상세코드 칸들 비우기
+				detailCodeInput.value = '';
+				detailContentInput.value = '';
+				detailSelect[1].selected = false;
+				detailSelect[0].selected = false;
+				
+				grouptableBody.lastChild.classList.add('selectedtr');
+			} else if(groupContentInput.hasAttribute('readonly')){
+				//잘못된 접근..
+			} else{	//수정
+				//POST 방식, /updateGroupCode로 groupFormData를 전송하는 요청
+				makeRequest(afterSendForm, 'POST', '/score/updategroupcode', groupFormData);			
+			}
+			
+			groupCodeInput.setAttribute('readonly', true);
+			//그룹코드명 수정불가
+			groupContentInput.setAttribute("readonly", true);
+			//disabled
+			groupSelect[1].setAttribute('disabled', 'disabled');
+			groupSelect[0].setAttribute('disabled', 'disabled');
 		}
 
-		groupCodeInput.setAttribute('readonly', true);
-		//그룹코드명 수정불가
-		groupContentInput.setAttribute("readonly", true);
-		//disabled
-		groupSelect[1].setAttribute('disabled', 'disabled');
-		groupSelect[0].setAttribute('disabled', 'disabled');
 	});
 
 	//상세코드 저장버튼 클릭 이벤트 등록
@@ -285,12 +290,20 @@ function afterSendForm(){
 		//응답을 문자열로 변환
 		let sendFormResponse = JSON.parse(httpRequest.responseText);
 		//수정된 칼럼의 수가 1인 경우 (정상 수정)
-		if(sendFormResponse[0]=='group' && sendFormResponse[1]=='1'){
+		/*if(sendFormResponse[0]=='group' && sendFormResponse[1]=='1'){
 			makeRequest(getGroupCodes, 'GET', '/score/getgroupcodes');
 		}
 	}).then( //앞부분 완료 후 동작
 			makeRequest(getDetailCodes, 'GET', '/score/getdetailcodes/'+groupCodeInput.value)
+	);*/
+		if(sendFormResponse[0]=='group' && sendFormResponse[1]=='1'){
+			makeRequest(getGroupCodes, 'POST', '/score/getgroupcodes');
+		}
+	}).then( //앞부분 완료 후 동작
+			makeRequest(getDetailCodes, 'POST', '/score/getdetailcodes/'+groupCodeInput.value)
+			//show 반대
 	);
+
 }
 
 makeRequest(getGroupCodes, 'GET', '/score/getgroupcodes');		
@@ -301,12 +314,12 @@ addEvent();
 
 //값 입력 범위 지정 및 문자 입력 제한
 $('.inputEnglish').keyup(function(event) {
-	regexp = /[^A-Z]{2}/g;
+	regexp = /[^A-Z]{3}/g;
 	v = $(this).val();
 	if (regexp.test(v)) {
 
-        alert("대문자 2자리만 입력가능합니다.");
-
+        $("#invalid-groupName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>대문자 2자리만 입력가능합니다</p>");
+        $("#invalid-groupName").show();
         $(this).val(v.replace(regexp, ''));
 
     }
@@ -317,26 +330,64 @@ $('.contentLimit').keyup(function(event) {
 	regexp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
 	groupcontent = $(this).val();
 	if (regexp.test(groupcontent)) {
-
-        alert("특수 문자는 입력할 수 없습니다.");
+		 $("#invalid-groupDetailName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>특수 문자는 입력할 수 없습니다.</p>");
+	     $("#invalid-groupDetailName").show();
 
         $(this).val(groupcontent.replace(regexp, ''));
 
     }
-
+	
 });
+$('.detailContentLimit').keyup(function(event) {
+	regexp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
+	groupcontent = $(this).val();
+	if (regexp.test(groupcontent)) {
+		 $("#invalid-DetailName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>특수 문자는 입력할 수 없습니다.</p>");
+	     $("#invalid-DetailName").show();
+        $(this).val(groupcontent.replace(regexp, ''));
+        
 
+    }
+	
+});
+	
 
 $('.inputNumber').keyup(function(event) {
 	regexp = /[^0-9.]/g;
 	groupcontent = $(this).val();
 	if (regexp.test(groupcontent)) {
-
-        alert("숫자만 입력가능합니다.");
-
+		 $("#invalid-detailCodeName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>숫자만 입력할 수 있습니다.</p>");
+	     $("#invalid-detailCodeName").show();
+		
         $(this).val(groupcontent.replace(regexp, ''));
 
     }
 
 });
 
+
+function Checkform() {
+	let checked = $("select[name=groupOccupied]").val();
+    if(checked == null) {
+    	
+    	//selectBoxCheck.essential.focus();
+		 $("#invalid-groupOccupied").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>운영여부를 선택해 주세요.</p>");
+	     $("#invalid-groupOccupied").show();
+        return false;
+        
+    }
+    return true;
+}
+
+function Checkform() {
+	let checked = $("select[name=groupOccupied]").val();
+    if(checked == null) {
+    	
+    	//selectBoxCheck.essential.focus();
+		 $("#invalid-groupOccupied").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>운영여부를 선택해 주세요.</p>");
+	     $("#invalid-groupOccupied").show();
+        return false;
+        
+    }
+    return true;
+}

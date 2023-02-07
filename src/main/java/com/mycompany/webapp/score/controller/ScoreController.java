@@ -281,10 +281,11 @@ public class ScoreController {
 		detailCodeMap.put("detailContent", request.getParameter("detailContent"));
 		detailCodeMap.put("detailOccupied", request.getParameter("detailOccupied").toUpperCase());
 		detailCodeMap.put("groupCode", request.getParameter("groupCode"));   
-
+		
 		return scoreService.insertDetailCode(detailCodeMap);
 	}
-
+	
+		
 	/**
 	 * 그룹코드 추가
 	 * @author 임유진
