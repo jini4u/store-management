@@ -40,11 +40,11 @@ public interface ICenterRepository {
 	//센터코드 총 갯수
 	int centerDataExist(CenterVO center);
 	
-	List<Map<String, Object>> getCenterUploadHistory();
+	List<Map<String, Object>> getCenterUploadHistory(Pager pager);
 	//파일업로드 된 총 수 구하기
 	int countUploadHistory();
 
-	public int centerNameCheck(String centerName);
+	int checkCenterTel(String centerTel);
 
-	public int checkCenterTel(String centerTel);
+	int centerNameCheck(String centerName);
 }

@@ -280,7 +280,6 @@ $("#centerInsertBtn").click(function () {
 	
 	$("#centerPhotoList").empty();
 
-
 	$("#showPhoto").hide();
 	$(".modal-body").removeAttr('id', 'centerphoto' );
 	$("#centerInsertModal").removeAttr('class', 'modal-xl');

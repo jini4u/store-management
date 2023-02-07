@@ -31,7 +31,7 @@
 	<!-- <button id="file-upload-button" class="pinkButton">업로드</button> -->
 </div>
 
-<table class="scoretable">
+<table class="verticalTable">
 	<tr>
 		<th>업로드 날짜</th>
 		<th>업로드 한 담당자</th>

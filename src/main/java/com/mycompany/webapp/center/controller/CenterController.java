@@ -148,7 +148,7 @@ public class CenterController {
 		int totalRows = centerService.countUploadHistory();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		model.addAttribute("pager", pager);
-		model.addAttribute("historyMapList", centerService.getCenterUploadHistory());
+		model.addAttribute("historyMapList", centerService.getCenterUploadHistory(pager));
 		return "jsp/center/excelupload";
 	}
 
@@ -162,6 +162,7 @@ public class CenterController {
 		int totalRows = centerService.countUploadHistory();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		model.addAttribute("pager", pager);
+		model.addAttribute("historyMap", centerService.getCenterUploadHistory(pager));
 		centerService.centerUploadFile(file, 3, userCode);
 
 		return "redirect:/center/centerexcelupload";

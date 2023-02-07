@@ -198,7 +198,12 @@ DELETE FROM fileinfo
 WHERE file_no = #{fileNo}
 </delete>
 
-<select id="getCenterUploadHistory" resultType="map">
+<select id="getCenterUploadHistory" resultType="map" parameterType="com.mycompany.webapp.common.vo.Pager">
+<![CDATA[
+SELECT rnum, "postDate","userName", "originalName", "insert", "update" 
+FROM(
+SELECT ROWNUM as  rnum, "postDate", "userName", "originalName", "insert", "update"
+FROM(
 SELECT TO_CHAR(F.file_post_date, 'YYYY-MM-DD') AS "postDate"
 		, U.user_name AS "userName"
 		, F.file_original_name AS "originalName"
@@ -208,6 +213,11 @@ FROM history H
 	JOIN fileinfo F ON H.file_no = F.file_no
 	JOIN userinfo U ON H.user_code = U.user_code
 WHERE F.file_saved_name like ('%' || 'centerExcel' || '%')
+)
+WHERE ROWNUM <= #{endRowNo}
+)
+WHERE rnum >= #{startRowNo}
+]]>
 </select>
 
 <select id="countUploadHistory" resultType="int">
