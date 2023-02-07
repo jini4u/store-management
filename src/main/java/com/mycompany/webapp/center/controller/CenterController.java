@@ -245,4 +245,20 @@ public class CenterController {
 		}
 		return centerService.deleteImage(fileNoList, centerCode);
 	}
+	/**
+	 * 센터 이름 중복 확인
+	 * @author 이소정
+	 * @return {int} 센터명 수
+	 * */
+	@PostMapping("/centerNameCheck")
+	@ResponseBody
+	public int centerNameCheck(@RequestParam String centerName) {
+		return centerService.centerNameCheck(centerName);
+	}
+	@PostMapping("/checkCenterTel")
+	@ResponseBody
+	public int checkCenterTel(@RequestParam String centerTel) {
+		return centerService.checkCenterTel(centerTel);
+		
+	}
 }

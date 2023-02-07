@@ -40,4 +40,34 @@
 	</c:forEach>
 </table>
 
+<div class="center-pagging">
+		<ul class="pagination">
+			<li><a class="innerPager first"
+				href="scoreupload?pageNo=1">처음</a></li>
+			<li><c:if test="${pager.groupNo>1}"> 
+					<a class="innerPager arrow left"
+						href="scoreupload?pageNo=${pager.startPageNo-1}">이전</a>
+				</c:if></li>
+
+			<c:forEach var="i" begin="${pager.startPageNo}"
+				end="${pager.endPageNo}">
+				<li><c:if test="${pager.pageNo != i}">
+						<a class="innerPager num"
+							href="scoreupload?pageNo=${i}">${i}</a>
+					</c:if></li>
+				<li><c:if test="${pager.pageNo == i}">
+						<a class="innerPager active num" id="now-page"
+							href="scoreupload?pageNo=${i}">${i}</a>
+					</c:if></li>
+			</c:forEach>
+
+			<li><c:if test="${pager.groupNo<pager.totalGroupNo}">
+					<a class="innerPager arrow right"
+						href="scoreupload?pageNo=${pager.endPageNo+1}">다음</a>
+				</c:if></li>
+			<li><a class="innerPager last"
+				href="scoreupload?pageNo=${pager.totalPageNo}">맨끝</a></li>
+		</ul>
+	</div>
+
 <script src="${pageContext.request.contextPath}/resources/js/score/scoreupload.js"></script>

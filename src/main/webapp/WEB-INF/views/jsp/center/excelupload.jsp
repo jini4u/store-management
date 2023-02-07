@@ -24,8 +24,9 @@
 	<form id="file-upload-form" enctype="multipart/form-data"
 		action="centerexcelupload" method="post">
 		<input type="hidden" name="userCode" value="${ssesionScope.userCode}">
-		<input type="file" name="centerExcelFile" accept=".xlsx, .xls">
-		<input type="submit" class="pinkButton" value="UPLOAD">
+		<input type="file" id="centerInputExcelFile" name="centerExcelFile" accept=".xlsx, .xls">
+		<input type="submit" class="pinkButton" id="centerExcelInsertBtn" value="UPLOAD">
+		<div id="centerExcelFile"></div>
 	</form>
 	<!-- <button id="file-upload-button" class="pinkButton">업로드</button> -->
 </div>
@@ -77,3 +78,4 @@
 				href="centerexcelupload?pageNo=${pager.totalPageNo}">맨끝</a></li>
 		</ul>
 	</div>
+<script src="${pageContext.request.contextPath}/resources/js/center/centerexcelupload.js"></script>

@@ -145,7 +145,7 @@
 						<div class="col-md-6 mb-3">
 							<input type="hidden" name="${centerCode}" id="centerCode">
 							<label for="centerName">센터명</label> 
-							<input type="text" name="centerName" id="centerName" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly="readonly">
+							<input type="text" onchange="checkCenterName()" name="centerName" id="centerName" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly="readonly">
 							<div id="invalid-centerName"></div>
 						</div>
 						<div class="col-md-6 mb-3">
@@ -157,7 +157,7 @@
 					</div>
 					<div class="mb-3">
 						<label for="centerTel">전화번호</label> 
-						<input type="text" name="centerTel" id="centerTel" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+						<input type="text" name="centerTel" onchange="checkCentertel()" id="centerTel" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
 						<div id="invalid-tel"></div>
 					</div>
 					<div class="mb-3">
@@ -198,11 +198,11 @@
 						</div>
 					</div>
 				</div>
-			</div> 
+			</div>
 			<div class="modal-footer">
 				<!--             <button type="button" class="centerSize" data-dismiss="modal" >Close</button> -->
 				<input type="button" class="pinkButton  btn-lg btn-block"
-					id="centerSavedBtn" data-dismiss="modal" 	 value="저장">
+					id="centerSavedBtn"  value="저장">
 			</div>
 		</div>
 	</div>

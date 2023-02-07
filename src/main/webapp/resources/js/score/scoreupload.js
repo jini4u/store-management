@@ -20,8 +20,10 @@ var fileUploadForm = document.getElementById("file-upload-form");
 //업로드 버튼 선택자
 var fileUpload = document.getElementById("file-upload-button");
 
-fileUpload.addEventListener("mousedown", loadingMask);
-fileUpload.addEventListener("click", uploadFile);
+fileUpload.addEventListener("mousedown", function(){
+	loadingMask();
+	setTimeout(uploadFile, 50);
+	});
 
 //업로드 버튼 클릭시 실행될 함수
 function uploadFile(){

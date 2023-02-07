@@ -1,3 +1,31 @@
+//-----------------사진 등록 유효성 검사----------------------------
+var fileForm = /(.*?)\.(jpg|jpeg|png)$/;
+
+function onSubmit() {
+	if ($("#centerPhoto_file").val() == "") {
+		console.log("1");
+		$("#invalid-centerPhoto").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>파일을 선택해 주세요</p>");
+		$("#invalid-centerPhoto").show();
+		$("#centermodal-photo-insert").attr("disabled", true);
+		return false;
+	}else{
+		if (!$("#centerPhoto_file").val().match(fileForm)) {
+			console.log("2");
+			$("#invalid-centerPhoto").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>jpg, jpeg, png 파일만 업로드 가능합니다</p>");
+			$("#invalid-centerPhoto").show();
+			$("#centermodal-photo-insert").attr("disabled", true);
+			return false;
+		}else{
+			console.log("3");
+		$("#invalid-centerPhoto").hide();
+		$("#centermodal-photo-insert").attr("disabled", false);
+		return true;
+		}
+	}
+};
+
+//-----------------사진 등록 유효성 검사----------------------------
+
 //전체 센터 목록 표시될 테이블 tbody 선택자
 var centerBody = document.getElementById("centertable").tBodies[0];
 //tr 선택시 해당 tr 내 정보 담을 객체 선언
@@ -157,7 +185,6 @@ function getcenterimages(){
       }
       photoDiv.append(div);
 
-
       var updateBtn = document.querySelector("#update-center-modal");
       var labelTag = document.getElementsByName('label');
 
@@ -307,8 +334,12 @@ var insertImgBtn = document.getElementById("centermodal-photo-insert");
 var insertForm = document.getElementById("photoinsertform");
 //사진 등록 모달에서 등록버튼에 클릭 이벤트 등록
 insertImgBtn.addEventListener("click",function(){
-   let insertFormData = new FormData(insertForm);
-   makeRequest(addcenterImage, 'POST', '/center/addcenterimage', insertFormData);
+	if ($("#centerPhoto_file").val() == "") {
+		onSubmit();
+	}else{
+		let insertFormData = new FormData(insertForm);
+		makeRequest(addcenterImage, 'POST', '/center/addcenterimage', insertFormData);
+	}
 });
 
 //센터 사진 등록 ajax 요청시 실행될 함수
@@ -342,6 +373,7 @@ updateBtn.addEventListener("click", function(){
 function afterUpdateImg(){
    $("#updateModal .close").click();
    makeRequest(getcenterimages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
+   onSubmit;
 }
 
 //삭제 모달 내부 삭제 버튼 선택자
@@ -368,3 +400,16 @@ function afterDeleteImg(){
    $("#deleteModal .close").click();
    makeRequest(getcenterimages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
 }
+
+//등록 모달 안 x버튼 클릭 시
+$("#centerPhoto-close").click(function (){
+	   $('#photoinsertform')[0].reset();
+	   insertImgTbody.innerHTML = '';
+	   $("#invalid-centerPhoto").empty();
+	   console.log("x");
+	   onSubmit;
+});
+
+$("#centerPhoto_file").change(function () {
+	onSubmit();
+});

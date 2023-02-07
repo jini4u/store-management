@@ -122,13 +122,11 @@
 <div class="modal fade" data-backdrop="static" id="insertModal"
 	role="dialog">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content">
+		<div class="modal-content" id="checkForm">
 			<div class="modal-header">
 				<h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
 				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+					aria-label="Close" id="centerPhoto-close">x</button>
 			</div>
 			<div class="modal-body">
 				<form id="photoinsertform">
@@ -147,7 +145,8 @@
 						<input name='centerCode' class='centercode' value='' readonly />
 					</div>
 					<div id="center-search-bar">
-						<input type="file" name="centerImage" multiple>
+						<input type="file" id="centerPhoto_file" name="centerImage" multiple>
+						<div id="invalid-centerPhoto"></div>
 					</div>
 					<div id="centermodal-photo-list">
 						<table id="centermodal-originalphoto-info" class="verticalTable">

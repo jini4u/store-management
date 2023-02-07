@@ -40,8 +40,10 @@ public class ScoreService implements IScoreService {
 	 * @return {List<Map<String, String>>} 파일 업로드 이력을 담은 Map의 List
 	 * */
 	@Override
-	public List<Map<String, String>> getScoreUploadHistory() {
-		List<Map<String, Object>> historyList = scoreRepository.getScoreUploadHistory();
+	public List<Map<String, String>> getScoreUploadHistory(int pageNo) {
+		Pager pager = new Pager(10, 10, scoreRepository.countScoreUploadHistory(), pageNo);
+		
+		List<Map<String, Object>> historyList = scoreRepository.getScoreUploadHistory(pager);
 		List<Map<String, String>> resultList = new ArrayList<Map<String,String>>();
 		for(Map<String, Object> history:historyList) {
 			String postDate = (String)history.get("postDate");
@@ -58,7 +60,14 @@ public class ScoreService implements IScoreService {
 			
 			resultList.add(resultMap);
 		}
+		
 		return resultList;
+	}
+	
+	@Override
+	public Pager getHistoryPager(int pageNo) {
+		Pager pager = new Pager(10, 10, scoreRepository.countScoreUploadHistory(), pageNo);
+		return pager;
 	}
 	
 	/**
