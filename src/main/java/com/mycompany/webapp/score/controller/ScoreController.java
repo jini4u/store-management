@@ -45,7 +45,7 @@ public class ScoreController {
 	public String scoreupload(@RequestParam(defaultValue="1") int pageNo, Model model) {
 		model.addAttribute("historyMapList", scoreService.getScoreUploadHistory(pageNo));
 		model.addAttribute("pager", scoreService.getHistoryPager(pageNo));
-		return "jsp/score/scoreupload";
+		return "jsp/score/scoreExcelUpload";
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class ScoreController {
 		int userCode = (int)session.getAttribute("userCode");
 		//service에서 인덱스 3까지는 무시하고 처리하도록 함
 		scoreService.uploadFileInfo(file, 3, userCode);
-		return "redirect:/score/scoreupload";
+		return "redirect:/score/scoreExcelUpload";
 	}
 
 	/*
