@@ -149,7 +149,7 @@ public class CenterController {
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		model.addAttribute("pager", pager);
 		model.addAttribute("historyMapList", centerService.getCenterUploadHistory(pager));
-		return "jsp/center/excelupload";
+		return "jsp/center/centerexcelupload";
 	}
 
 	//MultipartHttpServletRequest 는 여러개의 파일을 업로드할 때 사용하는데 
@@ -262,4 +262,10 @@ public class CenterController {
 		return centerService.checkCenterTel(centerTel);
 		
 	}
+	
+	@RequestMapping("/ex")
+	public String main(Model m)throws Exception {
+		throw new NumberFormatException("예외가 발생");
+	}
+	
 }

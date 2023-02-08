@@ -212,5 +212,4 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/center/centerList.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/center/centerList.js"></script>
