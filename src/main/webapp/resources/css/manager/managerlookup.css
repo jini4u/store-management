@@ -21,6 +21,6 @@
 .updateCell{
 	width: 109px;
 }
-#invalid-userName{
+#invalid-userName, #invalid-useEmail, #invalid-userTel{
 	margin-top: 5px;
 }

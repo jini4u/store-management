@@ -18,15 +18,14 @@
 </div>
 
 <div class='uploadbutton' id="fileuplod_collection">
-	<a
-		href='${pageContext.request.contextPath}/resources/templates/template_센터.xlsx'
+	<a href='${pageContext.request.contextPath}/resources/templates/template_센터.xlsx'
 		download="" class="greyButton">양식파일 다운로드</a>
 	<form id="file-upload-form" enctype="multipart/form-data"
 		action="centerexcelupload" method="post">
 		<input type="hidden" name="userCode" value="${ssesionScope.userCode}">
 		<input type="file" id="centerInputExcelFile" name="centerExcelFile" accept=".xlsx, .xls">
 		<input type="submit" class="pinkButton" id="centerExcelInsertBtn" value="UPLOAD">
-		<div id="centerExcelFile"></div>
+		<div id="centerExcelFile" style="display: flex;"></div>
 	</form>
 	<!-- <button id="file-upload-button" class="pinkButton">업로드</button> -->
 </div>

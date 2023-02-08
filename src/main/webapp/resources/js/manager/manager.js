@@ -147,7 +147,11 @@ $("#updatemgr").click(function (){
       $("#userEmail").val('');
       $("#userTeamCode").val('');            
       $("#userHireDate").val('');
-      $("#userResignDate").val('');   
+      $("#userResignDate").val('');  
+      $("#invalid-userName").empty();
+      $("#invalid-useEmail").empty();	
+      $("#invalid-userTel").empty();
+	  $("#invalid-userTeamCode").empty();	  
    });
 
 
@@ -164,7 +168,7 @@ $("#updatemgr").click(function (){
       let userHireDate=$("#userHireDate").val();
       //휴대전화번호 뒤에 4자리 자르기
       let pwCut= userTel.substr(9, 12);
-      
+       
       let data = {
          userPassword : pwCut,
          userName : userName,
@@ -198,14 +202,17 @@ $("#updatemgr").click(function (){
    //담당자명: 한글만 가능, 띄어쓰기 불가능
    let checkName = /^[가-힣]+$/;
    //이메일 형식만 가능
-   let checkEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+   let checkEmail = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+   let checkTel = /\d{3}-\d{3,4}-\d{4}/;
+   let checkTeamCode = /3\d{2}/;
 
   //userName 유효성 검사
    $("#userName").on("keyup",function(event){
-	   //담당자명이 한글이 아닐때
+	   //빈 칸 일때
 	   if($("#userName").val().length == 0){
 			  $("#invalid-userName").empty();
 	   }else{
+		      //담당자명이 한글이 아닐때
 			  if(!checkName.test($("#userName").val())){
 				  $("#invalid-userName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>한글만 입력해 주세요.</p>");
 				  $("#invalid-userName").show();
@@ -222,13 +229,64 @@ $("#updatemgr").click(function (){
 				  }
 			  }
 		   
-	   }
-	   
-
-	   
-	   
+	   }   
    });
    
-  
+   //userEmail 유효성 검사
+   $("#userEmail").on("keyup",function(event){
+	   //빈 칸 일때
+	   if($("#userEmail").val().length == 0){
+			  $("#invalid-useEmail").empty();
+	   }else{
+		      //이메일 형식이 아닐때
+			  if(!checkEmail.test($("#userEmail").val())){
+				  $("#invalid-useEmail").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>이메일 형식이 올바르지 않습니다.</p>");
+				  $("#invalid-useEmail").show();
+				  $("#savemgr").attr("disabled", true); //disabled 속성 적용
+			  }else{//이메일 형식일때
+				  $("#invalid-useEmail").empty();	  
+				  $("#savemgr").attr("disabled", false); //disabled 속성 해제
+			  }
+		   
+	   }   
+   });
+   
+   //userTel 유효성 검사
+   $("#userTel").on("keyup",function(event){
+	   //빈 칸 일때
+	   if($("#userTel").val().length == 0){
+			  $("#invalid-useEmail").empty();
+	   }else{
+		      //전화번호 형식이 아닐때
+			  if(!checkTel.test($("#userTel").val())){
+				  $("#invalid-userTel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>전화번호 형식이 올바르지 않습니다.</p>");
+				  $("#invalid-userTel").show();
+				  $("#savemgr").attr("disabled", true); //disabled 속성 적용
+			  }else{//전화번호 형식일때
+				  $("#invalid-userTel").empty();	  
+				  $("#savemgr").attr("disabled", false); //disabled 속성 해제
+			  }
+		   
+	   }   
+   });
+   
+   //userTeamCode 유효성 검사
+   $("#userTeamCode").on("keyup",function(event){
+	   //빈 칸 일때
+	   if($("#userTeamCode").val().length == 0){
+			  $("#invalid-userTeamCode").empty();
+	   }else{
+		      //팀코드 형식이 아닐때
+			  if(!checkTeamCode.test($("#userTeamCode").val())){
+				  $("#invalid-userTeamCode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>300번대로 입력해 주세요.</p>");
+				  $("#invalid-userTeamCode").show();
+				  $("#savemgr").attr("disabled", true); //disabled 속성 적용
+			  }else{//팀코드 형식일때
+				  $("#invalid-userTeamCode").empty();	  
+				  $("#savemgr").attr("disabled", false); //disabled 속성 해제
+			  }
+		   
+	   }   
+   });
 }
 

@@ -12,6 +12,7 @@
 			<mvc:exclude-mapping path="/login"/>
 			<mvc:exclude-mapping path="/resources/css/**"/>
 			<mvc:exclude-mapping path="/resources/images/**"/>
+			<mvc:exclude-mapping path="/resources/js/**"/>
 			<bean class="com.mycompany.webapp.common.filter.LoginInterceptor"/>
 		</mvc:interceptor>
 		
