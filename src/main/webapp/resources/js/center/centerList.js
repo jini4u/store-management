@@ -274,12 +274,11 @@ $("#centerSavedBtn").click(function (){
 
 //등록버튼
 $("#centerInsertBtn").click(function () {
-	
+
 	$("#invalid-tel").empty();
 	$("#invalid-centerName").empty();
-	
-	$("#centerPhotoList").empty();
 
+	$("#centerPhotoList").empty();
 
 	$("#showPhoto").hide();
 	$(".modal-body").removeAttr('id', 'centerphoto' );
@@ -335,31 +334,38 @@ let checkTel = /^\d{2,3}-\d{3,4}-\d{4}$/;
 
 //centerName
 $("#centerName").on("keyup", function(event){
-	if (!checkKor.test($("#centerName").val())) {
-		$("#invalid-centerName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>한글만 입력해 주세요</p>");
-		$("#invalid-centerName").show();
-		//disabled false면 비활성화, true면 활성화
-		$("#centerSavedBtn").attr("disabled", true);
-	}else{
+	if ($("#centerName").val().length==0) {
 		$("#invalid-centerName").empty();
-		if ($("#centerName").val().length >= 15 || $("#centerName").val().length  <= 1) {
-			$("#invalid-centerName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>센터명은 1~15사이로 입력해주세요</p>");
+	}else {
+		if (!checkKor.test($("#centerName").val())) {
+			$("#invalid-centerName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>한글만 입력해 주세요</p>");
 			$("#invalid-centerName").show();
+			//disabled false면 비활성화, true면 활성화
 			$("#centerSavedBtn").attr("disabled", true);
 		}else{
-			$("#centerSavedBtn").attr("disabled", false);
+			$("#invalid-centerName").empty();
+			if ($("#centerName").val().length >= 15 || $("#centerName").val().length  <= 1) {
+				$("#invalid-centerName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>센터명은 1~15사이로 입력해주세요</p>");
+				$("#invalid-centerName").show();
+				$("#centerSavedBtn").attr("disabled", true);
+			}else{
+				$("#centerSavedBtn").attr("disabled", false);
+			}
 		}
 	}
 }); //센터name
 
 //centerTel11
 $("#centerTel").on("keyup", function() {
+	if ($("#centerTel").val().length == 0) {
+		$("#invalid-tel").empty();
+	}else {
 	if (!checkTel.test($("#centerTel").val())) {
 		$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>'-'를 입력해 주세요</p>");
 		$("#invalid-tel").show();
 		$("#centerSavedBtn").attr("disabled", true);
 	}else{
-		$("#invalid-centerName").empty();
+		$("#invalid-tel").empty();
 		if ($("#centerTel").val().length >= 14 || $("#centerTel").val().length <= 10) {
 			$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>전화번호는 11~13사이로 입력해주세요</p>")
 			$("#invalid-tel").show();
@@ -368,6 +374,7 @@ $("#centerTel").on("keyup", function() {
 			$("#invalid-tel").empty();
 			$("#centerSavedBtn").attr("disabled", false);
 		}
+	}
 	}
 }); //centerTel
 
@@ -436,26 +443,22 @@ function checkCentertel() {
 }
 
 
+var excelBtn = document.getElementById('excel-download-button');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+excelBtn.addEventListener('click', function(){
+	var urlParams = new URLSearchParams(location.search);
+	var keywordType = urlParams.get('keywordType');
+	var keyword = urlParams.get('keyword');
+	
+	makeRequest(function(){
+		var response = httpRequest.responseText;
+		var excel = document.getElementById('excel');
+		if(keyword == ''){
+			excel.setAttribute('href', '/file/'+response);
+		} else {
+			response = response.split('_');
+			excel.setAttribute('href','/file/'+response[0]+'_'+keyword+'_'+response[2]);			
+		}
+		excel.click();
+	}, 'GET', '/center/centerlistdownload?keywordType='+keywordType+'&keyword='+keyword);
+});

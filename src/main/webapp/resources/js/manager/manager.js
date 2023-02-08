@@ -290,3 +290,22 @@ $("#updatemgr").click(function (){
    });
 }
 
+var excelBtn = document.getElementById('excel-download-button');
+
+excelBtn.addEventListener('click', function(){
+	var urlParams = new URLSearchParams(location.search);
+	var keywordType = urlParams.get('keywordType');
+	var keyword = urlParams.get('keyword');
+	
+	makeRequest(function(){
+		var response = httpRequest.responseText;
+		var excel = document.getElementById('excel');
+		if(keyword=='' || keyword==null){
+			excel.setAttribute('href', '/file/'+response);
+		} else {
+			response = response.split('_');
+			excel.setAttribute('href','/file/'+response[0]+'_'+keyword+'_'+response[2]);			
+		}
+		excel.click();
+	}, 'GET', '/manager/managerlistdownload?keywordType='+keywordType+'&keyword='+keyword);
+});

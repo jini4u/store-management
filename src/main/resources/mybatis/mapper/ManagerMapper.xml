@@ -26,7 +26,7 @@
       )
       WHERE rownum <= #{endRowNo}
    )
-   WHERE rnum >= #{startRowNo}
+   WHERE rnum >= #{startRowNo} 
          
 ]]>
 </select>
@@ -68,19 +68,19 @@ WHERE user_code > 30000
 <!-- author 고은별 
 	키워드별 담당자 수  -->
 <select id="managerCountByKeyword" parameterType="string" resultType="int">
-	SELECT count(*) from userInfo
+	SELECT count(*) from userInfo WHERE
 	<choose>
 		<when test="keywordType == 'UC'">
-		   WHERE user_code like ('%' ||#{keyword}||'%')
+		    user_code like ('%' ||#{keyword}||'%') AND
 		</when>
 		<when test="keywordType == 'UN'">
-		  WHERE user_name like ('%' ||#{keyword}||'%')
+		   user_name like ('%' ||#{keyword}||'%') AND
 		</when>
 		<when test="keywordType == 'UTC'">
-		  WHERE user_team_code like ('%' ||#{keyword}||'%')
+		   user_team_code like ('%' ||#{keyword}||'%') AND
 		</when>
 	 </choose>
-	  AND user_code > 30000
+	   user_code > 30000
 </select>
 
 <!-- author 고은별 
