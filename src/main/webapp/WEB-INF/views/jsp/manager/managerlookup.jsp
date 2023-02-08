@@ -153,7 +153,7 @@
 							<input type="hidden" name="userPassword" id="userPassword"> 
 							<input type="text" name="userName" id="userName" class="form-control"
 								aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-						<%-- 	<form:input path="userName"/> --%>
+							<div id="invalid-userName"></div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="name">생년월일</label> 
@@ -195,8 +195,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="greyButton modal-greyBtn" id="resetBtn">초기화</button>
-				<button type="button" class="pinkButton modal-pinkBtn" id="savemgr"
-					data-dismiss="modal">저장</button>
+				<button type="button" class="pinkButton modal-pinkBtn" id="savemgr" data-dismiss="modal">저장</button>
 
 				<!-- <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button> -->
 			</div>

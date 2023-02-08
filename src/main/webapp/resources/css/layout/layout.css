@@ -320,7 +320,7 @@ table{
 	text-decoration-line: none;
     color: #aaaaaa;
 }
-
+/* 유효성 검사 */
 .danger_p{
 	color: #E26868;
 	display: contents;

@@ -20,7 +20,7 @@
 
 <div id="fileuplod_collection">
 	<a class="greyButton" href='${pageContext.request.contextPath}/resources/templates/template_담당자.xlsx' download="" class="btn btn btn-primary btn-lg">양식파일 다운로드</a>
-	<form action="/manager/managerFileUpload" method="post" enctype="multipart/form-data">
+	<form action="/manager/managerfileupload" method="post" enctype="multipart/form-data">
 	<input type="file" name="mgrExcelFile">
 	<input class="pinkButton" type="submit" value="UPLOAD">
 	</form>

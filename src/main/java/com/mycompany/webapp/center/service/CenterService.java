@@ -3,7 +3,9 @@ package com.mycompany.webapp.center.service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -227,8 +229,8 @@ public class CenterService implements ICenterService{
 		return centerRepository.filterCountAllCenters(keyword, keywordType);
 	}
 	@Override
-	public List<Map<String, String>> getCenterUploadHistory() {
-		List<Map<String, Object>> historyList = centerRepository.getCenterUploadHistory();
+	public List<Map<String, String>> getCenterUploadHistory(Pager pager) {
+		List<Map<String, Object>> historyList = centerRepository.getCenterUploadHistory(pager);
 		List<Map<String, String>> resultList = new ArrayList<Map<String, String>>();
 
 		for(Map<String, Object> history:historyList) {
@@ -277,8 +279,14 @@ public class CenterService implements ICenterService{
 		}
 		String filePathName = filePath+"centerExcel_" + file.getOriginalFilename();
 
+		Date date = new Date();
+		//포맷정의
+		SimpleDateFormat fomatter = new SimpleDateFormat("yyyy.MM.dd.HH:mm:ss");
+		//포맷적용
+		String formattedNow = fomatter.format(date);
+		
 		FileInfoVO fileInfoVO = new FileInfoVO();
-		fileInfoVO.setFileSavedName("centerExcel_"+file.getOriginalFilename());
+		fileInfoVO.setFileSavedName("centerExcel_"+formattedNow+"_"+file.getOriginalFilename());
 		fileInfoVO.setOriginalName(file.getOriginalFilename());
 		fileInfoVO.setFileType(file.getContentType());
 		fileInfoVO.setFilePath(filePathName);
