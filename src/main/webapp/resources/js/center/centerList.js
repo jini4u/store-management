@@ -452,9 +452,13 @@ excelBtn.addEventListener('click', function(){
 	
 	makeRequest(function(){
 		var response = httpRequest.responseText;
-		response = response.split('_');
 		var excel = document.getElementById('excel');
-		excel.setAttribute('href','/file/'+response[0]+'_'+keyword+'_'+response[2]);
+		if(keyword == ''){
+			excel.setAttribute('href', '/file/'+response);
+		} else {
+			response = response.split('_');
+			excel.setAttribute('href','/file/'+response[0]+'_'+keyword+'_'+response[2]);			
+		}
 		excel.click();
 	}, 'GET', '/center/centerlistdownload?keywordType='+keywordType+'&keyword='+keyword);
 });
