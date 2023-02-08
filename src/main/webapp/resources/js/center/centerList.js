@@ -437,26 +437,18 @@ function checkCentertel() {
 }
 
 
+var excelBtn = document.getElementById('excel-download-button');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+excelBtn.addEventListener('click', function(){
+	var urlParams = new URLSearchParams(location.search);
+	var keywordType = urlParams.get('keywordType');
+	var keyword = urlParams.get('keyword');
+	
+	makeRequest(function(){
+		var response = httpRequest.responseText;
+		response = response.split('_');
+		var excel = document.getElementById('excel');
+		excel.setAttribute('href','/file/'+response[0]+'_'+keyword+'_'+response[2]);
+		excel.click();
+	}, 'GET', '/center/centerlistdownload?keywordType='+keywordType+'&keyword='+keyword);
+});
