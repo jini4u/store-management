@@ -12,8 +12,8 @@ display: inline-block;
 
 /*수정 점수등록 버튼*/
 #btnclick {
-	float: right;
-	
+	display: flex;
+    justify-content: space-between;	
 }
 
 #btn_group {
