@@ -104,18 +104,21 @@ function Checkform() {
     
 }
 	
-	
-	
+var excelBtn = document.getElementById('excel-download-button');
 
+excelBtn.addEventListener('click', function(){
+	var urlParams = new URLSearchParams(location.search);
+	var centerCode = urlParams.get('centerCode');
+	var checkYear = urlParams.get('checkYear');
+	var checkSeason = urlParams.get('checkSeason');
 	
+	checkYear = (checkYear=='null')?checkYear:0;
+	checkSeason = (checkSeason=='null')?checkSeason:0;
 	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
+	makeRequest(function(){
+		var response = httpRequest.responseText;
+		var excel = document.getElementById('excel');
+		excel.setAttribute('href','/file/'+response);			
+		excel.click();
+	}, 'GET', '/score/scorelistdownload?centerCode='+centerCode+'&checkYear='+checkYear+'&checkSeason='+checkSeason);
+});

@@ -33,7 +33,8 @@
 		</div>
 	</form>
 	<div>
-		<button class="greyButton">엑셀로 다운로드</button>
+		<button id="excel-download-button" class="greyButton">엑셀로 다운로드</button>
+		<a id="excel" href="" download=""></a>
 		<button id="centerInsertBtn" class="pinkButton" data-toggle="modal"
 		data-target="#myModal">등록</button>
 	</div>

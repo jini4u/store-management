@@ -45,8 +45,12 @@
 			</button>
 		</div>
 	</form>
+	<div>
+	<button id="excel-download-button" class="greyButton">엑셀로 다운로드</button>
+		<a id="excel" href="" download=""></a>
 	<button class="pinkButton mgrInsertBtn" data-toggle="modal"
 		data-target="#insertModal">등록</button>
+		</div>
 </div>
 
 <div class="managerbox">
