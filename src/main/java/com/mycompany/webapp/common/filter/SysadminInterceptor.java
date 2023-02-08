@@ -16,7 +16,7 @@ public class SysadminInterceptor implements HandlerInterceptor {
 			throws Exception {
 		
 		String authority = (String)request.getSession().getAttribute("authority");
-		
+		//권한이 sysadmin이 아니라면 Controller로 넘어가지 않는다
 		if(!authority.equals("sysadmin")) {
 			return false;
 		}

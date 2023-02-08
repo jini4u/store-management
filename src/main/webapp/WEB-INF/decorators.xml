@@ -14,4 +14,7 @@
 	<excludes>
 		<pattern>/login*</pattern>
 	</excludes>
+		<excludes>
+		<pattern>/center/jusoPopup</pattern>
+	</excludes>
 </decorators>
