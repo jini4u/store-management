@@ -70,21 +70,26 @@ $(".centerDate").change(function() {
 		centerClosingDateRd.readOnly = true;
 	}
 	if (centerOpeningDate > getToday()) {
-		centerCondition.value = "notyet";
+//		centerCondition.value = "notyet";
+		centerCondition.value = "오픈예정";
 	}
 	if (centerOpeningDate < getToday()) {
-		centerCondition.value = "o"+"-1";
+//		centerCondition.value = "o"+"-1";
+		centerCondition.value = "운영중";
 	}
 	let centerClosingDate = new Date(document.querySelector("#centerClosingDate").value);
 	let closingDate = document.querySelector("#centerClosingDate");
 	if (centerOpeningDate > getToday() && centerClosingDate > getToday())  {
-		centerCondition.value = "o"+"1";
+//		centerCondition.value = "o"+"1";
+		centerCondition.value = "오픈예정";
 	}
 	if ((centerOpeningDate !=='') && (centerClosingDate !== '')) {
 		if (centerOpeningDate <= centerClosingDate && centerClosingDate <= getToday() ) {
-			centerCondition.value = "closed";
+//			centerCondition.value = "closed";
+			centerCondition.value = "폐점";
 		}else if (centerOpeningDate < getToday()  && centerOpeningDate < centerClosingDate && centerClosingDate > getToday()) {
-			centerCondition.value = "o"+"-1";
+//			centerCondition.value = "o"+"-1";
+			centerCondition.value = "운영중";
 		}else if (centerOpeningDate > centerClosingDate) {
 			closingDate.value = '';
 			centerCondition.value='';
@@ -202,14 +207,14 @@ $("#centerSavedBtn").click(function (){
 		let centeraddress = $("#centerAddress").val();
 		let centerguide = $("#centerGuide").val();
 		let centerclosingDate = $("#centerClosingDate").val();
-		let centercondition = $("#centerCondition").val();	
-
+		let centercondition = $("#centerCondition").val();
 		let centeropeningDate = $("#centerOpeningDate").val();
 
 		if (centeropeningDate  == '') {
 			centercondition = "notyet";
 			console.log(centercondition);
 		}
+		
 		if(!$("#centerName").attr("readonly")) {
 			let insertURL = "centerinsert";
 			$.ajax({
@@ -418,7 +423,6 @@ function checkCenterName() {
 			}
 		},
 		error : function() {
-			alert("에러");
 		}
 	}); //ajax끝
 } //checkCenterName 끝

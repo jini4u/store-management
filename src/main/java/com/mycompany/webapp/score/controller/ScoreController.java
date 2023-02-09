@@ -81,7 +81,7 @@ public class ScoreController {
 		int userCode = (int)session.getAttribute("userCode");
 		//service에서 인덱스 3까지는 무시하고 처리하도록 함
 		scoreService.uploadFileInfo(file, 3, userCode);
-		return "redirect:/score/scoreExcelUpload";
+		return "redirect:/score/scoreupload";
 	}
 
 	/*
@@ -92,7 +92,6 @@ public class ScoreController {
 	@RequestMapping(value="/scorelist", method = RequestMethod.GET)
 	public String centerscoreinquiry(@RequestParam(defaultValue="1") int pageNo,@RequestParam(defaultValue="0")int centerCode, @RequestParam(defaultValue="0")int checkYear, @RequestParam(defaultValue="0")int checkSeason,Model model,HttpSession session) {
 
-	/*	int userCode = 10004;*/
 		int userCode = (Integer) session.getAttribute("userCode");
 		if(centerCode == 0) {
 			return "redirect:/score/scorelist?centerCode="+scoreService.getCenterName(userCode).get(0).getCenterCode();
@@ -102,12 +101,6 @@ public class ScoreController {
 		scoreVO.setCenterCode(centerCode);
 		scoreVO.setCheckYear(checkYear);
 		scoreVO.setCheckSeason(checkSeason);
-
-		/*		
-	 	세션에서 가져와서 값을 넣을 수 있도록 변경----------------------
-		int centerCode = (Integer) session.getAttribute("centerCode");
-		
-		------------------------------------------------  */	
 
 		//scoreVo를 getScoreList로 담아 socreList로 만듬
 		int totalRows = scoreService.countListByCenterCode(scoreVO);
@@ -327,6 +320,33 @@ public class ScoreController {
 
 		return result;
 	}
+	/**
+	 * 유효성검사(그룹코드)
+	 * @author 정윤선
+	 * @return groupCode,groupContent
+	 * */
+	@RequestMapping(value="/overlapgroupcode/{groupCode}")
+	public @ResponseBody int overlapGroupCode(@PathVariable String groupCode) {
+		return scoreService.overlapGroupCode(groupCode);
+	}
+	@RequestMapping(value="/overlapgroupcontent/{groupContent}")
+	public @ResponseBody int overlapGroupContent(@PathVariable String groupContent) {
+		return scoreService.overlapDetailCode(groupContent);
+	}	
+	/**
+	 * 유효성검사(detail)
+	 * @author 정윤선
+	 * @return detailCode,detailcontent
+	 * */
+	@RequestMapping(value="/overlapdetailcode/{detailCode}")
+	public @ResponseBody int overlapDetailCode(@PathVariable String detailCode) {
+		return scoreService.overlapGroupDetailCode(detailCode);
+	}
+	@RequestMapping(value="/overlapdetailcontent/{detailcontent}")
+	public @ResponseBody int overlapDetailContent(@PathVariable String detailcontent) {
+		return scoreService.overlapGroupDetailContent(detailcontent);
+	}
+	
 	
 	@RequestMapping("/scorelistdownload")
 	public @ResponseBody String centerListDownload(@RequestParam int centerCode, @RequestParam(defaultValue="0") int checkYear, @RequestParam(defaultValue="0") int checkSeason) {

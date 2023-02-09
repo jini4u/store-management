@@ -64,7 +64,7 @@ public class NoticeController {
 		String postContent = post.getContent();
 		int rows = postContent.split("\n").length;
 		model.addAttribute("post", post);
-		model.addAttribute("rows", rows+2);
+		model.addAttribute("rows", rows+5);
 		return "jsp/notice/update";
 	}
 	

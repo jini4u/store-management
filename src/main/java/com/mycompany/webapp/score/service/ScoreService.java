@@ -280,5 +280,27 @@ public class ScoreService implements IScoreService {
 		
 		return resultMap;
 	}
+
+	@Override
+	public int overlapGroupCode(String groupCode) {
+		return scoreRepository.overlapGroupCode(groupCode);
+	}
+
+	@Override
+	public int overlapDetailCode(String groupContent) {
+		return scoreRepository.overlapDetailCode(groupContent);
+	}
 	
+	@Override
+	public int overlapGroupDetailCode(String detailCode) {
+		return scoreRepository.overlapGroupDetailCode(detailCode);
+
+	}
+
+	@Override
+	public int overlapGroupDetailContent(String detailcontent) {
+		return scoreRepository.overlapGroupDetailContent(detailcontent);
+
+	}
+
 }
