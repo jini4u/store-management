@@ -243,6 +243,7 @@ $("#centerSavedBtn").click(function (){
 				error: error
 			});
 		}else{
+			//내일 안되면 여기 확인 대문자 소문자
 			let updateURL = "centerupdate";
 			let centercondition = document.querySelector("#centerCondition").value;
 			let pageNo = $("#now-page").text();
@@ -273,7 +274,7 @@ $("#centerSavedBtn").click(function (){
 					clickTd.eq(3).text(results.centerAddress);
 					clickTd.eq(4).text(results.centerOpeningDate);
 					clickTd.eq(5).text(results.centerCondition);
-					clickTd.eq(6).text(results.centerguide);
+					clickTd.eq(6).text(results.centerGuide);
 					clickTd.eq(7).text(results.centerclosingDate);
 					$("#findCenterName").val('');
 					$("#myModal .close").click();
