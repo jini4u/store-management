@@ -192,6 +192,7 @@ public class ManagerService implements IManagerService {
 				String postDate = (String)history.get("postDate");
 				String userName = (String)history.get("userName");
 				String originalName = (String)history.get("originalName");
+				String fileSavedName = (String)history.get("fileSavedName");
 				String insert = String.valueOf(history.get("insert"));
 				String update = String.valueOf(history.get("update"));
 				
@@ -199,6 +200,7 @@ public class ManagerService implements IManagerService {
 				mgrResultMap.put("postDate", postDate);
 				mgrResultMap.put("userName", userName);
 				mgrResultMap.put("originalName", originalName);
+				mgrResultMap.put("fileSavedName", fileSavedName);
 				mgrResultMap.put("result", "입력: "+insert+"건, 수정: "+update+"건");
 				
 				mgrResultList.add(mgrResultMap);

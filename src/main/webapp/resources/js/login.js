@@ -33,8 +33,8 @@ signin.addEventListener("click", () => {
 		}else{
 			loadingMask();
 			setTimeout(function(){
-				return true;
 			}, 50);
+			return true;
 		} 
 		return false;
  };
