@@ -40,8 +40,8 @@
 </head>
 <script language="javascript">
 // opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("주소입력화면 소스"도 동일하게 적용시켜야 합니다.)
-//document.domain = "abc.go.kr";
-document.domain = "localhost:8080";
+/* document.domain = "storemanagement.co.kr"; */
+
 /*
 		모의 해킹 테스트 시 팝업API를 호출하시면 IP가 차단 될 수 있습니다. 
 		주소팝업API를 제외하시고 테스트 하시기 바랍니다.
@@ -58,10 +58,11 @@ function init(){
 		document.form.resultType.value = resultType;
 		document.form.action="https://business.juso.go.kr/addrlink/addrLinkUrl.do"; //인터넷망
 		//document.form.action="https://business.juso.go.kr/addrlink/addrMobileLinkUrl.do"; //모바일 웹인 경우, 인터넷망
-		document.form.submit();
+		document.form.submit(); 
 	}else{
+			if(opener == null || opener == undefined) opener = window.open('', 'jusoPopup');
 		opener.jusoCallBack("<%=roadFullAddr%>","<%=roadAddrPart1%>","<%=addrDetail%>","<%=roadAddrPart2%>","<%=engAddr%>","<%=jibunAddr%>","<%=zipNo%>", "<%=admCd%>", "<%=rnMgtSn%>", "<%=bdMgtSn%>", "<%=detBdNmList%>", "<%=bdNm%>", "<%=bdKdcd%>", "<%=siNm%>", "<%=sggNm%>", "<%=emdNm%>", "<%=liNm%>", "<%=rn%>", "<%=udrtYn%>", "<%=buldMnnm%>", "<%=buldSlno%>", "<%=mtYn%>", "<%=lnbrMnnm%>", "<%=lnbrSlno%>", "<%=emdNo%>");
-		window.close();
+		window.open('about:blank', '_self').close();
 		}
 }
 </script>

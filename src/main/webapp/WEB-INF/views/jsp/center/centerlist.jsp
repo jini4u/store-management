@@ -214,9 +214,26 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
-document.domain = "localhost:8080";
+/* document.domain = "storemanagement.co.kr"; */
 
+/* function showModal() {
+	var args = new Object;
+	args.window = window;
+}
+ */
+//팝업창에서 opener를 통해서 부모창에 접근할 수 있습니다. 
+/*  $(document).ready(function () {
+	 alert("test");
+	 console.log(window);
+//	 window.showModalDialog("www.naver.com", ["hello", "world"]], "dialogWidth:300px; dialogHeight:200px");
+// 	 var oMyObject = window.dialogArguments;
+// 	 console.log(oMyObject);
+//      if (opener == undefined)
+//      opener = window.dialogArguments;
+ }); */
+ 
 function goPopup(){
+	 window.name = 'jusoPopup';
 	// 주소검색을 수행할 팝업 페이지를 호출합니다.
 	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://business.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
 	var pop = window.open("/center/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
