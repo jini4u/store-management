@@ -213,7 +213,7 @@ FROM history H
 	JOIN fileinfo F ON H.file_no = F.file_no
 	JOIN userinfo U ON H.user_code = U.user_code
 WHERE F.file_saved_name like ('%' || 'centerExcel' || '%')
-ORDER BY "postDate" DESC
+ORDER BY F.file_post_date DESC
 )
 WHERE ROWNUM <= #{endRowNo}
 )
