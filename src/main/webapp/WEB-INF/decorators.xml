@@ -13,8 +13,6 @@
 	<!-- decorators를 적용시키지 않을 url 패턴 -->
 	<excludes>
 		<pattern>/login*</pattern>
-	</excludes>
-		<excludes>
 		<pattern>/center/jusoPopup</pattern>
 	</excludes>
 </decorators>

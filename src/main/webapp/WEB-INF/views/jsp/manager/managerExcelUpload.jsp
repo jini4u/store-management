@@ -20,10 +20,13 @@
 
 <div id="fileuplod_collection">
 	<a class="greyButton" href='${pageContext.request.contextPath}/resources/templates/template_담당자.xlsx' download="" class="btn btn btn-primary btn-lg">양식파일 다운로드</a>
-	<form action="/manager/managerfileupload" method="post" enctype="multipart/form-data">
-	<input type="file" name="mgrExcelFile">
-	<input class="pinkButton" type="submit" value="UPLOAD">
+	<div class="fileupload_input">
+		<div id="invalid-mgrFile"></div>
+		<form action="/manager/managerfileupload" method="post" enctype="multipart/form-data">
+		<input type="file" name="mgrExcelFile" id ="mgrFileInput" accept=".xlsx, .xls">
+		<input class="pinkButton" id="mgrExcelInsertBtn" type="submit" value="UPLOAD">
 	</form>
+	</div>
 </div>
 
 <table class="verticalTable">

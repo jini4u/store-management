@@ -1,4 +1,4 @@
-const signup = document.getElementById("sign-up");
+/*const signup = document.getElementById("sign-up");
 signin = document.getElementById("sign-in");
 loginin = document.getElementById("login-in");
 loginup = document.getElementById("login-up");
@@ -17,4 +17,21 @@ signin.addEventListener("click", () => {
 
     loginin.classList.add("block");
     loginup.classList.add("none");
-})
+})*/
+
+ function loginBtnClick(){
+	 $("#invalid-login").empty();
+		if($("#userCode").val().length == 0){
+			console.log(message);
+			$("#invalid-login").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>아이디를 입력해 주세요.</p>");
+			$("#invalid-login").show;
+			return false;
+		}else if($("#password").val().length == 0){
+			$("#invalid-login").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>비밀번호를 입력해 주세요.</p>");
+			$("#invalid-login").show;
+			return false;
+		}else{
+			return true;
+		} 
+		return false;
+ };

@@ -11,3 +11,12 @@
 	font-size: 15px;
 	padding: 6px 10px;
 }
+#invalid-mgrFile{
+	margin-right: 15px;
+    display: flex;
+    align-items: center;
+}
+.fileupload_input{
+	display: flex;
+    align-items: center;
+}

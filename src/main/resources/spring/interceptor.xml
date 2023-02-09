@@ -8,23 +8,20 @@
 	<!-- 인터셉터 설정 파일. 위쪽부터 실행 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<!-- interceptor를 적용할 url -->
-			<mvc:mapping path="/**" />
-			<!-- interceptor를 해제할 url -->
-			<mvc:exclude-mapping path="/login" />
-			<mvc:exclude-mapping path="/resources/css/**" />
-			<mvc:exclude-mapping path="/resources/images/**" />
-			<bean
-				class="com.mycompany.webapp.common.filter.LoginInterceptor" />
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/login"/>
+			<mvc:exclude-mapping path="/resources/css/**"/>
+			<mvc:exclude-mapping path="/resources/images/**"/>
+			<mvc:exclude-mapping path="/resources/js/**"/>
+			<bean class="com.mycompany.webapp.common.filter.LoginInterceptor"/>
 		</mvc:interceptor>
 
 		<mvc:interceptor>
 			<mvc:mapping path="/center/**" />
 			<mvc:exclude-mapping path="/center/centerlist/**" />
-			<mvc:exclude-mapping path="/center/availcenter" />
-			<mvc:exclude-mapping
-				path="/center/getcenterimages/**" />
 			<mvc:exclude-mapping path="/center/jusoPopup/**" />
+			<mvc:exclude-mapping path="/center/availcenter" />
+			<mvc:exclude-mapping path="/center/getcenterimages/**" />
 			<bean
 				class="com.mycompany.webapp.common.filter.SysadminInterceptor" />
 		</mvc:interceptor>

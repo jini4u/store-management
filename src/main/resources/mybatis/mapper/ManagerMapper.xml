@@ -138,16 +138,26 @@ WHERE user_code = #{userCode}
 	파일 업로드 히스토리
  -->
 <select id="mgrUploadFileHistory" resultType="map">
-  <![CDATA[
- 	SELECT TO_CHAR(F.file_post_date, 'YYYY-MM-DD') AS "postDate"
-			, U.user_name AS "userName"
-			, F.file_original_name AS "originalName"
-			, H.history_insert AS "insert"
-			, H.history_update AS "update"
-	FROM history H
-		JOIN fileinfo F ON H.file_no = F.file_no
-		JOIN userinfo U ON H.user_code = U.user_code
-    WHERE f.file_saved_name like ('%' ||'manager'||'%')
+  <![CDATA[   
+    select * from(
+    select rownum as rnum, "postDate", "userName", "originalName", "insert", "update"
+    from(
+        SELECT  TO_CHAR(F.file_post_date, 'YYYY-MM-DD') AS "postDate"
+                , U.user_name AS "userName"
+                , F.file_original_name AS "originalName"
+                , H.history_insert AS "insert"
+                , H.history_update AS "update"
+        FROM history H
+            JOIN fileinfo F ON H.file_no = F.file_no
+            JOIN userinfo U ON H.user_code = U.user_code
+        WHERE f.file_saved_name like ('%' ||'manager'||'%')
+        ORDER BY F.file_post_date DESC
+        )
+      WHERE rownum <= #{endRowNo}
+   )
+   WHERE rnum >= #{startRowNo}
+
+         
 	]]>
 </select> 
  

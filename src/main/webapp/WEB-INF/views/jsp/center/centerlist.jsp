@@ -214,6 +214,7 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
+document.domain = "localhost:8080";
 
 function goPopup(){
 	// 주소검색을 수행할 팝업 페이지를 호출합니다.
@@ -228,7 +229,6 @@ var jusoCallBack = function(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,
 	  // 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
 	document.form.centerAddress.value = roadAddrPart1; // 도로명주소
 	document.form.centerGuide.value = addrDetail; // 상세주소
-	self.close();
 
 }
 </script>

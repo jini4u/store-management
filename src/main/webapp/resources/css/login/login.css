@@ -174,4 +174,23 @@ img {
    color: #E26868;
    border: 2px solid #E26868;
 }
-}}
+/* 유효성 검사 */
+.danger_p{
+	color: #E26868;
+	margin: 0;
+}
+.danger_img{
+	width: 24px;
+}
+.pass_p{
+	color: #007015;
+	display: contents;
+}
+.pass_img{
+	width: 24px;
+	color: #AACB73;
+}
+#invalid-login{
+	display: flex;
+    align-items: center;
+}
