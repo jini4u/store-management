@@ -103,4 +103,21 @@ excelBtn.addEventListener('click', function(){
 });
 	
 
-$('#no-box').prop('type', "placeholder");
+/*$('#no-box').prop('type', "placeholder");*/
+
+
+$.ajax({
+	url: "/score/scorelist/",
+	type: "GET",
+	data:{
+		centerCode :centerCode
+	},
+	async: false,
+	success: function(result){
+		if (result !=0 ) {
+			count += 1;
+			$("#invalid-detailcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>중복된 값이 있습니다.</p>");
+			$("#invalid-detailcode").show();	
+		}
+	}
+});

@@ -278,10 +278,10 @@ SELECT COUNT(*) FROM fileinfo WHERE file_saved_name LIKE 'score%'
 	WHERE check_group_content =#{groupContent}
 </select>
 
- <select id="overlapGroupDetailCode" resultType="int" parameterType="String">
+ <select id="overlapGroupDetailCode" resultType="int" parameterType="map">
 	SELECT count(*) 
 	FROM check_detail
-	WHERE check_detail_code =#{detailCode}
+	WHERE check_detail_code =#{dc}
 	AND check_group_code =#{groupCode}
 </select>
 

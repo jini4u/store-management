@@ -291,16 +291,18 @@ public class ScoreService implements IScoreService {
 		return scoreRepository.overlapDetailCode(groupContent);
 	}
 	
-	@Override
-	public int overlapGroupDetailCode(String detailCode) {
-		return scoreRepository.overlapGroupDetailCode(detailCode);
 
-	}
 
 	@Override
 	public int overlapGroupDetailContent(String detailcontent) {
 		return scoreRepository.overlapGroupDetailContent(detailcontent);
 
+	}
+
+	@Override
+	public int overlapGroupDetailCode(String detailCode, String groupCode) {
+		int dc = Integer.parseInt(detailCode);
+		return scoreRepository.overlapGroupDetailCode(dc,groupCode);
 	}
 
 }

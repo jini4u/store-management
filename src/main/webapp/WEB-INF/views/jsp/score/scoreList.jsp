@@ -17,18 +17,15 @@
 		src="${pageContext.request.contextPath}/resources/images/checklist.png">
 	<h2>센터 점수 조회</h2>
 </div>
+<c:forEach items="${centerName}" var="center" > 
 
-<c:forEach items="${centerName}" var="center">
 
 	<c:if test="${center.centerCode eq param.centerCode}">
-		<a class="clikedBtn clicked"
-			href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
+		<a class="clikedBtn clicked" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
 	</c:if>
 	<c:if test="${center.centerCode ne param.centerCode}">
-		<a class="clikedBtn"
-			href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
+		<a class="clikedBtn" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
 	</c:if>
-
 
 </c:forEach>
 
@@ -218,8 +215,8 @@
 										value="${usingCodeList.checkGroupCode}"> <input
 										type="hidden" name="arrayDetailCode"
 										value="${usingCodeList.checkDetailCode}"> <input
-										id="inputNumber" type="number" size="13" name="arrayScore"
-										value="0" min="0" max="100">
+										id="inputNumber" placeholder="점수를 입력하세요" size="13" name="arrayScore"
+										  min="0" max="100">
 								</tr>
 							</c:forEach>
 						</table>
