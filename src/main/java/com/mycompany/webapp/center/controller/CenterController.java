@@ -1,11 +1,22 @@
 package com.mycompany.webapp.center.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
-
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +24,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,6 +48,8 @@ import com.mycompany.webapp.common.vo.Pager;
 @RequestMapping("/center")
 @Controller
 public class CenterController {
+	
+	
 	private static Logger logger = LoggerFactory.getLogger(CenterController.class);
 	@Autowired
 	ICenterService centerService;
@@ -148,8 +162,8 @@ public class CenterController {
 		int totalRows = centerService.countUploadHistory();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		model.addAttribute("pager", pager);
-		model.addAttribute("historyMapList", centerService.getCenterUploadHistory());
-		return "jsp/center/excelupload";
+		model.addAttribute("historyMapList", centerService.getCenterUploadHistory(pager));
+		return "jsp/center/centerexcelupload";
 	}
 
 	//MultipartHttpServletRequest 는 여러개의 파일을 업로드할 때 사용하는데 
@@ -162,6 +176,7 @@ public class CenterController {
 		int totalRows = centerService.countUploadHistory();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		model.addAttribute("pager", pager);
+		model.addAttribute("historyMap", centerService.getCenterUploadHistory(pager));
 		centerService.centerUploadFile(file, 3, userCode);
 
 		return "redirect:/center/centerexcelupload";
@@ -259,6 +274,99 @@ public class CenterController {
 	@ResponseBody
 	public int checkCenterTel(@RequestParam String centerTel) {
 		return centerService.checkCenterTel(centerTel);
-		
+
 	}
+
+	@RequestMapping("/centerlistdownload")
+	public @ResponseBody String centerListDownload(@RequestParam(required=false) String keywordType, @RequestParam(required=false)String keyword) {
+		int totalRows = centerService.filterCountAllCenters(keyword, keywordType);
+		Pager pager = new Pager(totalRows, 1, totalRows, 1);
+		List<CenterVO> centerList = centerService.findCenter(pager, keyword, keywordType);
+		
+		String fileName = "";
+		Date date = new Date();
+		if(keyword==null || keyword.equals("")) {
+			fileName = "CenterList_"+date.getTime()+".xlsx";
+		} else {
+			fileName = "CenterList_"+keyword+"_"+date.getTime()+".xlsx";
+		}
+
+		XSSFWorkbook workbook = new XSSFWorkbook();
+
+		XSSFSheet sheet = workbook.createSheet("CenterList");
+
+		int rownum = 0;
+
+		Row row0 = sheet.createRow(rownum);
+
+		CellStyle titleStyle = workbook.createCellStyle();
+		
+		titleStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+		titleStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+		titleStyle.setBorderBottom(BorderStyle.THIN);
+		
+		Cell cell0 = row0.createCell(0);
+		cell0.setCellValue("센터코드");
+		cell0.setCellStyle(titleStyle);
+
+		Cell cell1 = row0.createCell(1);
+		cell1.setCellValue("센터명");
+		cell1.setCellStyle(titleStyle);
+
+		Cell cell2 = row0.createCell(2);
+		cell2.setCellValue("전화번호");
+		cell2.setCellStyle(titleStyle);
+
+		Cell cell3 = row0.createCell(3);
+		cell3.setCellValue("주소");
+		cell3.setCellStyle(titleStyle);
+		
+		Cell cell4 = row0.createCell(4);
+		cell4.setCellValue("오시는길");
+		cell4.setCellStyle(titleStyle);
+		
+		Cell cell5 = row0.createCell(5);
+		cell5.setCellValue("오픈일");
+		cell5.setCellStyle(titleStyle);
+		
+		Cell cell6 = row0.createCell(6);
+		cell6.setCellValue("폐점일");
+		cell6.setCellStyle(titleStyle);
+		
+		Cell cell7 = row0.createCell(7);
+		cell7.setCellValue("운영여부");
+		cell7.setCellStyle(titleStyle);
+		
+		for(CenterVO center:centerList) {
+			Row row = sheet.createRow(++rownum);
+			int cellnum = 0;
+			row.createCell(cellnum++).setCellValue(center.getCenterCode());
+			row.createCell(cellnum++).setCellValue(center.getCenterName());
+			row.createCell(cellnum++).setCellValue(center.getCenterTel());
+			row.createCell(cellnum++).setCellValue(center.getCenterAddress());
+			row.createCell(cellnum++).setCellValue(center.getCenterGuide());
+			row.createCell(cellnum++).setCellValue(center.getCenterOpeningDate());
+			row.createCell(cellnum++).setCellValue(center.getCenterClosingDate());
+			row.createCell(cellnum++).setCellValue(center.getCenterCondition());
+		}
+
+		try {
+			FileOutputStream out = new FileOutputStream(new File(filePath, fileName));
+			workbook.write(out);
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return fileName;
+	}
+/*	@RequestMapping("/ex")
+	public String main(Model m)throws Exception {
+		throw new NumberFormatException("예외가 발생");
+	}*/
+	@RequestMapping("/jusoPopup")
+    public String jusoPopup(@ModelAttribute("centerVO") CenterVO centerVO) throws Exception {
+        return "jsp/center/jusoPopup";
+
+    }
+	
 }

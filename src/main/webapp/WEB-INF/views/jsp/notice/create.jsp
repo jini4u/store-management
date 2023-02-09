@@ -12,14 +12,17 @@
 			<div class="mb-3">
 				<label for="title">제목</label> 
 				<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요">
+				<div class="invalid"></div>
 			</div>
 			<div class="mb-3">
 				<label for="reg_id">작성자</label> 
 				<input type="text" class="form-control" name="author" id="reg_id" placeholder="이름을 입력해 주세요">
+				<div class="invalid"></div>
 			</div>
 			<div class="mb-3">
 				<label for="content">내용</label>
 				<textarea class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요"></textarea>
+				<div class="invalid"></div>
 			</div>
 			</form>
 	<button type="button" class="pinkButton" id="btnSave">저장</button>

@@ -32,8 +32,12 @@
 			</button>
 		</div>
 	</form>
-	<button id="centerInsertBtn" class="pinkButton" data-toggle="modal"
-	data-target="#myModal">등록</button>
+	<div>
+		<button id="excel-download-button" class="greyButton">엑셀로 다운로드</button>
+		<a id="excel" href="" download=""></a>
+		<button id="centerInsertBtn" class="pinkButton" data-toggle="modal"
+		data-target="#myModal">등록</button>
+	</div>
 </div>
 <c:if test="${centerListN != 'empty'}">
 	<div id="center-form-pagging">
@@ -140,7 +144,7 @@
 			<div class="modal-body">
 				<!--   disabled="disabled" class="form-control removeDisabled"  <table class="rowTable" id="center-right">  -->
 
-				<form id="centerForm">
+				<form id="centerForm" name="form">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<input type="hidden" name="${centerCode}" id="centerCode">
@@ -161,10 +165,11 @@
 						<div id="invalid-tel"></div>
 					</div>
 					<div class="mb-3">
-						<label for="centerAddress">주소</label> <input type="text"
-							name="centerAddress" id="centerAddress" class="form-control"
+						<label for="centerAddress">주소</label> 
+						<input type="text" name="centerAddress" id="centerAddress" class="form-control"
 							aria-label="Sizing example input"
 							aria-describedby="inputGroup-sizing-sm">
+							<input type="button" onclick="goPopup();" value="우편번호"></button>
 							<div id="invalid-Address"></div>
 					</div>
 					<div class="mb-3">
@@ -207,7 +212,24 @@
 		</div>
 	</div>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/center/centerList.js"></script>
+<script type="text/javascript">
+document.domain = "localhost:8080";
+
+function goPopup(){
+	// 주소검색을 수행할 팝업 페이지를 호출합니다.
+	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://business.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+	var pop = window.open("/center/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	
+	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://business.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+}
+var jusoCallBack = function(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo){
+	
+	  // 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+	document.form.centerAddress.value = roadAddrPart1; // 도로명주소
+	document.form.centerGuide.value = addrDetail; // 상세주소
+
+}
+</script>
+<script src="${pageContext.request.contextPath}/resources/js/center/centerList.js"></script>

@@ -8,7 +8,8 @@
 <div class="menuRoute">
 	<img src="${pageContext.request.contextPath}/resources/images/home.png">
 	<a href="/">&nbsp; Home &nbsp; ></a> <span>&nbsp; 점수 &nbsp; ></span> <a
-		href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">&nbsp; 센터 점수 조회</a>
+		href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">&nbsp;
+		센터 점수 조회</a>
 </div>
 
 <div class="titleBox">
@@ -18,15 +19,17 @@
 </div>
 
 <c:forEach items="${centerName}" var="center">
-	
+
 	<c:if test="${center.centerCode eq param.centerCode}">
-	<a class="clicked" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
+		<a class="clikedBtn clicked"
+			href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
 	</c:if>
 	<c:if test="${center.centerCode ne param.centerCode}">
-	<a class="clikedBtn" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
+		<a class="clikedBtn"
+			href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
 	</c:if>
 
-		
+
 </c:forEach>
 
 
@@ -38,39 +41,41 @@
 	<form action="${pageContext.request.contextPath}/score/scorelist"
 		name="score" method="get">
 		<input type="hidden" name="centerCode" value="${param.centerCode}">
-		<select name="checkYear" id="yearbox" title="년도">년도</select> 
-			<select name="checkSeason">
+		<select name="checkYear" id="yearbox" title="년도">년도
+		</select> <select name="checkSeason">
 			<option value="0">분기</option>
-			<c:if test='${param.checkSeason eq 4}'> 
+			<c:if test='${param.checkSeason eq 4}'>
 				<option selected='selected' value="4">
-			</c:if> 
-			<c:if test='${param.checkSeason ne 4}'> 
+			</c:if>
+			<c:if test='${param.checkSeason ne 4}'>
 				<option value="4">
-			</c:if>
-				4 분기</option>
-				
-			<c:if test='${param.checkSeason eq 3}'> 
+			</c:if> 4 분기
+			</option>
+
+			<c:if test='${param.checkSeason eq 3}'>
 				<option selected='selected' value="3">
-			</c:if> 
-			<c:if test='${param.checkSeason ne 3}'> 
-				<option value="3">
-			</c:if>3 분기</option>
-			
-			<c:if test='${param.checkSeason eq 2}'> 
-				<option selected='selected' value="2">
-			</c:if> 
-			<c:if test='${param.checkSeason ne 2}'> 
-				<option value="2">
-			</c:if>2 분기</option>
-			
-			
-			<c:if test='${param.checkSeason eq 1}'> 
-				<option selected='selected' value="1">
-			</c:if> 
-			<c:if test='${param.checkSeason ne 1}'> 
-				<option value="1">
 			</c:if>
-				1 분기</option>
+			<c:if test='${param.checkSeason ne 3}'>
+				<option value="3">
+			</c:if>3 분기
+			</option>
+
+			<c:if test='${param.checkSeason eq 2}'>
+				<option selected='selected' value="2">
+			</c:if>
+			<c:if test='${param.checkSeason ne 2}'>
+				<option value="2">
+			</c:if>2 분기
+			</option>
+
+
+			<c:if test='${param.checkSeason eq 1}'>
+				<option selected='selected' value="1">
+			</c:if>
+			<c:if test='${param.checkSeason ne 1}'>
+				<option value="1">
+			</c:if> 1 분기
+			</option>
 		</select>
 		<button type="submit" class="pinkButton">찾기</button>
 	</form>
@@ -84,29 +89,29 @@
 	<input type="hidden" name="centerCode" value="${param.centerCode}">
 
 
-		<c:if test="${empty scoreList}">
-	<table class="scoretable" id="scoreListTable" border="1">
-			<tr>
-			<th>점검년도</th>
-			<th>분기</th>
-			<th>항목</th>
-			<th>상세항목</th>
-			<th>점수</th>
-		</tr>
-		<tr>
-			<td colspan="5">데이터가 없습니다.</td>
-			</tr>
-			</table>
-					</c:if>
-		<c:if test="${not empty scoreList}">
+	<c:if test="${empty scoreList}">
 		<table class="scoretable" id="scoreListTable" border="1">
 			<tr>
-			<th>점검년도</th>
-			<th>분기</th>
-			<th>항목</th>
-			<th>상세항목</th>
-			<th>점수</th>
-		</tr>
+				<th>점검년도</th>
+				<th>분기</th>
+				<th>항목</th>
+				<th>상세항목</th>
+				<th>점수</th>
+			</tr>
+			<tr>
+				<td colspan="5">데이터가 없습니다.</td>
+			</tr>
+		</table>
+	</c:if>
+	<c:if test="${not empty scoreList}">
+		<table class="scoretable" id="scoreListTable" border="1">
+			<tr>
+				<th>점검년도</th>
+				<th>분기</th>
+				<th>항목</th>
+				<th>상세항목</th>
+				<th>점수</th>
+			</tr>
 
 			<c:forEach items="${scoreList}" var="scoreCode">
 				<tr>
@@ -134,33 +139,35 @@
 				<input type="hidden" name="arrayDetailCode"
 					value="${score.checkDetailCode}" />
 			</c:forEach>
-	<!-- 페이징 처리  -->
-	</table>
-<div class="center-pagging">
-		<ul class="pagination pageModal">
-			<li><a class="innerPager first"
-				href="scorelist?pageNo=1&centerCode=${param.centerCode}&checkYear=${param.checkYear}&checkSeason=${param.checkSeason}">처음</a></li>
+			<!-- 페이징 처리  -->
+		</table>
+		<div class="center-pagging">
+			<ul class="pagination pageModal">
+				<li><a class="innerPager first"
+					href="scorelist?pageNo=1&centerCode=${param.centerCode}&checkYear=${param.checkYear}&checkSeason=${param.checkSeason}">처음</a></li>
 
-			<c:forEach var="i" begin="${pager.startPageNo}"
-				end="${pager.endPageNo}">
-				<li><c:if test="${pager.pageNo != i}">
-						<a class="innerPager num"
-							href="scorelist?pageNo=${i}&centerCode=${param.centerCode}&checkYear=${param.checkYear}&checkSeason=${param.checkSeason}">${i}</a>
-					</c:if></li>
-				<li><c:if test="${pager.pageNo == i}">
-						<a class="innerPager num active"
-							href="scorelist?pageNo=${i}&centerCode=${param.centerCode}&checkYear=${param.checkYear}&checkSeason=${param.checkSeason}">${i}</a>
-					</c:if></li>
-			</c:forEach>
+				<c:forEach var="i" begin="${pager.startPageNo}"
+					end="${pager.endPageNo}">
+					<li><c:if test="${pager.pageNo != i}">
+							<a class="innerPager num"
+								href="scorelist?pageNo=${i}&centerCode=${param.centerCode}&checkYear=${param.checkYear}&checkSeason=${param.checkSeason}">${i}</a>
+						</c:if></li>
+					<li><c:if test="${pager.pageNo == i}">
+							<a class="innerPager num active"
+								href="scorelist?pageNo=${i}&centerCode=${param.centerCode}&checkYear=${param.checkYear}&checkSeason=${param.checkSeason}">${i}</a>
+						</c:if></li>
+				</c:forEach>
 
-			<li><a class="innerPager last"
-				href="scorelist?pageNo=${pager.totalPageNo}&centerCode=${param.centerCode}&checkYear=${param.checkYear}&checkSeason=${param.checkSeason}">맨끝</a></li>
-		</ul>
-	</div>
-		</c:if>
+				<li><a class="innerPager last"
+					href="scorelist?pageNo=${pager.totalPageNo}&centerCode=${param.centerCode}&checkYear=${param.checkYear}&checkSeason=${param.checkSeason}">맨끝</a></li>
+			</ul>
+		</div>
+	</c:if>
 
 	<!--  수정 점수등록 버튼 -->
 	<div id="btnclick">
+		<button id="excel-download-button" class="greyButton">엑셀로 다운로드</button>
+		<a id="excel" href="" download=""></a>
 		<div id="btn_group">
 			<button type="submit" class="pinkButton" id="score-update-button">수정</button>
 </form>
@@ -229,4 +236,5 @@
 </c:if>
 
 <!-- 모달 자바 스크립트 -->
-<script src="${pageContext.request.contextPath}/resources/js/score/scoreList.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/score/scoreList.js"></script>

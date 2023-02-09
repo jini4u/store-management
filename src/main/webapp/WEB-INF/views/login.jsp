@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<head>
-<title>헌혈의 집 관리 시스템 로그인</title>
-</head>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <link rel="stylesheet" href="resources/css/login/login.css" />
-<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'
-	rel='stylesheet'>
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'/>
 
 
 	<div class="login__content">
@@ -17,18 +14,26 @@
 			<!--         login form -->
 
         
-        <form action="/login" class="login__register" id="login-in" method="post">
-          <h1 class="login__title">Sign In</h1>
-          <div class="login__box">
-            <i class='bx bx-user login__icon'></i>
-            <input type="text" name="userCode" placeholder="Username" class="login__input">
-          </div>
-          <div class="login__box">
-            <i class='bx bx-lock login__icon'></i>
-            <input type="password" name="password" placeholder="Password" class="login__input">
-          </div>
-       <input type="submit" class="pinkButton" value="Sign Up">
+        <form action="/login" class="login__register" id="login-in" method="post" onsubmit="return loginBtnClick();">
+		    <h1 class="login__title">Sign In</h1>
+		    <div class="login__box">
+			    <i class='bx bx-user login__icon'></i>
+			    <input type="text" name="userCode" id="userCode" placeholder="UserCode" class="login__input">
+		    </div>
+		    <div class="login__box">
+		        <i class='bx bx-lock login__icon'></i>
+			    <input type="password" name="password" id="password" placeholder="Password" class="login__input">
+		    </div>
+			<c:if test="${message != null}">
+				<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;${message}
+			</c:if>
+		    <div id="invalid-login">
+		    </div>
+		    <input type="submit" id="loginBtn" class="pinkButton" value="Sign In">
         </form>
 
 		</div>
 	</div>
+	
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/resources/js/login.js"></script>

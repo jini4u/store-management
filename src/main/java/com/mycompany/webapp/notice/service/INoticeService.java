@@ -5,7 +5,8 @@ import java.util.List;
 import com.mycompany.webapp.notice.vo.PostVO;
 
 public interface INoticeService {
-	List<PostVO> getAllPosts();
+	int countAllPosts();
+	List<PostVO> getPosts(int pageNo);
 	PostVO getPost(int postno);
 	void createPost(PostVO post);
 	void updatePost(PostVO post);

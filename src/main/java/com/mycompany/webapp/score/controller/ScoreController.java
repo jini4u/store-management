@@ -1,15 +1,29 @@
 package com.mycompany.webapp.score.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +33,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.mycompany.webapp.center.vo.CenterVO;
 import com.mycompany.webapp.common.vo.Pager;
 import com.mycompany.webapp.score.service.IScoreService;
 import com.mycompany.webapp.score.vo.ScoreVO;
@@ -36,6 +52,11 @@ public class ScoreController {
 
 	@Autowired
 	IScoreService scoreService;
+	
+	//local.properties에 있는 file.path
+	@Value("${file.path}")
+	private String filePath;
+	
 	/*
 	 * 정윤선
 	 * 엑셀파일 일괄 업로드
@@ -45,7 +66,7 @@ public class ScoreController {
 	public String scoreupload(@RequestParam(defaultValue="1") int pageNo, Model model) {
 		model.addAttribute("historyMapList", scoreService.getScoreUploadHistory(pageNo));
 		model.addAttribute("pager", scoreService.getHistoryPager(pageNo));
-		return "jsp/score/scoreupload";
+		return "jsp/score/scoreExcelUpload";
 	}
 
 	/**
@@ -60,7 +81,7 @@ public class ScoreController {
 		int userCode = (int)session.getAttribute("userCode");
 		//service에서 인덱스 3까지는 무시하고 처리하도록 함
 		scoreService.uploadFileInfo(file, 3, userCode);
-		return "redirect:/score/scoreupload";
+		return "redirect:/score/scoreExcelUpload";
 	}
 
 	/*
@@ -328,4 +349,79 @@ public class ScoreController {
 		return scoreService.overlapGroupDetailContent(detailcontent);
 	}
 	
+	
+	@RequestMapping("/scorelistdownload")
+	public @ResponseBody String centerListDownload(@RequestParam int centerCode, @RequestParam(defaultValue="0") int checkYear, @RequestParam(defaultValue="0") int checkSeason) {
+		ScoreVO scoreVO = new ScoreVO();
+		scoreVO.setCenterCode(centerCode);
+		scoreVO.setCheckYear(checkYear);
+		scoreVO.setCheckSeason(checkSeason);
+		int totalRows = scoreService.countListByCenterCode(scoreVO);
+		Pager pager = new Pager(totalRows, 1, totalRows, 1);
+		List<ScoreVO> scoreList = scoreService.getScoreList(scoreVO, pager);
+		
+		String fileName = "";
+		Date date = new Date();
+		
+		fileName = "ScoreList_"+centerCode+"_"+checkYear+"."+checkSeason+"_"+date.getTime()+".xlsx";
+
+		XSSFWorkbook workbook = new XSSFWorkbook();
+
+		XSSFSheet sheet = workbook.createSheet("ScoreList");
+
+		int rownum = 0;
+
+		Row row0 = sheet.createRow(rownum);
+
+		CellStyle titleStyle = workbook.createCellStyle();
+		
+		titleStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+		titleStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+		titleStyle.setBorderBottom(BorderStyle.THIN);
+		
+		Cell cell0 = row0.createCell(0);
+		cell0.setCellValue("센터코드");
+		cell0.setCellStyle(titleStyle); 
+		
+		Cell cell1 = row0.createCell(1);
+		cell1.setCellValue("점검년도");
+		cell1.setCellStyle(titleStyle); 
+
+		Cell cell2 = row0.createCell(2);
+		cell2.setCellValue("분기");
+		cell2.setCellStyle(titleStyle);
+
+		Cell cell3 = row0.createCell(3);
+		cell3.setCellValue("항목");
+		cell3.setCellStyle(titleStyle);
+
+		Cell cell4 = row0.createCell(4);
+		cell4.setCellValue("상세항목");
+		cell4.setCellStyle(titleStyle);
+		
+		Cell cell5 = row0.createCell(5);
+		cell5.setCellValue("점수");
+		cell5.setCellStyle(titleStyle);
+				
+		for(ScoreVO score:scoreList) {
+			Row row = sheet.createRow(++rownum);
+			int cellnum = 0;
+			row.createCell(cellnum++).setCellValue(score.getCenterCode());
+			row.createCell(cellnum++).setCellValue(score.getCheckYear());
+			row.createCell(cellnum++).setCellValue(score.getCheckSeason());
+			row.createCell(cellnum++).setCellValue(score.getCheckGroupContent());
+			row.createCell(cellnum++).setCellValue(score.getCheckDetailContent());
+			row.createCell(cellnum++).setCellValue(score.getCheckScore());
+		}
+
+		try {
+			FileOutputStream out = new FileOutputStream(new File(filePath, fileName));
+			workbook.write(out);
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return fileName;
+	}
 }

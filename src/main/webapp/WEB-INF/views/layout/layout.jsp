@@ -31,7 +31,7 @@
 <title>헌혈의 집 관리 시스템</title>
 </head>
 <body class="totalbox">
-
+	<input type="hidden" id="userAuthority" value="${authority}"/>
 		<!-- Modal -->
 		<div class="modal fade " id="pwUpdate" role="dialog">
 			<!-- 사용자 지정 부분① : id명 -->

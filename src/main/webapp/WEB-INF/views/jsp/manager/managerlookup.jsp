@@ -45,8 +45,12 @@
 			</button>
 		</div>
 	</form>
+	<div>
+	<button id="excel-download-button" class="greyButton">엑셀로 다운로드</button>
+		<a id="excel" href="" download=""></a>
 	<button class="pinkButton mgrInsertBtn" data-toggle="modal"
 		data-target="#insertModal">등록</button>
+		</div>
 </div>
 
 <div class="managerbox">
@@ -153,7 +157,7 @@
 							<input type="hidden" name="userPassword" id="userPassword"> 
 							<input type="text" name="userName" id="userName" class="form-control"
 								aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-						<%-- 	<form:input path="userName"/> --%>
+							<div id="invalid-userName"></div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="name">생년월일</label> 
@@ -165,16 +169,17 @@
 
 					<div class="row">
 						<div class="col-md-6 mb-3">
-							<label for="name">Email</label> <input type="text"
-								name="userEmail" id="userEmail" class="form-control"
-								aria-label="Sizing example input"
-								aria-describedby="inputGroup-sizing-sm">
+							<label for="name">Email</label> 
+							<input type="text" name="userEmail" id="userEmail" class="form-control"
+								aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+							<div id="invalid-useEmail"></div>
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="name">휴대전화번호</label> <input type="text"
-								name="userTel" id="userTel" class="form-control"
-								aria-label="Sizing example input"
-								aria-describedby="inputGroup-sizing-sm">
+							<label for="name">휴대전화번호</label> 
+							<input type="text" name="userTel" id="userTel" class="form-control"
+								aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+							<div id="invalid-userTel"></div>
+							
 						</div>
 					</div>
 					<div class="row">
@@ -189,14 +194,14 @@
 								name="userTeamCode" id="userTeamCode" class="form-control"
 								aria-label="Sizing example input"
 								aria-describedby="inputGroup-sizing-sm">
+							<div id="invalid-userTeamCode"></div>
 						</div>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="greyButton modal-greyBtn" id="resetBtn">초기화</button>
-				<button type="button" class="pinkButton modal-pinkBtn" id="savemgr"
-					data-dismiss="modal">저장</button>
+				<button type="button" class="pinkButton modal-pinkBtn" id="savemgr" data-dismiss="modal">저장</button>
 
 				<!-- <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button> -->
 			</div>
