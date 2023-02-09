@@ -277,16 +277,12 @@ public class CenterService implements ICenterService{
 				resultMap.replace("update", resultMap.get("update"), resultMap.get("update")+1);
 			}
 		}
-		String filePathName = filePath+"centerExcel_" + file.getOriginalFilename();
-
 		Date date = new Date();
-		//포맷정의
-		SimpleDateFormat fomatter = new SimpleDateFormat("yyyy.MM.dd.HH:mm:ss");
-		//포맷적용
-		String formattedNow = fomatter.format(date);
+
+		String filePathName = filePath+"centerExcel_"+date.getTime()+"_"+file.getOriginalFilename();
 		
 		FileInfoVO fileInfoVO = new FileInfoVO();
-		fileInfoVO.setFileSavedName("centerExcel_"+formattedNow+"_"+file.getOriginalFilename());
+		fileInfoVO.setFileSavedName("centerExcel_"+date.getTime()+"_"+file.getOriginalFilename());
 		fileInfoVO.setOriginalName(file.getOriginalFilename());
 		fileInfoVO.setFileType(file.getContentType());
 		fileInfoVO.setFilePath(filePathName);
@@ -295,15 +291,11 @@ public class CenterService implements ICenterService{
 		fileInfoVO.setUploadUserCode(userCode);
 		System.out.println("fileInfoVo" + fileInfoVO);
 
-		//파일은 왜 저장해야 하지? 히스토리에만 저장해주면 되는거 아닌강? 물어보기
-		//내 추측, history에는 fileno가 있는데 이 fileno를 받아오기 위해 사용하는 건강?
 		fileRepository.insertFile(fileInfoVO);
 
 		resultMap.replace("fileNo",0, fileInfoVO.getFileNo());
 		resultMap.replace("userCode",0, fileInfoVO.getUploadUserCode());
-		System.out.println("userCode확인 :" + fileInfoVO.getUploadUserCode());
 
-		//historyNo는 0일 때 사용하는 코드가 어디에 있는?
 		fileRepository.insertFileUploadHistory(resultMap);
 
 		try {

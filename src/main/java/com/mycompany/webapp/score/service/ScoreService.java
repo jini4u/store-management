@@ -2,6 +2,7 @@ package com.mycompany.webapp.score.service;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -254,15 +255,15 @@ public class ScoreService implements IScoreService {
 				resultMap.replace("update", resultMap.get("update"), resultMap.get("update")+1);
 			}
 		}
+		Date date = new Date();
 		
-		String filePathName = filePath+"score_"+file.getOriginalFilename();
+		String filePathName = filePath+"scoreExcel_"+date.getTime()+"_"+file.getOriginalFilename();
 		
 		FileInfoVO fileVO = new FileInfoVO();
-		fileVO.setFileSavedName("score_"+file.getOriginalFilename());
+		fileVO.setFileSavedName("scoreExcel_"+date.getTime()+"_"+file.getOriginalFilename());
 		fileVO.setOriginalName(file.getOriginalFilename());
 		fileVO.setFileType(file.getContentType());
 		fileVO.setFilePath(filePathName);
-		//로그인 기능 되면 얻어오는걸로 수정하기
 		fileVO.setUploadUserCode(userCode);
 		
 		fileRepository.insertFile(fileVO);
