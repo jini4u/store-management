@@ -310,10 +310,14 @@ var count = 0;
 		detailCodeInput.removeAttribute("readonly");
 		//상세코드명 수정가능
 		detailContentInput.removeAttribute("readonly");
-		//disabled 풀어주기
-		detailSelect[1].removeAttribute('disabled');
 		
-		detailSelect[0].removeAttribute('disabled');
+		if(groupSelect.value == 'y'){
+			//disabled 풀어주기
+			detailSelect[1].removeAttribute('disabled');
+			detailSelect[0].removeAttribute('disabled');							
+		} else {
+			detailSelect[1].selected = true;
+		}
 	});
 
 	//그룹코드 추가버튼 클릭 이벤트 등록
