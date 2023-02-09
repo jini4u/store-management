@@ -8,7 +8,7 @@
 		<img
 		src="${pageContext.request.contextPath}/resources/images/home.png">
 		<a href="/">&nbsp; Home &nbsp; ></a>
-		<a href="/">&nbsp; 통계</a>
+		<a href="/statistics">&nbsp; 통계</a>
 </div>
 	
 <div class="titleBox">
@@ -25,15 +25,15 @@
 	<div id="infodiv">
 		<div>
 			<p class="title-p"></p>
-			<p class="colored-p"></p>
+			<p class="colored-p">-</p>
 		</div>
 		<div>
 			<p class="title-p"></p>
-			<p class="colored-p"></p>
+			<p class="colored-p">-</p>
 		</div>
 		<div>
 			<p class="title-p"></p>
-			<p class="colored-p"></p>
+			<p class="colored-p">-</p>
 		</div>
 	</div>
 	
