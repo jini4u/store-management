@@ -146,12 +146,13 @@ function addEvent(){
 	        $("#invalid-groupcontent").show();
 		}
 		
-		$.ajax({
+/*		$.ajax({
 			url: "/score/overlapgroupcode/" + groupcode,
 			type: "GET",
 			async:false,
 			success: function(result){
-
+				//수정버튼을 눌렀을때 값은 고정
+							if()
 				if (result !=0 ) {
 					count+=1;
 			        $("#invalid-groupcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>중복된 값이 있습니다.</p>");
@@ -159,7 +160,7 @@ function addEvent(){
 				}
 			}
 		});
-		
+		*/
 			$.ajax({
 			url: "/score/overlapgroupcontent/" + groupcontent,
 			type: "GET",
@@ -180,9 +181,10 @@ function addEvent(){
 		if(count == 0){
 
 			/*버튼 입력시 알림메세지 삭제*/ 
-			$("#invalid-groupName").empty();
-			$("#invalid-groupDetailName").empty();
+			$("#invalid-groupcode").empty();
+			$("#invalid-groupcontent").empty();
 			$("#invalid-groupOccupied").empty();
+			
 			let groupFormData = new FormData(groupForm);
 			if(!groupCodeInput.hasAttribute("readonly")){	//추가
 				makeRequest(afterSendForm, 'POST', '/score/insertgroupcode', groupFormData);
@@ -234,7 +236,7 @@ var count = 0;
 	        $("#invalid-detailcontent").show();
 		}
 		
-		$.ajax({
+/*		$.ajax({
 			url: "/score/overlapdetailcode/" + detailcode,
 			type: "GET",
 			async:false,
@@ -246,7 +248,7 @@ var count = 0;
 			        $("#invalid-detailcode").show();	
 				}
 			}
-		});
+		});*/
 		
 			$.ajax({
 			url: "/score/overlapdetailcontent/" + detailcontent,
@@ -428,11 +430,30 @@ function afterSendForm(){
 makeRequest(getGroupCodes, 'GET', '/score/getgroupcodes');		
 addEvent();
 
+// 중복값이 있으면 알림 
+$(".inputEnglish").keyup(function(){
+	var count = 0;
+	var groupcode = $("#groupcode").val();
+	var groupcontent = $("#groupcontent").val();
+	
+	$.ajax({
+		url: "/score/overlapgroupcode/" + groupcode,
+		type: "GET",
+		async:false,
+		success: function(result){
 
-
+			if (result !=0 ) {
+				count+=1;
+		        $("#invalid-groupcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>중복된 값이 있습니다.</p>");
+		        $("#invalid-groupcode").show();	
+			}
+		}
+	});
+});
 
 //값 입력 범위 지정 및 문자 입력 제한
 $('.inputEnglish').keyup(function(event) {
+
 	regexp = /[^A-Z]/g;
 	v = $(this).val();
 	if (regexp.test(v)) {
@@ -475,8 +496,24 @@ $('.detailContentLimit').keyup(function(event) {
     }
 	
 });
-	
+$(".inputNumber").keyup(function(){
+	var count = 0;
+	var groupcode = $("#groupcode").val();
+	var groupcontent = $("#groupcontent").val();	
+$.ajax({
+	url: "/score/overlapdetailcode/" + detailcode,
+	type: "GET",
+	async:false,
+	success: function(result){
 
+		if (result !=0 ) {
+			count+=1;
+	        $("#invalid-detailcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>중복된 값이 있습니다.</p>");
+	        $("#invalid-detailcode").show();	
+		}
+	}
+});
+});
 $('.inputNumber').keyup(function(event) {
 	regexp = /[^0-9.]/g;
 	groupcontent = $(this).val();

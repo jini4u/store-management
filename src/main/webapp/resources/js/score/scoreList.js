@@ -77,12 +77,13 @@ function setYearBox(){
 //scoreUpdate
 	
 var updateBtn = document.getElementById("score-update-button");
-
 if(urlParams.get("checkYear")!=null && urlParams.get("checkSeason")!=null){
 	updateBtn.style.display = 'block';
 } else {
 	updateBtn.style.display = 'none';
 }
+
+//엑셀로 다운로드
 var excelBtn = document.getElementById('excel-download-button');
 excelBtn.addEventListener('click', function(){
 	var urlParams = new URLSearchParams(location.search);
@@ -102,4 +103,4 @@ excelBtn.addEventListener('click', function(){
 });
 	
 
-$('input[name=arrayScore]').prop('type', "placeholder");
+$('#no-box').prop('type', "placeholder");

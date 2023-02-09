@@ -120,9 +120,9 @@
 					<td class="score_td">${scoreCode.checkGroupContent}</td>
 					<td class="score_td">${scoreCode.checkDetailContent}</td>
 					<td class="score_td">
-					<input id="inputNumber" type="number"
-						name="arrayScore" class="placeholderstlye no-box" size="5"
-						value="${scoreCode.checkScore}" value="0" min="0" max="100"></td>
+					<input id="inputNumber " type="number"
+						name="arrayScore" class="placeholderstlye" size="5"
+						value="${scoreCode.checkScore}" value="placeholder" min="0" max="100"></td>
 
 
 				</tr>
@@ -166,15 +166,16 @@
 
 	<!--  수정 점수등록 버튼 -->
 	<div id="btnclick">
-		<button id="excel-download-button" class="greyButton">엑셀로 다운로드</button>
+		<button id="excel-download-button" class="greyButton">파일 다운</button>
 		<a id="excel" href="" download=""></a>
 		<div id="btn_group">
+<!-- 			<button id="no-box" class="greyButton">수정</button> -->
 			<button type="submit" class="pinkButton" id="score-update-button">수정</button>
+			
 </form>
 <c:if test="${(maxYear eq year and maxSeason eq season) == false}">
 <button type="button" id="testBtnn modalOpen" class="pinkButton"
 	data-toggle="modal" data-target="#myModal" >점수입력</button>
-<!--  <div id="invalid-InsertModal"></div>  -->
 		</div>
 	</div>
 
