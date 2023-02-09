@@ -14,11 +14,6 @@ function menuClick(event){
 }
 
 $(function(){
-	//모달창
-	/*$('#testBtn').click(function(e){
-		e.preventDefault();
-		$('#testModal').modal("show");
-	});*/
 
 	 // 모달 버튼에 이벤트를 건다.
 	  $('#openModalBtn').on('click', function(){
@@ -89,33 +84,7 @@ if(urlParams.get("checkYear")!=null && urlParams.get("checkSeason")!=null){
 } else {
 	updateBtn.style.display = 'none';
 }
-	
-	
-function Checkform() {
-
-    if( frm.name.value == "" ) {
-    
-        frm.name.focus();
-        alert("성명을 입력해 주십시오.");
-        
-        return false;
-        
-    }
-    
-}
-	
-	
-	
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
+	$('input[name=arrayScore]').prop('type', "placeholder");
 	

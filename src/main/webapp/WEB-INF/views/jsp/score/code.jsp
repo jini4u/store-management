@@ -24,24 +24,23 @@
 		<p class="textStyle">그룹코드
 		<div class="titleLine"></div>
 		<div class="codediv">
-			<form name="selectBoxCheck" id="groupform" onsubmit="return checkForm();">
+			<form name="selectBoxCheck" id="groupform">
 				<div class="inputDiv">
-
 					<div id="groupinputs" class="codedetailtopdiv">
 						<div class="alretdiv">
 							<div class="codenodiv">
 								그룹코드 <input type="text" class="inputEnglish" name="groupCode"
-									id="groupcode" value="" style="text-transform: uppercase;"
+									id="groupcode" value="" 
 									readonly />
 							</div>
-							<div id="invalid-groupName"></div>
+							<div id="invalid-groupcode"></div>
 						</div>
 						<div class="alretDiv">
 							<div class="codenamediv">
-								그룹코드명 <input type="text" class="contentLimit "
+								그룹코드명 <input type="text" class="contentLimit" required="required"
 									name="groupContent" id="groupcontent" value="" readonly>
 							</div>
-							<div id="invalid-groupDetailName"></div>
+							<div id="invalid-groupcontent"></div>
 						</div>
 					</div>
 					<div id="groupselectdiv" class="occupieddiv">
@@ -86,26 +85,24 @@
 					<div class="codedetailtopdiv">
 					<div class="alretdiv">
 						<div class="codenodiv">
-							상세코드 <input type="text" class="inputNumber" name="detailCode" id="detailcode"
-								value="" readonly>
+							상세코드 <input type="text" class="inputNumber" name="detailCode" id="detailcode" value="" readonly>
 						</div>
-								<div id="invalid-detailCodeName"></div>
+								<div id="invalid-detailcode"></div>
 						</div>
 						<div class="alretDiv">
 						<div class="codenamediv">
-							상세코드명 <input type="text" class="detailContentLimit" name="detailContent" id="detailcontent"
-								value="" readonly>
+							상세코드명 <input type="text" class="detailContentLimit" name="detailContent" id="detailcontent" value="" readonly>
 						</div>
-						<div id="invalid-DetailName"></div>
+								<div id="invalid-detailcontent"></div>
 					</div>
 					</div>
-					<div class="occupieddiv">
-						사용여부 
-						<select name="detailOccupied" class="detailOccupied">
+					<div class="occupieddiv" class="occupieddiv">
+						사용여부 <select name="detailOccupied" class="detailOccupied">
 							<option disabled="disabled" value="y">사용중
 							<option disabled="disabled" value="n">사용안함
 						</select>
 					</div>
+						<div id="invalid-detailOccupied"></div>
 				</div>
 				<div class="widthLine"></div>
 				<div id="code-notice">코드 등록 또는 수정 시, 정보 입력 후 저장 버튼을 눌러주세요</div>

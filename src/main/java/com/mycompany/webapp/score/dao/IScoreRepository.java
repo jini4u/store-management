@@ -51,5 +51,11 @@ public interface IScoreRepository {
 	int countListByCenterCode(ScoreVO score);
 	/*username 받아오기*/
 	List<ScoreVO> getCenterName(int userCode);
+	/*중복값 제거*/
+	int overlapGroupCode(String groupCode);
+	int overlapDetailCode(String groupContent);
+	
+	int overlapGroupDetailCode(String detailCode);
+	int overlapGroupDetailContent(String detailcontent);
 }
 

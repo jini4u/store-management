@@ -412,7 +412,6 @@ function checkCenterName() {
 			}
 		},
 		error : function() {
-			alert("에러");
 		}
 	}); //ajax끝
 } //checkCenterName 끝

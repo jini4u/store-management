@@ -265,5 +265,31 @@ WHERE
 <select id="countScoreUploadHistory" resultType="int">
 SELECT COUNT(*) FROM fileinfo WHERE file_saved_name LIKE 'score%'
 </select>
+<!-- 유효성검사 -->
+
+ <select id="overlapGroupCode" resultType="int" parameterType="String">
+	SELECT count(*) 
+	FROM check_group
+	WHERE check_group_code =#{groupCode}
+ </select>
+<select id="overlapDetailCode" resultType="int" parameterType="String">
+	SELECT count(*) 
+	FROM check_group
+	WHERE check_group_content =#{groupContent}
+</select>
+
+ <select id="overlapGroupDetailCode" resultType="int" parameterType="String">
+	SELECT count(*) 
+	FROM check_detail
+	WHERE check_detail_code =#{detailCode}
+</select>
+
+ <select id="overlapGroupDetailContent" resultType="int" parameterType="String">
+	SELECT count(*) 
+	FROM check_detail
+	WHERE check_detail_content =#{detailcontent}
+</select>
+
+
 
 </mapper>
