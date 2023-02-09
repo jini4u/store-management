@@ -31,6 +31,8 @@ signin.addEventListener("click", () => {
 			$("#invalid-login").show;
 			return false;
 		}else{
+			loadingMask();
+			setTimeout(function(){}, 50);
 			return true;
 		} 
 		return false;

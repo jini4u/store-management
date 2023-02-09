@@ -37,3 +37,4 @@
 	
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="/resources/js/login.js"></script>
+<script src="/resources/js/common.js"></script>
