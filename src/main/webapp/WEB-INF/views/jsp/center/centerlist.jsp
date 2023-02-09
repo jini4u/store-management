@@ -66,7 +66,7 @@
 						<td>${centerList.centerCondition}</td>
 						<td style="display: none">${centerList.centerGuide}</td>
 						<td style="display: none">${fn:substring(centerList.centerClosingDate,0,10)}</td>
-						<td><button id="centerDetails" class="updateBtn"
+						<td><button id="centerDetails" class="updateBtn centerDet"
 								data-toggle="modal" data-target="#myModal"><img
 		src="${pageContext.request.contextPath}/resources/images/edit-tools.png"></button></td>
 					</tr>
@@ -156,7 +156,7 @@
 							<label for="name">운영여부</label> <input type="text"
 								id="centerCondition" name="centerCondition" class="form-control"
 								aria-label="Sizing example input"
-								aria-describedby="inputGroup-sizing-sm">
+								aria-describedby="inputGroup-sizing-sm" readonly="readonly">
 						</div>
 					</div>
 					<div class="mb-3">
