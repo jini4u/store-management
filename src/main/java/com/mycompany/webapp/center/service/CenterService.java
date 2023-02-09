@@ -228,6 +228,7 @@ public class CenterService implements ICenterService{
 	public int filterCountAllCenters(String keyword, String keywordType) {
 		return centerRepository.filterCountAllCenters(keyword, keywordType);
 	}
+	
 	@Override
 	public List<Map<String, String>> getCenterUploadHistory(Pager pager) {
 		List<Map<String, Object>> historyList = centerRepository.getCenterUploadHistory(pager);
@@ -237,6 +238,7 @@ public class CenterService implements ICenterService{
 			String postDate = (String)history.get("postDate");
 			String userName = (String)history.get("userName");
 			String originalName = (String)history.get("originalName");
+			String fileSavedName = (String)history.get("fileSavedName");
 			String insert = String.valueOf(history.get("insert"));
 			String update = String.valueOf(history.get("update"));
 
@@ -244,6 +246,7 @@ public class CenterService implements ICenterService{
 			resultMap.put("postDate", postDate);
 			resultMap.put("userName", userName);
 			resultMap.put("originalName", originalName);
+			resultMap.put("fileSavedName", fileSavedName);
 			resultMap.put("result", "입력: "+insert+"건, 수정: "+update+"건");
 
 			resultList.add(resultMap);
@@ -251,6 +254,7 @@ public class CenterService implements ICenterService{
 		}
 		return resultList;
 	}
+	
 	@Override
 	public Map<String, Integer> centerUploadFile(MultipartFile file, int startRow, int userCode) {
 		//리턴할 Map생성
@@ -258,7 +262,6 @@ public class CenterService implements ICenterService{
 		resultMap.put("fileNo", 0);
 		resultMap.put("userCode", 0);
 		resultMap.put("insert", 0);
-		resultMap.put("update", 0);
 
 		POIClass poi = new CenterPOI();
 		List<Object> VOList = poi.readWorkBook(file, startRow);

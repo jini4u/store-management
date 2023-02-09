@@ -3,20 +3,17 @@ var fileForm = /(.*?)\.(jpg|jpeg|png)$/;
 
 function onSubmit() {
 	if ($("#centerPhoto_file").val() == "") {
-		console.log("1");
 		$("#invalid-centerPhoto").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>파일을 선택해 주세요</p>");
 		$("#invalid-centerPhoto").show();
 		$("#centermodal-photo-insert").attr("disabled", true);
 		return false;
 	}else{
 		if (!$("#centerPhoto_file").val().match(fileForm)) {
-			console.log("2");
 			$("#invalid-centerPhoto").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>jpg, jpeg, png 파일만 업로드 가능합니다</p>");
 			$("#invalid-centerPhoto").show();
 			$("#centermodal-photo-insert").attr("disabled", true);
 			return false;
 		}else{
-			console.log("3");
 		$("#invalid-centerPhoto").hide();
 		$("#centermodal-photo-insert").attr("disabled", false);
 		return true;

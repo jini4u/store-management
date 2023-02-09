@@ -42,7 +42,7 @@
 		<tr>
 			<td>${historyMap.postDate}</td>
 			<td>${historyMap.userName}</td>
-			<td><a href='/file/centerExcel_${historyMap.originalName}'
+			<td><a href='/file/${historyMap.fileSavedName}'
 				download="${historyMap.originalName}">${historyMap.originalName}</a></td>
 			<td>${historyMap.result}</td>
 
