@@ -169,14 +169,14 @@ SELECT COUNT(*) FROM INSPECTION
 <select id="getCenterName" parameterType="int" resultType="com.mycompany.webapp.score.vo.ScoreVO">
 
 SELECT DISTINCT
-I.center_code as "centerCode",
+M.center_code as "centerCode",
 C.center_name as "centerName"
 
 FROM center C
-    LEFT OUTER JOIN Inspection I
-        ON C.center_code = I.center_code  
+    	JOIN mapping M
+        ON C.center_code = M.center_code  
 WHERE 
-    I.user_code = #{userCode}
+    M.user_code = #{userCode}
 
 </select> 
 <!-- 

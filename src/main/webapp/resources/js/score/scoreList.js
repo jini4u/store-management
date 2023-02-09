@@ -83,8 +83,6 @@ if(urlParams.get("checkYear")!=null && urlParams.get("checkSeason")!=null){
 } else {
 	updateBtn.style.display = 'none';
 }
-
-	
 var excelBtn = document.getElementById('excel-download-button');
 excelBtn.addEventListener('click', function(){
 	var urlParams = new URLSearchParams(location.search);
@@ -92,8 +90,8 @@ excelBtn.addEventListener('click', function(){
 	var checkYear = urlParams.get('checkYear');
 	var checkSeason = urlParams.get('checkSeason');
 	
-	checkYear = (checkYear=='null')?checkYear:0;
-	checkSeason = (checkSeason=='null')?checkSeason:0;
+	checkYear = (checkYear==null)?0:checkYear;
+	checkSeason = (checkSeason==null)?0:checkSeason;
 	
 	makeRequest(function(){
 		var response = httpRequest.responseText;
@@ -102,6 +100,6 @@ excelBtn.addEventListener('click', function(){
 		excel.click();
 	}, 'GET', '/score/scorelistdownload?centerCode='+centerCode+'&checkYear='+checkYear+'&checkSeason='+checkSeason);
 });
-
+	
 
 $('input[name=arrayScore]').prop('type', "placeholder");
