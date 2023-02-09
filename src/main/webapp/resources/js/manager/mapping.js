@@ -13,6 +13,9 @@ var searchBtn = document.getElementById("search-btn");
 //검색 input 선택자 
 var keyword = document.getElementById("search-txt");
 
+var urlparams = new URLSearchParams(location.search);
+keyword.value = urlparams.get('keyword');
+
 //검색버튼 클릭 이벤트 지정 
 searchBtn.addEventListener("click", function(){
 	let keywordValue = keyword.value;
@@ -20,7 +23,7 @@ searchBtn.addEventListener("click", function(){
 });
 
 //담당자 칸 클릭 이벤트 지정 
-managerTable.addEventListener("click",function(e){
+managerTable.tBodies[0].addEventListener("click",function(e){
 	let targetTr = e.target.parentElement;
 	let clickedManagerCode = targetTr.innerText.split("\t")[0];
 	makeRequest(getCenterList, 'GET', '/manager/getcenters/'+clickedManagerCode);

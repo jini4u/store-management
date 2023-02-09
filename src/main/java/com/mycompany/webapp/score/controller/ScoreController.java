@@ -81,7 +81,7 @@ public class ScoreController {
 		int userCode = (int)session.getAttribute("userCode");
 		//service에서 인덱스 3까지는 무시하고 처리하도록 함
 		scoreService.uploadFileInfo(file, 3, userCode);
-		return "redirect:/score/scoreExcelUpload";
+		return "redirect:/score/scoreupload";
 	}
 
 	/*
@@ -94,8 +94,12 @@ public class ScoreController {
 
 		int userCode = (Integer) session.getAttribute("userCode");
 		if(centerCode == 0) {
-			return "redirect:/score/scorelist?centerCode="+scoreService.getCenterName(userCode).get(0).getCenterCode();
-		} else {
+			if(scoreService.getCenterName(userCode).size() == 0) {
+				return "redirect:/score/scorelist?centerCode=-1";
+			} else {
+				return "redirect:/score/scorelist?centerCode="+scoreService.getCenterName(userCode).get(0).getCenterCode();
+			}
+		} else if(centerCode > 0){
 			
 		ScoreVO scoreVO = new ScoreVO();
 		scoreVO.setCenterCode(centerCode);
@@ -166,6 +170,8 @@ public class ScoreController {
 		model.addAttribute("centerName",scoreService.getCenterName(userCode));
 
 		return "jsp/score/scoreList";
+		} else {
+			return "jsp/score/scoreList";
 		}
 	}
 
@@ -347,7 +353,14 @@ public class ScoreController {
 		return scoreService.overlapGroupDetailContent(detailcontent);
 	}
 	
-	
+	/**
+	 * 점수 조회 결과 엑셀파일로 다운로드
+	 * @author 임유진
+	 * @param {int} 센터코드
+	 * @param {int} 년도
+	 * @param {int} 분기
+	 * @return {String} 생성된 파일 이름
+	 * */
 	@RequestMapping("/scorelistdownload")
 	public @ResponseBody String centerListDownload(@RequestParam int centerCode, @RequestParam(defaultValue="0") int checkYear, @RequestParam(defaultValue="0") int checkSeason) {
 		ScoreVO scoreVO = new ScoreVO();
