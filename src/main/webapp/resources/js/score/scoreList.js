@@ -14,11 +14,6 @@ function menuClick(event){
 }
 
 $(function(){
-	//모달창
-	/*$('#testBtn').click(function(e){
-		e.preventDefault();
-		$('#testModal').modal("show");
-	});*/
 
 	 // 모달 버튼에 이벤트를 건다.
 	  $('#openModalBtn').on('click', function(){

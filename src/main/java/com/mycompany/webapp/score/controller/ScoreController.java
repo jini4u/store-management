@@ -328,6 +328,28 @@ public class ScoreController {
 		return result;
 	}
 	
+	//중복 값 검사
+	@RequestMapping(value="/overlapgroupcode/{groupCode}")
+	public @ResponseBody int overlapGroupCode(@PathVariable String groupCode) {
+		return scoreService.overlapGroupCode(groupCode);
+	}
+	@RequestMapping(value="/overlapgroupcontent/{groupContent}")
+	public @ResponseBody int overlapGroupContent(@PathVariable String groupContent) {
+		return scoreService.overlapDetailCode(groupContent);
+	}	
+	
+	
+	///
+	@RequestMapping(value="/overlapdetailcode/{detailCode}")
+	public @ResponseBody int overlapDetailCode(@PathVariable String detailCode) {
+		return scoreService.overlapGroupDetailCode(detailCode);
+	}
+	@RequestMapping(value="/overlapdetailcontent/{detailcontent}")
+	public @ResponseBody int overlapDetailContent(@PathVariable String detailcontent) {
+		return scoreService.overlapGroupDetailContent(detailcontent);
+	}
+	
+	
 	@RequestMapping("/scorelistdownload")
 	public @ResponseBody String centerListDownload(@RequestParam int centerCode, @RequestParam(defaultValue="0") int checkYear, @RequestParam(defaultValue="0") int checkSeason) {
 		ScoreVO scoreVO = new ScoreVO();

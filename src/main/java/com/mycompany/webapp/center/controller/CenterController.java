@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,6 +48,8 @@ import com.mycompany.webapp.common.vo.Pager;
 @RequestMapping("/center")
 @Controller
 public class CenterController {
+	
+	
 	private static Logger logger = LoggerFactory.getLogger(CenterController.class);
 	@Autowired
 	ICenterService centerService;
@@ -354,13 +357,16 @@ public class CenterController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		return fileName;
 	}
-	
-	@RequestMapping("/ex")
+/*	@RequestMapping("/ex")
 	public String main(Model m)throws Exception {
 		throw new NumberFormatException("예외가 발생");
-	}
+	}*/
+	@RequestMapping("/jusoPopup")
+    public String jusoPopup(@ModelAttribute("centerVO") CenterVO centerVO) throws Exception {
+        return "jsp/center/jusoPopup";
+
+    }
 	
 }

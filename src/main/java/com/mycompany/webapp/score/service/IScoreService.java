@@ -36,5 +36,11 @@ public interface IScoreService {
 	int countListByCenterCode(ScoreVO score);
 	//센터리스트 가져오기
 	List<ScoreVO> getCenterName(int userCode);
+	int overlapGroupCode(String groupCode);
+	int overlapDetailCode(String groupContent);
+
+	int overlapGroupDetailCode(String detailCode);
+	int overlapGroupDetailContent(String detailcontent);
+
 
 }
