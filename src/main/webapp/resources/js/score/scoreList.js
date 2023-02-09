@@ -14,7 +14,6 @@ function menuClick(event){
 }
 
 $(function(){
-
 	 // 모달 버튼에 이벤트를 건다.
 	  $('#openModalBtn').on('click', function(){
 	    $('#modalBox').modal('show');
@@ -84,36 +83,15 @@ if(urlParams.get("checkYear")!=null && urlParams.get("checkSeason")!=null){
 } else {
 	updateBtn.style.display = 'none';
 }
-<<<<<<< HEAD
-=======
-	
-	
-function Checkform() {
 
-    if( frm.name.value == "" ) {
-    
-        frm.name.focus();
-        alert("성명을 입력해 주십시오.");
-        
-        return false;
-        
-    }
-    
-}
 	
 var excelBtn = document.getElementById('excel-download-button');
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
-
 excelBtn.addEventListener('click', function(){
 	var urlParams = new URLSearchParams(location.search);
 	var centerCode = urlParams.get('centerCode');
 	var checkYear = urlParams.get('checkYear');
 	var checkSeason = urlParams.get('checkSeason');
 	
-<<<<<<< HEAD
-	$('input[name=arrayScore]').prop('type', "placeholder");
-	
-=======
 	checkYear = (checkYear=='null')?checkYear:0;
 	checkSeason = (checkSeason=='null')?checkSeason:0;
 	
@@ -124,4 +102,6 @@ excelBtn.addEventListener('click', function(){
 		excel.click();
 	}, 'GET', '/score/scorelistdownload?centerCode='+centerCode+'&checkYear='+checkYear+'&checkSeason='+checkSeason);
 });
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
+
+
+$('input[name=arrayScore]').prop('type', "placeholder");
