@@ -6,6 +6,15 @@
 <!-- Latest compiled JavaScript -->
 <link href="${pageContext.request.contextPath}/resources/css/center/centerphoto.css" rel="stylesheet">
 
+<div class="menuRoute">
+		<img
+		src="${pageContext.request.contextPath}/resources/images/home.png">
+		<a href="/">&nbsp; Home &nbsp; ></a>
+		<span>&nbsp; 센터 &nbsp; ></span>
+		<a href="">&nbsp; 센터 사진 관리</a>	
+</div>
+
+
 <div class="titleBox">
 	<img
 		src="${pageContext.request.contextPath}/resources/images/photo.png" />
