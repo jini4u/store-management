@@ -4,6 +4,7 @@ package com.mycompany.webapp.score.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.mycompany.webapp.common.vo.Pager;
@@ -55,7 +56,7 @@ public interface IScoreRepository {
 	int overlapGroupCode(String groupCode);
 	int overlapDetailCode(String groupContent);
 	
-	int overlapGroupDetailCode(String detailCode);
 	int overlapGroupDetailContent(String detailcontent);
-}
+	int overlapGroupDetailCode(@Param("dc") int detailCode, @Param("groupCode") String groupCode);
 
+}

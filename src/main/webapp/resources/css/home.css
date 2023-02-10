@@ -4,7 +4,7 @@
 }
 
 .bigGroupBox {
-	margin: 20px;
+	margin: 38px 0 30px 14px;
 }
 
 
@@ -76,14 +76,14 @@ width: 700px;
 .line {
 	border-bottom: 1.5px solid #ccc;
 	width: 530px;
-	margin: 25px auto;
+	margin: 12px auto;
 }
 /* 헌혈의 집 소개*/
 .introduce {
 	display: flex;
 	margin: 0 auto;
 	justify-content: space-between;
-	margin-top: 60px;
+	margin-top: 79px;
 	padding: 0 20px 0 20px;
 }
 .linkBox {
@@ -117,6 +117,7 @@ width: 700px;
 .announcementTitle{
 	display: flex;
 	align-items: center;
+	 margin-bottom: 10px;
 }
 .announcementTitle a{
     color: black;

@@ -1,21 +1,22 @@
 @charset "UTF-8";
 
 .noticediv{
-	margin: 35px 0 0 38px;
-	height: 935px;
-	padding-bottom: 20px;
+   margin-top: 28px;
+   height: 935px;
+   padding-bottom: 20px;
 }
 
 .board-hidden{
-	display: none;
+   display: none;
 }
 
 #buttonsdiv {
-	display: flex;
-    justify-content: flex-end;
+   display: flex;
+   justify-content: flex-end;
+   padding-bottom: 20px;
 }
 
-.subheading {
+/* .subheading {
     font-size: 20px;
     font-weight: 600;
     margin: 0px 12px 20px 0px;
@@ -23,16 +24,15 @@
     text-decoration-thickness: 3px;
     text-decoration-color: #E26868;
     text-underline-position: under;
-}
+} */
 
 textarea {
         resize: none;
-        overflow-y: hidden;
         height: auto;
         padding: 10px;
     }
 .noticeTr:hover{
-	background-color: #ededed;
+   background-color: #ededed;
 }
 .noticeTitle{
     width: 600px;
@@ -48,9 +48,24 @@ textarea {
     color: black;
 }
 #title{
-	 background-color: #e9ecef;
+    background-color: #fff;
 } 
 .mb-3 label{
     font-size: 20px;
     font-weight: 600;
+}
+
+/* 공지사항 등록 */
+.insertForm{
+    height: 653px;
+}
+.insertContent{
+    height: 67%;
+}
+.insertContent textarea{
+	height: 95%;
+}
+.insertBtn{
+	text-align: right;
+	margin-top: 10px;
 }

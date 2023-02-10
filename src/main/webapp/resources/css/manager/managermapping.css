@@ -72,7 +72,7 @@
 }
 
 .selectedtr {
-	background: #D8D9CF;
+	background: #EDEDED;
 }
 
 .fadein {
@@ -139,6 +139,9 @@ transform: translate(-50%, -50%);
 
 #availtable tbody tr:hover{
 	background: #EDEDED;
+}
+#availtable{
+	margin-top: 10px;
 }
 .search-box{
  	width: 246px;

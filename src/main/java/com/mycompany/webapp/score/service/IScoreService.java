@@ -39,7 +39,7 @@ public interface IScoreService {
 	int overlapGroupCode(String groupCode);
 	int overlapDetailCode(String groupContent);
 
-	int overlapGroupDetailCode(String detailCode);
+	int overlapGroupDetailCode(String detailCode, String groupCode);
 	int overlapGroupDetailContent(String detailcontent);
 
 

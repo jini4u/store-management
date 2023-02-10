@@ -344,9 +344,9 @@ public class ScoreController {
 	 * @author 정윤선
 	 * @return detailCode,detailcontent
 	 * */
-	@RequestMapping(value="/overlapdetailcode/{detailCode}")
-	public @ResponseBody int overlapDetailCode(@PathVariable String detailCode) {
-		return scoreService.overlapGroupDetailCode(detailCode);
+	@RequestMapping(value="/overlapdetailcode/{detailCode}/{groupCode}")
+	public @ResponseBody int overlapDetailCode(@PathVariable String detailCode,@PathVariable String groupCode) {
+		return scoreService.overlapGroupDetailCode(detailCode,groupCode);
 	}
 	@RequestMapping(value="/overlapdetailcontent/{detailcontent}")
 	public @ResponseBody int overlapDetailContent(@PathVariable String detailcontent) {

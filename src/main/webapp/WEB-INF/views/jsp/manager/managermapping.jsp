@@ -109,7 +109,7 @@
 </div>
 
 <div class="modal fade mappingModal" data-backdrop="static" role="dialog" id="mappingModal">
-   <div class="modal-dialog modal-dialog-centered">
+   <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content p-6">
          <div class="modal-header">
             <h4 class="modal-title">맵핑 가능 센터 목록</h4>

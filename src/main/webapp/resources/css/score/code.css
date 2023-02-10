@@ -59,7 +59,6 @@
 
 .inputDiv div {
 	display: flex;
-	align-items: center;
 }
 
 .codedetailtopdiv {
@@ -156,4 +155,15 @@ button:hover {
 .alretDiv{
 	flex-direction: column;
 }
+
+#invalid-detailcode, #invalid-detailcontent, #invalid-detailOccupied, #invalid-groupcode, #invalid-groupcontent, #invalid-groupOccupied{
+	display: flex;
+	align-items: center;
+    margin-top: 5px;
+}
+#invalid-groupcontent, #invalid-detailcontent{
+	margin-left: 67px;
+}
+#groupselectdiv, .occupieddiv{
+	flex-direction: column;
 }
