@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<!-- 인터셉터 설정 파일. 위쪽부터 실행-->
+	<!-- 인터셉터 설정 파일. 위쪽부터 실행 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
@@ -15,18 +15,21 @@
 			<mvc:exclude-mapping path="/resources/js/**"/>
 			<bean class="com.mycompany.webapp.common.filter.LoginInterceptor"/>
 		</mvc:interceptor>
-		
+
 		<mvc:interceptor>
-			<mvc:mapping path="/center/**"/>
-			<mvc:exclude-mapping path="/center/centerlist/**"/>
-			<mvc:exclude-mapping path="/center/availcenter"/>
-			<mvc:exclude-mapping path="/center/getcenterimages/**"/>
-			<bean class="com.mycompany.webapp.common.filter.SysadminInterceptor"/>
+			<mvc:mapping path="/center/**" />
+			<mvc:exclude-mapping path="/center/centerlist/**" />
+			<mvc:exclude-mapping path="/center/jusoPopup/**" />
+			<mvc:exclude-mapping path="/center/availcenter" />
+			<mvc:exclude-mapping path="/center/getcenterimages/**" />
+			<bean
+				class="com.mycompany.webapp.common.filter.SysadminInterceptor" />
 		</mvc:interceptor>
-		
+
 		<mvc:interceptor>
-			<mvc:mapping path="/manager/**"/>
-			<bean class="com.mycompany.webapp.common.filter.AdminInterceptor"/>
+			<mvc:mapping path="/manager/**" />
+			<bean
+				class="com.mycompany.webapp.common.filter.AdminInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 

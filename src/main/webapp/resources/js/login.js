@@ -32,7 +32,9 @@ signin.addEventListener("click", () => {
 			$("#invalid-login").show;
 			return false;
 		}else{
-			 $("#invalid-login").hide();
+			loadingMask();
+			setTimeout(function(){
+			}, 50);
 			return true;
 		} 
 		return false;

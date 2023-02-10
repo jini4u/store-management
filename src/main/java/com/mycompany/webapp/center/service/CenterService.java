@@ -228,6 +228,7 @@ public class CenterService implements ICenterService{
 	public int filterCountAllCenters(String keyword, String keywordType) {
 		return centerRepository.filterCountAllCenters(keyword, keywordType);
 	}
+	
 	@Override
 	public List<Map<String, String>> getCenterUploadHistory(Pager pager) {
 		List<Map<String, Object>> historyList = centerRepository.getCenterUploadHistory(pager);
@@ -237,6 +238,7 @@ public class CenterService implements ICenterService{
 			String postDate = (String)history.get("postDate");
 			String userName = (String)history.get("userName");
 			String originalName = (String)history.get("originalName");
+			String fileSavedName = (String)history.get("fileSavedName");
 			String insert = String.valueOf(history.get("insert"));
 			String update = String.valueOf(history.get("update"));
 
@@ -244,6 +246,7 @@ public class CenterService implements ICenterService{
 			resultMap.put("postDate", postDate);
 			resultMap.put("userName", userName);
 			resultMap.put("originalName", originalName);
+			resultMap.put("fileSavedName", fileSavedName);
 			resultMap.put("result", "입력: "+insert+"건, 수정: "+update+"건");
 
 			resultList.add(resultMap);
@@ -251,6 +254,7 @@ public class CenterService implements ICenterService{
 		}
 		return resultList;
 	}
+	
 	@Override
 	public Map<String, Integer> centerUploadFile(MultipartFile file, int startRow, int userCode) {
 		//리턴할 Map생성
@@ -258,7 +262,6 @@ public class CenterService implements ICenterService{
 		resultMap.put("fileNo", 0);
 		resultMap.put("userCode", 0);
 		resultMap.put("insert", 0);
-		resultMap.put("update", 0);
 
 		POIClass poi = new CenterPOI();
 		List<Object> VOList = poi.readWorkBook(file, startRow);
@@ -277,16 +280,12 @@ public class CenterService implements ICenterService{
 				resultMap.replace("update", resultMap.get("update"), resultMap.get("update")+1);
 			}
 		}
-		String filePathName = filePath+"centerExcel_" + file.getOriginalFilename();
-
 		Date date = new Date();
-		//포맷정의
-		SimpleDateFormat fomatter = new SimpleDateFormat("yyyy.MM.dd.HH:mm:ss");
-		//포맷적용
-		String formattedNow = fomatter.format(date);
+
+		String filePathName = filePath+"centerExcel_"+date.getTime()+"_"+file.getOriginalFilename();
 		
 		FileInfoVO fileInfoVO = new FileInfoVO();
-		fileInfoVO.setFileSavedName("centerExcel_"+formattedNow+"_"+file.getOriginalFilename());
+		fileInfoVO.setFileSavedName("centerExcel_"+date.getTime()+"_"+file.getOriginalFilename());
 		fileInfoVO.setOriginalName(file.getOriginalFilename());
 		fileInfoVO.setFileType(file.getContentType());
 		fileInfoVO.setFilePath(filePathName);
@@ -295,15 +294,11 @@ public class CenterService implements ICenterService{
 		fileInfoVO.setUploadUserCode(userCode);
 		System.out.println("fileInfoVo" + fileInfoVO);
 
-		//파일은 왜 저장해야 하지? 히스토리에만 저장해주면 되는거 아닌강? 물어보기
-		//내 추측, history에는 fileno가 있는데 이 fileno를 받아오기 위해 사용하는 건강?
 		fileRepository.insertFile(fileInfoVO);
 
 		resultMap.replace("fileNo",0, fileInfoVO.getFileNo());
 		resultMap.replace("userCode",0, fileInfoVO.getUploadUserCode());
-		System.out.println("userCode확인 :" + fileInfoVO.getUploadUserCode());
 
-		//historyNo는 0일 때 사용하는 코드가 어디에 있는?
 		fileRepository.insertFileUploadHistory(resultMap);
 
 		try {

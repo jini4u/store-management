@@ -37,7 +37,7 @@ function menuClick(event){
 	}
 	//서브 통계 내용 비우기
 	for(var i=0;i<colorP.length;i++){
-		colorP[i].innerText = '';
+		colorP[i].innerText = '-';
 	}
 	//클릭한 메뉴에 clicked 클래스 추가
 	event.target.classList.add("clicked");
@@ -101,6 +101,11 @@ searchBtn.addEventListener("click", function(){
 
 //리스트 항목 클릭시 등록될 함수
 function listClick(event){
+	//서브 통계 내용 비우기
+	for(var i=0;i<colorP.length;i++){
+		colorP[i].innerText = '-';
+	}
+	
 	//테이블 안 항목들 선택된 상태 해제
 	for(var i=0;i<list.length;i++){
 		list[i].classList.remove("selected");

@@ -27,7 +27,10 @@ $("#mgrFileInput").change(function(){
 });
 
 $("#mgrExcelInsertBtn").click(function(){
-	$("#invalid-mgrFile").empty();
-	mgrExcelUploadCheck();
+	loadingMask();
+	setTimeout(function(){
+		$("#invalid-mgrFile").empty();
+		mgrExcelUploadCheck();		
+	}, 50);
 });
 

@@ -140,11 +140,12 @@ WHERE user_code = #{userCode}
 <select id="mgrUploadFileHistory" resultType="map">
   <![CDATA[   
     select * from(
-    select rownum as rnum, "postDate", "userName", "originalName", "insert", "update"
+    select rownum as rnum, "postDate", "userName", "originalName", "fileSavedName", "insert", "update"
     from(
         SELECT  TO_CHAR(F.file_post_date, 'YYYY-MM-DD') AS "postDate"
                 , U.user_name AS "userName"
                 , F.file_original_name AS "originalName"
+                , F.file_saved_name AS "fileSavedName"
                 , H.history_insert AS "insert"
                 , H.history_update AS "update"
         FROM history H

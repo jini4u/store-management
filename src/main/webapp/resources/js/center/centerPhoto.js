@@ -3,20 +3,17 @@ var fileForm = /(.*?)\.(jpg|jpeg|png)$/;
 
 function onSubmit() {
 	if ($("#centerPhoto_file").val() == "") {
-		console.log("1");
 		$("#invalid-centerPhoto").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>파일을 선택해 주세요</p>");
 		$("#invalid-centerPhoto").show();
 		$("#centermodal-photo-insert").attr("disabled", true);
 		return false;
 	}else{
 		if (!$("#centerPhoto_file").val().match(fileForm)) {
-			console.log("2");
 			$("#invalid-centerPhoto").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>jpg, jpeg, png 파일만 업로드 가능합니다</p>");
 			$("#invalid-centerPhoto").show();
 			$("#centermodal-photo-insert").attr("disabled", true);
 			return false;
 		}else{
-			console.log("3");
 		$("#invalid-centerPhoto").hide();
 		$("#centermodal-photo-insert").attr("disabled", false);
 		return true;
@@ -198,16 +195,17 @@ function getcenterimages(){
     	  //label에 이벤트 발생
          for(let i = 0; i < labelClass.length; i++) {         
             labelClass[i].addEventListener('click', updateCenterInfo, false);
-         }//for문을 통해 click이벤트를 생성, .click을 통해, clicl하지 않아도 함수 실행할 수 있다.
+         }//for문을 통해 click이벤트를 생성, .click을 통해, click하지 않아도 함수 실행할 수 있다.
          if (labelClass[0]) {
             labelClass[0].click();
+            console.log("label정보");
          }
       });
-
-
 //      label 클릭 시 사진 정보 가져오는 함수
       updateCenterInfo = function(e) {
+    	  console.log("label정보1");
          for(let i=0;i<result.length;i++){
+        	 console.log("label정보2");
             //수정 모달 내부 테이블 초기화
             imgDetailTable.tBodies[0].innerHTML = '';
             //사진 정보를 담을 <tr></tr> 생성
@@ -373,6 +371,12 @@ updateBtn.addEventListener("click", function(){
 function afterUpdateImg(){
    $("#updateModal .close").click();
    makeRequest(getcenterimages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
+   for(let i = 0; i < labelClass.length; i++) {         
+       labelClass[i].addEventListener('click', updateCenterInfo, false);
+    }//for문을 통해 click이벤트를 생성, .click을 통해, clicl하지 않아도 함수 실행할 수 있다.
+    if (labelClass[0]) {
+       labelClass[0].click();
+    }
    onSubmit;
 }
 

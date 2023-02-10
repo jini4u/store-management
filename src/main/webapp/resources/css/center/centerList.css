@@ -183,7 +183,6 @@ ul.imgs li {
 	width: 570px;
 	display: initial;
 	margin-top: 60px;
-
 }
 
 .search-box {
@@ -200,16 +199,25 @@ ul.imgs li {
 
 .center-label {
 	margin-top: 60px;
+}
 
+.center-noimage {
+	width: 495px;
+	height: 380px;
 }
-.center-noimage{
-    width: 495px;
-    height: 380px;
+
+.updateBtn {
+	border: 0;
+	background: none;
 }
-.updateBtn{
-    border: 0;
-    background: none;
+
+#center-left thead tr th {
+	pointer-events: none;
 }
-#center-left thead tr th{
-	pointer-events : none;
+
+#invalid-centerName, #invalid-tel, #invalid-Address {
+	display: flex !important;
+	align-items: center;
+	font-size: 15px;
+	margin-top: 7px;
 }

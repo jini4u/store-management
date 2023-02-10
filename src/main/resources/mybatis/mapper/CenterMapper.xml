@@ -200,20 +200,21 @@ WHERE file_no = #{fileNo}
 
 <select id="getCenterUploadHistory" resultType="map" parameterType="com.mycompany.webapp.common.vo.Pager">
 <![CDATA[
-SELECT rnum, "postDate","userName", "originalName", "insert", "update" 
+SELECT rnum, "postDate","userName", "originalName", "fileSavedName", "insert", "update" 
 FROM(
-SELECT ROWNUM as  rnum, "postDate", "userName", "originalName", "insert", "update"
+SELECT ROWNUM as  rnum, "postDate", "userName", "originalName", "fileSavedName", "insert", "update"
 FROM(
 SELECT TO_CHAR(F.file_post_date, 'YYYY-MM-DD') AS "postDate"
 		, U.user_name AS "userName"
 		, F.file_original_name AS "originalName"
+		, F.file_saved_name AS "fileSavedName"
 		, H.history_insert AS "insert"
 		, H.history_update AS "update"
 FROM history H
 	JOIN fileinfo F ON H.file_no = F.file_no
 	JOIN userinfo U ON H.user_code = U.user_code
 WHERE F.file_saved_name like ('%' || 'centerExcel' || '%')
-ORDER BY "postDate" DESC
+ORDER BY F.file_post_date DESC
 )
 WHERE ROWNUM <= #{endRowNo}
 )

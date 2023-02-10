@@ -85,7 +85,7 @@
 
 <!-- 점수리스트 테이블 -->
 <form action="${pageContext.request.contextPath}/score/updatescore"
-	method="post">
+	method="post" name="InsertModal">
 	<input type="hidden" name="centerCode" value="${param.centerCode}">
 
 
@@ -119,9 +119,10 @@
 					<td class="score_td">${scoreCode.checkSeason}</td>
 					<td class="score_td">${scoreCode.checkGroupContent}</td>
 					<td class="score_td">${scoreCode.checkDetailContent}</td>
-					<td class="score_td"><input id="inputNumber" type="number"
+					<td class="score_td">
+					<input id="inputNumber " type="number"
 						name="arrayScore" class="placeholderstlye" size="5"
-						value="${scoreCode.checkScore}" value="0" min="0" max="100"></td>
+						value="${scoreCode.checkScore}" value="placeholder" min="0" max="100"></td>
 
 
 				</tr>
@@ -165,34 +166,37 @@
 
 	<!--  수정 점수등록 버튼 -->
 	<div id="btnclick">
-		<button id="excel-download-button" class="greyButton">엑셀로 다운로드</button>
+		<button id="excel-download-button" class="greyButton">파일 다운</button>
 		<a id="excel" href="" download=""></a>
 		<div id="btn_group">
+<!-- 			<button id="no-box" class="greyButton">수정</button> -->
 			<button type="submit" class="pinkButton" id="score-update-button">수정</button>
+			
 </form>
-<button type="button" id="testBtnn" class="pinkButton"
-	data-toggle="modal" data-target="#myModal">점수입력</button>
-
-
+<c:if test="${(maxYear eq year and maxSeason eq season) == false}">
+<button type="button" id="testBtnn modalOpen" class="pinkButton"
+	data-toggle="modal" data-target="#myModal" >점수입력</button>
 		</div>
 	</div>
 
 <!--입력 모달 영역 -->
-<c:if test="${(maxYear eq year and maxSeason eq season) == false}">
+
 
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
+		aria-labelledby="myModalLabel" >
+		
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">점수입력</h5>
 					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
+						aria-label="Close" >
 						<span aria-hidden="true">×</span>
 					</button>
+					
 				</div>
 				<form action="${pageContext.request.contextPath}/score/insertscore"
-					method="post">
+					method="post"  >
 					<div class="modal-body">
 						<!-- 모달창 안 테이블 -->
 						<div>년도: ${year}, 분기: ${season}</div>
@@ -226,6 +230,7 @@
 						<button class="greyButton" data-dismiss="modal">취소</button>
 					</div>
 				</form>
+			
 			</div>
 		</div>
 	</div>

@@ -2,6 +2,7 @@ package com.mycompany.webapp.manager.service;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -144,20 +145,20 @@ public class ManagerService implements IManagerService {
 			int mgrExisData = managerRepository.mgrIsDataExist(mgr);
 			if(mgr.getUserCode() == 30000) {
 				managerRepository.insertManager(mgr);
-				logger.info("등록@@@@@@@@@@@@ : "+mgr.toString());
 				//replace(K key, V oldValue, V newValue): 저장된 key의 value가 oldValue와 동일할 때만 newValue로 변경해준다
 				//replace로 바꿔서 히스토리에 저장
 				resultMap.replace("insert", resultMap.get("insert"), resultMap.get("insert")+1);
 			} else {
 				managerRepository.updateManagerInfo(mgr);
-				logger.info("수정%%%%%%%%%%%%%%% : "+mgr.toString());
 				resultMap.replace("update", resultMap.get("update"), resultMap.get("update")+1);
 			}
 		}
-		String filePathName = filePath+"manager_"+file.getOriginalFilename();
+		Date date = new Date();
+		
+		String filePathName = filePath+"managerExcel_"+date.getTime()+"_"+file.getOriginalFilename();
 		
 		FileInfoVO fileVO = new FileInfoVO();
-		fileVO.setFileSavedName("manager_"+file.getOriginalFilename());
+		fileVO.setFileSavedName("managerExcel_"+date.getTime()+"_"+file.getOriginalFilename());
 		fileVO.setOriginalName(file.getOriginalFilename());
 		fileVO.setFileType(file.getContentType());
 		fileVO.setFilePath(filePathName);
@@ -191,6 +192,7 @@ public class ManagerService implements IManagerService {
 				String postDate = (String)history.get("postDate");
 				String userName = (String)history.get("userName");
 				String originalName = (String)history.get("originalName");
+				String fileSavedName = (String)history.get("fileSavedName");
 				String insert = String.valueOf(history.get("insert"));
 				String update = String.valueOf(history.get("update"));
 				
@@ -198,6 +200,7 @@ public class ManagerService implements IManagerService {
 				mgrResultMap.put("postDate", postDate);
 				mgrResultMap.put("userName", userName);
 				mgrResultMap.put("originalName", originalName);
+				mgrResultMap.put("fileSavedName", fileSavedName);
 				mgrResultMap.put("result", "입력: "+insert+"건, 수정: "+update+"건");
 				
 				mgrResultList.add(mgrResultMap);

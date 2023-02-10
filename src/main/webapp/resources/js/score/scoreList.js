@@ -14,12 +14,6 @@ function menuClick(event){
 }
 
 $(function(){
-	//모달창
-	/*$('#testBtn').click(function(e){
-		e.preventDefault();
-		$('#testModal').modal("show");
-	});*/
-
 	 // 모달 버튼에 이벤트를 건다.
 	  $('#openModalBtn').on('click', function(){
 	    $('#modalBox').modal('show');
@@ -83,37 +77,22 @@ function setYearBox(){
 //scoreUpdate
 	
 var updateBtn = document.getElementById("score-update-button");
-
 if(urlParams.get("checkYear")!=null && urlParams.get("checkSeason")!=null){
 	updateBtn.style.display = 'block';
 } else {
 	updateBtn.style.display = 'none';
 }
-	
-	
-function Checkform() {
 
-    if( frm.name.value == "" ) {
-    
-        frm.name.focus();
-        alert("성명을 입력해 주십시오.");
-        
-        return false;
-        
-    }
-    
-}
-	
+//엑셀로 다운로드
 var excelBtn = document.getElementById('excel-download-button');
-
 excelBtn.addEventListener('click', function(){
 	var urlParams = new URLSearchParams(location.search);
 	var centerCode = urlParams.get('centerCode');
 	var checkYear = urlParams.get('checkYear');
 	var checkSeason = urlParams.get('checkSeason');
 	
-	checkYear = (checkYear=='null')?checkYear:0;
-	checkSeason = (checkSeason=='null')?checkSeason:0;
+	checkYear = (checkYear==null)?0:checkYear;
+	checkSeason = (checkSeason==null)?0:checkSeason;
 	
 	makeRequest(function(){
 		var response = httpRequest.responseText;
@@ -122,3 +101,6 @@ excelBtn.addEventListener('click', function(){
 		excel.click();
 	}, 'GET', '/score/scorelistdownload?centerCode='+centerCode+'&checkYear='+checkYear+'&checkSeason='+checkSeason);
 });
+	
+
+$('#no-box').prop('type', "placeholder");

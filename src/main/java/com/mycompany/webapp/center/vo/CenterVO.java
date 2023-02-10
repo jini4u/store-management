@@ -94,7 +94,7 @@ public class CenterVO {
 			if(Integer.parseInt(centerCondition.substring(1)) > 0) {
 				centerCondition = "오픈예정";
 			} else {
-				centerCondition = "영업중";
+				centerCondition = "운영중";
 			}
 		} else if(centerCondition.equals("closed")) {
 				centerCondition = "폐점";
@@ -102,7 +102,7 @@ public class CenterVO {
 			if(Integer.parseInt(centerCondition.substring(1)) > 0) {
 				centerCondition = "폐점";
 			} else {
-				centerCondition = "영업중";
+				centerCondition = "운영중";
 			}
 		}
 		this.centerCondition = centerCondition;
