@@ -160,3 +160,37 @@ button.menubtn.clicked {
     margin-bottom: -1px;
     font-weight: 700;
 }
+/* .no-center{
+ 	color: #FF8787;
+	font-size: larger;
+	border: none;
+	padding: 4%;
+	margin-left: 41%;
+} */
+.no-center{
+    display: flex;
+    align-items: center;
+    margin-left: 40%;
+    margin-top: 3%;
+}
+.no-center1{
+	margin: 0;
+ 	font-size: large;
+}
+.widthLine{
+    margin-top: 3%;
+    border-top: 1px solid #ccc;
+}
+.danger_img{
+    width: 20px;
+    height: 20px;
+	
+}
+.danger_p{
+    font-size: 14px;
+    display: contents;
+}
+#invalid-insertscore {
+	margin-top: -1%;
+	margin-left: 70%;
+}

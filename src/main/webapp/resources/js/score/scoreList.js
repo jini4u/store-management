@@ -62,16 +62,22 @@ function setYearBox(){
 };
 
 //값 입력 범위 지정 및 문자 입력 제한
-	$('#inputNumber').on('keyup', function() {
+/*	$('#inputNumber').on('keyup', function() {
 	    if (/\D/.test(this.value)) {
 	        this.value = this.value.replace(/\D/g, '')
 	        alert('숫자만 입력가능합니다.');
 	    }
-	  if (this.value > 100) {
+	  if (this.value > 100 ) {
 	      this.value = 100;
-	      alert('점수는 0-100까지만 가능합니다.');
-	  }
-	});
+	      return false
+	    }else{
+	        alert("점수는 0-100까지만 가능합니다.")
+	        return false
+	    }
+
+	});*/
+
+
 
 	
 //scoreUpdate
@@ -106,18 +112,17 @@ excelBtn.addEventListener('click', function(){
 /*$('#no-box').prop('type', "placeholder");*/
 
 
-$.ajax({
-	url: "/score/scorelist/",
-	type: "GET",
-	data:{
-		centerCode :centerCode
-	},
-	async: false,
-	success: function(result){
-		if (result !=0 ) {
-			count += 1;
-			$("#invalid-detailcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>중복된 값이 있습니다.</p>");
-			$("#invalid-detailcode").show();	
+function modalScore(){
+	let insertBtn = true;
+	$("input[name=arrayScore]").each(function(){
+		if($(this).val()==0){
+			insertBtn = false;
 		}
-	}
-});
+	})
+	if(!insertBtn) /*alert("값을 입력해주세요!");*/
+	$("#invalid-insertscore").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>값을 입력해주세요!</p>");
+	$("#invalid-insertscore").show();
+	return insertBtn;
+}
+
+

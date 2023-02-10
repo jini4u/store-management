@@ -30,7 +30,7 @@
 </c:forEach>
 
 
-
+<c:if test="${(param.centerCode eq -1) == false}">
 <div class="year_and_quarter">
 
 	<!-- 년도,분기 찾기 -->
@@ -82,12 +82,12 @@
 
 <!-- 점수리스트 테이블 -->
 <form action="${pageContext.request.contextPath}/score/updatescore"
-	method="post" name="InsertModal">
-	<input type="hidden" name="centerCode" value="${param.centerCode}">
+	method="post" name="InsertModal" >
+	<input type="hidden" name="centerCode" value="${param.centerCode}" >
 
 
 	<c:if test="${empty scoreList}">
-		<table class="scoretable" id="scoreListTable" border="1">
+		<table class="verticalTable" id="scoreListTable" border="1">
 			<tr>
 				<th>점검년도</th>
 				<th>분기</th>
@@ -101,7 +101,7 @@
 		</table>
 	</c:if>
 	<c:if test="${not empty scoreList}">
-		<table class="scoretable" id="scoreListTable" border="1">
+		<table class="verticalTable" id="scoreListTable" border="1">
 			<tr>
 				<th>점검년도</th>
 				<th>분기</th>
@@ -166,7 +166,6 @@
 		<button id="excel-download-button" class="greyButton">파일 다운</button>
 		<a id="excel" href="" download=""></a>
 		<div id="btn_group">
-<!-- 			<button id="no-box" class="greyButton">수정</button> -->
 			<button type="submit" class="pinkButton" id="score-update-button">수정</button>
 			
 </form>
@@ -175,7 +174,16 @@
 	data-toggle="modal" data-target="#myModal" >점수입력</button>
 		</div>
 	</div>
+</c:if>
+</c:if>
+<c:if test="${(param.centerCode eq -1)}">
+<div class="no-center">
+<image src='/resources/images/center/icons_care.png' class='pass_img'><p class="no-center1">매핑된 센터가 없습니다.</p></image>
+</div>
+<div class="widthLine"></div>
 
+
+</c:if>
 <!--입력 모달 영역 -->
 
 
@@ -193,10 +201,10 @@
 					
 				</div>
 				<form action="${pageContext.request.contextPath}/score/insertscore"
-					method="post"  >
+					method="post" onsubmit="return modalScore();">
 					<div class="modal-body">
 						<!-- 모달창 안 테이블 -->
-						<div>년도: ${year}, 분기: ${season}</div>
+						<div>년도: ${year}, 분기: ${season} </div>
 						<input type="hidden" name="centerCode" value="${param.centerCode}" />
 						<input type="hidden" name="userCode" value="${userCode}" /> <input
 							type="hidden" name="checkYear" value="${year}" /> <input
@@ -215,23 +223,24 @@
 										value="${usingCodeList.checkGroupCode}"> <input
 										type="hidden" name="arrayDetailCode"
 										value="${usingCodeList.checkDetailCode}"> <input
-										id="inputNumber" placeholder="점수를 입력하세요" size="13" name="arrayScore"
+										id="inputNumber" type="number" name="arrayScore" 
 										  min="0" max="100">
+										  <div id="invalid-numberLimit"></div>
 								</tr>
 							</c:forEach>
 						</table>
 					</div>
-					<div class="modal-footer">
-						<button type="submit" class=" pinkButton">확인</button>
-
-						<button class="greyButton" data-dismiss="modal">취소</button>
-					</div>
-				</form>
+				<div class="modal-footer">
+					<button type="submit" class=" pinkButton" id="modal-insertBtn">확인</button>
+					<button class="greyButton" data-dismiss="modal">취소</button>
+				</div>
+				<div id="invalid-insertscore"></div>
+			</form>
 			
 			</div>
 		</div>
 	</div>
-</c:if>
+
 
 <!-- 모달 자바 스크립트 -->
 <script
