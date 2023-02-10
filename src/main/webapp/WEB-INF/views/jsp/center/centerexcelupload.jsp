@@ -2,8 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 엑셀 파일 다운로드 하기 위해 사용 -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/score/score.css" />
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/score/score.css" /> 
 
 <div class="menuRoute">
 	<img src="${pageContext.request.contextPath}/resources/images/home.png">
@@ -42,7 +41,7 @@
 		<tr>
 			<td>${historyMap.postDate}</td>
 			<td>${historyMap.userName}</td>
-			<td><a href='/file/centerExcel_${historyMap.originalName}'
+			<td><a href='/file/${historyMap.fileSavedName}'
 				download="${historyMap.originalName}">${historyMap.originalName}</a></td>
 			<td>${historyMap.result}</td>
 

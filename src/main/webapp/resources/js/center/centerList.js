@@ -16,7 +16,7 @@ let centerlist = function centerList(results){
 		"<td>" + results[i].centerCondition + "</td>" +
 		"<td style='display:none'>" + results[i].centerGuide + "</td>" +
 		"<td style='display:none'>" + results[i].centerClosingDate +"</td>" +
-		"<td><button id='centerDetails' class='centerSize' data-toggle='modal' data-target='#myModal'>상세보기</button></td>";
+		"<td><button id='centerDetails' class='centerDet' data-toggle='modal' data-target='#myModal'>상세보기</button></td>";
 
 
 		str += "</tr>";
@@ -106,10 +106,9 @@ $("#center-left tr").click(function (){
 
 	$("#centerInsertModal").removeAttr('class', 'modal-lg');
 	$("#centerInsertModal").attr('class', 'modal-dialog modal-xl modal-dialog-centered');
-
 	$("#centerPhotoList").empty();
 	str =""
-		tdArr = new Array(); //배열 선언
+	tdArr = new Array(); //배열 선언
 
 	//현재 클릭된 Row(<tr>)
 	tr = $(this);
@@ -144,6 +143,15 @@ $("#center-left tr").click(function (){
 	$("#centerClosingDate").val(centClosingDate);
 	$("#centerGuide").val(centGuide);
 
+	if ($("#centerOpeningDate").val().length == 0) {
+		console.log("나와2");
+		//readonly 적용
+		$("#centerClosingDate").attr("readonly", true);
+	}else if (!$("#centerOpeningDate").val().length == 0) {
+		console.log("나와");
+		$("#centerClosingDate").attr("readonly", false);
+	}
+	
 	console.log("클릭한 td데이터 :" + clickTd.text());
 
 	if (imgCenterCode !=null) {
@@ -196,8 +204,7 @@ function getDetailAjax() {
 	});
 }
 
-//ceterInsert 해주는 자스
-
+//ceterInsert 해주는 ajax
 $("#centerSavedBtn").click(function (){
 	let check = centerInsert_check();
 	if(check){
@@ -214,7 +221,7 @@ $("#centerSavedBtn").click(function (){
 			centercondition = "notyet";
 			console.log(centercondition);
 		}
-		
+
 		if(!$("#centerName").attr("readonly")) {
 			let insertURL = "centerinsert";
 			$.ajax({
@@ -231,10 +238,12 @@ $("#centerSavedBtn").click(function (){
 				},
 				success: function(results){
 					location.href="centerlist"
+
 				},
 				error: error
 			});
 		}else{
+			//내일 안되면 여기 확인 대문자 소문자
 			let updateURL = "centerupdate";
 			let centercondition = document.querySelector("#centerCondition").value;
 			let pageNo = $("#now-page").text();
@@ -265,7 +274,7 @@ $("#centerSavedBtn").click(function (){
 					clickTd.eq(3).text(results.centerAddress);
 					clickTd.eq(4).text(results.centerOpeningDate);
 					clickTd.eq(5).text(results.centerCondition);
-					clickTd.eq(6).text(results.centerguide);
+					clickTd.eq(6).text(results.centerGuide);
 					clickTd.eq(7).text(results.centerclosingDate);
 					$("#findCenterName").val('');
 					$("#myModal .close").click();
@@ -280,6 +289,13 @@ $("#centerSavedBtn").click(function (){
 //등록버튼
 $("#centerInsertBtn").click(function () {
 
+	if ($("#centerOpeningDate").val() !== '') {
+		$("#centerClosingDate").attr("readonly", false);
+	} else {
+		$("#centerClosingDate").attr("readonly", true);
+	}
+
+	
 	$("#invalid-tel").empty();
 	$("#invalid-centerName").empty();
 
@@ -338,7 +354,7 @@ let checkTel = /^\d{2,3}-\d{3,4}-\d{4}$/;
 
 
 //centerName
-$("#centerName").on("keyup", function(event){
+var centerNameCheck = $("#centerName").on("keyup", function(event){
 	if ($("#centerName").val().length==0) {
 		$("#invalid-centerName").empty();
 	}else {
@@ -349,37 +365,35 @@ $("#centerName").on("keyup", function(event){
 			$("#centerSavedBtn").attr("disabled", true);
 		}else{
 			$("#invalid-centerName").empty();
-			if ($("#centerName").val().length >= 15 || $("#centerName").val().length  <= 1) {
-				$("#invalid-centerName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>센터명은 1~15사이로 입력해주세요</p>");
-				$("#invalid-centerName").show();
-				$("#centerSavedBtn").attr("disabled", true);
-			}else{
-				$("#centerSavedBtn").attr("disabled", false);
-			}
+			$("#centerSavedBtn").attr("disabled", false);
 		}
 	}
 }); //센터name
 
 //centerTel11
-$("#centerTel").on("keyup", function() {
+var centerTelCheck = $("#centerTel").on("keyup", function() {
 	if ($("#centerTel").val().length == 0) {
 		$("#invalid-tel").empty();
+		return false;
 	}else {
-	if (!checkTel.test($("#centerTel").val())) {
-		$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>'-'를 입력해 주세요</p>");
-		$("#invalid-tel").show();
-		$("#centerSavedBtn").attr("disabled", true);
-	}else{
-		$("#invalid-tel").empty();
-		if ($("#centerTel").val().length >= 14 || $("#centerTel").val().length <= 10) {
-			$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>전화번호는 11~13사이로 입력해주세요</p>")
+		if (!checkTel.test($("#centerTel").val())) {
+			$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>'-'를 포함한 올바른 형식을 입력해주세요</p>");
 			$("#invalid-tel").show();
 			$("#centerSavedBtn").attr("disabled", true);
+			return false;
 		}else{
 			$("#invalid-tel").empty();
-			$("#centerSavedBtn").attr("disabled", false);
+			if ($("#centerTel").val().length >= 14 || $("#centerTel").val().length <= 10) {
+				$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>전화번호는 11~13사이로 입력해주세요</p>")
+				$("#invalid-tel").show();
+				$("#centerSavedBtn").attr("disabled", true);
+				return false;
+			}else{
+				$("#invalid-tel").empty();
+				$("#centerSavedBtn").attr("disabled", false);
+				return true;
+			}
 		}
-	}
 	}
 }); //centerTel
 
@@ -407,43 +421,47 @@ function centerInsert_check() {
 
 //centerName 중복 확인 ajax
 function checkCenterName() {
-	var centerNameRegx = $("#centerName").val(); // id값이 "centerName"인 입력란의 값을 저장
-	$.ajax({
-		url : "centerNameCheck", //controller에서 요청 받을 주소
-		type : 'post', //post방식으로 전달
-		data : {centerName : centerNameRegx},
-		success : function(result) { //컨트롤러에서 넘어온 result 값을 받는다
-			if (result == 0) { //result가 1이 아니면 사용가능한 아이디
-				$("#invalid-centerName").html("<img src='/resources/images/center/icons_care_gr.png' class='pass_img'></img><p class='pass_p'>사용가능한 센터명입니다</p>");
-				$("#invalid-centerName").show();
-			} else {
-				$("#invalid-centerName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>이미 존재하는 센터명입니다. 다른 센터명을 입력해주세요</p>");
-				$("#invalid-centerName").show();
-				$("#centerSavedBtn").attr("disabled", true);
+	if(!$('#invalid-centerName').html().includes('danger')){
+		var centerNameRegx = $("#centerName").val(); // id값이 "centerName"인 입력란의 값을 저장
+		$.ajax({
+			url : "centerNameCheck", //controller에서 요청 받을 주소
+			type : 'post', //post방식으로 전달
+			data : {centerName : centerNameRegx},
+			success : function(result) { //컨트롤러에서 넘어온 result 값을 받는다
+				if (result == 0) { //result가 1이 아니면 사용가능한 아이디
+					$("#invalid-centerName").html("<img src='/resources/images/center/icons_care_gr.png' class='pass_img'></img><p class='pass_p'>사용가능한 센터명입니다</p>");
+					$("#invalid-centerName").show();
+				} else {
+					$("#invalid-centerName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>이미 존재하는 센터명입니다. 다른 센터명을 입력해주세요</p>");
+					$("#invalid-centerName").show();
+					$("#centerSavedBtn").attr("disabled", true);
+				}
+			},
+			error : function() {
 			}
-		},
-		error : function() {
-		}
-	}); //ajax끝
+		});
+	}//ajax끝
 } //checkCenterName 끝
 
 function checkCentertel() {
-	var centerTelRegx = $("#centerTel").val();
-	$.ajax({
-		url : "checkCenterTel",
-		type : "post",
-		data : { centerTel : centerTelRegx},
-		success : function(result) {
-			if (result == 0) {
-				$("#invalid-tel").html("<img src='/resources/images/center/icons_care_gr.png' class='pass_img'></img><p class='pass_p'>사용가능한 전화번호입니다</p>");
-				$("#invalid-tel").show();
-			} else {
-				$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>이미 존재하는 전화번호입니다.다른 전화번호를 입력해주세요</p>");
-				$("#invalid-tel").show();
-				$("#centerSavedBtn").attr("disabled", true);
-			}
-		},
-	});
+	if (!$("#invalid-tel").html().includes('danger')) {
+		var centerTelRegx = $("#centerTel").val();
+		$.ajax({
+			url : "checkCenterTel",
+			type : "post",
+			data : { centerTel : centerTelRegx},
+			success : function(result) {
+				if (result == 0) {
+					$("#invalid-tel").html("<img src='/resources/images/center/icons_care_gr.png' class='pass_img'></img><p class='pass_p'>사용가능한 전화번호입니다</p>");
+					$("#invalid-tel").show();
+				} else {
+					$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>이미 존재하는 전화번호입니다.다른 전화번호를 입력해주세요</p>");
+					$("#invalid-tel").show();
+					$("#centerSavedBtn").attr("disabled", true);
+				}
+			},
+		});
+	}
 }
 
 
@@ -453,7 +471,7 @@ excelBtn.addEventListener('click', function(){
 	var urlParams = new URLSearchParams(location.search);
 	var keywordType = urlParams.get('keywordType');
 	var keyword = urlParams.get('keyword');
-	
+
 	makeRequest(function(){
 		var response = httpRequest.responseText;
 		var excel = document.getElementById('excel');

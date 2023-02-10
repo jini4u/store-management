@@ -11,7 +11,7 @@ import com.mycompany.webapp.common.vo.Pager;
 import com.mycompany.webapp.notice.service.INoticeService;
 import com.mycompany.webapp.notice.vo.PostVO;
 
-@RequestMapping("/board")
+@RequestMapping("/notice")
 @Controller
 public class NoticeController {
 	
@@ -49,7 +49,7 @@ public class NoticeController {
 	@RequestMapping(value="/create", method=RequestMethod.POST)
 	public String createPost(PostVO post, Model model) {
 		noticeService.createPost(post);
-		return "redirect: /board/list";
+		return "redirect: /notice/list";
 	}
 	
 	/**
@@ -77,7 +77,7 @@ public class NoticeController {
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String updatePost(PostVO post, Model model) {
 		noticeService.updatePost(post);
-		return "redirect: /board/list";
+		return "redirect: /notice/list";
 	}
 	
 	/**
@@ -89,6 +89,6 @@ public class NoticeController {
 	@RequestMapping("/delete")
 	public String deletePost(@RequestParam int postno, Model model) {
 		noticeService.deletePost(postno);
-		return "redirect: /board/list";
+		return "redirect: /notice/list";
 	}
 }

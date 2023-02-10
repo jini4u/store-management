@@ -73,7 +73,7 @@ public class LoginController {
       }else {
       //비회원
          logger.info("비회원"+password);
-         rttr.addFlashAttribute("message","비회원입니다");
+         rttr.addFlashAttribute("message","아이디 또는 비밀번호를 잘못 입력했습니다.");
       }
       session.invalidate();
       return "redirect:/login";

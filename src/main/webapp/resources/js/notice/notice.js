@@ -49,6 +49,7 @@ $("#btnList").click(function (){
 window.onload = function(){
 	var createBtn = document.getElementById("createnotice");
 	var readUpdateHead = document.getElementById("read-update-heading");
+	var menuRouteChange = document.getElementById("menuRoute_change");
 	var updateBtn = document.getElementById("btnUpdate");
 	var deleteBtn = document.getElementById("deletebutton");
 	
@@ -57,17 +58,20 @@ window.onload = function(){
 			createBtn.style.display = 'none';
 		} else {
 			readUpdateHead.innerText = '공지사항 조회';
+			menuRouteChange.innerText = '공지사항 조회';
 		}		
 	} else {
 		if(loginUserAuthority != 'sysadmin'){
 			updateBtn.style.display = 'none';
 			deleteBtn.style.display = 'none';
 			readUpdateHead.innerText = '공지사항 조회';
+			menuRouteChange.innerText = '공지사항 조회';
 			$("input").css('border', 'none');
 				 $('textarea').css('height', 'auto');
 				 $('textarea').height(this.scrollHeight);
 		} else {
 			readUpdateHead.innerText = '공지사항 수정';
+			menuRouteChange.innerText = '공지사항 수정';
 			$(".editable").attr('readonly', false);
 		}		
 	}

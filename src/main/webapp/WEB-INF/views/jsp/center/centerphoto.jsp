@@ -6,6 +6,14 @@
 <!-- Latest compiled JavaScript -->
 <link href="${pageContext.request.contextPath}/resources/css/center/centerphoto.css" rel="stylesheet">
 
+<div class="menuRoute">
+		<img
+		src="${pageContext.request.contextPath}/resources/images/home.png">
+		<a href="/">&nbsp; Home &nbsp; ></a>
+		<span>&nbsp; 센터  &nbsp; ></span>
+		<a href="${pageContext.request.contextPath}/center/centerphoto">&nbsp; 센터 사진 관리</a>	
+</div>
+
 <div class="titleBox">
 	<img
 		src="${pageContext.request.contextPath}/resources/images/photo.png" />
@@ -89,8 +97,8 @@
 	<div id="photo-right-frame">
 		<div id="button-frame">
 			<button type="button" id="insert-center-modal" class="pinkButton" data-toggle="modal" data-target="#insertModal">등록</button>
-			<button type="button" id="update-center-modal" class="pinkButton" data-toggle="modal" data-target="#updateModal">수정</button>
-			<button type="button" id="delete-center-modal" class="pinkButton" data-toggle="modal" data-target="#deleteModal">삭제</button>
+			<button type="button" id="update-center-modal" class="greyButton" data-toggle="modal" data-target="#updateModal">수정</button>
+			<button type="button" id="delete-center-modal" class="greyButton" data-toggle="modal" data-target="#deleteModal">삭제</button>
 		</div>
 		<div id="photo-frame">
 			<div id="photo-main-size">

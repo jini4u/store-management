@@ -228,6 +228,7 @@ public class CenterService implements ICenterService{
 	public int filterCountAllCenters(String keyword, String keywordType) {
 		return centerRepository.filterCountAllCenters(keyword, keywordType);
 	}
+	
 	@Override
 	public List<Map<String, String>> getCenterUploadHistory(Pager pager) {
 		List<Map<String, Object>> historyList = centerRepository.getCenterUploadHistory(pager);
@@ -237,6 +238,7 @@ public class CenterService implements ICenterService{
 			String postDate = (String)history.get("postDate");
 			String userName = (String)history.get("userName");
 			String originalName = (String)history.get("originalName");
+			String fileSavedName = (String)history.get("fileSavedName");
 			String insert = String.valueOf(history.get("insert"));
 			String update = String.valueOf(history.get("update"));
 
@@ -244,6 +246,7 @@ public class CenterService implements ICenterService{
 			resultMap.put("postDate", postDate);
 			resultMap.put("userName", userName);
 			resultMap.put("originalName", originalName);
+			resultMap.put("fileSavedName", fileSavedName);
 			resultMap.put("result", "입력: "+insert+"건, 수정: "+update+"건");
 
 			resultList.add(resultMap);
@@ -251,6 +254,7 @@ public class CenterService implements ICenterService{
 		}
 		return resultList;
 	}
+	
 	@Override
 	public Map<String, Integer> centerUploadFile(MultipartFile file, int startRow, int userCode) {
 		//리턴할 Map생성
@@ -265,7 +269,7 @@ public class CenterService implements ICenterService{
 		for(Object vo : VOList) {
 			CenterVO center = (CenterVO)vo;
 
-			//기존 데이터가 없으면 
+			//기존 데이터가 없으면  
 			if (center.getCenterCode() == 0) {
 				centerRepository.insertCenter(center);
 				System.out.println();
@@ -297,6 +301,7 @@ public class CenterService implements ICenterService{
 		resultMap.replace("userCode",0, fileInfoVO.getUploadUserCode());
 
 		fileRepository.insertFileUploadHistory(resultMap);
+		logger.info("파일 업로드"+resultMap+"");
 
 		try {
 			//이친구는 왜 하는거징? -> 업로드한 파일 데이터를  지정한 파일에 저장한다

@@ -70,13 +70,13 @@ public class CenterController {
 		List<CenterVO> centerList = null;
 		if (keyword == null) {
 			int totalRows = centerService.countAllCenters();
-			pager = new Pager(10, 10, totalRows, pageNo);
+			pager = new Pager(12, 10, totalRows, pageNo);
 			centerList = centerService.centerList(pager);
 		}else {
 			String keywordType = "CN";
 			int totalRows = centerService.filterCountAllCenters(keyword, keywordType);
 			if (totalRows != 0) {
-				pager = new Pager(10, 10, totalRows, pageNo);
+				pager = new Pager(12, 10, totalRows, pageNo);
 				centerList = centerService.findCenter(pager, keyword, keywordType);
 				model.addAttribute("keyword", keyword);
 			}else {
@@ -166,11 +166,8 @@ public class CenterController {
 		return "jsp/center/centerexcelupload";
 	}
 
-	//MultipartHttpServletRequest 는 여러개의 파일을 업로드할 때 사용하는데 
-	//우리는 왜 사용? 값을 list로 받아올 수 있기 때문인가?
 	@PostMapping(value="/centerexcelupload")
 	public String excelUplaod(MultipartHttpServletRequest request, HttpSession session, @RequestParam(defaultValue="1")int pageNo, Model model) {
-		//request에서 업로드한 파일 얻기, getFile안에 있는 건 이름을 정해주는 건가?
 		MultipartFile file = request.getFile("centerExcelFile");
 		int userCode = (int)session.getAttribute("userCode");
 		int totalRows = centerService.countUploadHistory();
@@ -359,14 +356,4 @@ public class CenterController {
 		}
 		return fileName;
 	}
-/*	@RequestMapping("/ex")
-	public String main(Model m)throws Exception {
-		throw new NumberFormatException("예외가 발생");
-	}*/
-	@RequestMapping("/jusoPopup")
-    public String jusoPopup(@ModelAttribute("centerVO") CenterVO centerVO) throws Exception {
-        return "jsp/center/jusoPopup";
-
-    }
-	
 }

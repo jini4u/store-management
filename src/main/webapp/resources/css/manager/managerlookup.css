@@ -24,3 +24,12 @@
 #invalid-userName, #invalid-useEmail, #invalid-userTel{
 	margin-top: 5px;
 }
+.danger_img{
+	width: 20px;
+}
+.invalid-userEmail, #invalid-userResignDate, #invalid-userName, .invalid-userTel, .invalid-userTeamCode{
+	display: flex;
+    align-items: center;
+    font-size: 15px;
+    margin-top: 7px;
+}

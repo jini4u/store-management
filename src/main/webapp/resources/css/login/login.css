@@ -46,7 +46,7 @@ img {
 .login__register{
   position: absolute;
   bottom: 1rem;
-  width: 100%;
+  width: 376px;
   background-color: #f2f2f2;
   padding: 2rem 1rem;
   border-radius: 1rem;
@@ -67,6 +67,9 @@ img {
   background-color: #fff;
   margin-top: 1rem;
   border-radius: 0.5rem;
+}
+.password{
+    margin-bottom: 20px;
 }
 .login__icon {
   font-size: 1.5rem;
@@ -125,7 +128,6 @@ img {
     grid-template-columns: repeat(2, max-content);
     justify-content: center;
     align-items: center;
-    margin-left: 10rem;
   }
   .login__img {
     display: flex;
@@ -138,6 +140,7 @@ img {
   .login__img img {
     width: 80%;
     margin-top: 0;
+    z-index: 2;
   }
   .login__register {
     left: -11rem;
@@ -165,7 +168,7 @@ img {
    background-color: #E26868;
    border: 2px solid #E26868;
    color: #fff;
-  margin-top: 43px;
+  margin-top: 21px;
    
 }
 
@@ -190,7 +193,9 @@ img {
 	width: 24px;
 	color: #AACB73;
 }
-#invalid-login{
+#invalid-login, #invalid-login-message{
 	display: flex;
     align-items: center;
+    width: 318px;
+    margin-left: 10px;
 }

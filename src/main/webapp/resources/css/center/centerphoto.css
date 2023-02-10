@@ -86,7 +86,7 @@
 
 #photo-right-frame {
 	display: none;
-	margin: 0px 70px;
+	margin: 8px 70px 0 70px;
 }
 
 .paging {
@@ -293,3 +293,6 @@ ul.photo-imgs li {
 .removePadding{
 	padding : 0px;
 } 
+#modal-image-update{
+	width: 500px;
+}
