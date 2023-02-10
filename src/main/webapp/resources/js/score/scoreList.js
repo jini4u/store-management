@@ -24,7 +24,7 @@ $(function(){
 
 //점수리스트 마우스 오버시 색 변화
 function changeColor(){
-	$('#scoreListTable tr').mouseover(function(){
+	$('.scoreListTableTr').mouseover(function(){
 		$(this).addClass('changeColor');
 	}).mouseout(function() {
 		$(this).removeClass('changeColor');

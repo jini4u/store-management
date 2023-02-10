@@ -18,7 +18,8 @@
 	<h2>센터 점수 조회</h2>
 </div>
 
-<div>
+<div class="centerName_search_btn">
+	<div class="centerNameGroup">
 		<c:forEach items="${centerName}" var="center" > 
 			<c:if test="${center.centerCode eq param.centerCode}">
 				<a class="clikedBtn clicked" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
@@ -28,6 +29,7 @@
 			</c:if>
 		
 		</c:forEach>
+	</div>
 
 
 	<c:if test="${(param.centerCode eq -1) == false}">
@@ -82,12 +84,12 @@
 
 <!-- 점수리스트 테이블 -->
 <form action="${pageContext.request.contextPath}/score/updatescore"
-	method="post" name="InsertModal" >
+	method="post" name="InsertModal"  class="scoreTableForm">
 	<input type="hidden" name="centerCode" value="${param.centerCode}" >
 
 
 	<c:if test="${empty scoreList}">
-		<table class="verticalTable" id="scoreListTable" border="1">
+		<table class="verticalTable" id="scoreListTable">
 			<tr>
 				<th>점검년도</th>
 				<th>분기</th>
@@ -101,7 +103,7 @@
 		</table>
 	</c:if>
 	<c:if test="${not empty scoreList}">
-		<table class="verticalTable" id="scoreListTable" border="1">
+		<table class="verticalTable" id="scoreListTable">
 			<tr>
 				<th>점검년도</th>
 				<th>분기</th>
@@ -111,7 +113,7 @@
 			</tr>
 
 			<c:forEach items="${scoreList}" var="scoreCode">
-				<tr>
+				<tr class="scoreListTableTr">
 					<td class="score_td">${scoreCode.checkYear}</td>
 					<td class="score_td">${scoreCode.checkSeason}</td>
 					<td class="score_td">${scoreCode.checkGroupContent}</td>
