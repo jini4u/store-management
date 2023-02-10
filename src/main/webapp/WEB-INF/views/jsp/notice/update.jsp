@@ -5,9 +5,9 @@
 
 <div class="menuRoute">
 	<img src="${pageContext.request.contextPath}/resources/images/home.png">
-	<a href="/">&nbsp; Home &nbsp; ></a> <a href="/board/list">&nbsp;
+	<a href="/">&nbsp; Home &nbsp; ></a> <a href="/notice/list">&nbsp;
 		공지사항 &nbsp; > &nbsp;</a> <a
-		href="${pageContext.request.contextPath}/board/update?postno=${post.postno}"
+		href="${pageContext.request.contextPath}/notice/update?postno=${post.postno}"
 		id="menuRoute_change">공지사항 수정 </a>
 </div>
 
@@ -18,7 +18,7 @@
 <article>
 	<div class="container noticediv" role="main">
 		<form name="form" id="update-form" role="form" method="post"
-			action="${pageContext.request.contextPath}/board/update">
+			action="${pageContext.request.contextPath}/notice/update">
 			<div class="mb-3">
 				<label for="title">글번호</label> <input type="text"
 					class="form-control" name="postno" id="title"
@@ -51,7 +51,7 @@
 			<div>
 				<button type="button" class="pinkButton" id="btnUpdate">수정</button>
 				<a
-					href="${pageContext.request.contextPath}/board/delete?postno=${post.postno}"
+					href="${pageContext.request.contextPath}/notice/delete?postno=${post.postno}"
 					class="btn btn btn-danger btn-lg greyButton" id="deletebutton">삭제</a>
 				<button type="button" class="greyButton btn btn btn-primary btn-lg"
 					id="btnList">목록</button>

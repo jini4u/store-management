@@ -43,7 +43,7 @@ $("#btnUpdate").click(function (){
 });
 
 $("#btnList").click(function (){
-	location.href="/board/list";
+	location.href="/notice/list";
 });
 
 window.onload = function(){
