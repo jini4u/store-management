@@ -470,28 +470,30 @@ $(".inputEnglish").keyup(function(){
 
 		$("#invalid-groupcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>영어(대문자)만 입력가능합니다</p>");
 		$("#invalid-groupcode").show();
+		
 	}
 	if(v.length >=3){
 		$("#invalid-groupcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>대문자 2자리만 입력가능합니다</p>");
 		$("#invalid-groupcode").show();
+		$(this).val(v.replace(v.substr(2),''));
 	}
 	if(v.length == 0){
 		$("#invalid-groupcode").empty();
-	}
+	}else{
+		$.ajax({
+			url: "/score/overlapgroupcode/" + groupcode,
+			type: "GET",
+			async:false,
+			success: function(result){
 	
-	$.ajax({
-		url: "/score/overlapgroupcode/" + groupcode,
-		type: "GET",
-		async:false,
-		success: function(result){
-
-			if (result !=0 ) {
-				count+=1;
-				$("#invalid-groupcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>중복된 값이 있습니다.</p>");
-				$("#invalid-groupcode").show();	
+				if (result !=0 ) {
+					count+=1;
+					$("#invalid-groupcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>중복된 값이 있습니다.</p>");
+					$("#invalid-groupcode").show();	
+				}
 			}
-		}
-	});
+		});
+	}
 });
 
 
@@ -516,9 +518,6 @@ $('.detailContentLimit').keyup(function(event) {
 		$("#invalid-detailcontent").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>특수 문자는 입력할 수 없습니다.</p>");
 		$("#invalid-detailcontent").show();
 	}
-/*	if(groupcontent.length()==0){
-		$("#invalid-detailcontent").empty();
-	}*/
 	if($("#detailcontent").val().length ==0){
 		$("#invalid-detailcontent").empty();
 	}
@@ -533,29 +532,34 @@ $(".inputNumber").keyup(function(){
 	var groupcode = $("#groupcode").val();
 	regexp = /[^0-9.]/g;
 	
-	if (regexp.test(detailcode)) {
-		$("#invalid-detailcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>숫자만 입력할 수 있습니다.</p>");
-		$("#invalid-detailcode").show();
-	}	
+
 	if(detailcode.length >=3){
 		$("#invalid-detailcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>숫자 2자리만 입력가능합니다</p>");
 		$("#invalid-detailcode").show();
+		$(this).val(detailcode.replace(detailcode.substr(2),''));
 	}
 	if(detailcode.length == 0){
 		$("#invalid-detailcode").empty();
-	}
-	$.ajax({
-		url: "/score/overlapdetailcode/" + detailcode + "/"+ groupcode,
-		type: "GET",
-		async: false,
-		success: function(result){
-			if (result !=0 ) {
-				count += 1;
-				$("#invalid-detailcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>중복된 값이 있습니다.</p>");
-				$("#invalid-detailcode").show();	
-			}
+	}else{
+		if (regexp.test(detailcode)) {
+			$("#invalid-detailcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>숫자만 입력할 수 있습니다.</p>");
+			$("#invalid-detailcode").show();
+		}else{
+			$.ajax({
+				url: "/score/overlapdetailcode/" + detailcode + "/"+ groupcode,
+				type: "GET",
+				async: false,
+				success: function(result){
+					if (result !=0 ) {
+						count += 1;
+						$("#invalid-detailcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>중복된 값이 있습니다.</p>");
+						$("#invalid-detailcode").show();	
+					}
+				}
+			});
 		}
-	});
+
+	}
 });
 
 

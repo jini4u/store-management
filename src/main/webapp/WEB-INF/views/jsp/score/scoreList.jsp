@@ -17,67 +17,67 @@
 		src="${pageContext.request.contextPath}/resources/images/checklist.png">
 	<h2>센터 점수 조회</h2>
 </div>
-<c:forEach items="${centerName}" var="center" > 
 
-
-	<c:if test="${center.centerCode eq param.centerCode}">
-		<a class="clikedBtn clicked" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
-	</c:if>
-	<c:if test="${center.centerCode ne param.centerCode}">
-		<a class="clikedBtn" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
-	</c:if>
-
-</c:forEach>
-
-
-<c:if test="${(param.centerCode eq -1) == false}">
-<div class="year_and_quarter">
-
-	<!-- 년도,분기 찾기 -->
-
-	<form action="${pageContext.request.contextPath}/score/scorelist"
-		name="score" method="get">
-		<input type="hidden" name="centerCode" value="${param.centerCode}">
-		<select name="checkYear" id="yearbox" title="년도">년도
-		</select> <select name="checkSeason">
-			<option value="0">분기</option>
-			<c:if test='${param.checkSeason eq 4}'>
-				<option selected='selected' value="4">
+<div>
+		<c:forEach items="${centerName}" var="center" > 
+			<c:if test="${center.centerCode eq param.centerCode}">
+				<a class="clikedBtn clicked" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
 			</c:if>
-			<c:if test='${param.checkSeason ne 4}'>
-				<option value="4">
-			</c:if> 4 분기
-			</option>
-
-			<c:if test='${param.checkSeason eq 3}'>
-				<option selected='selected' value="3">
+			<c:if test="${center.centerCode ne param.centerCode}">
+				<a class="clikedBtn" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
 			</c:if>
-			<c:if test='${param.checkSeason ne 3}'>
-				<option value="3">
-			</c:if>3 분기
-			</option>
-
-			<c:if test='${param.checkSeason eq 2}'>
-				<option selected='selected' value="2">
-			</c:if>
-			<c:if test='${param.checkSeason ne 2}'>
-				<option value="2">
-			</c:if>2 분기
-			</option>
+		
+		</c:forEach>
 
 
-			<c:if test='${param.checkSeason eq 1}'>
-				<option selected='selected' value="1">
-			</c:if>
-			<c:if test='${param.checkSeason ne 1}'>
-				<option value="1">
-			</c:if> 1 분기
-			</option>
-		</select>
-		<button type="submit" class="pinkButton">찾기</button>
-	</form>
+	<c:if test="${(param.centerCode eq -1) == false}">
+	<div class="year_and_quarter">
+	
+		<!-- 년도,분기 찾기 -->
+	
+		<form action="${pageContext.request.contextPath}/score/scorelist"
+			name="score" method="get">
+			<input type="hidden" name="centerCode" value="${param.centerCode}">
+			<select name="checkYear" id="yearbox" title="년도">년도
+			</select> <select name="checkSeason">
+				<option value="0">분기</option>
+				<c:if test='${param.checkSeason eq 4}'>
+					<option selected='selected' value="4">
+				</c:if>
+				<c:if test='${param.checkSeason ne 4}'>
+					<option value="4">
+				</c:if> 4 분기
+				</option>
+	
+				<c:if test='${param.checkSeason eq 3}'>
+					<option selected='selected' value="3">
+				</c:if>
+				<c:if test='${param.checkSeason ne 3}'>
+					<option value="3">
+				</c:if>3 분기
+				</option>
+	
+				<c:if test='${param.checkSeason eq 2}'>
+					<option selected='selected' value="2">
+				</c:if>
+				<c:if test='${param.checkSeason ne 2}'>
+					<option value="2">
+				</c:if>2 분기
+				</option>
+	
+	
+				<c:if test='${param.checkSeason eq 1}'>
+					<option selected='selected' value="1">
+				</c:if>
+				<c:if test='${param.checkSeason ne 1}'>
+					<option value="1">
+				</c:if> 1 분기
+				</option>
+			</select>
+			<button type="submit" class="pinkButton">찾기</button>
+		</form>
+	</div>
 </div>
-
 
 
 <!-- 점수리스트 테이블 -->
