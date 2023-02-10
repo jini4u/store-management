@@ -44,12 +44,16 @@
 						</div>
 					</div>
 					<div id="groupselectdiv" class="occupieddiv">
-						사용여부 <select name="groupOccupied" class="groupOccupied">
-							<option disabled="disabled" value="y">사용중
-							<option disabled="disabled" value="n">사용안함
-						</select>
+						<div>
+							사용여부 
+							<select name="groupOccupied" class="groupOccupied">
+								<option disabled="disabled" value="y">사용중
+								<option disabled="disabled" value="n">사용안함
+							</select>
+						</div>
+						<div id="invalid-groupOccupied"></div>
 					</div>
-					<div id="invalid-groupOccupied"></div>
+					
 				</div>
 				<div class="widthLine"></div>
 				<div id="code-notice">코드 등록 또는 수정 시, 정보 입력 후 저장 버튼을 눌러주세요</div>
@@ -77,7 +81,7 @@
 	<div class="codeLine"></div>
 
 	<div class="codeTotalDiv">
-		<p>상세코드
+		<p class="textStyle">상세코드
 		<div class="titleLine"></div>
 		<div class="codediv">
 			<form id="detailform">
@@ -97,12 +101,16 @@
 					</div>
 					</div>
 					<div class="occupieddiv" class="occupieddiv">
-						사용여부 <select name="detailOccupied" class="detailOccupied">
-							<option disabled="disabled" value="y">사용중
-							<option disabled="disabled" value="n">사용안함
-						</select>
-					</div>
+						<div>
+							사용여부 
+							<select name="detailOccupied" class="detailOccupied">
+								<option disabled="disabled" value="y">사용중
+								<option disabled="disabled" value="n">사용안함
+							</select>
+						</div>
 						<div id="invalid-detailOccupied"></div>
+					</div>
+						
 				</div>
 				<div class="widthLine"></div>
 				<div id="code-notice">코드 등록 또는 수정 시, 정보 입력 후 저장 버튼을 눌러주세요</div>

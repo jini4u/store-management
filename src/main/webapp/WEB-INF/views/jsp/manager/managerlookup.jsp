@@ -284,8 +284,7 @@
 						<div class="col-md-6 mb-3">
 							<label for="name">담당 센터명</label>
 							<div id="centerName" class="form-control"
-								aria-label="Sizing example input"
-								aria-describedby="inputGroup-sizing-sm"></div>
+								aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"></div>
 						</div>
 					</div>
 				</form>

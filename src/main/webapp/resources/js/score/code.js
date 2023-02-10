@@ -107,6 +107,10 @@ function addEvent(){
 		}
 		
 		$("#invalid-detailcontent").hide();
+		
+		$("#invalid-groupcode").empty();
+		$("#invalid-groupcontent").empty();
+		$("#invalid-groupOccupied").empty();
 
 		//ajax 요청해서 상세코드 내용 채우기
 		makeRequest(getDetailCodes, 'GET', '/score/getdetailcodes/'+groupTextArr[1]);
@@ -120,6 +124,10 @@ function addEvent(){
 		detailCodeInput.value = detailTextArr[1];
 		detailContentInput.value = detailTextArr[2];
 
+		$("#invalid-detailcode").empty();
+		$("#invalid-detailcontent").empty();
+		$("#invalid-detailOccupied").empty();
+		
 		//사용중 여부에 맞춰 selected 되도록
 		for(var i=0;i<detailSelect.length;i++){
 			if(detailSelect[i].value == detailTextArr[3].toLowerCase()){
@@ -142,14 +150,14 @@ function addEvent(){
 
 		if(groupcode.length == 0){
 			count +=1;
-			$("#invalid-groupcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>값을 입력해 주세요.</p>");
+			$("#invalid-groupcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>값을 입력해 주세요.</p>");
 			$("#invalid-groupcode").show();
 		}
 
 
 		if($("#groupcontent").val().length == 0) {
 			count +=1;
-			$("#invalid-groupcontent").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>값을 입력해주세요.</p>");
+			$("#invalid-groupcontent").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>값을 입력해주세요.</p>");
 			$("#invalid-groupcontent").show();
 		}
 
@@ -175,7 +183,7 @@ function addEvent(){
 			success: function(result){
 				if (result !=0 ) {
 					count+=1;
-					$("#invalid-groupcontent").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>중복된 값이 있습니다.</p>");
+					$("#invalid-groupcontent").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>중복된 값이 있습니다.</p>");
 					$("#invalid-groupcontent").show();
 
 				}
@@ -234,16 +242,15 @@ function addEvent(){
 		var detailcode = $("#detailcode").val();
 		var detailcontent = $("#detailcontent").val();
 
-		if(groupcode.length == 0){
+		if(detailcode.length == 0){
 			count +=1;
-			$("#invalid-detailcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>값을 입력해 주세요.</p>");
+			$("#invalid-detailcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>값을 입력해 주세요.</p>");
 			$("#invalid-detailcode").show();
 		}
-
-
+		
 		if($("#detailcontent").val().length == 0) {
 			count +=1;
-			$("#invalid-detailcontent").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>값을 입력해주세요.</p>");
+			$("#invalid-detailcontent").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>값을 입력해주세요.</p>");
 			$("#invalid-detailcontent").show();
 		}
 
@@ -269,7 +276,7 @@ function addEvent(){
 				success: function(result){
 					if (result !=0 ) {
 						count+=1;
-						$("#invalid-detailcontent").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>중복된 값이 있습니다.</p>");
+						$("#invalid-detailcontent").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>중복된 값이 있습니다.</p>");
 						$("#invalid-detailcontent").show();
 
 					}
@@ -461,14 +468,15 @@ $(".inputEnglish").keyup(function(){
 	//값 입력 범위 지정 및 문자 입력 제한
 	if (regexp.test(v)) {
 
-		$("#invalid-groupcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>대문자만 입력가능합니다</p>");
+		$("#invalid-groupcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>영어(대문자)만 입력가능합니다</p>");
 		$("#invalid-groupcode").show();
-		$(this).val(v.replace(regexp,''));
 	}
 	if(v.length >=3){
-		$("#invalid-groupcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>대문자 2자리만 입력가능합니다</p>");
+		$("#invalid-groupcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>대문자 2자리만 입력가능합니다</p>");
 		$("#invalid-groupcode").show();
-		$(this).val(v.replace(v.substr(2),''));
+	}
+	if(v.length == 0){
+		$("#invalid-groupcode").empty();
 	}
 	
 	$.ajax({
@@ -479,7 +487,7 @@ $(".inputEnglish").keyup(function(){
 
 			if (result !=0 ) {
 				count+=1;
-				$("#invalid-groupcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>중복된 값이 있습니다.</p>");
+				$("#invalid-groupcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>중복된 값이 있습니다.</p>");
 				$("#invalid-groupcode").show();	
 			}
 		}
@@ -491,11 +499,11 @@ $('.contentLimit').keyup(function(event) {
 	regexp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
 	groupcontent = $(this).val();
 	if (regexp.test(groupcontent)) {
-		$("#invalid-groupcontent").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>특수 문자는 입력할 수 없습니다.</p>");
+		$("#invalid-groupcontent").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>특수 문자는 입력할 수 없습니다.</p>");
 		$("#invalid-groupcontent").show();
-
-		$(this).val(groupcontent.replace(regexp, ''));
-
+	}
+	if($("#groupcontent").val().length==0){
+		$("#invalid-groupcontent").empty();
 	}
 
 });
@@ -505,10 +513,16 @@ $('.detailContentLimit').keyup(function(event) {
 	regexp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
 	groupcontent = $(this).val();
 	if (regexp.test(groupcontent)) {
-		$("#invalid-detailcontent").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>특수 문자는 입력할 수 없습니다.</p>");
+		$("#invalid-detailcontent").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>특수 문자는 입력할 수 없습니다.</p>");
 		$("#invalid-detailcontent").show();
-		$(this).val(groupcontent.replace(regexp, ''));
 	}
+/*	if(groupcontent.length()==0){
+		$("#invalid-detailcontent").empty();
+	}*/
+	if($("#detailcontent").val().length ==0){
+		$("#invalid-detailcontent").empty();
+	}
+	
 });
 
 
@@ -520,15 +534,15 @@ $(".inputNumber").keyup(function(){
 	regexp = /[^0-9.]/g;
 	
 	if (regexp.test(detailcode)) {
-		$("#invalid-detailcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>숫자만 입력할 수 있습니다.</p>");
+		$("#invalid-detailcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>숫자만 입력할 수 있습니다.</p>");
 		$("#invalid-detailcode").show();
-
-		$(this).val(detailcode.replace(regexp, ''));
 	}	
 	if(detailcode.length >=3){
-		$("#invalid-detailcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>숫자 2자리만 입력가능합니다</p>");
+		$("#invalid-detailcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>숫자 2자리만 입력가능합니다</p>");
 		$("#invalid-detailcode").show();
-		$(this).val(detailcode.replace(detailcode.substr(2),''));
+	}
+	if(detailcode.length == 0){
+		$("#invalid-detailcode").empty();
 	}
 	$.ajax({
 		url: "/score/overlapdetailcode/" + detailcode + "/"+ groupcode,
@@ -537,7 +551,7 @@ $(".inputNumber").keyup(function(){
 		success: function(result){
 			if (result !=0 ) {
 				count += 1;
-				$("#invalid-detailcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>중복된 값이 있습니다.</p>");
+				$("#invalid-detailcode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>중복된 값이 있습니다.</p>");
 				$("#invalid-detailcode").show();	
 			}
 		}
@@ -549,7 +563,7 @@ function checkForm() {
 	let checked = $("select[name=groupOccupied]").val();
 	if(checked == null) {
 
-		$("#invalid-groupOccupied").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>운영여부를 선택해 주세요.</p>");
+		$("#invalid-groupOccupied").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>운영여부를 선택해 주세요.</p>");
 		$("#invalid-groupOccupied").show();
 		return false;
 
@@ -561,7 +575,7 @@ function Checkform() {
 	let detailchecked = $("select[name=detailOccupied]").val();
 	if(detailchecked == null) {
 
-		$("#invalid-detailOccupied").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>운영여부를 선택해 주세요.</p>");
+		$("#invalid-detailOccupied").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>운영여부를 선택해 주세요.</p>");
 		$("#invalid-detailOccupied").show();
 		return false;
 
