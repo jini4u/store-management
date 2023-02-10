@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/notice/notice.css"/>
+<div class="menuRoute">
+		<img
+		src="${pageContext.request.contextPath}/resources/images/home.png">
+		<a href="/">&nbsp; Home &nbsp; ></a>
+		<a href="/board/list">&nbsp; 공지사항 &nbsp; > &nbsp;</a>	
+		<a href="${pageContext.request.contextPath}/notice/create" id="menuRoute_change">공지사항 작성 </a>
+		
+</div>
 <div class="titleBox">
 	<img src="${pageContext.request.contextPath}/resources/images/notification-bell.png">
 	<h2>공지사항</h2>
@@ -8,7 +16,7 @@
 	<article>
 		<div class="container noticediv" role="main">
 			<h3 class="subheading">공지사항 작성</h3>
-			<form name="form" id="create-form" role="form" method="post" action="${pageContext.request.contextPath}/board/create">
+			<form name="form" id="create-form" role="form" method="post" action="${pageContext.request.contextPath}/notice/create">
 			<div class="mb-3">
 				<label for="title">제목</label> 
 				<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요">

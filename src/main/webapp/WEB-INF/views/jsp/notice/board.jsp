@@ -7,7 +7,7 @@
 		<img
 		src="${pageContext.request.contextPath}/resources/images/home.png">
 		<a href="/">&nbsp; Home &nbsp; ></a>
-		<a href="/board/list">&nbsp; 공지사항</a>	
+		<a href="/notice/list">&nbsp; 공지사항</a>	
 </div>
 
 <div class="titleBox">
@@ -33,7 +33,7 @@
 			<tr class="noticeTr">
 				<td>${post.postno}</td>
 				<td class="noticeTitle"><a
-					href="${pageContext.request.contextPath}/board/update?postno=${post.postno}">${post.title}</a></td>
+					href="${pageContext.request.contextPath}/notice/update?postno=${post.postno}">${post.title}</a></td>
 				<td>${post.author}</td>
 				<td>${post.posttime}</td>
 			</tr>

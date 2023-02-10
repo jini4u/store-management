@@ -33,7 +33,7 @@
 		<div class="announcement">
 			<div class="announcementTitle">
 				<h2>공지사항</h2>
-				<a href="/board/list">>></a>
+				<a href="/notice/list">>></a>
 			</div>
 			<div class="line"></div>
 			<div>
