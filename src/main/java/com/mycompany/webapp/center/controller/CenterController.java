@@ -70,13 +70,13 @@ public class CenterController {
 		List<CenterVO> centerList = null;
 		if (keyword == null) {
 			int totalRows = centerService.countAllCenters();
-			pager = new Pager(10, 10, totalRows, pageNo);
+			pager = new Pager(12, 10, totalRows, pageNo);
 			centerList = centerService.centerList(pager);
 		}else {
 			String keywordType = "CN";
 			int totalRows = centerService.filterCountAllCenters(keyword, keywordType);
 			if (totalRows != 0) {
-				pager = new Pager(10, 10, totalRows, pageNo);
+				pager = new Pager(12, 10, totalRows, pageNo);
 				centerList = centerService.findCenter(pager, keyword, keywordType);
 				model.addAttribute("keyword", keyword);
 			}else {

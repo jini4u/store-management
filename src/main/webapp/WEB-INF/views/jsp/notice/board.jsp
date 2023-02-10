@@ -2,10 +2,25 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="/resources/css/notice/notice.css" />
+
+<div class="menuRoute">
+		<img
+		src="${pageContext.request.contextPath}/resources/images/home.png">
+		<a href="/">&nbsp; Home &nbsp; ></a>
+		<a href="/board/list">&nbsp; 공지사항</a>	
+</div>
+
 <div class="titleBox">
 	<img src="/resources/images/notification-bell.png">
 	<h2>공지사항</h2>
 </div>
+
+<div class="noticeInsertDiv">
+	<a href="create" id="createnotice">
+		<button class="pinkButton btn btn btn-primary btn-lg">글쓰기</button>
+	</a>
+</div>
+
 <div class="noticediv">
 	<table id="fullnoticetable" class="verticalTable">
 		<tr>
@@ -54,8 +69,7 @@
 	</div>
 
 </div>
-<a href="create" id="createnotice"><button
-		class="greyButton btn btn btn-primary btn-lg">글쓰기</button></a>
+
 
 <script
 	src="${pageContext.request.contextPath}/resources/js/notice/notice.js"></script>

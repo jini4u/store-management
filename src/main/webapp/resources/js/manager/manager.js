@@ -2,6 +2,7 @@ window.onload = function(){
 
 var mgrListTd;
 $(".updateBtn").click(function(){ 
+   $(".invalid-userEmail").empty();
    
    var str = ""
    var mgrTdArr = new Array();   // 배열 선언
@@ -138,23 +139,29 @@ $("#updatemgr").click(function (){
    }
 
    // 초기화 버튼
+   function inputValueReset() {
+	   let userCode = $("#userCode").val();
+	      $("#userCode").val(userCode);
+	      $("#userName").val('');
+	      $("#userBirth").val('');
+	      $("#userTel").val('');
+	      $("#userEmail").val('');
+	      $("#userTeamCode").val('');            
+	      $("#userHireDate").val('');
+	      $("#userResignDate").val('');  
+	      $("#invalid-userName").empty();
+	      $(".invalid-userEmail").empty();	
+	      $(".invalid-userTel").empty();
+		  $(".invalid-userTeamCode").empty();	 
+   };
+   
    $("#resetBtn").click(function (){
-      let userCode = $("#userCode").val();
-      $("#userCode").val(userCode);
-      $("#userName").val('');
-      $("#userBirth").val('');
-      $("#userTel").val('');
-      $("#userEmail").val('');
-      $("#userTeamCode").val('');            
-      $("#userHireDate").val('');
-      $("#userResignDate").val('');  
-      $("#invalid-userName").empty();
-      $("#invalid-useEmail").empty();	
-      $("#invalid-userTel").empty();
-	  $("#invalid-userTeamCode").empty();	  
-   });
-
-
+	   inputValueReset();
+	});
+   
+   $(".mgrInsertBtn").click(function (){
+	   inputValueReset();
+	});
    
    //담당자 등록
    $("#savemgr").click(function (){
@@ -203,7 +210,9 @@ $("#updatemgr").click(function (){
    let checkName = /^[가-힣]+$/;
    //이메일 형식만 가능
    let checkEmail = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-   let checkTel = /\d{3}-\d{3,4}-\d{4}/;
+   //전화번호 
+   let checkTel = /^\d{3}-\d{3,4}-\d{4}$/;
+   //팀코드: 3으로 시작하는 세자리만 가능
    let checkTeamCode = /3\d{2}/;
 
   //userName 유효성 검사
@@ -233,61 +242,125 @@ $("#updatemgr").click(function (){
    });
    
    //userEmail 유효성 검사
-   $("#userEmail").on("keyup",function(event){
+   $(".userEmailCheck").on("keyup",function(event){
+	   //현재 보이는 모달 선택
+	   var nowModal = $('.show')[0];
+	   var num;
+	   //모달 타이틀이 담당자 등록이면
+	   if(nowModal.innerText.split('\n')[0] == '담당자 등록'){
+		   num = 0;
+	   } else { //아니면 (수정이면)
+		   num = 1;
+	   }
+	   
+	   //보이는 모달에 해당하는 객체 선택 (0번이 등록모달, 1번이 수정모달)
+	   var emailValue = $(".userEmailCheck")[num].value;
+	   var invalidEmailDiv = $(".invalid-userEmail")[num];
 	   //빈 칸 일때
-	   if($("#userEmail").val().length == 0){
-			  $("#invalid-useEmail").empty();
+	   if(emailValue.length == 0){
+		   invalidEmailDiv.style.display = 'none';
 	   }else{
 		      //이메일 형식이 아닐때
-			  if(!checkEmail.test($("#userEmail").val())){
-				  $("#invalid-useEmail").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>이메일 형식이 올바르지 않습니다.</p>");
-				  $("#invalid-useEmail").show();
+			  if(!checkEmail.test(emailValue)){
+				  invalidEmailDiv.innerHTML = "<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>이메일 형식이 올바르지 않습니다.</p>";
+				  invalidEmailDiv.style.display = 'flex';
+//				  $(".invalid-userEmail").show();
 				  $("#savemgr").attr("disabled", true); //disabled 속성 적용
+				  $("#updatemgr").attr("disabled", true); 
 			  }else{//이메일 형식일때
-				  $("#invalid-useEmail").empty();	  
+				  invalidEmailDiv.style.display = 'none';  
 				  $("#savemgr").attr("disabled", false); //disabled 속성 해제
+				  $("#updatemgr").attr("disabled", false);
 			  }
-		   
 	   }   
    });
    
+
+
    //userTel 유효성 검사
-   $("#userTel").on("keyup",function(event){
+   $(".userTelCheck").on("keyup",function(event){
+	   //현재 보이는 모달 선택
+	   var nowModal = $('.show')[0];
+	   var num;
+	   //모달 타이틀이 담당자 등록이면
+	   if(nowModal.innerText.split('\n')[0] == '담당자 등록'){
+		   num = 0;
+	   } else { //아니면 (수정이면)
+		   num = 1;
+	   }
+	   
+	   //보이는 모달에 해당하는 객체 선택 (0번이 등록모달, 1번이 수정모달)
+	   var telValue = $(".userTelCheck")[num].value;
+	   var invalidTelDiv = $(".invalid-userTel")[num];
+	   
 	   //빈 칸 일때
-	   if($("#userTel").val().length == 0){
-			  $("#invalid-useEmail").empty();
+	   if(telValue.length == 0){
+		   invalidTelDiv.style.display = 'none';  	
 	   }else{
 		      //전화번호 형식이 아닐때
-			  if(!checkTel.test($("#userTel").val())){
-				  $("#invalid-userTel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>전화번호 형식이 올바르지 않습니다.</p>");
-				  $("#invalid-userTel").show();
+			  if(!checkTel.test(telValue)){
+				  invalidTelDiv.innerHTML = "<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>전화번호 형식이 올바르지 않습니다.</p>";
+				  invalidTelDiv.style.display = 'flex';
 				  $("#savemgr").attr("disabled", true); //disabled 속성 적용
+				  $("#updatemgr").attr("disabled", true); 
 			  }else{//전화번호 형식일때
-				  $("#invalid-userTel").empty();	  
+				  invalidTelDiv.style.display = 'none';  				  
 				  $("#savemgr").attr("disabled", false); //disabled 속성 해제
+				  $("#updatemgr").attr("disabled", false);
 			  }
 		   
 	   }   
    });
    
    //userTeamCode 유효성 검사
-   $("#userTeamCode").on("keyup",function(event){
+   $(".userTeamCodeCheck").on("keyup",function(event){
+	   //현재 보이는 모달 선택
+	   var nowModal = $('.show')[0];
+	   var num;
+	   //모달 타이틀이 담당자 등록이면
+	   if(nowModal.innerText.split('\n')[0] == '담당자 등록'){
+		   num = 0;
+	   } else { //아니면 (수정이면)
+		   num = 1;
+	   }
+	   
+	   //보이는 모달에 해당하는 객체 선택 (0번이 등록모달, 1번이 수정모달)
+	   var teamCodeValue = $(".userTeamCodeCheck")[num].value;
+	   var invalidTeamCodeDiv = $(".invalid-userTeamCode")[num];
+	   
 	   //빈 칸 일때
-	   if($("#userTeamCode").val().length == 0){
-			  $("#invalid-userTeamCode").empty();
+	   if(teamCodeValue.length == 0){
+			  invalidTeamCodeDiv.style.display = 'none';  	
 	   }else{
 		      //팀코드 형식이 아닐때
-			  if(!checkTeamCode.test($("#userTeamCode").val())){
-				  $("#invalid-userTeamCode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>300번대로 입력해 주세요.</p>");
-				  $("#invalid-userTeamCode").show();
+			  if(!checkTeamCode.test(teamCodeValue)){
+				  invalidTeamCodeDiv.innerHTML = "<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>300번대로 입력해 주세요.</p>";
+				  invalidTeamCodeDiv.style.display = 'flex';
 				  $("#savemgr").attr("disabled", true); //disabled 속성 적용
+				  $("#updatemgr").attr("disabled", true); 
 			  }else{//팀코드 형식일때
-				  $("#invalid-userTeamCode").empty();	  
+				  invalidTeamCodeDiv.style.display = 'none';  	
 				  $("#savemgr").attr("disabled", false); //disabled 속성 해제
+				  $("#updatemgr").attr("disabled", false);
 			  }
 		   
 	   }   
    });
+   
+   //퇴사일자 유효성 검사
+   $("#userResignDateInfo").change(function() {
+		let userHitrDate = new Date(document.querySelector("#userHireDateInfo").value);
+		let userResignDate = new Date(document.querySelector("#userResignDateInfo").value);
+		if(userHitrDate > userResignDate){
+			$("#invalid-userResignDate").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>입사일자 이후로 선택해주세요.</p>");
+			$("#invalid-userResignDate").show();
+		} else{
+			$("#invalid-userResignDate").empty();
+			$("#updatemgr").attr("disabled", false);
+		}
+	   
+   });
+
 }
 
 var excelBtn = document.getElementById('excel-download-button');
@@ -309,3 +382,11 @@ excelBtn.addEventListener('click', function(){
 		excel.click();
 	}, 'GET', '/manager/managerlistdownload?keywordType='+keywordType+'&keyword='+keyword);
 });
+
+/*생년월일 등록 제한*/
+var now_utc = Date.now() // 지금 날짜를 밀리초로
+//getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
+var timeOff = new Date().getTimezoneOffset()*60000; // 분단위를 밀리초로 변환
+//new Date(now_utc-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+document.getElementById("userBirth").setAttribute("max", today);

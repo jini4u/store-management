@@ -22,11 +22,12 @@ signin.addEventListener("click", () => {
  function loginBtnClick(){
 	 $("#invalid-login").empty();
 		if($("#userCode").val().length == 0){
-			console.log(message);
+			$("#invalid-login-message").hide();
 			$("#invalid-login").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>아이디를 입력해 주세요.</p>");
 			$("#invalid-login").show;
 			return false;
 		}else if($("#password").val().length == 0){
+			$("#invalid-login-message").hide();
 			$("#invalid-login").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>비밀번호를 입력해 주세요.</p>");
 			$("#invalid-login").show;
 			return false;
@@ -38,3 +39,17 @@ signin.addEventListener("click", () => {
 		} 
 		return false;
  };
+ 
+ $("#userCode").on("keyup",function(event){
+	 let checkUserCode = /^[0-9]+$/;
+	   if($("#userCode").val().length == 0){
+			  $("#invalid-login").empty();
+	   }else{
+			 if(!checkUserCode.test($("#userCode").val())){
+					$("#invalid-login-message").hide();
+					$("#invalid-login").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>숫자만 입력해 주세요.</p>");
+					$("#invalid-login").show;
+			 }
+	   }
+ });
+
