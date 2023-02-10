@@ -4,22 +4,14 @@
 <link rel="stylesheet" href="/resources/css/notice/notice.css" />
 
 <div class="menuRoute">
-<<<<<<< HEAD
-      <img
-      src="${pageContext.request.contextPath}/resources/images/home.png">
-      <a href="/">&nbsp; Home &nbsp; ></a>
-      <a href="/board/list">&nbsp; 공지사항</a>   
-=======
-		<img
-		src="${pageContext.request.contextPath}/resources/images/home.png">
-		<a href="/">&nbsp; Home &nbsp; ></a>
-		<a href="/notice/list">&nbsp; 공지사항</a>	
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
+	<img src="${pageContext.request.contextPath}/resources/images/home.png">
+	<a href="/">&nbsp; Home &nbsp; ></a> <a href="/notice/list">&nbsp;
+		공지사항</a>
 </div>
 
 <div class="titleBox">
-   <img src="/resources/images/notification-bell.png">
-   <h2>공지사항</h2>
+	<img src="/resources/images/notification-bell.png">
+	<h2>공지사항</h2>
 </div>
 
 <div class="noticeInsertDiv">
@@ -29,7 +21,6 @@
 </div>
 
 <div class="noticediv">
-<<<<<<< HEAD
 	<table id="fullnoticetable" class="verticalTable">
 		<tr>
 			<th>글번호</th>
@@ -47,26 +38,6 @@
 			</tr>
 		</c:forEach>
 	</table>
-=======
-   <table id="fullnoticetable" class="verticalTable">
-      <tr>
-         <th>글번호</th>
-         <th>제목</th>
-         <th>작성자</th>
-         <th>게시일</th>
-      </tr>
-      <c:forEach var="post" items="${allPosts}">
-         <tr class="noticeTr">
-            <td>${post.postno}</td>
-            <td class="noticeTitle"><a
-               href="${pageContext.request.contextPath}/board/update?postno=${post.postno}">${post.title}</a></td>
-            <td>${post.author}</td>
-            <td>${post.posttime}</td>
-         </tr>
-      </c:forEach>
-   </table>
->>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
-
 
    <div class="center-pagging">
       <ul class="pagination">
