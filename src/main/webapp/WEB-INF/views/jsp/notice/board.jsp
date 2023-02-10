@@ -4,10 +4,17 @@
 <link rel="stylesheet" href="/resources/css/notice/notice.css" />
 
 <div class="menuRoute">
+<<<<<<< HEAD
       <img
       src="${pageContext.request.contextPath}/resources/images/home.png">
       <a href="/">&nbsp; Home &nbsp; ></a>
       <a href="/board/list">&nbsp; 공지사항</a>   
+=======
+		<img
+		src="${pageContext.request.contextPath}/resources/images/home.png">
+		<a href="/">&nbsp; Home &nbsp; ></a>
+		<a href="/notice/list">&nbsp; 공지사항</a>	
+>>>>>>> branch 'master' of https://github.com/jini4u/store-management.git
 </div>
 
 <div class="titleBox">
@@ -39,6 +46,7 @@
          </tr>
       </c:forEach>
    </table>
+
 
    <div class="center-pagging">
       <ul class="pagination">

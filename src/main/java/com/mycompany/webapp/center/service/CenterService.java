@@ -262,13 +262,14 @@ public class CenterService implements ICenterService{
 		resultMap.put("fileNo", 0);
 		resultMap.put("userCode", 0);
 		resultMap.put("insert", 0);
+		resultMap.put("update", 0);
 
 		POIClass poi = new CenterPOI();
 		List<Object> VOList = poi.readWorkBook(file, startRow);
 		for(Object vo : VOList) {
 			CenterVO center = (CenterVO)vo;
 
-			//기존 데이터가 없으면 
+			//기존 데이터가 없으면  
 			if (center.getCenterCode() == 0) {
 				centerRepository.insertCenter(center);
 				System.out.println();
@@ -300,6 +301,7 @@ public class CenterService implements ICenterService{
 		resultMap.replace("userCode",0, fileInfoVO.getUploadUserCode());
 
 		fileRepository.insertFileUploadHistory(resultMap);
+		logger.info("파일 업로드"+resultMap+"");
 
 		try {
 			//이친구는 왜 하는거징? -> 업로드한 파일 데이터를  지정한 파일에 저장한다

@@ -300,7 +300,7 @@ function getcenterimages(){
 			fileDetail = '외부';
 		}
          imgHistoryTable.tBodies[0].innerHTML += '<tr><td class="noImageTd thead-centerPhoto-file">'+result[i].originalName+'</td><td class="thead-allcenterPhoto-file" id="centerDetail">'+fileDetail+'</td><td class="thead-allcenterPhoto-file">'+result[i].uploadUserName+'</td><td class="thead-allcenterPhoto-file">'+result[i].filePostDate+'</td><td class="thead-allcenterPhoto-file">'+result[i].fileModifyDate+'</td></tr>';
-         deleteModalBody.innerHTML += '<tr><td><input type="checkbox" name="deleteCheck" value="'+result[i].fileNo+'"></td><td>'+result[i].originalName+'</td></tr>';
+         deleteModalBody.innerHTML += '<tr><td><input type="checkbox" id="deleteCheckbox" name="deleteCheck" value="'+result[i].fileNo+'"></td><td><label for="deleteCheckbox">'+result[i].originalName+'</label></td></tr>';
       }
    }
 }//사진 선택 요청 시 실행되는 함수 끝

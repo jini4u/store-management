@@ -2,13 +2,13 @@
    pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/notice/notice.css"/>
 
+
 <div class="menuRoute">
       <img
       src="${pageContext.request.contextPath}/resources/images/home.png">
       <a href="/">&nbsp; Home &nbsp; ></a>
       <a href="/board/list">&nbsp; 공지사항 &nbsp; > &nbsp;</a>   
       <a href="${pageContext.request.contextPath}/board/create" id="menuRoute_change">공지사항 등록 </a>
-      
 </div>
 
 <div class="titleBox">
@@ -40,5 +40,6 @@
       	</div>
       </div>
    </article>
+
 
 <script src="${pageContext.request.contextPath}/resources/js/notice/notice.js"></script>

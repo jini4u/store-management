@@ -356,14 +356,4 @@ public class CenterController {
 		}
 		return fileName;
 	}
-/*	@RequestMapping("/ex")
-	public String main(Model m)throws Exception {
-		throw new NumberFormatException("예외가 발생");
-	}*/
-	@RequestMapping("/jusoPopup")
-    public String jusoPopup(@ModelAttribute("centerVO") CenterVO centerVO) throws Exception {
-        return "jsp/center/jusoPopup";
-
-    }
-	
 }
