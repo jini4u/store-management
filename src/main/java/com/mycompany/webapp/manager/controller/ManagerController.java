@@ -80,46 +80,26 @@ public class ManagerController {
 	/* author 은별
 	  담당자 등록 POST*/
 	@ResponseBody
-	@PostMapping(value="/managerInsert")
-	public List<ManagerVO> insertManager(@RequestParam(defaultValue="1") int pageNo,ManagerVO mgr) {		
-		managerService.insertManager(mgr);
-		int totalRows = managerService.countAllMgr();
-		Pager pager = new Pager(10, 10, totalRows, pageNo);
-		List<ManagerVO> managerList = managerService.selectManagerList(pager);
-		//비동기 처리를 하기 위해 결과값을 보내준다
-		return managerList;
-
-	}
-
-
-	/* author 은별
-	  담담자 수정 GET*/
-	@GetMapping(value="/managerupdate")
-	public  String managerUpdate() {
-		return "jsp/manager/managerlookup";
+	@PostMapping(value="/managerinsert")
+	public int insertManager(ManagerVO mgr) {		
+		return managerService.insertManager(mgr);
 	}
 
 	/* author 은별
 	  담담자 수정 POST*/
 	@ResponseBody
 	@PostMapping(value="/managerupdate")
-	public  ManagerVO managerUpdate(@RequestParam(defaultValue="1") int pageNo, ManagerVO mgr) {
-		logger.info(mgr.toString());
+	public ManagerVO managerUpdate(@RequestParam(defaultValue="1") int pageNo, ManagerVO mgr) {
 		managerService.managerUpdate(mgr);
-		int totalRows = managerService.countAllMgr();
-		Pager pager = new Pager(10, 10, totalRows, pageNo);
-		/*List<ManagerVO> managerList = managerService.selectManagerList(pager);
-		logger.info(managerList.toString());*/
 		return mgr;
 	}
 
 	/* author 은별
 	  담담자 검색 */
 	@GetMapping(value="/managersearch")
-	public String managerSearch(@RequestParam(defaultValue="1")int pageNo, @RequestParam("keyword") String keyword,
-			@RequestParam("keywordType") String keywordType,Model model){
+	public String managerSearch(@RequestParam(defaultValue="1") int pageNo, @RequestParam("keyword") String keyword,
+			@RequestParam("keywordType") String keywordType, Model model){
 		int keywordTotalRows = managerService.managerCountByKeyword(keyword, keywordType);
-		logger.info("검색11"+keywordTotalRows);
 		Pager searchPager = new Pager(10, 10, keywordTotalRows, pageNo);
 		model.addAttribute("pager", searchPager);
 
@@ -128,20 +108,20 @@ public class ManagerController {
 			model.addAttribute("managerList", mgrSearchList);
 			model.addAttribute("pager", searchPager);
 			model.addAttribute("mgrURL","/manager/managersearch");
-			logger.info("검색"+searchPager.toString());
 		}else {
 			model.addAttribute("pager", new Pager(1, 1, 1, 1));
 			model.addAttribute("managerListCheck", "empty");
 		}
 		model.addAttribute("keyword",keyword);
 		model.addAttribute("keywordType",keywordType);
-		logger.info(searchPager.toString());
 		return "jsp/manager/managerlookup";
-
 	}
 
 	/**
 	 * 담당자 맵핑 페이지로 이동 
+	 * @param {int} 페이지 번호
+	 * @param {String} 키워드
+	 * @param {String} 키워드 종류
 	 * @author 임유진
 	 * */
 	@RequestMapping(value="/managermapping")
@@ -195,7 +175,6 @@ public class ManagerController {
 			int centerCode = Integer.parseInt(item.get("centerCode"));			
 			result += managerService.cancelMapping(userCode, centerCode);
 		}
-
 		return result;
 	}
 
@@ -217,6 +196,7 @@ public class ManagerController {
 
 		return managerService.mapping(userCode, centerCode);
 	}
+	
 	/* author 은별
 	  담담자 엑셀 파일  히스토리  */
 	@RequestMapping(value="/managerfileuploadhistory" , method=RequestMethod.GET)
@@ -238,10 +218,17 @@ public class ManagerController {
 		//getAttribute 하면 object로 받아와지므로 캐스팅 해줘야 한다
 		int userCode = (int)session.getAttribute("userCode");
 		managerService.mgrUploadFileInfo(file, 3, userCode);
-		logger.info("엑셀 등록"+file.toString());
 		return "redirect: /manager/managerfileuploadhistory";
 	}
 
+	/**
+	 * 담당자 조회 결과 엑셀파일로 다운로드
+	 * @author 임유진
+	 * @param {int} 센터코드
+	 * @param {int} 년도
+	 * @param {int} 분기
+	 * @return {String} 생성된 파일 이름
+	 * */
 	@RequestMapping("/managerlistdownload")
 	public @ResponseBody String centerListDownload(@RequestParam(required=false) String keywordType, @RequestParam(required=false)String keyword) {
 		int totalRows = managerService.managerCountByKeyword(keyword, keywordType);

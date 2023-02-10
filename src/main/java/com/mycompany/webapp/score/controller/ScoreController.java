@@ -199,7 +199,7 @@ public class ScoreController {
 	 * */ 
 	
 	@RequestMapping(value="/insertscore", method=RequestMethod.POST)
-	public String insertsocre(int[] arrayScore, int[] arrayDetailCode,
+	public String insertScore(int[] arrayScore, int[] arrayDetailCode,
 								String[] arrayGroupCode, ScoreVO scoreVO, HttpServletRequest request, Model model) {
 
 		scoreVO.setArrayScore(arrayScore);

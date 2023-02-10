@@ -141,14 +141,12 @@ public class CenterController {
 	/**
 	 * 센터 정보 수정
 	 * @author 이소정
-	 * @param int 페이지 번호, model, centerVO
-	 * @return List<센터리스트>
+	 * @param {CenterVO} 수정할 센터VO
+	 * @return {CenterVO} 수정된 센터VO
 	 * */
 	@ResponseBody
 	@PostMapping(value ="/centerupdate")
-	public CenterVO centerUpdate(@RequestParam(defaultValue="1") int pageNo, Model model, CenterVO centerVO){
-		int totalRows = centerService.countAllCenters();
-		Pager pager = new Pager(10, 10, totalRows, pageNo);
+	public CenterVO centerUpdate(CenterVO centerVO){
 		centerService.centerUpdate(centerVO);
 		return centerVO;
 	}
@@ -158,7 +156,7 @@ public class CenterController {
 	 * 센터 정보 일괄 업로드
 	 * */
 	@GetMapping(value="/centerexcelupload")
-	public String excelUplaod(Model model, @RequestParam(defaultValue="1")int pageNo) {
+	public String excelUplaod(@RequestParam(defaultValue="1")int pageNo, Model model) {
 		int totalRows = centerService.countUploadHistory();
 		Pager pager = new Pager(10, 10, totalRows, pageNo);
 		model.addAttribute("pager", pager);
@@ -182,6 +180,7 @@ public class CenterController {
 	/**
 	 * 담당자가 지정되어있지 않은 센터 조회
 	 * @author 임유진
+	 * @param {int} 현재 페이지 번호
 	 * @return {List<맵핑가능센터>}
 	 * */
 	@RequestMapping("/availcenter")
@@ -262,18 +261,27 @@ public class CenterController {
 	 * @author 이소정
 	 * @return {int} 센터명 수
 	 * */
-	@PostMapping("/centerNameCheck")
+	@PostMapping("/centernamecheck")
 	@ResponseBody
 	public int centerNameCheck(@RequestParam String centerName) {
 		return centerService.centerNameCheck(centerName);
 	}
-	@PostMapping("/checkCenterTel")
+	
+	
+	@PostMapping("/checkcentertel")
 	@ResponseBody
 	public int checkCenterTel(@RequestParam String centerTel) {
 		return centerService.checkCenterTel(centerTel);
 
 	}
 
+	/**
+	 * 센터 조회 결과 엑셀파일로 다운로드
+	 * @author 임유진
+	 * @param {String} 키워드유형
+	 * @param {String} 키워드
+	 * @return {String} 생성된 파일 이름
+	 * */
 	@RequestMapping("/centerlistdownload")
 	public @ResponseBody String centerListDownload(@RequestParam(required=false) String keywordType, @RequestParam(required=false)String keyword) {
 		int totalRows = centerService.filterCountAllCenters(keyword, keywordType);
