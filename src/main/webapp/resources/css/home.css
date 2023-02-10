@@ -1,7 +1,6 @@
 @charset "UTF-8";
 .smallGroupBox {
 	display: flex;
-	padding: 20px 20px 0 20px;
 }
 
 .bigGroupBox {

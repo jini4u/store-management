@@ -32,7 +32,7 @@
 </head>
 <body class="totalbox">
 	<input type="hidden" id="userAuthority" value="${authority}"/>
-		<!-- Modal -->
+		<!-- 비밀번호 변경 Modal -->
 		<div class="modal fade " id="pwUpdate" role="dialog">
 			<!-- 사용자 지정 부분① : id명 -->
 			<div class="modal-dialog modal-sm modal-dialog-centered">
@@ -53,17 +53,17 @@
 							</div>
 							<div class="col-md-6 mb-3" style="max-width: 100%">
 								<label for="name">비밀번호</label> 
-								<input type="password"
+								<input type="password" id="userPassword"
 									 name="userPassword" class="form-control"
 									aria-label="Sizing example input"
 									aria-describedby="inputGroup-sizing-sm">
 							</div>
-						
+						<div id="invalid-password"></div>
 					</div>
 					<div class="modal-footer">
-						<input type="submit" class="pinkButton modal-pinkBtn" value="저장">
+						<input type="submit" class="pinkButton modal-pinkBtn" id="passwordUpdateBtn" value="저장">
 						</form>
-						<button type="button" class="greyButton modal-greyBtn" data-dismiss="modal">닫기</button>	
+						<button type="button" class="greyButton modal-greyBtn" id="pwCloseBtn" data-dismiss="modal">닫기</button>	
 					</div>
 				</div>
 			</div>
@@ -79,4 +79,6 @@
 		</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/layout.js"></script>
+
 </html>

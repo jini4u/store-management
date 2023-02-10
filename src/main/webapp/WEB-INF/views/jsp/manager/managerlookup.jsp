@@ -139,7 +139,7 @@
 <div class="modal fade" data-backdrop="static" id="insertModal"
 	role="dialog">
 	<!-- 사용자 지정 부분① : id명 -->
-	<div class="modal-dialog modal-dialog-centered">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
 		<!-- Modal content-->
 		<div class="modal-content p-6">
 			<div class="modal-header">
@@ -170,15 +170,15 @@
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="name">Email</label> 
-							<input type="text" name="userEmail" id="userEmail" class="form-control"
+							<input type="text" name="userEmail" id="userEmail" class="form-control userEmailCheck"
 								aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-							<div id="invalid-useEmail"></div>
+							<div class="invalid-userEmail"></div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="name">휴대전화번호</label> 
-							<input type="text" name="userTel" id="userTel" class="form-control"
+							<input type="text" name="userTel" id="userTel" class="form-control userTelCheck"
 								aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-							<div id="invalid-userTel"></div>
+							<div class="invalid-userTel"></div>
 							
 						</div>
 					</div>
@@ -191,10 +191,10 @@
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="name">팀코드</label> <input type="text"
-								name="userTeamCode" id="userTeamCode" class="form-control"
+								name="userTeamCode" id="userTeamCode" class="form-control userTeamCodeCheck"
 								aria-label="Sizing example input"
 								aria-describedby="inputGroup-sizing-sm">
-							<div id="invalid-userTeamCode"></div>
+							<div class="invalid-userTeamCode"></div>
 						</div>
 					</div>
 				</form>
@@ -211,10 +211,9 @@
 
 
 <!-- 수정 모달창 -->
-<div class="modal fade" data-backdrop="static" id="updateModal"
-	role="dialog">
+<div class="modal fade" data-backdrop="static" id="updateModal" role="dialog">
 	<!-- 사용자 지정 부분① : id명 -->
-	<div class="modal-dialog modal-dialog-centered">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
 		<!-- Modal content-->
 		<div class="modal-content p-6">
 			<div class="modal-header">
@@ -246,15 +245,17 @@
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="name">Email</label> <input type="text"
-								name="userEmail" id="userEmailInfo" class="form-control"
+								name="userEmail" id="userEmailInfo" class="form-control userEmailCheck"
 								aria-label="Sizing example input"
 								aria-describedby="inputGroup-sizing-sm">
+							<div class="invalid-userEmail"></div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="name">휴대전화번호</label> <input type="text"
-								name="userTel" id="userTelInfo" class="form-control"
+								name="userTel" id="userTelInfo" class="form-control userTelCheck"
 								aria-label="Sizing example input"
 								aria-describedby="inputGroup-sizing-sm">
+							<div class="invalid-userTel"></div>
 						</div>
 					</div>
 					<div class="row">
@@ -266,9 +267,10 @@
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="name">팀코드</label> <input type="text"
-								name="userTeamCode" id="userTeamCodeInfo" class="form-control"
+								name="userTeamCode" id="userTeamCodeInfo" class="form-control userTeamCodeCheck"
 								aria-label="Sizing example input"
 								aria-describedby="inputGroup-sizing-sm">
+							<div class="invalid-userTeamCode"></div>
 						</div>
 					</div>
 					<div class="row">
@@ -277,6 +279,7 @@
 								name="userResignDate" id="userResignDateInfo"
 								class="form-control" aria-label="Sizing example input"
 								aria-describedby="inputGroup-sizing-sm">
+							<div id="invalid-userResignDate"></div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="name">담당 센터명</label>

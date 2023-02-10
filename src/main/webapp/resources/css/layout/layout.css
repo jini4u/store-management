@@ -37,12 +37,15 @@ table{
 
 .leftbox {
    max-height: 1000px;
-   width: 230px;
+   width: 258px;
    background: #FFEEEE;
    flex-shrink: 0;
    z-index: 0;
    height: 960px;
    position: fixed;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 }
 
 .contentbox {
@@ -51,7 +54,7 @@ table{
    flex-direction: column;
    padding: 20px;
    max-width: 1486.33px;
-   margin-left: 13%;
+   margin-left: 15.5%;
 }
 /* 제목 디자인 */
 .titleBox {
@@ -336,4 +339,13 @@ table{
 	width: 24px;
 	color: #AACB73;
 }
-
+.fileName{
+	text-align: left;
+	width: 38%;
+}
+#invalid-password{
+	display: flex;
+    align-items: flex-start;
+    font-size: 15px;
+    margin-top: 7px;
+}

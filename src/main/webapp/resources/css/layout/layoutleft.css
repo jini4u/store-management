@@ -124,3 +124,9 @@ a {
 .userName:active{
 	background-color: #fff;
 }
+.dropdown-menu.show{
+	width: 231px;
+}
+.dropdown-menu{
+	width: 231px;
+}
