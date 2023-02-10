@@ -269,7 +269,7 @@ public class CenterService implements ICenterService{
 		for(Object vo : VOList) {
 			CenterVO center = (CenterVO)vo;
 
-			//기존 데이터가 없으면 
+			//기존 데이터가 없으면  
 			if (center.getCenterCode() == 0) {
 				centerRepository.insertCenter(center);
 				System.out.println();
