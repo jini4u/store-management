@@ -304,7 +304,7 @@ public class CenterService implements ICenterService{
 		logger.info("파일 업로드"+resultMap+"");
 
 		try {
-			//이친구는 왜 하는거징? -> 업로드한 파일 데이터를  지정한 파일에 저장한다
+			//업로드한 파일 데이터를  지정한 파일에 저장한다
 			file.transferTo(new File(filePathName));
 		} catch (Exception e) {
 			e.printStackTrace();

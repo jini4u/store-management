@@ -9,10 +9,6 @@
  * 2023.01.13	정윤선
  * @author 정윤선
  * **/
-function menuClick(event){
-	
-}
-
 $(function(){
 	 // 모달 버튼에 이벤트를 건다.
 	  $('#openModalBtn').on('click', function(){

@@ -33,7 +33,7 @@
 			<tr class="noticeTr">
 				<td>${post.postno}</td>
 				<td class="noticeTitle"><a
-					href="${pageContext.request.contextPath}/notice/update?postno=${post.postno}">${post.title}</a></td>
+					href="${pageContext.request.contextPath}/notice/update?postNo=${post.postno}">${post.title}</a></td>
 				<td>${post.author}</td>
 				<td>${post.posttime}</td>
 			</tr>

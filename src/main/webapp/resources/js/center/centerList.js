@@ -144,15 +144,11 @@ $("#center-left tr").click(function (){
 	$("#centerGuide").val(centGuide);
 
 	if ($("#centerOpeningDate").val().length == 0) {
-		console.log("나와2");
 		//readonly 적용
 		$("#centerClosingDate").attr("readonly", true);
 	}else if (!$("#centerOpeningDate").val().length == 0) {
-		console.log("나와");
 		$("#centerClosingDate").attr("readonly", false);
 	}
-	
-	console.log("클릭한 td데이터 :" + clickTd.text());
 
 	if (imgCenterCode !=null) {
 		$("#showPhoto").show();
@@ -243,11 +239,9 @@ $("#centerSavedBtn").click(function (){
 				error: error
 			});
 		}else{
-			//내일 안되면 여기 확인 대문자 소문자
 			let updateURL = "centerupdate";
 			let centercondition = document.querySelector("#centerCondition").value;
 			let pageNo = $("#now-page").text();
-			console.log("centerCondition"+centercondition);
 			$.ajax({
 				type : "POST",
 				url : updateURL,
@@ -424,7 +418,7 @@ function checkCenterName() {
 	if(!$('#invalid-centerName').html().includes('danger')){
 		var centerNameRegx = $("#centerName").val(); // id값이 "centerName"인 입력란의 값을 저장
 		$.ajax({
-			url : "centerNameCheck", //controller에서 요청 받을 주소
+			url : "centernamecheck", //controller에서 요청 받을 주소
 			type : 'post', //post방식으로 전달
 			data : {centerName : centerNameRegx},
 			success : function(result) { //컨트롤러에서 넘어온 result 값을 받는다
@@ -447,7 +441,7 @@ function checkCentertel() {
 	if (!$("#invalid-tel").html().includes('danger')) {
 		var centerTelRegx = $("#centerTel").val();
 		$.ajax({
-			url : "checkCenterTel",
+			url : "checkcentertel",
 			type : "post",
 			data : { centerTel : centerTelRegx},
 			success : function(result) {
