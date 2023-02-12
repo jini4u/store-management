@@ -42,42 +42,45 @@
 			<input type="hidden" name="centerCode" value="${param.centerCode}">
 			<select name="checkYear" id="yearbox" title="년도">년도
 			</select> <select name="checkSeason">
-				<option value="0">분기</option>
-				<c:if test='${param.checkSeason eq 4}'>
-					<option selected='selected' value="4">
-				</c:if>
-				<c:if test='${param.checkSeason ne 4}'>
-					<option value="4">
-				</c:if> 4 분기
-				</option>
-	
-				<c:if test='${param.checkSeason eq 3}'>
-					<option selected='selected' value="3">
-				</c:if>
-				<c:if test='${param.checkSeason ne 3}'>
-					<option value="3">
-				</c:if>3 분기
-				</option>
-	
-				<c:if test='${param.checkSeason eq 2}'>
-					<option selected='selected' value="2">
-				</c:if>
-				<c:if test='${param.checkSeason ne 2}'>
-					<option value="2">
-				</c:if>2 분기
-				</option>
-	
-	
-				<c:if test='${param.checkSeason eq 1}'>
-					<option selected='selected' value="1">
-				</c:if>
-				<c:if test='${param.checkSeason ne 1}'>
-					<option value="1">
-				</c:if> 1 분기
-				</option>
-			</select>
-			<button type="submit" class="pinkButton">찾기</button>
-		</form>
+					<option value="0">분기</option>
+					<c:if test='${param.checkSeason eq 4}'>
+						<option selected='selected' value="4">
+					</c:if>
+					<c:if test='${param.checkSeason ne 4}'>
+						<option value="4">
+					</c:if> 4 분기
+					</option>
+
+					<c:if test='${param.checkSeason eq 3}'>
+						<option selected='selected' value="3">
+					</c:if>
+					<c:if test='${param.checkSeason ne 3}'>
+						<option value="3">
+					</c:if>3 분기
+					</option>
+
+					<c:if test='${param.checkSeason eq 2}'>
+						<option selected='selected' value="2">
+					</c:if>
+					<c:if test='${param.checkSeason ne 2}'>
+						<option value="2">
+					</c:if>2 분기
+					</option>
+
+
+					<c:if test='${param.checkSeason eq 1}'>
+						<option selected='selected' value="1">
+					</c:if>
+					<c:if test='${param.checkSeason ne 1}'>
+						<option value="1">
+					</c:if> 1 분기
+					</option>
+				</select>
+				<button type="submit" class="pinkButton">찾기</button>
+				<button id="excel-download-button" class="greyButton">엑셀로
+					다운로드</button>
+				<a id="excel" href="" download=""></a>
+			</form>
 	</div>
 </div>
 
@@ -165,8 +168,6 @@
 
 	<!--  수정 점수등록 버튼 -->
 	<div id="btnclick">
-		<button id="excel-download-button" class="greyButton">파일 다운</button>
-		<a id="excel" href="" download=""></a>
 		<div id="btn_group">
 			<button type="submit" class="pinkButton" id="score-update-button">수정</button>
 			
