@@ -11,12 +11,11 @@
 	font-size: 15px;
 	padding: 6px 10px;
 }
-#invalid-mgrFile{
+#invalid-mgrFile, #centerExcelFile{
 	margin-right: 15px;
     display: flex;
     align-items: center;
 }
-.fileupload_input{
-	display: flex;
-    align-items: center;
+.danger_p {
+    font-size: 15px;
 }

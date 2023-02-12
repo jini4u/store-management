@@ -21,30 +21,9 @@
 .carousel{
 width: 700px;
 }
-/* .slideitem div {
-	width: 700px;
-	height: 350px;
-	max-width: 100%;
+.carousel-inner{
+    border-radius: 20px;
 }
-.slidebox {
-	max-width: 700px;
-	width: 100%;
-	margin: 0 auto;
-}
-
-.slidebox .slidelist {
-	white-space: nowrap;
-	font-size: 0;
-	overflow: hidden;
-}
-
-.slidebox .slideitem {
-	position: relative;
-	display: inline-block;
-	vertical-align: middle;
-	width: 100%;
-	transition: all .35s;
-} */
 
 /*공지사항*/
 .announcement {
