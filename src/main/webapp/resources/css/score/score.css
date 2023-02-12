@@ -188,29 +188,6 @@ a[tabindex]:focus {
     outline: none;
 } 
 
-/* button {
-	background-color: #EDEDED;
-	border: none;
-	width: 100px;
-	border-radius: 4px 4px 0px 0px;
-	margin-right: 1px;
-	font-size: 1em;
-}
-button.menubtn.clicked {
-    background: #fff;
-    border-top: 5px solid #E26868;
-	z-index: 2;
-    position: relative;
-    margin-bottom: -1px;
-    font-weight: 700;
-} */
-/* .no-center{
- 	color: #FF8787;
-	font-size: larger;
-	border: none;
-	padding: 4%;
-	margin-left: 41%;
-} */
 .no-center{
     display: flex;
     align-items: center;
@@ -245,7 +222,7 @@ button.menubtn.clicked {
 	margin-top: 15px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+
 }
 .centerNameGroup{
 	display: flex;
