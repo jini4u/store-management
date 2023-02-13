@@ -132,7 +132,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" id="checkForm">
 			<div class="modal-header">
-				<h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+				<h5 class="modal-title" id="staticBackdropLabel">사진 등록</h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close" id="centerPhoto-close">x</button>
 			</div>
@@ -190,7 +190,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Modal title</h5>
+				<h5 class="modal-title">사진 정보 수정</h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -231,7 +231,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+				<h5 class="modal-title" id="staticBackdropLabel">사진 삭제</h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
