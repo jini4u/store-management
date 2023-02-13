@@ -2,12 +2,12 @@
 .year_and_quarter{
     display: inline-block;
     float: right;
-
-   
+    margin-left: 53%;
 }
 .year_and_quarter > form{
 display: inline-block;
     size:5px;
+        
 }
 
 /*수정 점수등록 버튼*/
@@ -40,11 +40,6 @@ display: inline-block;
     padding: 10px;
   
   }
-
-
-
-
-
 
 /*scoreupload*/
 
@@ -91,68 +86,6 @@ table.scoretable td {
 	font-size: 15px;
 	padding: 6px 10px;
 }
-
-
-/* .clikedBtn {
-	background-color: #EDEDED;
-	border: 2px solid #EDEDED;
-	color: #fff;
-	border-radius: 4px;
-	display: inline-block;
-	cursor: pointer;
-	font-size: 18px;
-	padding: 6px 25px;
-	text-decoration: none;
-	font-weight: 550;
-	text-decoration: none !important;
-} */
-
- /* 마우스 올렸을때 파란색 변하지 않도록, 하단 줄 뜨지않도록 조정 */
-/*  .clikedBtn:hover{
-text-decoration:none!important ;
- } */
-
-/* click했을때 변할 버튼, 글자색 지정 
- ** js필요
- ** 
- */
-/*  .clicked  {
-	background-color: #E26868;
-	border: 2px solid #E26868;
-	color: #fff;
-	border-radius: 4px;
-	display: inline-block;
-	cursor: pointer;
-	font-size: 18px;
-	padding: 6px 25px;
-	text-decoration: none;
-	font-weight: 550; 
-	
-}  */
-/* .clicked {
-    background: #fff;
-    border-top: 5px solid #E26868;
-    z-index: 2;
-    position: relative;
-    margin-bottom: -1px;
-    font-weight: 700;
-    color: black;
-	border-radius: 4px;
-	display: inline-block;
-	cursor: pointer;
-	font-size: 18px;
-	padding: 6px 25px;
-	text-decoration: none;
-	font-weight: 550;
-	text-decoration: none !important;
-} */
-/* .clicked:hover {
-	text-decoration: none !important;
-	background-color: #fff;
-	color: #E26868;
-	border: 2px solid #E26868;
-} */
-
 
 .clikedBtn {
 	background-color: #EDEDED;
@@ -216,8 +149,6 @@ a[tabindex]:focus {
 	margin-left: 70%;
 }
 
-
-
 .centerName_search_btn{
 	margin-top: 15px;
     display: flex;
@@ -229,4 +160,5 @@ a[tabindex]:focus {
 }
 #btnclick{
     margin-top: 20px;
+    margin-left: 85%;
 }
