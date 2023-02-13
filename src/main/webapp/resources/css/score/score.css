@@ -130,6 +130,7 @@ a[tabindex]:focus {
 .no-center1{
 	margin: 0;
  	font-size: large;
+ 	color: #E26868;
 }
 .widthLine{
     margin-top: 3%;
@@ -160,5 +161,11 @@ a[tabindex]:focus {
 }
 #btnclick{
     margin-top: 20px;
+<<<<<<< HEAD
     margin-left: 85%;
+
+}
+.pass_img{
+	width: 27px;
+
 }

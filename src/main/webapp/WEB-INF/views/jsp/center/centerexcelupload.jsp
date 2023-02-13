@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 엑셀 파일 다운로드 하기 위해 사용 -->
- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/score/score.css" /> 
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/manager/managerFileUpload.css">
 
 <div class="menuRoute">
 	<img src="${pageContext.request.contextPath}/resources/images/home.png">
@@ -20,13 +21,15 @@
 	<a
 		href='${pageContext.request.contextPath}/resources/templates/template_센터.xlsx'
 		download="" class="greyButton">양식파일 다운로드</a>
-	<form id="file-upload-form" enctype="multipart/form-data"
-		action="centerexcelupload" method="post">
-		<input type="hidden" name="userCode" value="${ssesionScope.userCode}">
-		<input type="file" id="centerInputExcelFile" name="centerExcelFile" accept=".xlsx, .xls">
-		<input type="submit" class="pinkButton" id="centerExcelInsertBtn" value="UPLOAD">
+	<div class="fileupload_input">	
 		<div id="centerExcelFile"></div>
-	</form>
+		<form id="file-upload-form" enctype="multipart/form-data"
+			action="centerexcelupload" method="post">
+			<input type="hidden" name="userCode" value="${ssesionScope.userCode}">
+			<input type="file" id="centerInputExcelFile" name="centerExcelFile" accept=".xlsx, .xls">
+			<input type="submit" class="pinkButton" id="centerExcelInsertBtn" value="UPLOAD">
+		</form>
+	</div>
 	<!-- <button id="file-upload-button" class="pinkButton">업로드</button> -->
 </div>
 

@@ -181,7 +181,7 @@
 </c:if>
 <c:if test="${(param.centerCode eq -1)}">
 <div class="no-center">
-<image src='/resources/images/center/icons_care.png' class='pass_img'><p class="no-center1">매핑된 센터가 없습니다.</p></image>
+<image src='/resources/images/center/icons_care.png' class='pass_img'><p class="no-center1">&nbsp;매핑된 센터가 없습니다.</p></image>
 </div>
 <div class="widthLine"></div>
 
@@ -234,10 +234,11 @@
 						</table>
 					</div>
 				<div class="modal-footer">
+					<div id="invalid-insertscore"></div>
 					<button type="submit" class=" pinkButton" id="modal-insertBtn">확인</button>
 					<button class="greyButton" data-dismiss="modal">취소</button>
 				</div>
-				<div id="invalid-insertscore"></div>
+				
 			</form>
 			
 			</div>
