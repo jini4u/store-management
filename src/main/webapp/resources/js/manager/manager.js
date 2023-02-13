@@ -186,15 +186,12 @@ $("#updatemgr").click(function (){
          userHireDate : userHireDate
       };
       
-      console.log(data);
-      
       $.ajax({
          type:"POST",
-         url: "/manager/managerInsert",
+         url: "/manager/managerinsert",
          data: data,
          success: function(result) {
         	 location.href = "/manager/managerlist";  
-          /*  $("#mgrList").html(str);*/
          },
          error: function() {
             alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);

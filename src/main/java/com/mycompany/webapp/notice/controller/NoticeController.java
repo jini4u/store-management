@@ -59,8 +59,8 @@ public class NoticeController {
 	 * @return 글수정 뷰페이지
 	 * */
 	@RequestMapping(value="/update", method=RequestMethod.GET)
-	public String updatePost(@RequestParam int postno, Model model) {
-		PostVO post = noticeService.getPost(postno);
+	public String updatePost(@RequestParam int postNo, Model model) {
+		PostVO post = noticeService.getPost(postNo);
 		String postContent = post.getContent();
 		int rows = postContent.split("\n").length;
 		model.addAttribute("post", post);
@@ -87,8 +87,8 @@ public class NoticeController {
 	 * @return redirect: 글목록
 	 * */
 	@RequestMapping("/delete")
-	public String deletePost(@RequestParam int postno, Model model) {
-		noticeService.deletePost(postno);
+	public String deletePost(@RequestParam int postNo, Model model) {
+		noticeService.deletePost(postNo);
 		return "redirect: /notice/list";
 	}
 }

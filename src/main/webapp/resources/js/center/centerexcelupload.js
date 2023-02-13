@@ -8,7 +8,7 @@ function excelCenterSubmit() {
 		$("#centerExcelInsertBtn").attr("disabled", true);
 	}else{
 		if (!$("#centerInputExcelFile").val().match(fileForm)) {
-			$("#centerExcelFile").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>xlsx, xls 파일만 업로드 가능합니다</p>");
+			$("#centerExcelFile").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>XLSX, XLS 파일만 업로드 가능합니다</p>");
 			$("#centerExcelFile").show();
 			$("#centerExcelInsertBtn").attr("disabled", true);
 		}else{

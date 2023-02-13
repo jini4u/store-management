@@ -9,10 +9,6 @@
  * 2023.01.13	정윤선
  * @author 정윤선
  * **/
-function menuClick(event){
-	
-}
-
 $(function(){
 	 // 모달 버튼에 이벤트를 건다.
 	  $('#openModalBtn').on('click', function(){
@@ -28,7 +24,7 @@ $(function(){
 
 //점수리스트 마우스 오버시 색 변화
 function changeColor(){
-	$('#scoreListTable tr').mouseover(function(){
+	$('.scoreListTableTr').mouseover(function(){
 		$(this).addClass('changeColor');
 	}).mouseout(function() {
 		$(this).removeClass('changeColor');
@@ -83,7 +79,7 @@ function setYearBox(){
 //scoreUpdate
 	
 var updateBtn = document.getElementById("score-update-button");
-if(urlParams.get("checkYear")!=null && urlParams.get("checkSeason")!=null){
+if(urlParams.get("checkYear") > 0 || urlParams.get("checkSeason") > 0){
 	updateBtn.style.display = 'block';
 } else {
 	updateBtn.style.display = 'none';
@@ -120,7 +116,7 @@ function modalScore(){
 		}
 	})
 	if(!insertBtn) /*alert("값을 입력해주세요!");*/
-	$("#invalid-insertscore").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>값을 입력해주세요!</p>");
+	$("#invalid-insertscore").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>값을 입력해주세요.</p>");
 	$("#invalid-insertscore").show();
 	return insertBtn;
 }

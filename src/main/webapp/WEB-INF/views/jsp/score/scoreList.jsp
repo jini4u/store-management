@@ -17,77 +17,82 @@
 		src="${pageContext.request.contextPath}/resources/images/checklist.png">
 	<h2>센터 점수 조회</h2>
 </div>
-<c:forEach items="${centerName}" var="center" > 
 
-
-	<c:if test="${center.centerCode eq param.centerCode}">
-		<a class="clikedBtn clicked" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
-	</c:if>
-	<c:if test="${center.centerCode ne param.centerCode}">
-		<a class="clikedBtn" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
-	</c:if>
-
-</c:forEach>
-
-
-<c:if test="${(param.centerCode eq -1) == false}">
-<div class="year_and_quarter">
-
-	<!-- 년도,분기 찾기 -->
-
-	<form action="${pageContext.request.contextPath}/score/scorelist"
-		name="score" method="get">
-		<input type="hidden" name="centerCode" value="${param.centerCode}">
-		<select name="checkYear" id="yearbox" title="년도">년도
-		</select> <select name="checkSeason">
-			<option value="0">분기</option>
-			<c:if test='${param.checkSeason eq 4}'>
-				<option selected='selected' value="4">
+<div class="centerName_search_btn">
+	<div class="centerNameGroup">
+		<c:forEach items="${centerName}" var="center" > 
+			<c:if test="${center.centerCode eq param.centerCode}">
+				<a class="clikedBtn clicked" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
 			</c:if>
-			<c:if test='${param.checkSeason ne 4}'>
-				<option value="4">
-			</c:if> 4 분기
-			</option>
-
-			<c:if test='${param.checkSeason eq 3}'>
-				<option selected='selected' value="3">
+			<c:if test="${center.centerCode ne param.centerCode}">
+				<a class="clikedBtn" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
 			</c:if>
-			<c:if test='${param.checkSeason ne 3}'>
-				<option value="3">
-			</c:if>3 분기
-			</option>
-
-			<c:if test='${param.checkSeason eq 2}'>
-				<option selected='selected' value="2">
-			</c:if>
-			<c:if test='${param.checkSeason ne 2}'>
-				<option value="2">
-			</c:if>2 분기
-			</option>
+		
+		</c:forEach>
+	</div>
 
 
-			<c:if test='${param.checkSeason eq 1}'>
-				<option selected='selected' value="1">
-			</c:if>
-			<c:if test='${param.checkSeason ne 1}'>
-				<option value="1">
-			</c:if> 1 분기
-			</option>
-		</select>
-		<button type="submit" class="pinkButton">찾기</button>
-	</form>
+	<c:if test="${(param.centerCode eq -1) == false}">
+	<div class="year_and_quarter">
+	
+		<!-- 년도,분기 찾기 -->
+	
+		<form action="${pageContext.request.contextPath}/score/scorelist"
+			name="score" method="get">
+			<input type="hidden" name="centerCode" value="${param.centerCode}">
+			<select name="checkYear" id="yearbox" title="년도">년도
+			</select> <select name="checkSeason">
+					<option value="0">분기</option>
+					<c:if test='${param.checkSeason eq 4}'>
+						<option selected='selected' value="4">
+					</c:if>
+					<c:if test='${param.checkSeason ne 4}'>
+						<option value="4">
+					</c:if> 4 분기
+					</option>
+
+					<c:if test='${param.checkSeason eq 3}'>
+						<option selected='selected' value="3">
+					</c:if>
+					<c:if test='${param.checkSeason ne 3}'>
+						<option value="3">
+					</c:if>3 분기
+					</option>
+
+					<c:if test='${param.checkSeason eq 2}'>
+						<option selected='selected' value="2">
+					</c:if>
+					<c:if test='${param.checkSeason ne 2}'>
+						<option value="2">
+					</c:if>2 분기
+					</option>
+
+
+					<c:if test='${param.checkSeason eq 1}'>
+						<option selected='selected' value="1">
+					</c:if>
+					<c:if test='${param.checkSeason ne 1}'>
+						<option value="1">
+					</c:if> 1 분기
+					</option>
+				</select>
+				<button type="submit" class="pinkButton">찾기</button>
+				<button id="excel-download-button" class="greyButton">엑셀로
+					다운로드</button>
+				<a id="excel" href="" download=""></a>
+			</form>
+	</div>
 </div>
-
 
 
 <!-- 점수리스트 테이블 -->
 <form action="${pageContext.request.contextPath}/score/updatescore"
-	method="post" name="InsertModal" >
+	method="post" name="InsertModal"  class="scoreTableForm">
 	<input type="hidden" name="centerCode" value="${param.centerCode}" >
 
 
 	<c:if test="${empty scoreList}">
-		<table class="verticalTable" id="scoreListTable" border="1">
+		<table class="verticalTable" id="scoreListTable">
 			<tr>
 				<th>점검년도</th>
 				<th>분기</th>
@@ -101,7 +106,7 @@
 		</table>
 	</c:if>
 	<c:if test="${not empty scoreList}">
-		<table class="verticalTable" id="scoreListTable" border="1">
+		<table class="verticalTable" id="scoreListTable">
 			<tr>
 				<th>점검년도</th>
 				<th>분기</th>
@@ -111,7 +116,7 @@
 			</tr>
 
 			<c:forEach items="${scoreList}" var="scoreCode">
-				<tr>
+				<tr class="scoreListTableTr">
 					<td class="score_td">${scoreCode.checkYear}</td>
 					<td class="score_td">${scoreCode.checkSeason}</td>
 					<td class="score_td">${scoreCode.checkGroupContent}</td>
@@ -163,8 +168,6 @@
 
 	<!--  수정 점수등록 버튼 -->
 	<div id="btnclick">
-		<button id="excel-download-button" class="greyButton">파일 다운</button>
-		<a id="excel" href="" download=""></a>
 		<div id="btn_group">
 			<button type="submit" class="pinkButton" id="score-update-button">수정</button>
 			
@@ -178,7 +181,7 @@
 </c:if>
 <c:if test="${(param.centerCode eq -1)}">
 <div class="no-center">
-<image src='/resources/images/center/icons_care.png' class='pass_img'><p class="no-center1">매핑된 센터가 없습니다.</p></image>
+<image src='/resources/images/center/icons_care.png' class='pass_img'><p class="no-center1">&nbsp;매핑된 센터가 없습니다.</p></image>
 </div>
 <div class="widthLine"></div>
 
@@ -231,10 +234,11 @@
 						</table>
 					</div>
 				<div class="modal-footer">
+					<div id="invalid-insertscore"></div>
 					<button type="submit" class=" pinkButton" id="modal-insertBtn">확인</button>
 					<button class="greyButton" data-dismiss="modal">취소</button>
 				</div>
-				<div id="invalid-insertscore"></div>
+				
 			</form>
 			
 			</div>

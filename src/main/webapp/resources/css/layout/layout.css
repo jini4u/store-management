@@ -349,3 +349,7 @@ table{
     font-size: 15px;
     margin-top: 7px;
 }
+.fileupload_input{
+	display: flex;
+    align-items: center;
+}
