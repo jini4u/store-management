@@ -100,8 +100,6 @@ $("#updatemgr").click(function (){
              if(results.userResignDate) {
                 userResignDate =  mgrListTd.eq(7).text(results.userResignDate);
              }
-             
-            alert("수정 성공");
             changeColor();
          },
 
@@ -153,6 +151,9 @@ $("#updatemgr").click(function (){
 	      $(".invalid-userEmail").empty();	
 	      $(".invalid-userTel").empty();
 		  $(".invalid-userTeamCode").empty();	 
+		  $("#invalid-userBirth").empty();	
+		  $("#invalid-userHireDate").empty();	
+		  
    };
    
    $("#resetBtn").click(function (){
@@ -220,14 +221,16 @@ $("#updatemgr").click(function (){
 	   }else{
 		      //담당자명이 한글이 아닐때
 			  if(!checkName.test($("#userName").val())){
-				  $("#invalid-userName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>한글만 입력해 주세요.</p>");
+				  $("#invalid-userName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+				  		"<p class='danger_p'>한글만 입력해 주세요.</p>");
 				  $("#invalid-userName").show();
 				  $("#savemgr").attr("disabled", true); //disabled 속성 적용
 			  }else{//담당자명이 한글일때
 				  $("#invalid-userName").empty();
 				  //담당자명 길이 맞지 않을때
 				  if($("#userName").val().length >=10 || $("#userName").val().length <= 1){
-					  $("#invalid-userName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>담당자명 2~9자 사이로 입력해 주세요.</p>");
+					  $("#invalid-userName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+					  		"<p class='danger_p'>담당자명 2~9자 사이로 입력해 주세요.</p>");
 					  $("#invalid-userName").show();
 					  $("#savemgr").attr("disabled", true); //disabled 속성 적용
 				  }else{ //담당자명 길이 맞을때
@@ -237,6 +240,14 @@ $("#updatemgr").click(function (){
 		   
 	   }   
    });
+   
+   //userBirth 유효성 검사
+   $("#userBirth").change(function() {
+	   if($("#userBirth").val() != null){
+			$("#invalid-userBirth").empty();
+	   }
+   });
+   
    
    //userEmail 유효성 검사
    $(".userEmailCheck").on("keyup",function(event){
@@ -259,9 +270,9 @@ $("#updatemgr").click(function (){
 	   }else{
 		      //이메일 형식이 아닐때
 			  if(!checkEmail.test(emailValue)){
-				  invalidEmailDiv.innerHTML = "<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>이메일 형식이 올바르지 않습니다.</p>";
+				  invalidEmailDiv.innerHTML = "<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+				  		"<p class='danger_p'>이메일 형식이 올바르지 않습니다.</p>";
 				  invalidEmailDiv.style.display = 'flex';
-//				  $(".invalid-userEmail").show();
 				  $("#savemgr").attr("disabled", true); //disabled 속성 적용
 				  $("#updatemgr").attr("disabled", true); 
 			  }else{//이메일 형식일때
@@ -296,7 +307,8 @@ $("#updatemgr").click(function (){
 	   }else{
 		      //전화번호 형식이 아닐때
 			  if(!checkTel.test(telValue)){
-				  invalidTelDiv.innerHTML = "<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>전화번호 형식이 올바르지 않습니다.</p>";
+				  invalidTelDiv.innerHTML = "<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+				  		"<p class='danger_p'>'-'를 포함한 올바른 형식을 입력해주세요.</p>";
 				  invalidTelDiv.style.display = 'flex';
 				  $("#savemgr").attr("disabled", true); //disabled 속성 적용
 				  $("#updatemgr").attr("disabled", true); 
@@ -331,7 +343,8 @@ $("#updatemgr").click(function (){
 	   }else{
 		      //팀코드 형식이 아닐때
 			  if(!checkTeamCode.test(teamCodeValue)){
-				  invalidTeamCodeDiv.innerHTML = "<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>300번대로 입력해 주세요.</p>";
+				  invalidTeamCodeDiv.innerHTML = "<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+				  		"<p class='danger_p'>300번대로 입력해 주세요.</p>";
 				  invalidTeamCodeDiv.style.display = 'flex';
 				  $("#savemgr").attr("disabled", true); //disabled 속성 적용
 				  $("#updatemgr").attr("disabled", true); 
@@ -344,12 +357,21 @@ $("#updatemgr").click(function (){
 	   }   
    });
    
+   
+   //userHireDate 유효성 검사
+   $("#userHireDate").change(function() {
+	   if($("#userHireDate").val() != null){
+			$("#invalid-userHireDate").empty();
+	   }
+   });
+   
    //퇴사일자 유효성 검사
    $("#userResignDateInfo").change(function() {
 		let userHitrDate = new Date(document.querySelector("#userHireDateInfo").value);
 		let userResignDate = new Date(document.querySelector("#userResignDateInfo").value);
 		if(userHitrDate > userResignDate){
-			$("#invalid-userResignDate").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>입사일자 이후로 선택해주세요.</p>");
+			$("#invalid-userResignDate").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+					"<p class='danger_p'>입사일자 이후로 선택해주세요.</p>");
 			$("#invalid-userResignDate").show();
 		} else{
 			$("#invalid-userResignDate").empty();
@@ -357,6 +379,70 @@ $("#updatemgr").click(function (){
 		}
 	   
    });
+   
+   //등록 모달창에 저장 버튼 클릭 시 
+   $("#savemgr").click(function(){ 
+/*	   if($("#userName").val().length == 0 || $("#userBirth").val().length == 0 || $("#userEmail").val().length == 0
+			   || $("#userTel").val().length == 0  || $("#userHireDate").val().length == 0 || $("#userTeamCode").val().length == 0){
+		  $("#invalid-userName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+		  "<p class='danger_p'>값을 입력해 주세요.</p>");
+		  $("#invalid-userName").show();
+		  
+			$("#invalid-userBirth").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+			 "<p class='danger_p'>값을 입력해 주세요.</p>");
+			$("#invalid-userBirth").show();
+			
+			$(".invalid-userEmail").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+			 "<p class='danger_p'>값을 입력해 주세요.</p>");
+			$(".invalid-userEmail").show();
+			
+			$(".invalid-userTel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+			 "<p class='danger_p'>값을 입력해 주세요.</p>");
+			$(".invalid-userTel").show();
+			
+			$("#invalid-userHireDate").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+			 "<p class='danger_p'>값을 입력해 주세요.</p>");
+			$("#invalid-userHireDate").show();
+			
+			$(".invalid-userTeamCode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+			 "<p class='danger_p'>값을 입력해 주세요.</p>");
+			$(".invalid-userTeamCode").show();
+	   }
+	   */
+	   
+	   if($("#userName").val().length == 0 ){
+			  $("#invalid-userName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+			  "<p class='danger_p'>값을 입력해 주세요.</p>");
+			  $("#invalid-userName").show();
+	   }
+	   if( $("#userBirth").val().length == 0){
+			$("#invalid-userBirth").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+			 "<p class='danger_p'>값을 입력해 주세요.</p>");
+			$("#invalid-userBirth").show();   
+	   }
+	   if($("#userEmail").val().length == 0){
+			$(".invalid-userEmail").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+			 "<p class='danger_p'>값을 입력해 주세요.</p>");
+			$(".invalid-userEmail").show();
+	   }
+	   if($("#userTel").val().length == 0){
+		 	$(".invalid-userTel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+			 "<p class='danger_p'>값을 입력해 주세요.</p>");
+			$(".invalid-userTel").show();  
+	   }
+	   if($("#userHireDate").val().length == 0){
+		  	$("#invalid-userHireDate").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+			 "<p class='danger_p'>값을 입력해 주세요.</p>");
+			$("#invalid-userHireDate").show();
+			 
+	   }
+	   if($("#userTeamCode").val().length == 0){
+		   	$(".invalid-userTeamCode").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;" +
+			 "<p class='danger_p'>값을 입력해 주세요.</p>");
+			$(".invalid-userTeamCode").show();
+	   }
+   });
+   
 
 }
 
