@@ -123,9 +123,10 @@ public class ScoreController {
 		//비어있는 ScoreVO 생성
 		ScoreVO emptyVO = new ScoreVO();
 		//getScoreList 하기위해서 centerCode는 무조건 필요하므로 1로 set
-		emptyVO.setCenterCode(centerCode);;
+		emptyVO.setCenterCode(centerCode);
+		Pager twoPager = new Pager(10, 10, totalRows, 1); 
 		//빈 VO를 이용해서 getScoreList : emptyVO에 센터코드만 있고 년도, 시즌 없으니까 쿼리문에서 WHERE절에 if조건으로 안걸려서 전체 점수 정보가 다 담겨있음
-		List<ScoreVO> allScoreList = scoreService.getScoreList(emptyVO, pager);
+		List<ScoreVO> allScoreList = scoreService.getScoreList(emptyVO, twoPager);
 		//전체 리스트 크기가 0보다 크면 (점수 테이블에 값이 있으면)
 		if(allScoreList.size() > 0) {
 
@@ -167,6 +168,7 @@ public class ScoreController {
 		}
 		model.addAttribute("year",year);
 		model.addAttribute("season",season);
+	
 		//모달창 점수 항목 출력 리스트
 		model.addAttribute("usingCodeList", scoreService.usingCodeList());
 		//센터 버튼에 센터 이름 출력
