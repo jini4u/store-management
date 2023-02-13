@@ -81,6 +81,7 @@ function setYearBox(){
 var updateBtn = document.getElementById("score-update-button");
 if(urlParams.get("checkYear") > 0 || urlParams.get("checkSeason") > 0){
 	updateBtn.style.display = 'block';
+	$(".placeholderstlye").removeAttr('disabled');
 } else {
 	updateBtn.style.display = 'none';
 }
@@ -104,8 +105,6 @@ excelBtn.addEventListener('click', function(){
 	}, 'GET', '/score/scorelistdownload?centerCode='+centerCode+'&checkYear='+checkYear+'&checkSeason='+checkSeason);
 });
 	
-
-/*$('#no-box').prop('type', "placeholder");*/
 
 
 function modalScore(){
