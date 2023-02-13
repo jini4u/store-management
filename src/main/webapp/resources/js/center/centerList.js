@@ -371,7 +371,7 @@ var centerTelCheck = $("#centerTel").on("keyup", function() {
 		return false;
 	}else {
 		if (!checkTel.test($("#centerTel").val())) {
-			$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>'-'를 포함한 올바른 형식을 입력해주세요</p>");
+			$("#invalid-tel").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>'-'를 포함한 올바른 형식을 입력해주세요.</p>");
 			$("#invalid-tel").show();
 			$("#centerSavedBtn").attr("disabled", true);
 			return false;
