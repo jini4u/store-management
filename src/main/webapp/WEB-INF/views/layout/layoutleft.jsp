@@ -42,14 +42,13 @@
 		</div>
 		<ul class="submenuItems">
 			<li><a href="<c:url value='/score/scorelist'/>">센터 점수 조회</a></li>
-			<!-- centercode 로그인 기능 만든 후 변경해줘야함 -->
 			<li><a href="<c:url value='/score/code'/>">항목 코드 관리</a></li>
 			<li><a href="<c:url value='/score/scoreupload'/>">센터 점수 일괄 등록</a></li>
 		</ul>
 	</li>
 	<li>
 		<div class="dropdownlink">
-			<a href="<c:url value='/statistics'/>">통계 </a>
+			<a id="menu-stat" href="<c:url value='/statistics'/>">통계 </a>
 		</div>
 	</li>
 </ul>
