@@ -193,14 +193,11 @@ function getcenterimages(){
 			}//for문을 통해 click이벤트를 생성, .click을 통해, click하지 않아도 함수 실행할 수 있다.
 			if (labelClass[0]) {
 				labelClass[0].click();
-				console.log("label정보");
 			}
 		});
 //		label 클릭 시 사진 정보 가져오는 함수
 		updateCenterInfo = function(e) {
-			console.log("label정보1");
 			for(let i=0;i<result.length;i++){
-				console.log("label정보2");
 				//수정 모달 내부 테이블 초기화
 				imgDetailTable.tBodies[0].innerHTML = '';
 				//사진 정보를 담을 <tr></tr> 생성
@@ -300,7 +297,6 @@ function getcenterimages(){
 	} 
 }//사진 선택 요청 시 실행되는 함수 끝
 
-
 //등록 모달 안 사진 선택 input 선택자
 var fileSelect = document.querySelector("input[name='centerImage']");
 //등록 모달 안 선택한 사진 정보 테이블 선택자
@@ -311,27 +307,17 @@ var insertImgTbody = insertImgTable.tBodies[0];
 fileSelect.addEventListener("change", handleFiles);
 //등록 모달 파일 선택 상태 변화시 실행되는 함수
 function handleFiles(){
-	//선택한 파일들을 얻어오기
-	fileList = this.files;
-	//테이블 초기화, FILE눌렀을 때 초기화 된다고 해서 주석처리!오류날 시 확인
-//	insertImgTbody.innerHTML = '';
-	//테이블에 얻어온 파일들 이름 넣어주기
-	var rows = insertImgTbody.getElementsByTagName("td");
-	//등록버튼 클릭 시 사진번호 +1
-	var row = insertImgTbody.rows.length;
-	if (insertImgTbody.innerText == "" ) {
-		for(var i=0;i<fileList.length;i++){
-			insertImgTbody.innerHTML += "<tr><td>"+(row+1)+"</td><td>"+fileList[i].name+"</td></tr>";
-		}
-		insertBtnRegex();
-	}else{
-		for(var i=0;i<fileList.length;i++){
-			//tbody에 있는 row행 개수 구하기
-			insertImgTbody.innerHTML += "<tr><td>"+(row+1)+"</td><td>"+fileList[i].name+"</td></tr>";
-		}
-		insertBtnRegex();
-	}
+   //선택한 파일들을 얻어오기
+   fileList = this.files;
+   //테이블 초기화
+   insertImgTbody.innerHTML = '';
+   //테이블에 얻어온 파일들 이름 넣어주기
+   for(var i=0;i<fileList.length;i++){
+      insertImgTbody.innerHTML += "<tr><td>"+(i+1)+"</td><td>"+fileList[i].name+"</td></tr>";
+   }
+   insertBtnRegex();
 }
+
 
 
 
@@ -372,8 +358,11 @@ function addcenterImage(){
 	if (labelClass[0]) {
 		labelClass[0].click();
 	}
+	console.log("아");
 	$('#photoinsertform')[0].reset();
 	insertImgTbody.innerHTML = '';
+	$("#invalid-centerPhoto").hide();
+	insertBtnRegex();
 }
 
 //수정 모달 내부 수정 버튼
@@ -397,6 +386,7 @@ function afterUpdateImg(){
 	if (labelClass[0]) {
 		labelClass[0].click();
 	}
+	$("#invalid-centerPhoto").empty();
 	insertBtnRegex();
 }
 
