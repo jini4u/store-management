@@ -38,13 +38,11 @@ public class ManagerPOI extends POIClass {
 					mgr.setUserCode(userCode);
 				}		
 			}
-
 			break;
 		case 2:
 			String userPassword;
 			if(cell.getCellType().toString().equals("NUMERIC")) {
 				userPassword= String.valueOf((int)cell.getNumericCellValue());
-
 			}else {
 				userPassword= cell.getStringCellValue();
 			}
