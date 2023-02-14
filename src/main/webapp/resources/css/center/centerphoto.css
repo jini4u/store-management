@@ -306,3 +306,6 @@ ul.photo-imgs li {
 #center-photo-total{
 	display: flex;
 }
+#invalid-centerPhoto{
+	display: flex;
+}
