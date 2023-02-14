@@ -272,7 +272,6 @@ public class CenterService implements ICenterService{
 			//기존 데이터가 없으면  
 			if (center.getCenterCode() == 0) {
 				centerRepository.insertCenter(center);
-				System.out.println();
 				//replace(첫번쨰는 key, 두번째는 oldValue, 세번째는 newValue) ->저장된 key의 value가 oldvalue
 				//와 동일할 때만 newvalue로 변경, 교체가 되면 true를 리턴, 동일하지 않느면 교체되지 않고 false 리턴
 				resultMap.replace("insert", resultMap.get("insert"), resultMap.get("insert")+1);
@@ -293,7 +292,6 @@ public class CenterService implements ICenterService{
 
 		
 		fileInfoVO.setUploadUserCode(userCode);
-		System.out.println("fileInfoVo" + fileInfoVO);
 
 		fileRepository.insertFile(fileInfoVO);
 
@@ -301,7 +299,6 @@ public class CenterService implements ICenterService{
 		resultMap.replace("userCode",0, fileInfoVO.getUploadUserCode());
 
 		fileRepository.insertFileUploadHistory(resultMap);
-		logger.info("파일 업로드"+resultMap+"");
 
 		try {
 			//업로드한 파일 데이터를  지정한 파일에 저장한다
