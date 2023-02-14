@@ -207,7 +207,7 @@ function addEvent(){
 			let groupFormData = new FormData(groupForm);
 			if(!groupCodeInput.hasAttribute("readonly")){	//추가
 				makeRequest(afterSendForm, 'POST', '/score/insertgroupcode', groupFormData);
-				groupCodeInput.se-tAttribute("readonly", true);
+
 				//상세코드 칸들 비우기
 				detailCodeInput.value = '';
 				detailContentInput.value = '';
@@ -223,6 +223,7 @@ function addEvent(){
 			}
 
 			groupCodeInput.setAttribute('readonly', true);
+			groupCodeInput.setAttribute('disabled', true);
 			//그룹코드명 수정불가
 			groupContentInput.setAttribute("readonly", true);
 			//disabled
@@ -298,7 +299,6 @@ function addEvent(){
 			detailFormData.append('groupCode', groupCodeInput.value);
 			if(!detailCodeInput.hasAttribute("readonly")){
 				makeRequest(afterSendForm, 'POST', '/score/insertdetailcode', detailFormData);
-				detailCodeInput.setAttribute("readonly", true);
 			} else if(detailContentInput.hasAttribute('readonly')){
 
 			} else {
@@ -307,6 +307,7 @@ function addEvent(){
 
 			}
 
+			detailCodeInput.setAttribute("readonly", true);
 			//상세코드명 수정불가
 			detailContentInput.setAttribute("readonly", true);
 			//disabled
@@ -332,6 +333,7 @@ function addEvent(){
 		detailSelect[0].selected = false;
 		//상세코드부분 입력할 수 있도록
 		detailCodeInput.removeAttribute("readonly");
+		detailCodeInput.removeAttribute("disabled");
 		//상세코드명 수정가능
 		detailContentInput.removeAttribute("readonly");
 
@@ -359,6 +361,7 @@ function addEvent(){
 		groupSelect[0].selected = false;
 
 		groupCodeInput.removeAttribute("readonly");
+		groupCodeInput.removeAttribute("disabled");
 		//그룹코드명 수정가능
 		groupContentInput.removeAttribute("readonly");
 		//disabled 풀어주기
@@ -375,7 +378,8 @@ function addEvent(){
 			originalDetailContent = detailContentInput.value;
 			//상세코드명 수정가능
 			detailContentInput.removeAttribute("readonly");
-
+			detailCodeInput.removeAttribute("disabled");
+			
 			if(groupSelect.value == 'y'){
 				//disabled 풀어주기
 				detailSelect[1].removeAttribute('disabled');
@@ -390,6 +394,10 @@ function addEvent(){
 	//그룹코드 수정 버튼 클릭 이벤트 등록
 	updateGroupBtn.addEventListener("click", function(){
 		if(groupCodeInput.value!='' && groupCodeInput.value!=null){
+			groupCodeInput.removeAttribute("readonly");
+			groupCodeInput.removeAttribute("disabled");
+			
+			groupCodeInput.style.background = 'rgba(239, 239, 239, 0.3)';
 			//그룹코드명 수정가능
 			groupContentInput.removeAttribute("readonly");
 			//disabled 풀어주기

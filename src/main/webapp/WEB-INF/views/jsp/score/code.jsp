@@ -31,7 +31,7 @@
 							<div class="codenodiv">
 								그룹코드 <input type="text" class="inputEnglish" name="groupCode"
 									id="groupcode" value="" 
-									readonly />
+									readonly disabled/>
 							</div>
 							<div id="invalid-groupcode"></div>
 						</div>
@@ -89,7 +89,7 @@
 					<div class="codedetailtopdiv">
 					<div class="alretdiv">
 						<div class="codenodiv">
-							상세코드 <input type="text" class="inputNumber" name="detailCode" id="detailcode" value="" readonly>
+							상세코드 <input type="text" class="inputNumber" name="detailCode" id="detailcode" value="" readonly disabled>
 						</div>
 								<div id="invalid-detailcode"></div>
 						</div>
