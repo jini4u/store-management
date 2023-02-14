@@ -17,7 +17,8 @@ display: inline-block;
 }
 
 #btn_group {
-	display: flex;
+    display: flex;
+    margin-left: 90%;
 }
 
 #score-update-button {
@@ -161,11 +162,12 @@ a[tabindex]:focus {
 }
 #btnclick{
     margin-top: 20px;
-<<<<<<< HEAD
-    margin-left: 85%;
-
 }
 .pass_img{
 	width: 27px;
 
+}
+.updateSelect {
+	margin-right: -48%;
+	padding-left: 30%;
 }

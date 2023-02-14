@@ -63,6 +63,7 @@
 	)
 	WHERE rnum &gt;= #{startRowNo}
 </select>
+
 <!-- 
  점수 항목 조회
 (모달)
@@ -70,7 +71,6 @@
  -->
  <select id="usingCodeList"  resultType="com.mycompany.webapp.score.vo.ScoreVO">
  <![CDATA[
- 
 SELECT
 G.check_group_content as "checkGroupContent",
 D.check_detail_content as "checkDetailContent",
@@ -81,15 +81,13 @@ FROM check_group G
 	full outer JOIN check_detail D 
 	ON G.check_group_code = D.check_group_code
 WHERE D.check_detail_occupied = 'Y'
-
-
 ]]>
 </select>
+
 <!-- 
 점수 수정
 정윤선
  -->
-
 <update id="updateScore" parameterType="com.mycompany.webapp.score.vo.ScoreVO">
 UPDATE
     inspection 
@@ -106,11 +104,11 @@ AND check_year = #{checkYear}
 AND check_season = #{checkSeason}
 
 </update> 
+
 <!-- 
 점수등록
 정윤선
- -->
- 
+ --> 
  <insert id="insertScore" parameterType="com.mycompany.webapp.score.vo.ScoreVO">
  <![CDATA[
 INSERT INTO INSPECTION(
@@ -162,23 +160,6 @@ SELECT COUNT(*) FROM INSPECTION
 	ORDER BY I.check_year DESC, I.check_season DESC NULLS LAST
 </select>
 
-<!-- 
-센터이름 가져오기
-정윤선 -->
-
-<select id="getCenterName" parameterType="int" resultType="com.mycompany.webapp.score.vo.ScoreVO">
-
-SELECT DISTINCT
-M.center_code as "centerCode",
-C.center_name as "centerName"
-
-FROM center C
-    	JOIN mapping M
-        ON C.center_code = M.center_code  
-WHERE 
-    M.user_code = #{userCode}
-
-</select> 
 <!-- 
 	상세코드 수정.
 	 코드는 수정 불가(PK), 코드명, 사용여부 수정 가능

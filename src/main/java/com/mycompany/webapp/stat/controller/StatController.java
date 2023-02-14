@@ -58,7 +58,7 @@ public class StatController {
 	 *  @param {int} 센터 코드 
 	 *  @return {Map<String, List<ScoreVO>>} 전체 평균과 센터 평균들을 담은 리스트 
 	 * */
-	@RequestMapping("/centerAvgScore/{centerCode}")
+	@RequestMapping("/centeravgscore/{centerCode}")
 	public @ResponseBody Map<String, List<ScoreVO>> getCenterAvgScores(@PathVariable int centerCode){
 		return statService.getCenterAvgScores(centerCode);
 	}
@@ -69,27 +69,27 @@ public class StatController {
 	 * @param {int} 담당자 코드
 	 * @return {Map<String, List<ScoreVO>>} 전체 평균과 담당자 평균들을 담은 리스트
 	 * */
-	@RequestMapping("/managerAvgScore/{userCode}")
+	@RequestMapping("/manageravgscore/{userCode}")
 	public @ResponseBody Map<String, List<ScoreVO>> getManagerAvgScores(@PathVariable int userCode){
 		return statService.getManagerAvgScores(userCode);
 	}
 	
-	@RequestMapping("/codeAvgScore/{userCode}")
+	@RequestMapping("/codeavgscore/{userCode}")
 	public @ResponseBody Map<String, List<ScoreVO>> getCodeAvgScores(@PathVariable int userCode, @RequestParam(name="group") String groupCode, @RequestParam(name="detail") int detailCode){
 		return statService.getAvgScoreByCheckCode(groupCode, detailCode, userCode);
 	}
 	
-	@RequestMapping("/centerSubStat/{centerCode}")
+	@RequestMapping("/centersubstat/{centerCode}")
 	public @ResponseBody Map<String, String> getCenterSubStat(@PathVariable int centerCode, @RequestParam(name="year") int checkYear, @RequestParam(name="season") int checkSeason){
 		return statService.getCenterSubStat(centerCode, checkYear, checkSeason);
 	}
 	
-	@RequestMapping("/managerSubStat/{userCode}")
+	@RequestMapping("/managersubstat/{userCode}")
 	public @ResponseBody Map<String, String> getManagerSubStat(@PathVariable int userCode, @RequestParam(name="year") int checkYear, @RequestParam(name="season") int checkSeason){
 		return statService.getManagerSubStat(userCode, checkYear, checkSeason);
 	}
 	
-	@RequestMapping("/codeSubStat/{userCode}")
+	@RequestMapping("/codesubstat/{userCode}")
 	public @ResponseBody Map<String, String> getCodeSubStat(@PathVariable int userCode, @RequestParam(name="year") int checkYear, @RequestParam(name="season") int checkSeason){
 		return statService.getCodeSubStat(userCode, checkYear, checkSeason);
 	}

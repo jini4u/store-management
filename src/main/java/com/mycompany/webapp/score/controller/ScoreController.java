@@ -36,6 +36,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.mycompany.webapp.center.vo.CenterVO;
 import com.mycompany.webapp.common.vo.Pager;
+import com.mycompany.webapp.manager.service.IManagerService;
 import com.mycompany.webapp.score.service.IScoreService;
 import com.mycompany.webapp.score.vo.ScoreVO;
 
@@ -52,6 +53,8 @@ public class ScoreController {
 
 	@Autowired
 	IScoreService scoreService;
+	@Autowired
+	IManagerService managerService;
 	
 	//local.properties에 있는 file.path
 	@Value("${file.path}")
@@ -94,10 +97,10 @@ public class ScoreController {
 
 		int userCode = (Integer) session.getAttribute("userCode");
 		if(centerCode == 0) {
-			if(scoreService.getCenterName(userCode).size() == 0) {
+			if(managerService.getCenterByManager(userCode).size() == 0) {
 				return "redirect:/score/scorelist?centerCode=-1";
 			} else {
-				return "redirect:/score/scorelist?centerCode="+scoreService.getCenterName(userCode).get(0).getCenterCode();
+				return "redirect:/score/scorelist?centerCode="+managerService.getCenterByManager(userCode).get(0).getCenterCode();
 			}
 		} else if(centerCode > 0){
 			
@@ -113,7 +116,7 @@ public class ScoreController {
 		//scoreList를 view페이지로 보내주기 위해서 model에 받음
 		model.addAttribute("scoreList",scoreList);
 		model.addAttribute("pager", pager);	
-		model.addAttribute("centerName",scoreService.getCenterName(userCode));
+		model.addAttribute("centerName",managerService.getCenterByManager(userCode));
 		model.addAttribute("userCode",userCode);
 
 
@@ -169,7 +172,7 @@ public class ScoreController {
 		//모달창 점수 항목 출력 리스트
 		model.addAttribute("usingCodeList", scoreService.usingCodeList());
 		//센터 버튼에 센터 이름 출력
-		model.addAttribute("centerName",scoreService.getCenterName(userCode));
+		model.addAttribute("centerName",managerService.getCenterByManager(userCode));
 
 		return "jsp/score/scoreList";
 		} else {
@@ -214,15 +217,6 @@ public class ScoreController {
 		return "redirect:/score/scorelist?centerCode="+scoreVO.getCenterCode();
 	}	
 
-	/*
-	 * 정윤선
-	 * 버튼을 누르면 해당 센터(담당자 별 센터) 점수 리스트 설정
-	 * */  
-	@RequestMapping(value="/getcenters/{userCode}")
-	public @ResponseBody List<ScoreVO> getCenterName(@PathVariable int userCode,Model model){
-		return scoreService.getCenterName(userCode);
-
-	}
 	/**
 	 * DB에 존재하는 그룹코드 전체의 정보를 조회, 코드 관리 화면으로 이동
 	 * @author 임유진
@@ -328,6 +322,7 @@ public class ScoreController {
 
 		return result;
 	}
+	
 	/**
 	 * 유효성검사(그룹코드)
 	 * @author 정윤선
@@ -341,6 +336,7 @@ public class ScoreController {
 	public @ResponseBody int overlapGroupContent(@PathVariable String groupContent) {
 		return scoreService.overlapDetailCode(groupContent);
 	}	
+	
 	/**
 	 * 유효성검사(detail)
 	 * @author 정윤선
@@ -350,9 +346,9 @@ public class ScoreController {
 	public @ResponseBody int overlapDetailCode(@PathVariable String detailCode,@PathVariable String groupCode) {
 		return scoreService.overlapGroupDetailCode(detailCode,groupCode);
 	}
-	@RequestMapping(value="/overlapdetailcontent/{detailcontent}")
-	public @ResponseBody int overlapDetailContent(@PathVariable String detailcontent) {
-		return scoreService.overlapGroupDetailContent(detailcontent);
+	@RequestMapping(value="/overlapdetailcontent/{detailContent}")
+	public @ResponseBody int overlapDetailContent(@PathVariable String detailContent) {
+		return scoreService.overlapGroupDetailContent(detailContent);
 	}
 	
 	/**

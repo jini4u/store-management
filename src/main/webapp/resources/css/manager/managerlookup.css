@@ -27,7 +27,7 @@
 .danger_img{
 	width: 20px;
 }
-.invalid-userEmail, #invalid-userResignDate, #invalid-userName, .invalid-userTel, .invalid-userTeamCode{
+#invalid-userBirth, #invalid-userHireDate, .invalid-userEmail, #invalid-userResignDate, #invalid-userName, .invalid-userTel, .invalid-userTeamCode{
 	display: flex;
     align-items: center;
     font-size: 15px;

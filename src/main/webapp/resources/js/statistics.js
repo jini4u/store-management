@@ -49,6 +49,11 @@ function menuClick(event){
 		centerTb.style.display = 'block';
 		managerTb.style.display = 'none';
 		codeTb.style.display = 'none';
+		
+		if(centerTb.children[0].tBodies.length == 2){
+			centerTb.children[0].removeChild(centerTb.children[0].tBodies[1]);
+		}
+		
 		//서브통계 항목 변경
 		titleP[0].innerText = '최고 점수 항목';
 		titleP[1].innerText = '최저 점수 항목';
@@ -58,6 +63,11 @@ function menuClick(event){
 		centerTb.style.display = 'none';
 		managerTb.style.display = 'block';
 		codeTb.style.display = 'none';
+		
+		if(managerTb.children[0].tBodies.length == 2){
+			managerTb.children[0].removeChild(managerTb.children[0].tBodies[1]);
+		}
+		
 		//서브 통계 항목 변경
 		titleP[0].innerText = '최고 점수 항목';
 		titleP[1].innerText = '우수 담당자';
@@ -67,6 +77,11 @@ function menuClick(event){
 		centerTb.style.display = 'none';
 		managerTb.style.display = 'none';
 		codeTb.style.display = 'block';
+		
+		if(codeTb.children[0].tBodies.length == 2){
+			codeTb.children[0].removeChild(codeTb.children[0].tBodies[1]);
+		}
+		
 		//서브 통계 항목 변경
 		titleP[0].innerText = '최고 점수 센터';
 		titleP[1].innerText = '최고 평균 점수 항목';
@@ -75,13 +90,25 @@ function menuClick(event){
 }	//메뉴버튼 클릭 시행 함수 끝
 
 //검색 버튼에 클릭 이벤트 등록
-searchBtn.addEventListener("click", function(){
+searchBtn.addEventListener("click", search);	//검색창 클릭 이벤트 등록 함수 끝
+keyword.addEventListener('keypress', function(e){
+	if(e.keyCode == 13){
+		search();
+	}
+})
+
+function search(){
 	//검색창 내용
 	let keywordValue = keyword.value;
 	//현재 선택된 메뉴 (center, manager, code)
 	let nowMenu = document.querySelector(".clicked").classList[1];
 	//현재 보여지고있는 테이블 선택자
 	let nowTable = document.getElementById(nowMenu+"listtable");
+	
+	if(nowTable.tBodies.length == 2){
+		nowTable.removeChild(nowTable.tBodies[1]);
+	}
+	
 	//리스트 항목들 중 검색 내용을 포함한것만 보이도록
 	for(var i=0;i<list.length;i++){
 		//전부 보이도록 함
@@ -97,7 +124,12 @@ searchBtn.addEventListener("click", function(){
 			}
 		}
 	}
-});	//검색창 클릭 이벤트 등록 함수 끝
+	
+	if(nowTable.innerText == ''){
+		nowTable.innerHTML += '<tr><td>검색 결과가 없습니다.</td></tr>';
+	}
+	
+}
 
 //리스트 항목 클릭시 등록될 함수
 function listClick(event){
@@ -127,37 +159,48 @@ function listClick(event){
 		//선택한 항목 id에서 센터코드 얻어오기 (center0 형태)
 		centerCode = event.target.id.substr(6);
 		//센터에 대한 통계 그래프 그리기 위한 정보 요청
-		makeRequest(makeCenterGraph, 'GET', '/centerAvgScore/'+centerCode);
+		makeRequest(makeCenterGraph, 'GET', '/centeravgscore/'+centerCode);
 		//그래프에서 분기별 포인트 클릭시 사용될 함수, 서브통계 내용 채우기
 		var makeSubStat = function(response){
 			//최고점수항목
 			colorP[0].innerText = response.bestCodeName;
 			if(response.countBestCode > 1){
 				colorP[0].innerText += ' 외 '+(response.countBestCode-1)+'개';
+			} else if(response.countBestCode == 0){
+				colorP[0].innerText = '정보 없음';
 			}
 			//최저점수항목
 			colorP[1].innerText = response.worstCodeName;
 			if(response.countWorstCode > 1){
 				colorP[1].innerText += ' 외 '+(response.countWorstCode-1)+'개';
+			} else if(response.countWorstCode == 0){
+				colorP[1].innerText = '정보 없음';
 			}
 			//해당분기담당자
 			colorP[2].innerText = response.managerName;
+			if(response.managerName == null){
+				colorP[2].innerText = '정보 없음';
+			}
 		}
 	} else if(clickedMenu == 'manager'){	//담당자별
 		//선택한 항목 id에서 담당자코드 얻어오기 (manager00000 형태)
 		userCode = event.target.id.substr(7);
 		//담당자에 대한 통계 그래프 그리기 위한 정보 요청
-		makeRequest(makeManagerGraph, 'GET', '/managerAvgScore/'+userCode);
+		makeRequest(makeManagerGraph, 'GET', '/manageravgscore/'+userCode);
 		//그래프에서 분기별 포인트 클릭시 사용될 함수, 서브통계 내용 채우기
 		var makeSubStat = function(response){
 			colorP[0].innerText = response.bestCodeName;
 			if(response.countBestCode > 1){
 				colorP[0].innerText += ' 외 '+(response.countBestCode-1)+'개';
+			} else if(response.countBestCode == 0){
+				colorP[0].innerText = '정보 없음';
 			}
 			
 			colorP[1].innerText = response.bestManager;
 			if(response.countBestManager > 1){
 				colorP[1].innerText += ' 외 '+(response.countBestManager-1)+'명';
+			} else if(response.countBestManager == 0){
+				colorP[1].innerText = '정보 없음';
 			}
 			
 			colorP[2].innerText = response.countNewManager+'명';
@@ -171,7 +214,7 @@ function listClick(event){
 		//상세코드
 		detailCode = code[1];
 		//점수 코드에 대한 통계 그래프 그리기 위한 정보 요청
-		makeRequest(makeCodeGraph, 'GET', '/codeAvgScore/'+userCode+'?group='+groupCode+'&detail='+detailCode);
+		makeRequest(makeCodeGraph, 'GET', '/codeavgscore/'+userCode+'?group='+groupCode+'&detail='+detailCode);
 		var makeSubStat = function(response){
 			colorP[0].innerText = response.bestCenter;
 			colorP[1].innerText = response.bestCode;
@@ -264,6 +307,10 @@ function makeCenterGraph(){
 	for(var i=0;i<entireVOArr.length;i++){
 		categories.push(entireVOArr[i].checkYear+'/'+entireVOArr[i].checkSeason);
 		entireAvgArr.push(entireVOArr[i].checkScore);
+		if(centerVOArr.length == 0){
+			itemAvgArr.push(0);
+			continue;
+		}
 		for(var j=0;j<centerVOArr.length;j++){
 			var matched = false;
 			if(entireVOArr[i].checkYear==centerVOArr[j].checkYear && entireVOArr[i].checkSeason==centerVOArr[j].checkSeason){
@@ -288,7 +335,7 @@ function makeCenterGraph(){
 	    data: entireAvgArr
 	  }];
 	
-	subUrl = '/centerSubStat/'+centerCode;
+	subUrl = '/centersubstat/'+centerCode;
 }
 
 //담당자 통계 그래프 그리기 위한 정보 처리 부분
@@ -301,9 +348,14 @@ function makeManagerGraph(){
 	entireAvgArr = [];
 	itemAvgArr = [];
 	
+	
 	for(var i=0;i<entireVOArr.length;i++){
 		categories.push(entireVOArr[i].checkYear+'/'+entireVOArr[i].checkSeason);
 		entireAvgArr.push(entireVOArr[i].checkScore);
+		if(managerVOArr.length == 0){
+			itemAvgArr.push(0);
+			continue;
+		}
 		for(var j=0;j<managerVOArr.length;j++){
 			var matched = false;
 			if(entireVOArr[i].checkYear==managerVOArr[j].checkYear && entireVOArr[i].checkSeason==managerVOArr[j].checkSeason){
@@ -327,7 +379,7 @@ function makeManagerGraph(){
 		data: entireAvgArr
 	  }];
 	
-	subUrl = '/managerSubStat/'+userCode;
+	subUrl = '/managersubstat/'+userCode;
 }
 
 function makeCodeGraph(){
@@ -385,7 +437,7 @@ function makeCodeGraph(){
 	}
 	seriesArr.push({type:'line', dashStyle:'LongDash', name:"담당 센터 평균", data:entireAvgArr});
 	
-	subUrl = '/codeSubStat/'+userCode;
+	subUrl = '/codesubstat/'+userCode;
 }
 
 

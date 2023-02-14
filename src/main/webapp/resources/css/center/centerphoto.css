@@ -297,6 +297,10 @@ ul.photo-imgs li {
 #modal-image-update{
 	width: 500px;
 }
+
 #tableClickEventNo{
 	pointer-events: none; 
+}
+#modal-image-delete{
+    width: 459px;
 }
