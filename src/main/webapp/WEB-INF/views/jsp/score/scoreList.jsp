@@ -31,6 +31,7 @@
 		</c:forEach>
 	</div>
 
+			<div class="updateSelect">*수정하려면 년도와 분기를 선택해 주세요*</div>
 
 	<c:if test="${(param.centerCode eq -1) == false}">
 	<div class="year_and_quarter">
@@ -122,7 +123,7 @@
 					<td class="score_td">${scoreCode.checkGroupContent}</td>
 					<td class="score_td">${scoreCode.checkDetailContent}</td>
 					<td class="score_td">
-					<input id="inputNumber " type="number"
+					<input id="inputNumber " type="number" disabled="disabled"
 						name="arrayScore" class="placeholderstlye" size="5"
 						value="${scoreCode.checkScore}" value="placeholder" min="0" max="100"></td>
 
