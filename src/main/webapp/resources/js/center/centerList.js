@@ -343,7 +343,8 @@ $(".updateBtn").click(function (){
 });*/
 
 //------------------유효성 검사--------------------------
-let checkKor = /^[가-힣]+$/;
+/*let checkKor = /^[가-힣]+$/;*/
+var eng = /^[a-zA-Z]*$/; 
 let checkTel = /^\d{2,3}-\d{3,4}-\d{4}$/;
 
 
@@ -352,8 +353,8 @@ var centerNameCheck = $("#centerName").on("keyup", function(event){
 	if ($("#centerName").val().length==0) {
 		$("#invalid-centerName").empty();
 	}else {
-		if (!checkKor.test($("#centerName").val())) {
-			$("#invalid-centerName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>한글만 입력해 주세요</p>");
+		if (eng.test($("#centerName").val())) {
+			$("#invalid-centerName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>영문을 제외한 글자를 입력해 주세요</p>");
 			$("#invalid-centerName").show();
 			//disabled false면 비활성화, true면 활성화
 			$("#centerSavedBtn").attr("disabled", true);

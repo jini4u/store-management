@@ -1,13 +1,10 @@
 @charset "UTF-8";
 
-#center-photo-total {
-	display: flex;
-	position: relative;
-}
 
 #photo-left-frame {
 	    width: 593px;
 	margin-left: 3%;
+	display: inline-block;
 }
 
 .photo-img {
@@ -86,7 +83,7 @@
 
 #photo-right-frame {
 	display: none;
-	margin: 8px 70px 0 70px;
+	margin: 8px 18px 0 18px;
 }
 
 .paging {
@@ -272,7 +269,7 @@ ul.photo-imgs li {
 	opacity: 1;
 	transition: 1s;
 	z-index: 1;
-}
+} 
 
 ul.photo-imgs li {
 	position: absolute;
@@ -296,6 +293,16 @@ ul.photo-imgs li {
 #modal-image-update{
 	width: 500px;
 }
+
+#tableClickEventNo{
+	pointer-events: none; 
+}
 #modal-image-delete{
     width: 459px;
+}
+#centertable{
+	width: 516px;
+}
+#center-photo-total{
+	display: flex;
 }
