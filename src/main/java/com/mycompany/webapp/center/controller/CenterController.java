@@ -359,6 +359,7 @@ public class CenterController {
 			FileOutputStream out = new FileOutputStream(new File(filePath, fileName));
 			workbook.write(out);
 			out.close();
+			workbook.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

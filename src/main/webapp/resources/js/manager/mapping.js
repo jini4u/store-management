@@ -84,15 +84,17 @@ function getAvailCenters(){
 	
 	modalPager.innerHTML = '<li><a class="innerPager first">처음</a></li>';
 	
-	for(var i=pager.startRowIndex;i<pager.endRowIndex;i++){
+	for(var i=pager.startRowIndex;i<=pager.endRowIndex;i++){
 		if(i == res.length-1){
 			break;
 		}
 		availBody.innerHTML += "<tr><td>"+res[i].centerCode+"</td><td>"+res[i].centerName+"</td><td>"+res[i].centerAddress+"</td></tr>";
 	}
 	
-	if(pager.groupNo > 1){
-		modalPager.innerHTML += '<li><a class="innerPager arrow left">이전</a></li>';
+	modalPager.innerHTML += '<li><a class="innerPager arrow left">이전</a></li>';
+
+	if(pager.groupNo == 1){
+		document.querySelector(".modal-pagging .left").style.display = 'none';
 	}
 	
 	for(var i=pager.startPageNo;i<=pager.endPageNo;i++){
@@ -116,28 +118,32 @@ function getAvailCenters(){
 			let clickedNum = e.target.innerText;
 			makeRequest(getAvailCenters,'GET','/center/availcenter?pageNo='+clickedNum);
 		});
-		
-		modalPageFirst = document.querySelector(".modal-pagging .first");
-		modalPageLast = document.querySelector(".modal-pagging .last");
+	});
 
-		if(!modalPageFirst.classList.contains("hasEvent")){
-			//모달 안 페이징 처음 선택 이벤트 
-			modalPageFirst.addEventListener("click", function(){
-				makeRequest(getAvailCenters,'GET','/center/availcenter?pageNo=1');
-			});
-			
-			modalPageFirst.classList.add("hasEvent");
-		}
-		
-		if(!modalPageLast.classList.contains("hasEvent")){
-			//모달 안 페이징 끝 선택 이벤트
-			modalPageLast.addEventListener("click", function(){
-				makeRequest(getAvailCenters,'GET','/center/availcenter?pageNo='+pager.totalPageNo);
-			});
-			
-			modalPageLast.classList.add("hasEvent");
-		}
-
+	modalPageFirst = document.querySelector(".modal-pagging .first");
+	modalPageLast = document.querySelector(".modal-pagging .last");
+	
+	//모달 안 페이징 처음 선택 이벤트 
+	modalPageFirst.addEventListener("click", function(){
+		makeRequest(getAvailCenters,'GET','/center/availcenter?pageNo=1');
+	});
+	
+	//모달 안 페이징 끝 선택 이벤트
+	modalPageLast.addEventListener("click", function(){
+		makeRequest(getAvailCenters,'GET','/center/availcenter?pageNo='+pager.totalPageNo);
+	});
+	
+	modalPageLeft = document.querySelector('.modal-pagging .left');
+	modalPageRight = document.querySelector('.modal-pagging .right');
+	
+	modalPageLeft.addEventListener('click', function(){
+		pageNo = Number(pager.startPageNo)-1;
+		makeRequest(getAvailCenters, 'GET', '/center/availcenter?pageNo='+pageNo);
+	});
+	
+	modalPageRight.addEventListener('click', function(){
+		pageNo = Number(pager.endPageNo)+1;
+		makeRequest(getAvailCenters, 'GET', '/center/availcenter?pageNo='+pageNo);
 	});
 }
 
