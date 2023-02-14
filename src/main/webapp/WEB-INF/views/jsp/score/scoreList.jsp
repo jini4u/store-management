@@ -31,13 +31,13 @@
 		</c:forEach>
 	</div>
 
-			<div class="updateSelect">*수정하려면 년도와 분기를 선택해 주세요*</div>
+			
 
 	<c:if test="${(param.centerCode eq -1) == false}">
 	<div class="year_and_quarter">
 	
 		<!-- 년도,분기 찾기 -->
-	
+	<div class="updateSelect">*수정하려면 년도와 분기를 선택해 주세요*</div> 
 		<form action="${pageContext.request.contextPath}/score/scorelist"
 			name="score" method="get">
 			<input type="hidden" name="centerCode" value="${param.centerCode}">
