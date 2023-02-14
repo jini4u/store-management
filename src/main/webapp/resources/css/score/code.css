@@ -79,6 +79,12 @@ input {
 	width: 100px;
 }
 
+input:read-only {
+    background: #e9ecef73;
+    border: 1px darkgray solid;
+    border-radius: 3px;
+}
+
 input, select {
 	margin: 0px 25px;
 }

@@ -394,10 +394,9 @@ function addEvent(){
 	//그룹코드 수정 버튼 클릭 이벤트 등록
 	updateGroupBtn.addEventListener("click", function(){
 		if(groupCodeInput.value!='' && groupCodeInput.value!=null){
-			groupCodeInput.removeAttribute("readonly");
+
 			groupCodeInput.removeAttribute("disabled");
 			
-			groupCodeInput.style.background = 'rgba(239, 239, 239, 0.3)';
 			//그룹코드명 수정가능
 			groupContentInput.removeAttribute("readonly");
 			//disabled 풀어주기
