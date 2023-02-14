@@ -174,12 +174,14 @@
 						<div id="invalid-tel"></div>
 					</div>
 					<div class="mb-3">
-						<label for="centerAddress">주소</label> <input type="text"
+						<label for="centerAddress">주소</label> 
+						<div id="addressSearchPosition">
+						<input type="text"
 							name="centerAddress" id="centerAddress" class="form-control"
 							aria-label="Sizing example input"
 							aria-describedby="inputGroup-sizing-sm"> <input
 							type="button" onclick="sample6_execDaumPostcode()" value="주소검색">
-						</button>
+						</div>
 						<div id="invalid-Address"></div>
 					</div>
 					<div class="mb-3">

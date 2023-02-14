@@ -3,7 +3,7 @@
 
 #photo-left-frame {
 	    width: 593px;
-	margin-left: 3%;
+	margin-left: 2%;
 	display: inline-block;
 }
 
@@ -13,8 +13,7 @@
 }
 
 .arrow {
-	width: 24px;
-	margin: 2%;
+	width: 62px;
 }
 
 #center-photo-first {
@@ -83,7 +82,7 @@
 
 #photo-right-frame {
 	display: none;
-	margin: 8px 18px 0 18px;
+	margin: 8px 18px 0 60px;
 }
 
 .paging {
@@ -301,11 +300,14 @@ ul.photo-imgs li {
     width: 459px;
 }
 #centertable{
-	width: 516px;
+	width: 600px;
 }
 #center-photo-total{
 	display: flex;
 }
 #invalid-centerPhoto{
 	display: flex;
+}
+#pagingWidth{
+	width: 600px;
 }

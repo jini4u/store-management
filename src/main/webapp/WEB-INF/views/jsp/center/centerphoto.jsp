@@ -62,7 +62,7 @@
 			</div>
 			<tr>
 				<td id="pager" colspan="4">
-					<div class="center-pagging">
+					<div class="center-pagging" id="pagingWidth">
 						<ul class="pagination">
 							<li><a class="innerPager first"
 								href="centerphoto?pageNo=1&keyword=${keyword}">처음</a></li>

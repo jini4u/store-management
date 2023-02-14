@@ -70,16 +70,18 @@
 #centerphoto {
 	display: flex;
 	justify-content: space-between;
+	padding-bottom: 65px;
 }
 
 #centerPhotoSize {
-	width: 495px;
-	height: 410px;
+	width: 503px;
+	height: 401px;
 }
 
 .slider {
-	width: 495px;
-	height: 480px;
+	border: 1px solid #ced4da;
+	width: 506px;
+	height: 403px;
 	position: relative;
 	margin: 0 auto;
 }
@@ -105,7 +107,7 @@ ul.imgs li {
 	position: absolute;
 	left: 50%; /* 가로로 가운데 정렬 */
 	transform: translateX(-50%);
-	bottom: 88px; /* 슬라이드 밑에서 20px 간격 띄움 */
+	bottom: 10px; /* 슬라이드 밑에서 20px 간격 띄움 */
 	z-index: 2; /* 슬라이드 위에 보이도록 레이어 순위를 높임 */
 	width: 85px;
 	display: flex;
@@ -202,7 +204,7 @@ ul.imgs li {
 }
 
 .center-noimage {
-	width: 495px;
+	width: 502px;
 	height: 380px;
 }
 
@@ -220,4 +222,8 @@ ul.imgs li {
 	align-items: center;
 	font-size: 15px;
 	margin-top: 7px;
+}
+
+#addressSearchPosition {
+	display: flex;
 }

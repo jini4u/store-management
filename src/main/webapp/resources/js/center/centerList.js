@@ -173,7 +173,7 @@ function getDetailAjax() {
 			let strDOMdiv ="";
 			if (results.length == 0) {
 				strDOMdiv +="<div>"
-					strDOMdiv += "<img src='/resources/images/center/no_image.png' class='center-noimage'>"
+					strDOMdiv += "<img src='/resources/images/center/blood.jpg' class='center-noimage'>"
 						strDOMdiv += "</div>";
 			}
 			for(i=0; i<results.length; i++) {
