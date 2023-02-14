@@ -292,7 +292,7 @@ function getcenterimages(){
 				fileDetail = '외부';
 			}
 			imgHistoryTable.tBodies[0].innerHTML += '<tr><td class="noImageTd thead-centerPhoto-file">'+result[i].originalName+'</td><td class="thead-allcenterPhoto-file" id="centerDetail">'+fileDetail+'</td><td class="thead-allcenterPhoto-file">'+result[i].uploadUserName+'</td><td class="thead-allcenterPhoto-file">'+result[i].filePostDate+'</td><td class="thead-allcenterPhoto-file">'+result[i].fileModifyDate+'</td></tr>';
-			deleteModalBody.innerHTML += '<tr><td><input type="checkbox" id="deleteCheckbox" name="deleteCheck" value="'+result[i].fileNo+'"></td><td><label for="deleteCheckbox">'+result[i].originalName+'</label></td></tr>';
+			deleteModalBody.innerHTML += '<tr><td><input type="checkbox" id="deleteCheckbox'+[i]+'" name="deleteCheck" value="'+result[i].fileNo+'"></td><td><label for="deleteCheckbox'+[i]+'">'+result[i].originalName+'</label></td></tr>';
 		}
 	} 
 }//사진 선택 요청 시 실행되는 함수 끝
@@ -354,15 +354,12 @@ function addcenterImage(){
 	makeRequest(getcenterimages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
 	for(let i = 0; i < labelClass.length; i++) {         
 		labelClass[i].addEventListener('click', updateCenterInfo, false);
-	}//for문을 통해 click이벤트를 생성, .click을 통해, clicl하지 않아도 함수 실행할 수 있다.
+	}//for문을 통해 click이벤트를 생성, .click을 통해, click하지 않아도 함수 실행할 수 있다.
 	if (labelClass[0]) {
 		labelClass[0].click();
 	}
-	console.log("아");
 	$('#photoinsertform')[0].reset();
 	insertImgTbody.innerHTML = '';
-	$("#invalid-centerPhoto").hide();
-	insertBtnRegex();
 }
 
 //수정 모달 내부 수정 버튼
@@ -431,6 +428,7 @@ $("#centerPhoto-close").click(function (){
 
 //등록된 사진이 없습니다.뜨게 하는 함수, disabled면 click이벤트가 먹지 않는다, 제거하고 이벤트 추가
 $("#insert-center-modal").click(function (){
+	$("#invalid-centerPhoto").empty();
 	$("#centermodal-photo-insert").attr("disabled", false);
 	$("#centermodal-photo-insert").click(function(){
 		insertBtnRegex();

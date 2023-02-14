@@ -128,13 +128,13 @@ public class CenterController {
 			if (filterCenterList.size() != 0) {
 				model.addAttribute("centerList", filterCenterList);
 				model.addAttribute("pager", filterPager);
-				model.addAttribute("keyword", keyword);
-				model.addAttribute("keywordType", keywordType);
 			}else {
 				model.addAttribute("pager", new Pager(1, 1, 1, 1));
 				model.addAttribute("centerListN" , "empty");
 			}
 		}
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("keywordType", keywordType);
 		return "jsp/center/centerlist";
 	}
 
@@ -359,6 +359,7 @@ public class CenterController {
 			FileOutputStream out = new FileOutputStream(new File(filePath, fileName));
 			workbook.write(out);
 			out.close();
+			workbook.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
