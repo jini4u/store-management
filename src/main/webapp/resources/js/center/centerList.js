@@ -73,7 +73,7 @@ $(".centerDate").change(function() {
 //		centerCondition.value = "notyet";
 		centerCondition.value = "오픈예정";
 	}
-	if (centerOpeningDate < getToday()) {
+	if (centerOpeningDate <= getToday()) {
 //		centerCondition.value = "o"+"-1";
 		centerCondition.value = "운영중";
 	}
