@@ -1,14 +1,10 @@
 @charset "UTF-8";
 
-#center-photo-total {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-}
 
 #photo-left-frame {
 	    width: 593px;
 	margin-left: 3%;
+	display: inline-block;
 }
 
 .photo-img {
@@ -87,7 +83,7 @@
 
 #photo-right-frame {
 	display: none;
-	margin: 8px 70px 0 70px;
+	margin: 8px 18px 0 18px;
 }
 
 .paging {
@@ -303,4 +299,10 @@ ul.photo-imgs li {
 }
 #modal-image-delete{
     width: 459px;
+}
+#centertable{
+	width: 516px;
+}
+#center-photo-total{
+	display: flex;
 }

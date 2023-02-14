@@ -94,8 +94,7 @@
 				</td>
 			</tr>
 		</c:if>
-	</div>
-	<c:if test="${centerListN == 'empty' }">
+		<c:if test="${centerListN == 'empty' }">
 		<div id="center-photo-first">
 			<table id="centertable" class="table click verticalTable">
 				<thead>
@@ -113,7 +112,9 @@
 				</tbody>
 			</table>
 		</div>
-	</c:if>
+		</c:if>
+	</div>
+
 	<div id="photo-right-frame">
 		<div id="button-frame">
 			<button type="button" id="insert-center-modal" class="pinkButton"
