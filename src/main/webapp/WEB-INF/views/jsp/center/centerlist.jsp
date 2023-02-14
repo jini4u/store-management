@@ -14,7 +14,7 @@
 	<img
 		src="${pageContext.request.contextPath}/resources/images/blood-bank.png" />
 	<h2>센터관리</h2>
-</div>
+</div> 
 <div class="search_insert">
 	<form action="centerlist" class="search-form">
 		<select name="keywordType" class="search-select">
