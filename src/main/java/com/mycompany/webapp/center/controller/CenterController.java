@@ -78,12 +78,12 @@ public class CenterController {
 			if (totalRows != 0) {
 				pager = new Pager(12, 10, totalRows, pageNo);
 				centerList = centerService.findCenter(pager, keyword, keywordType);
-				model.addAttribute("keyword", keyword);
 			}else {
 				model.addAttribute("pager", new Pager(1, 1, 1, 1));
 				model.addAttribute("centerListN" , "empty");
 			}
 		}
+		model.addAttribute("keyword", keyword);
 		model.addAttribute("centerList", centerList);
 		model.addAttribute("pager", pager);
 		return "jsp/center/centerphoto";

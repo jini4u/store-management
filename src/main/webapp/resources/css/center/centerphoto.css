@@ -1,8 +1,9 @@
 @charset "UTF-8";
 
 #center-photo-total {
-	display: flex;
-	position: relative;
+    display: flex;
+    position: relative;
+    flex-direction: column;
 }
 
 #photo-left-frame {
@@ -295,4 +296,7 @@ ul.photo-imgs li {
 } 
 #modal-image-update{
 	width: 500px;
+}
+#tableClickEventNo{
+	pointer-events: none; 
 }

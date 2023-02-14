@@ -1,10 +1,8 @@
 //-----------------사진 등록 유효성 검사----------------------------
 var fileForm = /(.*?)\.(jpg|jpeg|png)$/;
 
-//-----------------사진 등록 유효성 검사----------------------------
 function insertBtnRegex(){
 	if ($("#centerPhoto_file").val() == "") {
-		console.log("아")
 		$("#invalid-centerPhoto").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>파일을 선택해 주세요</p>");
 		$("#invalid-centerPhoto").show();
 		$("#centermodal-photo-insert").attr("disabled", true);
@@ -13,6 +11,7 @@ function insertBtnRegex(){
 		if (!$("#centerPhoto_file").val().match(fileForm)) {
 			$("#invalid-centerPhoto").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>jpg, jpeg, png 파일만 업로드 가능합니다</p>");
 			$("#invalid-centerPhoto").show();
+			insertImgTbody.innerHTML = '';	
 			$("#centermodal-photo-insert").attr("disabled", true);
 			return false;
 		}else{
@@ -78,9 +77,6 @@ function appearTable(e) {
 	centerCode.setAttribute("value", centerNameArr[4].innerText); 
 	//센터명 옆 td에 센터명 지정
 	insertModalCenterName.innerText = centerNameArr[0].innerText;
-
-
-
 
 	//선택한 센터 사진들 요청하는 ajax요청
 	makeRequest(getcenterimages,'GET','/center/getcenterimages/'+centerNameArr[4].innerText);
@@ -320,11 +316,24 @@ function handleFiles(){
 	//테이블 초기화, FILE눌렀을 때 초기화 된다고 해서 주석처리!오류날 시 확인
 //	insertImgTbody.innerHTML = '';
 	//테이블에 얻어온 파일들 이름 넣어주기
-	for(var i=0;i<fileList.length;i++){
-		insertImgTbody.innerHTML += "<tr><td>"+(i+1)+"</td><td>"+fileList[i].name+"</td></tr>";
+	var rows = insertImgTbody.getElementsByTagName("td");
+	//등록버튼 클릭 시 사진번호 +1
+	var row = insertImgTbody.rows.length;
+	if (insertImgTbody.innerText == "" ) {
+		for(var i=0;i<fileList.length;i++){
+			insertImgTbody.innerHTML += "<tr><td>"+(row+1)+"</td><td>"+fileList[i].name+"</td></tr>";
+		}
+		insertBtnRegex();
+	}else{
+		for(var i=0;i<fileList.length;i++){
+			//tbody에 있는 row행 개수 구하기
+			insertImgTbody.innerHTML += "<tr><td>"+(row+1)+"</td><td>"+fileList[i].name+"</td></tr>";
+		}
+		insertBtnRegex();
 	}
-	insertBtnRegex();
 }
+
+
 
 //사진 등록 모달 안 등록 버튼 선택자
 var insertImgBtn = document.getElementById("centermodal-photo-insert");
@@ -333,7 +342,6 @@ var insertForm = document.getElementById("photoinsertform");
 //사진 등록 모달에서 등록버튼에 클릭 이벤트 등록
 insertImgBtn.addEventListener("click",function(){
 	if ($("#centerPhoto_file").val() == "") {
-		console.log("아")
 		$("#invalid-centerPhoto").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>파일을 선택해 주세요</p>");
 		$("#invalid-centerPhoto").show();
 		$("#centermodal-photo-insert").attr("disabled", true);
@@ -394,21 +402,28 @@ function afterUpdateImg(){
 
 //삭제 모달 내부 삭제 버튼 선택자
 var deleteBtn = document.getElementById("deletebutton");
-
-deleteBtn.addEventListener("click", function(){
-	let checkbox = document.getElementsByName("deleteCheck");
-	let checked = [];
-	for(var i=0;i<checkbox.length;i++){
-		if(checkbox[i].checked){
-			checked.push(checkbox[i].value);
-		}
-	}
-	makeRequest(afterDeleteImg, 'POST', '/center/deleteimage/'+centerNameArr[4].innerText, checked);
-	for(let i = 0; i < labelClass.length; i++) {         
-		labelClass[i].addEventListener('click', updateCenterInfo, false);
-	}//for문을 통해 click이벤트를 생성, .click을 통해, clicl하지 않아도 함수 실행할 수 있다.
-	if (labelClass[0]) {
-		labelClass[0].click();
+let checkbox = document.getElementsByName("deleteCheck");
+let checked = [];
+$("#delete-center-modal").click(function(){
+	if (deleteModalBody.innerText == 0) {
+		$("#deletebutton").attr("disabled", true);
+	}else{
+		$("#deletebutton").attr("disabled", false);
+		deleteBtn.addEventListener("click", function(){
+			
+			for(var i=0;i<checkbox.length;i++){
+				if(checkbox[i].checked){
+					checked.push(checkbox[i].value);
+				}
+			}
+			makeRequest(afterDeleteImg, 'POST', '/center/deleteimage/'+centerNameArr[4].innerText, checked);
+			for(let i = 0; i < labelClass.length; i++) {         
+				labelClass[i].addEventListener('click', updateCenterInfo, false);
+			}//for문을 통해 click이벤트를 생성, .click을 통해, clicl하지 않아도 함수 실행할 수 있다.
+			if (labelClass[0]) {
+				labelClass[0].click();
+			}
+		});
 	}
 });
 
@@ -422,6 +437,12 @@ $("#centerPhoto-close").click(function (){
 	$('#photoinsertform')[0].reset();
 	insertImgTbody.innerHTML = '';
 	$("#invalid-centerPhoto").empty();
-
 });
 
+//등록된 사진이 없습니다.뜨게 하는 함수, disabled면 click이벤트가 먹지 않는다, 제거하고 이벤트 추가
+$("#insert-center-modal").click(function (){
+	$("#centermodal-photo-insert").attr("disabled", false);
+	$("#centermodal-photo-insert").click(function(){
+		insertBtnRegex();
+	});
+});

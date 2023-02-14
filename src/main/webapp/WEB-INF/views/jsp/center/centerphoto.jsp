@@ -4,14 +4,15 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!-- Latest compiled JavaScript -->
-<link href="${pageContext.request.contextPath}/resources/css/center/centerphoto.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/resources/css/center/centerphoto.css"
+	rel="stylesheet">
 
 <div class="menuRoute">
-		<img
-		src="${pageContext.request.contextPath}/resources/images/home.png">
-		<a href="/">&nbsp; Home &nbsp; ></a>
-		<span>&nbsp; 센터  &nbsp; ></span>
-		<a href="${pageContext.request.contextPath}/center/centerphoto">&nbsp; 센터 사진 관리</a>	
+	<img src="${pageContext.request.contextPath}/resources/images/home.png">
+	<a href="/">&nbsp; Home &nbsp; ></a> <span>&nbsp; 센터 &nbsp; ></span> <a
+		href="${pageContext.request.contextPath}/center/centerphoto">&nbsp;
+		센터 사진 관리</a>
 </div>
 
 <div class="titleBox">
@@ -27,7 +28,7 @@
 			<form action="centerphoto" class="search-form">
 				<div class="search-box">
 					<input type="text" name="keyword" id="findCenterName"
-						class="search-txt" placeholder="search">
+						class="search-txt" placeholder="search" value="${keyword}">
 					<button type="submit" class="search-btn" id="findCenterList">
 						<i class="fa fa-search"></i>
 					</button>
@@ -35,7 +36,66 @@
 			</form>
 		</div>
 
+		<c:if test="${centerListN != 'empty' }">
+			<div id="center-photo-first">
+				<table id="centertable" class="table click verticalTable">
+					<thead>
+						<tr>
+							<th class="centerPhoto-centerName">센터명</th>
+							<th class="centerPhoto-thead">센터 담당자</th>
+							<th class="centerPhoto-thead">전화번호</th>
+							<th class="centerPhoto-thead">운영 여부</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${centerList}" var="center">
+							<tr>
+								<td class="centerPhoto-centerName">${center.centerName}</td>
+								<td class="centerPhoto-thead">${center.userName}</td>
+								<td class="centerPhoto-thead">${center.centerTel}</td>
+								<td class="centerPhoto-thead">${center.centerCondition}</td>
+								<td class="centercode">${center.centerCode}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<tr>
+				<td id="pager" colspan="4">
+					<div class="center-pagging">
+						<ul class="pagination">
+							<li><a class="innerPager first"
+								href="centerphoto?pageNo=1&keyword=${keyword}">처음</a></li>
+							<li><c:if test="${pager.groupNo>1}">
+									<a class="innerPager arrow left"
+										href="centerphoto?pageNo=${pager.startPageNo-1}&keyword=${keyword}">이전</a>
+								</c:if></li>
 
+							<c:forEach var="i" begin="${pager.startPageNo}"
+								end="${pager.endPageNo}">
+								<li><c:if test="${pager.pageNo != i}">
+										<a class="innerPager num"
+											href="centerphoto?pageNo=${i}&keyword=${keyword}">${i}</a>
+									</c:if></li>
+								<li><c:if test="${pager.pageNo == i}">
+										<a class="innerPager active num" id="now-page"
+											href="centerphoto?pageNo=${i}&keyword=${keyword}">${i}</a>
+									</c:if></li>
+							</c:forEach>
+
+							<li><c:if test="${pager.groupNo<pager.totalGroupNo}">
+									<a class="innerPager arrow right"
+										href="centerphoto?pageNo=${pager.endPageNo+1}&keyword=${keyword}">다음</a>
+								</c:if></li>
+							<li><a class="innerPager last"
+								href="centerphoto?pageNo=${pager.totalPageNo}&keyword=${keyword}">맨끝</a></li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+		</c:if>
+	</div>
+	<c:if test="${centerListN == 'empty' }">
 		<div id="center-photo-first">
 			<table id="centertable" class="table click verticalTable">
 				<thead>
@@ -46,59 +106,22 @@
 						<th class="centerPhoto-thead">운영 여부</th>
 					</tr>
 				</thead>
-				<tbody>
-					<c:forEach items="${centerList}" var="center">
-						<tr>
-							<td class="centerPhoto-centerName">${center.centerName}</td>
-							<td class="centerPhoto-thead">${center.userName}</td>
-							<td class="centerPhoto-thead">${center.centerTel}</td>
-							<td class="centerPhoto-thead">${center.centerCondition}</td>
-							<td class="centercode">${center.centerCode}</td>
-						</tr>
-					</c:forEach>
+				<tbody id="centerList">
+					<tr>
+						<td colspan="4" id="tableClickEventNo">등록된 센터가 없습니다.</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
-					<tr>
-						<td id="pager" colspan="4">
-							<div class="center-pagging">
-							<ul class="pagination">
-								<li><a class="innerPager first"
-									href="centerphoto?pageNo=1&keyword=${keyword}">처음</a></li>
-								<li><c:if test="${pager.groupNo>1}">
-									<a class="innerPager arrow left"
-										href="centerphoto?pageNo=${pager.startPageNo-1}&keyword=${keyword}">이전</a>
-								</c:if></li>
-
-								<c:forEach var="i" begin="${pager.startPageNo}"
-									end="${pager.endPageNo}">
-									<li><c:if test="${pager.pageNo != i}">
-										<a class="innerPager num"
-											href="centerphoto?pageNo=${i}&keyword=${keyword}">${i}</a>
-									</c:if></li>
-									<li><c:if test="${pager.pageNo == i}">
-										<a class="innerPager active num" id="now-page"
-											href="centerphoto?pageNo=${i}&keyword=${keyword}">${i}</a>
-									</c:if></li>
-								</c:forEach>
-
-								<li><c:if test="${pager.groupNo<pager.totalGroupNo}">
-									<a class="innerPager arrow right"
-										href="centerphoto?pageNo=${pager.endPageNo+1}&keyword=${keyword}">다음</a>
-								</c:if></li>
-								<li><a class="innerPager last"
-									href="centerphoto?pageNo=${pager.totalPageNo}&keyword=${keyword}">맨끝</a></li>
-							</ul>
-							</div>
-						</td>
-					</tr>
-	</div>
-
+	</c:if>
 	<div id="photo-right-frame">
 		<div id="button-frame">
-			<button type="button" id="insert-center-modal" class="pinkButton" data-toggle="modal" data-target="#insertModal">등록</button>
-			<button type="button" id="update-center-modal" class="greyButton" data-toggle="modal" data-target="#updateModal">수정</button>
-			<button type="button" id="delete-center-modal" class="greyButton" data-toggle="modal" data-target="#deleteModal">삭제</button>
+			<button type="button" id="insert-center-modal" class="pinkButton"
+				data-toggle="modal" data-target="#insertModal">등록</button>
+			<button type="button" id="update-center-modal" class="greyButton"
+				data-toggle="modal" data-target="#updateModal">수정</button>
+			<button type="button" id="delete-center-modal" class="greyButton"
+				data-toggle="modal" data-target="#deleteModal">삭제</button>
 		</div>
 		<div id="photo-frame">
 			<div id="photo-main-size">
@@ -108,7 +131,7 @@
 				</div>
 			</div>
 		</div>
-			<div id="center-photo-second">
+		<div id="center-photo-second">
 			<table class="search verticalTable" id="imageHistory">
 				<thead>
 					<tr>
@@ -124,7 +147,7 @@
 			</table>
 		</div>
 	</div>
-	
+
 </div>
 <!-- Modal -->
 <div class="modal fade" data-backdrop="static" id="insertModal"
@@ -153,7 +176,8 @@
 						<input name='centerCode' class='centercode' value='' readonly />
 					</div>
 					<div id="center-search-bar">
-						<input type="file" id="centerPhoto_file" name="centerImage" multiple>
+						<input type="file" id="centerPhoto_file" name="centerImage"
+							multiple>
 						<div id="invalid-centerPhoto"></div>
 					</div>
 					<div id="centermodal-photo-list">
