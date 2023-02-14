@@ -337,7 +337,7 @@ insertImgBtn.addEventListener("click",function(){
 			$("#invalid-centerPhoto").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img><p class='danger_p'>jpg, jpeg, png 파일만 업로드 가능합니다</p>");
 			$("#invalid-centerPhoto").show();
 			$("#centermodal-photo-insert").attr("disabled", true);
-			return false;
+			return false; 
 		}
 		else{
 			let insertFormData = new FormData(insertForm);
