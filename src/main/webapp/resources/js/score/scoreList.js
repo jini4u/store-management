@@ -114,9 +114,13 @@ function modalScore(){
 			insertBtn = false;
 		}
 	})
-	if(!insertBtn) /*alert("값을 입력해주세요!");*/
-	$("#invalid-insertscore").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>값을 입력해주세요.</p>");
-	$("#invalid-insertscore").show();
+	if(!insertBtn){ /*alert("값을 입력해주세요!");*/
+		$("#invalid-insertscore").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>값을 입력해주세요.</p>");
+		$("#invalid-insertscore").show();
+	} else {
+		loadingMask();
+	} 
+	
 	return insertBtn;
 }
 

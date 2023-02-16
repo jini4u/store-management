@@ -20,29 +20,31 @@
 
 <div class="centerName_search_btn">
 	<div class="centerNameGroup">
-		<c:forEach items="${centerName}" var="center" > 
+		<c:forEach items="${centerName}" var="center">
 			<c:if test="${center.centerCode eq param.centerCode}">
-				<a class="clikedBtn clicked" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
+				<a class="clikedBtn clicked"
+					href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
 			</c:if>
 			<c:if test="${center.centerCode ne param.centerCode}">
-				<a class="clikedBtn" href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
+				<a class="clikedBtn"
+					href="${pageContext.request.contextPath}/score/scorelist?centerCode=${center.centerCode}">${center.centerName}</a>
 			</c:if>
-		
+
 		</c:forEach>
 	</div>
 
-			
+
 
 	<c:if test="${(param.centerCode eq -1) == false}">
-	<div class="year_and_quarter">
-	
-		<!-- 년도,분기 찾기 -->
-	<div class="updateSelect">*수정하려면 년도와 분기를 선택해 주세요*</div> 
-		<form action="${pageContext.request.contextPath}/score/scorelist"
-			name="score" method="get">
-			<input type="hidden" name="centerCode" value="${param.centerCode}">
-			<select name="checkYear" id="yearbox" title="년도">년도
-			</select> <select name="checkSeason">
+		<div class="year_and_quarter">
+
+			<!-- 년도,분기 찾기 -->
+			<div class="updateSelect">*수정하려면 년도와 분기를 선택해 주세요*</div>
+			<form action="${pageContext.request.contextPath}/score/scorelist"
+				name="score" method="get">
+				<input type="hidden" name="centerCode" value="${param.centerCode}">
+				<select name="checkYear" id="yearbox" title="년도">년도
+				</select> <select name="checkSeason">
 					<option value="0">분기</option>
 					<c:if test='${param.checkSeason eq 4}'>
 						<option selected='selected' value="4">
@@ -82,14 +84,14 @@
 					다운로드</button>
 				<a id="excel" href="" download=""></a>
 			</form>
-	</div>
+		</div>
 </div>
 
 
 <!-- 점수리스트 테이블 -->
 <form action="${pageContext.request.contextPath}/score/updatescore"
-	method="post" name="InsertModal"  class="scoreTableForm">
-	<input type="hidden" name="centerCode" value="${param.centerCode}" >
+	method="post" name="InsertModal" class="scoreTableForm">
+	<input type="hidden" name="centerCode" value="${param.centerCode}">
 
 
 	<c:if test="${empty scoreList}">
@@ -122,10 +124,10 @@
 					<td class="score_td">${scoreCode.checkSeason}</td>
 					<td class="score_td">${scoreCode.checkGroupContent}</td>
 					<td class="score_td">${scoreCode.checkDetailContent}</td>
-					<td class="score_td">
-					<input id="inputNumber " type="number" disabled="disabled"
-						name="arrayScore" class="placeholderstlye" size="5"
-						value="${scoreCode.checkScore}" value="placeholder" min="0" max="100"></td>
+					<td class="score_td"><input id="inputNumber " type="number"
+						disabled="disabled" name="arrayScore" class="placeholderstlye"
+						size="5" value="${scoreCode.checkScore}" value="placeholder"
+						min="0" max="100"></td>
 
 
 				</tr>
@@ -171,80 +173,81 @@
 	<div id="btnclick">
 		<div id="btn_group">
 			<button type="submit" class="pinkButton" id="score-update-button">수정</button>
-			
 </form>
 <c:if test="${(maxYear eq year and maxSeason eq season) == false}">
-<button type="button" id="testBtnn modalOpen" class="pinkButton"
-	data-toggle="modal" data-target="#myModal" >점수입력</button>
-		</div>
+	<button type="button" id="testBtnn modalOpen" class="pinkButton"
+		data-toggle="modal" data-target="#myModal">점수입력</button>
+	</div>
 	</div>
 </c:if>
 </c:if>
 <c:if test="${(param.centerCode eq -1)}">
-<div class="no-center">
-<image src='/resources/images/center/icons_care.png' class='pass_img'><p class="no-center1">&nbsp;매핑된 센터가 없습니다.</p></image>
-</div>
-<div class="widthLine"></div>
+	<div class="no-center">
+		<image src='/resources/images/center/icons_care.png' class='pass_img'>
+		<p class="no-center1">&nbsp;매핑된 센터가 없습니다.</p>
+		</image>
+	</div>
+	<div class="widthLine"></div>
 
 
 </c:if>
 <!--입력 모달 영역 -->
 
 
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" >
-		
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">점수입력</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close" >
-						<span aria-hidden="true">×</span>
-					</button>
-					
-				</div>
-				<form action="${pageContext.request.contextPath}/score/insertscore"
-					method="post" onsubmit="return modalScore();">
-					<div class="modal-body">
-						<!-- 모달창 안 테이블 -->
-						<div>년도: ${year}, 분기: ${season} </div>
-						<input type="hidden" name="centerCode" value="${param.centerCode}" />
-						<input type="hidden" name="userCode" value="${userCode}" /> <input
-							type="hidden" name="checkYear" value="${year}" /> <input
-							type="hidden" name="checkSeason" value="${season}" />
-						<table class="scoretable" border="1">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">점수입력</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+
+			</div>
+			<form action="${pageContext.request.contextPath}/score/insertscore"
+				method="post" onsubmit="return modalScore();">
+				<div class="modal-body">
+					<!-- 모달창 안 테이블 -->
+					<div>년도: ${year}, 분기: ${season}</div>
+					<input type="hidden" name="centerCode" value="${param.centerCode}" />
+					<input type="hidden" name="userCode" value="${userCode}" /> <input
+						type="hidden" name="checkYear" value="${year}" /> <input
+						type="hidden" name="checkSeason" value="${season}" />
+					<table class="scoretable" border="1">
+						<tr>
+							<th class="score_th">항목</th>
+							<th class="score_th">상세항목</th>
+							<th class="score_th">점수</th>
+						</tr>
+						<c:forEach items="${usingCodeList}" var="usingCodeList">
 							<tr>
-								<th class="score_th">항목</th>
-								<th class="score_th">상세항목</th>
-								<th class="score_th">점수</th>
+								<td>${usingCodeList.checkGroupContent}</td>
+								<td>${usingCodeList.checkDetailContent}</td>
+								<td><input type="hidden" name="arrayGroupCode"
+									value="${usingCodeList.checkGroupCode}"> <input
+									type="hidden" name="arrayDetailCode"
+									value="${usingCodeList.checkDetailCode}"> <input
+									id="inputNumber" type="number" name="arrayScore" min="0"
+									max="100">
+									<div id="invalid-numberLimit"></div>
 							</tr>
-							<c:forEach items="${usingCodeList}" var="usingCodeList">
-								<tr>
-									<td>${usingCodeList.checkGroupContent}</td>
-									<td>${usingCodeList.checkDetailContent}</td>
-									<td><input type="hidden" name="arrayGroupCode"
-										value="${usingCodeList.checkGroupCode}"> <input
-										type="hidden" name="arrayDetailCode"
-										value="${usingCodeList.checkDetailCode}"> <input
-										id="inputNumber" type="number" name="arrayScore" 
-										  min="0" max="100">
-										  <div id="invalid-numberLimit"></div>
-								</tr>
-							</c:forEach>
-						</table>
-					</div>
+						</c:forEach>
+					</table>
+				</div>
 				<div class="modal-footer">
 					<div id="invalid-insertscore"></div>
 					<button type="submit" class=" pinkButton" id="modal-insertBtn">확인</button>
 					<button class="greyButton" data-dismiss="modal">취소</button>
 				</div>
-				
+
 			</form>
-			
-			</div>
+
 		</div>
 	</div>
+</div>
 
 
 <!-- 모달 자바 스크립트 -->
