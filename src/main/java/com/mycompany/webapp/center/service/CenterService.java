@@ -113,6 +113,8 @@ public class CenterService implements ICenterService{
 				//파일 저장
 				file.transferTo(new File(filePath+fileSavedName));
 			} catch (Exception e) {
+				System.out.println("file Exception !! ");
+				System.out.println(e.getMessage());
 				return -1;
 			}
 			result += centerRepository.addCenterImage(newFile);

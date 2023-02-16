@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mycompany.webapp.stat.dao.IStatRepository">
 
-<select id="getAvgScoreByCenterCode" parameterType="int" resultType="com.mycompany.webapp.score.vo.ScoreVO">
+<select id="getAvgScoreByCenterCode" parameterType="int" resultType="com.mycompany.webapp.score.vo.ScoreVO">`
 <if test="centerCode != 0">
 SELECT check_year AS "checkYear"
 		, check_season AS "checkSeason"

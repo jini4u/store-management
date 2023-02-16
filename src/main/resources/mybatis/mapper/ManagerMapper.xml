@@ -100,7 +100,8 @@ SELECT * FROM(
                TO_CHAR(user_hire_date, 'YYYY-MM-DD') as userHireDate,
                TO_CHAR(user_resign_date, 'YYYY-MM-DD') as userResignDate
          FROM  userinfo
-         WHERE user_code > 30000 
+         WHERE 1=1
+         	AND user_code > 30000 
          ]]> 
 		<choose>
 		    <when test="keywordType == 'UC'">

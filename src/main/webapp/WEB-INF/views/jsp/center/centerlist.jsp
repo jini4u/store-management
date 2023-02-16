@@ -149,14 +149,14 @@
 			</div>
 			<div class="modal-body">
 
-				<form id="centerForm" name="form">
+				<form id="centerForm" name="form" autocomplete="off">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<input type="hidden" name="${centerCode}" id="centerCode">
 							<label for="centerName">센터명</label> <input type="text"
 								onchange="checkCenterName()" name="centerName" id="centerName"
 								class="form-control" aria-label="Sizing example input"
-								aria-describedby="inputGroup-sizing-sm" readonly="readonly">
+								aria-describedby="inputGroup-sizing-sm" readonly="readonly" >
 							<div id="invalid-centerName"></div>
 						</div>
 						<div class="col-md-6 mb-3">
