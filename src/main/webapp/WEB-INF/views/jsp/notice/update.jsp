@@ -22,7 +22,7 @@
 			<div class="mb-3">
 				<label for="title">글번호</label> <input type="text"
 					class="form-control" name="postno" id="title"
-					value="${post.postno}" disabled="disabled">
+					value="${post.postno}" readonly>
 				<div class="invalid"></div>
 			</div>
 			<div class="mb-3">
@@ -51,7 +51,7 @@
 			<div>
 				<button type="button" class="pinkButton" id="btnUpdate">수정</button>
 				<a
-					href="${pageContext.request.contextPath}/notice/delete?postno=${post.postno}"
+					href="${pageContext.request.contextPath}/notice/delete?postNo=${post.postno}"
 					class="btn btn btn-danger btn-lg greyButton" id="deletebutton">삭제</a>
 				<button type="button" class="greyButton btn btn btn-primary btn-lg"
 					id="btnList">목록</button>

@@ -269,7 +269,7 @@ $("#centerSavedBtn").click(function (){
 					clickTd.eq(4).text(results.centerOpeningDate);
 					clickTd.eq(5).text(results.centerCondition);
 					clickTd.eq(6).text(results.centerGuide);
-					clickTd.eq(7).text(results.centerclosingDate);
+					clickTd.eq(7).text(results.centerClosingDate);
 					$("#findCenterName").val('');
 					$("#myModal .close").click();
 				},
@@ -352,6 +352,8 @@ let checkTel = /^\d{2,3}-\d{3,4}-\d{4}$/;
 var centerNameCheck = $("#centerName").on("keyup", function(event){
 	if ($("#centerName").val().length==0) {
 		$("#invalid-centerName").empty();
+		$("#invalid-centerName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>센터명을 입력해주세요</p>");
+		$("#invalid-centerName").show();
 	}else {
 		if (eng.test($("#centerName").val())) {
 			$("#invalid-centerName").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>영문을 제외한 글자를 입력해 주세요</p>");
