@@ -90,7 +90,7 @@
 
 <!-- 점수리스트 테이블 -->
 <form action="${pageContext.request.contextPath}/score/updatescore"
-	method="post" name="InsertModal" class="scoreTableForm">
+	method="post" name="InsertModal" class="scoreTableForm" onsubmit="return checkUpdateScores();">
 	<input type="hidden" name="centerCode" value="${param.centerCode}">
 
 
@@ -170,6 +170,7 @@
 	</c:if>
 
 	<!--  수정 점수등록 버튼 -->
+			<div id="invalid-updatescore"></div>
 	<div id="btnclick">
 		<div id="btn_group">
 			<button type="submit" class="pinkButton" id="score-update-button">수정</button>

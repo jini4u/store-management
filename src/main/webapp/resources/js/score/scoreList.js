@@ -115,7 +115,7 @@ function modalScore(){
 		}
 	})
 	if(!insertBtn){ /*alert("값을 입력해주세요!");*/
-		$("#invalid-insertscore").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>값을 입력해주세요.</p>");
+		$("#invalid-insertscore").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>모든값을 입력해주세요.</p>");
 		$("#invalid-insertscore").show();
 	} else {
 		loadingMask();
@@ -124,4 +124,18 @@ function modalScore(){
 	return insertBtn;
 }
 
-
+function checkUpdateScores(){
+	let update = true;
+	$("#scoreListTable input[name=arrayScore]").each(function(){
+		if($(this).val()==null || $(this).val()==''){
+            console.log($(this));
+            update = false;
+        }
+	})
+	
+	if(update == false){
+		$("#invalid-updatescore").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>모든값을 입력해주세요.</p>");
+		$("#invalid-updatescore").show();
+	}
+	return update;
+}

@@ -151,6 +151,11 @@ a[tabindex]:focus {
 	margin-left: 70%;
 }
 
+#invalid-updatescore {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .centerName_search_btn{
 	margin-top: 15px;
     display: flex;
