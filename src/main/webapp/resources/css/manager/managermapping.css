@@ -156,3 +156,8 @@ transform: translate(-50%, -50%);
 .centerTitleLine{
 	width: 48px;
  }
+ 
+ #center-table-div {
+ 	overflow-y: auto;
+    max-height: 516px;
+ }
