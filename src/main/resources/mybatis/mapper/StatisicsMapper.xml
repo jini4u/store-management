@@ -329,6 +329,7 @@ WHERE check_detail_code = (SELECT check_detail_code
                                                             GROUP BY check_detail_code
                                                         )
                                                 )
+                                  AND ROWNUM = 1
                         	)
     AND check_group_code = (SELECT check_group_code
                             FROM (SELECT AVG(check_score) AS avgscore, check_group_code, check_detail_code
@@ -347,6 +348,7 @@ WHERE check_detail_code = (SELECT check_detail_code
                                                     GROUP BY check_detail_code, check_group_code
                                                     )
                                               )
+                                  AND ROWNUM = 1
                              )
 </select>
 
@@ -370,6 +372,7 @@ WHERE check_detail_code = (SELECT check_detail_code
                                                             GROUP BY check_detail_code
                                                         )
                                                 )
+                                 AND ROWNUM = 1
                         	)
     AND check_group_code = (SELECT check_group_code
                             FROM (SELECT AVG(check_score) AS avgscore, check_group_code, check_detail_code
@@ -388,6 +391,7 @@ WHERE check_detail_code = (SELECT check_detail_code
                                                     GROUP BY check_detail_code, check_group_code
                                                     )
                                               )
+                                  AND ROWNUM = 1
                              )
 </select>
 </mapper>

@@ -41,7 +41,9 @@
 			점수 <i class="fa fa-chevron-down" aria-hidden="true"></i>
 		</div>
 		<ul class="submenuItems">
+			<c:if test="${authority eq 'manager'}">
 			<li><a href="<c:url value='/score/scorelist'/>">센터 점수 조회</a></li>
+			</c:if>
 			<li><a href="<c:url value='/score/code'/>">항목 코드 관리</a></li>
 			<li><a href="<c:url value='/score/scoreupload'/>">센터 점수 일괄 등록</a></li>
 		</ul>
