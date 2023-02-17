@@ -24,7 +24,7 @@
 	<div class="fileupload_input">	
 		<div id="centerExcelFile"></div>
 		<form id="file-upload-form" enctype="multipart/form-data"
-			action="centerexcelupload" method="post">
+			action="centerexcelupload" method="post" onsubmit="return checkFile();">
 			<input type="hidden" name="userCode" value="${ssesionScope.userCode}">
 			<input type="file" id="centerInputExcelFile" name="centerExcelFile" accept=".xlsx, .xls">
 			<input type="submit" class="pinkButton" id="centerExcelInsertBtn" value="UPLOAD">

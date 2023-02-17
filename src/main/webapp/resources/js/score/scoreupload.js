@@ -21,8 +21,12 @@ var fileUploadForm = document.getElementById("file-upload-form");
 var fileUpload = document.getElementById("file-upload-button");
 
 fileUpload.addEventListener("mousedown", function(){
-	loadingMask();
-	setTimeout(uploadFile, 50);
+	if(fileInput.files.length == 0){
+		$("#invalid-file-div").html("<img src='/resources/images/center/icons_care.png' class='danger_img'></img>&nbsp;<p class='danger_p'>파일을 선택해주세요.</p>");
+	} else {
+		loadingMask();
+		setTimeout(uploadFile, 50);		
+	}
 	});
 
 //업로드 버튼 클릭시 실행될 함수

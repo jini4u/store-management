@@ -22,7 +22,7 @@
 	<a class="greyButton" href='${pageContext.request.contextPath}/resources/templates/template_담당자.xlsx' download="" class="btn btn btn-primary btn-lg">양식파일 다운로드</a>
 	<div class="fileupload_input">
 		<div id="invalid-mgrFile"></div>
-		<form action="/manager/managerfileupload" method="post" enctype="multipart/form-data">
+		<form action="/manager/managerfileupload" method="post" enctype="multipart/form-data" onsubmit="return checkFile();">
 		<input type="file" name="mgrExcelFile" id ="mgrFileInput" accept=".xlsx, .xls">
 		<input class="pinkButton" id="mgrExcelInsertBtn" type="submit" value="UPLOAD">
 	</form>
